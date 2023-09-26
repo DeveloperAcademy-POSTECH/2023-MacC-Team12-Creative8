@@ -1,5 +1,5 @@
 ---
-name: Creative8 Issue
+name: feature issue
 about: IssueTemplate
 title: ''
 labels: ''
