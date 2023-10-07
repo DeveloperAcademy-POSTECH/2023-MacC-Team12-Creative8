@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Projects"
+      name = "Projects">
+      <FileRef
+         location = "group:App/Setlist.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Core/Core.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Feature/Feature.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:UI/UI.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>
