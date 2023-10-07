@@ -3,15 +3,15 @@
 # Convention
 
 ## 종류
- - feature: 새로운 기능
- - fix: 기능 수정 (정책에 의한 수정, 인터페이스 변경)
+ - `feature` : 새로운 기능
+ - `fix` : 기능 수정 (정책에 의한 수정, 인터페이스 변경)
     - ex) 이미 만들어놨는데 디자인팀에서 바꿔야 한다고 요청이 왔을때
- - bugfix: 버그 수정
+ - `bugfix`: 버그 수정
     - 보라색 버그
- - refactor: 리팩토링
- - docs: 문서 작성 및 수정 (설명 주석 추가 등)
- - chore: 기타 변경 사항 (git, .github, gradle task 등의 수정)
- - style: 코드 포맷팅
+ - `refactor` : 리팩토링
+ - `docs` : 문서 작성 및 수정 (설명 주석 추가 등)
+ - `chore` : 기타 변경 사항 (git, .github, gradle task 등의 수정)
+ - `style` : 코드 포맷팅
 
 ## 네이밍
 *노션에 작업 등록 후 이슈 업뎃*
