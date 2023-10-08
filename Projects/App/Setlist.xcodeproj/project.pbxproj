@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -368,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -480,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

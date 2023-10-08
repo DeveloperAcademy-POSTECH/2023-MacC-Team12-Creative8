@@ -12,7 +12,7 @@ import Feature
 struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
-      MainView()
+      SearchView()
     }
   }
 }
