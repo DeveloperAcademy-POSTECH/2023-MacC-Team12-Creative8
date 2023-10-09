@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
-import Feature
 
 @main
-struct SetlistApp: App {
+struct FeatureApp: App {
   var body: some Scene {
     WindowGroup {
-        MainView()
+        SettingView()
     }
   }
 }

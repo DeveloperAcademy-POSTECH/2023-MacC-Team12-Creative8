@@ -10,7 +10,7 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
     name: "Feature",
-    product: .staticFramework,
+    product: .framework,
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),
         .project(target: "UI", path: .relativeToRoot("Projects/UI"))
