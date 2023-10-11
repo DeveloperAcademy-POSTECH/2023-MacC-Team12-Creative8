@@ -32,6 +32,7 @@ public struct TopBannerView: View {
                                 }
                                 .padding(.trailing)
                         }
+                        .foregroundColor(.black)
                         .padding(.vertical)
                         .padding()
                         .background(

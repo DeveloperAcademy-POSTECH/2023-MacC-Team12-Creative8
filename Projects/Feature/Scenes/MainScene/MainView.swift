@@ -15,6 +15,14 @@ public struct MainView: View {
         UpcomingEvent(singer: "NCT 127", date: "2023. 10. 07", dDay: "D - 1", image: "nct127"),
         UpcomingEvent(singer: "방탄소년단", date: "2023. 10. 07", dDay: "D - 1", image: "bts")
     ]
+    // 임시로 만들어둔 데이터입니다.
+    let archivedNum: Int = 4
+    let singer: String = "Post Malone"
+    let concertName: String = "If Ya’ll Weren’t Here, I’d Be Crying"
+    let dDay: String = "D-20"
+    let month: String = "10월"
+    let day: String = "27"
+    let image: String = "postmalone"
     @State private var scrollID: Int?
     public init() {}
     public var body: some View {
@@ -44,7 +52,42 @@ public struct MainView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 20)
-                    MainBookmarkedView()
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 6) {
+                            ForEach(0..<archivedNum, id: \.self) { _ in
+                                VStack(alignment: .leading, spacing: 0) {
+                                    MainBookmarkedView(archivedNum: archivedNum
+                                                       , singer: singer, concertName: concertName, dDay: dDay
+                                                       , month: month, day: day, image: image)
+                                }
+                            }
+                        }
+                        .scrollTargetLayout()
+                        .safeAreaPadding(.horizontal, 20)
+                        .background(.yellow)
+                        .onAppear {
+                            if archivedNum != 0 {
+                                scrollID = 0
+                            }
+                        }
+                    }
+                    .scrollTargetBehavior(.viewAligned)
+                    .scrollIndicators(.hidden)
+                    .scrollPosition(id: $scrollID)
+                    HStack(spacing: 8) {
+                        ForEach(0..<archivedNum, id: \.self) { pageIndex in
+                            Circle()
+                                .frame(width: 8, height: 8)
+                                .foregroundColor(scrollID == pageIndex ? .black : .gray)
+                                .animation(.easeInOut(duration: 0.3))
+                                .onTapGesture {
+                                    withAnimation {
+                                        scrollID = pageIndex
+                                    }
+                                }
+                        }
+                        .padding(.vertical, 18)
+                    }
                         .padding(.bottom, 48)
                     VStack(alignment: .leading) {
                         Text("다가오는 공연")
