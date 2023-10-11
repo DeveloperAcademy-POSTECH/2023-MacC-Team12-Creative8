@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum Token: String {
+    case setlitFM = "Etp_bKUUaREyYBjbLpdkritldxrwWRhrw48H"
+    case musicBrainz = "API_KEY"
+    case genius = "Bearer 7UINyw6MHKzr-CYFgeuL3ViZnpCLNvU1GeAo0ZKFEfyrvbyfSU5cWYMazDCXwIfh"
+}
+
 class DataService {
     static let shared = DataService()
     
@@ -15,7 +21,7 @@ class DataService {
         if let url = URL(string: "https://musicbrainz.org/ws/2/artist?query=\(artistName)&fmt=json") {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("API_KEY", forHTTPHeaderField: "Authorization")
+            request.setValue(Token.musicBrainz.rawValue, forHTTPHeaderField: "Authorization")
             
             let session = URLSession(configuration: .default)
             
@@ -49,7 +55,7 @@ class DataService {
         if let url = URL(string: "https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=\(artistMbid)&p=\(page)") {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("Etp_bKUUaREyYBjbLpdkritldxrwWRhrw48H", forHTTPHeaderField: "x-api-key")
+            request.setValue(Token.setlitFM.rawValue, forHTTPHeaderField: "x-api-key")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             request.setValue("en", forHTTPHeaderField: "Accept-Language")
             
@@ -85,7 +91,7 @@ class DataService {
         if let url = URL(string: "https://api.genius.com/search?q=\(artistName)") {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("Bearer 7UINyw6MHKzr-CYFgeuL3ViZnpCLNvU1GeAo0ZKFEfyrvbyfSU5cWYMazDCXwIfh", forHTTPHeaderField: "Authorization")
+            request.setValue(Token.genius.rawValue, forHTTPHeaderField: "Authorization")
             
             let session = URLSession(configuration: .default)
             
@@ -120,7 +126,7 @@ class DataService {
             print("@LOG request url: \(url)")
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("Bearer 7UINyw6MHKzr-CYFgeuL3ViZnpCLNvU1GeAo0ZKFEfyrvbyfSU5cWYMazDCXwIfh", forHTTPHeaderField: "Authorization")
+            request.setValue(Token.genius.rawValue, forHTTPHeaderField: "Authorization")
             
             let session = URLSession(configuration: .default)
             
