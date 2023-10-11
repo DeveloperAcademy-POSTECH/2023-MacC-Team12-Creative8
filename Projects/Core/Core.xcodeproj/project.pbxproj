@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05839DB71503C9C324D2FE8B /* SongListTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F473A489A11A3D417AEA32 /* SongListTestView.swift */; };
+		47C2C0F399E23BD353CEC79B /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */; };
+		5D58717518F30B5BC91996F8 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */; };
+		6402D76AF3A073E5544EBF65 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013749188F549E2BA326CC3 /* GeniusSongsModel.swift */; };
+		85662108D3249FA1426BA3A0 /* SetlistTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA69566DE6A5EB135E52C00A /* SetlistTestView.swift */; };
+		9563DB7D792BF96A08BDEC4F /* SearchArtistTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3664658B3C72853611D73 /* SearchArtistTestView.swift */; };
+		9ACA8FFD6F40F2B734921692 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF018D0FB8E375EEA61CF7BC /* GeniusArtistsModel.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
+		C34B5CC14145CA76E58312F1 /* KoreanTitleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775C9B765DAF4F251FEF1E0F /* KoreanTitleConverter.swift */; };
+		E8F40E7BE4D0D7CA6AC5B095 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64301FBD5A32CFE948872F32 /* DataService.swift */; };
+		F72CFE340AB350EAACF168B3 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE299893623B5C42E85A05F1 /* KoreanNameConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +54,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03F473A489A11A3D417AEA32 /* SongListTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListTestView.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CE3664658B3C72853611D73 /* SearchArtistTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistTestView.swift; sourceTree = "<group>"; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64301FBD5A32CFE948872F32 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
+		775C9B765DAF4F251FEF1E0F /* KoreanTitleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanTitleConverter.swift; sourceTree = "<group>"; };
+		8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
+		AE299893623B5C42E85A05F1 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
+		CA69566DE6A5EB135E52C00A /* SetlistTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistTestView.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
+		EF018D0FB8E375EEA61CF7BC /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
+		F013749188F549E2BA326CC3 /* GeniusSongsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusSongsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +123,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		81104ECEC5CD1B0F5111557B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9917FB2BFD58AD83A06E72AF /* Models */,
+				AF3D3A25B1163FF7AA007316 /* SampleViews */,
+				64301FBD5A32CFE948872F32 /* DataService.swift */,
+				AE299893623B5C42E85A05F1 /* KoreanNameConverter.swift */,
+				775C9B765DAF4F251FEF1E0F /* KoreanTitleConverter.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9917FB2BFD58AD83A06E72AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */,
+				EF018D0FB8E375EEA61CF7BC /* GeniusArtistsModel.swift */,
+				F013749188F549E2BA326CC3 /* GeniusSongsModel.swift */,
+				8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AF3D3A25B1163FF7AA007316 /* SampleViews */ = {
+			isa = PBXGroup;
+			children = (
+				3CE3664658B3C72853611D73 /* SearchArtistTestView.swift */,
+				CA69566DE6A5EB135E52C00A /* SetlistTestView.swift */,
+				03F473A489A11A3D417AEA32 /* SongListTestView.swift */,
+			);
+			path = SampleViews;
+			sourceTree = "<group>";
+		};
 		E12816BA35F79D21E0D77318 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				F631B3543A0C26BDC2DE72DD /* Derived */,
+				81104ECEC5CD1B0F5111557B /* Sources */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -240,6 +294,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8F40E7BE4D0D7CA6AC5B095 /* DataService.swift in Sources */,
+				F72CFE340AB350EAACF168B3 /* KoreanNameConverter.swift in Sources */,
+				C34B5CC14145CA76E58312F1 /* KoreanTitleConverter.swift in Sources */,
+				47C2C0F399E23BD353CEC79B /* ArtistListModel.swift in Sources */,
+				9ACA8FFD6F40F2B734921692 /* GeniusArtistsModel.swift in Sources */,
+				6402D76AF3A073E5544EBF65 /* GeniusSongsModel.swift in Sources */,
+				5D58717518F30B5BC91996F8 /* SetlistListModel.swift in Sources */,
+				9563DB7D792BF96A08BDEC4F /* SearchArtistTestView.swift in Sources */,
+				85662108D3249FA1426BA3A0 /* SetlistTestView.swift in Sources */,
+				05839DB71503C9C324D2FE8B /* SongListTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
