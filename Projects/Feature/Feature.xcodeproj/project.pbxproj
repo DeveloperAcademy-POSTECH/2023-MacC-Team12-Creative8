@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,9 @@
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061AC51D0A5E10A4A203E69 /* MainView.swift */; };
 		66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9B012EDBBF54D1085338 /* MainViewModel.swift */; };
+		7969802E2AD6C2290018377A /* MainBookmarkedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969802D2AD6C2290018377A /* MainBookmarkedView.swift */; };
+		796980312AD6C2DD0018377A /* PopularArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796980302AD6C2DD0018377A /* PopularArtistView.swift */; };
+		796980332AD6C2FF0018377A /* TopBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796980322AD6C2FF0018377A /* TopBannerView.swift */; };
 		8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8561DB4CBBBD28355B569F7 /* SettingViewModel.swift */; };
 		92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBC0111302E453AE98E24C6 /* SearchViewModel.swift */; };
 		97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB66A4326EFC255A2FEFB1C /* SettingView.swift */; };
@@ -56,6 +59,9 @@
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C02EBA9564A56386388E50E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		7969802D2AD6C2290018377A /* MainBookmarkedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBookmarkedView.swift; sourceTree = "<group>"; };
+		796980302AD6C2DD0018377A /* PopularArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularArtistView.swift; sourceTree = "<group>"; };
+		796980322AD6C2FF0018377A /* TopBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBannerView.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB66A4326EFC255A2FEFB1C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		992FB9DCAD849315992DB030 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				A061AC51D0A5E10A4A203E69 /* MainView.swift */,
+				7969802F2AD6C28D0018377A /* MainViewSubView */,
 				D7EA9B012EDBBF54D1085338 /* MainViewModel.swift */,
 			);
 			path = MainScene;
@@ -133,6 +140,17 @@
 				FF84802DBECE1160D2AE52BE /* Frameworks */,
 				F37C3A4FE623C846745B9CE2 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		7969802F2AD6C28D0018377A /* MainViewSubView */ = {
+			isa = PBXGroup;
+			children = (
+				7969802D2AD6C2290018377A /* MainBookmarkedView.swift */,
+				796980322AD6C2FF0018377A /* TopBannerView.swift */,
+				796980302AD6C2DD0018377A /* PopularArtistView.swift */,
+			);
+			name = MainViewSubView;
+			path = ../../../..;
 			sourceTree = "<group>";
 		};
 		AA476BACFF1FE77A2E869E4B /* InfoPlists */ = {
@@ -229,8 +247,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -296,9 +312,12 @@
 			files = (
 				A0191395AEF98A36BA2EAFB4 /* App.swift in Sources */,
 				62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */,
+				7969802E2AD6C2290018377A /* MainBookmarkedView.swift in Sources */,
 				66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */,
+				796980332AD6C2FF0018377A /* TopBannerView.swift in Sources */,
 				0D408FF9AD99B249D912B301 /* SearchView.swift in Sources */,
 				92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */,
+				796980312AD6C2DD0018377A /* PopularArtistView.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
 				8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */,
 			);

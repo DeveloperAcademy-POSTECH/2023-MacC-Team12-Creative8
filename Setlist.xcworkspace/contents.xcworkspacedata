@@ -2,6 +2,10 @@
 <Workspace
    version = "1.0">
    <Group
+      location = "container:"
+      name = "New Group">
+   </Group>
+   <Group
       location = "group:Projects"
       name = "Projects">
       <FileRef
