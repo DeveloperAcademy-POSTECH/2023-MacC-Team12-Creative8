@@ -78,7 +78,6 @@ public struct TopBannerView: View {
                         scrollID = 1
                     }
                 }
-            print(scrollID!)
         }
         .onReceive(timer, perform: { _ in
             withAnimation {

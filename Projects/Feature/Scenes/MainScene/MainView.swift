@@ -64,7 +64,6 @@ public struct MainView: View {
                         }
                         .scrollTargetLayout()
                         .safeAreaPadding(.horizontal, 20)
-                        .background(.yellow)
                         .onAppear {
                             if archivedNum != 0 {
                                 scrollID = 0
