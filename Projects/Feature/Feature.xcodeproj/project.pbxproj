@@ -20,7 +20,6 @@
 		9B69B47757BE4626315A9E59 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		B225F9A401E0F4EAD85C41FF /* Core.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; };
-		FA400307DD0D6BC247FC5C92 /* UI.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,17 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1E30F68BEE06D067009B4984 /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				B225F9A401E0F4EAD85C41FF /* Core.framework in Dependencies */,
-				FA400307DD0D6BC247FC5C92 /* UI.framework in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		30F01E56E14211AA26551CC8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,16 +53,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2F39917B197FB3DB18AA5EF /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				3E8A482952487EDC4969D414 /* UI_UI.bundle in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +65,8 @@
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6085C7B56CA62156DBDD104D /* UI_UI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UI_UI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FB66A4326EFC255A2FEFB1C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		992FB9DCAD849315992DB030 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A061AC51D0A5E10A4A203E69 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A215FBB13B09E45FD00ED57C /* Feature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Feature-Info.plist"; sourceTree = "<group>"; };
 		D2E966455637831DC7FA52A6 /* FeatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,9 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B69B47757BE4626315A9E59 /* Core.framework in Frameworks */,
 				F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */,
-				78045B4A15748AE0819268FB /* UI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */,
+				AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +190,6 @@
 				35F364327687E6A20628F831 /* Core.framework */,
 				8A611D1693834F821CBD6EAD /* Feature.framework */,
 				D2E966455637831DC7FA52A6 /* FeatureTests.xctest */,
-				6085C7B56CA62156DBDD104D /* UI_UI.bundle */,
 				FFAB8E69261DF7B00B491EB6 /* UI.framework */,
 			);
 			name = Products;
@@ -235,7 +214,6 @@
 				8E0437CF7E5C538AD21C9785 /* Resources */,
 				30F01E56E14211AA26551CC8 /* Embed Frameworks */,
 				E8D7D7F892784DF238F9E9C4 /* Frameworks */,
-				1E30F68BEE06D067009B4984 /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -254,7 +232,6 @@
 				53E96F0A5BE9F15958E1034C /* Resources */,
 				55DBDC1908CFD30C9319345E /* Embed Frameworks */,
 				C2B770B012D2736DAFE9B11A /* Frameworks */,
-				A2F39917B197FB3DB18AA5EF /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -299,7 +276,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310E4E5146CE0700BC69E55A /* UI_UI.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +360,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Feature;
 				PRODUCT_NAME = Feature;
 				SDKROOT = iphoneos;
@@ -443,7 +418,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Feature;
 				PRODUCT_NAME = Feature;
 				SDKROOT = iphoneos;
