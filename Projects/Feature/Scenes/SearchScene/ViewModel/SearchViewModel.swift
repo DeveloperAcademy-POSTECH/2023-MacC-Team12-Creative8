@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// 제발 제발 제발
 final class SearchViewModel: ObservableObject {
   @Published var searchText: String = ""
   @Published  var searchIsPresented: Bool = false

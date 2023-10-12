@@ -11,7 +11,6 @@ import SwiftData
 import Core
 import UI
 
-// 제발 제발 제발
 struct SearchHistoryCell: View {
   @Binding var searchText: String
   let dataManager: SearchHistoryManager

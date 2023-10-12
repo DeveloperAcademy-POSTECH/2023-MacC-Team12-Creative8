@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// 제발 제발 제발
 struct SearchBar: View {
     @Binding var text: String
     @Binding var isEditing: Bool
@@ -60,7 +59,6 @@ struct SearchBar: View {
             }
             .foregroundStyle(.black)
             .padding(.horizontal, 10)
-//            .animation(.linear(duration: 0.25))
           }
         }
         .textCase(.none)

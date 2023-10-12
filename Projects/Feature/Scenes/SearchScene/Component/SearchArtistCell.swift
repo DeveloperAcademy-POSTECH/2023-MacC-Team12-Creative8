@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// 제발 제발 제발
 struct SearchArtistCell: View {
   let tempColor: Color
 //  let imageURL: URL
