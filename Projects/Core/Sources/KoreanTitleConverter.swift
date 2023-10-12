@@ -50,18 +50,17 @@ class KoreanTitleConverter {
         
         func fetchPage(page: Int) {
             dataService.fetchSongsFromGenius(artistId: artistId, page: page) { result in
-                if let result = result {
-                    let songs = result.response?.songs ?? []
-                    for song in songs {
-                        songList.append(song.title ?? "")
-                    }
-                    if let nextPage = result.response?.nextPage {
-                        fetchPage(page: nextPage)
-                    } else {
-                        completion(songList)
-                    }
-                } else {
+                guard let result = result, let songs = result.response?.songs else {
                     completion(nil)
+                    return
+                }
+                for song in songs {
+                    songList.append(song.title ?? "")
+                }
+                if let nextPage = result.response?.nextPage {
+                    fetchPage(page: nextPage)
+                } else {
+                    completion(songList)
                 }
             }
         }
