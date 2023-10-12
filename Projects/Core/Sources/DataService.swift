@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum Token: String {
-    case setlitFM = "Etp_bKUUaREyYBjbLpdkritldxrwWRhrw48H"
-    case musicBrainz = "API_KEY"
-    case genius = "Bearer 7UINyw6MHKzr-CYFgeuL3ViZnpCLNvU1GeAo0ZKFEfyrvbyfSU5cWYMazDCXwIfh"
-}
-
 class DataService {
     static let shared = DataService()
     
@@ -49,7 +43,7 @@ class DataService {
     
     func searchArtistsFromMusicBrainz(artistName: String, completion: @escaping (ArtistListModel?) -> Void) {
         if let url = URL(string: "https://musicbrainz.org/ws/2/artist?query=\(artistName)&fmt=json") {
-            let headers = ["Authorization": Token.musicBrainz.rawValue]
+            let headers = ["Authorization": APIKeys().musicBrainz]
             APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else {
             completion(nil)
@@ -59,7 +53,7 @@ class DataService {
     func fetchSetlistsFromSetlistFM(artistMbid: String, page: Int, completion: @escaping (SetlistListModel?) -> Void) {
         if let url = URL(string: "https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=\(artistMbid)&p=\(page)") {
             let headers = [
-                "x-api-key": Token.setlitFM.rawValue,
+                "x-api-key": APIKeys().setlistFM,
                 "Accept": "application/json",
                 "Accept-Language": "en"
             ]
@@ -72,7 +66,7 @@ class DataService {
     func searchArtistFromGenius(artistName: String, completion: @escaping (GeniusArtistsModel?) -> Void) {
         if let url = URL(string: "https://api.genius.com/search?q=\(artistName)") {
             print("request url: \(url)")
-            let headers = ["Authorization": Token.genius.rawValue]
+            let headers = ["Authorization": APIKeys().genius]
             APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else { 
             completion(nil)
@@ -81,7 +75,7 @@ class DataService {
     
     func fetchSongsFromGenius(artistId: Int, page: Int, completion: @escaping (GeniusSongsModel?) -> Void) {
         if let url = URL(string: "https://api.genius.com/artists/\(artistId)/songs?page=\(page)&per_page=50") {
-            let headers = ["Authorization": Token.genius.rawValue]
+            let headers = ["Authorization": APIKeys().genius]
             APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else {
             completion(nil)
