@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00547D706DD669EAA6210824 /* UI_UI.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = C35375481DE7C38B88D1E376 /* UI_UI.bundle */; };
+		0B0A9D282AD7779E00C291E4 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A9D272AD7779D00C291E4 /* DateFormatterExtension.swift */; };
 		37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */; };
 		7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */; };
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
@@ -77,6 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B0A9D272AD7779D00C291E4 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
 		66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+UI.swift"; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0B0A9D272AD7779D00C291E4 /* DateFormatterExtension.swift */,
 				CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
@@ -271,8 +274,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -356,6 +357,7 @@
 			files = (
 				7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */,
 				37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */,
+				0B0A9D282AD7779E00C291E4 /* DateFormatterExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
