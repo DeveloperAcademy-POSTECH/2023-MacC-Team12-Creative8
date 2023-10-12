@@ -17,35 +17,40 @@ enum Token: String {
 class DataService {
     static let shared = DataService()
     
-    func searchArtistsFromMusicBrainz(artistName: String, completion: @escaping (ArtistListModel?) -> Void) {
-        if let url = URL(string: "https://musicbrainz.org/ws/2/artist?query=\(artistName)&fmt=json") {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue(Token.musicBrainz.rawValue, forHTTPHeaderField: "Authorization")
-            
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: request) { data, response, error in
-                if let error = error {
+    private func APIRequest<T: Codable>(url: URL, httpMethod: String, headers: [String: String], completion: @escaping (T?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod
+        
+        for (headerField, headerValue) in headers {
+            request.setValue(headerValue, forHTTPHeaderField: headerField)
+        }
+        
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error)
+                completion(nil)
+            } else if let JSONdata = data {
+                let decoder = JSONDecoder()
+                do {
+                    let decodedData = try decoder.decode(T.self, from: JSONdata)
+                    completion(decodedData)
+                } catch let error {
                     print(error)
                     completion(nil)
-                    return
                 }
-                
-                if let JSONdata = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let decodedData = try decoder.decode(ArtistListModel.self, from: JSONdata)
-                        completion(decodedData)
-                    } catch let error {
-                        print(error)
-                        completion(nil)
-                    }
-                } else {
-                    completion(nil)
-                }
+            } else {
+                completion(nil)
             }
-            task.resume()
+        }
+        task.resume()
+    }
+    
+    func searchArtistsFromMusicBrainz(artistName: String, completion: @escaping (ArtistListModel?) -> Void) {
+        if let url = URL(string: "https://musicbrainz.org/ws/2/artist?query=\(artistName)&fmt=json") {
+            let headers = ["Authorization": Token.musicBrainz.rawValue]
+            APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else {
             completion(nil)
         }
@@ -53,35 +58,12 @@ class DataService {
     
     func fetchSetlistsFromSetlistFM(artistMbid: String, page: Int, completion: @escaping (SetlistListModel?) -> Void) {
         if let url = URL(string: "https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=\(artistMbid)&p=\(page)") {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue(Token.setlitFM.rawValue, forHTTPHeaderField: "x-api-key")
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            request.setValue("en", forHTTPHeaderField: "Accept-Language")
-            
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print(error)
-                    completion(nil)
-                    return
-                }
-                
-                if let JSONdata = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let decodedData = try decoder.decode(SetlistListModel.self, from: JSONdata)
-                        completion(decodedData)
-                    } catch let error {
-                        print(error)
-                        completion(nil)
-                    }
-                } else {
-                    completion(nil)
-                }
-            }
-            task.resume()
+            let headers = [
+                "x-api-key": Token.setlitFM.rawValue,
+                "Accept": "application/json",
+                "Accept-Language": "en"
+            ]
+            APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else {
             completion(nil)
         }
@@ -89,70 +71,21 @@ class DataService {
     
     func searchArtistFromGenius(artistName: String, completion: @escaping (GeniusArtistsModel?) -> Void) {
         if let url = URL(string: "https://api.genius.com/search?q=\(artistName)") {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue(Token.genius.rawValue, forHTTPHeaderField: "Authorization")
-            
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print(error)
-                    completion(nil)
-                    return
-                }
-                
-                if let JSONdata = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let decodedData = try decoder.decode(GeniusArtistsModel.self, from: JSONdata)
-                        completion(decodedData)
-                    } catch let error {
-                        print(error)
-                        completion(nil)
-                    }
-                } else {
-                    completion(nil)
-                }
-            }
-            task.resume()
-        } else {
+            print("request url: \(url)")
+            let headers = ["Authorization": Token.genius.rawValue]
+            APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
+        } else { 
             completion(nil)
         }
     }
-
+    
     func fetchSongsFromGenius(artistId: Int, page: Int, completion: @escaping (GeniusSongsModel?) -> Void) {
         if let url = URL(string: "https://api.genius.com/artists/\(artistId)/songs?page=\(page)&per_page=50") {
-            print("@LOG request url: \(url)")
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue(Token.genius.rawValue, forHTTPHeaderField: "Authorization")
-            
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print(error)
-                    completion(nil)
-                    return
-                }
-                
-                if let JSONdata = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let decodedData = try decoder.decode(GeniusSongsModel.self, from: JSONdata)
-                        completion(decodedData) // 데이터 성공적으로 파싱되면 completion 핸들러 호출
-                    } catch let error {
-                        print(error)
-                        completion(nil)
-                    }
-                } else {
-                    completion(nil)
-                }
-            }
-            task.resume()
+            let headers = ["Authorization": Token.genius.rawValue]
+            APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
         } else {
             completion(nil)
         }
     }
+    
 }
