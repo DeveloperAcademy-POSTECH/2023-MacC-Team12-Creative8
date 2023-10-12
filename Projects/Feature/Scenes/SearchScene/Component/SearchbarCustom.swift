@@ -19,7 +19,7 @@ struct SearchBar: View {
 
     var body: some View {
         HStack {
-            TextField("공연, 아티스트를 검색하세요", text: $text)
+            TextField("아티스트를 검색하세요", text: $text)
                 .padding(12.5)
                 .padding(.horizontal, 20)
                 .foregroundColor(.gray)
