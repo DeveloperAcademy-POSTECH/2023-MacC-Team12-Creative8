@@ -32,7 +32,7 @@ struct SearchHistoryCell: View {
         Button {
           dataManager.deleteItems(item: history)
         } label: {
-          Image(systemName: "xmark").foregroundStyle(.secondary)
+          Image(systemName: "xmark").foregroundStyle(.gray)
         }
       }
       .padding(.top)
