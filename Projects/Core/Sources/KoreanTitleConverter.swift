@@ -53,7 +53,6 @@ class KoreanTitleConverter {
                 if let result = result {
                     let songs = result.response?.songs ?? []
                     for song in songs {
-//                        songList.append(song.titleWithFeatured ?? "")
                         songList.append(song.title ?? "")
                     }
                     if let nextPage = result.response?.nextPage {
@@ -74,11 +73,9 @@ class KoreanTitleConverter {
         for hit in hits {
             let name = hit.result?.primaryArtist?.name ?? ""
             if removeFirstParentheses(from: name) == artistName {
-                print("@LOG Found Artist: \(name)")
                 return hit.result?.primaryArtist?.id
             }
         }
-        print("@LOG Artist Not Found")
         return nil
     }
     
