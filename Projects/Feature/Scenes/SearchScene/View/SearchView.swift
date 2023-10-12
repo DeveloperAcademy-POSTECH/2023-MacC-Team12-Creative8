@@ -11,6 +11,7 @@ import Core
 import SwiftData
 import UI
 
+// 제발 제발 제발
 struct SearchView: View {
   @Query private var history: [SearchHistory] = []
   @StateObject var viewModel = SearchViewModel()
