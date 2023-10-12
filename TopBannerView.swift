@@ -11,7 +11,7 @@ import SwiftUI
 public struct TopBannerView: View {
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State private var scrollID: Int?
-    @GestureState private var dargOffset: CGSize = .zero
+    let screenWidth = UIScreen.main.bounds.size.width
     public var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
@@ -41,7 +41,7 @@ public struct TopBannerView: View {
                                 .foregroundColor(.gray)
                     )
                     }
-                    .frame(width: 350)
+                    .frame(width: screenWidth * 0.89)
                     .padding(.horizontal, 3) // navi
                 }
             }
