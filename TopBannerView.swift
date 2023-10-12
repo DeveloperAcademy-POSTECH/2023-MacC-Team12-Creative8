@@ -11,6 +11,7 @@ import SwiftUI
 public struct TopBannerView: View {
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State private var scrollID: Int?
+    @GestureState private var dargOffset: CGSize = .zero
     public var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
@@ -57,32 +58,33 @@ public struct TopBannerView: View {
         }
         .gesture(
                DragGesture()
-                   .onChanged {value in
-                           timer.upstream.connect().cancel()
+                   .onChanged { value in
+                       timer.upstream.connect().cancel()
                    }
-                   .onEnded{value in
+               // onEnded 호출 안됨...
+                   .onEnded{ value in
+                       timer.upstream.connect().cancel()
                        timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
                    }
            )
         .onChange(of: scrollID) {
-                if scrollID == BannerData.bannerData[0].id {
+                if scrollID == 0 {
                     withAnimation {
-                        scrollID = BannerData.bannerData[4].id
+                        scrollID = 4
                     }
                 }
-                if scrollID == BannerData.bannerData[5].id {
+            if scrollID == 5 {
                     withAnimation(.linear) {
-                        scrollID = BannerData.bannerData[1].id
+                        scrollID = 1
                     }
                 }
-            timer.upstream.connect().cancel()
-            timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+            print(scrollID!)
         }
-        .onReceive(timer) { _ in
+        .onReceive(timer, perform: { _ in
             withAnimation {
                         scrollID! += 1
             }
-        }
+        }) 
     }
 }
 
