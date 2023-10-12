@@ -76,7 +76,6 @@ extension SearchArtistTestView {
                 NavigationLink {
                     VStack {
                         Text("name: \(koreanNameConverter.findKoreanName(artist: artist))")
-                        Text("gender: \(artist.gender ?? "")")
                         Text("country: \(artist.country ?? "")")
                     }
                     .navigationTitle("Artist Info")

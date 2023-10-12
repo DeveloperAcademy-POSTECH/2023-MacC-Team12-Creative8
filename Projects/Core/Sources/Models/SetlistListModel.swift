@@ -11,13 +11,16 @@ import Foundation
 // MARK: - SetlistListModel
 struct SetlistListModel: Codable {
     let type: String?
-    let itemsPerPage, page, total: Int?
+    let itemsPerPage: Int?
+    let page: Int?
+    let total: Int?
     let setlist: [Setlist]?
 }
 
 // MARK: - Setlist
 struct Setlist: Codable {
-    let id, versionId: String?
+    let id: String?
+    let versionId: String?
     let eventDate: String?
     let lastUpdated: String?
     let artist: Artist?
@@ -30,7 +33,10 @@ struct Setlist: Codable {
 
 // MARK: - Artist
 struct Artist: Codable {
-    let mbid, name, sortName, disambiguation: String?
+    let mbid: String?
+    let name: String?
+    let sortName: String?
+    let disambiguation: String?
     let url: String?
 }
 
@@ -52,7 +58,8 @@ struct Set: Codable {
 
 // MARK: - Song
 struct Song: Codable {
-    let name, info: String?
+    let name: String?
+    let info: String?
     let cover: Artist?
     let tape: Bool?
 }
@@ -64,7 +71,8 @@ struct Tour: Codable {
 
 // MARK: - Venue
 struct Venue: Codable {
-    let id, name: String?
+    let id: String?
+    let name: String?
     let city: City?
     let url: String?
 }
@@ -72,7 +80,8 @@ struct Venue: Codable {
 // MARK: - City
 struct City: Codable {
     let id: String?
-    let name, state: String?
+    let name: String?
+    let state: String?
     let stateCode: String?
     let coords: Coords?
     let country: Country?
@@ -80,7 +89,8 @@ struct City: Codable {
 
 // MARK: - Coords
 struct Coords: Codable {
-    let lat, long: Double?
+    let lat: Double?
+    let long: Double?
 }
 
 // MARK: - Country
