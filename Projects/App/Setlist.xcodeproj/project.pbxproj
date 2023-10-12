@@ -14,9 +14,6 @@
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
 		C0EF89FD3AC7EE309CFE1063 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39BF685A6F1AC6C014AFECB /* UI.framework */; };
 		E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */; };
-		E3892A0645D4E0027515B073 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; };
-		EDFB599DF237A2AEA630D5CC /* UI_UI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3FD6C4663ADEB60B0189737 /* UI_UI.bundle */; };
-		FA268782E8A497C04B4B4077 /* UI_UI.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = D3FD6C4663ADEB60B0189737 /* UI_UI.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,19 +33,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		47C4AB24203CC41B0ED2CD24 /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				FA268782E8A497C04B4B4077 /* UI_UI.bundle in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
 		};
 		A8D2C7009BDD8E831C27935E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -71,11 +59,8 @@
 		0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Setlist.swift"; sourceTree = "<group>"; };
 		0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66FAE4CFDF5725510C9654A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		A39BF685A6F1AC6C014AFECB /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11848CE114DC128FE941C0C /* SetlistTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SetlistTests-Info.plist"; sourceTree = "<group>"; };
 		CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3FD6C4663ADEB60B0189737 /* UI_UI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UI_UI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		F592AE35C902CB7E4AF3F5DF /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,9 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3892A0645D4E0027515B073 /* Core.framework in Frameworks */,
 				21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */,
-				C0EF89FD3AC7EE309CFE1063 /* UI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,12 +121,9 @@
 		96AF4B79DA528B7749EC9D8A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F592AE35C902CB7E4AF3F5DF /* Core.framework */,
 				05D7E000A703647DD9102B8F /* Feature.framework */,
 				04A3932CB4A4A550F38B6D0A /* Setlist.app */,
 				CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */,
-				D3FD6C4663ADEB60B0189737 /* UI_UI.bundle */,
-				A39BF685A6F1AC6C014AFECB /* UI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,7 +182,6 @@
 				44FD4BC1EFE20084A340AD11 /* Resources */,
 				406DD4890ECF1656228A9F06 /* Embed Frameworks */,
 				71F7CD5B99A949D3A64AA349 /* Frameworks */,
-				47C4AB24203CC41B0ED2CD24 /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -272,7 +251,6 @@
 			files = (
 				11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */,
 				45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */,
-				EDFB599DF237A2AEA630D5CC /* UI_UI.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

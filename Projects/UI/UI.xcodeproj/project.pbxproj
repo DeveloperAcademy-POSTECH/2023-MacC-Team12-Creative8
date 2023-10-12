@@ -10,11 +10,7 @@
 		00547D706DD669EAA6210824 /* UI_UI.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = C35375481DE7C38B88D1E376 /* UI_UI.bundle */; };
 		0B0A9D282AD7779E00C291E4 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A9D272AD7779D00C291E4 /* DateFormatterExtension.swift */; };
 		37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */; };
-		7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */; };
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
-		922224E1111A212679056F94 /* UI_UI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C35375481DE7C38B88D1E376 /* UI_UI.bundle */; };
-		A1546F732844B62821880592 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957378EDAFAF88BFEB487132 /* Colors.xcassets */; };
-		FE93CF553DAF2118979FCCE4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A78FD64E60B33D4B9F3344 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,26 +21,9 @@
 			remoteGlobalIDString = A71F8DD2A4C18857FFBFF581;
 			remoteInfo = UI;
 		};
-		6B1F7272836A85B8C3A570C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E1CDE9B685737937831E727 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC10593DD15AA695EB717CA4;
-			remoteInfo = UI_UI;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5A8D3E36C775F9F3D58D458B /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				00547D706DD669EAA6210824 /* UI_UI.bundle in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		631C0BAA0E6B4A8BC6CE758B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,40 +44,18 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8BBA321AD6F42FB25CFA41E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B0A9D272AD7779D00C291E4 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
-		66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+UI.swift"; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		957378EDAFAF88BFEB487132 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C35375481DE7C38B88D1E376 /* UI_UI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UI_UI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		CDBBB62E68E4D27CF897A042 /* UI_UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI_UI-Info.plist"; sourceTree = "<group>"; };
-		D3A78FD64E60B33D4B9F3344 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EA107D337866699F71AD9912 /* UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UITests-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5058F36F3DEEBDE897F291C8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8E1E2B2DB3468FC8BC5AD156 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				8C92E84977AC273EA43C05B1 /* Derived */,
-				56F3DCA032D4C8ADA6BAADB3 /* Resources */,
 				4979EA0CE84B8AF2F138CB2C /* Sources */,
 			);
 			name = Project;
@@ -149,15 +105,6 @@
 				8AA572ECEAA212E1DEFF3F6E /* Extensions */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		56F3DCA032D4C8ADA6BAADB3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				957378EDAFAF88BFEB487132 /* Colors.xcassets */,
-				D3A78FD64E60B33D4B9F3344 /* Images.xcassets */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
@@ -173,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				D5036A44A2F2BCCB79343D9B /* InfoPlists */,
-				CA66930CEDCE989F0F7E2174 /* Sources */,
 			);
 			path = Derived;
 			sourceTree = "<group>";
@@ -181,25 +127,15 @@
 		B03C18C5BAECE53CE1E5DDE5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C35375481DE7C38B88D1E376 /* UI_UI.bundle */,
 				6A1C9C9F198B162C645B7C84 /* UI.framework */,
 				BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CA66930CEDCE989F0F7E2174 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 		D5036A44A2F2BCCB79343D9B /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
-				CDBBB62E68E4D27CF897A042 /* UI_UI-Info.plist */,
 				14B2639FB34BAB7A317AA102 /* UI-Info.plist */,
 				EA107D337866699F71AD9912 /* UITests-Info.plist */,
 			);
@@ -222,29 +158,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				CC3EB71271DFBE171B704B3F /* PBXTargetDependency */,
 			);
 			name = UI;
 			productName = UI;
 			productReference = 6A1C9C9F198B162C645B7C84 /* UI.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		AC10593DD15AA695EB717CA4 /* UI_UI */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8E5D7B871C487E3086778C08 /* Build configuration list for PBXNativeTarget "UI_UI" */;
-			buildPhases = (
-				3761F2CB5E03D8E3F5BD1BFC /* Resources */,
-				E8BBA321AD6F42FB25CFA41E /* Embed Frameworks */,
-				5058F36F3DEEBDE897F291C8 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = UI_UI;
-			productName = UI_UI;
-			productReference = C35375481DE7C38B88D1E376 /* UI_UI.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 		F5B409AA710E5F5513429B5E /* UITests */ = {
 			isa = PBXNativeTarget;
@@ -254,7 +172,6 @@
 				1713805845D7DE240B4E46E5 /* Resources */,
 				631C0BAA0E6B4A8BC6CE758B /* Embed Frameworks */,
 				9FF1A5B0283AAA99CBF875C0 /* Frameworks */,
-				5A8D3E36C775F9F3D58D458B /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -289,7 +206,6 @@
 			projectRoot = "";
 			targets = (
 				A71F8DD2A4C18857FFBFF581 /* UI */,
-				AC10593DD15AA695EB717CA4 /* UI_UI */,
 				F5B409AA710E5F5513429B5E /* UITests */,
 			);
 		};
@@ -300,16 +216,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				922224E1111A212679056F94 /* UI_UI.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3761F2CB5E03D8E3F5BD1BFC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1546F732844B62821880592 /* Colors.xcassets in Resources */,
-				FE93CF553DAF2118979FCCE4 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */,
 				37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */,
 				0B0A9D282AD7779E00C291E4 /* DateFormatterExtension.swift in Sources */,
 			);
@@ -369,12 +274,6 @@
 			name = UI;
 			target = A71F8DD2A4C18857FFBFF581 /* UI */;
 			targetProxy = 2DF49939CD837E096595F294 /* PBXContainerItemProxy */;
-		};
-		CC3EB71271DFBE171B704B3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = UI_UI;
-			target = AC10593DD15AA695EB717CA4 /* UI_UI */;
-			targetProxy = 6B1F7272836A85B8C3A570C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -459,27 +358,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		19D1B4A4A5B964BE986F214D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Derived/InfoPlists/UI_UI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UI.resources;
-				PRODUCT_NAME = UI_UI;
-				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -596,26 +474,6 @@
 			};
 			name = Release;
 		};
-		694C824AAA5D0D2A42318B55 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Derived/InfoPlists/UI_UI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UI.resources;
-				PRODUCT_NAME = UI_UI;
-				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		E1489BB31632FD7A2D560DBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -658,15 +516,6 @@
 			buildConfigurations = (
 				0BF837D68577EA1AEF991401 /* Debug */,
 				658CFD0CAC3683BC8216718C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8E5D7B871C487E3086778C08 /* Build configuration list for PBXNativeTarget "UI_UI" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				19D1B4A4A5B964BE986F214D /* Debug */,
-				694C824AAA5D0D2A42318B55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
