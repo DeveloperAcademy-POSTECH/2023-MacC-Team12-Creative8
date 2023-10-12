@@ -494,7 +494,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Core;
 				PRODUCT_NAME = Core;
 				SDKROOT = iphoneos;
@@ -528,7 +527,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Core;
 				PRODUCT_NAME = Core;
 				SDKROOT = iphoneos;
