@@ -13,7 +13,9 @@
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
 		97778FDC5FD657112348D680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D2A25A4B493B491347702 /* App.swift */; };
 		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C0EF89FD3AC7EE309CFE1063 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39BF685A6F1AC6C014AFECB /* UI.framework */; };
 		E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */; };
+		E3892A0645D4E0027515B073 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +61,10 @@
 		0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		658D2A25A4B493B491347702 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		66FAE4CFDF5725510C9654A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A39BF685A6F1AC6C014AFECB /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11848CE114DC128FE941C0C /* SetlistTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SetlistTests-Info.plist"; sourceTree = "<group>"; };
 		CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F592AE35C902CB7E4AF3F5DF /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3892A0645D4E0027515B073 /* Core.framework in Frameworks */,
 				21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */,
+				C0EF89FD3AC7EE309CFE1063 /* UI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,9 +127,11 @@
 		96AF4B79DA528B7749EC9D8A /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				F592AE35C902CB7E4AF3F5DF /* Core.framework */,
 				05D7E000A703647DD9102B8F /* Feature.framework */,
 				04A3932CB4A4A550F38B6D0A /* Setlist.app */,
 				CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */,
+				A39BF685A6F1AC6C014AFECB /* UI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

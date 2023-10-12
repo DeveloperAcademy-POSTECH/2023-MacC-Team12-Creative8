@@ -16,6 +16,8 @@ let project = Project.makeModule(
   ],
   dependencies: [
     .Projcet.Feature,
+    .Projcet.Core,
+    .Projcet.UI,
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],
