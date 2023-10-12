@@ -13,6 +13,17 @@ class KoreanTitleConverter {
     
     let dataService: DataService = DataService.shared
     
+    func findKoreanTitle(title: String, songList: [(String, String?)]) -> String? {
+        for song in songList {
+            if title.lowercased() == song.0.lowercased() {
+                return title
+            } else if title.lowercased() == song.1?.lowercased() {
+                return song.0
+            }
+        }
+        return nil
+    }
+    
     func getSongListByArtist(artistName: String, completion: @escaping ([(String, String?)]?) -> Void) {
         var parsedSongList: [(String, String?)] = []
         var artistId: Int?

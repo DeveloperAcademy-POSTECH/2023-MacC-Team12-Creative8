@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		5D58717518F30B5BC91996F8 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */; };
 		6402D76AF3A073E5544EBF65 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013749188F549E2BA326CC3 /* GeniusSongsModel.swift */; };
 		85662108D3249FA1426BA3A0 /* SetlistTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA69566DE6A5EB135E52C00A /* SetlistTestView.swift */; };
+		8B81A2B42AD7FE54007F359F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81A2B32AD7FE54007F359F /* APIKeys.swift */; };
 		9563DB7D792BF96A08BDEC4F /* SearchArtistTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE3664658B3C72853611D73 /* SearchArtistTestView.swift */; };
 		9ACA8FFD6F40F2B734921692 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF018D0FB8E375EEA61CF7BC /* GeniusArtistsModel.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; platformFilter = ios; };
@@ -62,6 +63,7 @@
 		64301FBD5A32CFE948872F32 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
 		775C9B765DAF4F251FEF1E0F /* KoreanTitleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanTitleConverter.swift; sourceTree = "<group>"; };
+		8B81A2B32AD7FE54007F359F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
 		AE299893623B5C42E85A05F1 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
 		CA69566DE6A5EB135E52C00A /* SetlistTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistTestView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				9917FB2BFD58AD83A06E72AF /* Models */,
 				AF3D3A25B1163FF7AA007316 /* SampleViews */,
 				64301FBD5A32CFE948872F32 /* DataService.swift */,
+				8B81A2B32AD7FE54007F359F /* APIKeys.swift */,
 				AE299893623B5C42E85A05F1 /* KoreanNameConverter.swift */,
 				775C9B765DAF4F251FEF1E0F /* KoreanTitleConverter.swift */,
 			);
@@ -221,8 +224,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = com.creative8;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -293,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B81A2B42AD7FE54007F359F /* APIKeys.swift in Sources */,
 				E8F40E7BE4D0D7CA6AC5B095 /* DataService.swift in Sources */,
 				F72CFE340AB350EAACF168B3 /* KoreanNameConverter.swift in Sources */,
 				C34B5CC14145CA76E58312F1 /* KoreanTitleConverter.swift in Sources */,
