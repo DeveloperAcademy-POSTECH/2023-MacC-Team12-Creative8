@@ -38,13 +38,7 @@ struct SearchView: View {
   // MARK: 상단, ScrollViewReader의 사용을 위해 id 활용
   private var headView: some View {
     VStack(alignment: .leading) {
-      Group {
-        Text("누구의 ")
-        +
-        Text("세트리스트").bold()
-        +
-        Text("를\n찾으시나요?")
-      }
+      Text("누구의 **세트리스트**를\n찾으시나요?")
       .font(.largeTitle)
       .opacity(viewModel.searchIsPresented ? 0 : 1)
       .id(ScrollID.top)
