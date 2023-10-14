@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */; };
-		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; };
+		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; };
 		45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018F043A036853F4399E1EB6 /* LaunchScreen.storyboard */; };
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
 		97778FDC5FD657112348D680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D2A25A4B493B491347702 /* App.swift */; };
-		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */; };
 /* End PBXBuildFile section */
 
@@ -217,7 +217,6 @@
 		601C713A3C15E6BE519CFFA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
 				TargetAttributes = {
 					C2CD78F96AEE99661AE40142 = {
@@ -226,7 +225,7 @@
 				};
 			};
 			buildConfigurationList = 69D118F316893E6C418AE0C7 /* Build configuration list for PBXProject "Setlist" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -331,12 +330,11 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Setlist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/Setlist";
 				TEST_TARGET_NAME = Setlist;
 			};
 			name = Release;
@@ -358,7 +356,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -383,13 +380,12 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Setlist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/Setlist";
 				TEST_TARGET_NAME = Setlist;
 			};
 			name = Debug;
@@ -470,7 +466,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
