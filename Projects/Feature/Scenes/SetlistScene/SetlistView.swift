@@ -187,9 +187,9 @@ private struct ConcertInfoDetailView: View {
                                 .font(.system(size: 19))
                         }
                     }
-                    .padding()
+                    .padding(10)
                 }
-                .frame(width: screenWidth * 0.9, height: screenHeight * 0.085)
+                .frame(width: screenWidth * 0.9, height: screenHeight * 0.075)
             }
         }
     }
