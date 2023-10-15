@@ -29,8 +29,8 @@ public struct PopularArtistsView: View {
                 ZStack {
                         Image(image)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .frame(width: screenWidth * 0.44, height: screenHeight * 0.16)
                             
                         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.2), Color.black]),
                                        startPoint: .top,
