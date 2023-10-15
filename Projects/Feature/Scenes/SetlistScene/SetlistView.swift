@@ -205,42 +205,58 @@ private struct ConcertInfoDetailView: View {
 }
 
 private struct ListView: View {
+    let setlist: Setlist = dummySetlist
+    let koreanTitleConverter: KoreanTitleConverter = KoreanTitleConverter.shared
+    
     var body: some View {
         LazyVStack {
-            ForEach(dummySetlist, id: \.sessionName) { session in
+            ForEach(setlist.sets?.setsSet ?? [], id: \.name) { session in
                 VStack(alignment: .leading, spacing: 20) {
-                    if let sessionName = session.sessionName {
+                    if let sessionName = session.name {
                         Text(sessionName)
                             .font(.system(size: 18))
                             .fontWeight(.bold)
                             .opacity(0.3)
                     }
                     
-                    ForEach(Array(session.songs.enumerated()), id: \.offset) { index, song in
-                        if session.isTape {
-                            ListRowView(index: nil, title: song.title, info: song.info)
+                    let songs = session.song ?? []
+                    ForEach(Array(songs.enumerated()), id: \.offset) { index, song in
+                        if let title = song.name {
+                            if song.tape != nil && song.tape == true {
+                                ListRowView(
+                                    index: nil,
+                                    title: koreanTitleConverter.convertTitleToKorean(title: title, songList: iuSongList) ?? title,
+                                    info: song.info
+                                )
                                 .opacity(0.6)
-                        } else {
-                            ListRowView(index: index + 1, title: song.title, info: song.info)
-                        }
-                        
-                        if index + 1 < session.songs.count {
-                            Divider()
+                            } else {
+                                ListRowView(
+                                    index: index,
+                                    title: koreanTitleConverter.convertTitleToKorean(title: title, songList: iuSongList) ?? title,
+                                    info: song.info
+                                )
+                            }
+                            
+                            if index + 1 < songs.count {
+                                Divider()
+                            }
                         }
                     }
+                    
                 }
                 .padding(.vertical, screenHeight * 0.03)
             }
         }
         .padding(.horizontal, screenWidth * 0.1)
         .padding(.bottom)
+        
     }
 }
 
 private struct ListRowView: View {
     var index: Int?
     var title: String
-    var info: [String]?
+    var info: String?
     
     var body: some View {
         VStack {
@@ -260,15 +276,11 @@ private struct ListRowView: View {
             .fontWeight(.semibold)
             
             if let info = info {
-                VStack(spacing: 3) {
-                    ForEach(info, id: \.self) { info in
-                        Text(info)
-                            .fontWeight(.regular)
-                            .opacity(0.6)
-                            .frame(width: screenWidth * 0.65, height: 16, alignment: .leading)
-                            .padding(.leading, 55)
-                    }
-                }
+                Text(info)
+                    .fontWeight(.regular)
+                    .opacity(0.6)
+                    .frame(width: screenWidth * 0.65, alignment: .leading)
+                    .padding(.leading, 55)
             }
         }
         .font(.system(size: 16))
