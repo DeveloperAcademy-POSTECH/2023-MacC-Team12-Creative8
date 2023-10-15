@@ -8,120 +8,133 @@
 
 import SwiftUI
 
-struct TopBannerView: View {
-    @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    @State private var selected = 2
-    let screenHeight = UIScreen.main.bounds.size.height
+public struct TopBannerView: View {
+    let items = BannerData.bannerData
     let screenWidth = UIScreen.main.bounds.size.width
-    var body: some View {
-        HStack {
-            TeasingTabView(selectedTab: $selected, spacing: 6) {
-                [
-                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
-                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" )),
-                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
-                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" )),
-                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
-                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" ))
-                ]
-            }
+    let screenHeight = UIScreen.main.bounds.size.height
+    @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @State private var currentIndex = 0 {
+        didSet {
+            scrollToCurrentPage()
         }
     }
-}
-struct TeasingTabView: View {
-    let screenWidth = UIScreen.main.bounds.size.width
-    let screenHeight = UIScreen.main.bounds.size.height
-    @Binding var selectedTab: Int
-    let spacing: CGFloat
-    let views: () -> [AnyView]
-    @State private var offset = CGFloat.zero
-    @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    
-    var viewCount: Int { views().count }
-    var body: some View {
-            GeometryReader { _ in
-                let width = screenWidth * 0.9
-                LazyHStack(spacing: spacing) {
-                    Color.clear
-                        .frame(width: screenWidth * 0.05 - spacing)
-                    ForEach(0..<viewCount, id: \.self) { idx in
-                        views()[idx]
-                            .frame(width: width)
-                            .padding(.vertical)
-                   }
-                }
-                .offset(x: CGFloat(-selectedTab) * (width + spacing) + offset)
-                .animation(.easeOut, value: selectedTab)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            offset = value.translation.width
-                            timer.upstream.connect().cancel()
-                        }
-                        .onEnded { value in
-                            withAnimation(.easeOut) {
-                                offset = value.predictedEndTranslation.width
-                                selectedTab -= Int((offset / width).rounded())
-                                selectedTab = max(0, min(selectedTab, viewCount-1))
-                                offset = 0
-                                timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @State private var contentOffsetX: CGFloat = 0
+    @State private var titleViewWidth: CGFloat = 0
+    @State private var isLinkActive: Bool = false
+    let spacing: CGFloat = 6
+    public var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .bottom) {
+                VStack(alignment: .trailing) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: spacing) {
+                            Group {
+                                ForEach(-1..<items.count + 1, id: \.self) { i in
+                                    CarouselTitleView(item: items[i < 0 ? items.count - 1 : (i >= items.count ? 0 : i)])
+                                    .frame(width: titleViewWidth)
+                                }
                             }
                         }
-                )
+                        .offset(x: contentOffsetX + 8, y: 0)
+                    } //: ScrollView
+                    .scrollDisabled(true)
+                }
+            } //: ZStack
+            .gesture(
+                DragGesture()
+                    .onChanged { _ in
+                        isLinkActive = false // DragGesture가 작동할 때 NavigationLink 비활성화
+                        print("이거되나?")
+                    }
+                    .onEnded { value in
+                        isLinkActive = true
+                        if value.translation.width < 0 {
+                            currentIndex += 1
+                        } else if value.translation.width > 0 {
+                            currentIndex -= 1
+                        }
+                        timer.upstream.connect().cancel()
+                        timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+                        print("취소?")
+                    }
+            )
+            .onAppear {
+                titleViewWidth = screenWidth * 0.9
+                contentOffsetX = -titleViewWidth + (spacing)
             }
-        .onChange(of: selectedTab) {
-                if selectedTab == 0 {
-                    withAnimation {
-                        selectedTab = 4
-                    }
-                }
-            if selectedTab == 5 {
-                    withAnimation(.linear) {
-                        selectedTab = 1
-                    }
-                }
+            .onReceive(timer) { _ in
+                currentIndex += 1
+            }
+        } //: GeometryReader
+        .frame(width: screenWidth , height: screenHeight * 0.17)
+    }
+    private func scrollToCurrentPage() {
+        if currentIndex == items.count {
+            contentOffsetX = 0
+            currentIndex = 0
+        } else if currentIndex < 0 {
+            contentOffsetX = -titleViewWidth * CGFloat(items.count+1) + spacing * CGFloat(items.count - 1)
+            currentIndex = items.count - 1
         }
-        .onReceive(timer, perform: { _ in
-            withAnimation {
-                if selectedTab != 5 {
-                    selectedTab += 1
-                }
-            }
-        })
+        withAnimation {
+            contentOffsetX = -titleViewWidth * CGFloat(currentIndex+1) - spacing * CGFloat(currentIndex - 1)
+        }
     }
 }
-struct TabContentView: View {
-    let mainText: String
-    let naviText: String
+#Preview {
+    TopBannerView()
+}
+struct CarouselTitleView: View {
     let screenWidth = UIScreen.main.bounds.size.width
-    let screenHeight = UIScreen.main.bounds.size.height
+    let item: BannerData
+    @State var selection: String?
+    
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text(.init(mainText))
+                        Text(.init(item.mainText))
                             .multilineTextAlignment(.leading)
                             .padding(.bottom)
                             .font(.title3)
                     }
                     HStack {
-                        Text(naviText)
+                        Text(item.naviTitle)
                             .lineLimit(1)
                             .allowsTightening(true)
                         Image(systemName: "arrow.right")
                         Spacer()
                     }
+                    .padding(.trailing)
             }
-            .padding()
-            .frame(height: screenHeight * 0.17)
-            .foregroundColor(.black)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(.gray)
-        )
-        }
+            .onTapGesture {
+                        selection = "배너를 눌렀다"
+                    }
+            .background {
+                NavigationLink(destination: Text("이것은 어느 뷰?"), tag: "배너를 눌렀다", selection: self.$selection) {}
+                    .disabled(true)
+                    .opacity(0)
+            }
+                .foregroundColor(.black)
+                .padding(EdgeInsets(top: 22, leading: 20, bottom: 28, trailing: 20))
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(.gray)
+                )
+            .frame(width: screenWidth * 0.9)
+    }
 }
-
-#Preview {
-    TopBannerView()
+struct BannerData: Identifiable {
+    let id =  UUID()
+    let mainText: String
+    let naviTitle: String
+    static var bannerData: [BannerData] {
+        [
+            .init(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
+            .init(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기"),
+            .init(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
+            .init(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기"),
+            .init(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
+            .init(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기")
+        ]
+    }
 }
-

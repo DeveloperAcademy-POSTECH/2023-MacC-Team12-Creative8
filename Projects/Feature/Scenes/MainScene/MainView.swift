@@ -46,8 +46,6 @@ public struct MainView: View {
                     Spacer()
                         .frame(height: 25)
                     TopBannerView()
-                        .frame(height: screenHeight * 0.17)
-                        .background(.yellow)
                         .padding(.bottom, 48)
                     HStack {
                         Text("내가 찜한 공연")
