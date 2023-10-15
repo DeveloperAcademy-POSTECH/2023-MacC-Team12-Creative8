@@ -291,7 +291,7 @@ private struct BottomView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 220)
+                .frame(height: screenHeight * 0.25)
                 .foregroundColor(gray)
             
             VStack(alignment: .leading, spacing: 30) {
