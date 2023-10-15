@@ -8,99 +8,117 @@
 
 import SwiftUI
 
-public struct TopBannerView: View {
+struct TopBannerView: View {
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    @State private var scrollID: Int?
+    @State private var selected = 2
+    let screenHeight = UIScreen.main.bounds.size.height
     let screenWidth = UIScreen.main.bounds.size.width
-    public var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 0) {
-                ForEach(BannerData.bannerData) { data in
-                    NavigationLink(destination: Text("나중에 각각 맞는 상세페이지로 연결하기")) {
-                        VStack(alignment: .leading, spacing: 0) {
-                                HStack {
-                                    Text(.init(data.mainText))
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.bottom)
-                                        .font(.title3)
-                                }
-                                HStack {
-                                    Text(data.naviTitle)
-                                        .lineLimit(1)
-                                        .allowsTightening(true)
-                                    Image(systemName: "arrow.right")
-                                    Spacer()
-                                }
-                                .padding(.trailing)
+    var body: some View {
+        HStack {
+            TeasingTabView(selectedTab: $selected, spacing: 6) {
+                [
+                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
+                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" )),
+                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
+                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" )),
+                    AnyView(TabContentView(mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요", naviText: "아티스트 더 자세히 보기" )),
+                    AnyView(TabContentView(mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviText: "다른 세트리스트 보기" ))
+                ]
+            }
+        }
+    }
+}
+struct TeasingTabView: View {
+    let screenWidth = UIScreen.main.bounds.size.width
+    let screenHeight = UIScreen.main.bounds.size.height
+    @Binding var selectedTab: Int
+    let spacing: CGFloat
+    let views: () -> [AnyView]
+    @State private var offset = CGFloat.zero
+    @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    
+    var viewCount: Int { views().count }
+    var body: some View {
+            GeometryReader { _ in
+                let width = screenWidth * 0.9
+                LazyHStack(spacing: spacing) {
+                    Color.clear
+                        .frame(width: screenWidth * 0.05 - spacing)
+                    ForEach(0..<viewCount, id: \.self) { idx in
+                        views()[idx]
+                            .frame(width: width)
+                            .padding(.vertical)
+                   }
+                }
+                .offset(x: CGFloat(-selectedTab) * (width + spacing) + offset)
+                .animation(.easeOut, value: selectedTab)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            offset = value.translation.width
+                            timer.upstream.connect().cancel()
                         }
-                        .foregroundColor(.black)
-                        .padding(.vertical)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(.gray)
-                    )
-                    }
-                    .frame(width: screenWidth * 0.89)
-                    .padding(.horizontal, 3) // navi
-                }
+                        .onEnded { value in
+                            withAnimation(.easeOut) {
+                                offset = value.predictedEndTranslation.width
+                                selectedTab -= Int((offset / width).rounded())
+                                selectedTab = max(0, min(selectedTab, viewCount-1))
+                                offset = 0
+                                timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+                            }
+                        }
+                )
             }
-            .scrollTargetLayout()
-        }
-        .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
-        .scrollPosition(id: $scrollID)
-        .scrollIndicators(.never)
-        .safeAreaPadding(.horizontal, 20)
-        .onAppear {
-            if !BannerData.bannerData.isEmpty {
-                scrollID = BannerData.bannerData[2].id
-            }
-        }
-        .gesture(
-               DragGesture()
-                   .onChanged { value in
-                       timer.upstream.connect().cancel()
-                   }
-               // onEnded 호출 안됨...
-                   .onEnded{ value in
-                       timer.upstream.connect().cancel()
-                       timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-                   }
-           )
-        .onChange(of: scrollID) {
-                if scrollID == 0 {
+        .onChange(of: selectedTab) {
+                if selectedTab == 0 {
                     withAnimation {
-                        scrollID = 4
+                        selectedTab = 4
                     }
                 }
-            if scrollID == 5 {
+            if selectedTab == 5 {
                     withAnimation(.linear) {
-                        scrollID = 1
+                        selectedTab = 1
                     }
                 }
         }
         .onReceive(timer, perform: { _ in
             withAnimation {
-                        scrollID! += 1
+                if selectedTab != 5 {
+                    selectedTab += 1
+                }
             }
-        }) 
+        })
     }
 }
-
-struct BannerData: Identifiable {
-    let id: Int
+struct TabContentView: View {
     let mainText: String
-    let naviTitle: String
-    static var bannerData: [BannerData] {
-        [
-        .init(id: 0, mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
-        .init(id: 1, mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기"),
-        .init(id: 2, mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
-        .init(id: 3, mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기"),
-        .init(id: 4, mainText: "관심있는 아티스트의\n**세트리스트**를 찾아보세요.", naviTitle: "아티스트 더 자세히 보기"),
-        .init(id: 5, mainText: "다녀온 아티스트의 \n**새로운 공연**을 확인해보세요.", naviTitle: "다른 세트리스트 보기")
-        ]
-    }
+    let naviText: String
+    let screenWidth = UIScreen.main.bounds.size.width
+    let screenHeight = UIScreen.main.bounds.size.height
+    var body: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Text(.init(mainText))
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom)
+                            .font(.title3)
+                    }
+                    HStack {
+                        Text(naviText)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                        Image(systemName: "arrow.right")
+                        Spacer()
+                    }
+            }
+            .padding()
+            .frame(height: screenHeight * 0.17)
+            .foregroundColor(.black)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.gray)
+        )
+        }
 }
 
 #Preview {

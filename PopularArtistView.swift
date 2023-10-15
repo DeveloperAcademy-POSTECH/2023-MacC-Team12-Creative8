@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PopularArtistsView: View {
+public struct PopularArtistsView: View {
     let singer: String
     let image: String
     let day1: String
@@ -20,22 +20,22 @@ struct PopularArtistsView: View {
     let day3: String
     let month3: String
     let venue3: String
+    let screenWidth = UIScreen.main.bounds.size.width
+    let screenHeight = UIScreen.main.bounds.size.height
     
-    var body: some View {
+    public var body: some View {
         VStack {
             HStack {
                 ZStack {
                         Image(image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: 172)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             
                         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.2), Color.black]),
                                        startPoint: .top,
                                        endPoint: .bottom)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
-                    
                     VStack {
                         Text(singer)
                                 .foregroundColor(.white)
@@ -58,7 +58,7 @@ struct PopularArtistsView: View {
                     }
                     .padding(.vertical, 15)
                 }
-                .frame(maxWidth: 172)
+                .frame(width: screenWidth * 0.44)
                 VStack {
                     RoundedRectangle(cornerRadius: 17)
                         .overlay(
@@ -92,9 +92,9 @@ struct PopularArtistsView: View {
                             .foregroundColor(.white)
                             .padding(12)
                         )
+                    }
                 }
-                }
-            .frame(height: 132)
+            .frame(height: screenHeight * 0.16)
         }
     }
 }
