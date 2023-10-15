@@ -30,16 +30,16 @@ public struct TopBannerView: View {
                         HStack(spacing: spacing) {
                             Group {
                                 ForEach(-1..<items.count + 1, id: \.self) { i in
-                                    CarouselTitleView(item: items[i < 0 ? items.count - 1 : (i >= items.count ? 0 : i)])
+                                    BannerTitleView(item: items[i < 0 ? items.count - 1 : (i >= items.count ? 0 : i)])
                                     .frame(width: titleViewWidth)
                                 }
                             }
                         }
                         .offset(x: contentOffsetX + 8, y: 0)
-                    } //: ScrollView
+                    }
                     .scrollDisabled(true)
                 }
-            } //: ZStack
+            }
             .gesture(
                 DragGesture()
                     .onChanged { _ in
@@ -65,7 +65,7 @@ public struct TopBannerView: View {
             .onReceive(timer) { _ in
                 currentIndex += 1
             }
-        } //: GeometryReader
+        }
         .frame(width: screenWidth , height: screenHeight * 0.17)
     }
     private func scrollToCurrentPage() {
@@ -84,7 +84,7 @@ public struct TopBannerView: View {
 #Preview {
     TopBannerView()
 }
-struct CarouselTitleView: View {
+struct BannerTitleView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let item: BannerData
     @State var selection: String?
