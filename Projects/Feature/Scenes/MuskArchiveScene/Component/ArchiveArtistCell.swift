@@ -7,13 +7,36 @@
 //
 
 import SwiftUI
+import UI
 
 struct ArchiveArtistCell: View {
+  let artistUrl: URL
+  let isNewUpdate: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      AsyncImage(url: artistUrl) { image in
+        image
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .clipShape(Circle())
+          .overlay {
+            if isNewUpdate {
+//                Circle()
+//                  .foregroundStyle(.blue)
+//                  .padding()
+//                  .background {
+//                    Circle()
+//                      .foregroundStyle(.white)
+//                  }
+
+            }
+          }
+      } placeholder: {
+        ProgressView()
+      }
     }
 }
 
 #Preview {
-    ArchiveArtistCell()
+  ArchiveArtistCell(artistUrl: URL(string: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg")!, isNewUpdate: true)
 }
+

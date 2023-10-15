@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BA0AA292ADAB9F3005B18C4 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */; };
 		37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */; };
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */,
+				0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -187,8 +190,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -260,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */,
+				0BA0AA292ADAB9F3005B18C4 /* UIScreenExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

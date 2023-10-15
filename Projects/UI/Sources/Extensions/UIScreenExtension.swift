@@ -6,4 +6,14 @@
 //  Copyright © 2023 com.creative8. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+public extension View {
+  var UIWidth: CGFloat {
+      return UIScreen.main.bounds.width
+  }
+
+  var UIHeight: CGFloat {
+      return UIScreen.main.bounds.height
+  }
+}
