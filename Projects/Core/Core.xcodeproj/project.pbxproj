@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B0A9D2B2AD777B500C291E4 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A9D2A2AD777B500C291E4 /* SearchHistoryModel.swift */; };
-		0B0A9D2E2AD777B900C291E4 /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A9D2D2AD777B900C291E4 /* SearchHistoryManager.swift */; };
+		61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
+		E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,11 +46,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B0A9D2A2AD777B500C291E4 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
-		0B0A9D2D2AD777B900C291E4 /* SearchHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
+		1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,22 +73,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B0A9D292AD777B500C291E4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0B0A9D2A2AD777B500C291E4 /* SearchHistoryModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0B0A9D2C2AD777B900C291E4 /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				0B0A9D2D2AD777B900C291E4 /* SearchHistoryManager.swift */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
 		250C62EE12DB56ECEBB473C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +80,14 @@
 				3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3CE205FFA0B9CE31813EAD2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4B97075397CA6D3C7DEE06A1 /* InfoPlists */ = {
@@ -123,12 +115,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		81104ECEC5CD1B0F5111557B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				99D89054FDB8DCB5686F508B /* DataManager */,
+				3CE205FFA0B9CE31813EAD2B /* Model */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		99D89054FDB8DCB5686F508B /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
 		E12816BA35F79D21E0D77318 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				0B0A9D2C2AD777B900C291E4 /* DataManager */,
-				0B0A9D292AD777B500C291E4 /* Model */,
 				F631B3543A0C26BDC2DE72DD /* Derived */,
+				81104ECEC5CD1B0F5111557B /* Sources */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -190,6 +198,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -260,8 +270,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B0A9D2E2AD777B900C291E4 /* SearchHistoryManager.swift in Sources */,
-				0B0A9D2B2AD777B500C291E4 /* SearchHistoryModel.swift in Sources */,
+				61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */,
+				E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +343,6 @@
 		2CADB9708E4C94F94F0653FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -358,7 +367,6 @@
 		7E41C2E24C55494B821B7E22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

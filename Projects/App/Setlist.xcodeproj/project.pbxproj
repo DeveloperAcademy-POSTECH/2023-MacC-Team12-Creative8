@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B0A9D302AD777EB00C291E4 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A9D2F2AD777EB00C291E4 /* App.swift */; };
 		11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */; };
 		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; };
 		45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018F043A036853F4399E1EB6 /* LaunchScreen.storyboard */; };
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
-		C0EF89FD3AC7EE309CFE1063 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39BF685A6F1AC6C014AFECB /* UI.framework */; };
+		97778FDC5FD657112348D680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D2A25A4B493B491347702 /* App.swift */; };
+		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +55,9 @@
 		03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Setlist.swift"; sourceTree = "<group>"; };
 		04A3932CB4A4A550F38B6D0A /* Setlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Setlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D7E000A703647DD9102B8F /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B0A9D2F2AD777EB00C291E4 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Setlist.swift"; sourceTree = "<group>"; };
 		0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		658D2A25A4B493B491347702 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		66FAE4CFDF5725510C9654A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C11848CE114DC128FE941C0C /* SetlistTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SetlistTests-Info.plist"; sourceTree = "<group>"; };
 		CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +131,7 @@
 		98571DDDCC2ADE95B046D45A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0B0A9D2F2AD777EB00C291E4 /* App.swift */,
+				658D2A25A4B493B491347702 /* App.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -296,9 +296,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B0A9D302AD777EB00C291E4 /* App.swift in Sources */,
 				65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */,
 				E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */,
+				97778FDC5FD657112348D680 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +346,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -459,7 +458,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
