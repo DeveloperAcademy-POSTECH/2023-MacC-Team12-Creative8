@@ -10,9 +10,11 @@ import Feature
 
 @main
 struct SetlistApp: App {
-  var body: some Scene {
-    WindowGroup {
-        MainView()
+    var body: some Scene {
+        WindowGroup {
+            NavigationStack {
+                SettingView()
+            }
+        }
     }
-  }
 }

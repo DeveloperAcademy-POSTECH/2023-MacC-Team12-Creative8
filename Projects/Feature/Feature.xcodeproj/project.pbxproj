@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061AC51D0A5E10A4A203E69 /* MainView.swift */; };
 		66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9B012EDBBF54D1085338 /* MainViewModel.swift */; };
+		854B46112ADD5B190012E597 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854B46102ADD5B190012E597 /* SettingModel.swift */; };
+		854B46132ADD77970012E597 /* ServiceExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854B46122ADD77970012E597 /* ServiceExplainView.swift */; };
 		8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8561DB4CBBBD28355B569F7 /* SettingViewModel.swift */; };
 		92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBC0111302E453AE98E24C6 /* SearchViewModel.swift */; };
 		97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB66A4326EFC255A2FEFB1C /* SettingView.swift */; };
@@ -57,6 +59,8 @@
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C02EBA9564A56386388E50E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		70A57548501213657DD59132 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
+		854B46102ADD5B190012E597 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		854B46122ADD77970012E597 /* ServiceExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceExplainView.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB66A4326EFC255A2FEFB1C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A061AC51D0A5E10A4A203E69 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				70A57548501213657DD59132 /* AskView.swift */,
 				8FB66A4326EFC255A2FEFB1C /* SettingView.swift */,
 				F8561DB4CBBBD28355B569F7 /* SettingViewModel.swift */,
+				854B46102ADD5B190012E597 /* SettingModel.swift */,
+				854B46122ADD77970012E597 /* ServiceExplainView.swift */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -229,8 +235,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -295,9 +299,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */,
+				854B46132ADD77970012E597 /* ServiceExplainView.swift in Sources */,
 				66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */,
 				0D408FF9AD99B249D912B301 /* SearchView.swift in Sources */,
 				92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */,
+				854B46112ADD5B190012E597 /* SettingModel.swift in Sources */,
 				0738E6E5BD14086D15D0A542 /* AskView.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
 				8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */,

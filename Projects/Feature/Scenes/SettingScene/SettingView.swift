@@ -18,11 +18,11 @@ public struct SettingView: View {
     
     public init() {}
 
-    @State var userSelectionScreenMode: ScreenModeSelectionButton.ScreenMode = .system
+    @State var userSelectionScreenMode: ScreenMode = .system
     @State var showModal = false
     
     public var body: some View {
-        NavigationStack {
+        //NavigationStack {
             ScrollView {
                 ZStack {
                     Color(.gray).ignoresSafeArea()
@@ -30,92 +30,86 @@ public struct SettingView: View {
                         HStack {
                             Text("더보기")
                                 .font(.system(size: 24, weight: .semibold))
-                                .padding(EdgeInsets(top: 70, leading: 24, bottom: 30, trailing: 0))
+                                .padding(EdgeInsets(top: 70, leading: 24, bottom: 1, trailing: 0))
                             Spacer()
                         }
                         // 화면 모드 설정
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.white)
-                            .frame(width: 350, height: 322)
+                            .frame(height: 322)
                             .overlay {
                                 VStack(alignment: .leading) {
                                     Text("화면 모드 설정")
                                         .font(.system(size: 16, weight: .semibold))
-                                    Spacer()
+                                        .padding(.vertical, 32)
                                     Text("앱의 모드를 조정해서 방해받지 않는 콘서트\n문화를 즐겨보세요.")
                                         .font(.footnote)
                                         .foregroundStyle(.gray)
+                                        .padding(.bottom, 16)
                                     Divider()
+                                    
                                     // 시스템 설정 따르기
-                                    ScreenModeSelectionButton(text: "시스템 설정 따르기", screenMode: .system, settingSelected: $userSelectionScreenMode)
+                                    ScreenModeSelectionButton(modeName: "시스템 설정 따르기", screenMode: .system, settingSelected: $userSelectionScreenMode)
                                     Divider()
                                     
                                     // 밝은 모드
-                                    ScreenModeSelectionButton(text: "밝은 모드", screenMode: .light, settingSelected: $userSelectionScreenMode)
+                                    ScreenModeSelectionButton(modeName: "라이트 모드", screenMode: .light, settingSelected: $userSelectionScreenMode)
                                     Divider()
                                     
                                     // 어두운 모드
-                                    ScreenModeSelectionButton(text: "어두운 모드", screenMode: .dark, settingSelected: $userSelectionScreenMode)
+                                    ScreenModeSelectionButton(modeName: "다크 모드", screenMode: .dark, settingSelected: $userSelectionScreenMode)
+                                        .padding(.bottom, 10)
                                 }
-                                .padding(26)
+                                .padding(.horizontal, 26)
                             }
-                            .padding(.bottom, 20)
+                            .padding(EdgeInsets(top: 32, leading: 20, bottom: 20, trailing: 20))
                         
-                        // 음악 앱 선택하기
+                        // 세트리스트 추가 및 수정하기
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.white)
-                            .frame(width: 350, height: 309)
+                            .frame(height: 239)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    Text("음악 앱 선택하기")
+                                    Text("세트리스트 추가 및 수정하기")
                                         .font(.system(size: 16, weight: .semibold))
-                                    Spacer()
-                                    Text("내가 좋아하는 세트리스트를 현재 사용하고 있는\n음악 앱 플레이리스트로 바로 옮겨보세요. ")
+                                        .padding(.vertical, 32)
+                                    Text("Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
                                         .font(.footnote)
                                         .foregroundStyle(.gray)
-                                    Spacer()
-                                    Button {
-                                        
-                                    } label: {
+                                        .padding(.bottom, 29)
+                                    Link(destination: URL(string: "https://www.setlist.fm")!, label: {
                                         HStack {
                                             Spacer()
-                                            Image(systemName: "photo.circle")
-                                            Spacer()
-                                            Text("Apple Music으로 연동하기")
+                                            Text("Setlist.fm 바로가기")
                                                 .font(.system(.footnote, weight: .semibold))
                                             Spacer()
-                                            Spacer()
                                         }
-                                        .frame(width: 315, height: 54)
+                                        .frame(width: 298, height: 56)
                                         .background(.thickMaterial)
                                         .foregroundStyle(.black)
                                         .clipShape(RoundedRectangle(cornerRadius: 14))
-                                    }
-                                    Spacer()
-                                    Divider()
-                                    Spacer()
-                                    Text("이 버전에서는 Apple Music만 지원하고 있습니다. 추가 지원되는\n음악 앱은 버전 업데이트를 기다려주세요.")
-                                        .font(.caption2)
-                                        .lineSpacing(5)
-                                        .foregroundStyle(.gray)
+                                    })
+                                    .padding(.bottom, 24)
                                 }
-                                .padding(26)
+                                .padding(.horizontal, 26)
                             }
-                            .padding(.bottom, 20)
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                         
                         // 서비스 이용 관련
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.white)
-                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 270)
                             .overlay {
                                 VStack(alignment: .leading) {
                                     Text("서비스 이용 관련")
                                         .font(.system(size: 16, weight: .semibold))
-                                        .padding(.bottom, 32)
+                                        .padding(.vertical, 30)
                                     Text("아무런 아무런 말말말말말말말말말이랍니다.\n그냥 이런저런 텍스트일테지요.")
                                         .font(.footnote)
                                         .foregroundStyle(.gray)
+                                        .padding(.bottom, 16)
                                     Divider()
+                                    
                                     // 이용 약관
                                     NavigationLink {
                                         Text("이용 약관")
@@ -123,15 +117,17 @@ public struct SettingView: View {
                                         HStack {
                                             Text("이용 약관")
                                                 .font(.footnote)
+                                                .padding(.vertical, 10)
                                             Spacer()
                                             Image(systemName: "chevron.right")
                                                 .resizable()
                                                 .frame(width: 6, height: 12)
+                                                .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
                                         }
                                         .foregroundStyle(.black)
-                                        .padding(.vertical, 18)
                                     }
                                     Divider()
+                                    
                                     // Setlist.fm 약관
                                     NavigationLink {
                                         Text("Setlist.fm 약관")
@@ -139,35 +135,19 @@ public struct SettingView: View {
                                         HStack {
                                             Text("Setlist.fm 약관")
                                                 .font(.footnote)
+                                                .padding(.vertical, 20)
                                             Spacer()
                                             Image(systemName: "chevron.right")
                                                 .resizable()
                                                 .frame(width: 6, height: 12)
+                                                .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
                                         }
                                         .foregroundStyle(.black)
-                                        .padding(.vertical, 18)
-                                    }
-                                    Divider()
-                                    // 개발자 정보
-                                    NavigationLink {
-                                        Text("개발자 정보")
-                                    } label: {
-                                        HStack {
-                                            Text("개발자 정보")
-                                                .font(.footnote)
-                                            Spacer()
-                                            Image(systemName: "chevron.right")
-                                                .resizable()
-                                                .frame(width: 6, height: 12)
-                                        }
-                                        .foregroundStyle(.black)
-                                        .padding(.vertical, 18)
                                     }
                                 }
-                                .padding(26)
+                                .padding(.horizontal, 26)
                             }
-                            .padding(.horizontal, 20)
-                            .padding(.bottom, 20)
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                         
                         // 문의하기
 //                        RoundedRectangle(cornerRadius: 12)
@@ -181,20 +161,15 @@ public struct SettingView: View {
                 }
             }
             .ignoresSafeArea()
-        }
+        //}
     }
 }
 
 struct ScreenModeSelectionButton: View {
     
-    enum ScreenMode {
-        case system
-        case light
-        case dark
-    }
-    
-    var text: String
+    var modeName: String
     var screenMode: ScreenMode
+    
     @Binding var settingSelected: ScreenMode
     
     var body: some View {
@@ -203,7 +178,7 @@ struct ScreenModeSelectionButton: View {
         } label: {
             HStack{
                 Image(systemName: settingSelected == screenMode ? "checkmark.circle.fill" : "circle")
-                Text(text)
+                Text(modeName)
                     .foregroundStyle(.black)
                     .font(.footnote)
                 Spacer()
