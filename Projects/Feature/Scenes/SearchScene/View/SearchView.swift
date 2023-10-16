@@ -11,15 +11,15 @@ import Core
 import SwiftData
 import UI
 
-struct SearchView: View {
+public struct SearchView: View {
   @Query private var history: [SearchHistory] = []
   @StateObject var viewModel = SearchViewModel()
   @Environment (\.modelContext) var modelContext
   @StateObject var dataManager = SearchHistoryManager()
   // MARK: - 임시 값
   let tempColor: [Color] = [.red, .orange, .green, .blue, .purple, .pink, .cyan, .indigo, .mint]
-
-  var body: some View {
+  public init() {}
+  public var body: some View {
     ScrollViewReader { proxy in
       ScrollView {
         Group {

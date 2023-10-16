@@ -11,9 +11,8 @@ import SwiftUI
 final class SearchViewModel: ObservableObject {
   @Published var searchText: String = ""
   @Published  var searchIsPresented: Bool = false
-
 }
 enum ScrollID: String {
-  case top 
+  case top
   case searchBar
 }
