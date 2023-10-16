@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SettingView: View {
+public struct SettingView: View {
     
     enum SettingSelected {
         case system
@@ -16,10 +16,12 @@ struct SettingView: View {
         case dark
     }
     
-    @State var settingSelected: SettingSelected = .system
+    public init() {}
+
+    @State var userSelectionScreenMode: ScreenModeSelectionButton.ScreenMode = .system
     @State var showModal = false
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ScrollView {
                 ZStack {
@@ -45,46 +47,15 @@ struct SettingView: View {
                                         .foregroundStyle(.gray)
                                     Divider()
                                     // 시스템 설정 따르기
-                                    Button {
-                                        settingSelected = .system
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: settingSelected == .system ? "checkmark.circle.fill" : "circle")
-                                            Text("시스템 설정 따르기")
-                                                .foregroundStyle(.black)
-                                                .font(.footnote)
-                                            Spacer()
-                                        }
-                                        .padding(.vertical, 10)
-                                    }
+                                    ScreenModeSelectionButton(text: "시스템 설정 따르기", screenMode: .system, settingSelected: $userSelectionScreenMode)
                                     Divider()
+                                    
                                     // 밝은 모드
-                                    Button {
-                                        settingSelected = .light
-                                    } label: {
-                                        HStack{
-                                            Image(systemName: settingSelected == .light ? "checkmark.circle.fill" : "circle")
-                                            Text("밝은 모드")
-                                                .foregroundStyle(.black)
-                                                .font(.footnote)
-                                            Spacer()
-                                        }
-                                        .padding(.vertical, 10)
-                                    }
+                                    ScreenModeSelectionButton(text: "밝은 모드", screenMode: .light, settingSelected: $userSelectionScreenMode)
                                     Divider()
+                                    
                                     // 어두운 모드
-                                    Button {
-                                        settingSelected = .dark
-                                    } label: {
-                                        HStack{
-                                            Image(systemName: settingSelected == .dark ? "checkmark.circle.fill" : "circle")
-                                            Text("어두운 모드")
-                                                .foregroundStyle(.black)
-                                                .font(.footnote)
-                                            Spacer()
-                                        }
-                                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 15, trailing: 0))
-                                    }
+                                    ScreenModeSelectionButton(text: "어두운 모드", screenMode: .dark, settingSelected: $userSelectionScreenMode)
                                 }
                                 .padding(26)
                             }
@@ -199,33 +170,45 @@ struct SettingView: View {
                             .padding(.bottom, 20)
                         
                         // 문의하기
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.white)
-                            .frame(width: 350, height: 66)
-                            .overlay {
-                                Button {
-                                    showModal.toggle()
-                                } label: {
-                                    HStack {
-                                        Text("문의하기")
-                                            .font(.system(.footnote, weight: .semibold))
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .resizable()
-                                            .frame(width: 6, height: 12)
-                                    }
-                                    .foregroundStyle(.black)
-                                    .padding(26)
-                                }
-                                .sheet(isPresented: $showModal, content: {
-                                    Text("문의하기")
-                                })
-                            }
-                            .padding(.bottom, 91)
+//                        RoundedRectangle(cornerRadius: 12)
+//                            .fill(.white)
+//                            .frame(width: 350, height: 66)
+                            //.overlay {
+                                AskView()
+                            //}
+                            //.padding(.bottom, 91)
                     }
                 }
             }
             .ignoresSafeArea()
+        }
+    }
+}
+
+struct ScreenModeSelectionButton: View {
+    
+    enum ScreenMode {
+        case system
+        case light
+        case dark
+    }
+    
+    var text: String
+    var screenMode: ScreenMode
+    @Binding var settingSelected: ScreenMode
+    
+    var body: some View {
+        Button {
+            settingSelected = screenMode
+        } label: {
+            HStack{
+                Image(systemName: settingSelected == screenMode ? "checkmark.circle.fill" : "circle")
+                Text(text)
+                    .foregroundStyle(.black)
+                    .font(.footnote)
+                Spacer()
+            }
+            .padding(.vertical, 10)
         }
     }
 }
