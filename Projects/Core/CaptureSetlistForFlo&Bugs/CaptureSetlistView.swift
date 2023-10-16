@@ -76,7 +76,7 @@ extension UIView {
     }
 }
 
-extension View {
+public extension View {
   func takeSetlistToImage(_ song: [String], _ artist: [String]) {
     let songCount = song.count
     let pagesongs = songCount / 10
