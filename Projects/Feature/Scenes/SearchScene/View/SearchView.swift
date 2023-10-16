@@ -18,7 +18,9 @@ public struct SearchView: View {
   @StateObject var dataManager = SearchHistoryManager()
   // MARK: - 임시 값
   let tempColor: [Color] = [.red, .orange, .green, .blue, .purple, .pink, .cyan, .indigo, .mint]
+  
   public init() {}
+  
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollView {

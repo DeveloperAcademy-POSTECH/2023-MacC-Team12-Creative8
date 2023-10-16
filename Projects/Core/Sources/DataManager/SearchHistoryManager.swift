@@ -11,6 +11,7 @@ import SwiftData
 
 public final class SearchHistoryManager: ObservableObject {
   public var modelContext: ModelContext?
+  
   public func addItem(searchText: String) {
     let newHistory = SearchHistory(searchText: searchText, searchDate: Date())
       modelContext?.insert(newHistory)
