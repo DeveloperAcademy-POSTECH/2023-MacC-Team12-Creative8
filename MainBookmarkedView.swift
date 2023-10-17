@@ -107,9 +107,6 @@ struct BookMarkViewButton: ButtonStyle {
   }
 }
 
-//#Preview {
-//    MainBookmarkedView(id: 0, destination: AnyView(Text("상세내용")),
-//                       singer: "Post Malone",
-//                       concertName: "conecert", dDay: "D-1",
-//                       month: "10", day: "27", image: "post malone")
-//}
+#Preview {
+    MainBookmarkedView(id: 0, destination: AnyView(Text("해당 아티스트로 연결")), bookmarkData: MainBookmarkData(id: 0))
+}

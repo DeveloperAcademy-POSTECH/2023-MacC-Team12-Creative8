@@ -104,7 +104,6 @@ struct BannerTitleView: View {
                         Image(systemName: "arrow.right")
                         Spacer()
                     }
-                    .padding(.trailing)
             }
             .onTapGesture {
                         selection = "배너를 눌렀다"

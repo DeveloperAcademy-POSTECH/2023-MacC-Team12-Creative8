@@ -16,7 +16,7 @@ struct MainBookmarkData: Identifiable {
     let month: String
     let day: String
     let image: String
-    init(id: Int = 0, singer: String = "artist", concertName: String = "concertName", 
+    init(id: Int, singer: String = "artist", concertName: String = "concertName",
          dDay: String = "dDay", month: String = "month", day: String = "day", image: String = "") {
         self.id = id
         self.singer = singer
@@ -54,7 +54,7 @@ struct PopularArtistData {
     let day3: String
     let month3: String
     let venue3: String
-    init(singer: String = "artist", image: String = "", 
+    init(singer: String = "artist", image: String = "",
          day1: String = "day1", month1: String = "month1", venue1: String = "venue1",
          day2: String = "day2", month2: String = "month2", venue2: String = "venue2",
          day3: String = "day3", month3: String = "month3", venue3: String = "venue3") {
