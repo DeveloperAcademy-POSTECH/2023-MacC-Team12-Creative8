@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */; };
+		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
+		E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */; };
 		05839DB71503C9C324D2FE8B /* SongListTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F473A489A11A3D417AEA32 /* SongListTestView.swift */; };
 		47C2C0F399E23BD353CEC79B /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */; };
 		5D58717518F30B5BC91996F8 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A3E3488BA06C8B20B4FCF /* SetlistListModel.swift */; };
@@ -56,10 +59,12 @@
 
 /* Begin PBXFileReference section */
 		03F473A489A11A3D417AEA32 /* SongListTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListTestView.swift; sourceTree = "<group>"; };
+		1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE3664658B3C72853611D73 /* SearchArtistTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistTestView.swift; sourceTree = "<group>"; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
 		4D776676034E56CB0A2EAC1A /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		64301FBD5A32CFE948872F32 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		6EE116BF9CB2E90A2138DDF1 /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
@@ -98,6 +103,14 @@
 				3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3CE205FFA0B9CE31813EAD2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4B97075397CA6D3C7DEE06A1 /* InfoPlists */ = {
@@ -159,6 +172,23 @@
 			path = SampleViews;
 			sourceTree = "<group>";
 		};
+		81104ECEC5CD1B0F5111557B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				99D89054FDB8DCB5686F508B /* DataManager */,
+				3CE205FFA0B9CE31813EAD2B /* Model */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		99D89054FDB8DCB5686F508B /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
 		E12816BA35F79D21E0D77318 /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98830250AF7B3CEC34690D43 /* Build configuration list for PBXNativeTarget "Core" */;
 			buildPhases = (
-				D3536414F35E027411F4D158 /* SwiftLintString */,
+				C50CC719C99DABBB1509EE96 /* SwiftLint */,
 				68E9A351E4B1C8B9C155F97C /* Sources */,
 				3FEE3D1A9FD48DDE5D5CDD8B /* Resources */,
 				2A34CD9447D0001C8C98AEF5 /* Embed Frameworks */,
@@ -264,8 +294,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D3536414F35E027411F4D158 /* SwiftLintString */ = {
+		C50CC719C99DABBB1509EE96 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -273,14 +304,14 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLintString;
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n    PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -296,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */,
+				E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */,
 				CC8C395176912B4D53F4ABE0 /* APIKeys.swift in Sources */,
 				E8F40E7BE4D0D7CA6AC5B095 /* DataService.swift in Sources */,
 				F72CFE340AB350EAACF168B3 /* KoreanNameConverter.swift in Sources */,
