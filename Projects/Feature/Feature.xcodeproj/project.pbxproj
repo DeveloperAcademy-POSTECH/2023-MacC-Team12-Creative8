@@ -14,6 +14,7 @@
 		7969802E2AD6C2290018377A /* MainBookmarkedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7969802D2AD6C2290018377A /* MainBookmarkedView.swift */; };
 		796980312AD6C2DD0018377A /* PopularArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796980302AD6C2DD0018377A /* PopularArtistView.swift */; };
 		796980332AD6C2FF0018377A /* TopBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796980322AD6C2FF0018377A /* TopBannerView.swift */; };
+		798295802ADEBABE002EBE8D /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982957F2ADEBABE002EBE8D /* MainModel.swift */; };
 		8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8561DB4CBBBD28355B569F7 /* SettingViewModel.swift */; };
 		92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBC0111302E453AE98E24C6 /* SearchViewModel.swift */; };
 		97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB66A4326EFC255A2FEFB1C /* SettingView.swift */; };
@@ -62,6 +63,7 @@
 		7969802D2AD6C2290018377A /* MainBookmarkedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBookmarkedView.swift; sourceTree = "<group>"; };
 		796980302AD6C2DD0018377A /* PopularArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularArtistView.swift; sourceTree = "<group>"; };
 		796980322AD6C2FF0018377A /* TopBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBannerView.swift; sourceTree = "<group>"; };
+		7982957F2ADEBABE002EBE8D /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB66A4326EFC255A2FEFB1C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		992FB9DCAD849315992DB030 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				A061AC51D0A5E10A4A203E69 /* MainView.swift */,
 				7969802F2AD6C28D0018377A /* MainViewSubView */,
 				D7EA9B012EDBBF54D1085338 /* MainViewModel.swift */,
+				7982957F2ADEBABE002EBE8D /* MainModel.swift */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */,
 				796980332AD6C2FF0018377A /* TopBannerView.swift in Sources */,
 				0D408FF9AD99B249D912B301 /* SearchView.swift in Sources */,
+				798295802ADEBABE002EBE8D /* MainModel.swift in Sources */,
 				92C67D697A926D9E89AD4E3E /* SearchViewModel.swift in Sources */,
 				796980312AD6C2DD0018377A /* PopularArtistView.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
