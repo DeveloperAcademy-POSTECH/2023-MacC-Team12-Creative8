@@ -7,26 +7,19 @@
 
 import Foundation
 import SwiftUI
-
 public struct MainView: View {
+    @StateObject var bookmarkViewModel = MainBookmarkViewModel()
+    @StateObject var popArtistViewModel = PopularArtistViewModel(popArtistData: PopularArtistData())
     // 임시로 만들어둔 데이터입니다.
     let upcomingEvents: [UpcomingEvent] = [
         UpcomingEvent(singer: "Kings of Convenience", date: "2023. 10. 07", dDay: "D - 1", image: "postmalone"),
         UpcomingEvent(singer: "NCT 127", date: "2023. 10. 07", dDay: "D - 1", image: "nct127"),
         UpcomingEvent(singer: "방탄소년단", date: "2023. 10. 07", dDay: "D - 1", image: "bts")
     ]
-    // 임시로 만들어둔 데이터입니다.
-    let archivedNum: Int = 10
-    let singer: String = "Post Malone"
-    let concertName: String = "If Ya’ll Weren’t Here, I’d Be Crying"
-    let dDay: String = "D-20"
-    let month: String = "10월"
-    let day: String = "27"
-    let image: String = "postmalone"
+    public init() {}
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
     @State private var scrollID: Int?
-    public init() {}
     public var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
@@ -56,18 +49,17 @@ public struct MainView: View {
                     .padding(.bottom, 20)
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 6) {
-                            ForEach(0..<archivedNum, id: \.self) { index in
+                            ForEach(0..<bookmarkViewModel.mainBookmarksData.count, id: \.self) { index in
+                                let bookmarkData = bookmarkViewModel.mainBookmarksData[index]
                                 VStack(alignment: .leading, spacing: 0) {
-                                    MainBookmarkedView(id: index,
-                                    destination: AnyView(Text("각 아티스트 화면 연결")),
-                                    singer: singer, concertName: concertName, dDay: dDay,
-                                                       month: month, day: day, image: image)
+                                    MainBookmarkedView(id: bookmarkData.id,
+                                                       destination: AnyView(Text("연결")), bookmarkData: bookmarkData)
                                 }
                             }
                         }
                         .scrollTargetLayout()
                         .onAppear {
-                            if archivedNum != 0 {
+                            if MainBookmarkViewModel().mainBookmarksData.count != 0 {
                                 scrollID = 0
                             }
                         }
@@ -77,7 +69,7 @@ public struct MainView: View {
                     .scrollIndicators(.hidden)
                     .scrollPosition(id: $scrollID)
                     HStack(spacing: 8) {
-                        ForEach(0..<archivedNum, id: \.self) { pageIndex in
+                        ForEach(0..<MainBookmarkViewModel().mainBookmarksData.count, id: \.self) { pageIndex in
                             Circle()
                                 .frame(width: 8, height: 8)
                                 .foregroundColor(scrollID == pageIndex ? .black : .gray)
@@ -114,7 +106,7 @@ public struct MainView: View {
                         Text("인기 아티스트")
                             .bold()
                             .padding(.bottom, 20)
-                        PopularArtistsView(viewModel: PopularArtistViewModel(popArtistData: PopularArtistData()))
+                        PopularArtistsView(popularArtistData: popArtistViewModel.popArtistData)
                         .padding(.bottom, 9)
                         NavigationLink(destination: Text("안녕")) {
                             HStack {
@@ -125,7 +117,7 @@ public struct MainView: View {
                                 .foregroundColor(.black)
                         }
                         .padding(.bottom, 30)
-                        PopularArtistsView(viewModel: PopularArtistViewModel(popArtistData: PopularArtistData()))
+                        PopularArtistsView(popularArtistData: popArtistViewModel.popArtistData)
                         .padding(.bottom, 9)
                         NavigationLink(destination: Text("안녕")) {
                             HStack {

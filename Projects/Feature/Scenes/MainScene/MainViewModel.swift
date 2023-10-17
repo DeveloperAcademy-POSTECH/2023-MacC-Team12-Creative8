@@ -9,11 +9,9 @@ import Foundation
 
 class MainBookmarkViewModel: ObservableObject {
     @Published var mainBookmarksData: [MainBookmarkData] = []
-
         init() {
-           
+            mainBookmarksData = []
         }
-
 }
 
 class PopularArtistViewModel: ObservableObject {

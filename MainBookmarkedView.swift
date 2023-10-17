@@ -17,15 +17,10 @@ public struct MainBookmarkedView: View, Identifiable, Hashable {
     public static func == (lhs: MainBookmarkedView, rhs: MainBookmarkedView) -> Bool {
             lhs.id == rhs.id
         }
+    var bookmarkData: MainBookmarkData
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
-    let singer: String
-    let concertName: String
-    let dDay: String
-    let month: String
-    let day: String
-    let image: String
-    
+
     public var body: some View {
         NavigationLink(destination: destination) {
             VStack(alignment: .leading, spacing: 0) {
@@ -64,8 +59,8 @@ public struct MainBookmarkedView: View, Identifiable, Hashable {
                             HStack {
                                 Spacer()
                                 VStack {
-                                    Text(month)
-                                    Text(day)
+                                    Text(bookmarkData.month)
+                                    Text(bookmarkData.day)
                                         .font(.largeTitle)
                                         .bold()
                                 }
@@ -79,7 +74,7 @@ public struct MainBookmarkedView: View, Identifiable, Hashable {
                                         .foregroundColor(.white)
                                         .frame(maxWidth: 70, maxHeight: 40)
                                         .overlay(
-                                            Text(dDay)
+                                            Text(bookmarkData.dDay)
                                         )
                                 }
                                 .padding(.top)
@@ -89,15 +84,13 @@ public struct MainBookmarkedView: View, Identifiable, Hashable {
                             .padding()
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                Text(singer)
+                Text(bookmarkData.singer)
                     .font(.title)
                     .fontWeight(.semibold)
+                    .padding([.leading, .bottom])
+                Text(bookmarkData.concertName)
                     .padding(.leading)
-                    .padding(.bottom)
-                Text(concertName)
-                    .padding(.bottom)
-                    .padding(.leading)
-                Text("")
+                    .padding(.bottom, 28)
             }
             .foregroundStyle(.black)
             .background(
@@ -114,9 +107,9 @@ struct BookMarkViewButton: ButtonStyle {
   }
 }
 
-#Preview {
-    MainBookmarkedView(id: 0, destination: AnyView(Text("상세내용")),
-                       singer: "Post Malone",
-                       concertName: "conecert", dDay: "D-1",
-                       month: "10", day: "27", image: "post malone")
-}
+//#Preview {
+//    MainBookmarkedView(id: 0, destination: AnyView(Text("상세내용")),
+//                       singer: "Post Malone",
+//                       concertName: "conecert", dDay: "D-1",
+//                       month: "10", day: "27", image: "post malone")
+//}

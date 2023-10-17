@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct PopularArtistsView: View {
-    @ObservedObject var viewModel: PopularArtistViewModel
+    var popularArtistData: PopularArtistData
 
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
@@ -17,7 +17,7 @@ public struct PopularArtistsView: View {
         VStack {
             HStack {
                 ZStack {
-                    Image(viewModel.popArtistData.image)
+                    Image(popularArtistData.image)
                             .resizable()
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .frame(width: screenWidth * 0.44, height: screenHeight * 0.16)
@@ -27,13 +27,15 @@ public struct PopularArtistsView: View {
                                        endPoint: .bottom)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                     VStack {
-                        Text(viewModel.popArtistData.singer)
+                        Text(popularArtistData.singer)
                                 .foregroundColor(.white)
                                 .font(.callout)
                             .bold()
                             .padding(.top)
                         Spacer()
-                        PopArtistBlockView(month: viewModel.popArtistData.month1, day: viewModel.popArtistData.day1, venue: viewModel.popArtistData.venue1)
+                        PopArtistBlockView(month: popularArtistData.month1, day: popularArtistData.day1, venue: popularArtistData.venue1)
+                            .padding(.leading, 15)
+                            .padding(.trailing, 9)
                     }
                     .padding(.vertical, 15)
                 }
@@ -41,12 +43,12 @@ public struct PopularArtistsView: View {
                 VStack {
                     RoundedRectangle(cornerRadius: 17)
                         .overlay(
-                            PopArtistBlockView(month: viewModel.popArtistData.month2, day: viewModel.popArtistData.day2, venue: viewModel.popArtistData.venue2)
+                            PopArtistBlockView(month: popularArtistData.month2, day: popularArtistData.day2, venue: popularArtistData.venue2)
                             .padding(12)
                         )
                     RoundedRectangle(cornerRadius: 17)
                         .overlay(
-                            PopArtistBlockView(month: viewModel.popArtistData.month3, day: viewModel.popArtistData.day3, venue: viewModel.popArtistData.venue3)
+                            PopArtistBlockView(month: popularArtistData.month3, day: popularArtistData.day3, venue: popularArtistData.venue3)
                             .padding(12)
                         )
                     }
@@ -61,13 +63,14 @@ public struct PopularArtistsView: View {
         var body: some View {
             HStack {
                 VStack {
-                    Text(month)
+                    Text(.init(month))
                         .font(.caption)
-                    Text(day)
+                    Text(.init(day))
                         .font(.title3)
                 }
+                Spacer()
                 .padding(.trailing, 10)
-                Text(venue)
+                Text(.init(venue))
                     .font(.caption)
             }
             .foregroundColor(.white)
@@ -76,5 +79,5 @@ public struct PopularArtistsView: View {
 }
 
 #Preview {
-    PopularArtistsView(viewModel: PopularArtistViewModel(popArtistData: PopularArtistData()))
+    PopularArtistsView(popularArtistData: PopularArtistData())
 }
