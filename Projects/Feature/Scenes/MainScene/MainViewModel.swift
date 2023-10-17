@@ -7,12 +7,19 @@
 
 import Foundation
 
-class MainViewModel: ObservableObject {
-    @Published var mainBookMarkData: MainBookMarkData
-    @Published var popArtistData: PopularArtistData
+class MainBookmarkViewModel: ObservableObject {
+    @Published var mainBookmarksData: [MainBookmarkData] = []
 
-    init(mainBookMarkData: MainBookMarkData, popArtistData: PopularArtistData) {
-           self.mainBookMarkData = mainBookMarkData
+        init() {
+           
+        }
+
+}
+
+class PopularArtistViewModel: ObservableObject {
+    @Published var popArtistData: PopularArtistData = PopularArtistData()
+
+    init(popArtistData: PopularArtistData) {
            self.popArtistData = popArtistData
        }
 }

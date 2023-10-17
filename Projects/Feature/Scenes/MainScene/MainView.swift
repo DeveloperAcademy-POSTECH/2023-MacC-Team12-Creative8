@@ -114,10 +114,7 @@ public struct MainView: View {
                         Text("인기 아티스트")
                             .bold()
                             .padding(.bottom, 20)
-                        PopularArtistsView(singer: "블랙핑크", image: "blackpink",
-                                           day1: "02", month1: "11월", venue1: "KINTEX, Goyang-si,South Korea",
-                                           day2: "02", month2: "11월", venue2: "KINTEX, Goyang-si, South Korea",
-                                           day3: "02", month3: "11월", venue3: "KINTEX, Goyang-si,South Korea")
+                        PopularArtistsView(viewModel: PopularArtistViewModel(popArtistData: PopularArtistData()))
                         .padding(.bottom, 9)
                         NavigationLink(destination: Text("안녕")) {
                             HStack {
@@ -128,10 +125,7 @@ public struct MainView: View {
                                 .foregroundColor(.black)
                         }
                         .padding(.bottom, 30)
-                        PopularArtistsView(singer: "방탄소년단", image: "bts",
-                                           day1: "02", month1: "11월", venue1: "KINTEX, Goyang-si,South Korea",
-                                           day2: "02", month2: "11월", venue2: "KINTEX, Goyang-si, South Korea",
-                                           day3: "02", month3: "11월", venue3: "KINTEX, Goyang-si,South Korea")
+                        PopularArtistsView(viewModel: PopularArtistViewModel(popArtistData: PopularArtistData()))
                         .padding(.bottom, 9)
                         NavigationLink(destination: Text("안녕")) {
                             HStack {

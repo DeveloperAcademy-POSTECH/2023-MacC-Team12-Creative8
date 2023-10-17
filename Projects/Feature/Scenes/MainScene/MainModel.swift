@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MainBookMarkData: Identifiable {
+struct MainBookmarkData: Identifiable {
     let id: Int
     let singer: String
     let concertName: String
@@ -16,6 +16,16 @@ struct MainBookMarkData: Identifiable {
     let month: String
     let day: String
     let image: String
+    init(id: Int = 0, singer: String = "artist", concertName: String = "concertName", 
+         dDay: String = "dDay", month: String = "month", day: String = "day", image: String = "") {
+        self.id = id
+        self.singer = singer
+        self.concertName = concertName
+        self.dDay = dDay
+        self.month = month
+        self.day = day
+        self.image = image
+    }
 }
 
 struct UpcomingEventData: Identifiable {
@@ -24,6 +34,12 @@ struct UpcomingEventData: Identifiable {
     let date: String
     let dDay: String
     let image: String
+    init(singer: String = "artist", date: String = "date", dDay: String = "dDay", image: String = "image") {
+        self.singer = singer
+        self.date = date
+        self.dDay = dDay
+        self.image = image
+    }
 }
 
 struct PopularArtistData {
@@ -38,4 +54,20 @@ struct PopularArtistData {
     let day3: String
     let month3: String
     let venue3: String
+    init(singer: String = "artist", image: String = "", 
+         day1: String = "day1", month1: String = "month1", venue1: String = "venue1",
+         day2: String = "day2", month2: String = "month2", venue2: String = "venue2",
+         day3: String = "day3", month3: String = "month3", venue3: String = "venue3") {
+        self.singer = singer
+        self.image = image
+        self.day1 = day1
+        self.month1 = month1
+        self.venue1 = venue1
+        self.day2 = day2
+        self.month2 = month2
+        self.venue2 = venue2
+        self.day3 = day3
+        self.month3 = month3
+        self.venue3 = venue3
+    }
 }
