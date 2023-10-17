@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BA0AA292ADAB9F3005B18C4 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */; };
+		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
+		0B65D9242ADEBCF50059E8F2 /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */; };
+		0B65D9262ADEBFFB0059E8F2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */; };
 		37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */; };
-		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
+		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
+		0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
+		371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -110,7 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */,
-				0BA0AA282ADAB9F3005B18C4 /* UIScreenExtension.swift */,
+				371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */,
+				0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */,
+				0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,7 +198,7 @@
 				ORGANIZATIONNAME = com.creative8;
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -260,8 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B65D9242ADEBCF50059E8F2 /* ImageCropExtension.swift in Sources */,
 				37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */,
-				0BA0AA292ADAB9F3005B18C4 /* UIScreenExtension.swift in Sources */,
+				001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */,
+				0B65D9262ADEBFFB0059E8F2 /* CellFrameExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +301,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -384,7 +391,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -411,7 +417,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -497,7 +502,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

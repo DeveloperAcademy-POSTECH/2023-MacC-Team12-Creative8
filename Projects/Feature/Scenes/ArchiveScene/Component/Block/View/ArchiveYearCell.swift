@@ -21,6 +21,7 @@ struct ArchiveYearCell: View {
 
       Text("\(concertCnt)개 공연 보기")
         .bold()
+        .foregroundStyle(.black)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
     }
     .padding()

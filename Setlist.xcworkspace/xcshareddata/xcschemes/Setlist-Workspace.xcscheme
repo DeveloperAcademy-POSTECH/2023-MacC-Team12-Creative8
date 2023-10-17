@@ -118,20 +118,6 @@
                ReferencedContainer = "container:Projects/UI/UI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC10593DD15AA695EB717CA4"
-               BuildableName = "UI_UI.bundle"
-               BlueprintName = "UI_UI"
-               ReferencedContainer = "container:Projects/UI/UI.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
