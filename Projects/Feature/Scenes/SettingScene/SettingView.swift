@@ -9,13 +9,7 @@
 import SwiftUI
 
 public struct SettingView: View {
-    
-    enum SettingSelected {
-        case system
-        case light
-        case dark
-    }
-    
+
     public init() {}
 
     @State var userSelectionScreenMode: ScreenMode = .system
@@ -98,7 +92,7 @@ public struct SettingView: View {
                         // 서비스 이용 관련
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.white)
-                            .frame(height: 270)
+                            .frame(height: 280)
                             .overlay {
                                 VStack(alignment: .leading) {
                                     Text("서비스 이용 관련")
@@ -112,7 +106,7 @@ public struct SettingView: View {
                                     
                                     // 이용 약관
                                     NavigationLink {
-                                        Text("이용 약관")
+                                        ServiceExplainView()
                                     } label: {
                                         HStack {
                                             Text("이용 약관")
@@ -130,7 +124,7 @@ public struct SettingView: View {
                                     
                                     // Setlist.fm 약관
                                     NavigationLink {
-                                        Text("Setlist.fm 약관")
+                                        termsOfSetlistfm()
                                     } label: {
                                         HStack {
                                             Text("Setlist.fm 약관")
@@ -143,6 +137,7 @@ public struct SettingView: View {
                                                 .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
                                         }
                                         .foregroundStyle(.black)
+                                        .padding(.bottom, 10)
                                     }
                                 }
                                 .padding(.horizontal, 26)

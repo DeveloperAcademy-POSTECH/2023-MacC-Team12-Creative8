@@ -12,9 +12,7 @@ import Feature
 struct SetlistApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                SettingView()
-            }
+                MainView()
         }
     }
 }
