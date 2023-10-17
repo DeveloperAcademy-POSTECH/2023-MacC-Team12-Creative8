@@ -11,11 +11,9 @@ import SwiftUI
 public struct MainBookmarkedView: View, Identifiable, Hashable {
     public var id: Int
     let destination: AnyView
-        
     public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
         }
-        
     public static func == (lhs: MainBookmarkedView, rhs: MainBookmarkedView) -> Bool {
             lhs.id == rhs.id
         }
@@ -27,7 +25,7 @@ public struct MainBookmarkedView: View, Identifiable, Hashable {
     let month: String
     let day: String
     let image: String
-
+    
     public var body: some View {
         NavigationLink(destination: destination) {
             VStack(alignment: .leading, spacing: 0) {

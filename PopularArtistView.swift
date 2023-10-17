@@ -43,18 +43,7 @@ public struct PopularArtistsView: View {
                             .bold()
                             .padding(.top)
                         Spacer()
-                        HStack {
-                            VStack {
-                                Text(month1)
-                                    .font(.caption)
-                                Text(day1)
-                                    .font(.title3)
-                            }
-                            .padding(.trailing, 10)
-                            Text(venue1)
-                                .font(.caption)
-                        }
-                        .foregroundColor(.white)
+                        PopArtistBlockView(month: month1, day: day1, venue: venue1)
                     }
                     .padding(.vertical, 15)
                 }
@@ -62,39 +51,36 @@ public struct PopularArtistsView: View {
                 VStack {
                     RoundedRectangle(cornerRadius: 17)
                         .overlay(
-                            HStack {
-                                VStack {
-                                    Text(month2)
-                                        .font(.caption)
-                                    Text(day2)
-                                        .font(.title3)
-                                }
-                                .padding(.trailing, 10)
-                                Text(.init(venue2))
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.white)
+                            PopArtistBlockView(month: month2, day: day2, venue: venue2)
                             .padding(12)
                         )
                     RoundedRectangle(cornerRadius: 17)
                         .overlay(
-                            HStack {
-                                VStack {
-                                    Text(month3)
-                                        .font(.caption)
-                                    Text(day3)
-                                        .font(.title3)
-                                }
-                                .padding(.trailing, 10)
-                                Text(.init(venue3))
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.white)
+                            PopArtistBlockView(month: month3, day: day3, venue: venue3)
                             .padding(12)
                         )
                     }
                 }
             .frame(height: screenHeight * 0.16)
+        }
+    }
+    struct PopArtistBlockView: View {
+        let month: String
+        let day: String
+        let venue: String
+        var body: some View {
+            HStack {
+                VStack {
+                    Text(month)
+                        .font(.caption)
+                    Text(day)
+                        .font(.title3)
+                }
+                .padding(.trailing, 10)
+                Text(.init(venue))
+                    .font(.caption)
+            }
+            .foregroundColor(.white)
         }
     }
 }
