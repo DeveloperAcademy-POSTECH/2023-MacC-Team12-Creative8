@@ -9,16 +9,16 @@
 import Foundation
 
 final public class KoreanNameConverter {
-    public static let shared = KoreanNameConverter()
-    
-    public func findKoreanName(artist: MusicBrainzArtist) -> String {
-        guard let aliases = artist.aliases else { return artist.name! }
-        for alias in aliases {
-            if (alias.locale == "ko" || alias.locale == "ko_KR") && (alias.type == "Artist name") {
-                return alias.name! + "(" + artist.name! + ")"
-            }
-        }
-        return artist.name!
+  public static let shared = KoreanNameConverter()
+  
+  public func findKoreanName(artist: MusicBrainzArtist) -> String {
+    guard let aliases = artist.aliases else { return artist.name! }
+    for alias in aliases {
+      if (alias.locale == "ko" || alias.locale == "ko_KR") && (alias.type == "Artist name") {
+        return alias.name! + "(" + artist.name! + ")"
+      }
     }
-
+    return artist.name!
+  }
+  
 }
