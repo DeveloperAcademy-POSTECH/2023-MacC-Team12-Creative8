@@ -106,7 +106,6 @@ struct BannerTitleView: View {
             }
             .onTapGesture {
                         selection = "배너를 눌렀다"
-                        selectedBanner
                     }
             .background {
                 NavigationLink(destination: Text("이것은 어느 뷰?"), tag: "배너를 눌렀다", selection: self.$selection) {}
