@@ -8,8 +8,8 @@
 
 import Foundation
 
-public final class DataService {
-  public static let shared = DataService()
+public final class SetlistDataService {
+  public static let shared = SetlistDataService()
   public init() {}
   
   private func APIRequest<T: Codable>(url: URL, httpMethod: String, headers: [String: String], completion: @escaping (T?) -> Void) {
