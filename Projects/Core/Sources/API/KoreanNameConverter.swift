@@ -8,10 +8,10 @@
 
 import Foundation
 
-class KoreanNameConverter {
-    static let shared = KoreanNameConverter()
+final public class KoreanNameConverter {
+    public static let shared = KoreanNameConverter()
     
-    func findKoreanName(artist: MusicBrainzArtist) -> String {
+    public func findKoreanName(artist: MusicBrainzArtist) -> String {
         guard let aliases = artist.aliases else { return artist.name! }
         for alias in aliases {
             if (alias.locale == "ko" || alias.locale == "ko_KR") && (alias.type == "Artist name") {
