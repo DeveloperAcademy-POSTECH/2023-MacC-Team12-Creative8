@@ -44,7 +44,6 @@ public struct TopBannerView: View {
                 DragGesture()
                     .onChanged { _ in
                         isLinkActive = false // DragGesture가 작동할 때 NavigationLink 비활성화
-                        print("이거되나?")
                     }
                     .onEnded { value in
                         isLinkActive = true
@@ -55,7 +54,6 @@ public struct TopBannerView: View {
                         }
                         timer.upstream.connect().cancel()
                         timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-                        print("취소?")
                     }
             )
             .onAppear {
@@ -108,6 +106,7 @@ struct BannerTitleView: View {
             }
             .onTapGesture {
                         selection = "배너를 눌렀다"
+                        selectedBanner
                     }
             .background {
                 NavigationLink(destination: Text("이것은 어느 뷰?"), tag: "배너를 눌렀다", selection: self.$selection) {}
