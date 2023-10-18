@@ -10,11 +10,11 @@ import Foundation
 
 // MARK: - SetlistListModel
 public struct SetlistListModel: Codable {
-  public let type: String?
-  public let itemsPerPage: Int?
-  public let page: Int?
-  public let total: Int?
-  public let setlist: [Setlist]?
+  let type: String?
+  let itemsPerPage: Int?
+  let page: Int?
+  let total: Int?
+  let setlist: [Setlist]?
 }
 
 // MARK: - Setlist
@@ -32,7 +32,7 @@ public struct Setlist: Codable {
 }
 
 // MARK: - Artist
-struct Artist: Codable {
+public struct Artist: Codable {
   let mbid: String?
   let name: String?
   let sortName: String?
@@ -41,7 +41,7 @@ struct Artist: Codable {
 }
 
 // MARK: - Sets
-struct Sets: Codable {
+public struct Sets: Codable {
   let setsSet: [Set]?
   
   enum CodingKeys: String, CodingKey {
@@ -50,14 +50,14 @@ struct Sets: Codable {
 }
 
 // MARK: - Set
-struct Set: Codable {
+public struct Set: Codable {
   let song: [Song]?
   let encore: Int?
   let name: String?
 }
 
 // MARK: - Song
-struct Song: Codable {
+public struct Song: Codable {
   let name: String?
   let info: String?
   let cover: Artist?
@@ -65,12 +65,12 @@ struct Song: Codable {
 }
 
 // MARK: - Tour
-struct Tour: Codable {
+public struct Tour: Codable {
   let name: String?
 }
 
 // MARK: - Venue
-struct Venue: Codable {
+public struct Venue: Codable {
   let id: String?
   let name: String?
   let city: City?
@@ -78,7 +78,7 @@ struct Venue: Codable {
 }
 
 // MARK: - City
-struct City: Codable {
+public struct City: Codable {
   let id: String?
   let name: String?
   let state: String?
@@ -88,13 +88,13 @@ struct City: Codable {
 }
 
 // MARK: - Coords
-struct Coords: Codable {
+public struct Coords: Codable {
   let lat: Double?
   let long: Double?
 }
 
 // MARK: - Country
-struct Country: Codable {
+public struct Country: Codable {
   let code: String?
   let name: String?
 }
