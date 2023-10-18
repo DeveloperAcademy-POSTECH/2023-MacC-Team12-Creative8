@@ -41,15 +41,12 @@ struct SetlistView: View {
             if isEmptySetlist {
                 EmptySetlistView()
             } else {
-                ZStack {
-                    ScrollView {
-                        ListView()
-                        BottomView()
-                    }
-                    .ignoresSafeArea()
-
+                ScrollView {
+                    ListView()
                     AddPlaylistButton()
+                    BottomView()
                 }
+                .ignoresSafeArea()
             }
         }
     }
