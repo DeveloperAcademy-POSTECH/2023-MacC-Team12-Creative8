@@ -22,7 +22,7 @@ public final class DataService {
     
     let session = URLSession(configuration: .default)
     
-    let task = session.dataTask(with: request) { data, response, error in
+    let task = session.dataTask(with: request) { data, _, error in
       if let error = error {
         print(error)
         completion(nil)
