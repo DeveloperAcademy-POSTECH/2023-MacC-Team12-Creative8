@@ -15,5 +15,4 @@ let project = Project.makeModule(
 
   ],
   sources: ["Sources/**"]
-  //resources: ["Resources/**"]
 )

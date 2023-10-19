@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */; };
+		11F2CF31C938E605E963CA81 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; };
 		45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018F043A036853F4399E1EB6 /* LaunchScreen.storyboard */; };
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
@@ -33,6 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				11F2CF31C938E605E963CA81 /* Core.framework in Embed Frameworks */,
 				AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -61,6 +63,7 @@
 		66FAE4CFDF5725510C9654A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C11848CE114DC128FE941C0C /* SetlistTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SetlistTests-Info.plist"; sourceTree = "<group>"; };
 		CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F592AE35C902CB7E4AF3F5DF /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 		96AF4B79DA528B7749EC9D8A /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				F592AE35C902CB7E4AF3F5DF /* Core.framework */,
 				05D7E000A703647DD9102B8F /* Feature.framework */,
 				04A3932CB4A4A550F38B6D0A /* Setlist.app */,
 				CDCE4814BB0DD42EC61E17A0 /* SetlistTests.xctest */,
@@ -177,7 +181,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 485A868C7C514060F1E36FC0 /* Build configuration list for PBXNativeTarget "Setlist" */;
 			buildPhases = (
-				EA1675BE85F4229D32CBDAB1 /* SwiftLintString */,
+				494512A60C7D0BD12537AA02 /* SwiftLint */,
 				C012A9F5C816A3135B51CFCE /* Sources */,
 				44FD4BC1EFE20084A340AD11 /* Resources */,
 				406DD4890ECF1656228A9F06 /* Embed Frameworks */,
@@ -264,8 +268,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EA1675BE85F4229D32CBDAB1 /* SwiftLintString */ = {
+		494512A60C7D0BD12537AA02 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -273,14 +278,14 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLintString;
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n    PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#11/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -345,7 +350,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -456,7 +460,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
