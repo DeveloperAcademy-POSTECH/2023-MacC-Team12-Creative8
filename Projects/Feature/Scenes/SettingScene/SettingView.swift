@@ -30,7 +30,7 @@ public struct SettingView: View {
                         SectionBackgroundView(height: 322)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    SectionDescriptionView(
+                                    SectionTitleView(
                                         sectionTitle: "화면 모드 설정",
                                         sectionDescription: "앱의 모드를 조정해서 방해받지 않는 콘서트 문화를 즐겨보세요.")
                                     Divider()
@@ -64,7 +64,7 @@ public struct SettingView: View {
                         SectionBackgroundView(height: 239)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    SectionDescriptionView(
+                                    SectionTitleView(
                                         sectionTitle: "세트리스트 추가 및 수정하기",
                                         sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
                                     SetlistfmLink(
@@ -80,7 +80,7 @@ public struct SettingView: View {
                         SectionBackgroundView(height: 300)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    SectionDescriptionView(
+                                    SectionTitleView(
                                         sectionTitle: "서비스 이용 관련",
                                         sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
                                     Divider()
@@ -90,7 +90,7 @@ public struct SettingView: View {
                                         ServiceExplainView()
                                             .navigationBarTitle("이용 약관", displayMode: .inline)
                                     } label: {
-                                        NavigationLinkLabel(LinkLabel: "이용 약관")
+                                        LinkLabelView(LinkLabel: "이용 약관")
                                     }
                                     Divider()
                                     
@@ -99,7 +99,7 @@ public struct SettingView: View {
                                         termsOfSetlistfm()
                                             .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
                                     } label: {
-                                        NavigationLinkLabel(LinkLabel: "Setlist.fm 약관")
+                                        LinkLabelView(LinkLabel: "Setlist.fm 약관")
                                             .padding(.bottom, 10)
                                     }
                                 }
@@ -127,7 +127,7 @@ struct SectionBackgroundView: View {
     }
 }
 
-struct SectionDescriptionView: View {
+struct SectionTitleView: View {
     
     var sectionTitle: String
     var sectionDescription: String
@@ -192,7 +192,7 @@ struct SetlistfmLink: View {
     }
 }
 
-struct NavigationLinkLabel: View {
+struct LinkLabelView: View {
     
     var LinkLabel: String
     

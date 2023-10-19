@@ -10,27 +10,30 @@ import SwiftUI
 import MessageUI
 
 struct AskView: View {
+    
+    @ObservedObject var coordinator = Coordinator()
+    
     var body: some View {
-            Button(action: {
-                commentsButtonTapped()
-            }, label: {
-                HStack {
-                    Text("문의하기")
-                        .font(.system(.footnote, weight: .semibold))
-                        .padding(EdgeInsets(top: 24, leading: 26, bottom: 24, trailing: 0))
-                    Spacer(minLength: 231)
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 6, height: 12)
-                        .padding(EdgeInsets(top: 22, leading: 0, bottom: 22, trailing: 36))
-                }
-                .frame(width: 350, height: 66)
-                .background(.white)
-                .foregroundStyle(.black)
-                .cornerRadius(12)
-                .padding(.bottom, 91)
-            })
-        }
+        Button(action: {
+            commentsButtonTapped()
+        }, label: {
+            HStack {
+                Text("문의하기")
+                    .font(.system(.footnote, weight: .semibold))
+                    .padding(EdgeInsets(top: 24, leading: 26, bottom: 24, trailing: 0))
+                Spacer(minLength: 231)
+                Image(systemName: "chevron.right")
+                    .resizable()
+                    .frame(width: 6, height: 12)
+                    .padding(EdgeInsets(top: 22, leading: 0, bottom: 22, trailing: 36))
+            }
+            .frame(width: 350, height: 66)
+            .background(.white)
+            .foregroundStyle(.black)
+            .cornerRadius(12)
+            .padding(.bottom, 91)
+        })
+    }
     
     func commentsButtonTapped() {
         guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
@@ -39,7 +42,7 @@ struct AskView: View {
         
         if MFMailComposeViewController.canSendMail() {
             let composeViewController = MFMailComposeViewController()
-            let coordinator = Coordinator()
+            //let coordinator = Coordinator()
             composeViewController.mailComposeDelegate = coordinator
             
             let bodyString = """
@@ -76,10 +79,8 @@ struct AskView: View {
             rootViewController.present(sendMailErrorAlert, animated: true, completion: nil)
         }
     }
-}
-
-extension AskView {
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+    
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate, ObservableObject {
         func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
             controller.dismiss(animated: true, completion: nil)
         }
