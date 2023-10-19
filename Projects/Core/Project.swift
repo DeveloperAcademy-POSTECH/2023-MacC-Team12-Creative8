@@ -10,7 +10,8 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
   name: "Core",
-  product: .staticFramework,
+  product: .framework,
   dependencies: [
-  ]
+  ],
+  sources: ["Sources/**"]
 )

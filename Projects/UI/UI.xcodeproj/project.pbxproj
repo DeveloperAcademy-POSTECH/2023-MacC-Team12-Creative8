@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
-		0B65D9242ADEBCF50059E8F2 /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */; };
-		0B65D9262ADEBFFB0059E8F2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */; };
-		37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */; };
+		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
+		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
+		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,13 +48,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
-		0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
+		289741E57FAAE603ED95F014 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
 		371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		EA107D337866699F71AD9912 /* UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UITests-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,10 +113,10 @@
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CAAB178FFEFCD44D1EBFA81E /* UIImage+Extensions.swift */,
+				676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */,
+				B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */,
+				289741E57FAAE603ED95F014 /* ImageCropExtension.swift */,
 				371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */,
-				0B65D9232ADEBCF50059E8F2 /* ImageCropExtension.swift */,
-				0B65D9252ADEBFFB0059E8F2 /* CellFrameExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,7 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3E447A11DEBE698B042C011 /* Build configuration list for PBXNativeTarget "UI" */;
 			buildPhases = (
-				F38C07F8FB94A2AE6B54BABB /* SwiftLintString */,
+				9B68838D281C25FEF3CCE744 /* SwiftLint */,
 				FD2A5B95C83C6188DECD992F /* Sources */,
 				941744F80E9F425D4CA03E34 /* Resources */,
 				6C24F764067D9D90AACF0E0E /* Embed Frameworks */,
@@ -196,6 +196,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -234,8 +236,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F38C07F8FB94A2AE6B54BABB /* SwiftLintString */ = {
+		9B68838D281C25FEF3CCE744 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -243,14 +246,14 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLintString;
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n    PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#12/New/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -266,10 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B65D9242ADEBCF50059E8F2 /* ImageCropExtension.swift in Sources */,
-				37F9D84C7BD1BE820A17071D /* UIImage+Extensions.swift in Sources */,
+				1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */,
+				95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */,
+				F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */,
 				001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */,
-				0B65D9262ADEBFFB0059E8F2 /* CellFrameExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

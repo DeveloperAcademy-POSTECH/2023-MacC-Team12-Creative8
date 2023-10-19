@@ -8,12 +8,13 @@
 import SwiftUI
 import SwiftData
 import Feature
+import Core
 
 @main
 struct SetlistApp: App {
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
-        LikeArtist.self, ArchivedConcertInfo.self
+        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self
       ])
       let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -23,6 +24,7 @@ struct SetlistApp: App {
           fatalError("Could not create ModelContainer: \(error)")
       }
   }()
+
   var body: some Scene {
     WindowGroup {
       NavigationStack {
