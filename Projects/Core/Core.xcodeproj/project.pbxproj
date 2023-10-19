@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		077C8C32B4631F87D89054C4 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE362160D746D1D98D19112B /* APIKeys.swift */; };
 		14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */; };
+		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
 		61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */; };
-		6C10A67AEC98B209B428A6D9 /* KoreanTitleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED9EA615FBF335F4010B29 /* KoreanTitleConverter.swift */; };
-		76D1A98CA0BED9E0EA2C808E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509FDE936851EF09FA5E305D /* DataService.swift */; };
-		7F4C044B2C19D495D887ABA9 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B899EAB7967D66328E10E34 /* KoreanNameConverter.swift */; };
+		7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */; };
+		98A2377B1AFCCCEF0D141609 /* KoreanTitleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */; };
+		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
 		DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
 		E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */; };
+		FB42455FF4A27A08049FC033 /* AppleMusicExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3E30DA6F7DC07AFFECB9 /* AppleMusicExport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,18 +56,19 @@
 
 /* Begin PBXFileReference section */
 		1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
-		1B899EAB7967D66328E10E34 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BED9EA615FBF335F4010B29 /* KoreanTitleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanTitleConverter.swift; sourceTree = "<group>"; };
+		2C8C3E30DA6F7DC07AFFECB9 /* AppleMusicExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicExport.swift; sourceTree = "<group>"; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		509FDE936851EF09FA5E305D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		75600AD4887E89C2223BF659 /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
+		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
 		B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
-		CE362160D746D1D98D19112B /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
+		EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanTitleConverter.swift; sourceTree = "<group>"; };
+		F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistDataService.swift; sourceTree = "<group>"; };
 		FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusSongsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4B1834DCC43C3F56D1CEA944 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
+				2C8C3E30DA6F7DC07AFFECB9 /* AppleMusicExport.swift */,
+				BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */,
+				EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */,
+				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		4B97075397CA6D3C7DEE06A1 /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +152,9 @@
 		81104ECEC5CD1B0F5111557B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EF43897A4EC2F17B200C08C2 /* API */,
 				99D89054FDB8DCB5686F508B /* DataManager */,
 				3CE205FFA0B9CE31813EAD2B /* Model */,
+				4B1834DCC43C3F56D1CEA944 /* Service */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -160,17 +174,6 @@
 				81104ECEC5CD1B0F5111557B /* Sources */,
 			);
 			name = Project;
-			sourceTree = "<group>";
-		};
-		EF43897A4EC2F17B200C08C2 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				CE362160D746D1D98D19112B /* APIKeys.swift */,
-				509FDE936851EF09FA5E305D /* DataService.swift */,
-				1B899EAB7967D66328E10E34 /* KoreanNameConverter.swift */,
-				2BED9EA615FBF335F4010B29 /* KoreanTitleConverter.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		F631B3543A0C26BDC2DE72DD /* Derived */ = {
@@ -229,7 +232,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				ORGANIZATIONNAME = com.creative8;
+				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
@@ -303,16 +306,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				077C8C32B4631F87D89054C4 /* APIKeys.swift in Sources */,
-				76D1A98CA0BED9E0EA2C808E /* DataService.swift in Sources */,
-				7F4C044B2C19D495D887ABA9 /* KoreanNameConverter.swift in Sources */,
-				6C10A67AEC98B209B428A6D9 /* KoreanTitleConverter.swift in Sources */,
 				61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */,
 				14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */,
 				E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */,
 				DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */,
 				E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */,
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
+				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
+				FB42455FF4A27A08049FC033 /* AppleMusicExport.swift in Sources */,
+				7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */,
+				98A2377B1AFCCCEF0D141609 /* KoreanTitleConverter.swift in Sources */,
+				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +396,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.CoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.CoreTests;
 				PRODUCT_NAME = CoreTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -416,7 +420,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.CoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.CoreTests;
 				PRODUCT_NAME = CoreTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -506,7 +510,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.Core;
 				PRODUCT_NAME = Core;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -540,7 +544,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.Core;
 				PRODUCT_NAME = Core;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

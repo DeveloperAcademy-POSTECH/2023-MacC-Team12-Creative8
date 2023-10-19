@@ -13,7 +13,7 @@ import SwiftData
 public final class SearchHistory {
   public var searchText: String
   public var searchDate: Date
-
+  
   init(searchText: String, searchDate: Date) {
     self.searchText = searchText
     self.searchDate = searchDate
