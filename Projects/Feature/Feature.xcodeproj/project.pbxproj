@@ -258,7 +258,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				ORGANIZATIONNAME = com.creative8;
+				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
@@ -373,7 +373,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Feature;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.Feature;
 				PRODUCT_NAME = Feature;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -399,7 +399,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.FeatureTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.FeatureTests;
 				PRODUCT_NAME = FeatureTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -429,7 +429,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Feature;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.Feature;
 				PRODUCT_NAME = Feature;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -568,7 +568,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.FeatureTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.FeatureTests;
 				PRODUCT_NAME = FeatureTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
