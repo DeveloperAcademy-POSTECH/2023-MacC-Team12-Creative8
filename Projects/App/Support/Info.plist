@@ -20,13 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-<<<<<<< HEAD
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>세트리스트를 사진첩에 저장하려면 권한이 필요합니다.</string>
-=======
 	<key>NSAppleMusicUsageDescription</key>
 	<string>공연의 세트리스트를 Apple Music 플레이리스트에 넣기 위해 접근을 허용해주세요</string>
->>>>>>> develop
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
