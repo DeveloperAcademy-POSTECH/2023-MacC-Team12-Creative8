@@ -21,6 +21,7 @@ public struct TopBannerView: View {
     @State private var contentOffsetX: CGFloat = 0
     @State private var titleViewWidth: CGFloat = 0
     @State private var isLinkActive: Bool = false
+    @State private var test: Int?
     let spacing: CGFloat = 6
     public var body: some View {
         GeometryReader { geometry in
@@ -30,8 +31,8 @@ public struct TopBannerView: View {
                         HStack(spacing: spacing) {
                             Group {
                                 ForEach(-1..<items.count + 1, id: \.self) { i in
-                                    BannerTitleView(item: items[i < 0 ? items.count - 1 : (i >= items.count ? 0 : i)])
-                                    .frame(width: titleViewWidth)
+                                            BannerTitleView(item: items[i < 0 ? items.count - 1 : (i >= items.count ? 0 : i)])
+                                                .frame(width: titleViewWidth)
                                 }
                             }
                         }
@@ -86,7 +87,21 @@ struct BannerTitleView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let item: BannerData
     @State var selection: String?
-    
+    @State private var test: Int?
+//      var body: some View {
+//        NavigationStack {
+//          List {
+//            Button("Mint") { test = 1 }
+//            Button("Pink") { test = 2 }
+//            Button("Teal") { test = 3 }
+//          }
+//          .navigationDestination(item: $test) { index in
+//            if index == 1 { AnotherView1() }
+//            else if index == 2 { AnotherView2() }
+//            else { AnotherView3() }
+//          }
+//        }
+//      }  
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                     HStack {
