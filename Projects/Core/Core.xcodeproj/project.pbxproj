@@ -14,7 +14,7 @@
 		6C10A67AEC98B209B428A6D9 /* KoreanTitleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED9EA615FBF335F4010B29 /* KoreanTitleConverter.swift */; };
 		76D1A98CA0BED9E0EA2C808E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509FDE936851EF09FA5E305D /* DataService.swift */; };
 		7F4C044B2C19D495D887ABA9 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B899EAB7967D66328E10E34 /* KoreanNameConverter.swift */; };
-		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
+		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; platformFilter = ios; };
 		DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
 		E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */; };
@@ -207,7 +207,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98830250AF7B3CEC34690D43 /* Build configuration list for PBXNativeTarget "Core" */;
 			buildPhases = (
-				C50CC719C99DABBB1509EE96 /* SwiftLint */,
+				D3536414F35E027411F4D158 /* SwiftLintString */,
 				68E9A351E4B1C8B9C155F97C /* Sources */,
 				3FEE3D1A9FD48DDE5D5CDD8B /* Resources */,
 				2A34CD9447D0001C8C98AEF5 /* Embed Frameworks */,
@@ -234,7 +234,7 @@
 				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -270,9 +270,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C50CC719C99DABBB1509EE96 /* SwiftLint */ = {
+		D3536414F35E027411F4D158 /* SwiftLintString */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -280,14 +279,14 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLint;
+			name = SwiftLintString;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n    PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -397,7 +396,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -421,7 +419,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -512,7 +509,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -546,7 +542,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
