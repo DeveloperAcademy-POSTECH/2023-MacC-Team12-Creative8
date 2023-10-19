@@ -9,7 +9,7 @@
 import Foundation
 
 enum ScreenMode: Int {
-    case system = 0
-    case light = 1
-    case dark = 2
+  case system = 0
+  case light = 1
+  case dark = 2
 }
