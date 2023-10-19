@@ -12,11 +12,10 @@ public struct SettingView: View {
 
     public init() {}
 
-    @State var userSelectionScreenMode: ScreenMode = .system
+    @State var userSelectionScreenMode: ScreenMode = ScreenMode(rawValue: UserDefaults.standard.integer(forKey: "displayMode")) ?? ScreenMode.system
     @State var showModal = false
     
     public var body: some View {
-        //NavigationStack {
             ScrollView {
                 ZStack {
                     Color(.gray).ignoresSafeArea()
@@ -28,30 +27,33 @@ public struct SettingView: View {
                             Spacer()
                         }
                         // 화면 모드 설정
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.white)
-                            .frame(height: 322)
+                        SectionBackgroundView(height: 322)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    Text("화면 모드 설정")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .padding(.vertical, 32)
-                                    Text("앱의 모드를 조정해서 방해받지 않는 콘서트\n문화를 즐겨보세요.")
-                                        .font(.footnote)
-                                        .foregroundStyle(.gray)
-                                        .padding(.bottom, 16)
+                                    SectionDescriptionView(
+                                        sectionTitle: "화면 모드 설정",
+                                        sectionDescription: "앱의 모드를 조정해서 방해받지 않는 콘서트 문화를 즐겨보세요.")
                                     Divider()
                                     
                                     // 시스템 설정 따르기
-                                    ScreenModeSelectionButton(modeName: "시스템 설정 따르기", screenMode: .system, settingSelected: $userSelectionScreenMode)
+                                    ScreenModeSelectionButton(
+                                        modeName: "시스템 설정 따르기",
+                                        screenMode: .system,
+                                        userSelectionScreenMode: $userSelectionScreenMode)
                                     Divider()
                                     
-                                    // 밝은 모드
-                                    ScreenModeSelectionButton(modeName: "라이트 모드", screenMode: .light, settingSelected: $userSelectionScreenMode)
+                                    // 라이트 모드
+                                    ScreenModeSelectionButton(
+                                        modeName: "라이트 모드",
+                                        screenMode: .light,
+                                        userSelectionScreenMode: $userSelectionScreenMode)
                                     Divider()
                                     
-                                    // 어두운 모드
-                                    ScreenModeSelectionButton(modeName: "다크 모드", screenMode: .dark, settingSelected: $userSelectionScreenMode)
+                                    // 다크 모드
+                                    ScreenModeSelectionButton(
+                                        modeName: "다크 모드",
+                                        screenMode: .dark,
+                                        userSelectionScreenMode: $userSelectionScreenMode)
                                         .padding(.bottom, 10)
                                 }
                                 .padding(.horizontal, 26)
@@ -59,85 +61,46 @@ public struct SettingView: View {
                             .padding(EdgeInsets(top: 32, leading: 20, bottom: 20, trailing: 20))
                         
                         // 세트리스트 추가 및 수정하기
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.white)
-                            .frame(height: 239)
+                        SectionBackgroundView(height: 239)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    Text("세트리스트 추가 및 수정하기")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .padding(.vertical, 32)
-                                    Text("Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
-                                        .font(.footnote)
-                                        .foregroundStyle(.gray)
-                                        .padding(.bottom, 29)
-                                    Link(destination: URL(string: "https://www.setlist.fm")!, label: {
-                                        HStack {
-                                            Spacer()
-                                            Text("Setlist.fm 바로가기")
-                                                .font(.system(.footnote, weight: .semibold))
-                                            Spacer()
-                                        }
-                                        .frame(width: 298, height: 56)
-                                        .background(.thickMaterial)
-                                        .foregroundStyle(.black)
-                                        .clipShape(RoundedRectangle(cornerRadius: 14))
-                                    })
-                                    .padding(.bottom, 24)
+                                    SectionDescriptionView(
+                                        sectionTitle: "세트리스트 추가 및 수정하기",
+                                        sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
+                                    SetlistfmLink(
+                                        setlistfmURL: "https://www.setlist.fm",
+                                        LinkLabel: "Setlist.fm 바로가기")
+                                        .padding(.bottom, 24)
                                 }
                                 .padding(.horizontal, 26)
                             }
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                         
                         // 서비스 이용 관련
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.white)
-                            .frame(height: 280)
+                        SectionBackgroundView(height: 300)
                             .overlay {
                                 VStack(alignment: .leading) {
-                                    Text("서비스 이용 관련")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .padding(.vertical, 30)
-                                    Text("아무런 아무런 말말말말말말말말말이랍니다.\n그냥 이런저런 텍스트일테지요.")
-                                        .font(.footnote)
-                                        .foregroundStyle(.gray)
-                                        .padding(.bottom, 16)
+                                    SectionDescriptionView(
+                                        sectionTitle: "서비스 이용 관련",
+                                        sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
                                     Divider()
                                     
                                     // 이용 약관
                                     NavigationLink {
                                         ServiceExplainView()
+                                            .navigationBarTitle("이용 약관", displayMode: .inline)
                                     } label: {
-                                        HStack {
-                                            Text("이용 약관")
-                                                .font(.footnote)
-                                                .padding(.vertical, 10)
-                                            Spacer()
-                                            Image(systemName: "chevron.right")
-                                                .resizable()
-                                                .frame(width: 6, height: 12)
-                                                .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
-                                        }
-                                        .foregroundStyle(.black)
+                                        NavigationLinkLabel(LinkLabel: "이용 약관")
                                     }
                                     Divider()
                                     
                                     // Setlist.fm 약관
                                     NavigationLink {
                                         termsOfSetlistfm()
+                                            .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
                                     } label: {
-                                        HStack {
-                                            Text("Setlist.fm 약관")
-                                                .font(.footnote)
-                                                .padding(.vertical, 20)
-                                            Spacer()
-                                            Image(systemName: "chevron.right")
-                                                .resizable()
-                                                .frame(width: 6, height: 12)
-                                                .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
-                                        }
-                                        .foregroundStyle(.black)
-                                        .padding(.bottom, 10)
+                                        NavigationLinkLabel(LinkLabel: "Setlist.fm 약관")
+                                            .padding(.bottom, 10)
                                     }
                                 }
                                 .padding(.horizontal, 26)
@@ -145,18 +108,38 @@ public struct SettingView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                         
                         // 문의하기
-//                        RoundedRectangle(cornerRadius: 12)
-//                            .fill(.white)
-//                            .frame(width: 350, height: 66)
-                            //.overlay {
                                 AskView()
-                            //}
-                            //.padding(.bottom, 91)
                     }
                 }
             }
             .ignoresSafeArea()
-        //}
+    }
+}
+
+struct SectionBackgroundView: View {
+    
+    var height: CGFloat
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 12)
+            .fill(.white)
+            .frame(height: height)
+    }
+}
+
+struct SectionDescriptionView: View {
+    
+    var sectionTitle: String
+    var sectionDescription: String
+    
+    var body: some View {
+        Text(sectionTitle)
+            .font(.system(size: 16, weight: .semibold))
+            .padding(.vertical, 32)
+        Text(sectionDescription)
+            .font(.footnote)
+            .foregroundStyle(.gray)
+            .padding(.bottom, 16)
     }
 }
 
@@ -165,14 +148,15 @@ struct ScreenModeSelectionButton: View {
     var modeName: String
     var screenMode: ScreenMode
     
-    @Binding var settingSelected: ScreenMode
+    @Binding var userSelectionScreenMode: ScreenMode
     
     var body: some View {
         Button {
-            settingSelected = screenMode
+            userSelectionScreenMode = screenMode
+            saveDisplayMode()
         } label: {
             HStack{
-                Image(systemName: settingSelected == screenMode ? "checkmark.circle.fill" : "circle")
+                Image(systemName: userSelectionScreenMode == screenMode ? "checkmark.circle.fill" : "circle")
                 Text(modeName)
                     .foregroundStyle(.black)
                     .font(.footnote)
@@ -180,6 +164,50 @@ struct ScreenModeSelectionButton: View {
             }
             .padding(.vertical, 10)
         }
+    }
+    
+    func saveDisplayMode() {
+        UserDefaults.standard.set(userSelectionScreenMode.rawValue, forKey: "displayMode")
+    }
+}
+
+struct SetlistfmLink: View {
+    
+    var setlistfmURL: String
+    var LinkLabel: String
+    
+    var body: some View {
+        Link(destination: URL(string: setlistfmURL)!, label: {
+            HStack {
+                Spacer()
+                Text(LinkLabel)
+                    .font(.system(.footnote, weight: .semibold))
+                Spacer()
+            }
+            .frame(width: 298, height: 56)
+            .background(.thickMaterial)
+            .foregroundStyle(.black)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+        })
+    }
+}
+
+struct NavigationLinkLabel: View {
+    
+    var LinkLabel: String
+    
+    var body: some View {
+        HStack {
+            Text(LinkLabel)
+                .font(.footnote)
+                .padding(.vertical, 20)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .resizable()
+                .frame(width: 6, height: 12)
+                .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 10))
+        }
+        .foregroundStyle(.black)
     }
 }
 

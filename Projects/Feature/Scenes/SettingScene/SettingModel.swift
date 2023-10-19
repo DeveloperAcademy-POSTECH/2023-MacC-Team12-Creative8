@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum ScreenMode {
-    case system
-    case light
-    case dark
+enum ScreenMode: Int {
+    case system = 0
+    case light = 1
+    case dark = 2
 }
