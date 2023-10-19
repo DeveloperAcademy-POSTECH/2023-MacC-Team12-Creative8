@@ -19,7 +19,7 @@ struct CaptureSetlistView: View {
       Color.white.ignoresSafeArea()
       Image(systemName: "\(index).circle")
         .font(.system(size: 200))
-        .opacity(0.3)
+        .opacity(0.15)
 
         VStack(alignment: .leading) {
           Text("SETA")
