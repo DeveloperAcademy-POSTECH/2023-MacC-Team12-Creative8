@@ -11,7 +11,7 @@ import Foundation
 final public class KoreanTitleConverter {
   public static let shared = KoreanTitleConverter()
   
-  let dataService: DataService = DataService.shared
+  let dataService: SetlistDataService = SetlistDataService.shared
   
   func findKoreanTitle(title: String, songList: [(String, String?)]) -> String? {
     for song in songList {
