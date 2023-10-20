@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-import Feature
 import SwiftData
+import Feature
 import Core
 
 @main
 struct SetlistApp: App {
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
-        SearchHistory.self
+        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self
       ])
       let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -29,8 +29,8 @@ struct SetlistApp: App {
     WindowGroup {
       NavigationStack {
         MainView()
-          .modelContainer(sharedModelContainer)
       }
     }
+    .modelContainer(sharedModelContainer)
   }
 }

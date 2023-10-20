@@ -294,7 +294,11 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#12/New/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
 			shellScript = "ROOT_DIR=\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> ebf18f1d9698973293266b781ab0d3d6c3cb8a92
 =======
 			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#11/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 >>>>>>> develop
@@ -362,7 +366,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
+=======
 				DEVELOPMENT_TEAM = 2QWMDJG53V;
+>>>>>>> develop
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -473,7 +481,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
+=======
 				DEVELOPMENT_TEAM = 2QWMDJG53V;
+>>>>>>> develop
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
