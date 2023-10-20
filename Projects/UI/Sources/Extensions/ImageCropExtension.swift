@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 public extension Image {
     func centerCropped() -> some View {
         GeometryReader { geo in
