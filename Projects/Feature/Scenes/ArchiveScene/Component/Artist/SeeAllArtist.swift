@@ -8,15 +8,16 @@
 
 import SwiftUI
 import SwiftData
+import Core
 
 struct SeeAllArtist: View {
   @Query var likeArtist: [LikeArtist]
   var body: some View {
     ScrollView {
-      ForEach(likeArtist) { item in
+//      ForEach(likeArtist) { item in
         HStack {
-          ArchiveArtistCell(artistUrl: item.artistImage, isNewUpdate: false)
-          Text("\(item.artistName)")
+//          ArchiveArtistCell(artistUrl: item.artistImage, isNewUpdate: false)
+//          Text("\(item.artistName)")
           Spacer()
           Button {
 
@@ -25,7 +26,7 @@ struct SeeAllArtist: View {
               .foregroundStyle(.black)
               .rotationEffect(.degrees(-90))
           }
-        }
+//        }
       }
     }
     .padding()

@@ -10,19 +10,35 @@ import Foundation
 import SwiftData
 
 @Model
-public class LikeArtist {
-  public var artistName: String
-  public var artistApiName: String
-  public var artistImage: URL
-  public var id: UUID
+public final class LikeArtist {
+  var name: String
+  var alias: String
+  var mbid: String
+  var gid: Int
+  var imageUrl: String
+  var songList: [Titles]
 
-  init(artistName: String, artistApiName: String, artistImage: URL) {
-    self.artistName = artistName
-    self.artistApiName = artistApiName
-    self.artistImage = artistImage
-    self.id = UUID()
+  init(name: String, alias: String, mbid: String, gid: Int, imageUrl: String, songList: [Titles]) {
+    self.name = name
+    self.alias = alias
+    self.mbid = mbid
+    self.gid = gid
+    self.imageUrl = imageUrl
+    self.songList = songList
   }
 }
+
+@Model
+public class Titles {
+  var title: String
+  var subTitle: String
+
+  init(title: String, subTitle: String) {
+    self.title = title
+    self.subTitle = subTitle
+  }
+}
+
 
 // 임시 모델. 합치고 삭제 예정
 @Model

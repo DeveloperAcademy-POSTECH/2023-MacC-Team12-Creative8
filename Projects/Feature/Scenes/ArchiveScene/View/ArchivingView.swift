@@ -8,11 +8,12 @@
 
 import SwiftUI
 import SwiftData
+import Core
 
 struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
   @Query var concertInfo: [ArchivedConcertInfo]
-
+  @Environment(\.modelContext) var modelContext
   var body: some View {
     VStack(alignment: .leading) {
       archivingArtistView
@@ -30,7 +31,7 @@ struct ArchivingView: View {
       HStack {
         if likeArtist.count == 0 { emptyLikeCell }
         if likeArtist.count > 1 { seeAllCell }
-        likedArtistCell
+//        likedArtistCell
       }
     }
     .scrollIndicators(.hidden)
@@ -66,21 +67,20 @@ struct ArchivingView: View {
         Text("좋아요한 아티스트")
           .font(.system(size: 12))
       }
-      .frameForCell()
   }
 
-  private var likedArtistCell: some View {
-    ForEach(likeArtist) { item in
-      VStack {
-        NavigationLink {
-
-        } label: {
-          ArchiveArtistCell(artistUrl: item.artistImage, isNewUpdate: false)
-        }
-        Text("\(item.artistName)")
-      }
-    }
-  }
+//  private var likedArtistCell: some View {
+//    ForEach(likeArtist) { item in
+//      VStack {
+//        NavigationLink {
+//
+//        } label: {
+//          ArchiveArtistCell(artistUrl: item.artistImage, isNewUpdate: false)
+//        }
+//        Text("\(item.artistName)")
+//      }
+//    }
+//  }
 
   private var blockView: some View {
     Group {
