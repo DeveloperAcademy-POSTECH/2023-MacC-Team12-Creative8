@@ -8,25 +8,23 @@
 import SwiftUI
 import SwiftData
 
-class ListArtistManager: ObservableObject {
-  var modelContext: ModelContext?
-  
-  func addLikeArtist(artistName: String, artistApiName: String, artistImage: URL) {
-    let newLikeArtist = LikeArtist(artistName: artistName, artistApiName: artistApiName, artistImage: artistImage)
-    modelContext?.insert(newLikeArtist)
-    self.save()
-  }
-  
-  func deleteItems(item: LikeArtist) {
-    modelContext?.delete(item)
-    self.save()
-  }
-  
-  func save() {
-    do {
-      try modelContext?.save()
-    } catch {
-      print(error.localizedDescription)
+class SwiftDataViewModel: ObservableObject {
+    var modelContext: ModelContext? = nil
+
+    func addLikeArtist(name: String,
+                       alias: String?,
+                       mbid: String,
+                       gid: Int?,
+                       imageUrl: String?,
+                       songList: [(String, String?)]?) {
+//        let newLikeArtist = LikeArtist(artistInfo: ArtistInfo(name: name,
+//                                                              alias: alias,
+//                                                              mbid: mbid,
+//                                                              gid: gid,
+//                                                              imageUrl: imageUrl,
+//                                                              songList: songList))
+//        modelContext?.insert(newLikeArtist)
+        self.save()
     }
   }
 }

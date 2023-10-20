@@ -16,7 +16,7 @@ struct ArchivingConcertBlockView: View {
   var body: some View {
     GeometryReader { geo in
       ScrollView {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
           ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
             NavigationLink {
               BlockAllConcertView(selecteYear: $viewModel.selecteYear,

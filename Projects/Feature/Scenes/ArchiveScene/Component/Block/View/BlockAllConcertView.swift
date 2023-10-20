@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import Core
 
 struct BlockAllConcertView: View {
   @Binding var selecteYear: Int
