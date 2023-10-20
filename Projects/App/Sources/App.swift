@@ -14,7 +14,7 @@ import Core
 struct SetlistApp: App {
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
-        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self, 
+        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self
       ])
       let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

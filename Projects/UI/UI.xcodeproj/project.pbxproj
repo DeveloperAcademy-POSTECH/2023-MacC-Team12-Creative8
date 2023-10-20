@@ -196,6 +196,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -290,7 +292,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -409,7 +410,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

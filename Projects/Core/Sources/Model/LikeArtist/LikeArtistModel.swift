@@ -39,7 +39,6 @@ public class Titles {
   }
 }
 
-
 // 임시 모델. 합치고 삭제 예정
 @Model
 public class ArchivedConcertInfo: Identifiable {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -154,13 +154,6 @@
 			path = Block;
 			sourceTree = "<group>";
 		};
-		3F484AFDA69B4A16E961CD4A /* LikeArtist */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LikeArtist;
-			sourceTree = "<group>";
-		};
 		47D9A39E45687A9BACB2BEC5 /* Derived */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				E0D3AFEC1AEF5B0F8ED71806 /* Component */,
-				3F484AFDA69B4A16E961CD4A /* LikeArtist */,
 				8ECED7BE23A224945FDB9DCC /* View */,
 			);
 			path = ArchiveScene;
@@ -483,7 +475,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -655,7 +646,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
