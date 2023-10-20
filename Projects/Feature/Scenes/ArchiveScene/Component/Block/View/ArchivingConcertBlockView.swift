@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import Core
 
 struct ArchivingConcertBlockView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
