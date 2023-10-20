@@ -9,13 +9,13 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-  name: "Setlist",
+  name: "App",
   platform: .iOS,
   product: .app,
   packages: [
   ],
   dependencies: [
-    .Projcet.Feature,
+    .Projcet.Feature
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

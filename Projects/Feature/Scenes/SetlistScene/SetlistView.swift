@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UI
+import Core
 
 private let gray: Color = Color(hex: 0xEAEAEA)
 private let screenWidth = UIScreen.main.bounds.width
@@ -16,7 +17,9 @@ private let screenHeight = UIScreen.main.bounds.height
 struct SetlistView: View {
     @State private var isBookmarked: Bool = false
     @State private var isEmptySetlist: Bool = false
-    
+    let setlist: Setlist
+    let songList: [(String, String?)]
+
     var body: some View {
         VStack {
             Group {
@@ -42,7 +45,7 @@ struct SetlistView: View {
                 EmptySetlistView()
             } else {
                 ScrollView {
-                    ListView()
+                    ListView(setlist: setlist, songList: songList)
                     AddPlaylistButton()
                     BottomView()
                 }
@@ -202,9 +205,10 @@ private struct ConcertInfoDetailView: View {
 }
 
 private struct ListView: View {
-    let setlist: Setlist = dummySetlist
     let koreanTitleConverter: KoreanTitleConverter = KoreanTitleConverter.shared
-    
+    let setlist: Setlist
+    let songList: [(String, String?)]
+
     var body: some View {
         LazyVStack {
             ForEach(setlist.sets?.setsSet ?? [], id: \.name) { session in
@@ -222,14 +226,14 @@ private struct ListView: View {
                             if song.tape != nil && song.tape == true {
                                 ListRowView(
                                     index: nil,
-                                    title: koreanTitleConverter.convertTitleToKorean(title: title, songList: iuSongList) ?? title,
+                                    title: koreanTitleConverter.findKoreanTitle(title: title, songList: songList) ?? title,
                                     info: song.info
                                 )
                                 .opacity(0.6)
                             } else {
                                 ListRowView(
                                     index: index,
-                                    title: koreanTitleConverter.convertTitleToKorean(title: title, songList: iuSongList) ?? title,
+                                    title: koreanTitleConverter.findKoreanTitle(title: title, songList: songList) ?? title,
                                     info: song.info
                                 )
                             }
@@ -373,6 +377,6 @@ private struct EmptySetlistView: View {
     }
 }
 
-#Preview {
-    SetlistView()
-}
+//#Preview {
+//    SetlistView()
+//}
