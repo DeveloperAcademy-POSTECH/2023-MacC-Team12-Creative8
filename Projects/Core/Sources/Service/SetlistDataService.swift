@@ -8,8 +8,8 @@
 
 import Foundation
 
-public final class DataService {
-  static let shared = DataService()
+public final class SetlistDataService {
+  public static let shared = SetlistDataService()
   
   private func APIRequest<T: Codable>(url: URL, httpMethod: String, headers: [String: String], completion: @escaping (T?) -> Void) {
     var request = URLRequest(url: url)
@@ -21,7 +21,7 @@ public final class DataService {
     
     let session = URLSession(configuration: .default)
     
-    let task = session.dataTask(with: request) { data, response, error in
+    let task = session.dataTask(with: request) { data, _, error in
       if let error = error {
         print(error)
         completion(nil)

@@ -185,7 +185,7 @@
 		5E1CDE9B685737937831E727 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = com.creative8;
+				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
@@ -243,7 +243,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -286,7 +286,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UITests;
 				PRODUCT_NAME = UITests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -375,7 +375,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UI;
 				PRODUCT_NAME = UI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -402,7 +402,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UITests;
 				PRODUCT_NAME = UITests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -486,7 +486,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.UI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UI;
 				PRODUCT_NAME = UI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
