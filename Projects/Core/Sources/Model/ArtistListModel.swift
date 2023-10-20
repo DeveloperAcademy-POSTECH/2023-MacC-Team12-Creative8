@@ -18,13 +18,13 @@ public struct ArtistListModel: Codable {
 
 // MARK: - Artist
 public struct MusicBrainzArtist: Codable {
-  public let id: String?
-  public let name: String?
-  public let sortName: String?
-  public let country: String?
-  public let area: Area?
-  public let beginArea: Area?
-  public let aliases: [Alias]?
+  let id: String?
+  let name: String?
+  let sortName: String?
+  let country: String?
+  let area: Area?
+  let beginArea: Area?
+  let aliases: [Alias]?
 }
 
 // MARK: - Alias

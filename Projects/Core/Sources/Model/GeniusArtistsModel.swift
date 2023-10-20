@@ -9,22 +9,22 @@
 import Foundation
 
 // MARK: - GeniusArtistsModel
-struct GeniusArtistsModel: Codable {
+public struct GeniusArtistsModel: Codable {
   let response: ArtistsResponse?
 }
 
 // MARK: - Response
-struct ArtistsResponse: Codable {
+public struct ArtistsResponse: Codable {
   let hits: [Hit]?
 }
 
 // MARK: - Hit
-struct Hit: Codable {
+public struct Hit: Codable {
   let result: Result?
 }
 
 // MARK: - Result
-struct Result: Codable {
+public struct Result: Codable {
   let artistNames: String?
   let headerImageThumbnailURL: String?
   let headerImageURL: String?
@@ -43,7 +43,7 @@ struct Result: Codable {
 }
 
 // MARK: - PrimaryArtist
-struct PrimaryArtist: Codable {
+public struct PrimaryArtist: Codable {
   let headerImageURL: String?
   let id: Int?
   let imageURL: String?

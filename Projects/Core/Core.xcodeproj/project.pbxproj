@@ -12,10 +12,12 @@
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
 		61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */; };
 		7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */; };
-		98A2377B1AFCCCEF0D141609 /* KoreanTitleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */; };
+		90C7433021A483DCFFE6BA2F /* ArtistDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9797422B3F9F69CA8805225 /* ArtistDataManager.swift */; };
+		92EB62E2326717AFF4CDA2FC /* KoreanConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88B2A00C4170BBA56254AC9 /* KoreanConverter.swift */; };
 		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
 		B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004E9629A66EFA763B287E6 /* AppleMusicService.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; platformFilter = ios; };
+		BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */; };
 		DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
 		E91C72D28581085E38D6D4B5 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */; };
@@ -58,17 +60,19 @@
 		1356C55C7BE92BC41E5AE292 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoModel.swift; sourceTree = "<group>"; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75600AD4887E89C2223BF659 /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
 		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
 		B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
+		B88B2A00C4170BBA56254AC9 /* KoreanConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanConverter.swift; sourceTree = "<group>"; };
 		BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
 		C004E9629A66EFA763B287E6 /* AppleMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicService.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
-		EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanTitleConverter.swift; sourceTree = "<group>"; };
 		F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistDataService.swift; sourceTree = "<group>"; };
+		F9797422B3F9F69CA8805225 /* ArtistDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDataManager.swift; sourceTree = "<group>"; };
 		FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusSongsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +107,7 @@
 		3CE205FFA0B9CE31813EAD2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */,
 				A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */,
 				B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */,
 				FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */,
@@ -118,7 +123,6 @@
 				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
 				BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */,
-				EB981B4E57D6EA872BE5228D /* KoreanTitleConverter.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
 			);
 			path = Service;
@@ -162,6 +166,8 @@
 		99D89054FDB8DCB5686F508B /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				F9797422B3F9F69CA8805225 /* ArtistDataManager.swift */,
+				B88B2A00C4170BBA56254AC9 /* KoreanConverter.swift */,
 				990C630A0325674DEABC1B7B /* SearchHistoryManager.swift */,
 			);
 			path = DataManager;
@@ -231,10 +237,7 @@
 		83ADD9484DDC11E75E9F182F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -290,7 +293,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/develop/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -306,7 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C7433021A483DCFFE6BA2F /* ArtistDataManager.swift in Sources */,
+				92EB62E2326717AFF4CDA2FC /* KoreanConverter.swift in Sources */,
 				61B80BE1E6AB19148AA5667B /* SearchHistoryManager.swift in Sources */,
+				BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */,
 				14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */,
 				E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */,
 				DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */,
@@ -315,7 +321,6 @@
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
 				7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */,
-				98A2377B1AFCCCEF0D141609 /* KoreanTitleConverter.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
