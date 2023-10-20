@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+final class SetlistViewModel: ObservableObject {
+  @Published var isBookmarked: Bool = false
+  @Published var isEmptySetlist: Bool = false
+}

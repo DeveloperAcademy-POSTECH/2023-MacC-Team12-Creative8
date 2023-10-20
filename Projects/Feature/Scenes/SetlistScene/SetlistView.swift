@@ -15,8 +15,7 @@ private let screenWidth = UIScreen.main.bounds.width
 private let screenHeight = UIScreen.main.bounds.height
 
 struct SetlistView: View {
-    @State private var isBookmarked: Bool = false
-    @State private var isEmptySetlist: Bool = false
+    @StateObject var vm: SetlistViewModel = SetlistViewModel()
     let setlist: Setlist
     let songList: [(String, String?)]
 
@@ -26,11 +25,11 @@ struct SetlistView: View {
                 NavigationBarView()
                 
                 ConcertInfoView(
+                    vm: vm,
                     date: "2023년 10월 28일",
                     venue: "Olympic Hall, Seoul",
                     artist: "잔나비",
-                    name: "판타스틱 올드 패션드 송년회",
-                    isBookmarked: $isBookmarked
+                    name: "판타스틱 올드 패션드 송년회"
                 )
 
                 ConcertInfoDetailView(
@@ -41,7 +40,7 @@ struct SetlistView: View {
             }
             .padding(.bottom)
 
-            if isEmptySetlist {
+            if vm.isEmptySetlist {
                 EmptySetlistView()
             } else {
                 ScrollView {
@@ -86,11 +85,11 @@ private struct NavigationBarView: View {
 }
 
 private struct ConcertInfoView: View {
+    @ObservedObject var vm: SetlistViewModel
     var date: String
     var venue: String
     var artist: String
     var name: String
-    @Binding var isBookmarked: Bool
     
     var body: some View {
         ZStack {
@@ -119,9 +118,9 @@ private struct ConcertInfoView: View {
                         .font(.system(size: 14))
                     Spacer()
                     Button {
-                        isBookmarked.toggle()
+                        vm.isBookmarked.toggle()
                     } label: {
-                        Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                        Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
                             .foregroundStyle(Color.primary)
                     }
                 }
