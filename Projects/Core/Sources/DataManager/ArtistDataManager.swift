@@ -2,7 +2,7 @@
 //  ArtistDataManager.swift
 //  Core
 //
-//  Created by 고혜지 on 10/18/23.
+//  Created by 고혜지 on 10/9/23.
 //  Copyright © 2023 com.creative8. All rights reserved.
 //
 
@@ -82,12 +82,13 @@ public final class ArtistDataManager {
             removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
             extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
           print("FIND ARTIST: \(name)")
-          return (ArtistInfo(gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil))
+          return ArtistInfo(gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
         }
       }
     }
+    
     print("FAILED TO FIND ARTIST")
-    return nil
+    return ArtistInfo(gid: hits[0].result?.primaryArtist?.id, imageUrl: hits[0].result?.primaryArtist?.imageURL, songList: nil)
   }
   
   private func stringFilter(_ str: String) -> String {

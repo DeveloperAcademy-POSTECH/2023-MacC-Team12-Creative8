@@ -17,10 +17,14 @@ public final class KoreanConverter {
     guard let aliases = artist.aliases else { return (artist.name!, nil) }
     
     for alias in aliases {
-      if (alias.primary == true) && (alias.name?.lowercased() != artist.name?.lowercased()) {
+      if (alias.locale == "ko" || alias.locale == "ko_KR") {
         primaryAlias = alias.name
         return (artist.name!, primaryAlias)
-      } else if (alias.locale == "ko" || alias.locale == "ko_KR") {
+      }
+    }
+    
+    for alias in aliases {
+      if (alias.primary == true) && (alias.name?.lowercased() != artist.name?.lowercased()) {
         primaryAlias = alias.name
         return (artist.name!, primaryAlias)
       }
@@ -45,4 +49,3 @@ public final class KoreanConverter {
   }
   
 }
-
