@@ -9,7 +9,7 @@
 import Foundation
 
 struct APIKeys {
-    let setlistFM = ""
-    let musicBrainz = ""
-    let genius = ""
+  let setlistFM = ""
+  let musicBrainz = ""
+  let genius = ""
 }

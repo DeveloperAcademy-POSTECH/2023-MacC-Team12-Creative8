@@ -3,7 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
+<<<<<<< HEAD
+	objectVersion = 50;
+=======
 	objectVersion = 56;
+>>>>>>> develop
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -221,8 +225,12 @@
 		601C713A3C15E6BE519CFFA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+<<<<<<< HEAD
+				ORGANIZATIONNAME = com.creative8;
+=======
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+>>>>>>> develop
 				TargetAttributes = {
 					C2CD78F96AEE99661AE40142 = {
 						TestTargetID = 868CF564ED5238E041BCB1F3;
@@ -286,7 +294,11 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#12/New/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+			shellScript = "ROOT_DIR=\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> ebf18f1d9698973293266b781ab0d3d6c3cb8a92
 =======
 			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#11/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 >>>>>>> develop

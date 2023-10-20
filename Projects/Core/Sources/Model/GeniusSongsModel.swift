@@ -9,12 +9,12 @@
 import Foundation
 
 // MARK: - GeniusSongsModel
-struct GeniusSongsModel: Codable {
+public struct GeniusSongsModel: Codable {
   let response: SongsResponse?
 }
 
 // MARK: - Response
-struct SongsResponse: Codable {
+public struct SongsResponse: Codable {
   let songs: [GeniusSong]?
   let nextPage: Int?
   
@@ -25,10 +25,10 @@ struct SongsResponse: Codable {
 }
 
 // MARK: - Song
-struct GeniusSong: Codable {
+public struct GeniusSong: Codable {
   let headerImageThumbnailURL: String?
   let headerImageURL: String?
-  let id: Int?
+  let id : Int?
   let songArtImageThumbnailURL: String?
   let songArtImageURL: String?
   let title, titleWithFeatured: String?
