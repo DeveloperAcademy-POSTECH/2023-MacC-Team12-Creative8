@@ -1,5 +1,5 @@
 //
-//  KoreanTitleConverter.swift
+//  ArtistDataManager.swift
 //  Core
 //
 //  Created by 고혜지 on 10/9/23.
@@ -8,33 +8,22 @@
 
 import Foundation
 
-final public class KoreanTitleConverter {
-  public static let shared = KoreanTitleConverter()
+public final class ArtistDataManager {
+  public static let shared = ArtistDataManager()
   
   let dataService: SetlistDataService = SetlistDataService.shared
   
-  public func findKoreanTitle(title: String, songList: [(String, String?)]) -> String? {
-    for song in songList {
-      if title.lowercased() == song.0.lowercased() {
-        return title
-      } else if title.lowercased() == song.1?.lowercased() {
-        return song.0
-      }
-    }
-    return nil
-  }
-  
-  public func getSongListByArtist(artistName: String, completion: @escaping ([(String, String?)]?) -> Void) {
+  public func getArtistInfo(artistName: String, artistAlias: String, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [(String, String?)] = []
-    var artistId: Int?
+    var artistInfo: ArtistInfo?
     var songList: [String] = []
     
     dataService.searchArtistFromGenius(artistName: artistName) { result in
       if let result = result {
         DispatchQueue.main.async {
-          artistId = self.findArtistId(artistName: artistName, hits: result.response?.hits ?? [])
+          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: artistAlias, hits: result.response?.hits ?? [])
           
-          self.fetchAllSongs(artistId: artistId ?? 0) { result in
+          self.fetchAllSongs(artistId: artistInfo?.gid ?? 0) { result in
             if let result = result {
               songList = result
               for song in songList {
@@ -43,11 +32,13 @@ final public class KoreanTitleConverter {
                    self.extractTextInsideFirstParentheses(from: song))
                 )
               }
-              completion(parsedSongList)
+              artistInfo?.songList = parsedSongList
+              completion(artistInfo)
             } else {
               completion(nil)
             }
           }
+          completion(artistInfo)
           
         }
       } else {
@@ -79,16 +70,36 @@ final public class KoreanTitleConverter {
     fetchPage(page: 1)
   }
   
-  private func findArtistId(artistName: String, hits: [Hit]) -> Int? {
+  private func findArtistIdAndImage(artistName: String, artistAlias: String, hits: [Hit]) -> ArtistInfo? {
     for hit in hits {
-      let name = hit.result?.primaryArtist?.name ?? ""
-      if removeFirstParentheses(from: name) == artistName {
-        return hit.result?.primaryArtist?.id
+      if let name = hit.result?.primaryArtist?.name {
+        let filteredName = stringFilter(name)
+        let filteredArtistName = stringFilter(artistName)
+        let filteredArtistAlias = stringFilter(artistAlias)
+        
+        if removeFirstParentheses(from: filteredName) == filteredArtistName ||
+            extractTextInsideFirstParentheses(from: filteredName) == filteredArtistName ||
+            removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
+            extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
+          print("FIND ARTIST: \(name)")
+          return ArtistInfo(gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
+        }
       }
     }
-    return nil
+    
+    print("FAILED TO FIND ARTIST")
+    return ArtistInfo(gid: hits[0].result?.primaryArtist?.id, imageUrl: hits[0].result?.primaryArtist?.imageURL, songList: nil)
   }
   
+  private func stringFilter(_ str: String) -> String {
+    return str
+      .lowercased()
+      .trimmingCharacters(in: .whitespaces)
+      .replacingOccurrences(of: " ", with: "")
+      .filter { $0.unicodeScalars.first?.value != 8203 }
+  }
+  
+  // 첫 번째 괄호 이전의 텍스트를 추출
   private func extractTextBeforeParentheses(from input: String) -> String {
     if let range = input.range(of: "(") {
       let textBeforeParentheses = input[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -98,6 +109,7 @@ final public class KoreanTitleConverter {
     }
   }
   
+  // 첫 번째 괄호 사이의 텍스트를 추출
   private func extractTextInsideFirstParentheses(from input: String) -> String? {
     if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
       let range = (input.index(after: startIndex)..<endIndex)
@@ -108,6 +120,7 @@ final public class KoreanTitleConverter {
     }
   }
   
+  //  첫 번째 괄호를 제거
   private func removeFirstParentheses(from input: String) -> String {
     if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
       let firstParenthesesRange = startIndex...endIndex

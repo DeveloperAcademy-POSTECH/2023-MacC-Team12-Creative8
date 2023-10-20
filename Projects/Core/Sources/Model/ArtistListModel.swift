@@ -10,10 +10,10 @@ import Foundation
 
 // MARK: - ArtistListModel
 public struct ArtistListModel: Codable {
-  let created: String?
-  let count: Int?
-  let offset: Int?
-  let artists: [MusicBrainzArtist]?
+  public let created: String?
+  public let count: Int?
+  public let offset: Int?
+  public let artists: [MusicBrainzArtist]?
 }
 
 // MARK: - Artist
@@ -29,19 +29,19 @@ public struct MusicBrainzArtist: Codable {
 
 // MARK: - Alias
 public struct Alias: Codable {
-  let sortName: String?
-  let typeID: String?
-  let name: String?
-  let locale: String?
-  let type: String?
-  let primary: Bool?
+  public let sortName: String?
+  public let typeID: String?
+  public let name: String?
+  public let locale: String?
+  public let type: String?
+  public let primary: Bool?
 }
 
 // MARK: - Area
 public struct Area: Codable {
-  let id: String?
-  let type: String?
-  let typeID: String?
-  let name: String?
-  let sortName: String?
+  public let id: String?
+  public let type: String?
+  public let typeID: String?
+  public let name: String?
+  public let sortName: String?
 }

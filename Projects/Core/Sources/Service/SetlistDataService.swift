@@ -10,7 +10,6 @@ import Foundation
 
 public final class SetlistDataService {
   public static let shared = SetlistDataService()
-  public init() {}
   
   private func APIRequest<T: Codable>(url: URL, httpMethod: String, headers: [String: String], completion: @escaping (T?) -> Void) {
     var request = URLRequest(url: url)
@@ -64,7 +63,7 @@ public final class SetlistDataService {
     }
   }
   
-  func searchArtistFromGenius(artistName: String, completion: @escaping (GeniusArtistsModel?) -> Void) {
+  public func searchArtistFromGenius(artistName: String, completion: @escaping (GeniusArtistsModel?) -> Void) {
     if let url = URL(string: "https://api.genius.com/search?q=\(artistName)") {
       print("request url: \(url)")
       let headers = ["Authorization": APIKeys().genius]
@@ -74,7 +73,7 @@ public final class SetlistDataService {
     }
   }
   
-  func fetchSongsFromGenius(artistId: Int, page: Int, completion: @escaping (GeniusSongsModel?) -> Void) {
+  public func fetchSongsFromGenius(artistId: Int, page: Int, completion: @escaping (GeniusSongsModel?) -> Void) {
     if let url = URL(string: "https://api.genius.com/artists/\(artistId)/songs?page=\(page)&per_page=50") {
       let headers = ["Authorization": APIKeys().genius]
       APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)

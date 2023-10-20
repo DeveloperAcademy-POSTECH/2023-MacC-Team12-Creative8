@@ -205,7 +205,7 @@ private struct ConcertInfoDetailView: View {
 }
 
 private struct ListView: View {
-    let koreanTitleConverter: KoreanTitleConverter = KoreanTitleConverter.shared
+    let koreanConverter: KoreanConverter = KoreanConverter.shared
     let setlist: Setlist
     let songList: [(String, String?)]
 
@@ -226,14 +226,14 @@ private struct ListView: View {
                             if song.tape != nil && song.tape == true {
                                 ListRowView(
                                     index: nil,
-                                    title: koreanTitleConverter.findKoreanTitle(title: title, songList: songList) ?? title,
+                                    title: koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title,
                                     info: song.info
                                 )
                                 .opacity(0.6)
                             } else {
                                 ListRowView(
                                     index: index,
-                                    title: koreanTitleConverter.findKoreanTitle(title: title, songList: songList) ?? title,
+                                    title: koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title,
                                     info: song.info
                                 )
                             }
