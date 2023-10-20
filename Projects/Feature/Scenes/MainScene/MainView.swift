@@ -44,7 +44,7 @@ public struct MainView: View {
     public init() {}
     
     public var body: some View {
-        ScrollView {
+        VStack { // 스크롤 빼기
             VStack(spacing: 20) {
                 HStack {
                     logo
@@ -183,9 +183,9 @@ public struct MainView: View {
                 .scrollTargetLayout()
             }
         }
+        .frame(height: screenHeight * 0.1)
         .scrollIndicators(.hidden)
-        .safeAreaPadding(.leading, 43)
-        .padding(.bottom, 20)
+        .safeAreaPadding(.leading, 45)
     }
     // 디데이 함수
     func calculateDDay(from date: Date) -> String {
