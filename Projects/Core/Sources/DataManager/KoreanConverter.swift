@@ -16,11 +16,6 @@ public final class KoreanConverter {
     
     guard let aliases = artist.aliases else { return (artist.name!, nil) }
     
-    if aliases.count == 1 {
-      primaryAlias = aliases[0].name
-      return (artist.name!, primaryAlias)
-    }
-    
     for alias in aliases {
       if (alias.primary == true) && (alias.name?.lowercased() != artist.name?.lowercased()) {
         primaryAlias = alias.name
@@ -29,6 +24,10 @@ public final class KoreanConverter {
         primaryAlias = alias.name
         return (artist.name!, primaryAlias)
       }
+    }
+    
+    if let alias = artist.aliases?[0] {
+      primaryAlias = alias.name
     }
     
     return (artist.name!, primaryAlias)
