@@ -220,7 +220,7 @@ public struct MainView: View {
                                     .padding(.vertical)
                                     Divider()
                                 }
-                                .opacity(selectedIndex == data ? 1.0 : 0.5)
+                                .opacity(selectedIndex == data ? 1.0 : 0)
                             }
                         }
                     }
