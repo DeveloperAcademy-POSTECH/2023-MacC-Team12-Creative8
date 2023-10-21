@@ -15,42 +15,46 @@ public struct MainView: View {
     public init() {
     }
     public var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
+        GeometryReader { geometry in
+            ScrollView {
                 VStack(spacing: 0) {
-                    HStack {
-                        logo
-                        Spacer()
-                        ZStack(alignment: .trailing) {
-                            Button {
-                                // 다크모드 기능 넣기
-                                viewModel.isTapped.toggle()
-                            } label: {
-                                Image(systemName: "moon.fill")
-                                
-                        }
-                            .overlay {
-                                if viewModel.isTapped {
-                                    darkmodeButtons
+                    VStack(spacing: 0) {
+                        HStack {
+                            logo
+                            Spacer()
+                            ZStack(alignment: .trailing) {
+                                Button {
+                                    // 다크모드 기능 넣기
+                                    viewModel.isTapped.toggle()
+                                } label: {
+                                    Image(systemName: "moon.fill")
+                                    
                                 }
+                                .overlay {
+                                    if viewModel.isTapped {
+                                        darkmodeButtons
+                                    }
+                                }
+                                
                             }
-                            
                         }
+                        .padding(.horizontal, 24)
                     }
-                    .padding(.horizontal, 24)
-                }
-                .padding(.vertical)
-                Divider()
-                    .padding(.leading, 24)
                     .padding(.vertical)
-                if viewModel.sampleData.isEmpty {
-                    EmptyMainView()
-                } else {
-                    mainArtistsView
+                    Divider()
+                        .padding(.leading, 24)
+                        .padding(.vertical)
+                    if viewModel.sampleData.isEmpty {
+                        EmptyMainView()
+                            .frame(width: geometry.size.width)
+                            .frame(minHeight: geometry.size.height * 0.75)
+                    } else {
+                        mainArtistsView
+                    }
                 }
             }
         }
-
+        
     }
     public var logo: some View {
         HStack(spacing: 0) {
@@ -62,7 +66,7 @@ public struct MainView: View {
                 .frame(width: 18, height: 20)
                 .cornerRadius(50, corners: .topRight)
                 .cornerRadius(50, corners: .topLeft)
-
+            
         }
     }
     public var darkmodeButtons: some View {
@@ -77,7 +81,7 @@ public struct MainView: View {
                         .clipShape(Circle())
                     Text("시스템")
                         .font(.system(size: 10))
-                        
+                    
                 }
                 .foregroundStyle(.black)
             }
@@ -125,7 +129,7 @@ public struct MainView: View {
                     ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
                         VStack(spacing: 0) {
                             Button {
-                               // TODO: 내비 연결
+                                // TODO: 내비 연결
                             } label: {
                                 Image(viewModel.sampleData[data].image)
                                     .resizable()
@@ -227,8 +231,8 @@ public struct MainView: View {
                 .onChange(of: viewModel.scrollToIndex) {
                     viewModel.selectedIndex = viewModel.scrollToIndex
                     withAnimation(.easeInOut(duration: 0.3)) {
-                                            scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
-                                        }
+                        scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
+                    }
                 }
                 .scrollTargetLayout()
             }
@@ -262,8 +266,8 @@ struct EmptyMainView: View {
             }
             .padding(.vertical)
             Spacer()
-            }
         }
+    }
 }
 
 // 로고 만들기
@@ -273,10 +277,10 @@ extension View {
     }
 }
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
