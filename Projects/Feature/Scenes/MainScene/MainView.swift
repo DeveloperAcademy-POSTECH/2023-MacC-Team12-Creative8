@@ -12,6 +12,8 @@ import Combine
 public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
+    @State private var isTapped: Bool = false
+    
     let sampleData: [MainArchiveData] = [
         MainArchiveData(image: "malone", artist: "Post\nMalone", concertInfo: [
             ConcertInfo(date: Date(), tourName: "Tour 1-1", venue: "Venue 1-1"),
@@ -62,15 +64,73 @@ public struct MainView: View {
                 HStack {
                     logo
                     Spacer()
-                    Button {
-                        // 다크모드 기능 넣기
-                    } label: {
-                        Image(systemName: "moon.fill")
+                    ZStack(alignment: .trailing) {
+                        Button {
+                            // 다크모드 기능 넣기
+                            isTapped.toggle()
+                        } label: {
+                            Image(systemName: "moon.fill")
+                            
+                    }
+                        .overlay {
+                            if isTapped {
+                                HStack {
+                                    Button {
+                                        isTapped.toggle()
+                                    } label: {
+                                        VStack {
+                                            Image(systemName: "circle.lefthalf.filled")
+                                                .padding(8)
+                                                .background(Color.white)
+                                                .clipShape(Circle())
+                                            Text("시스템")
+                                                .font(.system(size: 10))
+                                                
+                                        }
+                                        .foregroundStyle(.black)
+                                    }
+                                    Button {
+                                        isTapped.toggle()
+                                    } label: {
+                                        VStack {
+                                            Image(systemName: "moon")
+                                                .padding(8)
+                                                .background(Color.white)
+                                                .clipShape(Circle())
+                                            Text("라이트")
+                                                .foregroundStyle(.black)
+                                                .font(.system(size: 10))
+                                        }
+                                        .foregroundStyle(.black)
+                                    }
+                                    Button {
+                                        isTapped.toggle()
+                                    } label: {
+                                        VStack {
+                                            Image(systemName: "moon.fill")
+                                                .padding(8)
+                                                .background(Color.white)
+                                                .clipShape(Circle())
+                                            Text("다크")
+                                                .foregroundStyle(.black)
+                                                .font(.system(size: 10))
+                                        }
+                                        .foregroundStyle(.black)
+                                    }
+                                }
+                                .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
+                                .background(Color.gray)
+                                .clipShape(RoundedRectangle(cornerRadius: 36))
+                                .frame(width: 208, height: 72)
+                                .offset(x: -63)
+                            }
+                        }
+                        
                     }
                 }
                 .padding(.horizontal, 24)
             }
-            .padding(.bottom)
+            .padding(.vertical)
             Divider()
                 .padding(.leading, 24)
                 .padding(.vertical)
@@ -161,9 +221,17 @@ public struct MainView: View {
         }
     }
     public var logo: some View {
-        Text("Logo")
-            .font(.title)
-            .bold()
+        HStack(spacing: 0) {
+            Rectangle()
+                .frame(width: 19, height: 20)
+                .cornerRadius(50, corners: .bottomRight)
+                .cornerRadius(50, corners: .bottomLeft)
+            Rectangle()
+                .frame(width: 18, height: 20)
+                .cornerRadius(50, corners: .topRight)
+                .cornerRadius(50, corners: .topLeft)
+
+        }
     }
     public var artistNameScrollView: some View {
         ScrollView(.horizontal) {
@@ -198,6 +266,22 @@ public struct MainView: View {
         .frame(maxHeight: 60)
         .scrollIndicators(.hidden)
         .safeAreaPadding(.leading, screenWidth * 0.12)
+    }
+}
+// 로고 만들기
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
 // MARK: 임시로 만든 데이터입니다. 나중에 swiftData로 바꾸면 될 것 같아요
