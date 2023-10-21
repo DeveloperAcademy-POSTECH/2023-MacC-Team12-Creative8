@@ -121,8 +121,8 @@ public struct MainView: View {
                                 .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
                                 .background(Color.gray)
                                 .clipShape(RoundedRectangle(cornerRadius: 36))
-                                .frame(width: 208, height: 72)
-                                .offset(x: -63)
+                                .frame(width: (screenWidth * 0.5), height: (screenWidth * 0.18))  //TODO: 수정
+                                .offset(x: -(screenWidth * 0.16)) //TODO: 수정
                             }
                         }
                         
