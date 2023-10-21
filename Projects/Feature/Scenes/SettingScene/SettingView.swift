@@ -14,7 +14,6 @@ public struct SettingView: View {
   
   @State var userSelectionScreenMode: ScreenMode = ScreenMode(
     rawValue: UserDefaults.standard.integer(forKey: "displayMode")) ?? ScreenMode.system
-  @State var showModal = false
   
   public var body: some View {
     ScrollView {
