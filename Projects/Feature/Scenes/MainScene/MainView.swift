@@ -39,13 +39,26 @@ public struct MainView: View {
         formatter.dateFormat = "MM.dd"
         return formatter
     }
+    let yearMonthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "YY년 MM월"
+        return formatter
+    }()
+    let dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "dd"
+        return formatter
+    }()
+    
     @State var selectedIndex: Int?
     @State var scrollToIndex: Int?
-    public init() {}
-    
+    public init() {
+    }
     public var body: some View {
-        VStack { // 스크롤 빼기
-            VStack(spacing: 20) {
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
                 HStack {
                     logo
                     Spacer()
@@ -56,10 +69,11 @@ public struct MainView: View {
                     }
                 }
                 .padding(.horizontal, 24)
-                .padding(.bottom, 38)
             }
+            .padding(.bottom)
             Divider()
                 .padding(.leading, 24)
+                .padding(.vertical)
             artistNameScrollView
             VStack(spacing: 0) {
                 ScrollView(.horizontal) {
@@ -90,21 +104,25 @@ public struct MainView: View {
                                                             }
                                                     }
                                                 }
-                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 17, trailing: 13))
+                                                .padding([.trailing, .bottom])
                                             }
                                         }
                                         .clipShape(RoundedRectangle(cornerRadius: 15))
                                 }
-                                .padding(.bottom, 25)
                                 ForEach(0 ..< sampleData[data].concertInfo.count, id: \.self) { item in
-                                    let dDay = calculateDDay(from: sampleData[data].concertInfo[item].date)
-                                        
                                     VStack(spacing: 0) {
-                                        HStack {
-                                            Text("\(sampleData[data].concertInfo[item].date, formatter: dateFormatter)")
-                                                .bold()
-                                                .padding(.leading, 10)
-                                                .padding(.vertical, 15)
+                                        HStack(spacing: 0) {
+                                            VStack {
+                                                Text("\(sampleData[data].concertInfo[item].date, formatter: dayFormatter)")
+                                                    .bold()
+                                                    .font(.system(size: 26))
+                                                Text("\(sampleData[data].concertInfo[item].date, formatter: yearMonthFormatter)")
+                                                    .padding(.leading, 10)
+                                                    .font(.system(size: 10))
+                                                    .foregroundStyle(.gray)
+                                            }
+                                            Spacer()
+                                                .frame(width: screenWidth * 0.11)
                                             VStack(alignment: .leading, spacing: 0) {
                                                 Text(sampleData[data].concertInfo[item].tourName)
                                                     .bold()
@@ -112,29 +130,24 @@ public struct MainView: View {
                                                 Text(sampleData[data].concertInfo[item].venue)
                                             }
                                             .font(.system(size: 14))
-                                            .padding(.leading, 43)
                                             Spacer()
-                                            if dDay != "" {
-                                                Text("\(dDay)")
-                                                    .padding(10)
-                                                    .background(RoundedRectangle(cornerRadius: 20)
-                                                    .foregroundStyle(.gray))
-                                            }
                                         }
+                                        .padding(.vertical)
+                                        Divider()
                                     }
-                                    Divider()
-                                        .padding(EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
+                                    .opacity(selectedIndex == data ? 1.0 : 0.5)
                                 }
                             }
                         }
                     }
                     .scrollTargetLayout()
+                    
                 }
                 .scrollTargetBehavior(.viewAligned)
                 .scrollIndicators(.hidden)
                 .scrollPosition(id: $scrollToIndex)
-                .safeAreaPadding(.horizontal, 43)
-                
+                .safeAreaPadding(.horizontal, screenWidth * 0.11)
+                Spacer()
             }
         }
         .onChange(of: scrollToIndex) {
@@ -146,7 +159,6 @@ public struct MainView: View {
                 scrollToIndex = 0
             }
         }
-        
     }
     public var logo: some View {
         Text("Logo")
@@ -175,7 +187,7 @@ public struct MainView: View {
                     Color.clear
                         .frame(width: screenWidth * 0.6)
                 }
-                .onReceive(Just(scrollToIndex)) { index in
+                .onReceive(Just(scrollToIndex)) { _ in
                     withAnimation(.easeInOut(duration: 0.3)) {
                         scrollViewProxy.scrollTo(scrollToIndex, anchor: .leading)
                     }
@@ -183,26 +195,12 @@ public struct MainView: View {
                 .scrollTargetLayout()
             }
         }
-        .frame(height: screenHeight * 0.1)
+        .frame(maxHeight: 60)
         .scrollIndicators(.hidden)
-        .safeAreaPadding(.leading, 45)
-    }
-    // 디데이 함수
-    func calculateDDay(from date: Date) -> String {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: Date(), to: date)
-        
-        if let day = components.day {
-            if day == -1 {
-                return "D-1"
-            } else if day == 0 {
-                return "오늘"
-            }
-        }
-        return ""
+        .safeAreaPadding(.leading, screenWidth * 0.12)
     }
 }
-// 임시로 만든 데이터입니다. 나중에 swiftData로 바꾸면 될 것 같아요
+// MARK: 임시로 만든 데이터입니다. 나중에 swiftData로 바꾸면 될 것 같아요
 struct ConcertInfo: Identifiable {
     var id = UUID()
     var date: Date
