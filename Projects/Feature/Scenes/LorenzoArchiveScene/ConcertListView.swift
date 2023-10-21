@@ -20,7 +20,7 @@ struct ConcertListView: View {
                     HStack(spacing: 0) {
                         Text(viewModel.concertYears[concert])
                             .bold()
-                        .padding(.vertical, 28.5)
+                            .padding(.vertical, screenHeight * 0.03)
                         Spacer()
                         // MARK: 연도별 뷰로 연결해주시면 됩니다...
                         NavigationLink(destination: Text("연도별 뷰로 연결해주시믄 됩니다...")) {
@@ -89,6 +89,7 @@ struct ConcertListView: View {
 #Preview {
     ConcertListView()
 }
+
 //  MARK: 임시로 만든 북마크 모델입니다. 나중에 swiftData로 바꾸면 될 것 같아요
 struct BookmarkedConcert: Identifiable {
     var id = UUID()
