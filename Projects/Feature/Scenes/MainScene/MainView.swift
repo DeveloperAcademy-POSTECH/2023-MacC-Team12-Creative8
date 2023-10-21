@@ -121,11 +121,11 @@ public struct MainView: View {
             artistNameScrollView
                 .padding(.bottom)
             ScrollView(.horizontal) {
-                LazyHStack(spacing: 18) {
+                HStack(spacing: 18) {
                     ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
                         VStack(spacing: 0) {
                             Button {
-                                print("\(data)")
+                               // TODO: 내비 연결
                             } label: {
                                 Image(viewModel.sampleData[data].image)
                                     .resizable()
@@ -178,7 +178,7 @@ public struct MainView: View {
                                     Divider()
                                 }
                                 .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-//                                .animation(.easeInOut(duration: 0.1))
+                                .animation(.easeInOut(duration: 0.1))
                             }
                         }
                     }
