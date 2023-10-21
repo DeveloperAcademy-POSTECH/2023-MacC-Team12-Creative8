@@ -59,37 +59,39 @@ public struct MainView: View {
     public init() {
     }
     public var body: some View {
-        VStack(spacing: 0) {
+        ScrollView {
             VStack(spacing: 0) {
-                HStack {
-                    logo
-                    Spacer()
-                    ZStack(alignment: .trailing) {
-                        Button {
-                            // 다크모드 기능 넣기
-                            isTapped.toggle()
-                        } label: {
-                            Image(systemName: "moon.fill")
-                            
-                    }
-                        .overlay {
-                            if isTapped {
-                                darkmodeButtons
-                            }
+                VStack(spacing: 0) {
+                    HStack {
+                        logo
+                        Spacer()
+                        ZStack(alignment: .trailing) {
+                            Button {
+                                // 다크모드 기능 넣기
+                                isTapped.toggle()
+                            } label: {
+                                Image(systemName: "moon.fill")
+                                
                         }
-                        
+                            .overlay {
+                                if isTapped {
+                                    darkmodeButtons
+                                }
+                            }
+                            
+                        }
                     }
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
-            }
-            .padding(.vertical)
-            Divider()
-                .padding(.leading, 24)
                 .padding(.vertical)
-            if sampleData.isEmpty {
-                EmptyMainView()
-            } else {
-                mainArtistsView
+                Divider()
+                    .padding(.leading, 24)
+                    .padding(.vertical)
+                if sampleData.isEmpty {
+                    EmptyMainView()
+                } else {
+                    mainArtistsView
+                }
             }
         }
 
@@ -161,6 +163,7 @@ public struct MainView: View {
     public var mainArtistsView: some View {
         VStack(spacing: 0) {
             artistNameScrollView
+                .padding(.bottom)
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 18) {
                     ForEach(0 ..< sampleData.count, id: \.self) { data in
@@ -221,6 +224,7 @@ public struct MainView: View {
                                     Divider()
                                 }
                                 .opacity(selectedIndex == data ? 1.0 : 0)
+                                .animation(.easeInOut(duration: 0.1))
                             }
                         }
                     }
@@ -323,7 +327,7 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
-// MARK: 임시로 만든 데이터입니다. 나중에 swiftData로 바꾸면 될 것 같아요
+// MARK: 임시로 만든 데이터입니다.
 struct ConcertInfo: Identifiable {
     var id = UUID()
     var date: Date
