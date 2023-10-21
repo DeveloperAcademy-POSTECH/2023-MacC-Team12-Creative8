@@ -15,202 +15,146 @@ private let screenWidth = UIScreen.main.bounds.width
 private let screenHeight = UIScreen.main.bounds.height
 
 struct SetlistView: View {
-  @StateObject var vm: SetlistViewModel = SetlistViewModel()
   let setlist: Setlist
-  let songList: [(String, String?)]
+  let artistInfo: ArtistInfo
+  @StateObject var vm = SetlistViewModel()
   
   var body: some View {
     VStack {
-      Group {
-        NavigationBarView()
-        
-        ConcertInfoView(
-          vm: vm,
-          date: "2023년 10월 28일",
-          venue: "Olympic Hall, Seoul",
-          artist: "잔나비",
-          name: "판타스틱 올드 패션드 송년회"
-        )
-        
-        ConcertInfoDetailView(
-          entrance: "17:00",
-          begin: "17:00",
-          venue: "Olympic Hall"
-        )
-      }
-      .padding(.bottom)
-      
+      NavigationBarView(vm: vm)
       if vm.isEmptySetlist {
+        ConcertInfoView(vm: vm)
         EmptySetlistView()
       } else {
         ScrollView {
-          ListView(setlist: setlist, songList: songList)
+          ConcertInfoView(vm: vm)
+          ListView(vm: vm)
           AddPlaylistButton()
           BottomView()
         }
         .ignoresSafeArea()
       }
     }
+    .onAppear {
+      vm.setlist = setlist
+      vm.artistInfo = artistInfo
+    }
+    .foregroundStyle(Color.primary)
   }
 }
 
 private struct NavigationBarView: View {
+  @ObservedObject var vm: SetlistViewModel
+  
   var body: some View {
-    HStack {
-      Button(action: {
-        
-      }, label: {
-        Image(systemName: "chevron.left")
-          .font(.system(size: 24))
-      })
+    ZStack {
+      HStack {
+        Button(action: {
+          
+        }, label: {
+          Image(systemName: "chevron.left")
+            .font(.system(size: 24))
+        })
+        Spacer()
+      }
       
-      Spacer()
-      
-      Text("세트리스트")
-        .font(.system(size: 19))
-        .fontWeight(.semibold)
-      
-      Spacer()
-      
-      Button(action: {
-        
-      }, label: {
-        Image(systemName: "camera.viewfinder")
-          .font(.system(size: 24))
-      })
+      VStack {
+        Text(vm.artistInfo?.name ?? "")
+          .font(.system(size: 12))
+        Text("세트리스트")
+          .font(.system(size: 16))
+      }
+      .fontWeight(.semibold)
     }
-    .frame(width: screenWidth * 0.9)
-    .foregroundStyle(Color.primary)
+    .padding()
   }
 }
 
 private struct ConcertInfoView: View {
   @ObservedObject var vm: SetlistViewModel
-  var date: String
-  var venue: String
-  var artist: String
-  var name: String
   
   var body: some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 12)
-        .foregroundStyle(gray)
+      RoundedRectangle(cornerRadius: 14)
+        .foregroundStyle(Color.black)
       
-      VStack(alignment: .leading) {
-        Spacer()
-        
-        HStack {
-          Text(date)
-            .font(.system(size: 12))
-            .fontWeight(.bold)
-          Spacer()
-          Text(venue)
-            .font(.system(size: 12))
+      VStack(alignment: .leading, spacing: 10) {
+        Group {
+          Text(vm.artistInfo?.name ?? "")
+            .font(.system(size: 26))
+            .fontWeight(.semibold)
+          
+          Text(vm.setlist?.tour?.name ?? "")
+            .opacity(0.6)
         }
-        Spacer()
+        .padding(.horizontal)
+
+        Divider()
+          .background(Color.white)
+          .padding(.vertical, 5)
         
-        Text(artist)
-          .font(.system(size: 17))
-          .fontWeight(.semibold)
-        
-        HStack {
-          Text(name)
-            .font(.system(size: 14))
-          Spacer()
-          Button {
-            vm.isBookmarked.toggle()
-          } label: {
-            Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-              .foregroundStyle(Color.primary)
+        Group {
+          let venue = "\(vm.setlist?.venue?.name ?? ""), \(vm.setlist?.venue?.city?.name ?? ""), \(vm.setlist?.venue?.city?.country?.name ?? "")"
+          InfoComponenet(title: venue, subTitle: "Place")
+          HStack {
+            InfoComponenet(title: vm.setlist?.eventDate ?? "", subTitle: "Date")
+            Spacer()
+            InfoComponenet(title: "-", subTitle: "Time")
+            Spacer()
+            Spacer()
           }
         }
+        .padding(.horizontal)
+
+        Button(action: {
+          
+        }, label: {
+          ZStack {
+            RoundedRectangle(cornerRadius: 14)
+              .foregroundColor(Color.white)
+            HStack {
+              Text("해당 공연 다시 듣기")
+              Spacer()
+              Image(systemName: "checkmark")
+            }
+            .padding(.horizontal)
+            .foregroundStyle(Color.primary)
+            .fontWeight(.semibold)
+          }
+          .frame(height: screenHeight * 0.065)
+        })
         
-        Spacer()
       }
+      .font(.system(size: 16))
       .padding(.horizontal)
-      
+      .foregroundStyle(Color.white)
     }
-    .frame(width: screenWidth * 0.9, height: screenHeight * 0.1)
+    .padding(.horizontal)
+    .frame(height: screenHeight * 0.35)
   }
 }
 
-private struct ConcertInfoDetailView: View {
-  var entrance: String
-  var begin: String
-  var venue: String
-  @State var showConcertDetail: Bool = true
+private struct InfoComponenet: View {
+  let title: String
+  let subTitle: String
   
   var body: some View {
-    VStack(spacing: 15) {
-      
-      concertDetailToggleButton
-      
-      if showConcertDetail {
-        ZStack {
-          RoundedRectangle(cornerRadius: 12)
-            .foregroundStyle(gray)
-          
-          HStack {
-            VStack(alignment: .leading) {
-              Text("입장")
-                .font(.system(size: 12))
-                .fontWeight(.semibold)
-              Spacer()
-              Text(entrance)
-                .font(.system(size: 19))
-            }
-            
-            Rectangle()
-              .frame(width: 1)
-              .padding(.horizontal)
-            
-            VStack(alignment: .leading) {
-              Text("공연시작")
-                .font(.system(size: 12))
-                .fontWeight(.semibold)
-              Spacer()
-              Text(begin)
-                .font(.system(size: 19))
-            }
-            
-            Rectangle()
-              .frame(width: 1)
-              .padding(.horizontal)
-            
-            VStack(alignment: .leading) {
-              Text("장소")
-                .font(.system(size: 12))
-                .fontWeight(.semibold)
-              Spacer()
-              Text(venue)
-                .font(.system(size: 19))
-            }
-          }
-          .padding(10)
-        }
-        .frame(width: screenWidth * 0.9, height: screenHeight * 0.075)
-      }
+    VStack(alignment: .leading) {
+      Text(title)
+      Text(subTitle)
+        .font(.system(size: 10))
+        .opacity(0.4)
     }
-  }
-  
-  var concertDetailToggleButton: some View {
-    Button(action: {
-      showConcertDetail.toggle()
-    }, label: {
-      Image(systemName: showConcertDetail ? "chevron.down" : "chevron.up")
-        .foregroundColor(.primary)
-    })
   }
 }
 
 private struct ListView: View {
   let koreanConverter: KoreanConverter = KoreanConverter.shared
-  let setlist: Setlist
-  let songList: [(String, String?)]
+  @ObservedObject var vm: SetlistViewModel
   
   var body: some View {
     LazyVStack {
-      ForEach(setlist.sets?.setsSet ?? [], id: \.name) { session in
+      ForEach(vm.setlist?.sets?.setsSet ?? [], id: \.name) { session in
         VStack(alignment: .leading, spacing: 20) {
           if let sessionName = session.name {
             Text(sessionName)
@@ -225,14 +169,14 @@ private struct ListView: View {
               if song.tape != nil && song.tape == true {
                 ListRowView(
                   index: nil,
-                  title: koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title,
+                  title: koreanConverter.findKoreanTitle(title: title, songList: vm.artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
                 .opacity(0.6)
               } else {
                 ListRowView(
                   index: index,
-                  title: koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title,
+                  title: koreanConverter.findKoreanTitle(title: title, songList: vm.artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
               }
@@ -376,6 +320,6 @@ private struct EmptySetlistView: View {
   }
 }
 
-#Preview {
-  SetlistView(vm: SetlistViewModel(), setlist: dummySetlist, songList: [])
-}
+//#Preview {
+//  SetlistView(setlist: Setlist(), artistInfo: ArtistInfo(name: "IU", alias: "아이유", mbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c", gid: "", imageUrl: "", songList: []))
+//}

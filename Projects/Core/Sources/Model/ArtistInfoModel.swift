@@ -9,6 +9,9 @@
 import Foundation
 
 public struct ArtistInfo {
+  public var name: String
+  public var alias: String?
+  public var mbid: String
   public var gid: Int?
   public var imageUrl: String?
   public var songList: [(String, String?)]?
