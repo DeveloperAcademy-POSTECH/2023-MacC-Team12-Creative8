@@ -12,50 +12,7 @@ import Combine
 public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
-    @State private var isTapped: Bool = false
-    
-    let sampleData: [MainArchiveData] = [
-        MainArchiveData(image: "malone", artist: "Post\nMalone", concertInfo: [
-            ConcertInfo(date: Date(), tourName: "Tour 1-1", venue: "Venue 1-1"),
-            ConcertInfo(date: Date(), tourName: "Tour 1-2", venue: "Venue 1-2"),
-            ConcertInfo(date: Date(), tourName: "Tour 1-3", venue: "Venue 1-3")
-        ]),
-        MainArchiveData(image: "youngk", artist: "영케이", concertInfo: [
-            ConcertInfo(date: Date(), tourName: "Tour 2-1", venue: "Venue 2-1"),
-            ConcertInfo(date: Date(), tourName: "Tour 2-2", venue: "Venue 2-2"),
-            ConcertInfo(date: Date(), tourName: "Tour 2-3", venue: "Venue 2-3")
-        ]),
-        MainArchiveData(image: "koc", artist: "Kings of\nConvenience", concertInfo: [
-            ConcertInfo(date: Calendar.current.date(from: DateComponents(year: 2022, month: 1, day: 1)) ?? Date(), tourName: "Tour 3-1", venue: "Venue 3-1"),
-            ConcertInfo(date: Date(), tourName: "Tour 3-2", venue: "Venue 3-2"),
-            ConcertInfo(date: Date(), tourName: "Tour 3-3", venue: "Venue 3-3")
-        ]),
-        MainArchiveData(image: "woodz", artist: "Woodz", concertInfo: [
-            ConcertInfo(date: Date(), tourName: "Tour 4-1", venue: "Venue 4-1"),
-            ConcertInfo(date: Date(), tourName: "Tour 4-2", venue: "Venue 4-2"),
-            ConcertInfo(date: Date(), tourName: "Tour 4-3", venue: "Venue 4-3")
-        ])
-    ]
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter
-    }
-    let yearMonthFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "YY년 MM월"
-        return formatter
-    }()
-    let dayFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "dd"
-        return formatter
-    }()
-    
-    @State var selectedIndex: Int?
-    @State var scrollToIndex: Int?
+    @ObservedObject var viewModel = MainViewModel()
     public init() {
     }
     public var body: some View {
@@ -68,13 +25,13 @@ public struct MainView: View {
                         ZStack(alignment: .trailing) {
                             Button {
                                 // 다크모드 기능 넣기
-                                isTapped.toggle()
+                                viewModel.isTapped.toggle()
                             } label: {
                                 Image(systemName: "moon.fill")
                                 
                         }
                             .overlay {
-                                if isTapped {
+                                if viewModel.isTapped {
                                     darkmodeButtons
                                 }
                             }
@@ -87,7 +44,7 @@ public struct MainView: View {
                 Divider()
                     .padding(.leading, 24)
                     .padding(.vertical)
-                if sampleData.isEmpty {
+                if viewModel.sampleData.isEmpty {
                     EmptyMainView()
                 } else {
                     mainArtistsView
@@ -112,7 +69,7 @@ public struct MainView: View {
     public var darkmodeButtons: some View {
         HStack {
             Button {
-                isTapped.toggle()
+                viewModel.isTapped.toggle()
             } label: {
                 VStack {
                     Image(systemName: "circle.lefthalf.filled")
@@ -126,7 +83,7 @@ public struct MainView: View {
                 .foregroundStyle(.black)
             }
             Button {
-                isTapped.toggle()
+                viewModel.isTapped.toggle()
             } label: {
                 VStack {
                     Image(systemName: "moon")
@@ -140,7 +97,7 @@ public struct MainView: View {
                 .foregroundStyle(.black)
             }
             Button {
-                isTapped.toggle()
+                viewModel.isTapped.toggle()
             } label: {
                 VStack {
                     Image(systemName: "moon.fill")
@@ -166,12 +123,12 @@ public struct MainView: View {
                 .padding(.bottom)
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 18) {
-                    ForEach(0 ..< sampleData.count, id: \.self) { data in
+                    ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
                         VStack(spacing: 0) {
                             Button {
                                 print("\(data)")
                             } label: {
-                                Image(sampleData[data].image)
+                                Image(viewModel.sampleData[data].image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
@@ -197,25 +154,23 @@ public struct MainView: View {
                                     }
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
-                            ForEach(0 ..< sampleData[data].concertInfo.count, id: \.self) { item in
+                            ForEach(0 ..< viewModel.sampleData[data].concertInfo.count, id: \.self) { item in
                                 VStack(spacing: 0) {
                                     HStack(spacing: 0) {
-                                        VStack {
-                                            Text("\(sampleData[data].concertInfo[item].date, formatter: dayFormatter)")
-                                                .bold()
-                                                .font(.system(size: 26))
-                                            Text("\(sampleData[data].concertInfo[item].date, formatter: yearMonthFormatter)")
-                                                .padding(.leading, 10)
-                                                .font(.system(size: 10))
+                                        VStack(alignment: .center) {
+                                            Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.yearFormatter)")
                                                 .foregroundStyle(.gray)
+                                            Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.dateMonthFormatter)")
                                         }
+                                        .font(.callout)
+                                        .fontWeight(.semibold)
                                         Spacer()
                                             .frame(width: screenWidth * 0.11)
                                         VStack(alignment: .leading, spacing: 0) {
-                                            Text(sampleData[data].concertInfo[item].tourName)
+                                            Text(viewModel.sampleData[data].concertInfo[item].tourName)
                                                 .bold()
                                                 .padding(.bottom, 2)
-                                            Text(sampleData[data].concertInfo[item].venue)
+                                            Text(viewModel.sampleData[data].concertInfo[item].venue)
                                         }
                                         .font(.system(size: 14))
                                         Spacer()
@@ -223,8 +178,8 @@ public struct MainView: View {
                                     .padding(.vertical)
                                     Divider()
                                 }
-                                .opacity(selectedIndex == data ? 1.0 : 0)
-                                .animation(.easeInOut(duration: 0.1))
+                                .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+//                                .animation(.easeInOut(duration: 0.1))
                             }
                         }
                     }
@@ -234,17 +189,17 @@ public struct MainView: View {
             }
             .scrollTargetBehavior(.viewAligned)
             .scrollIndicators(.hidden)
-            .scrollPosition(id: $scrollToIndex)
+            .scrollPosition(id: $viewModel.scrollToIndex)
             .safeAreaPadding(.horizontal, screenWidth * 0.11)
             Spacer()
         }
-        .onChange(of: scrollToIndex) {
-            selectedIndex = scrollToIndex
+        .onChange(of: viewModel.scrollToIndex) {
+            viewModel.selectedIndex = viewModel.scrollToIndex
         }
         .onAppear {
-            if sampleData.count != 0 {
-                selectedIndex = 0
-                scrollToIndex = 0
+            if viewModel.sampleData.count != 0 {
+                viewModel.selectedIndex = 0
+                viewModel.scrollToIndex = 0
             }
         }
     }
@@ -252,27 +207,27 @@ public struct MainView: View {
         ScrollView(.horizontal) {
             ScrollViewReader { scrollViewProxy in
                 HStack(spacing: 54) {
-                    ForEach(0..<sampleData.count, id: \.self) { data in
-                        Text(.init(sampleData[data].artist))
+                    ForEach(0..<viewModel.sampleData.count, id: \.self) { data in
+                        Text(.init(viewModel.sampleData[data].artist))
                             .background(Color.clear)
                             .font(.system(size: 25))
                             .bold()
                             .id(data)
-                            .foregroundColor(selectedIndex == data ? .black : .gray)
+                            .foregroundColor(viewModel.selectedIndex == data ? .black : .gray)
                             .animation(.easeInOut(duration: 0.2))
                             .onTapGesture {
                                 withAnimation {
-                                    selectedIndex = data
-                                    scrollToIndex = data
+                                    viewModel.selectedIndex = data
+                                    viewModel.scrollToIndex = data
                                 }
                             }
                     }
                     Color.clear
                         .frame(width: screenWidth * 0.6)
                 }
-                .onReceive(Just(scrollToIndex)) { _ in
+                .onReceive(Just(viewModel.scrollToIndex)) { _ in
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        scrollViewProxy.scrollTo(scrollToIndex, anchor: .leading)
+                        scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
                     }
                 }
                 .scrollTargetLayout()
