@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
@@ -225,10 +224,11 @@ public struct MainView: View {
                     Color.clear
                         .frame(width: screenWidth * 0.6)
                 }
-                .onReceive(Just(viewModel.scrollToIndex)) { _ in
+                .onChange(of: viewModel.scrollToIndex) {
+                    viewModel.selectedIndex = viewModel.scrollToIndex
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
-                    }
+                                            scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
+                                        }
                 }
                 .scrollTargetLayout()
             }
