@@ -74,55 +74,7 @@ public struct MainView: View {
                     }
                         .overlay {
                             if isTapped {
-                                HStack {
-                                    Button {
-                                        isTapped.toggle()
-                                    } label: {
-                                        VStack {
-                                            Image(systemName: "circle.lefthalf.filled")
-                                                .padding(8)
-                                                .background(Color.white)
-                                                .clipShape(Circle())
-                                            Text("시스템")
-                                                .font(.system(size: 10))
-                                                
-                                        }
-                                        .foregroundStyle(.black)
-                                    }
-                                    Button {
-                                        isTapped.toggle()
-                                    } label: {
-                                        VStack {
-                                            Image(systemName: "moon")
-                                                .padding(8)
-                                                .background(Color.white)
-                                                .clipShape(Circle())
-                                            Text("라이트")
-                                                .foregroundStyle(.black)
-                                                .font(.system(size: 10))
-                                        }
-                                        .foregroundStyle(.black)
-                                    }
-                                    Button {
-                                        isTapped.toggle()
-                                    } label: {
-                                        VStack {
-                                            Image(systemName: "moon.fill")
-                                                .padding(8)
-                                                .background(Color.white)
-                                                .clipShape(Circle())
-                                            Text("다크")
-                                                .foregroundStyle(.black)
-                                                .font(.system(size: 10))
-                                        }
-                                        .foregroundStyle(.black)
-                                    }
-                                }
-                                .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
-                                .background(Color.gray)
-                                .clipShape(RoundedRectangle(cornerRadius: 36))
-                                .frame(width: (screenWidth * 0.5), height: (screenWidth * 0.18))  //TODO: 수정
-                                .offset(x: -(screenWidth * 0.16)) //TODO: 수정
+                                darkmodeButtons
                             }
                         }
                         
@@ -134,91 +86,13 @@ public struct MainView: View {
             Divider()
                 .padding(.leading, 24)
                 .padding(.vertical)
-            artistNameScrollView
-            VStack(spacing: 0) {
-                ScrollView(.horizontal) {
-                    LazyHStack(spacing: 18) {
-                        ForEach(0 ..< sampleData.count, id: \.self) { data in
-                            VStack(spacing: 0) {
-                                Button {
-                                    print("\(data)")
-                                } label: {
-                                    Image(sampleData[data].image)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-                                        .overlay {
-                                            ZStack {
-                                                Color.black
-                                                    .opacity(0.2)
-                                                VStack {
-                                                    Spacer()
-                                                    HStack {
-                                                        Spacer()
-                                                        Circle()
-                                                            .frame(width: screenWidth * 0.15)
-                                                            .foregroundStyle(.black)
-                                                            .overlay {
-                                                                Image(systemName: "arrow.right")
-                                                                    .foregroundStyle(.white)
-                                                            }
-                                                    }
-                                                }
-                                                .padding([.trailing, .bottom])
-                                            }
-                                        }
-                                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                                }
-                                ForEach(0 ..< sampleData[data].concertInfo.count, id: \.self) { item in
-                                    VStack(spacing: 0) {
-                                        HStack(spacing: 0) {
-                                            VStack {
-                                                Text("\(sampleData[data].concertInfo[item].date, formatter: dayFormatter)")
-                                                    .bold()
-                                                    .font(.system(size: 26))
-                                                Text("\(sampleData[data].concertInfo[item].date, formatter: yearMonthFormatter)")
-                                                    .padding(.leading, 10)
-                                                    .font(.system(size: 10))
-                                                    .foregroundStyle(.gray)
-                                            }
-                                            Spacer()
-                                                .frame(width: screenWidth * 0.11)
-                                            VStack(alignment: .leading, spacing: 0) {
-                                                Text(sampleData[data].concertInfo[item].tourName)
-                                                    .bold()
-                                                    .padding(.bottom, 2)
-                                                Text(sampleData[data].concertInfo[item].venue)
-                                            }
-                                            .font(.system(size: 14))
-                                            Spacer()
-                                        }
-                                        .padding(.vertical)
-                                        Divider()
-                                    }
-                                    .opacity(selectedIndex == data ? 1.0 : 0.5)
-                                }
-                            }
-                        }
-                    }
-                    .scrollTargetLayout()
-                    
-                }
-                .scrollTargetBehavior(.viewAligned)
-                .scrollIndicators(.hidden)
-                .scrollPosition(id: $scrollToIndex)
-                .safeAreaPadding(.horizontal, screenWidth * 0.11)
-                Spacer()
+            if sampleData.isEmpty {
+                EmptyMainView()
+            } else {
+                mainArtistsView
             }
         }
-        .onChange(of: scrollToIndex) {
-            selectedIndex = scrollToIndex
-        }
-        .onAppear {
-            if sampleData.count != 0 {
-                selectedIndex = 0
-                scrollToIndex = 0
-            }
-        }
+
     }
     public var logo: some View {
         HStack(spacing: 0) {
@@ -231,6 +105,143 @@ public struct MainView: View {
                 .cornerRadius(50, corners: .topRight)
                 .cornerRadius(50, corners: .topLeft)
 
+        }
+    }
+    public var darkmodeButtons: some View {
+        HStack {
+            Button {
+                isTapped.toggle()
+            } label: {
+                VStack {
+                    Image(systemName: "circle.lefthalf.filled")
+                        .padding(8)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                    Text("시스템")
+                        .font(.system(size: 10))
+                        
+                }
+                .foregroundStyle(.black)
+            }
+            Button {
+                isTapped.toggle()
+            } label: {
+                VStack {
+                    Image(systemName: "moon")
+                        .padding(8)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                    Text("라이트")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 10))
+                }
+                .foregroundStyle(.black)
+            }
+            Button {
+                isTapped.toggle()
+            } label: {
+                VStack {
+                    Image(systemName: "moon.fill")
+                        .padding(8)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                    Text("다크")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 10))
+                }
+                .foregroundStyle(.black)
+            }
+        }
+        .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
+        .background(Color.gray)
+        .clipShape(RoundedRectangle(cornerRadius: 36))
+        .frame(width: (screenWidth * 0.5), height: (screenWidth * 0.18))
+        .offset(x: -(screenWidth * 0.16))
+    }
+    public var mainArtistsView: some View {
+        VStack(spacing: 0) {
+            artistNameScrollView
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 18) {
+                    ForEach(0 ..< sampleData.count, id: \.self) { data in
+                        VStack(spacing: 0) {
+                            Button {
+                                print("\(data)")
+                            } label: {
+                                Image(sampleData[data].image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                                    .overlay {
+                                        ZStack {
+                                            Color.black
+                                                .opacity(0.2)
+                                            VStack {
+                                                Spacer()
+                                                HStack {
+                                                    Spacer()
+                                                    Circle()
+                                                        .frame(width: screenWidth * 0.15)
+                                                        .foregroundStyle(.black)
+                                                        .overlay {
+                                                            Image(systemName: "arrow.right")
+                                                                .foregroundStyle(.white)
+                                                        }
+                                                }
+                                            }
+                                            .padding([.trailing, .bottom])
+                                        }
+                                    }
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            }
+                            ForEach(0 ..< sampleData[data].concertInfo.count, id: \.self) { item in
+                                VStack(spacing: 0) {
+                                    HStack(spacing: 0) {
+                                        VStack {
+                                            Text("\(sampleData[data].concertInfo[item].date, formatter: dayFormatter)")
+                                                .bold()
+                                                .font(.system(size: 26))
+                                            Text("\(sampleData[data].concertInfo[item].date, formatter: yearMonthFormatter)")
+                                                .padding(.leading, 10)
+                                                .font(.system(size: 10))
+                                                .foregroundStyle(.gray)
+                                        }
+                                        Spacer()
+                                            .frame(width: screenWidth * 0.11)
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            Text(sampleData[data].concertInfo[item].tourName)
+                                                .bold()
+                                                .padding(.bottom, 2)
+                                            Text(sampleData[data].concertInfo[item].venue)
+                                        }
+                                        .font(.system(size: 14))
+                                        Spacer()
+                                    }
+                                    .padding(.vertical)
+                                    Divider()
+                                }
+                                .opacity(selectedIndex == data ? 1.0 : 0.5)
+                            }
+                        }
+                    }
+                }
+                .scrollTargetLayout()
+                
+            }
+            .scrollTargetBehavior(.viewAligned)
+            .scrollIndicators(.hidden)
+            .scrollPosition(id: $scrollToIndex)
+            .safeAreaPadding(.horizontal, screenWidth * 0.11)
+            Spacer()
+        }
+        .onChange(of: scrollToIndex) {
+            selectedIndex = scrollToIndex
+        }
+        .onAppear {
+            if sampleData.count != 0 {
+                selectedIndex = 0
+                scrollToIndex = 0
+            }
         }
     }
     public var artistNameScrollView: some View {
@@ -268,6 +279,34 @@ public struct MainView: View {
         .safeAreaPadding(.leading, screenWidth * 0.12)
     }
 }
+struct EmptyMainView: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            Text("찜한 아티스트가 없습니다")
+                .font(.callout)
+                .padding(.bottom)
+            Text("관심있는 아티스트 정보를 빠르게\n확인하고 싶으시다면 찜을 해주세요")
+                .font(.footnote)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(
+                    .gray)
+                .padding(.bottom)
+            // TODO: 찜하기 화면 연결
+            NavigationLink(destination: Text("아티스트 찜하기 이동")) {
+                Text("아티스트 찜하러 가기 →")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 14))
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 25.0)
+                        .foregroundStyle(.black))
+            }
+            .padding(.vertical)
+            Spacer()
+            }
+        }
+}
+
 // 로고 만들기
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
