@@ -3,17 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+<<<<<<< HEAD
+	objectVersion = 50;
+=======
+	objectVersion = 56;
+>>>>>>> develop
 	objects = {
 
 /* Begin PBXBuildFile section */
 		11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */; };
-		11F2CF31C938E605E963CA81 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; };
+		11F2CF31C938E605E963CA81 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; };
 		45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018F043A036853F4399E1EB6 /* LaunchScreen.storyboard */; };
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };
 		97778FDC5FD657112348D680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D2A25A4B493B491347702 /* App.swift */; };
-		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA4A905D2B5F44EF4A6128E5 /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E29F7D7EB357F020BF8CA2A7 /* TuistBundle+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4232CECB78930600E0EDDE /* TuistBundle+Setlist.swift */; };
 /* End PBXBuildFile section */
 
@@ -221,8 +225,12 @@
 		601C713A3C15E6BE519CFFA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
+<<<<<<< HEAD
 				ORGANIZATIONNAME = com.creative8;
+=======
+				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = com.creative8.seta;
+>>>>>>> develop
 				TargetAttributes = {
 					C2CD78F96AEE99661AE40142 = {
 						TestTargetID = 868CF564ED5238E041BCB1F3;
@@ -230,7 +238,7 @@
 				};
 			};
 			buildConfigurationList = 69D118F316893E6C418AE0C7 /* Build configuration list for PBXProject "Setlist" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -285,7 +293,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#12/New/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+			shellScript = "ROOT_DIR=\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> ebf18f1d9698973293266b781ab0d3d6c3cb8a92
+=======
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#11/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> develop
+>>>>>>> develop
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -331,17 +351,16 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.SetlistTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.SetlistTests;
 				PRODUCT_NAME = SetlistTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Setlist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/Setlist";
 				TEST_TARGET_NAME = Setlist;
 			};
 			name = Release;
@@ -351,6 +370,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
+=======
+				DEVELOPMENT_TEAM = 2QWMDJG53V;
+>>>>>>> develop
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -358,12 +382,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Setlist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta;
 				PRODUCT_NAME = Setlist;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -383,18 +406,17 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.SetlistTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.SetlistTests;
 				PRODUCT_NAME = SetlistTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Setlist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setlist.app/Setlist";
 				TEST_TARGET_NAME = Setlist;
 			};
 			name = Debug;
@@ -463,6 +485,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
+=======
+				DEVELOPMENT_TEAM = 2QWMDJG53V;
+>>>>>>> develop
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -470,12 +497,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.Setlist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta;
 				PRODUCT_NAME = Setlist;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

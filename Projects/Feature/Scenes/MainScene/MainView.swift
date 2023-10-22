@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Core
 
 public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
@@ -287,18 +288,18 @@ struct RoundedCorner: Shape {
     }
 }
 // MARK: 임시로 만든 데이터입니다.
-struct ConcertInfo: Identifiable {
-    var id = UUID()
-    var date: Date
-    var tourName: String
-    var venue: String
+public struct ConcertInfo: Identifiable {
+    public  var id = UUID()
+    public var date: Date
+    public var tourName: String
+    public var venue: String
 }
 
-struct MainArchiveData: Identifiable {
-    var id = UUID()
-    var image: String
-    var artist: String
-    var concertInfo: [ConcertInfo]
+public struct MainArchiveData: Identifiable {
+    public var id = UUID()
+    public var image: String
+    public var artist: String
+    public var concertInfo: [ConcertInfo]
 }
 
 #Preview {
