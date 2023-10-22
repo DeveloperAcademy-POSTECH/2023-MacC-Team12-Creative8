@@ -10,13 +10,13 @@ import Foundation
 
 // MARK: - GeniusSongsModel
 public struct GeniusSongsModel: Codable {
-  let response: SongsResponse?
+  public let response: SongsResponse?
 }
 
 // MARK: - Response
 public struct SongsResponse: Codable {
-  let songs: [GeniusSong]?
-  let nextPage: Int?
+  public let songs: [GeniusSong]?
+  public let nextPage: Int?
   
   enum CodingKeys: String, CodingKey {
     case songs
@@ -26,12 +26,12 @@ public struct SongsResponse: Codable {
 
 // MARK: - Song
 public struct GeniusSong: Codable {
-  let headerImageThumbnailURL: String?
-  let headerImageURL: String?
-  let id : Int?
-  let songArtImageThumbnailURL: String?
-  let songArtImageURL: String?
-  let title, titleWithFeatured: String?
+  public let headerImageThumbnailURL: String?
+  public let headerImageURL: String?
+  public let id : Int?
+  public let songArtImageThumbnailURL: String?
+  public let songArtImageURL: String?
+  public let title, titleWithFeatured: String?
   
   enum CodingKeys: String, CodingKey {
     case headerImageThumbnailURL = "header_image_thumbnail_url"
