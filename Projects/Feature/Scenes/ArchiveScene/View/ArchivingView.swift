@@ -13,9 +13,16 @@ import Core
 struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
   @Query var concertInfo: [ArchivedConcertInfo]
+
+  @ObservedObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
+
   var body: some View {
     VStack(alignment: .leading) {
+      Button("Test") {
+//        dataManager.addArchivedConcertInfo(SaveArtistInfo, <#SaveSetlist#>)
+        dataManager.addLikeArtist(name: "Dummy", country: "Korea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: [])
+      }
       archivingArtistView
       blockView
     }
@@ -24,6 +31,7 @@ struct ArchivingView: View {
     .toolbar {
       ToolbarItem(placement: .topBarLeading) { Text("아카이빙").font(.title) }
     }
+    .onAppear { dataManager.modelContext = modelContext }
   }
 
   private var archivingArtistView: some View {
@@ -31,7 +39,7 @@ struct ArchivingView: View {
       HStack {
         if likeArtist.count == 0 { emptyLikeCell }
         if likeArtist.count > 1 { seeAllCell }
-//        likedArtistCell
+        likedArtistCell
       }
     }
     .scrollIndicators(.hidden)
@@ -69,18 +77,18 @@ struct ArchivingView: View {
       }
   }
 
-//  private var likedArtistCell: some View {
-//    ForEach(likeArtist) { item in
-//      VStack {
-//        NavigationLink {
-//
-//        } label: {
-//          ArchiveArtistCell(artistUrl: item.artistImage, isNewUpdate: false)
-//        }
-//        Text("\(item.artistName)")
-//      }
-//    }
-//  }
+  private var likedArtistCell: some View {
+    ForEach(likeArtist) { item in
+      VStack {
+        NavigationLink {
+
+        } label: {
+          ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
+        }
+        Text("\(item.artistInfo.name)")
+      }
+    }
+  }
 
   private var blockView: some View {
     Group {

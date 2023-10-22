@@ -10,6 +10,7 @@
 		03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F1995BE8972BD993B58 /* SearchHistoryModel.swift */; };
 		0B0DCA842AE4C0C1004460BA /* SaveArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DCA832AE4C0C1004460BA /* SaveArtistInfo.swift */; };
 		0B0DCA872AE4C13D004460BA /* ArchivedConcertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DCA862AE4C13D004460BA /* ArchivedConcertInfo.swift */; };
+		0B0DCA892AE53BDD004460BA /* SaveSetlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DCA882AE53BDD004460BA /* SaveSetlist.swift */; };
 		14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */; };
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		0B0DCA832AE4C0C1004460BA /* SaveArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveArtistInfo.swift; sourceTree = "<group>"; };
 		0B0DCA862AE4C13D004460BA /* ArchivedConcertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedConcertInfo.swift; sourceTree = "<group>"; };
+		0B0DCA882AE53BDD004460BA /* SaveSetlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSetlist.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoModel.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				0B0DCA862AE4C13D004460BA /* ArchivedConcertInfo.swift */,
+				0B0DCA882AE53BDD004460BA /* SaveSetlist.swift */,
 			);
 			path = ArchivedConcertInfo;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */,
 				E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */,
 				DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */,
+				0B0DCA892AE53BDD004460BA /* SaveSetlist.swift in Sources */,
 				0B0DCA842AE4C0C1004460BA /* SaveArtistInfo.swift in Sources */,
 				48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */,
 				03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */,

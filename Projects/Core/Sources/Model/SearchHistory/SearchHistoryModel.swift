@@ -11,7 +11,7 @@ import SwiftData
 
 @Model
 public final class SearchHistory {
-  @Relationship public var artistInfo: SaveArtistInfo
+  public var artistInfo: SaveArtistInfo
 
   init(artistInfo: SaveArtistInfo) {
     self.artistInfo = artistInfo

@@ -11,6 +11,8 @@ import SwiftData
 public final class SwiftDataManager: ObservableObject {
   public var modelContext: ModelContext?
 
+  public init(modelContext: ModelContext? = nil) { self.modelContext = modelContext }
+
   // MARK: - Save SwiftData func
   public func save() {
     do {
@@ -48,13 +50,15 @@ public final class SwiftDataManager: ObservableObject {
 
   //MARK: - LikeArtist
   public func addLikeArtist(name: String,
+                            country: String,
                             alias: String,
                             mbid: String,
                             gid: Int,
                             imageUrl: String?,
                             songList: [(String, String?)]) {
 
-    let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name,
+    let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name, 
+                                                              country: country,
                                                               alias: alias,
                                                               mbid: mbid,
                                                               gid: gid,
@@ -71,6 +75,7 @@ public final class SwiftDataManager: ObservableObject {
 
   //MARK: - SearchHistory
   public func addSearchHistory(name: String,
+                               country: String,
                                alias: String,
                                mbid: String,
                                gid: Int,
@@ -78,6 +83,7 @@ public final class SwiftDataManager: ObservableObject {
                                songList: [(String, String?)]) {
 
     let newSearchHistory = SearchHistory(artistInfo: SaveArtistInfo(name: name,
+                                                                    country: country,
                                                                     alias: alias,
                                                                     mbid: mbid,
                                                                     gid: gid,
@@ -102,8 +108,9 @@ public final class SwiftDataManager: ObservableObject {
   }
 
   // MARK: - ArchivedConcertInfo
-  public func addArchivedConcertInfo(_ item: ArchivedConcertInfo) {
-    modelContext?.insert(item)
+  public func addArchivedConcertInfo(_ artistInfo: SaveArtistInfo, _ setlist: SaveSetlist) {
+    let newConcert = ArchivedConcertInfo(artistInfo: artistInfo, setlist: setlist)
+    modelContext?.insert(newConcert)
   }
 
   public func deleteArchivedConcertInfo(_ item: ArchivedConcertInfo) {
