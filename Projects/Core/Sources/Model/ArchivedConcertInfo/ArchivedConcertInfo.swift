@@ -11,10 +11,10 @@ import SwiftData
 
 @Model
 public class ArchivedConcertInfo {
-  public var artistInfo: [SaveArtistInfo]
-  public var setlist: [SaveSetlist]
+  @Relationship public var artistInfo: SaveArtistInfo
+  @Relationship public var setlist: SaveSetlist
 
-  init(artistInfo: [SaveArtistInfo], setlist: [SaveSetlist]) {
+  init(artistInfo: SaveArtistInfo, setlist: SaveSetlist) {
     self.artistInfo = artistInfo
     self.setlist = setlist
   }
@@ -26,11 +26,13 @@ public class SaveSetlist: Identifiable {
   public var setlistId: String
   public var date: String
   public var venue: String
+  public var title: String
 
-  init(id: UUID, setlistId: String, date: String, venue: String) {
+  init(id: UUID, setlistId: String, date: String, venue: String, title: String) {
     self.id = id
     self.setlistId = setlistId
     self.date = date
     self.venue = venue
+    self.title = title
   }
 }

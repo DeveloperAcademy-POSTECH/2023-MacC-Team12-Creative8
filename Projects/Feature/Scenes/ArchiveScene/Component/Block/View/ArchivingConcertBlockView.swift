@@ -65,18 +65,28 @@ public extension View {
   }
 
   func extractYearsAndCountsFromConcerts(_ concerts: [ArchivedConcertInfo]) -> [(Int, Int)] {
-    let calendar = Calendar.current
-    let orderedSet = NSOrderedSet(array: concerts.map { calendar.component(.year, from: $0.concertDate) })
-    var yearsToCount: [Int] = []
-    if let yearArray = orderedSet.array as? [Int] {
-      yearsToCount = yearArray.sorted(by: >)
-    } else { return [] }
-      var yearCounts: [(Int, Int)] = []
-      for yearToCount in yearsToCount {
-          let concertCount = concerts.filter { calendar.component(.year, from: $0.concertDate) == yearToCount }.count
-          yearCounts.append((yearToCount, concertCount))
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+
+    var yearToCountDictionary: [Int: Int] = [:]
+    for concert in concerts {
+      let dateString = concert.setlist.date
+      if let date = dateFormatter.date(from: dateString) {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+
+        if let count = yearToCountDictionary[year] {
+          yearToCountDictionary[year] = count + 1
+        } else {
+          yearToCountDictionary[year] = 1
+        }
       }
-      return yearCounts
+    }
+
+    let sortedYearCounts = yearToCountDictionary.sorted { $0.key > $1.key }
+    let yearCounts = sortedYearCounts.map { (year: $0.key, count: $0.value) }
+
+    return yearCounts
   }
 
   func cellWidthSize(_ itemCount: Int, _ maxminCnt: (Int, Int), _ geoSize: CGFloat) -> CGFloat {

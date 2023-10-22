@@ -17,8 +17,8 @@ struct BlockAllConcertView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
   var body: some View {
     VStack {
-      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.concertDate) == selecteYear }) { info in
-          Text("\(info.concertTitle)")
+      ForEach(concertInfo.filter { dateConverterStringToYear($0.setlist.date) == selecteYear }) { info in
+        Text("\(info.setlist.title)")
       }
     }
     .toolbar {
@@ -44,4 +44,17 @@ struct BlockAllConcertView: View {
       loadInfo(concertInfo: .constant(newValue), concertCellInfo: $concertCellInfo, maxminCnt: $maxminCnt)
     })
   }
+}
+
+extension View {
+    func dateConverterStringToYear(_ date: String) -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년MM월dd일" // 문자열의 형식에 맞게 설정
+        if let convertedDate = dateFormatter.date(from: date) {
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: convertedDate)
+            return year
+        }
+        return nil // 유효한 날짜로 변환할 수 없는 경우
+    }
 }

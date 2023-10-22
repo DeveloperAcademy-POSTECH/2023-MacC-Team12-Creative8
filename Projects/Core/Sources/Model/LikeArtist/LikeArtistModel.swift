@@ -9,11 +9,12 @@
 import Foundation
 import SwiftData
 
+
 @Model
 public final class LikeArtist {
-  public var artistInfo: [SaveArtistInfo]
+  @Relationship public var artistInfo: SaveArtistInfo
 
-  init(artistInfo: [SaveArtistInfo]) {
+  init(artistInfo: SaveArtistInfo) {
     self.artistInfo = artistInfo
   }
 }

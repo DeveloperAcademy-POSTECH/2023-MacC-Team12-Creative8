@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftData  
+import SwiftData
 
 @Model
 public class SaveArtistInfo: Identifiable {
@@ -16,8 +16,8 @@ public class SaveArtistInfo: Identifiable {
   public var mbid: String
   public var gid: Int
   public var imageUrl: String
-  public var songList: [Titles]
-  @Attribute(.unique) public var id: UUID
+  @Relationship public var songList: [Titles]
+  public var id: UUID
 
   init(name: String, alias: String, mbid: String, gid: Int, imageUrl: String, songList: [Titles]) {
     self.name = name
