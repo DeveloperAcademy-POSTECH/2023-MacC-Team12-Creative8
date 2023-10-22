@@ -9,7 +9,7 @@
 import Foundation
 
 public final class KoreanConverter {
-  static let shared = KoreanConverter()
+  public static let shared = KoreanConverter()
   
   public func findKoreanName(artist: MusicBrainzArtist) -> (String, String?) {
     var primaryAlias: String?

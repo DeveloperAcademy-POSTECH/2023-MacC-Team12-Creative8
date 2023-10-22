@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ArtistInfo {
-    var gid: Int?
-    var imageUrl: String?
-    var songList: [(String, String?)]?
+  public var gid: Int?
+  public var imageUrl: String?
+  public var songList: [(String, String?)]?
 }
