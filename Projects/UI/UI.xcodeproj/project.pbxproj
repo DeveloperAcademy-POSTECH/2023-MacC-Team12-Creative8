@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
 		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
+		2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */; };
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
 		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
@@ -51,6 +52,7 @@
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
 		289741E57FAAE603ED95F014 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
 		371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveExtension.swift; sourceTree = "<group>"; };
 		676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */,
 				676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */,
 				B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */,
 				289741E57FAAE603ED95F014 /* ImageCropExtension.swift */,
@@ -196,6 +199,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -267,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */,
 				1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */,
 				95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */,
 				F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */,
@@ -290,7 +296,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -407,7 +412,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

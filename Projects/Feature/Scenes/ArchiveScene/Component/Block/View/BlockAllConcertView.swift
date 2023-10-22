@@ -45,16 +45,3 @@ struct BlockAllConcertView: View {
     })
   }
 }
-
-extension View {
-    func dateConverterStringToYear(_ date: String) -> Int? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년MM월dd일" // 문자열의 형식에 맞게 설정
-        if let convertedDate = dateFormatter.date(from: date) {
-            let calendar = Calendar.current
-            let year = calendar.component(.year, from: convertedDate)
-            return year
-        }
-        return nil // 유효한 날짜로 변환할 수 없는 경우
-    }
-}

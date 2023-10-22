@@ -13,16 +13,13 @@ import Core
 struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
   @Query var concertInfo: [ArchivedConcertInfo]
-
   @ObservedObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
 
   var body: some View {
     VStack(alignment: .leading) {
-      Button("Test") {
-//        dataManager.addArchivedConcertInfo(SaveArtistInfo, <#SaveSetlist#>)
-        dataManager.addLikeArtist(name: "Dummy", country: "Korea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: [])
-      }
+      Button("Test\(concertInfo.count)") { testAddConcertCode() }
+      Button("DeleteALL") { testDeleteConcertAllData() }
       archivingArtistView
       blockView
     }
@@ -118,4 +115,21 @@ struct ArchivingView: View {
   ArchivingView()
     .modelContainer(for: LikeArtist.self, inMemory: false)
     .modelContainer(for: ArchivedConcertInfo.self, inMemory: false)
+}
+
+// MARK: - TestCode 적발시 삭제 요망
+extension ArchivingView {
+  func testAddConcertCode() {
+    let random = Int.random(in: 10...23)
+    dataManager.addArchivedConcertInfo(SaveArtistInfo(name: "Sibal", country: "NorthKorea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: []),
+                                       SaveSetlist(setlistId: "123", date: "20-10-20\(random)", venue: "Seoul", title: "DummyTitle"))
+  }
+
+  func testDeleteConcertAllData() {
+    do {
+      try modelContext.delete(model: ArchivedConcertInfo.self)
+    } catch {
+      print("Failed to delete students.")
+    }
+  }
 }

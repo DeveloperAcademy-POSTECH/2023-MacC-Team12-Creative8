@@ -25,8 +25,8 @@ struct ArchivingConcertBlockView: View {
             } label: {
               ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
                               concertCnt: viewModel.concertCellInfo[index].1)
-                .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
-                                            viewModel.maxminCnt, geo.size.width), height: 131)
+              .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
+                                          viewModel.maxminCnt, geo.size.width), height: 131)
             }
             .simultaneousGesture(TapGesture().onEnded {
               viewModel.selecteYear = viewModel.concertCellInfo[index].0
@@ -35,6 +35,7 @@ struct ArchivingConcertBlockView: View {
           }
         }
       }
+      .scrollIndicators(.hidden)
     }
     .onAppear {
       loadInfo(concertInfo: .constant(concertInfo),
@@ -53,8 +54,6 @@ struct ArchivingConcertBlockView: View {
   ArchivingConcertBlockView()
 }
 
-// Core는 import가 안되고,,, UI에 넣자니ArchivedConcertInfo 얘를 Feature에서 찾아야 하는데, UI에서 Feature가 import되지 않는군요.
-// 나중에 Core에 Model을 넣고, 이걸 UI Extension으로 옮길 예정입니다.
 public extension View {
   func loadInfo(concertInfo: Binding<[ArchivedConcertInfo]>,
                 concertCellInfo: Binding<[(Int, Int)]>,
@@ -66,8 +65,7 @@ public extension View {
 
   func extractYearsAndCountsFromConcerts(_ concerts: [ArchivedConcertInfo]) -> [(Int, Int)] {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-
+    dateFormatter.dateFormat = "dd-mm-yyyy"
     var yearToCountDictionary: [Int: Int] = [:]
     for concert in concerts {
       let dateString = concert.setlist.date
@@ -99,5 +97,16 @@ public extension View {
       let result = halfGeoSize + (halfGeoSize * itemCountFraction)
       return result
     }
+  }
+
+  func dateConverterStringToYear(_ date: String) -> Int? {
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "dd-mm-yyyy"
+      if let convertedDate = dateFormatter.date(from: date) {
+          let calendar = Calendar.current
+          let year = calendar.component(.year, from: convertedDate)
+          return year
+      }
+      return nil
   }
 }

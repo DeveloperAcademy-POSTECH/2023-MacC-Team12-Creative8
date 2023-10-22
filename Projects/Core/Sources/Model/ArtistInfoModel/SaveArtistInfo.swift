@@ -18,7 +18,7 @@ public struct SaveArtistInfo: Codable {
   public var imageUrl: String
   public var songList: [Titles]
 
-  init(name: String, country: String, alias: String, mbid: String, gid: Int, imageUrl: String, songList: [Titles]) {
+  public init(name: String, country: String, alias: String, mbid: String, gid: Int, imageUrl: String, songList: [Titles]) {
     self.name = name
     self.country = country
     self.alias = alias
@@ -33,7 +33,7 @@ public struct Titles: Codable {
   public var title: String
   public var subTitle: String
 
-  init(title: String, subTitle: String) {
+  public init(title: String, subTitle: String) {
     self.title = title
     self.subTitle = subTitle
   }
