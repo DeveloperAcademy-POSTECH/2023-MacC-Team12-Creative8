@@ -104,6 +104,18 @@ struct TermsView: View {
   }
 }
 
+struct SectionBackgroundView: View {
+  
+  var height: CGFloat
+  
+  var body: some View {
+    RoundedRectangle(cornerRadius: 12)
+      .fill(.white)
+      .frame(height: height)
+  }
+}
+
+
 #Preview {
   ServiceExplainView()
 }
