@@ -125,72 +125,7 @@ public struct MainView: View {
         VStack(spacing: 0) {
             artistNameScrollView
                 .padding(.bottom)
-            ScrollView(.horizontal) {
-                HStack(spacing: 18) {
-                    ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
-                        VStack(spacing: 0) {
-                            Button {
-                                // TODO: 내비 연결
-                            } label: {
-                                Image(viewModel.sampleData[data].image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-                                    .overlay {
-                                        ZStack {
-                                            Color.black
-                                                .opacity(0.2)
-                                            VStack {
-                                                Spacer()
-                                                HStack {
-                                                    Spacer()
-                                                    Circle()
-                                                        .frame(width: screenWidth * 0.15)
-                                                        .foregroundStyle(.black)
-                                                        .overlay {
-                                                            Image(systemName: "arrow.right")
-                                                                .foregroundStyle(.white)
-                                                        }
-                                                }
-                                            }
-                                            .padding([.trailing, .bottom])
-                                        }
-                                    }
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                            }
-                            ForEach(0 ..< viewModel.sampleData[data].concertInfo.count, id: \.self) { item in
-                                VStack(spacing: 0) {
-                                    HStack(spacing: 0) {
-                                        VStack(alignment: .center) {
-                                            Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.yearFormatter)")
-                                                .foregroundStyle(.gray)
-                                            Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.dateMonthFormatter)")
-                                        }
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        Spacer()
-                                            .frame(width: screenWidth * 0.11)
-                                        VStack(alignment: .leading, spacing: 0) {
-                                            Text(viewModel.sampleData[data].concertInfo[item].tourName)
-                                                .bold()
-                                                .padding(.bottom, 2)
-                                            Text(viewModel.sampleData[data].concertInfo[item].venue)
-                                        }
-                                        .font(.system(size: 14))
-                                        Spacer()
-                                    }
-                                    .padding(.vertical)
-                                    Divider()
-                                }
-                                .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                                .animation(.easeInOut(duration: 0.1))
-                            }
-                        }
-                    }
-                }
-                .scrollTargetLayout()
-                
-            }
+            artistContentView
             .scrollTargetBehavior(.viewAligned)
             .scrollIndicators(.hidden)
             .scrollPosition(id: $viewModel.scrollToIndex)
@@ -241,6 +176,74 @@ public struct MainView: View {
         .frame(maxHeight: 60)
         .scrollIndicators(.hidden)
         .safeAreaPadding(.leading, screenWidth * 0.12)
+    }
+    public var artistContentView: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 18) {
+                ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
+                    VStack(spacing: 0) {
+                        Button {
+                            // TODO: 내비 연결
+                        } label: {
+                            Image(viewModel.sampleData[data].image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                                .overlay {
+                                    ZStack {
+                                        Color.black
+                                            .opacity(0.2)
+                                        VStack {
+                                            Spacer()
+                                            HStack {
+                                                Spacer()
+                                                Circle()
+                                                    .frame(width: screenWidth * 0.15)
+                                                    .foregroundStyle(.black)
+                                                    .overlay {
+                                                        Image(systemName: "arrow.right")
+                                                            .foregroundStyle(.white)
+                                                    }
+                                            }
+                                        }
+                                        .padding([.trailing, .bottom])
+                                    }
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                        }
+                        ForEach(0 ..< viewModel.sampleData[data].concertInfo.count, id: \.self) { item in
+                            VStack(spacing: 0) {
+                                HStack(spacing: 0) {
+                                    VStack(alignment: .center) {
+                                        Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.yearFormatter)")
+                                            .foregroundStyle(.gray)
+                                        Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.dateMonthFormatter)")
+                                    }
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    Spacer()
+                                        .frame(width: screenWidth * 0.11)
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(viewModel.sampleData[data].concertInfo[item].tourName)
+                                            .bold()
+                                            .padding(.bottom, 2)
+                                        Text(viewModel.sampleData[data].concertInfo[item].venue)
+                                    }
+                                    .font(.system(size: 14))
+                                    Spacer()
+                                }
+                                .padding(.vertical)
+                                Divider()
+                            }
+                            .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                            .animation(.easeInOut(duration: 0.1))
+                        }
+                    }
+                }
+            }
+            .scrollTargetLayout()
+            
+        }
     }
 }
 struct EmptyMainView: View {
