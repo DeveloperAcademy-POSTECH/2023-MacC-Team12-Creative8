@@ -109,4 +109,5 @@ struct ArchivingView: View {
 #Preview {
   ArchivingView()
     .modelContainer(for: LikeArtist.self, inMemory: false)
+    .modelContainer(for: ArchivedConcertInfo.self, inMemory: false)
 }

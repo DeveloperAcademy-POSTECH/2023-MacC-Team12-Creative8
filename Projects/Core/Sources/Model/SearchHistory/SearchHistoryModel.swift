@@ -11,11 +11,9 @@ import SwiftData
 
 @Model
 public final class SearchHistory {
-  public var searchText: String
-  public var searchDate: Date
-  
-  init(searchText: String, searchDate: Date) {
-    self.searchText = searchText
-    self.searchDate = searchDate
+  public var artistInfo: [SaveArtistInfo]
+
+  init(artistInfo: [SaveArtistInfo]) {
+    self.artistInfo = artistInfo
   }
 }
