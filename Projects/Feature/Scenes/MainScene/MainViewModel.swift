@@ -47,4 +47,8 @@ class MainViewModel: ObservableObject {
         ])
     ]
 }
-
+enum ButtonType {
+    case dark
+    case light
+    case system
+}

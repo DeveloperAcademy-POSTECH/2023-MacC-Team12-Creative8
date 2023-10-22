@@ -34,6 +34,7 @@ public struct MainView: View {
                                 .overlay {
                                     if viewModel.isTapped {
                                         darkmodeButtons
+                                        
                                     }
                                 }
                                 
@@ -72,48 +73,9 @@ public struct MainView: View {
     }
     public var darkmodeButtons: some View {
         HStack {
-            Button {
-                viewModel.isTapped.toggle()
-            } label: {
-                VStack {
-                    Image(systemName: "circle.lefthalf.filled")
-                        .padding(8)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                    Text("시스템")
-                        .font(.system(size: 10))
-                    
-                }
-                .foregroundStyle(.black)
-            }
-            Button {
-                viewModel.isTapped.toggle()
-            } label: {
-                VStack {
-                    Image(systemName: "moon")
-                        .padding(8)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                    Text("라이트")
-                        .foregroundStyle(.black)
-                        .font(.system(size: 10))
-                }
-                .foregroundStyle(.black)
-            }
-            Button {
-                viewModel.isTapped.toggle()
-            } label: {
-                VStack {
-                    Image(systemName: "moon.fill")
-                        .padding(8)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                    Text("다크")
-                        .foregroundStyle(.black)
-                        .font(.system(size: 10))
-                }
-                .foregroundStyle(.black)
-            }
+            TopButtonView(buttonType: .system, viewModel: viewModel)
+            TopButtonView(buttonType: .light, viewModel: viewModel)
+            TopButtonView(buttonType: .dark, viewModel: viewModel)
         }
         .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
         .background(Color.gray)
@@ -270,6 +232,48 @@ struct EmptyMainView: View {
             }
             .padding(.vertical)
             Spacer()
+        }
+    }
+}
+struct TopButtonView: View {
+    var buttonType: ButtonType
+    var viewModel: MainViewModel
+
+    var icon: String {
+        switch buttonType {
+        case .system:
+            return "circle.lefthalf.filled"
+        case .light:
+            return "moon"
+        case .dark:
+            return "moon.fill"
+        }
+    }
+
+    var label: String {
+        switch buttonType {
+        case .system:
+            return "시스템"
+        case .light:
+            return "라이트"
+        case .dark:
+            return "다크"
+        }
+    }
+
+    var body: some View {
+        Button {
+            viewModel.isTapped.toggle()
+        } label: {
+            VStack {
+                Image(systemName: icon)
+                    .padding(8)
+                    .background(Color.white)
+                    .clipShape(Circle())
+                Text(label)
+                    .font(.system(size: 10))
+            }
+            .foregroundColor(.black)
         }
     }
 }
