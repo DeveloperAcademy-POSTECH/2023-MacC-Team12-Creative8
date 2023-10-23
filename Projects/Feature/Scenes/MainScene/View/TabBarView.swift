@@ -37,7 +37,7 @@ public struct TabBarView: View {
       
       ArchivingView()
         .tabItem {
-          Label("검색", systemImage: "heart.fill")
+          Label("아카이빙", systemImage: "heart.fill")
         }
         .tag(Tab.archiving)
       
