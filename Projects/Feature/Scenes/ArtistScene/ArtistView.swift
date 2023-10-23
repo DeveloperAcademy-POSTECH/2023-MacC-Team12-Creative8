@@ -87,7 +87,7 @@ private struct ArtistImageView: View {
     Text(vm.artistInfo?.name ?? "")
       .font(.system(size: 36))
       .fontWeight(.semibold)
-      .foregroundStyle(Color.white)
+      .foregroundStyle(Color.fontWhite)
   }
   
   private var buttonLayer: some View {
@@ -96,10 +96,10 @@ private struct ArtistImageView: View {
     }, label: {
       Circle()
         .frame(width: screenWidth * 0.1)
-        .foregroundStyle(Color(hex: 16777215, opacity: 0.4))
+        .foregroundStyle(Color.mainWhite1)
         .overlay(
           Image(systemName: "heart.fill")
-            .foregroundStyle(Color.white)
+            .foregroundStyle(Color.mainWhite)
         )
     })
   }
@@ -117,7 +117,7 @@ private struct BookmarkedView: View {
       if vm.showBookmarkedSetlists {
         ZStack {
           RoundedRectangle(cornerRadius: 15)
-            .foregroundStyle(Color(hex: 15592941, opacity: 0.5))
+            .foregroundStyle(Color.mainGrey1)
           
           if vm.bookmarkedSetlists == nil {
             emptyLayer
@@ -144,6 +144,7 @@ private struct BookmarkedView: View {
       } label: {
         Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
       }
+      .foregroundStyle(Color.fontBlack)
     }
   }
   
@@ -153,11 +154,13 @@ private struct BookmarkedView: View {
         .font(.system(size: 16))
         .fontWeight(.semibold)
         .padding(.bottom)
+        .foregroundStyle(Color.fontBlack)
       Group {
         Text("다시 듣기할 공연을 눌러 표시해주세요.")
         Text("아카이빙에서도 볼 수 있어요.")
       }
       .font(.system(size: 13))
+      .foregroundStyle(Color.fontGrey2)
     }
   }
   
@@ -189,9 +192,11 @@ private struct BookmarkedView: View {
             
             Spacer()
           }
+          .foregroundStyle(Color.fontBlack)
         }
 
         Divider()
+          .foregroundStyle(Color.fontGrey3)
           .padding(.horizontal)
 
       }
@@ -205,6 +210,7 @@ private struct BookmarkedView: View {
           Image(systemName: "arrow.right")
         }
         .font(.system(size: 14))
+        .foregroundStyle(Color.fontBlack)
       }
       
       Spacer()
@@ -232,6 +238,7 @@ private struct ListView: View {
       Text("전체 공연 보기")
         .font(.system(size: 20))
         .fontWeight(.bold)
+        .foregroundStyle(Color.fontBlack)
       Spacer()
     }
   }
@@ -262,9 +269,11 @@ private struct ListView: View {
           
           Spacer()
         }
+        .foregroundStyle(Color.fontBlack)
       }
 
       Divider()
+        .foregroundColor(Color.lineGrey1)
         .padding(.horizontal)
 
     }
@@ -281,11 +290,13 @@ private struct ListView: View {
           Text("더보기")
             .font(.system(size: 14))
             .fontWeight(.bold)
+            .foregroundStyle(Color.fontBlack)
             .padding()
         }
       }
       
       Divider()
+        .foregroundStyle(Color.lineGrey1)
         .padding(.horizontal)
     }
   }
