@@ -17,7 +17,7 @@ struct BlockAllConcertView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
   var body: some View {
     VStack {
-      ForEach(concertInfo.filter { dateConverterStringToYear($0.setlist.date) == selecteYear }) { info in
+      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.setlist.date) == selecteYear }) { info in
         Text("\(info.setlist.title)")
       }
     }

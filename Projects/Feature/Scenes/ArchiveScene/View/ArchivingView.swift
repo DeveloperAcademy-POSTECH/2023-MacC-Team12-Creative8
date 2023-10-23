@@ -18,11 +18,14 @@ struct ArchivingView: View {
   @Environment(\.modelContext) var modelContext
 
   var body: some View {
-    VStack(alignment: .leading) {
-      Button("Test") { testAddConcertCode() }
-      archivingArtistView
-      viewSelect
+    ScrollView {
+      VStack(alignment: .leading) {
+        Button("Test") { testAddConcertCode() }
+        archivingArtistView
+        viewSelect
+      }
     }
+    .scrollIndicators(.hidden)
     .padding()
     .edgesIgnoringSafeArea(.bottom)
     .toolbar {
@@ -150,7 +153,7 @@ extension ArchivingView {
   func testAddConcertCode() {
     let random = Int.random(in: 10...23)
     dataManager.addArchivedConcertInfo(SaveArtistInfo(name: "Sibal", country: "NorthKorea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: []),
-                                       SaveSetlist(setlistId: "123", date: "20-10-20\(random)", venue: "Seoul", title: "DummyTitle"))
+                                       SaveSetlist(setlistId: "123", date: Date(), venue: "Seoul", title: "DummyTitle"))
   }
 
   func testDeleteConcertAllData() {

@@ -15,7 +15,6 @@ struct ArchivingConcertBlockView: View {
   @StateObject var viewModel = ArchiveBlcokViewModel()
   var body: some View {
     GeometryReader { geo in
-      ScrollView {
         VStack(alignment: .leading, spacing: 0) {
           ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
             NavigationLink {
@@ -34,7 +33,6 @@ struct ArchivingConcertBlockView: View {
             
           }
         }
-      }
     }
     .onAppear {
       loadInfo(concertInfo: .constant(concertInfo),
@@ -63,27 +61,22 @@ public extension View {
   }
 
   func extractYearsAndCountsFromConcerts(_ concerts: [ArchivedConcertInfo]) -> [(Int, Int)] {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd-mm-yyyy"
-    var yearToCountDictionary: [Int: Int] = [:]
-    for concert in concerts {
-      let dateString = concert.setlist.date
-      if let date = dateFormatter.date(from: dateString) {
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
+      var yearToCountDictionary: [Int: Int] = [:]
+      for concert in concerts {
+          let date = concert.setlist.date
+          let calendar = Calendar.current
+          let year = calendar.component(.year, from: date)
 
-        if let count = yearToCountDictionary[year] {
-          yearToCountDictionary[year] = count + 1
-        } else {
-          yearToCountDictionary[year] = 1
-        }
+          if let count = yearToCountDictionary[year] {
+              yearToCountDictionary[year] = count + 1
+          } else {
+              yearToCountDictionary[year] = 1
+          }
       }
-    }
+      let sortedYearCounts = yearToCountDictionary.sorted { $0.key > $1.key }
+      let yearCounts = sortedYearCounts.map { (year: $0.key, count: $0.value) }
 
-    let sortedYearCounts = yearToCountDictionary.sorted { $0.key > $1.key }
-    let yearCounts = sortedYearCounts.map { (year: $0.key, count: $0.value) }
-
-    return yearCounts
+      return yearCounts
   }
 
   func cellWidthSize(_ itemCount: Int, _ maxminCnt: (Int, Int), _ geoSize: CGFloat) -> CGFloat {
