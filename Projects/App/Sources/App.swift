@@ -14,7 +14,7 @@ import Core
 struct SetlistApp: App {
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
-        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self
+        ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
       ])
       let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,9 +28,15 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
+<<<<<<< HEAD
+        MainView()
+//          .modelContainer(for: [ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self])
+=======
         TabBarView()
+>>>>>>> develop
       }
     }
     .modelContainer(sharedModelContainer)
+
   }
 }

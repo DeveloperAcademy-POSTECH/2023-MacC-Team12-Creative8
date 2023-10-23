@@ -12,29 +12,27 @@ import Core
 
 struct ArchivingConcertBlockView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
-  @StateObject var viewModel = ArchiveBlcokViewModel()
+  @StateObject var viewModel = ArchiveViewModel()
   var body: some View {
-    GeometryReader { geo in
-      ScrollView {
-        VStack(alignment: .leading, spacing: 0) {
-          ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
-            NavigationLink {
-              BlockAllConcertView(selecteYear: $viewModel.selecteYear,
-                                  concertCellInfo: $viewModel.concertCellInfo,
-                                  maxminCnt: $viewModel.maxminCnt)
-            } label: {
-              ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
-                              concertCnt: viewModel.concertCellInfo[index].1)
-                .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
-                                            viewModel.maxminCnt, geo.size.width), height: 131)
-            }
-            .simultaneousGesture(TapGesture().onEnded {
-              viewModel.selecteYear = viewModel.concertCellInfo[index].0
-            })
-
+    VStack(alignment: .leading, spacing: 121) {
+      ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
+        GeometryReader { geo in
+        NavigationLink {
+          BlockAllConcertView(selecteYear: $viewModel.selecteYear,
+                              concertCellInfo: $viewModel.concertCellInfo,
+                              maxminCnt: $viewModel.maxminCnt)
+        } label: {
+            ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
+                            concertCnt: viewModel.concertCellInfo[index].1)
+            .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
+                                        viewModel.maxminCnt, geo.size.width), height: 131)
           }
         }
+        .simultaneousGesture(TapGesture().onEnded {
+          viewModel.selecteYear = viewModel.concertCellInfo[index].0
+        })
       }
+      Spacer()
     }
     .onAppear {
       loadInfo(concertInfo: .constant(concertInfo),
@@ -53,8 +51,6 @@ struct ArchivingConcertBlockView: View {
   ArchivingConcertBlockView()
 }
 
-// Core는 import가 안되고,,, UI에 넣자니ArchivedConcertInfo 얘를 Feature에서 찾아야 하는데, UI에서 Feature가 import되지 않는군요.
-// 나중에 Core에 Model을 넣고, 이걸 UI Extension으로 옮길 예정입니다.
 public extension View {
   func loadInfo(concertInfo: Binding<[ArchivedConcertInfo]>,
                 concertCellInfo: Binding<[(Int, Int)]>,
@@ -65,17 +61,21 @@ public extension View {
   }
 
   func extractYearsAndCountsFromConcerts(_ concerts: [ArchivedConcertInfo]) -> [(Int, Int)] {
-    let calendar = Calendar.current
-    let orderedSet = NSOrderedSet(array: concerts.map { calendar.component(.year, from: $0.concertDate) })
-    var yearsToCount: [Int] = []
-    if let yearArray = orderedSet.array as? [Int] {
-      yearsToCount = yearArray.sorted(by: >)
-    } else { return [] }
-      var yearCounts: [(Int, Int)] = []
-      for yearToCount in yearsToCount {
-          let concertCount = concerts.filter { calendar.component(.year, from: $0.concertDate) == yearToCount }.count
-          yearCounts.append((yearToCount, concertCount))
+      var yearToCountDictionary: [Int: Int] = [:]
+      for concert in concerts {
+          let date = concert.setlist.date
+          let calendar = Calendar.current
+          let year = calendar.component(.year, from: date)
+
+          if let count = yearToCountDictionary[year] {
+              yearToCountDictionary[year] = count + 1
+          } else {
+              yearToCountDictionary[year] = 1
+          }
       }
+      let sortedYearCounts = yearToCountDictionary.sorted { $0.key > $1.key }
+      let yearCounts = sortedYearCounts.map { (year: $0.key, count: $0.value) }
+
       return yearCounts
   }
 
@@ -89,5 +89,16 @@ public extension View {
       let result = halfGeoSize + (halfGeoSize * itemCountFraction)
       return result
     }
+  }
+
+  func dateConverterStringToYear(_ date: String) -> Int? {
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "dd-mm-yyyy"
+      if let convertedDate = dateFormatter.date(from: date) {
+          let calendar = Calendar.current
+          let year = calendar.component(.year, from: convertedDate)
+          return year
+      }
+      return nil
   }
 }

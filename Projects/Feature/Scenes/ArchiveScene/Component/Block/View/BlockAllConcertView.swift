@@ -15,10 +15,12 @@ struct BlockAllConcertView: View {
   @Binding var concertCellInfo: [(Int, Int)]
   @Binding var maxminCnt: (Int, Int)
   @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var viewModel = ArchiveViewModel()
   var body: some View {
-    VStack {
-      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.concertDate) == selecteYear }) { info in
-          Text("\(info.concertTitle)")
+    ScrollView {
+      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.setlist.date) == selecteYear }) { info in
+        ArtistSetlistCell(info: info, isDetail: true)
+        Divider()
       }
     }
     .toolbar {
