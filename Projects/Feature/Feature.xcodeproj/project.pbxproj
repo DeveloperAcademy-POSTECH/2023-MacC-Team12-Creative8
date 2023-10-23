@@ -45,7 +45,6 @@
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
-		C63BCCFA6C11DDF2896B7633 /* SetlistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E9BFC0AE8D9842ED5AFC9 /* SetlistModel.swift */; };
 		CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766B8B4DF5C405ABA13CEBB /* SearchbarCustom.swift */; };
 		CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */; };
 		D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */; };
@@ -99,10 +98,13 @@
 		3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 		70A57548501213657DD59132 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		77AAF7AD19E849ABAB1668D7 /* ServiceExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceExplainView.swift; sourceTree = "<group>"; };
 =======
 		5B7E9BFC0AE8D9842ED5AFC9 /* SetlistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistModel.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> c7c54222505db54ade2f7e4615013a6e6616d3b8
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
 		63FF76D13D3DC0AE954F175F /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		811EED38EE073FA6E9252D7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -219,7 +221,6 @@
 			children = (
 				0DC793669A8FFC3F4C7741FB /* View */,
 				ED41C20DDFE82AF1DA140D73 /* ViewModel */,
-				5B7E9BFC0AE8D9842ED5AFC9 /* SetlistModel.swift */,
 			);
 			path = SetlistScene;
 			sourceTree = "<group>";
@@ -553,12 +554,15 @@
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				0738E6E5BD14086D15D0A542 /* AskView.swift in Sources */,
 				D715C305B8E85E1CE0E5853C /* ServiceExplainView.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
 				8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */,
 =======
 				C63BCCFA6C11DDF2896B7633 /* SetlistModel.swift in Sources */,
+=======
+>>>>>>> c7c54222505db54ade2f7e4615013a6e6616d3b8
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,
 				D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */,

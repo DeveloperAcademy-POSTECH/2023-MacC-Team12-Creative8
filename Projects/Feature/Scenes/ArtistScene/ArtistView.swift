@@ -29,7 +29,7 @@ struct ArtistView: View {
         ScrollView {
           ArtistImageView(vm: vm)
           BookmarkedView(vm: vm)
-          SetlistView(vm: vm)
+          ListView(vm: vm)
         }
       }
     }
@@ -227,7 +227,7 @@ private struct BookmarkedView: View {
   
 }
 
-private struct SetlistView: View {
+private struct ListView: View {
   @ObservedObject var vm: ArtistViewModel
   
   var body: some View {
