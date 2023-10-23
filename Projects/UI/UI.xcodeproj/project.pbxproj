@@ -3,12 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
+=======
+		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
+		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
+		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
+>>>>>>> dfa96974a2665c4f0e7f4a9e2f75234b0e8d9273
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
+		EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E35A63B91A07E2482B3B278 /* ColorExtension.swift */; };
+		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +54,11 @@
 
 /* Begin PBXFileReference section */
 		14B2639FB34BAB7A317AA102 /* UI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UI-Info.plist"; sourceTree = "<group>"; };
+		289741E57FAAE603ED95F014 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
+		371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
+		676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E35A63B91A07E2482B3B278 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA107D337866699F71AD9912 /* UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UITests-Info.plist"; sourceTree = "<group>"; };
@@ -107,7 +119,11 @@
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */,
+				9E35A63B91A07E2482B3B278 /* ColorExtension.swift */,
 				B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */,
+				289741E57FAAE603ED95F014 /* ImageCropExtension.swift */,
+				371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,7 +201,6 @@
 		5E1CDE9B685737937831E727 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
@@ -244,7 +259,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> dfa96974a2665c4f0e7f4a9e2f75234b0e8d9273
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -260,7 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */,
+				EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */,
 				95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */,
+				F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */,
+				001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

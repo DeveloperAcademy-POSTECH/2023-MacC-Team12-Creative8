@@ -16,7 +16,6 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
   public init() {
   }
   
-  
   // 플레이리스트 추가 및 음악 목록 추가
   public func addPlayList(name: String, musicList: [String]) {
     Task {
@@ -49,7 +48,7 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
     return response
   }
   
-  public func requestMusicAuthorization()  {
+  public func requestMusicAuthorization() {
     SKCloudServiceController.requestAuthorization { [weak self] status in
       switch status {
       case .authorized:
@@ -76,7 +75,7 @@ public final class CheckAppleMusicSubscription: ObservableObject {
   }
   
   public func appleMusicSubscription() {
-    SKCloudServiceController().requestCapabilities { (capability:SKCloudServiceCapability, err:Error?) in
+    SKCloudServiceController().requestCapabilities { (capability: SKCloudServiceCapability, err: Error?) in
       // 에러 발생시
       guard err == nil else { return }
       // 사용자가 애플 뮤직을 구독 중이라면

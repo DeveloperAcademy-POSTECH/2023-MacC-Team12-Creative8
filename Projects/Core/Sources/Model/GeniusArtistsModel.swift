@@ -9,28 +9,28 @@
 import Foundation
 
 // MARK: - GeniusArtistsModel
-struct GeniusArtistsModel: Codable {
-  let response: ArtistsResponse?
+public struct GeniusArtistsModel: Codable {
+  public let response: ArtistsResponse?
 }
 
 // MARK: - Response
-struct ArtistsResponse: Codable {
-  let hits: [Hit]?
+public struct ArtistsResponse: Codable {
+  public let hits: [Hit]?
 }
 
 // MARK: - Hit
-struct Hit: Codable {
-  let result: Result?
+public struct Hit: Codable {
+  public let result: Result?
 }
 
 // MARK: - Result
-struct Result: Codable {
-  let artistNames: String?
-  let headerImageThumbnailURL: String?
-  let headerImageURL: String?
-  let songArtImageThumbnailURL: String?
-  let songArtImageURL: String?
-  let primaryArtist: PrimaryArtist?
+public struct Result: Codable {
+  public let artistNames: String?
+  public let headerImageThumbnailURL: String?
+  public let headerImageURL: String?
+  public let songArtImageThumbnailURL: String?
+  public let songArtImageURL: String?
+  public let primaryArtist: PrimaryArtist?
   
   enum CodingKeys: String, CodingKey {
     case artistNames = "artist_names"
@@ -43,11 +43,11 @@ struct Result: Codable {
 }
 
 // MARK: - PrimaryArtist
-struct PrimaryArtist: Codable {
-  let headerImageURL: String?
-  let id: Int?
-  let imageURL: String?
-  let name: String?
+public struct PrimaryArtist: Codable {
+  public let headerImageURL: String?
+  public let id: Int?
+  public let imageURL: String?
+  public let name: String?
   
   enum CodingKeys: String, CodingKey {
     case headerImageURL = "header_image_url"

@@ -19,82 +19,82 @@ public struct SetlistListModel: Codable {
 
 // MARK: - Setlist
 public struct Setlist: Codable {
-  let id: String?
-  let versionId: String?
-  let eventDate: String?
-  let lastUpdated: String?
-  let artist: Artist?
-  let venue: Venue?
-  let sets: Sets?
-  let url: String?
-  let info: String?
-  let tour: Tour?
+  public let id: String?
+  public let versionId: String?
+  public let eventDate: String?
+  public let lastUpdated: String?
+  public let artist: Artist?
+  public let venue: Venue?
+  public let sets: Sets?
+  public let url: String?
+  public let info: String?
+  public let tour: Tour?
 }
 
 // MARK: - Artist
-struct Artist: Codable {
-  let mbid: String?
-  let name: String?
-  let sortName: String?
-  let disambiguation: String?
-  let url: String?
+public struct Artist: Codable {
+  public let mbid: String?
+  public let name: String?
+  public let sortName: String?
+  public let disambiguation: String?
+  public let url: String?
 }
 
 // MARK: - Sets
-struct Sets: Codable {
-  let setsSet: [Set]?
+public struct Sets: Codable {
+  public let setsSet: [Session]?
   
   enum CodingKeys: String, CodingKey {
     case setsSet = "set"
   }
 }
 
-// MARK: - Set
-struct Set: Codable {
-  let song: [Song]?
-  let encore: Int?
-  let name: String?
+// MARK: - Session
+public struct Session: Codable {
+  public let song: [Song]?
+  public let encore: Int?
+  public let name: String?
 }
 
 // MARK: - Song
-struct Song: Codable {
-  let name: String?
-  let info: String?
-  let cover: Artist?
-  let tape: Bool?
+public struct Song: Codable {
+  public let name: String?
+  public let info: String?
+  public let cover: Artist?
+  public let tape: Bool?
 }
 
 // MARK: - Tour
-struct Tour: Codable {
-  let name: String?
+public struct Tour: Codable {
+  public let name: String?
 }
 
 // MARK: - Venue
-struct Venue: Codable {
-  let id: String?
-  let name: String?
-  let city: City?
-  let url: String?
+public struct Venue: Codable {
+  public let id: String?
+  public let name: String?
+  public let city: City?
+  public let url: String?
 }
 
 // MARK: - City
-struct City: Codable {
-  let id: String?
-  let name: String?
-  let state: String?
-  let stateCode: String?
-  let coords: Coords?
-  let country: Country?
+public struct City: Codable {
+  public let id: String?
+  public let name: String?
+  public let state: String?
+  public let stateCode: String?
+  public let coords: Coords?
+  public let country: Country?
 }
 
 // MARK: - Coords
-struct Coords: Codable {
-  let lat: Double?
-  let long: Double?
+public struct Coords: Codable {
+  public let lat: Double?
+  public let long: Double?
 }
 
 // MARK: - Country
-struct Country: Codable {
-  let code: String?
-  let name: String?
+public struct Country: Codable {
+  public let code: String?
+  public let name: String?
 }
