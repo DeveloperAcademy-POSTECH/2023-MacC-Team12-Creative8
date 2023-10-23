@@ -12,6 +12,8 @@ import Core
 
 struct SeeAllArtist: View {
   @Query var likeArtist: [LikeArtist]
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
   var body: some View {
     ScrollView {
       ForEach(likeArtist) { item in
@@ -20,15 +22,19 @@ struct SeeAllArtist: View {
           Text("\(item.artistInfo.name)")
             .foregroundStyle(Color.fontBlack)
           Spacer()
-          Button {
-              
+          Menu {
+            NavigationLink("아티스트로 가기") { ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
+            Button("좋아요 취소") { dataManager.deleteLikeArtist(item) }
           } label: {
             Image(systemName: "ellipsis")
               .foregroundStyle(Color.fontBlack)
               .rotationEffect(.degrees(-90))
+              .padding(.horizontal)
+              .background(Color.clear)
           }
         }
       }
+      .onAppear { dataManager.modelContext = modelContext }
     }
     .padding()
     .navigationTitle("좋아요한 아티스트")

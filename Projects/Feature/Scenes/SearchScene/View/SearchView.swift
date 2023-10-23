@@ -24,7 +24,8 @@ public struct SearchView: View {
       ScrollView {
         Group {
           headView
-          artistView
+          searchingHistoryView
+          //          artistView
         }
         .padding(.horizontal)
       }
@@ -34,16 +35,17 @@ public struct SearchView: View {
       }
     }
   }
-
+  
   // MARK: 상단, ScrollViewReader의 사용을 위해 id 활용
   private var headView: some View {
     VStack(alignment: .leading) {
-      Text("LOGO")
-      .font(.largeTitle)
-      .opacity(viewModel.searchIsPresented ? 0 : 1)
-      .id(ScrollID.top)
-      .padding(.vertical)
-
+//      Image("logo")
+//        .resizable()
+//        .frame(width: 37, height: 21)
+//        .opacity(viewModel.searchIsPresented ? 0 : 1)
+//        .id(ScrollID.top)
+      MainView().logo
+        .padding([.leading, .vertical], 10)
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
         .onChange(of: viewModel.searchText) {
@@ -52,40 +54,40 @@ public struct SearchView: View {
     }
     .padding(.top)
   }
-
-  private var artistView: some View {
-    LazyVStack(alignment: .leading) {
-      domesticArtistView
-        .padding(.vertical, 64)
-      foreignArtistView
-    }
-    .disabled(viewModel.searchIsPresented)
-    .opacity(viewModel.searchIsPresented ? 0 : 1)
-    .overlay { searchingHistoryView }
-  }
-
-  private var domesticArtistView: some View {
-    VStack(alignment: .leading) {
-      Text("국내 아티스트")
-        .bold()
-        .foregroundStyle(Color.fontBlack)
-      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
- 
-      }
-    }
-  }
-
-  private var foreignArtistView: some View {
-    VStack(alignment: .leading) {
-      Text("해외 아티스트")
-        .bold()
-        .foregroundStyle(Color.fontBlack)
-      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-
-      }
-    }
-  }
-
+  
+//  private var artistView: some View {
+//    LazyVStack(alignment: .leading) {
+//      domesticArtistView
+//        .padding(.vertical, 64)
+//      foreignArtistView
+//    }
+//    .disabled(viewModel.searchIsPresented)
+//    .opacity(viewModel.searchIsPresented ? 0 : 1)
+//    .overlay { searchingHistoryView }
+//  }
+  
+//  private var domesticArtistView: some View {
+//    VStack(alignment: .leading) {
+//      Text("국내 아티스트").bold()
+//      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
+//        ForEach(tempColor, id: \.self) { item in
+//          SearchArtistCell(tempColor: item, artistName: "Dummy")
+//        }
+//      }
+//    }
+//  }
+//  
+//  private var foreignArtistView: some View {
+//    VStack(alignment: .leading) {
+//      Text("해외 아티스트").bold()
+//      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
+//        ForEach(tempColor, id: \.self) { item in
+//          SearchArtistCell(tempColor: item, artistName: "Dummy")
+//        }
+//      }
+//    }
+//  }
+//  
   private var searchingHistoryView: some View {
     ScrollView {
       LazyVStack {
@@ -101,7 +103,7 @@ public struct SearchView: View {
             .foregroundStyle(Color.blockOrange)
             .bold()
           }
-
+          
           ForEach(history, id: \.self) { item in
             SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
           }

@@ -20,8 +20,7 @@ struct SearchArtistCell: View {
       } label: {
         AsyncImage(url: imageURL)
       }
-        .aspectRatio(contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+
 
       Text("\(artistName)")
         .foregroundStyle(Color.fontBlack)

@@ -67,8 +67,7 @@ struct ArtistSetlistCell: View {
 
       if isDetail {
         Menu {
-          NavigationLink("아티스트로 가기") { }
-          NavigationLink("세트리스트 보기") { }
+          NavigationLink("아티스트로 가기") {  }
           Button("해당 공연 삭제") { dataManager.deleteArchivedConcertInfo(info) }
         } label: {
           Image(systemName: "ellipsis")

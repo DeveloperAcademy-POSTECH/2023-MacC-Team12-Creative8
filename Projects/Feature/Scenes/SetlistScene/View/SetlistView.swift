@@ -35,16 +35,16 @@ struct SetlistView: View {
     }
     .toolbar {
       ToolbarItem(placement: .principal) {
-          VStack {
-            Text(artistInfo?.name ?? "")
-              .font(.system(size: 12))
-            Text("세트리스트")
-              .font(.system(size: 16))
-          }
-          .fontWeight(.semibold)
+        VStack {
+          Text(artistInfo?.name ?? "")
+            .font(.system(size: 12))
+          Text("세트리스트")
+            .font(.system(size: 16))
+        }
+        .fontWeight(.semibold)
       }
     }
-    .foregroundStyle(Color.fontBlack)
+    .foregroundStyle(Color.primary)
     .sheet(isPresented: self.$isShowModal) {
       BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         .presentationDetents([.fraction(0.4)])
@@ -53,23 +53,23 @@ struct SetlistView: View {
   }
   
   private var addPlaylistButton: some View {
-      VStack {
-        Spacer()
-        Button(action: {
-          self.isShowModal.toggle()
-        }, label: {
-          RoundedRectangle(cornerRadius: 10)
-            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-            .foregroundStyle(gray)
-            .overlay {
-              Text("플레이리스트 등록")
-                .foregroundStyle(Color.primary)
-                .bold()
-            }
-        })
-        .padding(.bottom)
-      }
+    VStack {
+      Spacer()
+      Button(action: {
+        self.isShowModal.toggle()
+      }, label: {
+        RoundedRectangle(cornerRadius: 10)
+          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
+          .foregroundStyle(gray)
+          .overlay {
+            Text("플레이리스트 등록")
+              .foregroundStyle(Color.primary)
+              .bold()
+          }
+      })
+      .padding(.bottom)
     }
+  }
 }
 
 private struct ConcertInfoView: View {
@@ -79,35 +79,34 @@ private struct ConcertInfoView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
-
+  
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 14)
-        .foregroundStyle(Color.setlistBoxBlack)
+        .foregroundStyle(Color.black)
       
       VStack(alignment: .leading, spacing: 10) {
         Group {
           Text(artistInfo?.name ?? "")
             .font(.system(size: 26))
             .fontWeight(.semibold)
-            .foregroundStyle(Color.fontWhite)
           
           Text(setlist?.tour?.name ?? "")
-            .foregroundStyle(Color.fontWhite2)
+            .opacity(0.6)
         }
         .padding(.horizontal)
         
         Divider()
-          .foregroundStyle(Color.mainWhite1)
+          .background(Color.white)
           .padding(.vertical, 5)
         
         Group {
           let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
-          InfoComponent(title: venue, subTitle: "Place")
+          InfoComponenet(title: venue, subTitle: "Place")
           HStack {
-            InfoComponent(title: setlist?.eventDate ?? "", subTitle: "Date")
+            InfoComponenet(title: setlist?.eventDate ?? "", subTitle: "Date")
             Spacer()
-            InfoComponent(title: "-", subTitle: "Time")
+            InfoComponenet(title: "-", subTitle: "Time")
             Spacer()
             Spacer()
           }
@@ -160,7 +159,7 @@ private struct ConcertInfoView: View {
     }
     .padding(.horizontal)
     .frame(height: UIHeight * 0.35)
-    .onAppear { 
+    .onAppear {
       dataManager.modelContext = modelContext
       vm.isBookmark(concertInfo, setlist)
     }
@@ -170,17 +169,16 @@ private struct ConcertInfoView: View {
   }
 }
 
-private struct InfoComponent: View {
+private struct InfoComponenet: View {
   let title: String
   let subTitle: String
   
   var body: some View {
     VStack(alignment: .leading) {
       Text(title)
-        .foregroundStyle(Color.fontWhite)
       Text(subTitle)
         .font(.system(size: 10))
-        .foregroundStyle(Color.fontWhite3)
+        .opacity(0.4)
     }
   }
 }
@@ -199,7 +197,7 @@ private struct ListView: View {
             Text(sessionName)
               .font(.system(size: 18))
               .fontWeight(.bold)
-              .foregroundStyle(Color.fontGrey25)
+              .opacity(0.3)
           }
           
           let songs = session.song ?? []
@@ -211,6 +209,7 @@ private struct ListView: View {
                   title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
+                .opacity(0.6)
               } else {
                 ListRowView(
                   index: index,
@@ -220,12 +219,18 @@ private struct ListView: View {
               }
               if index + 1 < songs.count {
                 Divider()
-                  .foregroundStyle(Color.lineGrey1)
               }
               // 애플 뮤직용 음악 배열
               if !vm.setlistSongName.contains(title) {
                 let _ = vm.setlistSongName.append(title)
               }
+              
+              // 스크린샷용 음악 배열
+              let tmp = koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
+              if !vm.setlistSongKoreanName.contains(tmp) {
+                let _ = vm.setlistSongKoreanName.append(tmp)
+              }
+              
             }
           }
         }
@@ -257,13 +262,12 @@ private struct ListRowView: View {
         Text(title)
           .frame(width: UIWidth * 0.65, height: 16, alignment: .leading)
       }
-      .foregroundStyle(Color.fontBlack)
       .fontWeight(.semibold)
       
       if let info = info {
         Text(info)
           .fontWeight(.regular)
-          .foregroundStyle(Color.fontGrey25)
+          .opacity(0.6)
           .frame(width: UIWidth * 0.65, alignment: .leading)
           .padding(.leading, 55)
       }
@@ -274,165 +278,127 @@ private struct ListRowView: View {
 
 private struct BottomView: View {
   var body: some View {
-    ZStack {
-      Rectangle()
-        .frame(height: UIHeight * 0.25)
-        .foregroundColor(Color.setlistBoxGrey)
+    VStack(alignment: .leading, spacing: 30) {
+      Text("세트리스트 정보 수정을 원하시나요?")
+        .font(.system(size: 16))
+        .fontWeight(.semibold)
       
-      VStack(alignment: .leading, spacing: 30) {
-        Text("세트리스트 정보 수정을 원하시나요?")
-          .font(.system(size: 16))
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.fontBlack)
-        
-        VStack(alignment: .leading, spacing: 0) {
-          Text("잘못된 세트리스트 정보를 발견하셨다면,")
-          Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다.")
-        }
-        .foregroundStyle(Color.fontGrey2)
-        .font(.system(size: 13))
-        
-        Button(action: {}, label: {
-          HStack {
-            Spacer()
-            Text("바로가기")
-            Image(systemName: "arrow.right")
-          }
-          .font(.system(size: 16))
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.fontGrey2)
-        })
+      VStack(alignment: .leading, spacing: 0) {
+        Text("잘못된 세트리스트 정보를 발견하셨다면,")
+        Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다.")
       }
-      .padding(.horizontal)
+      .opacity(0.6)
+      .font(.system(size: 13))
+      
+      Button(action: {}, label: {
+        HStack {
+          Spacer()
+          Text("바로가기")
+          Image(systemName: "arrow.right")
+        }
+        .font(.system(size: 16))
+        .fontWeight(.semibold)
+        .foregroundStyle(Color.primary)
+      })
+    }
+    .padding(.horizontal)
+  }
+}
+
+private struct EmptySetlistView: View {
+  var body: some View {
+    VStack(spacing: 10) {
+      Spacer()
+      
+      Text("세트리스트가 없습니다.")
+        .font(.system(size: 16))
+        .fontWeight(.semibold)
+      
+      Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요.")
+        .opacity(0.6)
+        .font(.system(size: 13))
+      
+      Button(action: {
+        
+      }, label: {
+        RoundedRectangle(cornerRadius: 10)
+          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
+          .foregroundStyle(gray)
+          .overlay {
+            Text("Setlist.fm 바로가기")
+              .foregroundStyle(Color.primary)
+              .bold()
+          }
+      })
+      .padding(.top, UIHeight * 0.05)
+      
+      Spacer()
     }
   }
 }
+
+private struct BottomModalView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
+  @ObservedObject var vm: SetlistViewModel
   
-  private struct AddPlaylistButton: View {
-    @State private var isShowModal = false
-    
-    var body: some View {
-      VStack {
-        Spacer()
-        Button(action: {
+  var body: some View {
+    Spacer().frame(height: UIHeight * 0.07)
+    VStack(alignment: .leading, spacing: UIHeight * 0.03) {
+      Group {
+        listView(title: "Apple Music에 옮기기", description: nil, action: {
+          AppleMusicService().requestMusicAuthorization()
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
           
-        }, label: {
-          RoundedRectangle(cornerRadius: 10)
-            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-            .foregroundStyle(Color.buttonBlack)
-            .overlay {
-              Text("플레이리스트 등록")
-                .foregroundStyle(Color.fontWhite)
-                .bold()
-            }
         })
-        .padding(.bottom)
-      }
-    }
-  }
-  
-  private struct EmptySetlistView: View {
-    var body: some View {
-      VStack(spacing: 10) {
-        Spacer()
         
-        Text("세트리스트가 없습니다.")
-          .font(.system(size: 16))
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.fontBlack)
-        
-        Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요.")
-          .foregroundStyle(Color.fontGrey2)
-          .font(.system(size: 13))
-        
-        Button(action: {
-          
-        }, label: {
-          RoundedRectangle(cornerRadius: 10)
-            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-            .foregroundStyle(Color.buttonBlack)
-            .overlay {
-              Text("Setlist.fm 바로가기")
-                .foregroundStyle(Color.fontWhite)
-                .bold()
-            }
-        })
-        .padding(.top, UIHeight * 0.05)
-        
-        Spacer()
-      }
-    }
-  }
-  
-  private struct BottomModalView: View {
-    let setlist: Setlist?
-    let artistInfo: ArtistInfo?
-    @ObservedObject var vm: SetlistViewModel
-    
-    var body: some View {
-      Spacer().frame(height: UIHeight * 0.07)
-      VStack(alignment: .leading, spacing: UIHeight * 0.03) {
-        Group {
-          listView(title: "Apple Music에 옮기기", description: nil, action: {
-            AppleMusicService().requestMusicAuthorization()
-            CheckAppleMusicSubscription.shared.appleMusicSubscription()
-            AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
-            
-          })
-          .padding(.bottom, 31)
-          
-          listView(
-            title: "세트리스트 캡처하기",
-            description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
-            action: {
-              // TODO: 스크린샷 연동
-            }
-          )
-        }
-        .opacity(0.6)
-        
-        Spacer()
-      }
-      .padding(.horizontal, 20)
-    }
-    
-    private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
-      HStack {
-        VStack(alignment: .leading, spacing: UIHeight * 0.01) {
-          Text(title)
-            .font(.system(size: 16, weight: .semibold))
-            .foregroundStyle(Color.fontBlack)
-          if let description = description {
-            Text(description)
-              .font(.system(size: 12, weight: .regular))
-              .foregroundStyle(Color.fontGrey2)
-              .lineSpacing(5)
-              .padding(.top, 5)
+        listView(
+          title: "세트리스트 캡처하기",
+          description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
+          action: {
+            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+
           }
-        }
-        Spacer()
-        Button {
-          action()
-        } label: {
-          Image(systemName: "chevron.right")
-            .foregroundStyle(Color.fontBlack)
-        }
+        )
       }
+      .opacity(0.6)
+      Spacer()
     }
+    .padding(.horizontal, 20)
   }
-
   
-  extension View {
-    func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = format
-      dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
-      
-      if let date = dateFormatter.date(from: dateString) {
-        return date
-      } else {
-        return nil // 날짜 형식이 맞지 않을 경우 nil 반환
+  private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
+    HStack {
+      VStack(alignment: .leading, spacing: UIHeight * 0.01) {
+        Text(title)
+          .font(.system(size: 16, weight: .semibold))
+        if let description = description {
+          Text(description)
+            .font(.system(size: 12, weight: .regular))
+            .opacity(0.8)
+        }
+      }
+      Spacer()
+      Image(systemName: "chevron.right")
+          .foregroundStyle(.gray)
+          .onTapGesture {
+              action()
       }
     }
   }
+}
 
+extension View {
+  func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
+    
+    if let date = dateFormatter.date(from: dateString) {
+      return date
+    } else {
+      return nil // 날짜 형식이 맞지 않을 경우 nil 반환
+    }
+  }
+}
