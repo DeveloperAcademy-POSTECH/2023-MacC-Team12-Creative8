@@ -90,9 +90,8 @@ private struct ArtistImageView: View {
   
   private var imageLayer: some View {
     Image(uiImage: vm.image!)
-      .resizable()
+      .centerCropped()
       .frame(height: screenHeight * 0.25)
-      .scaledToFit()
       .cornerRadius(14)
       .overlay(Color.black.opacity(0.2).cornerRadius(14))
   }
@@ -180,7 +179,7 @@ private struct BookmarkedView: View {
       Spacer()
       ForEach(vm.bookmarkedSetlists?.prefix(3) ?? [], id: \.id) { setlist in
         NavigationLink {
-          
+          SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
         } label: {
           HStack {
             Spacer()
