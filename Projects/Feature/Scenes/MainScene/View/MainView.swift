@@ -10,6 +10,7 @@ import SwiftUI
 import Core
 
 public struct MainView: View {
+    @Environment(\.colorScheme) var colorScheme
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
     @ObservedObject var viewModel = MainViewModel()
@@ -30,14 +31,17 @@ public struct MainView: View {
                                     // 다크모드 기능 넣기
                                     viewModel.isTapped.toggle()
                                 } label: {
-                                    Image(systemName: "moon.fill")
-                                        .font(.title3)
+                                    
+                                    if colorScheme == .dark {
+                                        Image(systemName: "sun.max.fill")
+                                            .font(.title3)
+                                    } else {
+                                        Image(systemName: "moon.fill")
+                                            .font(.title3)
+                                    }
                                 }
                                 .foregroundColor(.black)
                                 .padding(6)
-//                                if viewModel.isTapped {
-//                                        darkmodeButtons
-//                                    }
                                 .overlay {
                                     if viewModel.isTapped {
                                         darkmodeButtons
@@ -84,9 +88,6 @@ public struct MainView: View {
         .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
             VStack {
                 HStack(spacing: screenWidth * 0.07) {
-//                    TopButtonView(buttonType: .automatic, viewModel: viewModel)
-//                    TopButtonView(buttonType: .light, viewModel: viewModel)
-//                    TopButtonView(buttonType: .dark, viewModel: viewModel)
                     ForEach(ButtonType.allCases) { mode in
                         TopButtonView(buttonType: mode, viewModel: viewModel)
                             .tag(mode)
@@ -248,7 +249,6 @@ struct EmptyMainView: View {
     }
 }
 struct TopButtonView: View {
-    @Environment(\.colorScheme) var scheme
     var buttonType: ButtonType
     var viewModel: MainViewModel
     @AppStorage("appearance")
