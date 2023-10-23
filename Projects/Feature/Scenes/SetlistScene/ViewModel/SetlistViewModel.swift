@@ -12,6 +12,7 @@ import Core
 final class SetlistViewModel: ObservableObject {
   @Published var isBookmarked: Bool
   @Published var isEmptySetlist: Bool
+  var setlistSongName: [String] = []
   
   init() {
     self.isBookmarked = false

@@ -45,7 +45,7 @@ struct SetlistView: View {
     }
     .foregroundStyle(Color.primary)
     .sheet(isPresented: self.$isShowModal) {
-      BottomModalView()
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
     }
@@ -185,20 +185,21 @@ private struct ListView: View {
                   info: song.info
                 )
               }
-              
               if index + 1 < songs.count {
                 Divider()
               }
+              // 애플 뮤직용 음악 배열
+              if !vm.setlistSongName.contains(title) {
+                let _ = vm.setlistSongName.append(title)
+              }
             }
           }
-          
         }
         .padding(.vertical, UIHeight * 0.03)
       }
     }
     .padding(.horizontal, UIWidth * 0.1)
     .padding(.bottom)
-    
   }
 }
 
@@ -298,6 +299,10 @@ private struct EmptySetlistView: View {
 }
 
 private struct BottomModalView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
+  @ObservedObject var vm: SetlistViewModel
+
   var body: some View {
     Spacer().frame(height: UIHeight * 0.07)
     VStack(alignment: .leading, spacing: UIHeight * 0.03) {
@@ -305,9 +310,9 @@ private struct BottomModalView: View {
         listView(title: "Apple Music에 옮기기", description: nil, action: {
           AppleMusicService().requestMusicAuthorization()
           CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
           
         })
-        
         listView(
           title: "세트리스트 캡처하기",
           description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
@@ -317,7 +322,7 @@ private struct BottomModalView: View {
         )
       }
       .opacity(0.6)
-      
+
       Spacer()
     }
     .padding(.horizontal, 20)
@@ -343,8 +348,4 @@ private struct BottomModalView: View {
       }
     }
   }
-}
-
-#Preview {
-  BottomModalView()
 }
