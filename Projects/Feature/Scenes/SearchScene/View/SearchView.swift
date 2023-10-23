@@ -16,8 +16,6 @@ public struct SearchView: View {
   @StateObject var viewModel = SearchViewModel()
   @Environment (\.modelContext) var modelContext
   @StateObject var dataManager = SwiftDataManager()
-  // MARK: - 임시 값
-  let tempColor: [Color] = [.red, .orange, .green, .blue, .purple, .pink, .cyan, .indigo, .mint]
   
   public init() {}
   
@@ -95,12 +93,14 @@ public struct SearchView: View {
       LazyVStack {
         if viewModel.searchText.isEmpty {
           HStack {
-            Text("최근 검색").bold()
+            Text("최근 검색")
+              .bold()
+              .foregroundStyle(Color.fontBlack)
             Spacer()
             Button("모두 지우기") {
               dataManager.deleteSearchHistoryAll()
             }
-            .foregroundStyle(.red)
+            .foregroundStyle(Color.blockOrange)
             .bold()
           }
           

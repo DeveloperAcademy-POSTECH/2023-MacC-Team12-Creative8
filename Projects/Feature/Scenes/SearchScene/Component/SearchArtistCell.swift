@@ -18,18 +18,12 @@ struct SearchArtistCell: View {
       NavigationLink {
 
       } label: {
-        AsyncImage(url: imageURL) { image in
-          image
-            .centerCropped()
-            .aspectRatio(1.0, contentMode: .fit)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-        } placeholder: {
-          ProgressView()
-        }
+        AsyncImage(url: imageURL)
       }
 
 
       Text("\(artistName)")
+        .foregroundStyle(Color.fontBlack)
     }
   }
 }

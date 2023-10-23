@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct SearchBar: View {
     @Binding var text: String
@@ -57,7 +58,7 @@ struct SearchBar: View {
               }
               UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
-            .foregroundStyle(.black)
+            .foregroundStyle(Color.fontBlack)
             .padding(.horizontal, 10)
           }
         }

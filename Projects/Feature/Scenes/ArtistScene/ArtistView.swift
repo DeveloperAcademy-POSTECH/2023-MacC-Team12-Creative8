@@ -44,7 +44,7 @@ struct ArtistView: View {
           .fontWeight(.semibold)
       }
     }
-    .foregroundStyle(Color.primary)
+    .foregroundStyle(Color.fontBlack)
     .onAppear {
       vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
       vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
