@@ -10,9 +10,10 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
   name: "UI",
-  product: .staticFramework,
+  product: .framework,
   dependencies: [
 
   ],
-  sources: ["Sources/**"]
+  sources: ["Sources/**"],
+  resources: ["Resources/**"]
 )

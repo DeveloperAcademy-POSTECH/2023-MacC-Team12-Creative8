@@ -20,13 +20,14 @@ struct SeeAllArtist: View {
         HStack {
           ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
           Text("\(item.artistInfo.name)")
+            .foregroundStyle(Color.fontBlack)
           Spacer()
           Menu {
             NavigationLink("아티스트로 가기") { ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
             Button("좋아요 취소") { dataManager.deleteLikeArtist(item) }
           } label: {
             Image(systemName: "ellipsis")
-              .foregroundStyle(.black)
+              .foregroundStyle(Color.fontBlack)
               .rotationEffect(.degrees(-90))
               .padding(.horizontal)
               .background(Color.clear)

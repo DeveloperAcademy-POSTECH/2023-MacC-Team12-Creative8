@@ -72,9 +72,6 @@ public struct SearchView: View {
     VStack(alignment: .leading) {
       Text("국내 아티스트").bold()
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(tempColor, id: \.self) { item in
-          SearchArtistCell(tempColor: item, artistName: "Dummy")
-        }
       }
     }
   }
@@ -83,9 +80,6 @@ public struct SearchView: View {
     VStack(alignment: .leading) {
       Text("해외 아티스트").bold()
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(tempColor, id: \.self) { item in
-          SearchArtistCell(tempColor: item, artistName: "Dummy")
-        }
       }
     }
   }

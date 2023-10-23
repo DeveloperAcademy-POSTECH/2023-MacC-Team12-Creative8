@@ -3,15 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
 		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
 		2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */; };
-		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
+		4227D6225C566381E5480831 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957378EDAFAF88BFEB487132 /* Colors.xcassets */; };
+		7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */; };
+		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
+		9F7512161D1AE13D99D8517A /* TuistAssets+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */; };
+		A37BCE36A95F8C4A2A75FE92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A78FD64E60B33D4B9F3344 /* Images.xcassets */; };
 		EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E35A63B91A07E2482B3B278 /* ColorExtension.swift */; };
 		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
 /* End PBXBuildFile section */
@@ -54,11 +58,15 @@
 		289741E57FAAE603ED95F014 /* ImageCropExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropExtension.swift; sourceTree = "<group>"; };
 		371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveExtension.swift; sourceTree = "<group>"; };
+		66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+UI.swift"; sourceTree = "<group>"; };
 		676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+UI.swift"; sourceTree = "<group>"; };
+		957378EDAFAF88BFEB487132 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E35A63B91A07E2482B3B278 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A78FD64E60B33D4B9F3344 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EA107D337866699F71AD9912 /* UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UITests-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				8C92E84977AC273EA43C05B1 /* Derived */,
+				56F3DCA032D4C8ADA6BAADB3 /* Resources */,
 				4979EA0CE84B8AF2F138CB2C /* Sources */,
 			);
 			name = Project;
@@ -112,6 +121,15 @@
 				8AA572ECEAA212E1DEFF3F6E /* Extensions */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		56F3DCA032D4C8ADA6BAADB3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				957378EDAFAF88BFEB487132 /* Colors.xcassets */,
+				D3A78FD64E60B33D4B9F3344 /* Images.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
@@ -131,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				D5036A44A2F2BCCB79343D9B /* InfoPlists */,
+				CA66930CEDCE989F0F7E2174 /* Sources */,
 			);
 			path = Derived;
 			sourceTree = "<group>";
@@ -142,6 +161,15 @@
 				BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CA66930CEDCE989F0F7E2174 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */,
+				66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		D5036A44A2F2BCCB79343D9B /* InfoPlists */ = {
@@ -200,12 +228,13 @@
 		5E1CDE9B685737937831E727 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -235,6 +264,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4227D6225C566381E5480831 /* Colors.xcassets in Resources */,
+				A37BCE36A95F8C4A2A75FE92 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +290,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 <<<<<<< HEAD
+			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 =======
 			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/65/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 >>>>>>> 0736932998f7ac976df41ba2da552ee6a778e31a
+>>>>>>> 18352d4e49c387475613f434140fc814837f9d41
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -278,6 +313,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7512161D1AE13D99D8517A /* TuistAssets+UI.swift in Sources */,
+				7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */,
 				2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */,
 				1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */,
 				EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */,
@@ -315,6 +352,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -398,13 +436,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UI;
 				PRODUCT_NAME = UI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -431,6 +469,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -509,13 +548,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creative8.seta.UI;
 				PRODUCT_NAME = UI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

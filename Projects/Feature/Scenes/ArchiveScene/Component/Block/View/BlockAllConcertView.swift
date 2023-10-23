@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct BlockAllConcertView: View {
   @Binding var selecteYear: Int
@@ -21,6 +22,7 @@ struct BlockAllConcertView: View {
       ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.setlist.date) == selecteYear }) { info in
         ArtistSetlistCell(info: info, isDetail: true)
         Divider()
+          .foregroundStyle(Color.lineGrey1)
       }
     }
     .toolbar {
@@ -34,9 +36,9 @@ struct BlockAllConcertView: View {
             }
           } label: {
             Image(systemName: "chevron.down")
-              .foregroundStyle(.black)
           }
         }
+        .foregroundStyle(Color.fontBlack)
       }
     }
     .onAppear {
