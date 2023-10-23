@@ -88,7 +88,7 @@ public final class ArtistDataManager {
     }
     
     print("FAILED TO FIND ARTIST")
-    return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hits[0].result?.primaryArtist?.id, imageUrl: hits[0].result?.primaryArtist?.imageURL, songList: nil)
+    return nil
   }
   
   private func stringFilter(_ str: String) -> String {
