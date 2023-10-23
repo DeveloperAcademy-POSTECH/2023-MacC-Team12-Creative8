@@ -43,7 +43,7 @@ struct SetlistView: View {
           .fontWeight(.semibold)
       }
     }
-    .foregroundStyle(Color.primary)
+    .foregroundStyle(Color.fontBlack)
     .sheet(isPresented: self.$isShowModal) {
       BottomModalView()
     }
@@ -58,30 +58,31 @@ private struct ConcertInfoView: View {
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 14)
-        .foregroundStyle(Color.black)
+        .foregroundStyle(Color.setlistBoxBlack)
       
       VStack(alignment: .leading, spacing: 10) {
         Group {
           Text(artistInfo?.name ?? "")
             .font(.system(size: 26))
             .fontWeight(.semibold)
+            .foregroundStyle(Color.fontWhite)
           
           Text(setlist?.tour?.name ?? "")
-            .opacity(0.6)
+            .foregroundStyle(Color.fontWhite2)
         }
         .padding(.horizontal)
         
         Divider()
-          .background(Color.white)
+          .foregroundStyle(Color.mainWhite1)
           .padding(.vertical, 5)
         
         Group {
           let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
-          InfoComponenet(title: venue, subTitle: "Place")
+          InfoComponent(title: venue, subTitle: "Place")
           HStack {
-            InfoComponenet(title: setlist?.eventDate ?? "", subTitle: "Date")
+            InfoComponent(title: setlist?.eventDate ?? "", subTitle: "Date")
             Spacer()
-            InfoComponenet(title: "-", subTitle: "Time")
+            InfoComponent(title: "-", subTitle: "Time")
             Spacer()
             Spacer()
           }
@@ -93,14 +94,14 @@ private struct ConcertInfoView: View {
         }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: 14)
-              .foregroundColor(Color.white)
+              .foregroundColor(Color.blockFontWhite)
             HStack {
               Text("해당 공연 다시 듣기")
               Spacer()
               Image(systemName: "checkmark")
             }
             .padding(.horizontal)
-            .foregroundStyle(Color.primary)
+            .foregroundStyle(Color.black)
             .fontWeight(.semibold)
           }
           .frame(height: UIHeight * 0.065)
@@ -116,16 +117,17 @@ private struct ConcertInfoView: View {
   }
 }
 
-private struct InfoComponenet: View {
+private struct InfoComponent: View {
   let title: String
   let subTitle: String
   
   var body: some View {
     VStack(alignment: .leading) {
       Text(title)
+        .foregroundStyle(Color.fontWhite)
       Text(subTitle)
         .font(.system(size: 10))
-        .opacity(0.4)
+        .foregroundStyle(Color.fontWhite3)
     }
   }
 }
@@ -144,7 +146,7 @@ private struct ListView: View {
             Text(sessionName)
               .font(.system(size: 18))
               .fontWeight(.bold)
-              .opacity(0.3)
+              .foregroundStyle(Color.fontGrey25)
           }
           
           let songs = session.song ?? []
@@ -156,7 +158,6 @@ private struct ListView: View {
                   title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
-                .opacity(0.6)
               } else {
                 ListRowView(
                   index: index,
@@ -167,6 +168,7 @@ private struct ListView: View {
               
               if index + 1 < songs.count {
                 Divider()
+                  .foregroundStyle(Color.lineGrey1)
               }
             }
           }
@@ -201,12 +203,13 @@ private struct ListRowView: View {
         Text(title)
           .frame(width: UIWidth * 0.65, height: 16, alignment: .leading)
       }
+      .foregroundStyle(Color.fontBlack)
       .fontWeight(.semibold)
       
       if let info = info {
         Text(info)
           .fontWeight(.regular)
-          .opacity(0.6)
+          .foregroundStyle(Color.fontGrey25)
           .frame(width: UIWidth * 0.65, alignment: .leading)
           .padding(.leading, 55)
       }
@@ -220,18 +223,19 @@ private struct BottomView: View {
     ZStack {
       Rectangle()
         .frame(height: UIHeight * 0.25)
-        .foregroundColor(gray)
+        .foregroundColor(Color.setlistBoxGrey)
       
       VStack(alignment: .leading, spacing: 30) {
         Text("세트리스트 정보 수정을 원하시나요?")
           .font(.system(size: 16))
           .fontWeight(.semibold)
+          .foregroundStyle(Color.fontBlack)
         
         VStack(alignment: .leading, spacing: 0) {
           Text("잘못된 세트리스트 정보를 발견하셨다면,")
           Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다.")
         }
-        .opacity(0.6)
+        .foregroundStyle(Color.fontGrey2)
         .font(.system(size: 13))
         
         Button(action: {}, label: {
@@ -242,7 +246,7 @@ private struct BottomView: View {
           }
           .font(.system(size: 16))
           .fontWeight(.semibold)
-          .foregroundStyle(Color.primary)
+          .foregroundStyle(Color.fontGrey2)
         })
       }
       .padding(.horizontal)
@@ -262,10 +266,10 @@ private struct AddPlaylistButton: View {
       }, label: {
         RoundedRectangle(cornerRadius: 10)
           .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-          .foregroundStyle(gray)
+          .foregroundStyle(Color.buttonBlack)
           .overlay {
             Text("플레이리스트 등록")
-              .foregroundStyle(Color.primary)
+              .foregroundStyle(Color.fontWhite)
               .bold()
           }
       })
@@ -282,9 +286,10 @@ private struct EmptySetlistView: View {
       Text("세트리스트가 없습니다.")
         .font(.system(size: 16))
         .fontWeight(.semibold)
+        .foregroundStyle(Color.fontBlack)
       
       Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요.")
-        .opacity(0.6)
+        .foregroundStyle(Color.fontGrey2)
         .font(.system(size: 13))
       
       Button(action: {
@@ -292,10 +297,10 @@ private struct EmptySetlistView: View {
       }, label: {
         RoundedRectangle(cornerRadius: 10)
           .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-          .foregroundStyle(gray)
+          .foregroundStyle(Color.buttonBlack)
           .overlay {
             Text("Setlist.fm 바로가기")
-              .foregroundStyle(Color.primary)
+              .foregroundStyle(Color.fontWhite)
               .bold()
           }
       })
@@ -314,6 +319,7 @@ private struct BottomModalView: View {
         listView(title: "Apple Music에 옮기기", description: nil, action: {
           // TODO: 플레이리스트 연동
         })
+        .padding(.bottom, 31)
         
         listView(
           title: "세트리스트 캡처하기",
@@ -323,7 +329,6 @@ private struct BottomModalView: View {
           }
         )
       }
-      .opacity(0.6)
       
       Spacer()
     }
@@ -335,10 +340,13 @@ private struct BottomModalView: View {
       VStack(alignment: .leading, spacing: 4) {
         Text(title)
           .font(.system(size: 16, weight: .semibold))
+          .foregroundStyle(Color.fontBlack)
         if let description = description {
           Text(description)
             .font(.system(size: 12, weight: .regular))
-            .opacity(0.8)
+            .foregroundStyle(Color.fontGrey2)
+            .lineSpacing(5)
+            .padding(.top, 5)
         }
       }
       Spacer()
@@ -346,7 +354,7 @@ private struct BottomModalView: View {
         action()
       } label: {
         Image(systemName: "chevron.right")
-          .foregroundStyle(.gray)
+          .foregroundStyle(Color.fontBlack)
       }
     }
   }
