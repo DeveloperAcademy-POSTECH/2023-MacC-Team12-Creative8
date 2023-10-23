@@ -15,6 +15,7 @@ private let gray: Color = Color(hex: 0xEAEAEA)
 struct SetlistView: View {
   let setlist: Setlist
   let artistInfo: ArtistInfo
+  @Binding var isShowModal: Bool
   @StateObject var vm = SetlistViewModel()
   
   var body: some View {
@@ -38,6 +39,9 @@ struct SetlistView: View {
       vm.artistInfo = artistInfo
     }
     .foregroundStyle(Color.primary)
+    .sheet(isPresented: self.$isShowModal) {
+      BottomModalView()
+    }
   }
 }
 
@@ -86,7 +90,7 @@ private struct ConcertInfoView: View {
             .opacity(0.6)
         }
         .padding(.horizontal)
-
+        
         Divider()
           .background(Color.white)
           .padding(.vertical, 5)
@@ -103,7 +107,7 @@ private struct ConcertInfoView: View {
           }
         }
         .padding(.horizontal)
-
+        
         Button(action: {
           
         }, label: {
@@ -266,11 +270,13 @@ private struct BottomView: View {
 }
 
 private struct AddPlaylistButton: View {
+  @State private var isShowModal = false
+  
   var body: some View {
     VStack {
       Spacer()
       Button(action: {
-        
+      
       }, label: {
         RoundedRectangle(cornerRadius: 10)
           .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
@@ -316,4 +322,54 @@ private struct EmptySetlistView: View {
       Spacer()
     }
   }
+}
+
+private struct BottomModalView: View {
+  var body: some View {
+    VStack(alignment: .leading, spacing: UIHeight * 0.02) {
+      Spacer().frame(height: UIHeight * 0.1)
+      Group {
+        listView(title: "Apple Music에 옮기기", description: nil, action: {
+          // TODO: 플레이리스트 연동
+        })
+        
+        listView(
+          title: "세트리스트 캡처하기",
+          description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
+          action: {
+            // TODO: 스크린샷 연동
+          }
+        )
+      }
+      .opacity(0.6)
+      
+      Spacer()
+    }
+    .padding(.horizontal, 20)
+  }
+  
+  private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
+    HStack {
+      VStack(alignment: .leading, spacing: 4) {
+        Text(title)
+          .font(.system(size: 16, weight: .semibold))
+        if let description = description {
+          Text(description)
+            .font(.system(size: 12, weight: .regular))
+            .opacity(0.8)
+        }
+      }
+      Spacer()
+      Button {
+        action()
+      } label: {
+        Image(systemName: "chevron.right")
+          .foregroundStyle(.gray)
+      }
+    }
+  }
+}
+
+#Preview {
+  BottomModalView()
 }
