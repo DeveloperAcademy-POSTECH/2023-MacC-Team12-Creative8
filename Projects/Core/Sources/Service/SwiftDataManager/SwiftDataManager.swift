@@ -23,7 +23,7 @@ public final class SwiftDataManager: ObservableObject {
   }
 
   // MARK: - songList Encoder, Decoder
-  private func songListEncoder(_ songList: [(String, String?)]) -> [Titles] {
+  public func songListEncoder(_ songList: [(String, String?)]) -> [Titles] {
     var titlesList: [Titles] = []
 
     for (title, subTitle) in songList {

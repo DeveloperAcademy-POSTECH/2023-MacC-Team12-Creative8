@@ -49,7 +49,22 @@ public final class SetlistDataService {
       completion(nil)
     }
   }
-  
+
+  public func fetchOneSetlistFromSetlistFM(setlistId: String, completion: @escaping (Setlist?) -> Void) {
+      print("Function Called")
+      if let url = URL(string: "https://api.setlist.fm/rest/1.0/setlist/\(setlistId)") {
+        let headers = [
+          "x-api-key": APIKeys().setlistFM,
+          "Accept": "application/json",
+          "Accept-Language": "en"
+        ]
+        APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
+      } else {
+        completion(nil)
+      }
+    }
+
+
   public func fetchSetlistsFromSetlistFM(artistMbid: String, page: Int, completion: @escaping (SetlistListModel?) -> Void) {
     if let url = URL(string: "https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=\(artistMbid)&p=\(page)") {
       let headers = [
