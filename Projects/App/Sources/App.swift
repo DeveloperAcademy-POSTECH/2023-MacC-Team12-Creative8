@@ -28,7 +28,7 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-        TabBarView()
+        OnboardingView()
       }
     }
     .modelContainer(sharedModelContainer)

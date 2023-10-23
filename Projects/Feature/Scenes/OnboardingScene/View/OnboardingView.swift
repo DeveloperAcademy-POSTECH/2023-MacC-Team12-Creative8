@@ -9,13 +9,16 @@
 import SwiftUI
 import CoreXLSX
 
-struct OnboardingView: View {
+public struct OnboardingView: View {
   
   @ObservedObject var viewModel = OnboardingViewModel()
   @State var selectedArtistCount: Int = 0
   @State var showToastBar: Bool = false
   
-  var body: some View {
+  public init() {
+  }
+  
+  public var body: some View {
     ZStack(alignment: .bottom) {
       VStack(spacing: 0) {
         ScrollView(showsIndicators: false) {

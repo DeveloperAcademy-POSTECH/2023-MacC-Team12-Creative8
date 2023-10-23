@@ -18,9 +18,6 @@ public struct TabBarView: View {
     case setting
   }
   
-  public init() {
-  }
-  
   public var body: some View {
     TabView(selection: $selectedTab) {
       MainView()
