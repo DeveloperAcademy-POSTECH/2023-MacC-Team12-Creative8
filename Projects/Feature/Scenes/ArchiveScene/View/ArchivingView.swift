@@ -14,14 +14,14 @@ struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
   @Query var concertInfo: [ArchivedConcertInfo]
   @ObservedObject var dataManager = SwiftDataManager()
+  @ObservedObject var vieWModel = ConcertListViewModel()
   @Environment(\.modelContext) var modelContext
 
   var body: some View {
     VStack(alignment: .leading) {
-      Button("Test\(concertInfo.count)") { testAddConcertCode() }
-      Button("DeleteALL") { testDeleteConcertAllData() }
+      Button("Test") { testAddConcertCode() }
       archivingArtistView
-      blockView
+      viewSelect
     }
     .padding()
     .edgesIgnoringSafeArea(.bottom)
@@ -30,7 +30,7 @@ struct ArchivingView: View {
     }
     .onAppear { dataManager.modelContext = modelContext }
   }
-
+  
   private var archivingArtistView: some View {
     ScrollView(.horizontal) {
       HStack {
@@ -42,7 +42,7 @@ struct ArchivingView: View {
     .scrollIndicators(.hidden)
     .disabled(likeArtist.isEmpty)
   }
-
+  
   private var seeAllCell: some View {
     NavigationLink {
       SeeAllArtist()
@@ -60,25 +60,25 @@ struct ArchivingView: View {
       }
     }
   }
-
+  
   private var emptyLikeCell: some View {
-      VStack {
-        RoundedRectangle(cornerRadius: 20)
-          .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-          .frameForCell()
-          .overlay {
-            Image(systemName: "heart")
-          }
-        Text("좋아요한 아티스트")
-          .font(.system(size: 12))
-      }
+    VStack {
+      RoundedRectangle(cornerRadius: 20)
+        .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+        .frameForCell()
+        .overlay {
+          Image(systemName: "heart")
+        }
+      Text("좋아요한 아티스트")
+        .font(.system(size: 12))
+    }
   }
-
+  
   private var likedArtistCell: some View {
     ForEach(likeArtist) { item in
       VStack {
         NavigationLink {
-
+          
         } label: {
           ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
         }
@@ -86,7 +86,7 @@ struct ArchivingView: View {
       }
     }
   }
-
+  
   private var blockView: some View {
     Group {
       if concertInfo.isEmpty {
@@ -96,7 +96,7 @@ struct ArchivingView: View {
       }
     }
   }
-
+  
   private var blockIsEmptyView: some View {
     VStack {
       Image(systemName: "bookmark")
@@ -107,6 +107,34 @@ struct ArchivingView: View {
       Text("내가 좋아하는 아티스트의 공연을 찜하고\n세트리스트를 확인해보세요")
         .multilineTextAlignment(.center)
         .font(.system(size: 13))
+    }
+  }
+
+  private var viewSelect: some View {
+    VStack(spacing: 0) {
+      viewPicker
+        .padding(.bottom)
+      if vieWModel.userSelection == vieWModel.options[1] {
+        blockView
+      } else {
+        ConcertListView()
+      }
+    }
+  }
+
+  private var viewPicker: some View {
+    HStack {
+      Text("공연 다시 듣기")
+        .font(.title3)
+        .bold()
+      Spacer()
+      Picker("Form Selection", selection: $vieWModel.userSelection) {
+        ForEach(vieWModel.options, id: \.self) {
+          Image(systemName: $0)
+        }
+      }
+      .pickerStyle(.segmented)
+      .frame(width: UIWidth * 0.3)
     }
   }
 }

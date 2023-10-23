@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
+		0B92AD7D2AE60E6D0046AD53 /* ConcertListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92AD7A2AE60E6D0046AD53 /* ConcertListViewModel.swift */; };
+		0B92AD7E2AE60E6D0046AD53 /* SampleArchiveMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92AD7B2AE60E6D0046AD53 /* SampleArchiveMainView.swift */; };
+		0B92AD7F2AE60E6D0046AD53 /* ConcertListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92AD7C2AE60E6D0046AD53 /* ConcertListView.swift */; };
 		0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406552E60CD13BEAD883FA3 /* ArchiveBlcokViewModel.swift */; };
 		1F4F0BECF2887CC08E04BC76 /* ArchivingConcertBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9373E7A1B9132D27C04F7C4 /* ArchivingConcertBlockView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		0262BAC1BBABEA8ACE800B1F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		0B92AD7A2AE60E6D0046AD53 /* ConcertListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcertListViewModel.swift; sourceTree = "<group>"; };
+		0B92AD7B2AE60E6D0046AD53 /* SampleArchiveMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleArchiveMainView.swift; sourceTree = "<group>"; };
+		0B92AD7C2AE60E6D0046AD53 /* ConcertListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcertListView.swift; sourceTree = "<group>"; };
 		1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
@@ -107,6 +113,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B92AD792AE60E6D0046AD53 /* LorenzoArchiveScene */ = {
+			isa = PBXGroup;
+			children = (
+				0B92AD7A2AE60E6D0046AD53 /* ConcertListViewModel.swift */,
+				0B92AD7B2AE60E6D0046AD53 /* SampleArchiveMainView.swift */,
+				0B92AD7C2AE60E6D0046AD53 /* ConcertListView.swift */,
+			);
+			path = LorenzoArchiveScene;
+			sourceTree = "<group>";
+		};
 		0D8A263344ADAE654A37E011 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +181,7 @@
 		48F6722CA62D2646F716C0F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0B92AD792AE60E6D0046AD53 /* LorenzoArchiveScene */,
 				5C3F5CC91689B43480025D3A /* ArchiveScene */,
 				1E4BCC9FA52881309D189527 /* MainScene */,
 				B9DEE02445017E26BC98FA76 /* SearchScene */,
@@ -336,8 +353,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -393,7 +408,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/#12/New/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/New#36/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -405,15 +420,18 @@
 				803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */,
 				309172FE05CC22EE9255692A /* SeeAllArtist.swift in Sources */,
 				DF31E26567C84E38796B59EA /* ArchiveYearCell.swift in Sources */,
+				0B92AD7D2AE60E6D0046AD53 /* ConcertListViewModel.swift in Sources */,
 				1F4F0BECF2887CC08E04BC76 /* ArchivingConcertBlockView.swift in Sources */,
 				249750C66E67B0994C0245FC /* BlockAllConcertView.swift in Sources */,
 				0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */,
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
 				62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */,
 				66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */,
+				0B92AD7E2AE60E6D0046AD53 /* SampleArchiveMainView.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
+				0B92AD7F2AE60E6D0046AD53 /* ConcertListView.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
@@ -476,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

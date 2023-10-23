@@ -31,11 +31,10 @@ struct ArchivingConcertBlockView: View {
             .simultaneousGesture(TapGesture().onEnded {
               viewModel.selecteYear = viewModel.concertCellInfo[index].0
             })
-
+            
           }
         }
       }
-      .scrollIndicators(.hidden)
     }
     .onAppear {
       loadInfo(concertInfo: .constant(concertInfo),
