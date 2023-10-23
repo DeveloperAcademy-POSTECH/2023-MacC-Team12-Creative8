@@ -79,6 +79,11 @@ public struct MainView: View {
         }
         .onAppear {
             dataManager.modelContext = modelContext
+          var idx = 0
+          for artist in likeArtists {
+            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+            idx += 1
+          }
         }
     }
     public var logo: some View {
@@ -203,15 +208,14 @@ public struct MainView: View {
                                 ProgressView()
                             }
                         }
-                        .onAppear {
-                            viewModel.getSetlistsFromSetlistFM(artistMbid: likeArtists[data].artistInfo.mbid)
-                        }
+                      
                         if viewModel.isLoading {
                             ProgressView()
                         } else {
-                            ForEach(viewModel.setlists?.prefix(3) ?? [], id: \.id) { item in
-                                let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item.eventDate ?? "")
-                                let year = viewModel.getFormattedYear(date: item.eventDate ?? "")
+                          let current: [Setlist?] = viewModel.setlists[data] ?? []
+                          ForEach(current.prefix(3), id: \.?.id) { item in
+                            let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                            let year = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
                                 VStack(spacing: 0) {
                                     HStack(spacing: 0) {
                                         VStack(alignment: .center) {
@@ -224,24 +228,22 @@ public struct MainView: View {
                                         Spacer()
                                             .frame(width: screenWidth * 0.11)
                                         VStack(alignment: .leading, spacing: 0) {
-                                            Text(item.tour?.name ?? "등록된 공연 이름이 없습니다")
+                                          Text(item?.tour?.name ?? "등록된 공연 이름이 없습니다")
                                                 .bold()
                                                 .padding(.bottom, 2)
-                                                .lineLimit(1)
-                                            Text(item.venue?.name ?? "등록된 장소가 없습니다")
+                                          Text(item?.venue?.name ?? "등록된 장소가 없습니다")
                                         }
                                         .font(.system(size: 14))
                                         Spacer()
                                     }
                                     .padding(.vertical)
-                                    .padding(.horizontal)
                                     Divider()
                                 }
                                 .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
                                 .animation(.easeInOut(duration: 0.1))
-                                .frame(width: screenWidth * 0.78)
                             }
                         }
+                      
                     }
                 }
             }
