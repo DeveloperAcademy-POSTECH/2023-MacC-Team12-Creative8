@@ -109,9 +109,10 @@ public struct MainView: View {
     public var artistNameScrollView: some View {
         ScrollView(.horizontal) {
             ScrollViewReader { scrollViewProxy in
-                HStack(spacing: 54) {
+                HStack(spacing: screenWidth * 0.13) {
                     ForEach(0..<viewModel.sampleData.count, id: \.self) { data in
-                        Text(.init(viewModel.sampleData[data].artist))
+                        let artistName = viewModel.replaceFirstSpaceWithNewline(viewModel.sampleData[data].artist)
+                        Text(.init(artistName))
                             .background(Color.clear)
                             .font(.system(size: 25))
                             .bold()
@@ -251,7 +252,6 @@ struct TopButtonView: View {
             return "moon.fill"
         }
     }
-
     var label: String {
         switch buttonType {
         case .system:
@@ -262,7 +262,6 @@ struct TopButtonView: View {
             return "다크"
         }
     }
-
     var body: some View {
         Button {
             viewModel.isTapped.toggle()
