@@ -57,33 +57,39 @@ public struct SearchView: View {
     .padding(.top)
   }
   
-  private var artistView: some View {
-    LazyVStack(alignment: .leading) {
-      domesticArtistView
-        .padding(.vertical, 64)
-      foreignArtistView
-    }
-    .disabled(viewModel.searchIsPresented)
-    .opacity(viewModel.searchIsPresented ? 0 : 1)
-    .overlay { searchingHistoryView }
-  }
+//  private var artistView: some View {
+//    LazyVStack(alignment: .leading) {
+//      domesticArtistView
+//        .padding(.vertical, 64)
+//      foreignArtistView
+//    }
+//    .disabled(viewModel.searchIsPresented)
+//    .opacity(viewModel.searchIsPresented ? 0 : 1)
+//    .overlay { searchingHistoryView }
+//  }
   
-  private var domesticArtistView: some View {
-    VStack(alignment: .leading) {
-      Text("국내 아티스트").bold()
-      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-      }
-    }
-  }
-  
-  private var foreignArtistView: some View {
-    VStack(alignment: .leading) {
-      Text("해외 아티스트").bold()
-      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-      }
-    }
-  }
-  
+//  private var domesticArtistView: some View {
+//    VStack(alignment: .leading) {
+//      Text("국내 아티스트").bold()
+//      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
+//        ForEach(tempColor, id: \.self) { item in
+//          SearchArtistCell(tempColor: item, artistName: "Dummy")
+//        }
+//      }
+//    }
+//  }
+//  
+//  private var foreignArtistView: some View {
+//    VStack(alignment: .leading) {
+//      Text("해외 아티스트").bold()
+//      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
+//        ForEach(tempColor, id: \.self) { item in
+//          SearchArtistCell(tempColor: item, artistName: "Dummy")
+//        }
+//      }
+//    }
+//  }
+//  
   private var searchingHistoryView: some View {
     ScrollView {
       LazyVStack {
