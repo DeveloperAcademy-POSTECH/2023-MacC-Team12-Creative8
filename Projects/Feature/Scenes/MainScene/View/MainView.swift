@@ -244,6 +244,7 @@ public struct MainView: View {
                                         Spacer()
                                     }
                                     .padding(.vertical)
+                                    .padding(.horizontal)
                                     Divider()
                                     .foregroundStyle(Color.lineGrey1)
                                 }
