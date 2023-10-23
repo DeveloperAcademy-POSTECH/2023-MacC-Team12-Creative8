@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Core
 import UI
 
@@ -54,7 +55,9 @@ struct ArtistView: View {
 
 private struct ArtistImageView: View {
   @ObservedObject var vm: ArtistViewModel
-  
+  @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
   var body: some View {
     ZStack(alignment: .bottom) {
       if vm.image != nil {
@@ -72,6 +75,7 @@ private struct ArtistImageView: View {
     .padding()
     .onAppear {
       vm.loadImage()
+      dataManager.modelContext = modelContext
     }
   }
   
@@ -92,7 +96,8 @@ private struct ArtistImageView: View {
   
   private var buttonLayer: some View {
     Button(action: {
-      
+      print("add")
+      dataManager.addLikeArtist(name: vm.artistInfo!.name, country: "", alias: (vm.artistInfo?.alias)!, mbid: vm.artistInfo!.mbid, gid: vm.artistInfo?.gid ?? 0, imageUrl: vm.artistInfo?.imageUrl ?? "", songList: vm.artistInfo?.songList ?? [])
     }, label: {
       Circle()
         .frame(width: screenWidth * 0.1)
@@ -239,7 +244,7 @@ private struct ListView: View {
   private var setlistsLayer: some View {
     ForEach(vm.setlists ?? [], id: \.id) { setlist in
       NavigationLink {
-//        SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
+        SetlistView(setlist: setlist, isShowModal: .constant(false), artistInfo: vm.artistInfo)
       } label: {
         HStack {
           Spacer()

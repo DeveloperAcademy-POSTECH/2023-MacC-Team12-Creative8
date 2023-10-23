@@ -104,8 +104,9 @@ struct ArchivingView: View {
     VStack(spacing: 0) {
       viewPicker
         .padding(.bottom)
-      if concertInfo.isEmpty { blockIsEmptyView }
-      else {
+      if concertInfo.isEmpty {
+        blockIsEmptyView
+      } else {
         if vieWModel.userSelection == vieWModel.options[1] {
           ArchivingConcertBlockView()
         } else {
