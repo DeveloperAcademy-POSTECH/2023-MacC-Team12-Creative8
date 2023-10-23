@@ -3,17 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
+<<<<<<< HEAD
 	objectVersion = 56;
+=======
+	objectVersion = 50;
+>>>>>>> develop
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0F3EBD548A92D7401B1FC633 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
-		2CB9554FA46EE201EEE9B770 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A32F6B5783E65B4D73C2B4 /* Feature.framework */; };
+		2CB9554FA46EE201EEE9B770 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A32F6B5783E65B4D73C2B4 /* Feature.framework */; platformFilter = ios; };
 		2E743A6F76CCB6064D781210 /* TuistAssets+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D529DAAF6A9D59C44D9D68 /* TuistAssets+App.swift */; };
-		37574800795554892D7FAF1C /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44A32F6B5783E65B4D73C2B4 /* Feature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37574800795554892D7FAF1C /* Feature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44A32F6B5783E65B4D73C2B4 /* Feature.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48469C5111BF762561C9B9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		6BBFFFC4A20F0DB9E7B30A4C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2FDE9983B290852737837A /* App.swift */; };
-		AAB073F1221B89F1B9D0816C /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 514C6A786251DDEC6B3DFF77 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AAB073F1221B89F1B9D0816C /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 514C6A786251DDEC6B3DFF77 /* Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE078F42728C23B77EE02A1B /* TuistBundle+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CD4D343ECF7F321C1905D /* TuistBundle+App.swift */; };
 /* End PBXBuildFile section */
 
@@ -221,7 +225,6 @@
 		6B590BF25178DC7D824D09CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 					99DCC7BD0ABB09C467644299 = {
@@ -230,7 +233,7 @@
 				};
 			};
 			buildConfigurationList = B3FD05C59F197F398A0B04AB /* Build configuration list for PBXProject "App" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -285,7 +288,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> develop
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -336,12 +343,11 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/App";
 				TEST_TARGET_NAME = App;
 			};
 			name = Release;
@@ -364,7 +370,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -443,13 +448,12 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/App";
 				TEST_TARGET_NAME = App;
 			};
 			name = Debug;
@@ -472,7 +476,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

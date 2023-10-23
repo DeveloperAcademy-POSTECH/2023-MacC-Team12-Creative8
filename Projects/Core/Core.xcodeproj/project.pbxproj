@@ -14,14 +14,16 @@
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
 		882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */; };
 		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
-		A884330D286DFEAC546F7ED6 /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513DAC267D32D53AB20C0466 /* SearchHistoryManager.swift */; };
+		B5AEB3196F16E3C52EC16288 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7A7F738C7D540C1FDA072E /* SwiftDataManager.swift */; };
 		B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004E9629A66EFA763B287E6 /* AppleMusicService.swift */; };
+		B6B2E5BD39B2856B9DE9966C /* SaveSetlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BA5525B0777162DED185D /* SaveSetlist.swift */; };
 		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
 		BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */; };
+		CFCE7846B7A050A6A39745F3 /* ArchivedConcertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F16996E458A8A1147E2AE /* ArchivedConcertInfo.swift */; };
 		DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */; };
 		E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4F12A755C30296E33F86F /* KoreanConverter.swift */; };
+		E443D461EB2E1D55C196E6F1 /* SaveArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DD837E5346A7627964873 /* SaveArtistInfo.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
-		F39A4744EC1737F60D804002 /* LikeArtistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B43EB87F46410491E1EFE /* LikeArtistManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,19 +60,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		143BA5525B0777162DED185D /* SaveSetlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSetlist.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoModel.swift; sourceTree = "<group>"; };
 		3CF4F12A755C30296E33F86F /* KoreanConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanConverter.swift; sourceTree = "<group>"; };
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		513DAC267D32D53AB20C0466 /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
+		4B7A7F738C7D540C1FDA072E /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
+		4F5F16996E458A8A1147E2AE /* ArchivedConcertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedConcertInfo.swift; sourceTree = "<group>"; };
 		752E25910681A644F3142B68 /* LikeArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArtistModel.swift; sourceTree = "<group>"; };
 		75600AD4887E89C2223BF659 /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
+		845DD837E5346A7627964873 /* SaveArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveArtistInfo.swift; sourceTree = "<group>"; };
 		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
 		B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
 		C004E9629A66EFA763B287E6 /* AppleMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicService.swift; sourceTree = "<group>"; };
-		CA7B43EB87F46410491E1EFE /* LikeArtistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArtistManager.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
 		DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDataManager.swift; sourceTree = "<group>"; };
 		E2A32F1995BE8972BD993B58 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
@@ -97,12 +101,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		147FFDBBAC4222F745CC3624 /* LikeArtistManager */ = {
+		1D24A802930D16A11D426C90 /* ArtistInfoModel */ = {
 			isa = PBXGroup;
 			children = (
-				CA7B43EB87F46410491E1EFE /* LikeArtistManager.swift */,
+				845DD837E5346A7627964873 /* SaveArtistInfo.swift */,
 			);
-			path = LikeArtistManager;
+			path = ArtistInfoModel;
 			sourceTree = "<group>";
 		};
 		250C62EE12DB56ECEBB473C3 /* Products */ = {
@@ -117,6 +121,8 @@
 		3CE205FFA0B9CE31813EAD2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FBB67E0A7C510A1556E61901 /* ArchivedConcertInfo */,
+				1D24A802930D16A11D426C90 /* ArtistInfoModel */,
 				BA3705CCAD85F676EBD53A9D /* LikeArtist */,
 				8B4738DB1F5DC668DE8D0814 /* SearchHistory */,
 				3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */,
@@ -131,8 +137,8 @@
 		4B1834DCC43C3F56D1CEA944 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				147FFDBBAC4222F745CC3624 /* LikeArtistManager */,
 				F9ABF6693A4A2ECC58141089 /* SearchHistoryDataManager */,
+				6102295BF8EA6BD3F00B6FE2 /* SwiftDataManager */,
 				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
@@ -147,6 +153,14 @@
 				D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		6102295BF8EA6BD3F00B6FE2 /* SwiftDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				4B7A7F738C7D540C1FDA072E /* SwiftDataManager.swift */,
+			);
+			path = SwiftDataManager;
 			sourceTree = "<group>";
 		};
 		62824534F75515F48E8114A7 = {
@@ -212,9 +226,17 @@
 			children = (
 				DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */,
 				3CF4F12A755C30296E33F86F /* KoreanConverter.swift */,
-				513DAC267D32D53AB20C0466 /* SearchHistoryManager.swift */,
 			);
 			path = SearchHistoryDataManager;
+			sourceTree = "<group>";
+		};
+		FBB67E0A7C510A1556E61901 /* ArchivedConcertInfo */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F16996E458A8A1147E2AE /* ArchivedConcertInfo.swift */,
+				143BA5525B0777162DED185D /* SaveSetlist.swift */,
+			);
+			path = ArchivedConcertInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,7 +361,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCE7846B7A050A6A39745F3 /* ArchivedConcertInfo.swift in Sources */,
+				B6B2E5BD39B2856B9DE9966C /* SaveSetlist.swift in Sources */,
 				BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */,
+				E443D461EB2E1D55C196E6F1 /* SaveArtistInfo.swift in Sources */,
 				14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */,
 				E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */,
 				DC89DC3BBCE399FE46C00578 /* GeniusSongsModel.swift in Sources */,
@@ -348,11 +373,10 @@
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
-				F39A4744EC1737F60D804002 /* LikeArtistManager.swift in Sources */,
 				882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */,
 				E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */,
-				A884330D286DFEAC546F7ED6 /* SearchHistoryManager.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
+				B5AEB3196F16E3C52EC16288 /* SwiftDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

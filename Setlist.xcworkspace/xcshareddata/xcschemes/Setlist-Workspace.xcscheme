@@ -14,34 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93E9E330FC2CE7458D9C925F"
-               BuildableName = "App.app"
-               BlueprintName = "App"
-               ReferencedContainer = "container:Projects/App/App.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99DCC7BD0ABB09C467644299"
-               BuildableName = "AppTests.xctest"
-               BlueprintName = "AppTests"
-               ReferencedContainer = "container:Projects/App/App.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
                BuildableName = "Core.framework"
                BlueprintName = "Core"
@@ -98,6 +70,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "611399E84463D116CB4F7010"
+               BuildableName = "Seta.app"
+               BlueprintName = "Seta"
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F44DE949E94917A5BE3D2F4"
+               BuildableName = "SetaTests.xctest"
+               BlueprintName = "SetaTests"
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "A71F8DD2A4C18857FFBFF581"
                BuildableName = "UI.framework"
                BlueprintName = "UI"
@@ -130,16 +130,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99DCC7BD0ABB09C467644299"
-               BuildableName = "AppTests.xctest"
-               BlueprintName = "AppTests"
-               ReferencedContainer = "container:Projects/App/App.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "73B1A2AD90A7970B7DB39CDC"
                BuildableName = "CoreTests.xctest"
                BlueprintName = "CoreTests"
@@ -154,6 +144,16 @@
                BuildableName = "FeatureTests.xctest"
                BlueprintName = "FeatureTests"
                ReferencedContainer = "container:Projects/Feature/Feature.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F44DE949E94917A5BE3D2F4"
+               BuildableName = "SetaTests.xctest"
+               BlueprintName = "SetaTests"
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -178,16 +178,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93E9E330FC2CE7458D9C925F"
-            BuildableName = "App.app"
-            BlueprintName = "App"
-            ReferencedContainer = "container:Projects/App/App.xcodeproj">
+            BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
+            BuildableName = "Core.framework"
+            BlueprintName = "Core"
+            ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -195,16 +194,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93E9E330FC2CE7458D9C925F"
-            BuildableName = "App.app"
-            BlueprintName = "App"
-            ReferencedContainer = "container:Projects/App/App.xcodeproj">
+            BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
+            BuildableName = "Core.framework"
+            BlueprintName = "Core"
+            ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		080A199A8C538F3C58813099 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3198357237EE3291ABE835E6 /* ArtistViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
+		0AA6F3D4A590D8F496A96045 /* ArtistSetlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50DEEB6F91B74F37AE65D6 /* ArtistSetlistCell.swift */; };
 		0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406552E60CD13BEAD883FA3 /* ArchiveBlcokViewModel.swift */; };
 		1F4F0BECF2887CC08E04BC76 /* ArchivingConcertBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9373E7A1B9132D27C04F7C4 /* ArchivingConcertBlockView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
@@ -23,6 +24,8 @@
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
 		803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */; };
+		8109EF2B904B3554B527353F /* ConcertListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1A05AAA65CFA9DF59D42CE /* ConcertListView.swift */; };
+		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */; };
@@ -73,6 +76,7 @@
 		1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		2E1A05AAA65CFA9DF59D42CE /* ConcertListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertListView.swift; sourceTree = "<group>"; };
 		2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
 		3198357237EE3291ABE835E6 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		9F8B02904D51D96EB3326921 /* BlockAllConcertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAllConcertView.swift; sourceTree = "<group>"; };
 		A215FBB13B09E45FD00ED57C /* Feature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Feature-Info.plist"; sourceTree = "<group>"; };
 		A9373E7A1B9132D27C04F7C4 /* ArchivingConcertBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingConcertBlockView.swift; sourceTree = "<group>"; };
+		AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistList.swift; sourceTree = "<group>"; };
 		B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		B5D29AC7BB9AE42983F99AB4 /* SeeAllArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllArtist.swift; sourceTree = "<group>"; };
 		B7F2F8F05B58D59460428D7A /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -97,6 +102,7 @@
 		D23792655CD82BB584579EB6 /* ArchiveYearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveYearCell.swift; sourceTree = "<group>"; };
 		D2E966455637831DC7FA52A6 /* FeatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F13B904D1DF7D17856476773 /* SetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistView.swift; sourceTree = "<group>"; };
+		FA50DEEB6F91B74F37AE65D6 /* ArtistSetlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetlistCell.swift; sourceTree = "<group>"; };
 		FFAB8E69261DF7B00B491EB6 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */,
+				AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */,
 				C766B8B4DF5C405ABA13CEBB /* SearchbarCustom.swift */,
 				206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */,
 			);
@@ -180,6 +187,7 @@
 			children = (
 				D23792655CD82BB584579EB6 /* ArchiveYearCell.swift */,
 				A9373E7A1B9132D27C04F7C4 /* ArchivingConcertBlockView.swift */,
+				FA50DEEB6F91B74F37AE65D6 /* ArtistSetlistCell.swift */,
 				9F8B02904D51D96EB3326921 /* BlockAllConcertView.swift */,
 			);
 			path = View;
@@ -237,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */,
+				2E1A05AAA65CFA9DF59D42CE /* ConcertListView.swift */,
 				B5D29AC7BB9AE42983F99AB4 /* SeeAllArtist.swift */,
 			);
 			path = Artist;
@@ -488,9 +497,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */,
+				8109EF2B904B3554B527353F /* ConcertListView.swift in Sources */,
 				309172FE05CC22EE9255692A /* SeeAllArtist.swift in Sources */,
 				DF31E26567C84E38796B59EA /* ArchiveYearCell.swift in Sources */,
 				1F4F0BECF2887CC08E04BC76 /* ArchivingConcertBlockView.swift in Sources */,
+				0AA6F3D4A590D8F496A96045 /* ArtistSetlistCell.swift in Sources */,
 				249750C66E67B0994C0245FC /* BlockAllConcertView.swift in Sources */,
 				0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */,
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
@@ -500,6 +511,7 @@
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
+				900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,

@@ -15,7 +15,7 @@ public struct SearchView: View {
   @Query private var history: [SearchHistory] = []
   @StateObject var viewModel = SearchViewModel()
   @Environment (\.modelContext) var modelContext
-  @StateObject var dataManager = SearchHistoryManager()
+//  @StateObject var dataManager = SearchHistoryManager()
   // MARK: - 임시 값
   let tempColor: [Color] = [.red, .orange, .green, .blue, .purple, .pink, .cyan, .indigo, .mint]
   
@@ -48,6 +48,9 @@ public struct SearchView: View {
 
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
+        .onChange(of: viewModel.searchText) {
+          viewModel.getArtistList()
+        }
     }
     .padding(.top)
   }
@@ -93,25 +96,24 @@ public struct SearchView: View {
             Text("최근 검색").bold()
             Spacer()
             Button("Test") {
-              dataManager.addItem(searchText: "Dummy")
+//              dataManager.addItem(searchText: "Dummy")
             }
             Button("모두 지우기") {
-              dataManager.deleteAll()
+//              dataManager.deleteAll()
             }
             .foregroundStyle(.black)
             .bold()
           }
 
           ForEach(history, id: \.self) { item in
-            SearchHistoryCell(searchText: $viewModel.searchText, dataManager: dataManager, history: item)
+//            SearchHistoryCell(searchText: $viewModel.searchText, dataManager: dataManager, history: item)
           }
         } else {
-          // 검색 API
-          Text("검색 뷰 나와야함")
+          SearchArtistList(viewModel: viewModel)
         }
       }
     }
-    .onAppear { dataManager.modelContext = modelContext }
+//    .onAppear { dataManager.modelContext = modelContext }
     .opacity(viewModel.searchIsPresented ? 1 : 0)
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
   }

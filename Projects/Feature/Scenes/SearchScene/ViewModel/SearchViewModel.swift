@@ -7,10 +7,31 @@
 //
 
 import SwiftUI
+import Core
 
 final class SearchViewModel: ObservableObject {
+  let dataService: SetlistDataService = SetlistDataService.shared
+  let koreanConverter: KoreanConverter = KoreanConverter.shared
+  
   @Published var searchText: String = ""
   @Published  var searchIsPresented: Bool = false
+  @Published var artistList: [MusicBrainzArtist] = []
+  @Published var isLoading: Bool = false
+  
+  func getArtistList() {
+    self.isLoading = true
+    self.dataService.searchArtistsFromMusicBrainz(artistName: self.searchText) { result in
+          if let result = result {
+              DispatchQueue.main.async {
+                self.artistList = result.artists ?? []
+                self.isLoading = false
+              }
+          } else {
+              print("Failed to fetch musicbrainz data.")
+          }
+      }
+  }
+  
 }
 enum ScrollID: String {
   case top

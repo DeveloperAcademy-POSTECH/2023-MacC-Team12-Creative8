@@ -17,7 +17,7 @@ struct SetlistApp: App {
     
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
-        LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self
+        ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
       ])
       let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -36,5 +36,6 @@ struct SetlistApp: App {
       }
     }
     .modelContainer(sharedModelContainer)
+
   }
 }
