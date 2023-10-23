@@ -249,7 +249,7 @@ private struct ListView: View {
   private var setlistsLayer: some View {
     ForEach(vm.setlists ?? [], id: \.id) { setlist in
       NavigationLink {
-        SetlistView(setlist: setlist, isShowModal: .constant(false), artistInfo: vm.artistInfo)
+        SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
           Spacer()

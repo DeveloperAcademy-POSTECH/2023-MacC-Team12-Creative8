@@ -12,8 +12,10 @@ import SwiftData
 @Model
 public final class SearchHistory {
   public var artistInfo: SaveArtistInfo
+  public var createdDate: Date
 
   init(artistInfo: SaveArtistInfo) {
     self.artistInfo = artistInfo
+    self.createdDate = Date()
   }
 }

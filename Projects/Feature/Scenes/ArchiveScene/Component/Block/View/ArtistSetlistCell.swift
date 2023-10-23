@@ -14,8 +14,6 @@ struct ArtistSetlistCell: View {
   let isDetail: Bool
 
   let dataServiece = SetlistDataService.shared
-  @State var isShowModal: Bool = false
-  @State var setlist: Setlist? = nil
   @StateObject var viewModel = ArchiveViewModel()
   @StateObject var dataManager = SwiftDataManager()
   @ObservedObject var setlistVm = SetlistViewModel()
@@ -33,7 +31,7 @@ struct ArtistSetlistCell: View {
       Button {
         dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
           if let setlist = setlist {
-            self.setlist = setlist
+            viewModel.setlist = setlist
             viewModel.isActiveButton.toggle()
           }
         })
@@ -60,9 +58,8 @@ struct ArtistSetlistCell: View {
         }
       }
       .navigationDestination(isPresented: $viewModel.isActiveButton) {
-        if let setlist = setlist {
+        if let setlist = viewModel.setlist {
           SetlistView(setlist: setlist,
-                      isShowModal: $isShowModal,
                       artistInfo: artistInfo)
         }
       }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 
 final class ArchiveViewModel: ObservableObject {
   @Published var concertCellInfo: [(Int, Int)] = []
@@ -14,7 +15,8 @@ final class ArchiveViewModel: ObservableObject {
   @Published var selecteYear: Int = 0
   @Published var artistUnique: [String] = []
   @Published var isActiveButton: Bool = false
-
+  var setlist: Setlist? = nil
+  
   @Published var userSelection = "music.note.list"
   let options = ["music.note.list", "batteryblock"]
   // 월.일 형태
