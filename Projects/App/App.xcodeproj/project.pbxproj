@@ -15,6 +15,7 @@
 		48469C5111BF762561C9B9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		6BBFFFC4A20F0DB9E7B30A4C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2FDE9983B290852737837A /* App.swift */; };
 		AAB073F1221B89F1B9D0816C /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 514C6A786251DDEC6B3DFF77 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FAA94D12F5B75DA50251DB63 /* test.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = E18480E82A9496DC1BB11187 /* test.xlsx */; };
 		FE078F42728C23B77EE02A1B /* TuistBundle+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083CD4D343ECF7F321C1905D /* TuistBundle+App.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		95D529DAAF6A9D59C44D9D68 /* TuistAssets+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+App.swift"; sourceTree = "<group>"; };
 		99BC9665070D353DEC16671B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BAFF060C3D8E68253DF6AABA /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E18480E82A9496DC1BB11187 /* test.xlsx */ = {isa = PBXFileReference; path = test.xlsx; sourceTree = "<group>"; };
 		FE2FDE9983B290852737837A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 			children = (
 				8F7F83A194E1D17030DCA033 /* Assets.xcassets */,
 				057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */,
+				E18480E82A9496DC1BB11187 /* test.xlsx */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				48469C5111BF762561C9B9B6 /* Assets.xcassets in Resources */,
 				0F3EBD548A92D7401B1FC633 /* LaunchScreen.storyboard in Resources */,
+				FAA94D12F5B75DA50251DB63 /* test.xlsx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +297,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
