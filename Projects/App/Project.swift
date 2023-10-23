@@ -13,9 +13,11 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   packages: [
+    .CoreXLSX
   ],
   dependencies: [
-    .Projcet.Feature
+    .Projcet.Feature,
+    .SPM.CoreXLSX
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

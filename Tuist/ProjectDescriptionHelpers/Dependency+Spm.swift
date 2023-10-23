@@ -12,10 +12,11 @@ public extension TargetDependency {
 }
 
 public extension Package {
+  static let CoreXLSX = Package.remote(url: "https://github.com/CoreOffice/CoreXLSX.git", requirement: .upToNextMajor(from: "0.14.2"))
 
 }
 
 public extension TargetDependency.SPM {
-
+  static let CoreXLSX = TargetDependency.package(product: "CoreXLSX")
 }
 
