@@ -29,6 +29,19 @@ public struct Setlist: Codable {
   public let url: String?
   public let info: String?
   public let tour: Tour?
+
+  public init(id: String?, versionId: String?, eventDate: String?, lastUpdated: String?, artist: Artist?, venue: Venue?, sets: Sets?, url: String?, info: String?, tour: Tour?) {
+    self.id = id
+    self.versionId = versionId
+    self.eventDate = eventDate
+    self.lastUpdated = lastUpdated
+    self.artist = artist
+    self.venue = venue
+    self.sets = sets
+    self.url = url
+    self.info = info
+    self.tour = tour
+  }
 }
 
 // MARK: - Artist
@@ -38,12 +51,24 @@ public struct Artist: Codable {
   public let sortName: String?
   public let disambiguation: String?
   public let url: String?
+
+  public init(mbid: String?, name: String?, sortName: String?, disambiguation: String?, url: String?) {
+    self.mbid = mbid
+    self.name = name
+    self.sortName = sortName
+    self.disambiguation = disambiguation
+    self.url = url
+  }
 }
 
 // MARK: - Sets
 public struct Sets: Codable {
   public let setsSet: [Session]?
-  
+
+  public init(setsSet: [Session]?) {
+    self.setsSet = setsSet
+  }
+
   enum CodingKeys: String, CodingKey {
     case setsSet = "set"
   }
@@ -54,6 +79,12 @@ public struct Session: Codable {
   public let song: [Song]?
   public let encore: Int?
   public let name: String?
+
+  public init(song: [Song]?, encore: Int?, name: String?) {
+    self.song = song
+    self.encore = encore
+    self.name = name
+  }
 }
 
 // MARK: - Song

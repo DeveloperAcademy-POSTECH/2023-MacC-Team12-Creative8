@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import UI
 import Core
 
@@ -14,9 +15,9 @@ private let gray: Color = Color(hex: 0xEAEAEA)
 
 struct SetlistView: View {
   let setlist: Setlist
-  @Binding var isShowModal: Bool
   let artistInfo: ArtistInfo?
   @StateObject var vm = SetlistViewModel()
+  @State private var isShowModal = false
   
   var body: some View {
     VStack {
@@ -27,7 +28,7 @@ struct SetlistView: View {
         ScrollView {
           ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
           ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-          AddPlaylistButton()
+          addPlaylistButton
           BottomView()
         }
       }
@@ -45,16 +46,40 @@ struct SetlistView: View {
     }
     .foregroundStyle(Color.fontBlack)
     .sheet(isPresented: self.$isShowModal) {
-      BottomModalView()
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+        .presentationDetents([.fraction(0.4)])
+        .presentationDragIndicator(.visible)
     }
   }
+  
+  private var addPlaylistButton: some View {
+      VStack {
+        Spacer()
+        Button(action: {
+          self.isShowModal.toggle()
+        }, label: {
+          RoundedRectangle(cornerRadius: 10)
+            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
+            .foregroundStyle(gray)
+            .overlay {
+              Text("플레이리스트 등록")
+                .foregroundStyle(Color.primary)
+                .bold()
+            }
+        })
+        .padding(.bottom)
+      }
+    }
 }
 
 private struct ConcertInfoView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  
+  @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 14)
@@ -90,18 +115,39 @@ private struct ConcertInfoView: View {
         .padding(.horizontal)
         
         Button(action: {
-          
+          if vm.isBookmarked {
+            for i in 0..<concertInfo.count {
+              if concertInfo[i].setlist.setlistId == setlist?.id {
+                dataManager.deleteArchivedConcertInfo(concertInfo[i])
+              }
+            }
+          } else {
+            let newArtist = SaveArtistInfo(
+              name: setlist?.artist?.name ?? "",
+              country: "",
+              alias: artistInfo?.alias ?? "",
+              mbid: artistInfo?.mbid ?? "",
+              gid: artistInfo?.gid ?? 0,
+              imageUrl: artistInfo?.imageUrl ?? "",
+              songList: dataManager.songListEncoder(artistInfo?.songList ?? []))
+            let newSetlist = SaveSetlist(
+              setlistId: setlist?.id ?? "",
+              date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+              venue: setlist?.venue?.name ?? "",
+              title: setlist?.tour?.name ?? "")
+            dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+          }
         }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: 14)
-              .foregroundColor(Color.blockFontWhite)
+              .foregroundColor(vm.isBookmarked ? Color.white : Color.gray)
             HStack {
               Text("해당 공연 다시 듣기")
               Spacer()
               Image(systemName: "checkmark")
             }
             .padding(.horizontal)
-            .foregroundStyle(Color.black)
+            .foregroundStyle(vm.isBookmarked ? Color.black : Color.white)
             .fontWeight(.semibold)
           }
           .frame(height: UIHeight * 0.065)
@@ -114,6 +160,13 @@ private struct ConcertInfoView: View {
     }
     .padding(.horizontal)
     .frame(height: UIHeight * 0.35)
+    .onAppear { 
+      dataManager.modelContext = modelContext
+      vm.isBookmark(concertInfo, setlist)
+    }
+    .onChange(of: concertInfo) { _, newValue in
+      vm.isBookmark(newValue, setlist)
+    }
   }
 }
 
@@ -165,21 +218,22 @@ private struct ListView: View {
                   info: song.info
                 )
               }
-              
               if index + 1 < songs.count {
                 Divider()
                   .foregroundStyle(Color.lineGrey1)
               }
+              // 애플 뮤직용 음악 배열
+              if !vm.setlistSongName.contains(title) {
+                let _ = vm.setlistSongName.append(title)
+              }
             }
           }
-          
         }
         .padding(.vertical, UIHeight * 0.03)
       }
     }
     .padding(.horizontal, UIWidth * 0.1)
     .padding(.bottom)
-    
   }
 }
 
@@ -250,8 +304,6 @@ private struct BottomView: View {
         })
       }
       .padding(.horizontal)
-    }
-    .frame(height: UIHeight * 0.25)
   }
 }
 
@@ -312,12 +364,19 @@ private struct EmptySetlistView: View {
 }
 
 private struct BottomModalView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
+  @ObservedObject var vm: SetlistViewModel
+
   var body: some View {
-    VStack(alignment: .leading, spacing: UIHeight * 0.02) {
-      Spacer().frame(height: UIHeight * 0.1)
+    Spacer().frame(height: UIHeight * 0.07)
+    VStack(alignment: .leading, spacing: UIHeight * 0.03) {
       Group {
         listView(title: "Apple Music에 옮기기", description: nil, action: {
-          // TODO: 플레이리스트 연동
+          AppleMusicService().requestMusicAuthorization()
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
+          
         })
         .padding(.bottom, 31)
         
@@ -329,7 +388,8 @@ private struct BottomModalView: View {
           }
         )
       }
-      
+      .opacity(0.6)
+
       Spacer()
     }
     .padding(.horizontal, 20)
@@ -337,7 +397,7 @@ private struct BottomModalView: View {
   
   private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
     HStack {
-      VStack(alignment: .leading, spacing: 4) {
+      VStack(alignment: .leading, spacing: UIHeight * 0.01) {
         Text(title)
           .font(.system(size: 16, weight: .semibold))
           .foregroundStyle(Color.fontBlack)
@@ -360,6 +420,16 @@ private struct BottomModalView: View {
   }
 }
 
-#Preview {
-  BottomModalView()
+extension View {
+  func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = format
+      dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
+
+      if let date = dateFormatter.date(from: dateString) {
+          return date
+      } else {
+          return nil // 날짜 형식이 맞지 않을 경우 nil 반환
+      }
+  }
 }
