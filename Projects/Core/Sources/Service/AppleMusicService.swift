@@ -17,7 +17,7 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
   }
   
   // 플레이리스트 추가 및 음악 목록 추가
-  public func addPlayList(name: String, musicList: [String]) {
+  public func addPlayList(name: String, musicList: [String], singer: String) {
     Task {
       // musicList를 index가 들어간 튜플로 변환
       let indexedMusicList = musicList.enumerated().map { (index, title) in

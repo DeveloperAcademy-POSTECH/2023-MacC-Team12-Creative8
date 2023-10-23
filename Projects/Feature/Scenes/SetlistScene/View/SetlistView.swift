@@ -303,7 +303,9 @@ private struct BottomModalView: View {
     VStack(alignment: .leading, spacing: UIHeight * 0.03) {
       Group {
         listView(title: "Apple Music에 옮기기", description: nil, action: {
-          // TODO: 플레이리스트 연동
+          AppleMusicService().requestMusicAuthorization()
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          
         })
         
         listView(
