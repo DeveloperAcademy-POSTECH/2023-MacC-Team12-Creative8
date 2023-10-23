@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import Core
 
 struct SearchArtistList: View {
   @ObservedObject var viewModel: SearchViewModel
-  
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
   var body: some View {
     if viewModel.isLoading {
       ProgressView()
@@ -25,17 +27,21 @@ struct SearchArtistList: View {
           } label: {
             ListRow(namePair: namePair, info: info)
           }
+          .simultaneousGesture(TapGesture().onEnded {
+            dataManager.addSearchHistory(name: namePair.0, country: info, alias: namePair.1 ?? "", mbid: artist.id ?? "", gid: 0, imageUrl: "", songList: [])
+          })
         }
       }
+      .onAppear { dataManager.modelContext = modelContext}
     }
   }
 }
 
-private struct ListRow: View {
+public struct ListRow: View {
   let namePair: (String, String?)
   let info: String
   
-  var body: some View {
+  public var body: some View {
     VStack(alignment: .leading) {
       VStack(alignment: .leading) {
         Text(namePair.0)
