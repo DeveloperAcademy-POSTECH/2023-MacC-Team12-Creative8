@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import UI
 import Core
 
@@ -75,7 +76,10 @@ private struct ConcertInfoView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  
+  @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 14)
@@ -110,7 +114,22 @@ private struct ConcertInfoView: View {
         .padding(.horizontal)
         
         Button(action: {
-          
+          let newArtist = SaveArtistInfo(
+              name: setlist?.artist?.name ?? "",
+              country: "",
+              alias: artistInfo?.alias ?? "",
+              mbid: artistInfo?.mbid ?? "",
+              gid: artistInfo?.gid ?? 0,
+              imageUrl: artistInfo?.imageUrl ?? "",
+              songList: dataManager.songListEncoder(artistInfo?.songList ?? []))
+          let newSetlist = SaveSetlist(
+              setlistId: setlist?.id ?? "",
+              date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+              venue: setlist?.venue?.name ?? "",
+              title: setlist?.tour?.name ?? ""
+          )
+
+          dataManager.addArchivedConcertInfo(newArtist, newSetlist)
         }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: 14)
@@ -134,6 +153,7 @@ private struct ConcertInfoView: View {
     }
     .padding(.horizontal)
     .frame(height: UIHeight * 0.35)
+    .onAppear { dataManager.modelContext = modelContext }
   }
 }
 
@@ -345,4 +365,18 @@ private struct BottomModalView: View {
 
 #Preview {
   BottomModalView()
+}
+
+extension View {
+  func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = format
+      dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
+
+      if let date = dateFormatter.date(from: dateString) {
+          return date
+      } else {
+          return nil // 날짜 형식이 맞지 않을 경우 nil 반환
+      }
+  }
 }

@@ -78,7 +78,7 @@ struct ArchivingView: View {
     ForEach(likeArtist) { item in
       VStack {
         NavigationLink {
-          
+          ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid)
         } label: {
           ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
         }
@@ -104,8 +104,9 @@ struct ArchivingView: View {
     VStack(spacing: 0) {
       viewPicker
         .padding(.bottom)
-      if concertInfo.isEmpty { blockIsEmptyView }
-      else {
+      if concertInfo.isEmpty {
+        blockIsEmptyView
+      } else {
         if vieWModel.userSelection == vieWModel.options[1] {
           ArchivingConcertBlockView()
         } else {
@@ -137,21 +138,4 @@ struct ArchivingView: View {
   ArchivingView()
     .modelContainer(for: LikeArtist.self, inMemory: false)
     .modelContainer(for: ArchivedConcertInfo.self, inMemory: false)
-}
-
-// MARK: - TestCode 적발시 삭제 요망
-extension ArchivingView {
-  func testAddConcertCode() {
-    let oneYearAgo = Calendar.current.date(byAdding: .year, value: Int.random(in: -10...0), to: Date())!
-    dataManager.addArchivedConcertInfo(SaveArtistInfo(name: "Sibal", country: "NorthKorea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: []),
-                                       SaveSetlist(setlistId: "123", date: oneYearAgo, venue: "Seoul", title: "DummyTitle"))
-  }
-
-  func testDeleteConcertAllData() {
-    do {
-      try modelContext.delete(model: ArchivedConcertInfo.self)
-    } catch {
-      print("Failed to delete students.")
-    }
-  }
 }

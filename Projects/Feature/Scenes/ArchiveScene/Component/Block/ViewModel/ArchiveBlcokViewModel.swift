@@ -13,6 +13,7 @@ final class ArchiveViewModel: ObservableObject {
   @Published var maxminCnt: (Int, Int) = (0, 0)
   @Published var selecteYear: Int = 0
   @Published var artistUnique: [String] = []
+  @Published var isActiveButton: Bool = false
 
   @Published var userSelection = "music.note.list"
   let options = ["music.note.list", "batteryblock"]
