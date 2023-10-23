@@ -23,6 +23,8 @@ final class SetlistViewModel: ObservableObject {
   }
 
   var setlistSongName: [String] = []
+  var setlistSongKoreanName: [String] = []
+  var setlistArtistName: [String] = []
   
   init() {
     self.isBookmarked = false
