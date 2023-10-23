@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,7 @@
 		2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF76D13D3DC0AE954F175F /* ArtistView.swift */; };
 		309172FE05CC22EE9255692A /* SeeAllArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D29AC7BB9AE42983F99AB4 /* SeeAllArtist.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
-		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
+		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
 		4C0C8A9631102214FC39D7B5 /* ServiceExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */; };
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
@@ -26,7 +26,7 @@
 		803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */; };
 		8109EF2B904B3554B527353F /* ConcertListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1A05AAA65CFA9DF59D42CE /* ConcertListView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
-		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
+		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; platformFilter = ios; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
@@ -34,7 +34,7 @@
 		CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */; };
 		D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */; };
 		DF31E26567C84E38796B59EA /* ArchiveYearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23792655CD82BB584579EB6 /* ArchiveYearCell.swift */; };
-		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; };
+		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; platformFilter = ios; };
 		F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -428,13 +428,12 @@
 		44191F7B9590ED06371F46BF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -487,11 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-<<<<<<< HEAD
-			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-=======
-			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
->>>>>>> 5f5d472d4ebe74a3948494cae51d1ff532f3b697
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -571,7 +566,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -597,7 +591,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -629,7 +622,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -768,7 +760,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

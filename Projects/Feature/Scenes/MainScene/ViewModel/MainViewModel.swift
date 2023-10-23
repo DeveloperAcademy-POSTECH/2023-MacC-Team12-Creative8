@@ -16,7 +16,7 @@ final class MainViewModel: ObservableObject {
     @Published var scrollToIndex: Int?
     @Published var isTapped: Bool = false
     @Published var isLoading: Bool = false
-    var setlists: [Setlist]?
+    var setlists = [[Setlist?]?](repeating: nil, count: 100) //MARK: 나중에 꼭 수정하기!
     
     let dateMonthFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -37,13 +37,12 @@ final class MainViewModel: ObservableObject {
         return input.replacingCharacters(in: range, with: "\n")
     }
     
-    func getSetlistsFromSetlistFM(artistMbid: String) {
-      if self.setlists == nil {
+  func getSetlistsFromSetlistFM(artistMbid: String, idx: Int) {
         self.isLoading = true
         dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: 1) { result in
           if let result = result {
             DispatchQueue.main.async {
-              self.setlists = result.setlist
+              self.setlists[idx] = result.setlist
               self.isLoading = false
             }
           } else {
@@ -51,7 +50,6 @@ final class MainViewModel: ObservableObject {
             print("Failed to fetch setlist data.")
           }
         }
-      }
     }
     
     func getFormattedDateAndMonth(date: String) -> String? {
