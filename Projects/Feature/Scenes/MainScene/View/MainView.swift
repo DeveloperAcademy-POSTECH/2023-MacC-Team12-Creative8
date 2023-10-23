@@ -69,6 +69,7 @@ public struct MainView: View {
                     Divider()
                         .padding(.leading, 24)
                         .padding(.vertical)
+                        .foregroundStyle(Color.lineGrey1)
                     if likeArtists.isEmpty {
                         EmptyMainView()
                             .frame(width: geometry.size.width)
@@ -244,13 +245,14 @@ public struct MainView: View {
                                     }
                                     .padding(.vertical)
                                     Divider()
+                                    .foregroundStyle(Color.lineGrey1)
                                 }
                                 .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
                                 .animation(.easeInOut(duration: 0.1))
                                 .frame(width: screenWidth * 0.78)
                             }
                         }
-                      
+                      Spacer()
                     }
                 }
             }
