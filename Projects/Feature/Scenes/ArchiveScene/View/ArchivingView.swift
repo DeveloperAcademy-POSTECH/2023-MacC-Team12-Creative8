@@ -14,13 +14,12 @@ struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
   @Query var concertInfo: [ArchivedConcertInfo]
   @ObservedObject var dataManager = SwiftDataManager()
-  @ObservedObject var vieWModel = ConcertListViewModel()
+  @ObservedObject var vieWModel = ArchiveViewModel()
   @Environment(\.modelContext) var modelContext
 
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Button("Test") { testAddConcertCode() }
         archivingArtistView
         viewSelect
       }
@@ -89,17 +88,7 @@ struct ArchivingView: View {
       }
     }
   }
-  
-  private var blockView: some View {
-    Group {
-      if concertInfo.isEmpty {
-        blockIsEmptyView
-      } else {
-        ArchivingConcertBlockView()
-      }
-    }
-  }
-  
+
   private var blockIsEmptyView: some View {
     VStack {
       Image(systemName: "bookmark")
@@ -117,10 +106,13 @@ struct ArchivingView: View {
     VStack(spacing: 0) {
       viewPicker
         .padding(.bottom)
-      if vieWModel.userSelection == vieWModel.options[1] {
-        blockView
-      } else {
-        ConcertListView()
+      if concertInfo.isEmpty { blockIsEmptyView }
+      else {
+        if vieWModel.userSelection == vieWModel.options[1] {
+          ArchivingConcertBlockView()
+        } else {
+          ConcertListView()
+        }
       }
     }
   }
@@ -139,6 +131,7 @@ struct ArchivingView: View {
       .pickerStyle(.segmented)
       .frame(width: UIWidth * 0.3)
     }
+    .padding([.vertical, .top])
   }
 }
 
@@ -151,9 +144,9 @@ struct ArchivingView: View {
 // MARK: - TestCode 적발시 삭제 요망
 extension ArchivingView {
   func testAddConcertCode() {
-    let random = Int.random(in: 10...23)
+    let oneYearAgo = Calendar.current.date(byAdding: .year, value: Int.random(in: -10...0), to: Date())!
     dataManager.addArchivedConcertInfo(SaveArtistInfo(name: "Sibal", country: "NorthKorea", alias: "123", mbid: "123", gid: 123, imageUrl: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg", songList: []),
-                                       SaveSetlist(setlistId: "123", date: Date(), venue: "Seoul", title: "DummyTitle"))
+                                       SaveSetlist(setlistId: "123", date: oneYearAgo, venue: "Seoul", title: "DummyTitle"))
   }
 
   func testDeleteConcertAllData() {

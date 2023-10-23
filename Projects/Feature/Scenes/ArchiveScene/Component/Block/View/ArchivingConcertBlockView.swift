@@ -12,27 +12,27 @@ import Core
 
 struct ArchivingConcertBlockView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
-  @StateObject var viewModel = ArchiveBlcokViewModel()
+  @StateObject var viewModel = ArchiveViewModel()
   var body: some View {
-    GeometryReader { geo in
-        VStack(alignment: .leading, spacing: 0) {
-          ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
-            NavigationLink {
-              BlockAllConcertView(selecteYear: $viewModel.selecteYear,
-                                  concertCellInfo: $viewModel.concertCellInfo,
-                                  maxminCnt: $viewModel.maxminCnt)
-            } label: {
-              ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
-                              concertCnt: viewModel.concertCellInfo[index].1)
-              .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
-                                          viewModel.maxminCnt, geo.size.width), height: 131)
-            }
-            .simultaneousGesture(TapGesture().onEnded {
-              viewModel.selecteYear = viewModel.concertCellInfo[index].0
-            })
-            
+    VStack(alignment: .leading, spacing: 121) {
+      ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { index in
+        GeometryReader { geo in
+        NavigationLink {
+          BlockAllConcertView(selecteYear: $viewModel.selecteYear,
+                              concertCellInfo: $viewModel.concertCellInfo,
+                              maxminCnt: $viewModel.maxminCnt)
+        } label: {
+            ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
+                            concertCnt: viewModel.concertCellInfo[index].1)
+            .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
+                                        viewModel.maxminCnt, geo.size.width), height: 131)
           }
         }
+        .simultaneousGesture(TapGesture().onEnded {
+          viewModel.selecteYear = viewModel.concertCellInfo[index].0
+        })
+      }
+      Spacer()
     }
     .onAppear {
       loadInfo(concertInfo: .constant(concertInfo),
