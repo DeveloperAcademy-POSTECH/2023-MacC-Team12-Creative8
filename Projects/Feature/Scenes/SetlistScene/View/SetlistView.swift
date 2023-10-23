@@ -11,8 +11,6 @@ import UI
 import Core
 
 private let gray: Color = Color(hex: 0xEAEAEA)
-private let screenWidth = UIScreen.main.bounds.width
-private let screenHeight = UIScreen.main.bounds.height
 
 struct SetlistView: View {
   let setlist: Setlist
@@ -121,7 +119,7 @@ private struct ConcertInfoView: View {
             .foregroundStyle(Color.primary)
             .fontWeight(.semibold)
           }
-          .frame(height: screenHeight * 0.065)
+          .frame(height: UIHeight * 0.065)
         })
         
       }
@@ -130,7 +128,7 @@ private struct ConcertInfoView: View {
       .foregroundStyle(Color.white)
     }
     .padding(.horizontal)
-    .frame(height: screenHeight * 0.35)
+    .frame(height: UIHeight * 0.35)
   }
 }
 
@@ -188,10 +186,10 @@ private struct ListView: View {
           }
           
         }
-        .padding(.vertical, screenHeight * 0.03)
+        .padding(.vertical, UIHeight * 0.03)
       }
     }
-    .padding(.horizontal, screenWidth * 0.1)
+    .padding(.horizontal, UIWidth * 0.1)
     .padding(.bottom)
     
   }
@@ -215,7 +213,7 @@ private struct ListRowView: View {
         .frame(width: 50)
         
         Text(title)
-          .frame(width: screenWidth * 0.65, height: 16, alignment: .leading)
+          .frame(width: UIWidth * 0.65, height: 16, alignment: .leading)
       }
       .fontWeight(.semibold)
       
@@ -223,7 +221,7 @@ private struct ListRowView: View {
         Text(info)
           .fontWeight(.regular)
           .opacity(0.6)
-          .frame(width: screenWidth * 0.65, alignment: .leading)
+          .frame(width: UIWidth * 0.65, alignment: .leading)
           .padding(.leading, 55)
       }
     }
@@ -235,7 +233,7 @@ private struct BottomView: View {
   var body: some View {
     ZStack {
       Rectangle()
-        .frame(height: screenHeight * 0.25)
+        .frame(height: UIHeight * 0.25)
         .foregroundColor(gray)
       
       VStack(alignment: .leading, spacing: 30) {
@@ -263,7 +261,7 @@ private struct BottomView: View {
       }
       .padding(.horizontal)
     }
-    .frame(height: screenHeight * 0.25)
+    .frame(height: UIHeight * 0.25)
   }
 }
 
@@ -275,7 +273,7 @@ private struct AddPlaylistButton: View {
         
       }, label: {
         RoundedRectangle(cornerRadius: 10)
-          .frame(width: screenWidth * 0.85, height: screenHeight * 0.065)
+          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
           .foregroundStyle(gray)
           .overlay {
             Text("플레이리스트 등록")
@@ -305,7 +303,7 @@ private struct EmptySetlistView: View {
         
       }, label: {
         RoundedRectangle(cornerRadius: 10)
-          .frame(width: screenWidth * 0.85, height: screenHeight * 0.065)
+          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
           .foregroundStyle(gray)
           .overlay {
             Text("Setlist.fm 바로가기")
@@ -313,7 +311,7 @@ private struct EmptySetlistView: View {
               .bold()
           }
       })
-      .padding(.top, screenHeight * 0.05)
+      .padding(.top, UIHeight * 0.05)
       
       Spacer()
     }
