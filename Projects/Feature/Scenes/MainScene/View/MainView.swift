@@ -52,7 +52,8 @@ public struct MainView: View {
                                             .font(.title3)
                                     }
                                 }
-                                .foregroundColor(.black)
+                                .foregroundColor(Color.mainBlack)
+                                .opacity(viewModel.isTapped ? 0 : 1)
                                 .padding(6)
                                 .overlay {
                                     if viewModel.isTapped {
@@ -80,6 +81,11 @@ public struct MainView: View {
         }
         .onAppear {
             dataManager.modelContext = modelContext
+          var idx = 0
+          for artist in likeArtists {
+            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+            idx += 1
+          }
         }
     }
     public var logo: some View {
@@ -98,14 +104,14 @@ public struct MainView: View {
     public var darkmodeButtons: some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 36)
-                .foregroundStyle(.gray)
+            .foregroundStyle(Color.mainGrey1)
                 .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
             VStack {
                 HStack(spacing: screenWidth * 0.07) {
                     ForEach(ButtonType.allCases) { mode in
                         TopButtonView(buttonType: mode, viewModel: viewModel)
                             .tag(mode)
-                            .opacity(mode == appearnace ? 1.0 : 0.5)
+                            .foregroundStyle(mode == appearnace ?  Color.fontBlack: Color.fontGrey3)
                     }
                 }
             }
@@ -143,7 +149,7 @@ public struct MainView: View {
                             .font(.system(size: 25))
                             .bold()
                             .id(data)
-                            .foregroundColor(viewModel.selectedIndex == data ? .black : .gray)
+                            .foregroundColor(viewModel.selectedIndex == data ? Color.mainBlack : Color.fontGrey3)
                             .animation(.easeInOut(duration: 0.2))
                             .onTapGesture {
                                 withAnimation {
@@ -189,10 +195,10 @@ public struct MainView: View {
                                                     Spacer()
                                                     Circle()
                                                         .frame(width: screenWidth * 0.15)
-                                                        .foregroundStyle(.black)
+                                                        .foregroundStyle(Color.mainBlack)
                                                         .overlay {
                                                             Image(systemName: "arrow.right")
-                                                                .foregroundStyle(.white)
+                                                            .foregroundStyle(Color.backgroundWhite)
                                                         }
                                                 }
                                             }
@@ -204,38 +210,39 @@ public struct MainView: View {
                                 ProgressView()
                             }
                         }
-                        .onAppear {
-                            viewModel.getSetlistsFromSetlistFM(artistMbid: likeArtists[data].artistInfo.mbid)
-                        }
+                      
                         if viewModel.isLoading {
                             ProgressView()
                         } else {
-                            ForEach(viewModel.setlists?.prefix(3) ?? [], id: \.id) { item in
-                                let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item.eventDate ?? "")
-                                let year = viewModel.getFormattedYear(date: item.eventDate ?? "")
+                          let current: [Setlist?] = viewModel.setlists[data] ?? []
+                          ForEach(current.prefix(3), id: \.?.id) { item in
+                            let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                            let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
                                 VStack(spacing: 0) {
                                     HStack(spacing: 0) {
-                                        VStack(alignment: .center) {
+                                      VStack(alignment: .center, spacing: 0) {
                                             Text(year ?? "")
-                                                .foregroundStyle(.gray)
+                                            .foregroundStyle(Color.fontGrey25)
+                                            .padding(.bottom, 2)
                                             Text(dateAndMonth ?? "")
+                                            .foregroundStyle(Color.fontBlack)
                                         }
                                         .font(.callout)
                                         .fontWeight(.semibold)
                                         Spacer()
                                             .frame(width: screenWidth * 0.11)
                                         VStack(alignment: .leading, spacing: 0) {
-                                            Text(item.tour?.name ?? "등록된 공연 이름이 없습니다")
+                                          Text(item?.tour?.name ?? "등록된 공연 이름이 없습니다")
+                                            .lineLimit(1)
                                                 .bold()
-                                                .padding(.bottom, 2)
-                                                .lineLimit(1)
-                                            Text(item.venue?.name ?? "등록된 장소가 없습니다")
+                                                .padding(.bottom, 3)
+                                          Text(item?.venue?.name ?? "등록된 장소가 없습니다")
                                         }
+                                        .foregroundStyle(Color.fontBlack)
                                         .font(.system(size: 14))
                                         Spacer()
                                     }
                                     .padding(.vertical)
-                                    .padding(.horizontal)
                                     Divider()
                                 }
                                 .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
@@ -243,6 +250,7 @@ public struct MainView: View {
                                 .frame(width: screenWidth * 0.78)
                             }
                         }
+                      
                     }
                 }
             }
@@ -257,20 +265,21 @@ struct EmptyMainView: View {
             Text("찜한 아티스트가 없습니다")
                 .font(.callout)
                 .padding(.bottom)
+                .foregroundStyle(Color.fontBlack)
             Text("관심있는 아티스트 정보를 빠르게\n확인하고 싶으시다면 찜을 해주세요")
                 .font(.footnote)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(
-                    .gray)
+                  Color.fontGrey2)
                 .padding(.bottom)
             // TODO: 찜하기 화면 연결
             NavigationLink(destination: Text("아티스트 찜하기 이동")) {
                 Text("아티스트 찜하러 가기 →")
-                    .foregroundStyle(.white)
+                .foregroundStyle(Color.fontWhite)
                     .font(.system(size: 14))
                     .padding(10)
                     .background(RoundedRectangle(cornerRadius: 25.0)
-                        .foregroundStyle(.black))
+                      .foregroundStyle(Color.buttonBlack))
             }
             .padding(.vertical)
             Spacer()
@@ -296,7 +305,6 @@ struct TopButtonView: View {
                 Text(buttonType.name)
                     .font(.system(size: 10))
             }
-            .foregroundColor(.black)
         }.tag(buttonType)
     }
 }
