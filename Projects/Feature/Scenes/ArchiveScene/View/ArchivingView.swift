@@ -20,6 +20,7 @@ struct ArchivingView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
+        Text("아카이빙").font(.title)
         archivingArtistView
         viewSelect
       }
@@ -27,9 +28,6 @@ struct ArchivingView: View {
     .scrollIndicators(.hidden)
     .padding()
     .edgesIgnoringSafeArea(.bottom)
-    .toolbar {
-      ToolbarItem(placement: .topBarLeading) { Text("아카이빙").font(.title) }
-    }
     .onAppear { dataManager.modelContext = modelContext }
   }
   
