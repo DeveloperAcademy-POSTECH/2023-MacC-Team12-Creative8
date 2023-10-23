@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Core
+import UI
 
 public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
