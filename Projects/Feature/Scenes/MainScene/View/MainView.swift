@@ -10,6 +10,8 @@ import SwiftUI
 import Core
 
 public struct MainView: View {
+    @AppStorage("appearance")
+    var appearnace: ButtonType = .automatic
     @Environment(\.colorScheme) var colorScheme
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
@@ -91,6 +93,7 @@ public struct MainView: View {
                     ForEach(ButtonType.allCases) { mode in
                         TopButtonView(buttonType: mode, viewModel: viewModel)
                             .tag(mode)
+                            .opacity(mode == appearnace ? 1.0 : 0.5)
                     }
                 }
             }
@@ -253,6 +256,7 @@ struct TopButtonView: View {
     var viewModel: MainViewModel
     @AppStorage("appearance")
     var appearnace: ButtonType = .automatic
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         Button {
