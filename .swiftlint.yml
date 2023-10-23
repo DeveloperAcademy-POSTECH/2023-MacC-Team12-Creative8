@@ -4,6 +4,8 @@ disabled_rules:
     - line_length
     - orphaned_doc_comment
     - nesting
+    - control_statement
+    - for_where
 
 opt_in_rules:
     - let_var_whitespace

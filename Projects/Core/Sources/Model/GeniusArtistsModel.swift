@@ -10,27 +10,27 @@ import Foundation
 
 // MARK: - GeniusArtistsModel
 public struct GeniusArtistsModel: Codable {
-  let response: ArtistsResponse?
+  public let response: ArtistsResponse?
 }
 
 // MARK: - Response
 public struct ArtistsResponse: Codable {
-  let hits: [Hit]?
+  public let hits: [Hit]?
 }
 
 // MARK: - Hit
 public struct Hit: Codable {
-  let result: Result?
+  public let result: Result?
 }
 
 // MARK: - Result
 public struct Result: Codable {
-  let artistNames: String?
-  let headerImageThumbnailURL: String?
-  let headerImageURL: String?
-  let songArtImageThumbnailURL: String?
-  let songArtImageURL: String?
-  let primaryArtist: PrimaryArtist?
+  public let artistNames: String?
+  public let headerImageThumbnailURL: String?
+  public let headerImageURL: String?
+  public let songArtImageThumbnailURL: String?
+  public let songArtImageURL: String?
+  public let primaryArtist: PrimaryArtist?
   
   enum CodingKeys: String, CodingKey {
     case artistNames = "artist_names"
@@ -44,10 +44,10 @@ public struct Result: Codable {
 
 // MARK: - PrimaryArtist
 public struct PrimaryArtist: Codable {
-  let headerImageURL: String?
-  let id: Int?
-  let imageURL: String?
-  let name: String?
+  public let headerImageURL: String?
+  public let id: Int?
+  public let imageURL: String?
+  public let name: String?
   
   enum CodingKeys: String, CodingKey {
     case headerImageURL = "header_image_url"
