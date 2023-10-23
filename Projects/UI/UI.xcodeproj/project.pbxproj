@@ -3,7 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
+<<<<<<< HEAD
+	objectVersion = 55;
+=======
 	objectVersion = 56;
+>>>>>>> 0996ef4c4b1856edb4a1b63077709b4d03142b56
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -254,7 +258,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
+			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
 			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> 0996ef4c4b1856edb4a1b63077709b4d03142b56
 		};
 /* End PBXShellScriptBuildPhase section */
 
