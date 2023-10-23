@@ -12,8 +12,6 @@ import Core
 final class SetlistViewModel: ObservableObject {
   @Published var isBookmarked: Bool
   @Published var isEmptySetlist: Bool
-  var artistInfo: ArtistInfo?
-  var setlist: Setlist?
   
   init() {
     self.isBookmarked = false

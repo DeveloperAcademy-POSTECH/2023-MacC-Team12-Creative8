@@ -21,56 +21,36 @@ struct SetlistView: View {
   
   var body: some View {
     VStack {
-      NavigationBarView(vm: vm)
       if vm.isEmptySetlist {
-        ConcertInfoView(vm: vm)
+        ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         EmptySetlistView()
       } else {
         ScrollView {
-          ConcertInfoView(vm: vm)
-          ListView(vm: vm)
+          ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
           AddPlaylistButton()
           BottomView()
         }
-        .ignoresSafeArea()
       }
     }
-    .onAppear {
-      vm.setlist = setlist
-      vm.artistInfo = artistInfo
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+          VStack {
+            Text(artistInfo?.name ?? "")
+              .font(.system(size: 12))
+            Text("세트리스트")
+              .font(.system(size: 16))
+          }
+          .fontWeight(.semibold)
+      }
     }
     .foregroundStyle(Color.primary)
   }
 }
 
-private struct NavigationBarView: View {
-  @ObservedObject var vm: SetlistViewModel
-  
-  var body: some View {
-    ZStack {
-      HStack {
-        Button(action: {
-          
-        }, label: {
-          Image(systemName: "chevron.left")
-            .font(.system(size: 24))
-        })
-        Spacer()
-      }
-      
-      VStack {
-        Text(vm.artistInfo?.name ?? "")
-          .font(.system(size: 12))
-        Text("세트리스트")
-          .font(.system(size: 16))
-      }
-      .fontWeight(.semibold)
-    }
-    .padding()
-  }
-}
-
 private struct ConcertInfoView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
   
   var body: some View {
@@ -80,11 +60,11 @@ private struct ConcertInfoView: View {
       
       VStack(alignment: .leading, spacing: 10) {
         Group {
-          Text(vm.artistInfo?.name ?? "")
+          Text(artistInfo?.name ?? "")
             .font(.system(size: 26))
             .fontWeight(.semibold)
           
-          Text(vm.setlist?.tour?.name ?? "")
+          Text(setlist?.tour?.name ?? "")
             .opacity(0.6)
         }
         .padding(.horizontal)
@@ -94,10 +74,10 @@ private struct ConcertInfoView: View {
           .padding(.vertical, 5)
         
         Group {
-          let venue = "\(vm.setlist?.venue?.name ?? ""), \(vm.setlist?.venue?.city?.name ?? ""), \(vm.setlist?.venue?.city?.country?.name ?? "")"
+          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
           InfoComponenet(title: venue, subTitle: "Place")
           HStack {
-            InfoComponenet(title: vm.setlist?.eventDate ?? "", subTitle: "Date")
+            InfoComponenet(title: setlist?.eventDate ?? "", subTitle: "Date")
             Spacer()
             InfoComponenet(title: "-", subTitle: "Time")
             Spacer()
@@ -149,12 +129,14 @@ private struct InfoComponenet: View {
 }
 
 private struct ListView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
   let koreanConverter: KoreanConverter = KoreanConverter.shared
   @ObservedObject var vm: SetlistViewModel
   
   var body: some View {
     LazyVStack {
-      ForEach(vm.setlist?.sets?.setsSet ?? [], id: \.name) { session in
+      ForEach(setlist?.sets?.setsSet ?? [], id: \.name) { session in
         VStack(alignment: .leading, spacing: 20) {
           if let sessionName = session.name {
             Text(sessionName)
@@ -169,14 +151,14 @@ private struct ListView: View {
               if song.tape != nil && song.tape == true {
                 ListRowView(
                   index: nil,
-                  title: koreanConverter.findKoreanTitle(title: title, songList: vm.artistInfo?.songList ?? []) ?? title,
+                  title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
                 .opacity(0.6)
               } else {
                 ListRowView(
                   index: index,
-                  title: koreanConverter.findKoreanTitle(title: title, songList: vm.artistInfo?.songList ?? []) ?? title,
+                  title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                   info: song.info
                 )
               }
