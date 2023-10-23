@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 class MainViewModel: ObservableObject {
-    @Published var selectedIndex: Int? 
+    @Published var selectedIndex: Int?
     @Published var scrollToIndex: Int?
     @Published var isTapped: Bool = false
     
@@ -46,6 +47,7 @@ class MainViewModel: ObservableObject {
             ConcertInfo(date: Date(), tourName: "Tour 4-3", venue: "Venue 4-3")
         ])
     ]
+    
     func replaceFirstSpaceWithNewline(_ input: String) -> String {
         guard let range = input.rangeOfCharacter(from: .whitespaces) else {
             return input
@@ -53,8 +55,35 @@ class MainViewModel: ObservableObject {
         return input.replacingCharacters(in: range, with: "\n")
     }
 }
-enum ButtonType {
-    case dark
-    case light
-    case system
+
+public enum ButtonType: Int, CaseIterable, Identifiable {
+    public var id: Int { self.rawValue }
+    case dark, light, automatic
+    
+   public var icon: String {
+        switch self {
+        case .automatic:
+            return "circle.lefthalf.filled"
+        case .light:
+            return "sun.max.fill"
+        case .dark:
+            return "moon.fill"
+        }
+    }
+    
+    public var name: String {
+        switch self {
+        case .light: return "라이트"
+        case .dark: return "다크"
+        case .automatic: return "자동"
+        }
+    }
+    
+    public func getColorScheme() -> ColorScheme? {
+        switch self {
+        case .automatic: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
 }

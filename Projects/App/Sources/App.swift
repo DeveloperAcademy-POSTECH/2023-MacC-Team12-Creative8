@@ -12,6 +12,9 @@ import Core
 
 @main
 struct SetlistApp: App {
+    @AppStorage("appearance")
+    var appearnace: ButtonType = .automatic
+    
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
         LikeArtist.self, ArchivedConcertInfo.self, SearchHistory.self, Titles.self
@@ -29,6 +32,7 @@ struct SetlistApp: App {
     WindowGroup {
       NavigationStack {
         TabBarView()
+              .preferredColorScheme(appearnace.getColorScheme())
       }
     }
     .modelContainer(sharedModelContainer)

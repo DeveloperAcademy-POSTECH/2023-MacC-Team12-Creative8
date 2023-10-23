@@ -84,9 +84,13 @@ public struct MainView: View {
         .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
             VStack {
                 HStack(spacing: screenWidth * 0.07) {
-                    TopButtonView(buttonType: .system, viewModel: viewModel)
-                    TopButtonView(buttonType: .light, viewModel: viewModel)
-                    TopButtonView(buttonType: .dark, viewModel: viewModel)
+//                    TopButtonView(buttonType: .automatic, viewModel: viewModel)
+//                    TopButtonView(buttonType: .light, viewModel: viewModel)
+//                    TopButtonView(buttonType: .dark, viewModel: viewModel)
+                    ForEach(ButtonType.allCases) { mode in
+                        TopButtonView(buttonType: mode, viewModel: viewModel)
+                            .tag(mode)
+                    }
                 }
             }
         }
@@ -213,7 +217,6 @@ public struct MainView: View {
                 }
             }
             .scrollTargetLayout()
-            
         }
     }
 }
@@ -245,41 +248,26 @@ struct EmptyMainView: View {
     }
 }
 struct TopButtonView: View {
+    @Environment(\.colorScheme) var scheme
     var buttonType: ButtonType
     var viewModel: MainViewModel
-    var icon: String {
-        switch buttonType {
-        case .system:
-            return "circle.lefthalf.filled"
-        case .light:
-            return "sun.max.fill"
-        case .dark:
-            return "moon.fill"
-        }
-    }
-    var label: String {
-        switch buttonType {
-        case .system:
-            return "자동"
-        case .light:
-            return "라이트"
-        case .dark:
-            return "다크"
-        }
-    }
+    @AppStorage("appearance")
+    var appearnace: ButtonType = .automatic
+    
     var body: some View {
         Button {
             viewModel.isTapped.toggle()
+            appearnace = buttonType
         } label: {
             VStack {
-                Image(systemName: icon)
+                Image(systemName: buttonType.icon)
                     .font(.title3)
                     .padding(6)
-                Text(label)
+                Text(buttonType.name)
                     .font(.system(size: 10))
             }
             .foregroundColor(.black)
-        }
+        }.tag(buttonType)
     }
 }
 
