@@ -487,7 +487,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
 			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> 5f5d472d4ebe74a3948494cae51d1ff532f3b697
 		};
 /* End PBXShellScriptBuildPhase section */
 

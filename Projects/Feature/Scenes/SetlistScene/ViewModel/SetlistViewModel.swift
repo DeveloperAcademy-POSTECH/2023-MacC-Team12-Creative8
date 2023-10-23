@@ -22,6 +22,8 @@ final class SetlistViewModel: ObservableObject {
     }()
   }
 
+  var setlistSongName: [String] = []
+  
   init() {
     self.isBookmarked = false
     self.isEmptySetlist = false
