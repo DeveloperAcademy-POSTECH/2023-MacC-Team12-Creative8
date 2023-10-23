@@ -16,7 +16,7 @@ private let screenHeight = UIScreen.main.bounds.height
 
 struct SetlistView: View {
   let setlist: Setlist
-  let artistInfo: ArtistInfo
+  let artistInfo: ArtistInfo?
   @StateObject var vm = SetlistViewModel()
   
   var body: some View {
