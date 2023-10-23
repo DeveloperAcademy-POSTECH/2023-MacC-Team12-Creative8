@@ -12,6 +12,7 @@ import Core
 
 @main
 struct SetlistApp: App {
+<<<<<<< HEAD
   var sharedModelContainer: ModelContainer = {
       let schema = Schema([
         SearchHistory.self
@@ -31,5 +32,13 @@ struct SetlistApp: App {
         MainView()
           .modelContainer(sharedModelContainer)
       }
+=======
+    var body: some Scene {
+        WindowGroup {
+          NavigationStack {
+            SettingView()
+          }
+        }
+>>>>>>> 5822be0fbd165b34e732c4d39c5f31d9ee3b71e4
     }
 }
