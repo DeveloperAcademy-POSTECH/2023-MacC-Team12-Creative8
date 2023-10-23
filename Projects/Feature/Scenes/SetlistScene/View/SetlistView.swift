@@ -224,6 +224,13 @@ private struct ListView: View {
               if !vm.setlistSongName.contains(title) {
                 let _ = vm.setlistSongName.append(title)
               }
+              
+              // 스크린샷용 음악 배열
+              let tmp = koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
+              if !vm.setlistSongKoreanName.contains(tmp) {
+                let _ = vm.setlistSongKoreanName.append(tmp)
+              }
+              
             }
           }
         }
