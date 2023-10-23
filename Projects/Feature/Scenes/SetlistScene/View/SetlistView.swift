@@ -35,13 +35,13 @@ struct SetlistView: View {
     }
     .toolbar {
       ToolbarItem(placement: .principal) {
-          VStack {
-            Text(artistInfo?.name ?? "")
-              .font(.system(size: 12))
-            Text("세트리스트")
-              .font(.system(size: 16))
-          }
-          .fontWeight(.semibold)
+        VStack {
+          Text(artistInfo?.name ?? "")
+            .font(.system(size: 12))
+          Text("세트리스트")
+            .font(.system(size: 16))
+        }
+        .fontWeight(.semibold)
       }
     }
     .foregroundStyle(Color.fontBlack)
@@ -53,23 +53,23 @@ struct SetlistView: View {
   }
   
   private var addPlaylistButton: some View {
-      VStack {
-        Spacer()
-        Button(action: {
-          self.isShowModal.toggle()
-        }, label: {
-          RoundedRectangle(cornerRadius: 10)
-            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-            .foregroundStyle(gray)
-            .overlay {
-              Text("플레이리스트 등록")
-                .foregroundStyle(Color.primary)
-                .bold()
-            }
-        })
-        .padding(.bottom)
-      }
+    VStack {
+      Spacer()
+      Button(action: {
+        self.isShowModal.toggle()
+      }, label: {
+        RoundedRectangle(cornerRadius: 10)
+          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
+          .foregroundStyle(gray)
+          .overlay {
+            Text("플레이리스트 등록")
+              .foregroundStyle(Color.primary)
+              .bold()
+          }
+      })
+      .padding(.bottom)
     }
+  }
 }
 
 private struct ConcertInfoView: View {
@@ -79,7 +79,7 @@ private struct ConcertInfoView: View {
   @Query var concertInfo: [ArchivedConcertInfo]
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
-
+  
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 14)
@@ -160,7 +160,7 @@ private struct ConcertInfoView: View {
     }
     .padding(.horizontal)
     .frame(height: UIHeight * 0.35)
-    .onAppear { 
+    .onAppear {
       dataManager.modelContext = modelContext
       vm.isBookmark(concertInfo, setlist)
     }
@@ -226,6 +226,13 @@ private struct ListView: View {
               if !vm.setlistSongName.contains(title) {
                 let _ = vm.setlistSongName.append(title)
               }
+              
+              // 스크린샷용 음악 배열
+              let tmp = koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
+              if !vm.setlistSongKoreanName.contains(tmp) {
+                let _ = vm.setlistSongKoreanName.append(tmp)
+              }
+              
             }
           }
         }
@@ -330,22 +337,21 @@ private struct BottomView: View {
       }
     }
   }
+}
+
+private struct BottomModalView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
+  @ObservedObject var vm: SetlistViewModel
   
-  private struct EmptySetlistView: View {
-    var body: some View {
-      VStack(spacing: 10) {
-        Spacer()
-        
-        Text("세트리스트가 없습니다.")
-          .font(.system(size: 16))
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.fontBlack)
-        
-        Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요.")
-          .foregroundStyle(Color.fontGrey2)
-          .font(.system(size: 13))
-        
-        Button(action: {
+  var body: some View {
+    Spacer().frame(height: UIHeight * 0.07)
+    VStack(alignment: .leading, spacing: UIHeight * 0.03) {
+      Group {
+        listView(title: "Apple Music에 옮기기", description: nil, action: {
+          AppleMusicService().requestMusicAuthorization()
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
           
         }, label: {
           RoundedRectangle(cornerRadius: 10)
@@ -357,10 +363,18 @@ private struct BottomView: View {
                 .bold()
             }
         })
-        .padding(.top, UIHeight * 0.05)
         
-        Spacer()
+        listView(
+          title: "세트리스트 캡처하기",
+          description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
+          action: {
+            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+
+          }
+        )
       }
+      .opacity(0.6)
+      Spacer()
     }
   }
   
