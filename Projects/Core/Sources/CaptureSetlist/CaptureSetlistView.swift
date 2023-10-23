@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct CaptureSetlistView: View {
+public struct CaptureSetlistView: View {
   let song: [String]
-  let artist: [String]
+  let artist: String
   let showingSongCount: Int
   let showingSongLastCount: Int
   let index: Int
-  var body: some View {
+  public var body: some View {
     ZStack {
       Color.white.ignoresSafeArea()
       Image(systemName: "\(index).circle")
@@ -32,7 +32,7 @@ struct CaptureSetlistView: View {
           ForEach(showingSongCount..<showingSongLastCount, id: \.self) { index in
               VStack(alignment: .leading) {
                 Text("\(song[index])")
-                Text("\(artist[index])")
+                Text("\(artist)")
               }
               .padding(.horizontal, 30)
             .foregroundStyle(.black)
@@ -77,7 +77,7 @@ extension UIView {
 }
 
 public extension View {
-  func takeSetlistToImage(_ song: [String], _ artist: [String]) {
+  func takeSetlistToImage(_ song: [String], _ artist: String) {
     let songCount = song.count
     let pagesongs = songCount / 10
     let remainsongs = songCount % 10
