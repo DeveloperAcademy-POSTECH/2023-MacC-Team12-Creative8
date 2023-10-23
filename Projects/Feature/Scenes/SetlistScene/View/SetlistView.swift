@@ -14,8 +14,8 @@ private let gray: Color = Color(hex: 0xEAEAEA)
 
 struct SetlistView: View {
   let setlist: Setlist
-  let artistInfo: ArtistInfo
   @Binding var isShowModal: Bool
+  let artistInfo: ArtistInfo?
   @StateObject var vm = SetlistViewModel()
   
   var body: some View {
