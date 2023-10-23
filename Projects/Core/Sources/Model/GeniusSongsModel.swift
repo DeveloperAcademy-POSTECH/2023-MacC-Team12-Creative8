@@ -28,7 +28,7 @@ public struct SongsResponse: Codable {
 public struct GeniusSong: Codable {
   public let headerImageThumbnailURL: String?
   public let headerImageURL: String?
-  public let id : Int?
+  public let id: Int?
   public let songArtImageThumbnailURL: String?
   public let songArtImageURL: String?
   public let title, titleWithFeatured: String?

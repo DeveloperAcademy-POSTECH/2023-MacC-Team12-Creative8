@@ -4,10 +4,14 @@
 	classes = {
 	};
 <<<<<<< HEAD
+	objectVersion = 55;
+=======
+<<<<<<< HEAD
 	objectVersion = 50;
 =======
 	objectVersion = 56;
 >>>>>>> develop
+>>>>>>> dfa96974a2665c4f0e7f4a9e2f75234b0e8d9273
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -374,10 +378,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = 2QWMDJG53V;
+=======
+>>>>>>> 5822be0fbd165b34e732c4d39c5f31d9ee3b71e4
+=======
 				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 =======
 				DEVELOPMENT_TEAM = 2QWMDJG53V;
 >>>>>>> develop
+>>>>>>> dfa96974a2665c4f0e7f4a9e2f75234b0e8d9273
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -489,10 +499,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 <<<<<<< HEAD
+<<<<<<< HEAD
+				DEVELOPMENT_TEAM = 2QWMDJG53V;
+=======
+>>>>>>> 5822be0fbd165b34e732c4d39c5f31d9ee3b71e4
+=======
 				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 =======
 				DEVELOPMENT_TEAM = 2QWMDJG53V;
 >>>>>>> develop
+>>>>>>> dfa96974a2665c4f0e7f4a9e2f75234b0e8d9273
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

@@ -13,8 +13,10 @@ public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
     @ObservedObject var viewModel = MainViewModel()
+  
     public init() {
     }
+  
     public var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -145,7 +147,7 @@ public struct MainView: View {
                 ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
                     VStack(spacing: 0) {
                         Button {
-                            // TODO: 내비 연결
+                        // TODO: 내비 연결
                         } label: {
                             Image(viewModel.sampleData[data].image)
                                 .resizable()

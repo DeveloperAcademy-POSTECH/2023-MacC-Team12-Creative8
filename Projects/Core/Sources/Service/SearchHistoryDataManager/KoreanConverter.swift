@@ -62,21 +62,21 @@ public final class KoreanConverter {
     let len2 = s2.count
     var matrix = Array(repeating: Array(repeating: 0, count: len2 + 1), count: len1 + 1)
     
-    for i in 0...len1 {
-      matrix[i][0] = i
+    for rowIndex in 0...len1 {
+      matrix[rowIndex][0] = rowIndex
     }
     
-    for j in 0...len2 {
-      matrix[0][j] = j
+    for colIndex in 0...len2 {
+      matrix[0][colIndex] = colIndex
     }
     
-    for (i, char1) in s1.enumerated() {
-      for (j, char2) in s2.enumerated() {
+    for (rowIndex, char1) in s1.enumerated() {
+      for (colIndex, char2) in s2.enumerated() {
         let cost = char1 == char2 ? 0 : 1
-        matrix[i + 1][j + 1] = min(
-          matrix[i][j + 1] + 1,
-          matrix[i + 1][j] + 1,
-          matrix[i][j] + cost
+        matrix[rowIndex + 1][colIndex + 1] = min(
+          matrix[rowIndex][colIndex + 1] + 1,
+          matrix[rowIndex + 1][colIndex] + 1,
+          matrix[rowIndex][colIndex] + cost
         )
       }
     }

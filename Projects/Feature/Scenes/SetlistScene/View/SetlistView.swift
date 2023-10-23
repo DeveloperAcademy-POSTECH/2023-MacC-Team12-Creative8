@@ -319,7 +319,3 @@ private struct EmptySetlistView: View {
     }
   }
 }
-
-//#Preview {
-//  SetlistView(setlist: Setlist(), artistInfo: ArtistInfo(name: "IU", alias: "아이유", mbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c", gid: "", imageUrl: "", songList: []))
-//}

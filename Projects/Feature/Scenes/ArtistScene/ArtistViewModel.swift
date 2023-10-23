@@ -97,7 +97,7 @@ class ArtistViewModel: ObservableObject {
   
   func loadImage() {
     if let url = URL(string: self.artistInfo?.imageUrl ?? "") {
-      URLSession.shared.dataTask(with: url) { data, response, error in
+      URLSession.shared.dataTask(with: url) { data, _, _ in
         if let data = data, let image = UIImage(data: data) {
           DispatchQueue.main.async {
             self.image = image
