@@ -13,7 +13,7 @@ public final class ArtistDataManager {
   
   let dataService: SetlistDataService = SetlistDataService.shared
   
-  public func getArtistInfo(artistName: String, artistAlias: String, completion: @escaping (ArtistInfo?) -> Void) {
+  public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [(String, String?)] = []
     var artistInfo: ArtistInfo?
     var songList: [String] = []
@@ -21,7 +21,7 @@ public final class ArtistDataManager {
     dataService.searchArtistFromGenius(artistName: artistName) { result in
       if let result = result {
         DispatchQueue.main.async {
-          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: artistAlias, hits: result.response?.hits ?? [])
+          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid, hits: result.response?.hits ?? [])
           
           self.fetchAllSongs(artistId: artistInfo?.gid ?? 0) { result in
             if let result = result {
@@ -70,7 +70,7 @@ public final class ArtistDataManager {
     fetchPage(page: 1)
   }
   
-  private func findArtistIdAndImage(artistName: String, artistAlias: String, hits: [Hit]) -> ArtistInfo? {
+  private func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
     for hit in hits {
       if let name = hit.result?.primaryArtist?.name {
         let filteredName = stringFilter(name)
@@ -82,13 +82,13 @@ public final class ArtistDataManager {
             removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
             extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
           print("FIND ARTIST: \(name)")
-          return ArtistInfo(gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
+          return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
         }
       }
     }
     
     print("FAILED TO FIND ARTIST")
-    return ArtistInfo(gid: hits[0].result?.primaryArtist?.id, imageUrl: hits[0].result?.primaryArtist?.imageURL, songList: nil)
+    return nil
   }
   
   private func stringFilter(_ str: String) -> String {

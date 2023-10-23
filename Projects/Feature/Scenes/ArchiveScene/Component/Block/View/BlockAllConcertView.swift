@@ -14,7 +14,6 @@ struct BlockAllConcertView: View {
   @Binding var selecteYear: Int
   @Binding var concertCellInfo: [(Int, Int)]
   @Binding var maxminCnt: (Int, Int)
-  @Binding var artistUnique: [String]
   @Query var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchiveViewModel()
   var body: some View {

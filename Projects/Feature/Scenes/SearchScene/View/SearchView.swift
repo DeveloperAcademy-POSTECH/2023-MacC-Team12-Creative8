@@ -48,6 +48,9 @@ public struct SearchView: View {
 
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
+        .onChange(of: viewModel.searchText) {
+          viewModel.getArtistList()
+        }
     }
     .padding(.top)
   }
@@ -106,8 +109,7 @@ public struct SearchView: View {
 //            SearchHistoryCell(searchText: $viewModel.searchText, dataManager: dataManager, history: item)
           }
         } else {
-          // 검색 API
-          Text("검색 뷰 나와야함")
+          SearchArtistList(viewModel: viewModel)
         }
       }
     }

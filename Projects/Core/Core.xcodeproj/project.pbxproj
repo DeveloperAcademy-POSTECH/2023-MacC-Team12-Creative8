@@ -12,7 +12,6 @@
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
-		7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */; };
 		882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */; };
 		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
 		B5AEB3196F16E3C52EC16288 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7A7F738C7D540C1FDA072E /* SwiftDataManager.swift */; };
@@ -75,7 +74,6 @@
 		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
 		B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
-		BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanNameConverter.swift; sourceTree = "<group>"; };
 		C004E9629A66EFA763B287E6 /* AppleMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicService.swift; sourceTree = "<group>"; };
 		D81A5985FBB055CC8CA4FAB8 /* CoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CoreTests-Info.plist"; sourceTree = "<group>"; };
 		DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDataManager.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				6102295BF8EA6BD3F00B6FE2 /* SwiftDataManager */,
 				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
-				BE4FB5E3CF46013870BEE1A2 /* KoreanNameConverter.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
 			);
 			path = Service;
@@ -374,7 +371,6 @@
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
-				7771D3639CF67AAB4C725DB6 /* KoreanNameConverter.swift in Sources */,
 				882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */,
 				E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
@@ -558,10 +554,9 @@
 		C6F0DD24793DC9075B33338B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Y7F2ZW9QG3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -592,10 +587,9 @@
 		F2BF94242B2654F7A820405E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Y7F2ZW9QG3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
