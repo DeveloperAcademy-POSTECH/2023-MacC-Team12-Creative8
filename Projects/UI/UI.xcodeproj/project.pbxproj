@@ -3,14 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
 		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
 		2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */; };
-		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
+		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
+		85AECBF52AE6B31600E2BC93 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85AECBF42AE6B31600E2BC93 /* Images.xcassets */; };
+		85AECBF72AE6B32700E2BC93 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85AECBF62AE6B32700E2BC93 /* Colors.xcassets */; };
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
 		EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E35A63B91A07E2482B3B278 /* ColorExtension.swift */; };
 		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
@@ -56,6 +58,8 @@
 		5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveExtension.swift; sourceTree = "<group>"; };
 		676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFrameExtension.swift; sourceTree = "<group>"; };
 		6A1C9C9F198B162C645B7C84 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85AECBF42AE6B31600E2BC93 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		85AECBF62AE6B32700E2BC93 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = ../../App/Resources/Colors.xcassets; sourceTree = "<group>"; };
 		9E35A63B91A07E2482B3B278 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +104,7 @@
 		387FA7DF5581F4BC167E86EE /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				85AECBF32AE6B2F900E2BC93 /* Resources */,
 				8C92E84977AC273EA43C05B1 /* Derived */,
 				4979EA0CE84B8AF2F138CB2C /* Sources */,
 			);
@@ -112,6 +117,15 @@
 				8AA572ECEAA212E1DEFF3F6E /* Extensions */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		85AECBF32AE6B2F900E2BC93 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85AECBF42AE6B31600E2BC93 /* Images.xcassets */,
+				85AECBF62AE6B32700E2BC93 /* Colors.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8AA572ECEAA212E1DEFF3F6E /* Extensions */ = {
@@ -204,7 +218,7 @@
 				ORGANIZATIONNAME = com.creative8.seta;
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -234,6 +248,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85AECBF52AE6B31600E2BC93 /* Images.xcassets in Resources */,
+				85AECBF72AE6B32700E2BC93 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +273,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/Setlist/develop/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -298,7 +314,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -311,6 +326,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -401,6 +417,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -415,7 +432,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/UITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -428,6 +444,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -513,6 +530,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

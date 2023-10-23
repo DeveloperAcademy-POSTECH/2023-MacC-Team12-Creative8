@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct ArchivingView: View {
   @Query var likeArtist: [LikeArtist]
@@ -20,7 +21,9 @@ struct ArchivingView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Text("아카이빙").font(.title)
+        Text("아카이빙")
+          .font(.title)
+          .foregroundStyle(.black)
         archivingArtistView
         viewSelect
       }
@@ -68,6 +71,7 @@ struct ArchivingView: View {
         .frameForCell()
         .overlay {
           Image(systemName: "heart")
+            .foregroundStyle(Color.fontBlack)
         }
       Text("좋아요한 아티스트")
         .font(.system(size: 12))
@@ -135,8 +139,8 @@ struct ArchivingView: View {
 
 #Preview {
   ArchivingView()
-    .modelContainer(for: LikeArtist.self, inMemory: false)
-    .modelContainer(for: ArchivedConcertInfo.self, inMemory: false)
+//    .modelContainer(for: LikeArtist.self, inMemory: false)
+//    .modelContainer(for: ArchivedConcertInfo.self, inMemory: false)
 }
 
 // MARK: - TestCode 적발시 삭제 요망
