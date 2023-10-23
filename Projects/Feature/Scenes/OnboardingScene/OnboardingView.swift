@@ -7,9 +7,6 @@
 //
 
 import SwiftUI
-import PopupView
-
-//private let gray: Color = Color(hex: 0xD1D1D1)
 
 struct OnboardingView: View {
   

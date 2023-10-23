@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,11 +15,11 @@
 		309172FE05CC22EE9255692A /* SeeAllArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D29AC7BB9AE42983F99AB4 /* SeeAllArtist.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
+		3CFC87F689075F7D36344BB2 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9CBF29D51E5B8A6B02173 /* OnboardingViewModel.swift */; };
+		60BE00D25581C288028C226E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDF8BD7A9D4C642BE4BB93 /* OnboardingView.swift */; };
 		62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061AC51D0A5E10A4A203E69 /* MainView.swift */; };
 		66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9B012EDBBF54D1085338 /* MainViewModel.swift */; };
 		803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */; };
-		851BB7972AE5347C002C61D2 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BB7962AE5347C002C61D2 /* OnboardingViewModel.swift */; };
-		85D200C82AE3D7D80042D028 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D200C72AE3D7D80042D028 /* OnboardingView.swift */; };
 		8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8561DB4CBBBD28355B569F7 /* SettingViewModel.swift */; };
 		97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB66A4326EFC255A2FEFB1C /* SettingView.swift */; };
 		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
@@ -70,11 +70,11 @@
 		2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42EDF8BD7A9D4C642BE4BB93 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8406552E60CD13BEAD883FA3 /* ArchiveBlcokViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveBlcokViewModel.swift; sourceTree = "<group>"; };
-		851BB7962AE5347C002C61D2 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		85D200C72AE3D7D80042D028 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB66A4326EFC255A2FEFB1C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		92B9CBF29D51E5B8A6B02173 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		9F8B02904D51D96EB3326921 /* BlockAllConcertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAllConcertView.swift; sourceTree = "<group>"; };
 		A061AC51D0A5E10A4A203E69 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 		48F6722CA62D2646F716C0F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				85D200C62AE3D7B60042D028 /* OnboardingScene */,
 				5C3F5CC91689B43480025D3A /* ArchiveScene */,
 				1E4BCC9FA52881309D189527 /* MainScene */,
+				85583253DFD2A4C30ED241DE /* OnboardingScene */,
 				B9DEE02445017E26BC98FA76 /* SearchScene */,
 				17CB872AC00E793C76D10747 /* SettingScene */,
 			);
@@ -213,11 +213,11 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		85D200C62AE3D7B60042D028 /* OnboardingScene */ = {
+		85583253DFD2A4C30ED241DE /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
-				85D200C72AE3D7D80042D028 /* OnboardingView.swift */,
-				851BB7962AE5347C002C61D2 /* OnboardingViewModel.swift */,
+				42EDF8BD7A9D4C642BE4BB93 /* OnboardingView.swift */,
+				92B9CBF29D51E5B8A6B02173 /* OnboardingViewModel.swift */,
 			);
 			path = OnboardingScene;
 			sourceTree = "<group>";
@@ -319,8 +319,6 @@
 			dependencies = (
 			);
 			name = Feature;
-			packageProductDependencies = (
-			);
 			productName = Feature;
 			productReference = 8A611D1693834F821CBD6EAD /* Feature.framework */;
 			productType = "com.apple.product-type.framework";
@@ -352,6 +350,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -362,8 +362,6 @@
 				en,
 			);
 			mainGroup = 6DC82FD44AFA8E6846CC19FE;
-			packageReferences = (
-			);
 			productRefGroup = F37C3A4FE623C846745B9CE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,14 +425,14 @@
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
 				62E90AA2BB4A82EB8CBEE5E3 /* MainView.swift in Sources */,
 				66C7D3D9859E483CDA88EA57 /* MainViewModel.swift in Sources */,
+				60BE00D25581C288028C226E /* OnboardingView.swift in Sources */,
+				3CFC87F689075F7D36344BB2 /* OnboardingViewModel.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
-				851BB7972AE5347C002C61D2 /* OnboardingViewModel.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
 				97BE26C8CAA156747FB9D1D8 /* SettingView.swift in Sources */,
-				85D200C82AE3D7D80042D028 /* OnboardingView.swift in Sources */,
 				8B0AE01B33B69A7B6316C546 /* SettingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,7 +493,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = CS9SP68DH3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -667,7 +664,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = CS9SP68DH3;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
