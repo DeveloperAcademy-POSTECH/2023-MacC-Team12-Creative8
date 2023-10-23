@@ -41,6 +41,15 @@ public final class SetlistDataService {
     task.resume()
   }
   
+  public func fetchArtistFromMusicBrainz(artistMbid: String, completion: @escaping (ArtistListModel?) -> Void) {
+    if let url = URL(string: "https://musicbrainz.org/ws/2/artist/?query=mbid:\(artistMbid)&fmt=json") {
+      let headers = ["Authorization": APIKeys().musicBrainz]
+      APIRequest(url: url, httpMethod: "GET", headers: headers, completion: completion)
+    } else {
+      completion(nil)
+    }
+  }
+  
   public func searchArtistsFromMusicBrainz(artistName: String, completion: @escaping (ArtistListModel?) -> Void) {
     if let url = URL(string: "https://musicbrainz.org/ws/2/artist?query=\(artistName)&fmt=json") {
       let headers = ["Authorization": APIKeys().musicBrainz]
