@@ -61,7 +61,7 @@ public struct SettingView: View {
           }
           Divider()
           
-          //문의하기
+          // 문의하기
           AskView()
         }
         .padding(.horizontal, 24)

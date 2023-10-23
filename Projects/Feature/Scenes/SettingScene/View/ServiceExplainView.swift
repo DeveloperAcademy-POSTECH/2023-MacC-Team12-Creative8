@@ -115,7 +115,6 @@ struct SectionBackgroundView: View {
   }
 }
 
-
 #Preview {
   ServiceExplainView()
 }
