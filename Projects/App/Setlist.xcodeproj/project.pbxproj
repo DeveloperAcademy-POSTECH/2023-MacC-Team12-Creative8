@@ -12,7 +12,10 @@
 
 /* Begin PBXBuildFile section */
 		11E4CA3717F3F073C1A7B033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9EA2A33E8D7B5AC27A4B9 /* Assets.xcassets */; };
+<<<<<<< HEAD
+=======
 		11F2CF31C938E605E963CA81 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F592AE35C902CB7E4AF3F5DF /* Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+>>>>>>> develop
 		21184637D21A73FF00E53AF4 /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D7E000A703647DD9102B8F /* Feature.framework */; platformFilter = ios; };
 		45CF31693F5726A2BB4D655F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018F043A036853F4399E1EB6 /* LaunchScreen.storyboard */; };
 		65D7654A93D9DEEC6A3AF2B7 /* TuistAssets+Setlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED54D957A90FEF2F20443B /* TuistAssets+Setlist.swift */; };

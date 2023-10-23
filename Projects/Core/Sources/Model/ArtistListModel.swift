@@ -10,38 +10,38 @@ import Foundation
 
 // MARK: - ArtistListModel
 public struct ArtistListModel: Codable {
-  let created: String?
-  let count: Int?
-  let offset: Int?
-  let artists: [MusicBrainzArtist]?
+  public let created: String?
+  public let count: Int?
+  public let offset: Int?
+  public let artists: [MusicBrainzArtist]?
 }
 
 // MARK: - Artist
 public struct MusicBrainzArtist: Codable {
-  let id: String?
-  let name: String?
-  let sortName: String?
-  let country: String?
-  let area: Area?
-  let beginArea: Area?
-  let aliases: [Alias]?
+  public let id: String?
+  public let name: String?
+  public let sortName: String?
+  public let country: String?
+  public let area: Area?
+  public let beginArea: Area?
+  public let aliases: [Alias]?
 }
 
 // MARK: - Alias
 public struct Alias: Codable {
-  let sortName: String?
-  let typeID: String?
-  let name: String?
-  let locale: String?
-  let type: String?
-  let primary: Bool?
+  public let sortName: String?
+  public let typeID: String?
+  public let name: String?
+  public let locale: String?
+  public let type: String?
+  public let primary: Bool?
 }
 
 // MARK: - Area
 public struct Area: Codable {
-  let id: String?
-  let type: String?
-  let typeID: String?
-  let name: String?
-  let sortName: String?
+  public let id: String?
+  public let type: String?
+  public let typeID: String?
+  public let name: String?
+  public let sortName: String?
 }
