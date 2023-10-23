@@ -101,7 +101,12 @@ private struct ConcertInfoView: View {
               gid: artistInfo?.gid ?? 0,
               imageUrl: artistInfo?.imageUrl ?? "",
               songList: dataManager.songListEncoder(artistInfo?.songList ?? []))
-          let newSetlist = SaveSetlist(setlistId: (setlist?.id)!, date: convertDateStringToDate((setlist?.eventDate)!) ?? Date(), venue: (setlist?.venue?.name)!, title: (setlist?.tour?.name) ?? "")
+          let newSetlist = SaveSetlist(
+              setlistId: setlist?.id ?? "",
+              date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+              venue: setlist?.venue?.name ?? "",
+              title: setlist?.tour?.name ?? ""
+          )
 
           dataManager.addArchivedConcertInfo(newArtist, newSetlist)
         }, label: {

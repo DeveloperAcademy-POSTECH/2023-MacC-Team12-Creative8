@@ -13,15 +13,30 @@ struct ArtistSetlistCell: View {
   let info: ArchivedConcertInfo
   let isDetail: Bool
 
+  let dataServiece = SetlistDataService.shared
+  @State var isShowModal: Bool = false
+  @State var setlist: Setlist? = nil
   @StateObject var viewModel = ArchiveViewModel()
   @StateObject var dataManager = SwiftDataManager()
+  @ObservedObject var setlistVm = SetlistViewModel()
   @Environment(\.modelContext) var modelContext
   var body: some View {
     let formattedDate = viewModel.dateFormatter.string(from: info.setlist.date)
     let dayOfWeek = viewModel.dayOfWeekFormatter.string(from: info.setlist.date)
+    let artistInfo = ArtistInfo(name: info.artistInfo.name,
+                                alias: info.artistInfo.name,
+                                mbid: info.artistInfo.mbid,
+                                gid: info.artistInfo.gid,
+                                imageUrl: info.artistInfo.imageUrl,
+                                songList: dataManager.songListDecoder(info.artistInfo.songList))
     HStack {
-      NavigationLink {
-        
+      Button {
+        dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
+          if let setlist = setlist {
+            self.setlist = setlist
+            viewModel.isActiveButton.toggle()
+          }
+        })
       } label: {
         HStack {
           VStack(spacing: 5) {
@@ -42,6 +57,13 @@ struct ArtistSetlistCell: View {
           .foregroundStyle(.black)
           .font(.system(size: 14))
           .padding(.leading)
+        }
+      }
+      .navigationDestination(isPresented: $viewModel.isActiveButton) {
+        if let setlist = setlist {
+          SetlistView(setlist: setlist,
+                      isShowModal: $isShowModal,
+                      artistInfo: artistInfo)
         }
       }
       Spacer()
