@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct SearchArtistList: View {
   @ObservedObject var viewModel: SearchViewModel
@@ -46,19 +47,20 @@ public struct ListRow: View {
       VStack(alignment: .leading) {
         Text(namePair.0)
           .font(.system(size: 16))
-          .foregroundStyle(Color.black)
+          .foregroundStyle(Color.fontBlack)
         if info == "" {
           Text(" ")
             .font(.system(size: 13))
         } else {
           Text(info)
             .font(.system(size: 13))
-            .foregroundStyle(Color.gray)
+            .foregroundStyle(Color.fontGrey25)
         }
       }
       .padding(.horizontal)
       .padding(.vertical, 5)
       Divider()
+        .foregroundStyle(Color.lineGrey1)
         .padding(.horizontal)
     }
   }

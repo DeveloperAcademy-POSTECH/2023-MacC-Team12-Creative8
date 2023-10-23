@@ -20,5 +20,83 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "SearchArtistList"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - fabb8442fe7b6c2c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Feature.SearchArtistList.dataManager : Core.SwiftDataManager"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 6dea8f16548af972"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.dataManager.getter : Core.SwiftDataManager"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - bdb3ea932d62fed9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.$dataManager.getter : SwiftUI.ObservedObject&lt;Core.SwiftDataManager&gt;.Wrapper"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 4c5da9bbdcf113e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of Feature.SearchArtistList.init(viewModel: Feature.SearchViewModel, dataManager: @autoclosure () -&gt; Core.SwiftDataManager, modelContext: SwiftUI.Environment&lt;SwiftData.ModelContext&gt;) -&gt; Feature.SearchArtistList"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

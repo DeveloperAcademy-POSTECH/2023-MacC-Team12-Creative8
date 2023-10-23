@@ -24,14 +24,13 @@ struct SearchHistoryCell: View {
         } label: {
           ListRow(namePair: (history.artistInfo.name, ""), info: history.artistInfo.country)
         }
-        .foregroundStyle(.black)
 
         Spacer()
 
         Button {
           dataManager.deleteSearchHistory(history)
         } label: {
-          Image(systemName: "xmark").foregroundStyle(.gray)
+          Image(systemName: "xmark").foregroundStyle(Color.fontGrey3)
         }
       }
       .padding(.top)
