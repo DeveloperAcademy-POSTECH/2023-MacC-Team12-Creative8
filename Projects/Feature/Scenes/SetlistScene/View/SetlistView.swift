@@ -14,9 +14,9 @@ private let gray: Color = Color(hex: 0xEAEAEA)
 
 struct SetlistView: View {
   let setlist: Setlist
-  @Binding var isShowModal: Bool
   let artistInfo: ArtistInfo?
   @StateObject var vm = SetlistViewModel()
+  @State private var isShowModal = false
   
   var body: some View {
     VStack {
@@ -27,7 +27,7 @@ struct SetlistView: View {
         ScrollView {
           ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
           ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-          AddPlaylistButton()
+          addPlaylistButton
           BottomView()
         }
       }
@@ -46,8 +46,29 @@ struct SetlistView: View {
     .foregroundStyle(Color.primary)
     .sheet(isPresented: self.$isShowModal) {
       BottomModalView()
+        .presentationDetents([.fraction(0.4)])
+        .presentationDragIndicator(.visible)
     }
   }
+  
+  private var addPlaylistButton: some View {
+      VStack {
+        Spacer()
+        Button(action: {
+          self.isShowModal.toggle()
+        }, label: {
+          RoundedRectangle(cornerRadius: 10)
+            .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
+            .foregroundStyle(gray)
+            .overlay {
+              Text("플레이리스트 등록")
+                .foregroundStyle(Color.primary)
+                .bold()
+            }
+        })
+        .padding(.bottom)
+      }
+    }
 }
 
 private struct ConcertInfoView: View {
@@ -217,11 +238,6 @@ private struct ListRowView: View {
 
 private struct BottomView: View {
   var body: some View {
-    ZStack {
-      Rectangle()
-        .frame(height: UIHeight * 0.25)
-        .foregroundColor(gray)
-      
       VStack(alignment: .leading, spacing: 30) {
         Text("세트리스트 정보 수정을 원하시나요?")
           .font(.system(size: 16))
@@ -246,31 +262,6 @@ private struct BottomView: View {
         })
       }
       .padding(.horizontal)
-    }
-    .frame(height: UIHeight * 0.25)
-  }
-}
-
-private struct AddPlaylistButton: View {
-  @State private var isShowModal = false
-  
-  var body: some View {
-    VStack {
-      Spacer()
-      Button(action: {
-      
-      }, label: {
-        RoundedRectangle(cornerRadius: 10)
-          .frame(width: UIWidth * 0.85, height: UIHeight * 0.065)
-          .foregroundStyle(gray)
-          .overlay {
-            Text("플레이리스트 등록")
-              .foregroundStyle(Color.primary)
-              .bold()
-          }
-      })
-      .padding(.bottom)
-    }
   }
 }
 
@@ -308,8 +299,8 @@ private struct EmptySetlistView: View {
 
 private struct BottomModalView: View {
   var body: some View {
-    VStack(alignment: .leading, spacing: UIHeight * 0.02) {
-      Spacer().frame(height: UIHeight * 0.1)
+    Spacer().frame(height: UIHeight * 0.07)
+    VStack(alignment: .leading, spacing: UIHeight * 0.03) {
       Group {
         listView(title: "Apple Music에 옮기기", description: nil, action: {
           // TODO: 플레이리스트 연동
@@ -332,7 +323,7 @@ private struct BottomModalView: View {
   
   private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
     HStack {
-      VStack(alignment: .leading, spacing: 4) {
+      VStack(alignment: .leading, spacing: UIHeight * 0.01) {
         Text(title)
           .font(.system(size: 16, weight: .semibold))
         if let description = description {

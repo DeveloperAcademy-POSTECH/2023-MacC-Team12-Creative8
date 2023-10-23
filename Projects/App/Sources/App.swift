@@ -28,12 +28,8 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-<<<<<<< HEAD
-        MainView()
 //          .modelContainer(for: [ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self])
-=======
         TabBarView()
->>>>>>> develop
       }
     }
     .modelContainer(sharedModelContainer)
