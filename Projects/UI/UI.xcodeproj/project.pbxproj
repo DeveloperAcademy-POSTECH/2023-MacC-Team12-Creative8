@@ -10,11 +10,8 @@
 		001AC19B78D27BF9845265C5 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EA395E1FD269D7EA13345 /* UIScreenExtension.swift */; };
 		1A39AE90F2F1BFE8DFD063C2 /* CellFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DFF7E3CF16D587F41473F /* CellFrameExtension.swift */; };
 		2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */; };
-<<<<<<< HEAD
 		4227D6225C566381E5480831 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957378EDAFAF88BFEB487132 /* Colors.xcassets */; };
 		7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */; };
-=======
->>>>>>> 9e03dd1e14102de727d6151a0da84111d8f51eb9
 		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
 		9F7512161D1AE13D99D8517A /* TuistAssets+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */; };
@@ -292,15 +289,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-=======
-<<<<<<< HEAD
-			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-=======
-			shellScript = "ROOT_DIR=/Users/jangsumin/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
->>>>>>> 5f5d472d4ebe74a3948494cae51d1ff532f3b697
->>>>>>> 9e03dd1e14102de727d6151a0da84111d8f51eb9
 		};
 /* End PBXShellScriptBuildPhase section */
 
