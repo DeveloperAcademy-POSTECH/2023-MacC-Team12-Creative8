@@ -7,15 +7,25 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 import Core
 
 public struct MainView: View {
     @AppStorage("appearance")
     var appearnace: ButtonType = .automatic
+    
     @Environment(\.colorScheme) var colorScheme
+    
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
+    
+    @Query var likeArtists: [LikeArtist]
+    
     @ObservedObject var viewModel = MainViewModel()
+    @ObservedObject var dataManager = SwiftDataManager()
+    @ObservedObject var setlistViewModel = ArtistViewModel()
+    
+    @Environment(\.modelContext) var modelContext
     
     public init() {
     }
@@ -33,7 +43,6 @@ public struct MainView: View {
                                     // 다크모드 기능 넣기
                                     viewModel.isTapped.toggle()
                                 } label: {
-                                    
                                     if colorScheme == .dark {
                                         Image(systemName: "sun.max.fill")
                                             .font(.title3)
@@ -58,7 +67,7 @@ public struct MainView: View {
                     Divider()
                         .padding(.leading, 24)
                         .padding(.vertical)
-                    if viewModel.sampleData.isEmpty {
+                    if likeArtists.isEmpty {
                         EmptyMainView()
                             .frame(width: geometry.size.width)
                             .frame(minHeight: geometry.size.height * 0.75)
@@ -68,7 +77,9 @@ public struct MainView: View {
                 }
             }
         }
-        
+        .onAppear {
+            dataManager.modelContext = modelContext
+        }
     }
     public var logo: some View {
         HStack(spacing: 0) {
@@ -86,8 +97,8 @@ public struct MainView: View {
     public var darkmodeButtons: some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 36)
-            .foregroundStyle(.gray)
-        .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
+                .foregroundStyle(.gray)
+                .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
             VStack {
                 HStack(spacing: screenWidth * 0.07) {
                     ForEach(ButtonType.allCases) { mode in
@@ -114,7 +125,7 @@ public struct MainView: View {
             viewModel.selectedIndex = viewModel.scrollToIndex
         }
         .onAppear {
-            if viewModel.sampleData.count != 0 {
+            if likeArtists.count != 0 {
                 viewModel.selectedIndex = 0
                 viewModel.scrollToIndex = 0
             }
@@ -124,8 +135,8 @@ public struct MainView: View {
         ScrollView(.horizontal) {
             ScrollViewReader { scrollViewProxy in
                 HStack(spacing: screenWidth * 0.13) {
-                    ForEach(0..<viewModel.sampleData.count, id: \.self) { data in
-                        let artistName = viewModel.replaceFirstSpaceWithNewline(viewModel.sampleData[data].artist)
+                    ForEach(0..<likeArtists.count, id: \.self) { data in
+                        let artistName = viewModel.replaceFirstSpaceWithNewline(likeArtists[data].artistInfo.name)
                         Text(.init(artistName))
                             .background(Color.clear)
                             .font(.system(size: 25))
@@ -159,63 +170,74 @@ public struct MainView: View {
     public var artistContentView: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 18) {
-                ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
+                ForEach(0 ..< likeArtists.count, id: \.self) { data in
                     VStack(spacing: 0) {
-                        Button {
-                            // TODO: 내비 연결
-                        } label: {
-                            Image(viewModel.sampleData[data].image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-                                .overlay {
-                                    ZStack {
-                                        Color.black
-                                            .opacity(0.2)
-                                        VStack {
-                                            Spacer()
-                                            HStack {
+                        NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
+                            AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                                    .overlay {
+                                        ZStack {
+                                            Color.black
+                                                .opacity(0.2)
+                                            VStack {
                                                 Spacer()
-                                                Circle()
-                                                    .frame(width: screenWidth * 0.15)
-                                                    .foregroundStyle(.black)
-                                                    .overlay {
-                                                        Image(systemName: "arrow.right")
-                                                            .foregroundStyle(.white)
-                                                    }
+                                                HStack {
+                                                    Spacer()
+                                                    Circle()
+                                                        .frame(width: screenWidth * 0.15)
+                                                        .foregroundStyle(.black)
+                                                        .overlay {
+                                                            Image(systemName: "arrow.right")
+                                                                .foregroundStyle(.white)
+                                                        }
+                                                }
                                             }
+                                            .padding([.trailing, .bottom])
                                         }
-                                        .padding([.trailing, .bottom])
                                     }
-                                }
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                        }
-                        ForEach(0 ..< viewModel.sampleData[data].concertInfo.count, id: \.self) { item in
-                            VStack(spacing: 0) {
-                                HStack(spacing: 0) {
-                                    VStack(alignment: .center) {
-                                        Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.yearFormatter)")
-                                            .foregroundStyle(.gray)
-                                        Text("\(viewModel.sampleData[data].concertInfo[item].date, formatter: viewModel.dateMonthFormatter)")
-                                    }
-                                    .font(.callout)
-                                    .fontWeight(.semibold)
-                                    Spacer()
-                                        .frame(width: screenWidth * 0.11)
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        Text(viewModel.sampleData[data].concertInfo[item].tourName)
-                                            .bold()
-                                            .padding(.bottom, 2)
-                                        Text(viewModel.sampleData[data].concertInfo[item].venue)
-                                    }
-                                    .font(.system(size: 14))
-                                    Spacer()
-                                }
-                                .padding(.vertical)
-                                Divider()
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            } placeholder: {
+                                ProgressView()
                             }
-                            .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                            .animation(.easeInOut(duration: 0.1))
+                        }
+                        .onAppear {
+                            viewModel.getSetlistsFromSetlistFM(artistMbid: likeArtists[data].artistInfo.mbid)
+                        }
+                        if viewModel.isLoading {
+                            ProgressView()
+                        } else {
+                            ForEach(viewModel.setlists?.prefix(3) ?? [], id: \.id) { item in
+                                let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item.eventDate ?? "")
+                                let year = viewModel.getFormattedDateAndMonth(date: item.eventDate ?? "")
+                                VStack(spacing: 0) {
+                                    HStack(spacing: 0) {
+                                        VStack(alignment: .center) {
+                                            Text(year ?? "")
+                                                .foregroundStyle(.gray)
+                                            Text(dateAndMonth ?? "")
+                                        }
+                                        .font(.callout)
+                                        .fontWeight(.semibold)
+                                        Spacer()
+                                            .frame(width: screenWidth * 0.11)
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            Text(item.tour?.name ?? "")
+                                                .bold()
+                                                .padding(.bottom, 2)
+                                            Text(item.venue?.name ?? "")
+                                        }
+                                        .font(.system(size: 14))
+                                        Spacer()
+                                    }
+                                    .padding(.vertical)
+                                    Divider()
+                                }
+                                .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                                .animation(.easeInOut(duration: 0.1))
+                            }
                         }
                     }
                 }
@@ -309,3 +331,29 @@ public struct MainArchiveData: Identifiable {
 #Preview {
     MainView()
 }
+
+//                            Image(viewModel.sampleData[data].image)
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+//                                .overlay {
+//                                    ZStack {
+//                                        Color.black
+//                                            .opacity(0.2)
+//                                        VStack {
+//                                            Spacer()
+//                                            HStack {
+//                                                Spacer()
+//                                                Circle()
+//                                                    .frame(width: screenWidth * 0.15)
+//                                                    .foregroundStyle(.black)
+//                                                    .overlay {
+//                                                        Image(systemName: "arrow.right")
+//                                                            .foregroundStyle(.white)
+//                                                    }
+//                                            }
+//                                        }
+//                                        .padding([.trailing, .bottom])
+//                                    }
+//                                }
+//                                .clipShape(RoundedRectangle(cornerRadius: 15))
