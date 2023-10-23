@@ -5,7 +5,7 @@
       location = "group:Projects"
       name = "Projects">
       <FileRef
-         location = "group:App/App.xcodeproj">
+         location = "group:App/Seta.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Core/Core.xcodeproj">
