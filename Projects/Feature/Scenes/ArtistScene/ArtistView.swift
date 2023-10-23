@@ -25,12 +25,22 @@ struct ArtistView: View {
       if vm.isLoading1 || vm.isLoading2 {
         ProgressView()
       } else {
-        NavigationBarView(vm: vm)
         ScrollView {
           ArtistImageView(vm: vm)
           BookmarkedView(vm: vm)
           ListView(vm: vm)
         }
+      }
+    }
+    .navigationTitle("")
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+          VStack {
+            Text(vm.artistInfo?.name ?? "")
+              .font(.system(size: 19))
+              .fontWeight(.semibold)
+          }
+          .fontWeight(.semibold)
       }
     }
     .foregroundStyle(Color.primary)
@@ -39,29 +49,6 @@ struct ArtistView: View {
       vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
       
     }
-  }
-}
-
-private struct NavigationBarView: View {
-  @ObservedObject var vm: ArtistViewModel
-  
-  var body: some View {
-    ZStack {
-      HStack {
-        Button(action: {
-          
-        }, label: {
-          Image(systemName: "chevron.left")
-            .font(.system(size: 24))
-        })
-        Spacer()
-      }
-      
-      Text(vm.artistInfo?.name ?? "")
-        .font(.system(size: 19))
-        .fontWeight(.semibold)
-    }
-    .padding()
   }
 }
 
@@ -179,7 +166,7 @@ private struct BookmarkedView: View {
       Spacer()
       ForEach(vm.bookmarkedSetlists?.prefix(3) ?? [], id: \.id) { setlist in
         NavigationLink {
-          SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
+          
         } label: {
           HStack {
             Spacer()
@@ -252,7 +239,7 @@ private struct ListView: View {
   private var setlistsLayer: some View {
     ForEach(vm.setlists ?? [], id: \.id) { setlist in
       NavigationLink {
-        
+        SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
           Spacer()
