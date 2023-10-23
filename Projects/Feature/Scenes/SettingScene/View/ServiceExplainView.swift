@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct ServiceExplainView: View {
   
@@ -15,7 +16,7 @@ struct ServiceExplainView: View {
   var body: some View {
     ScrollView {
       ZStack {
-        Color(.gray)
+        Color(hex: 0xEEEEEF)
         VStack {
           SectionBackgroundView(height: 1100)
             .overlay {
@@ -42,7 +43,7 @@ struct TermsOfSetlistfm: View {
   
   var body: some View {
     ZStack {
-      Color(.gray).ignoresSafeArea()
+      Color(hex: 0xEEEEEF).ignoresSafeArea()
       VStack {
         SectionBackgroundView(height: 571)
           .overlay {
@@ -72,7 +73,8 @@ struct TermsTitleView: View {
   
   var body: some View {
     Text(title)
-      .font(.system(size: 16, weight: .semibold))
+      .font(.system(size: 18, weight: .semibold))
+      .foregroundStyle(Color.fontBlack)
       .padding(EdgeInsets(top: 32, leading: 0, bottom: 16, trailing: 0))
     Divider()
   }
@@ -88,7 +90,6 @@ struct TermsView: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text(terms[0])
-        .foregroundStyle(.gray)
         .font(.footnote)
         .padding(.top, 16)
       ForEach(1..<terms.count, id: \.self) { index in
@@ -96,11 +97,11 @@ struct TermsView: View {
           Text(bulletPoint == "•" ? bulletPoint : "\(index).")
           Text(terms[index])
         }
-        .foregroundStyle(.gray)
         .font(.footnote)
         .lineSpacing(4)
       }
     }
+    .foregroundStyle(Color.fontGrey2)
   }
 }
 
@@ -116,5 +117,5 @@ struct SectionBackgroundView: View {
 }
 
 #Preview {
-  ServiceExplainView()
+  TermsOfSetlistfm()
 }

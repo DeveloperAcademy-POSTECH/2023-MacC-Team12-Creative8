@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 public struct SettingView: View {
   
@@ -17,10 +18,12 @@ public struct SettingView: View {
         HStack {
           Text("더보기")
             .font(.system(size: 24, weight: .semibold))
+            .foregroundStyle(Color.fontBlack)
             .padding(EdgeInsets(top: 0, leading: 24, bottom: 11, trailing: 0))
           Spacer()
         }
         Divider()
+          .foregroundStyle(Color.lineGrey1)
           .padding(.leading, 24)
         
         // 세트리스트 추가 및 수정하기
@@ -33,6 +36,7 @@ public struct SettingView: View {
             linkLabel: "Setlist.fm 바로가기")
           .padding(.bottom, 20)
           Divider()
+            .foregroundStyle(Color.lineGrey1)
         }
         .padding(.horizontal, 24)
 
@@ -42,6 +46,7 @@ public struct SettingView: View {
             sectionTitle: "서비스 이용 관련",
             sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
           Divider()
+            .foregroundStyle(Color.lineGrey1)
           
           // 이용 약관
           NavigationLink {
@@ -51,6 +56,7 @@ public struct SettingView: View {
             LinkLabelView(linkLabel: "이용 약관")
           }
           Divider()
+            .foregroundStyle(Color.lineGrey1)
           
           // Setlist.fm 약관
           NavigationLink {
@@ -78,10 +84,11 @@ struct SectionTitleView: View {
   var body: some View {
     Text(sectionTitle)
       .font(.system(size: 20, weight: .semibold))
+      .foregroundStyle(Color.fontBlack)
       .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
     Text(sectionDescription)
       .font(.footnote)
-      .foregroundStyle(.gray)
+      .foregroundStyle(Color.fontGrey2)
       .padding(.bottom, 16)
   }
 }
@@ -101,7 +108,7 @@ struct SetlistfmLink: View {
       }
       .frame(height: 54)
       .background(.black)
-      .foregroundStyle(.white)
+      .foregroundStyle(Color.fontWhite)
       .clipShape(RoundedRectangle(cornerRadius: 14))
       .padding(.horizontal, 7)
     })
@@ -123,7 +130,7 @@ struct LinkLabelView: View {
         .frame(width: 6, height: 12)
         .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 36))
     }
-    .foregroundStyle(.black)
+    .foregroundStyle(Color.fontBlack)
   }
 }
 
