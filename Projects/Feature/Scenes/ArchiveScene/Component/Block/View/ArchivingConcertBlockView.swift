@@ -23,7 +23,7 @@ struct ArchivingConcertBlockView: View {
                               maxminCnt: $viewModel.maxminCnt)
         } label: {
             ArchiveYearCell(year: viewModel.concertCellInfo[index].0,
-                            concertCnt: viewModel.concertCellInfo[index].1)
+                            concertCnt: viewModel.concertCellInfo[index].1, blockColor: index%3 == 0 ? .blockOrange : index%3 == 1 ? .blockPink : .blockWarmgrey)
             .frame(width: cellWidthSize(viewModel.concertCellInfo[index].1,
                                         viewModel.maxminCnt, geo.size.width), height: 131)
           }

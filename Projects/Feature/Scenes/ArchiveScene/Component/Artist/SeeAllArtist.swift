@@ -18,12 +18,13 @@ struct SeeAllArtist: View {
         HStack {
           ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
           Text("\(item.artistInfo.name)")
+            .foregroundStyle(Color.fontBlack)
           Spacer()
           Button {
               
           } label: {
             Image(systemName: "ellipsis")
-              .foregroundStyle(.black)
+              .foregroundStyle(Color.fontBlack)
               .rotationEffect(.degrees(-90))
           }
         }

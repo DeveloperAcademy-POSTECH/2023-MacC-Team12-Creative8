@@ -18,14 +18,15 @@ struct ConcertListView: View {
   var body: some View {
     VStack {
       Divider()
+        .foregroundStyle(Color.lineGrey1)
       ForEach(0..<viewModel.concertCellInfo.count, id: \.self) { yearIndex in
         NavigationLink {
           BlockAllConcertView(selecteYear: $selectYear, concertCellInfo: $viewModel.concertCellInfo, maxminCnt: $viewModel.maxminCnt)
         } label: {
           HStack {
-            Text(String(viewModel.concertCellInfo[yearIndex].0)).foregroundStyle(.black)
+            Text(String(viewModel.concertCellInfo[yearIndex].0)).foregroundStyle(Color.fontBlack)
             Spacer()
-            Image(systemName: "arrow.right").foregroundStyle(.black)
+            Image(systemName: "arrow.right").foregroundStyle(Color.mainBlack)
           }
           .bold()
           .padding()
@@ -34,10 +35,12 @@ struct ConcertListView: View {
           selectYear = viewModel.concertCellInfo[yearIndex].0
         })
         Divider()
+          .foregroundStyle(Color.lineGrey1)
 
         ForEach(concert.filter { Calendar.current.component(.year, from: $0.setlist.date) == viewModel.concertCellInfo[yearIndex].0 }) { item in
         ArtistSetlistCell(info: item, isDetail: false)
           Divider()
+            .foregroundStyle(Color.lineGrey1)
         }
 
       }

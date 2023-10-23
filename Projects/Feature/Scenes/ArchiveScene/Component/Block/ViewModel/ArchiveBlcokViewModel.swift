@@ -15,7 +15,7 @@ final class ArchiveViewModel: ObservableObject {
   @Published var artistUnique: [String] = []
 
   @Published var userSelection = "music.note.list"
-  let options = ["music.note.list", "batteryblock"]
+  let options = ["list.bullet", "batteryblock"]
   // 월.일 형태
   let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()

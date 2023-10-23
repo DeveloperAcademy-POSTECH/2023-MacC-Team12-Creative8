@@ -18,3 +18,115 @@ public extension Color {
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: opacity)
     }
 }
+
+public let setaBundle = Bundle(identifier: "com.creative8.seta.UI")
+public extension Color {
+    static var blockPink: Color {
+        Color("blockPink", bundle: setaBundle)
+    }
+  
+  static var blockOrange: Color {
+      Color("blockOrange", bundle: setaBundle)
+  }
+  
+  static var blockWarmgrey: Color {
+      Color("blockWarmgrey", bundle: setaBundle)
+  }
+  
+  static var backgroundGrey: Color {
+      Color("backgroundGrey", bundle: setaBundle)
+  }
+  
+  static var backgroundWhite: Color {
+      Color("backgroundWhite", bundle: setaBundle)
+  }
+  
+  static var blockFontBlack: Color {
+      Color("blockFontBlack", bundle: setaBundle)
+  }
+  
+  static var blockFontWhite: Color {
+      Color("blockFontWhite", bundle: setaBundle)
+  }
+  
+  static var buttonBlack: Color {
+      Color("buttonBlack", bundle: setaBundle)
+  }
+  
+  static var fontBlack: Color {
+      Color("fontBlack", bundle: setaBundle)
+  }
+  
+  static var fontGrey25: Color {
+      Color("fontGrey25", bundle: setaBundle)
+  }
+  
+  static var fontGrey3: Color {
+      Color("fontGrey3", bundle: setaBundle)
+  }
+  
+  static var fontGrey2: Color {
+      Color("fontGrey2", bundle: setaBundle)
+  }
+  
+  static var fontWhite: Color {
+      Color("fontWhite", bundle: setaBundle)
+  }
+  
+  static var fontWhite2: Color {
+      Color("fontWhite2", bundle: setaBundle)
+  }
+  
+  static var fontWhite3: Color {
+      Color("fontWhite3", bundle: setaBundle)
+  }
+  
+  static var lineGrey1: Color {
+      Color("lineGrey1", bundle: setaBundle)
+  }
+  
+  static var lineGrey2: Color {
+      Color("lineGrey2", bundle: setaBundle)
+  }
+  
+  static var lineWhite1: Color {
+      Color("lineWhite1", bundle: setaBundle)
+  }
+  
+  static var mainBlack: Color {
+      Color("mainBlack", bundle: setaBundle)
+  }
+  
+  static var mainGrey1: Color {
+      Color("mainGrey1", bundle: setaBundle)
+  }
+  
+  static var mainOrange: Color {
+      Color("mainOrange", bundle: setaBundle)
+  }
+  
+  static var mainWhite: Color {
+      Color("mainWhite", bundle: setaBundle)
+  }
+  
+  static var mainWhite1: Color {
+      Color("mainWhite1", bundle: setaBundle)
+  }
+  
+  static var setlistBoxBlack: Color {
+      Color("setlistBoxBlack", bundle: setaBundle)
+  }
+  
+  static var setlistBoxGrey: Color {
+      Color("setlistBoxGrey", bundle: setaBundle)
+  }
+  
+  static var setlistBoxWhite: Color {
+      Color("setlistBoxWhite", bundle: setaBundle)
+  }
+  
+  static var settingTextBoxWhite: Color {
+      Color("settingTextBoxWhite", bundle: setaBundle)
+  }
+  
+}

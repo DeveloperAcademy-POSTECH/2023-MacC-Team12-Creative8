@@ -23,7 +23,8 @@ struct ArchivingView: View {
       VStack(alignment: .leading) {
         Text("아카이빙")
           .font(.title)
-          .foregroundStyle(.black)
+          .fontWeight(.semibold)
+          .foregroundStyle(Color.fontBlack)
         archivingArtistView
         viewSelect
       }
@@ -71,11 +72,12 @@ struct ArchivingView: View {
         .frameForCell()
         .overlay {
           Image(systemName: "heart")
-            .foregroundStyle(Color.fontBlack)
         }
-      Text("좋아요한 아티스트")
+      Text("찜한 아티스트")
         .font(.system(size: 12))
+        .padding(.top, 5)
     }
+    .foregroundStyle(Color.fontBlack)
   }
   
   private var likedArtistCell: some View {
@@ -93,14 +95,16 @@ struct ArchivingView: View {
 
   private var blockIsEmptyView: some View {
     VStack {
-      Image(systemName: "bookmark")
-        .font(.largeTitle)
-      Text("찜한 공연이 없어요")
+      Spacer(minLength: 175)
+      Text("다시 듣기한 공연이 없어요")
         .font(.system(size: 16))
         .fontWeight(.semibold)
-      Text("내가 좋아하는 아티스트의 공연을 찜하고\n세트리스트를 확인해보세요")
+        .foregroundStyle(Color.fontBlack)
+      Spacer()
+      Text("내가 좋아하는 아티스트의 공연을 다시 듣기하고\n세트리스트를 확인해보세요")
         .multilineTextAlignment(.center)
         .font(.system(size: 13))
+        .foregroundStyle(Color.fontGrey2)
     }
   }
 
@@ -124,6 +128,7 @@ struct ArchivingView: View {
       Text("공연 다시 듣기")
         .font(.title3)
         .bold()
+        .foregroundStyle(Color.fontBlack)
       Spacer()
       Picker("Form Selection", selection: $vieWModel.userSelection) {
         ForEach(vieWModel.options, id: \.self) {

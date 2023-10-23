@@ -26,11 +26,11 @@ struct ArtistSetlistCell: View {
         HStack {
           VStack(spacing: 5) {
             Text(formattedDate)
-              .foregroundStyle(.black)
+              .foregroundStyle(Color.fontBlack)
               .font(.callout)
               .bold()
             Text(dayOfWeek)
-              .foregroundStyle(.gray)
+              .foregroundStyle(Color.fontGrey25)
               .font(.callout)
           }
 
@@ -39,7 +39,7 @@ struct ArtistSetlistCell: View {
             Text(info.setlist.title).bold()
             Text(info.setlist.venue)
           }
-          .foregroundStyle(.black)
+          .foregroundStyle(Color.fontBlack)
           .font(.system(size: 14))
           .padding(.leading)
         }
