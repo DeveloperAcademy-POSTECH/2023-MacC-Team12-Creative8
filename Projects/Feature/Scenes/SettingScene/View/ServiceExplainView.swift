@@ -16,7 +16,7 @@ struct ServiceExplainView: View {
   var body: some View {
     ScrollView {
       ZStack {
-        Color(hex: 0xEEEEEF)
+        Color(Color.settingTextBoxWhite)
         VStack {
           SectionBackgroundView(height: 1100)
             .overlay {
@@ -111,7 +111,7 @@ struct SectionBackgroundView: View {
   
   var body: some View {
     RoundedRectangle(cornerRadius: 12)
-      .fill(.white)
+      .fill(Color.backgroundWhite)
       .frame(height: height)
   }
 }
