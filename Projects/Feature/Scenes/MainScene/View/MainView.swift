@@ -14,9 +14,6 @@ public struct MainView: View {
     let screenHeight = UIScreen.main.bounds.size.height
     @ObservedObject var viewModel = MainViewModel()
   
-    public init() {
-    }
-  
     public var body: some View {
         GeometryReader { geometry in
             ScrollView {
