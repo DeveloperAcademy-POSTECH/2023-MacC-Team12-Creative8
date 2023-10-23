@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080A199A8C538F3C58813099 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3198357237EE3291ABE835E6 /* ArtistViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
 		0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406552E60CD13BEAD883FA3 /* ArchiveBlcokViewModel.swift */; };
 		1F4F0BECF2887CC08E04BC76 /* ArchivingConcertBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9373E7A1B9132D27C04F7C4 /* ArchivingConcertBlockView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		249750C66E67B0994C0245FC /* BlockAllConcertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B02904D51D96EB3326921 /* BlockAllConcertView.swift */; };
+		2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF76D13D3DC0AE954F175F /* ArtistView.swift */; };
 		309172FE05CC22EE9255692A /* SeeAllArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D29AC7BB9AE42983F99AB4 /* SeeAllArtist.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
@@ -71,9 +73,11 @@
 		2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
+		3198357237EE3291ABE835E6 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
+		63FF76D13D3DC0AE954F175F /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		811EED38EE073FA6E9252D7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8406552E60CD13BEAD883FA3 /* ArchiveBlcokViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveBlcokViewModel.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07D45D89AD382E079D6E8AC7 /* ArtistScene */ = {
+			isa = PBXGroup;
+			children = (
+				63FF76D13D3DC0AE954F175F /* ArtistView.swift */,
+				3198357237EE3291ABE835E6 /* ArtistViewModel.swift */,
+			);
+			path = ArtistScene;
+			sourceTree = "<group>";
+		};
 		0D8A263344ADAE654A37E011 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				5C3F5CC91689B43480025D3A /* ArchiveScene */,
+				07D45D89AD382E079D6E8AC7 /* ArtistScene */,
 				1E4BCC9FA52881309D189527 /* MainScene */,
 				B9DEE02445017E26BC98FA76 /* SearchScene */,
 				2AC800C4A6C6B50E5E5CCDAF /* SetlistScene */,
@@ -473,6 +487,8 @@
 				249750C66E67B0994C0245FC /* BlockAllConcertView.swift in Sources */,
 				0BD84AAA502B4C69E832EF2D /* ArchiveBlcokViewModel.swift in Sources */,
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
+				2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */,
+				080A199A8C538F3C58813099 /* ArtistViewModel.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
