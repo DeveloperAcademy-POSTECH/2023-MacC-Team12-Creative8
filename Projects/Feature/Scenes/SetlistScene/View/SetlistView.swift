@@ -352,15 +352,17 @@ private struct BottomModalView: View {
           AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
           
         })
+        
         listView(
           title: "세트리스트 캡처하기",
           description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
           action: {
+            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+
           }
         )
       }
       .opacity(0.6)
-      
       Spacer()
     }
     .padding(.horizontal, 20)
@@ -378,11 +380,10 @@ private struct BottomModalView: View {
         }
       }
       Spacer()
-      Button {
-        action()
-      } label: {
-        Image(systemName: "chevron.right")
+      Image(systemName: "chevron.right")
           .foregroundStyle(.gray)
+          .onTapGesture {
+              action()
       }
     }
   }
