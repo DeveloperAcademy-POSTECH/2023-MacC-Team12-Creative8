@@ -114,7 +114,14 @@ private struct ConcertInfoView: View {
         .padding(.horizontal)
         
         Button(action: {
-          let newArtist = SaveArtistInfo(
+          if vm.isBookmarked {
+            for i in 0..<concertInfo.count {
+              if concertInfo[i].setlist.setlistId == setlist?.id {
+                dataManager.deleteArchivedConcertInfo(concertInfo[i])
+              }
+            }
+          } else {
+            let newArtist = SaveArtistInfo(
               name: setlist?.artist?.name ?? "",
               country: "",
               alias: artistInfo?.alias ?? "",
@@ -122,25 +129,24 @@ private struct ConcertInfoView: View {
               gid: artistInfo?.gid ?? 0,
               imageUrl: artistInfo?.imageUrl ?? "",
               songList: dataManager.songListEncoder(artistInfo?.songList ?? []))
-          let newSetlist = SaveSetlist(
+            let newSetlist = SaveSetlist(
               setlistId: setlist?.id ?? "",
               date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
               venue: setlist?.venue?.name ?? "",
-              title: setlist?.tour?.name ?? ""
-          )
-
-          dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+              title: setlist?.tour?.name ?? "")
+            dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+          }
         }, label: {
           ZStack {
             RoundedRectangle(cornerRadius: 14)
-              .foregroundColor(Color.white)
+              .foregroundColor(vm.isBookmarked ? Color.white : Color.gray)
             HStack {
               Text("해당 공연 다시 듣기")
               Spacer()
               Image(systemName: "checkmark")
             }
             .padding(.horizontal)
-            .foregroundStyle(Color.primary)
+            .foregroundStyle(vm.isBookmarked ? Color.black : Color.white)
             .fontWeight(.semibold)
           }
           .frame(height: UIHeight * 0.065)
@@ -153,7 +159,13 @@ private struct ConcertInfoView: View {
     }
     .padding(.horizontal)
     .frame(height: UIHeight * 0.35)
-    .onAppear { dataManager.modelContext = modelContext }
+    .onAppear { 
+      dataManager.modelContext = modelContext
+      vm.isBookmark(concertInfo, setlist)
+    }
+    .onChange(of: concertInfo) { _, newValue in
+      vm.isBookmark(newValue, setlist)
+    }
   }
 }
 
