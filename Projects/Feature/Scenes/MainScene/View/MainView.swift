@@ -13,10 +13,10 @@ public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
     @ObservedObject var viewModel = MainViewModel()
-  
+    
     public init() {
     }
-  
+    
     public var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -25,21 +25,25 @@ public struct MainView: View {
                         HStack {
                             logo
                             Spacer()
-                            ZStack(alignment: .trailing) {
+                            ZStack(alignment: .trailingFirstTextBaseline) {
                                 Button {
                                     // 다크모드 기능 넣기
                                     viewModel.isTapped.toggle()
                                 } label: {
                                     Image(systemName: "moon.fill")
-                                    
+                                        .font(.title3)
                                 }
+                                .foregroundColor(.black)
+                                .padding(6)
+//                                if viewModel.isTapped {
+//                                        darkmodeButtons
+//                                    }
                                 .overlay {
                                     if viewModel.isTapped {
                                         darkmodeButtons
-                                        
+                                            .offset(x: -(screenWidth * 0.16))
                                     }
                                 }
-                                
                             }
                         }
                         .padding(.horizontal, 24)
@@ -74,26 +78,28 @@ public struct MainView: View {
         }
     }
     public var darkmodeButtons: some View {
-        HStack {
-            TopButtonView(buttonType: .system, viewModel: viewModel)
-            TopButtonView(buttonType: .light, viewModel: viewModel)
-            TopButtonView(buttonType: .dark, viewModel: viewModel)
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: 36)
+            .foregroundStyle(.gray)
+        .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
+            VStack {
+                HStack(spacing: screenWidth * 0.07) {
+                    TopButtonView(buttonType: .system, viewModel: viewModel)
+                    TopButtonView(buttonType: .light, viewModel: viewModel)
+                    TopButtonView(buttonType: .dark, viewModel: viewModel)
+                }
+            }
         }
-        .padding(EdgeInsets(top: 10, leading: 16, bottom: 6, trailing: 16))
-        .background(Color.gray)
-        .clipShape(RoundedRectangle(cornerRadius: 36))
-        .frame(width: (screenWidth * 0.5), height: (screenWidth * 0.18))
-        .offset(x: -(screenWidth * 0.16))
     }
     public var mainArtistsView: some View {
         VStack(spacing: 0) {
             artistNameScrollView
                 .padding(.bottom)
             artistContentView
-            .scrollTargetBehavior(.viewAligned)
-            .scrollIndicators(.hidden)
-            .scrollPosition(id: $viewModel.scrollToIndex)
-            .safeAreaPadding(.horizontal, screenWidth * 0.11)
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
+                .scrollPosition(id: $viewModel.scrollToIndex)
+                .safeAreaPadding(.horizontal, screenWidth * 0.11)
             Spacer()
         }
         .onChange(of: viewModel.scrollToIndex) {
@@ -148,7 +154,7 @@ public struct MainView: View {
                 ForEach(0 ..< viewModel.sampleData.count, id: \.self) { data in
                     VStack(spacing: 0) {
                         Button {
-                        // TODO: 내비 연결
+                            // TODO: 내비 연결
                         } label: {
                             Image(viewModel.sampleData[data].image)
                                 .resizable()
@@ -241,13 +247,12 @@ struct EmptyMainView: View {
 struct TopButtonView: View {
     var buttonType: ButtonType
     var viewModel: MainViewModel
-
     var icon: String {
         switch buttonType {
         case .system:
             return "circle.lefthalf.filled"
         case .light:
-            return "moon"
+            return "sun.max.fill"
         case .dark:
             return "moon.fill"
         }
@@ -255,7 +260,7 @@ struct TopButtonView: View {
     var label: String {
         switch buttonType {
         case .system:
-            return "시스템"
+            return "자동"
         case .light:
             return "라이트"
         case .dark:
@@ -268,9 +273,8 @@ struct TopButtonView: View {
         } label: {
             VStack {
                 Image(systemName: icon)
-                    .padding(8)
-                    .background(Color.white)
-                    .clipShape(Circle())
+                    .font(.title3)
+                    .padding(6)
                 Text(label)
                     .font(.system(size: 10))
             }
