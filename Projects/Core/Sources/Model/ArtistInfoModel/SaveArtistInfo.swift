@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 public struct SaveArtistInfo: Codable {
-  public var name: String
+  public var name: String 
   public var country: String
   public var alias: String
   public var mbid: String
