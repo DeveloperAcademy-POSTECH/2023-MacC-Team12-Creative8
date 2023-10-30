@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import CoreXLSX
 
 public struct OnboardingView: View {
   
@@ -23,22 +22,19 @@ public struct OnboardingView: View {
       VStack(spacing: 0) {
         ScrollView(showsIndicators: false) {
           VStack(alignment: .leading, spacing: 0) {
-            OnboardingTitle()
+            onboardingTitle
             ScrollView(.horizontal, showsIndicators: false) {
               HStack {
-                ForEach(viewModel.genres, id: \.self) { genre in
-                  GenreButton(genre: genre)
+                 
                 }
               }
               .padding(EdgeInsets(top: 0, leading: 24, bottom: 40, trailing: 0))
             }
-            ArtistSelectionView(selectedArtistCount: $selectedArtistCount, artists: viewModel.artists)
           }
         }
         BottomButton(selectedArtistCount: $selectedArtistCount, showToastBar: $showToastBar)
-      }
       if showToastBar {
-        ToastBar()
+        toastBar          
           .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
           .padding(.bottom, 120)
           .onAppear {
@@ -50,12 +46,12 @@ public struct OnboardingView: View {
           }
       }
     }
- 
+    .onAppear {
+      viewModel.readXslx()
+    }
   }
-}
-
-struct OnboardingTitle: View {
-  var body: some View {
+  
+  private var onboardingTitle: some View {
     VStack(alignment: .leading) {
       Text("아티스트 찜하기")
         .font(.system(size: 24, weight: .bold))
@@ -67,26 +63,37 @@ struct OnboardingTitle: View {
     }
     .padding(EdgeInsets(top: 0, leading: 24, bottom: 48, trailing: 0))
   }
-}
-
-struct GenreButton: View {
   
-  @State var isSelected: Bool = false
-  var genre: String
-  
-  var body: some View {
-    Button {
-      isSelected.toggle()
-    } label: {
-      Text(genre)
-        .frame(height: 30)
-        .padding(10)
-        .background(isSelected ? .black: .gray)
-        .cornerRadius(12)
-        .foregroundStyle(isSelected ? .white: .black)
+  private var genresFilter: some View {
+    ForEach(viewModel.genres, id: \.self) { genre in
+      Button {
+        viewModel.isGenreSelected.toggle()
+      } label: {
+        Text(genre)
+          .frame(height: 30)
+          .padding(10)
+          .background(viewModel.isGenreSelected ? .black: .gray)
+          .cornerRadius(12)
+          .foregroundStyle(viewModel.isGenreSelected ? .white: .black)
+      }
+    }
     }
   }
-}
+  
+  private var toastBar: some View {
+    RoundedRectangle(cornerRadius: 14)
+      .frame(width: 328, height: 54)
+      .foregroundColor(.black)
+      .overlay {
+        Text("아직 아티스트 3명이 선택되지 않았어요.")
+          .foregroundStyle(.white)
+          .font(.callout)
+          .fontWeight(.bold)
+    }
+  }
+
+
+
 
 struct ArtistButton: View {
   
@@ -170,20 +177,6 @@ struct BottomButton: View {
           .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
     }
-  }
-}
-
-struct ToastBar: View {
-  var body: some View {
-    RoundedRectangle(cornerRadius: 14)
-      .frame(width: 328, height: 54)
-      .foregroundColor(.black)
-      .overlay {
-        Text("아직 아티스트 3명이 선택되지 않았어요.")
-          .foregroundStyle(.white)
-          .font(.callout)
-          .fontWeight(.bold)
-      }
   }
 }
 

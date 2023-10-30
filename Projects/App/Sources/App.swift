@@ -31,8 +31,9 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-        TabBarView()
-              .preferredColorScheme(appearnace.getColorScheme())
+//        TabBarView()
+//              .preferredColorScheme(appearnace.getColorScheme())
+        OnboardingView()
       }
     }
     .modelContainer(sharedModelContainer)
