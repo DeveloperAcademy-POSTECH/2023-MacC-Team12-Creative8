@@ -280,6 +280,7 @@ private struct ListView: View {
           Spacer()
         }
         .foregroundStyle(Color.fontBlack)
+        .opacity(vm.isEmptySetlist(setlist) ? 0.2 : 1.0)
       }
 
       Divider()

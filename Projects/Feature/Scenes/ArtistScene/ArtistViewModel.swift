@@ -96,19 +96,23 @@ class ArtistViewModel: ObservableObject {
   }
   
   func loadImage() {
-    if let url = URL(string: self.artistInfo?.imageUrl ?? "") {
-      URLSession.shared.dataTask(with: url) { data, _, _ in
-        if let data = data, let image = UIImage(data: data) {
-          DispatchQueue.main.async {
-            self.image = image
+    if let imageUrl = artistInfo?.imageUrl {
+      if let url = URL(string: imageUrl) {
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+          if let data = data, let image = UIImage(data: data) {
+            DispatchQueue.main.async {
+              self.image = image
+            }
           }
         }
+        .resume()
+      } else {
+        //MARK: 아티스트를 찾지 못했을 때 사용할 디폴트 이미지 필요!
+        self.image = UIImage(systemName: "person.crop.circle")
+        print("Invalid Image URL")
       }
-      .resume()
     } else {
-      //MARK: 아티스트를 찾지 못했을 때 사용할 디폴트 이미지 필요!
-      self.image = UIImage(systemName: "person.crop.circle")
-      print("Invalid Image URL")
+      return
     }
   }
 
@@ -132,4 +136,10 @@ class ArtistViewModel: ObservableObject {
     }
   }
   
+  func isEmptySetlist(_ setlist: Setlist) -> Bool {
+    if setlist.sets?.setsSet?.isEmpty == true {
+      return true
+    }
+    return false
+  }
 }
