@@ -253,6 +253,7 @@ public struct MainView: View {
                                                   .padding(.bottom, 3)
                                             Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
                                               .lineLimit(1)
+                                              .foregroundStyle(Color.fontGrey25)
                                           }
                                           .foregroundStyle(Color.fontBlack)
                                           .font(.system(size: 14))
