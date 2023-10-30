@@ -26,7 +26,7 @@ struct ArtistSetlistCell: View {
                                 mbid: info.artistInfo.mbid,
                                 gid: info.artistInfo.gid,
                                 imageUrl: info.artistInfo.imageUrl,
-                                songList: dataManager.songListDecoder(info.artistInfo.songList))
+                                songList: info.artistInfo.songList)
     HStack {
       Button {
         dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
