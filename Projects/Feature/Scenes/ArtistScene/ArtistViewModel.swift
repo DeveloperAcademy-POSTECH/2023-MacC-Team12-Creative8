@@ -28,7 +28,7 @@ class ArtistViewModel: ObservableObject {
   @Published var image: UIImage?
 
   init() {
-    self.showBookmarkedSetlists = true
+    self.showBookmarkedSetlists = false
     self.isLoading1 = false
     self.isLoading2 = false
     self.isLoading3 = false
@@ -106,6 +106,8 @@ class ArtistViewModel: ObservableObject {
       }
       .resume()
     } else {
+      //MARK: 아티스트를 찾지 못했을 때 사용할 디폴트 이미지 필요!
+      self.image = UIImage(systemName: "person.crop.circle")
       print("Invalid Image URL")
     }
   }
