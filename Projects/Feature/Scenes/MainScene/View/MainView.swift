@@ -33,7 +33,7 @@ public struct MainView: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            ScrollView {
+//            ScrollView { // 스크롤
                 VStack(spacing: 0) {
                     VStack(spacing: 0) {
                         HStack {
@@ -75,10 +75,12 @@ public struct MainView: View {
                             .frame(width: geometry.size.width)
                             .frame(minHeight: geometry.size.height * 0.75)
                     } else {
+                      ScrollView {
                         mainArtistsView
+                      }
                     }
                 }
-            }
+//            } // 스크롤
         }
         .onAppear {
             dataManager.modelContext = modelContext
@@ -211,7 +213,15 @@ public struct MainView: View {
                                 ProgressView()
                             }
                         }
-                      
+                        
+                      HStack {
+                        Text("\(likeArtists[data].artistInfo.name)의 최근 공연")
+                          .font(.caption)
+                          .foregroundStyle(Color.fontGrey2)
+                        Spacer()
+                      }
+                      .padding([.horizontal, .top])
+
                         if viewModel.isLoading {
                             ProgressView()
                         } else {
