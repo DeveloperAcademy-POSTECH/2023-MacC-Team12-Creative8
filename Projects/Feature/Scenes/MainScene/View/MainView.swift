@@ -203,6 +203,7 @@ public struct MainView: View {
                                                             Image(systemName: "arrow.right")
                                                             .foregroundStyle(Color.backgroundWhite)
                                                         }
+                                                        .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
                                                 }
                                             }
                                             .padding([.trailing, .bottom])
@@ -229,32 +230,37 @@ public struct MainView: View {
                           ForEach(current.prefix(3), id: \.?.id) { item in
                             let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
                             let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                            let city = item?.venue?.city?.name ?? ""
+                            let country = item?.venue?.city?.country?.name ?? ""
                                 VStack(spacing: 0) {
+//                                  NavigationLink(SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
                                     HStack(spacing: 0) {
-                                      VStack(alignment: .center, spacing: 0) {
-                                            Text(year ?? "")
-                                            .foregroundStyle(Color.fontGrey25)
-                                            .padding(.bottom, 2)
-                                            Text(dateAndMonth ?? "")
-                                            .foregroundStyle(Color.fontBlack)
-                                        }
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        Spacer()
-                                            .frame(width: screenWidth * 0.11)
-                                        VStack(alignment: .leading, spacing: 0) {
-                                          Text(item?.tour?.name ?? "등록된 공연 이름이 없습니다")
-                                            .lineLimit(1)
-                                                .bold()
-                                                .padding(.bottom, 3)
-                                          Text(item?.venue?.name ?? "등록된 장소가 없습니다")
-                                        }
-                                        .foregroundStyle(Color.fontBlack)
-                                        .font(.system(size: 14))
-                                        Spacer()
-                                    }
-                                    .padding(.vertical)
+                                        VStack(alignment: .center, spacing: 0) {
+                                              Text(year ?? "")
+                                              .foregroundStyle(Color.fontGrey25)
+                                              .padding(.bottom, 2)
+                                              Text(dateAndMonth ?? "")
+                                              .foregroundStyle(Color.fontBlack)
+                                          }
+                                          .font(.callout)
+                                          .fontWeight(.semibold)
+                                          Spacer()
+                                          .frame(width: screenWidth * 0.08)
+                                          VStack(alignment: .leading, spacing: 0) {
+                                            Text(city + ", " + country)
+                                              .lineLimit(1)
+                                                  .bold()
+                                                  .padding(.bottom, 3)
+                                            Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
+                                              .lineLimit(1)
+                                          }
+                                          .foregroundStyle(Color.fontBlack)
+                                          .font(.system(size: 14))
+                                          Spacer()
+                                      }
+                                      .padding(.vertical)
                                     .padding(.horizontal)
+//                                  }
                                     Divider()
                                     .foregroundStyle(Color.lineGrey1)
                                 }
@@ -338,47 +344,7 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
-// MARK: 임시로 만든 데이터입니다.
-public struct ConcertInfo: Identifiable {
-    public  var id = UUID()
-    public var date: Date
-    public var tourName: String
-    public var venue: String
-}
-
-public struct MainArchiveData: Identifiable {
-    public var id = UUID()
-    public var image: String
-    public var artist: String
-    public var concertInfo: [ConcertInfo]
-}
 
 #Preview {
     MainView()
 }
-
-//                            Image(viewModel.sampleData[data].image)
-//                                .resizable()
-//                                .scaledToFill()
-//                                .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-//                                .overlay {
-//                                    ZStack {
-//                                        Color.black
-//                                            .opacity(0.2)
-//                                        VStack {
-//                                            Spacer()
-//                                            HStack {
-//                                                Spacer()
-//                                                Circle()
-//                                                    .frame(width: screenWidth * 0.15)
-//                                                    .foregroundStyle(.black)
-//                                                    .overlay {
-//                                                        Image(systemName: "arrow.right")
-//                                                            .foregroundStyle(.white)
-//                                                    }
-//                                            }
-//                                        }
-//                                        .padding([.trailing, .bottom])
-//                                    }
-//                                }
-//                                .clipShape(RoundedRectangle(cornerRadius: 15))
