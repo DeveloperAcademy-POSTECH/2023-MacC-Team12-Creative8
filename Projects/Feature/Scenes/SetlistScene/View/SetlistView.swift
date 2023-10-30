@@ -190,7 +190,7 @@ private struct ListView: View {
   @ObservedObject var vm: SetlistViewModel
   
   var body: some View {
-    LazyVStack {
+    VStack {
       ForEach(setlist?.sets?.setsSet ?? [], id: \.name) { session in
         VStack(alignment: .leading, spacing: 20) {
           if let sessionName = session.name {
