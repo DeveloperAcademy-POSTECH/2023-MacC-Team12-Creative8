@@ -7,10 +7,10 @@
 //
 
 import SwiftUI
+import UI
 
 struct SearchArtistCell: View {
-  let tempColor: Color
-//  let imageURL: URL
+  let imageURL: URL
   let artistName: String
 
   var body: some View {
@@ -18,13 +18,12 @@ struct SearchArtistCell: View {
       NavigationLink {
 
       } label: {
-        Rectangle().foregroundStyle(tempColor)
-  //      AsyncImage(url: imageURL)
+        AsyncImage(url: imageURL)
       }
-        .aspectRatio(contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+
 
       Text("\(artistName)")
+        .foregroundStyle(Color.fontBlack)
     }
   }
 }

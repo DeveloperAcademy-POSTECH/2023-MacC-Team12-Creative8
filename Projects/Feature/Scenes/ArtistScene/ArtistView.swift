@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Core
 import UI
 
@@ -25,7 +26,6 @@ struct ArtistView: View {
       if vm.isLoading1 || vm.isLoading2 {
         ProgressView()
       } else {
-        NavigationBarView(vm: vm)
         ScrollView {
           ArtistImageView(vm: vm)
           BookmarkedView(vm: vm)
@@ -33,41 +33,30 @@ struct ArtistView: View {
         }
       }
     }
-    .foregroundStyle(Color.primary)
+    .navigationTitle("")
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+          VStack {
+            Text(vm.artistInfo?.name ?? "")
+              .font(.system(size: 19))
+              .fontWeight(.semibold)
+          }
+          .fontWeight(.semibold)
+      }
+    }
+    .foregroundStyle(Color.fontBlack)
     .onAppear {
       vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
       vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
-      
     }
-  }
-}
-
-private struct NavigationBarView: View {
-  @ObservedObject var vm: ArtistViewModel
-  
-  var body: some View {
-    ZStack {
-      HStack {
-        Button(action: {
-          
-        }, label: {
-          Image(systemName: "chevron.left")
-            .font(.system(size: 24))
-        })
-        Spacer()
-      }
-      
-      Text(vm.artistInfo?.name ?? "")
-        .font(.system(size: 19))
-        .fontWeight(.semibold)
-    }
-    .padding()
   }
 }
 
 private struct ArtistImageView: View {
   @ObservedObject var vm: ArtistViewModel
-  
+  @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
   var body: some View {
     ZStack(alignment: .bottom) {
       if vm.image != nil {
@@ -85,14 +74,14 @@ private struct ArtistImageView: View {
     .padding()
     .onAppear {
       vm.loadImage()
+      dataManager.modelContext = modelContext
     }
   }
   
   private var imageLayer: some View {
     Image(uiImage: vm.image!)
-      .resizable()
+      .centerCropped()
       .frame(height: screenHeight * 0.25)
-      .scaledToFit()
       .cornerRadius(14)
       .overlay(Color.black.opacity(0.2).cornerRadius(14))
   }
@@ -101,21 +90,28 @@ private struct ArtistImageView: View {
     Text(vm.artistInfo?.name ?? "")
       .font(.system(size: 36))
       .fontWeight(.semibold)
-      .foregroundStyle(Color.white)
+      .foregroundStyle(Color.fontWhite)
   }
-  
+
   private var buttonLayer: some View {
-    Button(action: {
-      
-    }, label: {
+    Button {
+      dataManager.addLikeArtist(
+        name: vm.artistInfo?.name ?? "",
+        country: "",
+        alias: vm.artistInfo?.alias ?? "",
+        mbid: vm.artistInfo?.mbid ?? "",
+        gid: vm.artistInfo?.gid ?? 0,
+        imageUrl: vm.artistInfo?.imageUrl ?? "",
+        songList: vm.artistInfo?.songList ?? [])
+    } label: {
       Circle()
         .frame(width: screenWidth * 0.1)
-        .foregroundStyle(Color(hex: 16777215, opacity: 0.4))
+        .foregroundStyle(Color.mainWhite1)
         .overlay(
           Image(systemName: "heart.fill")
-            .foregroundStyle(Color.white)
+            .foregroundStyle(Color.mainWhite)
         )
-    })
+    }
   }
   
 }
@@ -131,7 +127,7 @@ private struct BookmarkedView: View {
       if vm.showBookmarkedSetlists {
         ZStack {
           RoundedRectangle(cornerRadius: 15)
-            .foregroundStyle(Color(hex: 15592941, opacity: 0.5))
+            .foregroundStyle(Color.mainGrey1)
           
           if vm.bookmarkedSetlists == nil {
             emptyLayer
@@ -158,6 +154,7 @@ private struct BookmarkedView: View {
       } label: {
         Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
       }
+      .foregroundStyle(Color.fontBlack)
     }
   }
   
@@ -167,11 +164,13 @@ private struct BookmarkedView: View {
         .font(.system(size: 16))
         .fontWeight(.semibold)
         .padding(.bottom)
+        .foregroundStyle(Color.fontBlack)
       Group {
         Text("다시 듣기할 공연을 눌러 표시해주세요.")
         Text("아카이빙에서도 볼 수 있어요.")
       }
       .font(.system(size: 13))
+      .foregroundStyle(Color.fontGrey2)
     }
   }
   
@@ -203,9 +202,11 @@ private struct BookmarkedView: View {
             
             Spacer()
           }
+          .foregroundStyle(Color.fontBlack)
         }
 
         Divider()
+          .foregroundStyle(Color.fontGrey3)
           .padding(.horizontal)
 
       }
@@ -219,6 +220,7 @@ private struct BookmarkedView: View {
           Image(systemName: "arrow.right")
         }
         .font(.system(size: 14))
+        .foregroundStyle(Color.fontBlack)
       }
       
       Spacer()
@@ -246,6 +248,7 @@ private struct ListView: View {
       Text("전체 공연 보기")
         .font(.system(size: 20))
         .fontWeight(.bold)
+        .foregroundStyle(Color.fontBlack)
       Spacer()
     }
   }
@@ -253,7 +256,7 @@ private struct ListView: View {
   private var setlistsLayer: some View {
     ForEach(vm.setlists ?? [], id: \.id) { setlist in
       NavigationLink {
-        
+        SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
           Spacer()
@@ -276,9 +279,11 @@ private struct ListView: View {
           
           Spacer()
         }
+        .foregroundStyle(Color.fontBlack)
       }
 
       Divider()
+        .foregroundColor(Color.lineGrey1)
         .padding(.horizontal)
 
     }
@@ -295,11 +300,13 @@ private struct ListView: View {
           Text("더보기")
             .font(.system(size: 14))
             .fontWeight(.bold)
+            .foregroundStyle(Color.fontBlack)
             .padding()
         }
       }
       
       Divider()
+        .foregroundStyle(Color.lineGrey1)
         .padding(.horizontal)
     }
   }

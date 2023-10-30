@@ -17,7 +17,7 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
   }
   
   // 플레이리스트 추가 및 음악 목록 추가
-  public func addPlayList(name: String, musicList: [String]) {
+  public func addPlayList(name: String, musicList: [String], singer: String?, venue: String?) {
     Task {
       // musicList를 index가 들어간 튜플로 변환
       let indexedMusicList = musicList.enumerated().map { (index, title) in
@@ -26,11 +26,11 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
       // index 순서대로 정렬
       let sortedMusicList = indexedMusicList.sorted { $0.0 < $1.0 }.map { $0.1 }
       
-      let newPlayList = try await MusicLibrary.shared.createPlaylist(name: name, description: "Setlist 앱에서 생성된 플레이리스트 입니다.", authorDisplayName: "Setlist")
+      let newPlayList = try await MusicLibrary.shared.createPlaylist(name: String(name), description: "Setlist 앱에서 생성된 플레이리스트 입니다.", authorDisplayName: String(venue ?? ""))
       
       for musicTitle in sortedMusicList {
         // MusicCatalogSearchRequest를 비동기로 처리
-        let response = try await searchMusic(title: musicTitle)
+        let response = try await searchMusic(title: String(musicTitle), singer: singer ?? "")
         
         if let song = response.songs.first {
           // 순차적으로 MusicLibrary에 추가
@@ -41,8 +41,8 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
   }
   
   // MusicCatalogSearchRequest를 비동기로 처리하는 함수
-  private func searchMusic(title: String) async throws -> MusicCatalogSearchResponse {
-    var request = MusicCatalogSearchRequest.init(term: title, types: [MusicKit.Song.self])
+  private func searchMusic(title: String, singer: String) async throws -> MusicCatalogSearchResponse {
+    var request = MusicCatalogSearchRequest.init(term: "\(singer) \(title)", types: [MusicKit.Song.self])
     request.includeTopResults = true
     let response = try await request.response()
     return response

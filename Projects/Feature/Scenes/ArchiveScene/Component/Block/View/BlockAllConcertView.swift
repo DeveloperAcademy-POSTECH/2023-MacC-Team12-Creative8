@@ -9,16 +9,20 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct BlockAllConcertView: View {
   @Binding var selecteYear: Int
   @Binding var concertCellInfo: [(Int, Int)]
   @Binding var maxminCnt: (Int, Int)
   @Query var concertInfo: [ArchivedConcertInfo]
+  @StateObject var viewModel = ArchiveViewModel()
   var body: some View {
-    VStack {
-      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.concertDate) == selecteYear }) { info in
-          Text("\(info.concertTitle)")
+    ScrollView {
+      ForEach(concertInfo.filter { Calendar.current.component(.year, from: $0.setlist.date) == selecteYear }) { info in
+        ArtistSetlistCell(info: info, isDetail: true)
+        Divider()
+          .foregroundStyle(Color.lineGrey1)
       }
     }
     .toolbar {
@@ -32,9 +36,9 @@ struct BlockAllConcertView: View {
             }
           } label: {
             Image(systemName: "chevron.down")
-              .foregroundStyle(.black)
           }
         }
+        .foregroundStyle(Color.fontBlack)
       }
     }
     .onAppear {

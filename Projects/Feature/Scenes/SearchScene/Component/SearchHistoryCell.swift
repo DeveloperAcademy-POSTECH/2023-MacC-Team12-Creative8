@@ -13,25 +13,24 @@ import UI
 
 struct SearchHistoryCell: View {
   @Binding var searchText: String
-  let dataManager: SearchHistoryManager
   let history: SearchHistory
   let dateFormatter = DateFormatter.monthDayFormatter()
+  let dataManager: SwiftDataManager
 
     var body: some View {
       HStack {
-        Button("\(history.searchText)") {
-          searchText = history.searchText
+        NavigationLink {
+          ArtistView(artistName: history.artistInfo.name, artistAlias: history.artistInfo.alias, artistMbid: history.artistInfo.mbid)
+        } label: {
+          ListRow(namePair: (history.artistInfo.name, ""), info: history.artistInfo.country)
         }
-        .foregroundStyle(.black)
 
         Spacer()
 
-        Text("\(dateFormatter.string(from: history.searchDate))").foregroundStyle(.gray)
-
         Button {
-          dataManager.deleteItems(item: history)
+          dataManager.deleteSearchHistory(history)
         } label: {
-          Image(systemName: "xmark").foregroundStyle(.gray)
+          Image(systemName: "xmark").foregroundStyle(Color.fontGrey3)
         }
       }
       .padding(.top)

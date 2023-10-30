@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MessageUI
+import UI
 
 struct AskView: View {
   
@@ -18,21 +19,6 @@ struct AskView: View {
       commentsButtonTapped()
     }, label: {
       LinkLabelView(linkLabel: "문의하기")
-//      HStack {
-//        Text("문의하기")
-//          .font(.footnote)
-//          .padding(EdgeInsets(top: 24, leading: 26, bottom: 24, trailing: 0))
-//        Spacer(minLength: 231)
-//        Image(systemName: "chevron.right")
-//          .resizable()
-//          .frame(width: 6, height: 12)
-//          .padding(EdgeInsets(top: 22, leading: 0, bottom: 22, trailing: 36))
-//      }
-//      .frame(width: 350, height: 66)
-//      .background(.white)
-//      .foregroundStyle(.black)
-//      .cornerRadius(12)
-//      .padding(.bottom, 91)
     })
   }
   
@@ -41,9 +27,6 @@ struct AskView: View {
           let rootViewController = windowScene.windows.first?.rootViewController else {
         return
     }
-//    guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
-//      return
-//    }
     
     if MFMailComposeViewController.canSendMail() {
       let composeViewController = MFMailComposeViewController()

@@ -13,6 +13,40 @@ public final class ArtistDataManager {
   
   let dataService: SetlistDataService = SetlistDataService.shared
   
+  // MARK: 온보딩에서 Genius ID 찾을 때 사용할 함수
+  public func getGeniusIdAndImageUrl(mbid: String, completion: @escaping ((Int, String)?) -> Void) {
+    let dataService = SetlistDataService.shared
+    let koreanConverter = KoreanConverter.shared
+    let artistDataManager = ArtistDataManager.shared
+
+    dataService.fetchArtistFromMusicBrainz(artistMbid: mbid) { result in
+      if let result = result {
+        let namePair = koreanConverter.findKoreanName(artist: (result.artists?[0])!)
+        var artistInfo = ArtistInfo(name: namePair.0, mbid: mbid)
+
+        artistDataManager.getArtistInfo(artistName: namePair.0, artistAlias: namePair.1 ?? "", artistMbid: mbid) { result in
+          if let result = result {
+            DispatchQueue.main.async {
+              artistInfo = result
+              completion((artistInfo.gid, artistInfo.imageUrl) as? (Int, String))
+            }
+          } else {
+            artistDataManager.getArtistInfo(artistName: namePair.1 ?? "", artistAlias: namePair.0, artistMbid: mbid) { result in
+              if let result = result {
+                DispatchQueue.main.async {
+                  artistInfo = result
+                  completion((artistInfo.gid, artistInfo.imageUrl) as? (Int, String))
+                }
+              } else {
+                completion(nil)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
   public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [(String, String?)] = []
     var artistInfo: ArtistInfo?
@@ -88,7 +122,7 @@ public final class ArtistDataManager {
     }
     
     print("FAILED TO FIND ARTIST")
-    return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hits[0].result?.primaryArtist?.id, imageUrl: hits[0].result?.primaryArtist?.imageURL, songList: nil)
+    return nil
   }
   
   private func stringFilter(_ str: String) -> String {

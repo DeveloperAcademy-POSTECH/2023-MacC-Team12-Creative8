@@ -7,9 +7,29 @@
 //
 
 import SwiftUI
+import Core
 
-final class ArchiveBlcokViewModel: ObservableObject {
-    @Published var concertCellInfo: [(Int, Int)] = []
-    @Published var maxminCnt: (Int, Int) = (0, 0)
-    @Published var selecteYear: Int = 0
+final class ArchiveViewModel: ObservableObject {
+  @Published var concertCellInfo: [(Int, Int)] = []
+  @Published var maxminCnt: (Int, Int) = (0, 0)
+  @Published var selecteYear: Int = 0
+  @Published var artistUnique: [String] = []
+  @Published var isActiveButton: Bool = false
+  var setlist: Setlist? = nil
+  
+  @Published var userSelection = "music.note.list"
+  let options = ["list.bullet", "batteryblock"]
+  // 월.일 형태
+  let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM.dd"
+    return formatter
+  }()
+  // 요일 형태
+  let dayOfWeekFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "E"
+    return formatter
+  }()
 }
