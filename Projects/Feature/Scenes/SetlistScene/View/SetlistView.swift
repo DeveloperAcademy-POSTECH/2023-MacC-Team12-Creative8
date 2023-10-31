@@ -25,11 +25,13 @@ struct SetlistView: View {
         ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         EmptySetlistView()
       } else {
-        ScrollView {
-          ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+        ZStack {
+          ScrollView {
+            ConcertInfoView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            BottomView()
+          }
           addPlaylistButton
-          BottomView()
         }
       }
     }
@@ -43,8 +45,20 @@ struct SetlistView: View {
         }
         .fontWeight(.semibold)
       }
+      ToolbarItem(placement: .topBarTrailing) {
+        Button(action: {
+          vm.isBookmarked.toggle()
+        }, label: {
+          Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
+        })
+      }
     }
     .foregroundStyle(Color.primary)
+    .onAppear {
+      if setlist.sets?.setsSet?.isEmpty == true {
+        vm.isEmptySetlist = true
+      }
+    }
     .sheet(isPresented: self.$isShowModal) {
       BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         .presentationDetents([.fraction(0.4)])
