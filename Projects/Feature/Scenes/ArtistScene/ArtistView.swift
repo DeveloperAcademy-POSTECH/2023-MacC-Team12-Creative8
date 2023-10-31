@@ -36,11 +36,8 @@ struct ArtistView: View {
     .navigationTitle("")
     .toolbar {
       ToolbarItem(placement: .principal) {
-          VStack {
-            Text(vm.artistInfo?.name ?? "")
-              .font(.system(size: 19))
-              .fontWeight(.semibold)
-          }
+        Text(vm.artistInfo?.name ?? "")
+          .font(.title3)
           .fontWeight(.semibold)
       }
     }
@@ -55,8 +52,9 @@ struct ArtistView: View {
 private struct ArtistImageView: View {
   @ObservedObject var vm: ArtistViewModel
   @Query var concertInfo: [ArchivedConcertInfo]
-  @StateObject var dataManager = SwiftDataManager()
+  @Query var likeArtist: [LikeArtist]
   @Environment(\.modelContext) var modelContext
+  
   var body: some View {
     ZStack(alignment: .bottom) {
       if vm.image != nil {
@@ -74,42 +72,36 @@ private struct ArtistImageView: View {
     .padding()
     .onAppear {
       vm.loadImage()
-      dataManager.modelContext = modelContext
+      vm.dataManager.modelContext = modelContext
+      vm.isLikedArtist = vm.dataManager.isLikeArtist(likeArtist, vm.artistInfo?.mbid ?? "")
     }
   }
   
   private var imageLayer: some View {
     Image(uiImage: vm.image!)
       .centerCropped()
-      .frame(height: screenHeight * 0.25)
+      .aspectRatio(1.5, contentMode: .fit)
       .cornerRadius(14)
       .overlay(Color.black.opacity(0.2).cornerRadius(14))
   }
-
+  
   private var textLayer: some View {
     Text(vm.artistInfo?.name ?? "")
-      .font(.system(size: 36))
+      .font(.largeTitle)
       .fontWeight(.semibold)
       .foregroundStyle(Color.fontWhite)
   }
-
+  
   private var buttonLayer: some View {
     Button {
-      dataManager.addLikeArtist(
-        name: vm.artistInfo?.name ?? "",
-        country: "",
-        alias: vm.artistInfo?.alias ?? "",
-        mbid: vm.artistInfo?.mbid ?? "",
-        gid: vm.artistInfo?.gid ?? 0,
-        imageUrl: vm.artistInfo?.imageUrl ?? "",
-        songList: vm.artistInfo?.songList ?? [])
+      vm.toggleLikeButton()
     } label: {
       Circle()
         .frame(width: screenWidth * 0.1)
         .foregroundStyle(Color.mainWhite1)
         .overlay(
-          Image(systemName: "heart.fill")
-            .foregroundStyle(Color.mainWhite)
+          Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
+            .foregroundStyle(vm.isLikedArtist ? Color.blockOrange : Color.mainWhite)
         )
     }
   }
@@ -118,6 +110,8 @@ private struct ArtistImageView: View {
 
 private struct BookmarkedView: View {
   @ObservedObject var vm: ArtistViewModel
+  // TODO: 아티스트 이름 필터 들어가야 함
+  @Query var concertInfo: [ArchivedConcertInfo]
   
   var body: some View {
     VStack {
@@ -125,19 +119,22 @@ private struct BookmarkedView: View {
         .padding()
       
       if vm.showBookmarkedSetlists {
-        ZStack {
-          RoundedRectangle(cornerRadius: 15)
-            .foregroundStyle(Color.mainGrey1)
-          
-          if vm.bookmarkedSetlists == nil {
+        VStack {
+          if concertInfo.isEmpty == true {
             emptyLayer
+              .padding(.vertical, 20)
           } else {
             setlistsLayer
-            .padding(.horizontal)
+            navigationLayer
           }
         }
-        .padding()
-        .frame(height: screenHeight * 0.35)
+        .padding(.vertical)
+        .frame(maxWidth: .infinity)
+        .background(
+          Color.mainGrey1
+            .cornerRadius(15)
+        )
+        .padding(.horizontal)
         
       }
     }
@@ -145,8 +142,8 @@ private struct BookmarkedView: View {
   
   private var titleLayer: some View {
     HStack {
-      Text("공연 다시 듣기")
-        .font(.system(size: 20))
+      Text("북마크한 공연")
+        .font(.headline)
         .fontWeight(.bold)
       Spacer()
       Button {
@@ -161,69 +158,77 @@ private struct BookmarkedView: View {
   private var emptyLayer: some View {
     VStack(alignment: .center, spacing: 5) {
       Text("다시 듣기한 공연이 없습니다.")
-        .font(.system(size: 16))
-        .fontWeight(.semibold)
+        .font(.headline)
         .padding(.bottom)
         .foregroundStyle(Color.fontBlack)
       Group {
         Text("다시 듣기할 공연을 눌러 표시해주세요.")
         Text("아카이빙에서도 볼 수 있어요.")
       }
-      .font(.system(size: 13))
+      .font(.footnote)
       .foregroundStyle(Color.fontGrey2)
     }
   }
   
   private var setlistsLayer: some View {
-    VStack {
-      Spacer()
-      ForEach(vm.bookmarkedSetlists?.prefix(3) ?? [], id: \.id) { setlist in
-        NavigationLink {
-          
-        } label: {
-          HStack {
-            Spacer()
-            
-            Text(vm.getFormattedDate(date: setlist.eventDate ?? "") ?? "")
-              .font(.system(size: 17))
-              .fontWeight(.semibold)
-            
-            Spacer()
-            
-            VStack(spacing: 5) {
-              Text(setlist.tour?.name ?? "")
-                .fontWeight(.semibold)
-              let venue = "\(setlist.venue?.name ?? ""), \(setlist.venue?.city?.name ?? ""), \(setlist.venue?.city?.country?.name ?? "")"
-              Text(venue)
-            }
-            .font(.system(size: 14))
-            .frame(width: screenWidth * 0.65, height: 33)
-            .padding(.vertical)
-            
-            Spacer()
-          }
-          .foregroundStyle(Color.fontBlack)
-        }
-
-        Divider()
-          .foregroundStyle(Color.fontGrey3)
-          .padding(.horizontal)
-
-      }
-      
-      NavigationLink {
+    ForEach(concertInfo.prefix(3), id: \.self) { concert in
+      HStack {
+        Spacer()
         
-      } label: {
-        HStack {
-          Spacer()
-          Text("\(vm.artistInfo?.name ?? "") 아카이빙에서 보기")
-          Image(systemName: "arrow.right")
+        // MARK: Date
+        VStack {
+          Text(vm.getFormattedDateFromDate(date: concert.setlist.date, format: "yyyy"))
+            .foregroundStyle(Color.fontGrey25)
+            .tracking(1)
+          Text(vm.getFormattedDateFromDate(date: concert.setlist.date, format: "MM.dd"))
         }
-        .font(.system(size: 14))
-        .foregroundStyle(Color.fontBlack)
+        .font(.headline)
+        
+        Spacer()
+        
+        // MARK: Venue
+        VStack(alignment: .leading) {
+          Text(concert.setlist.venue) // MARK: venue name 말고도 city, country를 저장해둬야 할 듯
+            .font(.subheadline)
+          Text("여기에 뭐가 들어가야 할까용?")
+            .font(.footnote)
+            .foregroundStyle(Color(hex: 0xC7C7CC)) // MARK: 컬러 값 수정 필요!
+        }
+        .lineLimit(1)
+        .frame(width: screenWidth * 0.5, alignment: .leading)
+        .padding(.vertical, 10)
+        
+        Spacer()
+        
+        // MARK: Button
+        Button(action: {
+          
+        }, label: {
+          Image(systemName: "ellipsis")
+            .font(.title3)
+        })
+        
+        Spacer()
       }
+      .foregroundStyle(Color.fontBlack)
       
-      Spacer()
+      Divider()
+        .padding(.horizontal)
+        .foregroundColor(Color.lineGrey1)
+    }
+  }
+  
+  private var navigationLayer: some View {
+    NavigationLink {
+      // Archiving View + Artist Filter
+    } label: {
+      HStack {
+        Spacer()
+        Text("\(vm.artistInfo?.name ?? "") 아카이빙에서 보기")
+        Image(systemName: "arrow.right")
+      }
+      .font(.footnote)
+      .padding()
     }
   }
   
@@ -246,7 +251,7 @@ private struct ListView: View {
   private var titleLayer: some View {
     HStack {
       Text("전체 공연 보기")
-        .font(.system(size: 20))
+        .font(.headline)
         .fontWeight(.bold)
         .foregroundStyle(Color.fontBlack)
       Spacer()
@@ -261,32 +266,50 @@ private struct ListView: View {
         HStack {
           Spacer()
           
-          Text(vm.getFormattedDate(date: setlist.eventDate ?? "") ?? "")
-            .font(.system(size: 17))
-            .fontWeight(.semibold)
+          // MARK: Date
+          VStack {
+            Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
+              .foregroundStyle(Color.fontGrey25)
+              .tracking(1.0)
+            Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
+          }
+          .font(.headline)
           
           Spacer()
           
-          VStack(spacing: 5) {
-            Text(setlist.tour?.name ?? "")
-              .fontWeight(.semibold)
-            let venue = "\(setlist.venue?.name ?? ""), \(setlist.venue?.city?.name ?? ""), \(setlist.venue?.city?.country?.name ?? "")"
+          // MARK: Venue
+          VStack(alignment: .leading) {
+            let venue = "\(setlist.venue?.city?.name ?? ""), \(setlist.venue?.city?.country?.name ?? "")"
             Text(venue)
+              .font(.subheadline)
+            Group {
+              if vm.isEmptySetlist(setlist) {
+                Text("세트리스트 정보가 아직 없습니다")
+              } else {
+                Text("01 ") + Text(setlist.sets?.setsSet?.first?.song?.first?.name ?? "") // TODO: 곡 제목 한글화 필요!
+              }
+            }
+            .font(.footnote)
+            .foregroundStyle(Color(hex: 0xC7C7CC)) // TODO: 컬러 값 수정 필요!
           }
-          .font(.system(size: 14))
-          .frame(width: screenWidth * 0.65, height: 33)
-          .padding(.vertical)
+          .lineLimit(1)
+          .frame(width: screenWidth * 0.5, alignment: .leading)
+          .padding(.vertical, 10)
+          
+          Spacer()
+          
+          // MARK: Arrow
+          Image(systemName: "arrow.right")
+            .font(.title3)
           
           Spacer()
         }
         .foregroundStyle(Color.fontBlack)
-        .opacity(vm.isEmptySetlist(setlist) ? 0.2 : 1.0)
       }
-
+      
       Divider()
-        .foregroundColor(Color.lineGrey1)
         .padding(.horizontal)
-
+        .foregroundColor(Color.lineGrey1)
     }
   }
   
@@ -298,9 +321,9 @@ private struct ListView: View {
         if vm.isLoading3 {
           ProgressView()
             .padding()
-        } else 
+        } else {
           Text("더보기")
-            .font(.system(size: 14))
+            .font(.subheadline)
             .fontWeight(.bold)
             .foregroundStyle(Color.fontBlack)
             .padding()

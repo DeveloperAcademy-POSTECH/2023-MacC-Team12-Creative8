@@ -14,9 +14,9 @@ class ArtistViewModel: ObservableObject {
   let dataService: SetlistDataService = SetlistDataService.shared
   let koreanConverter: KoreanConverter = KoreanConverter.shared
   let artistDataManager: ArtistDataManager = ArtistDataManager.shared
+  let dataManager = SwiftDataManager()
   
   var artistInfo: ArtistInfo?
-  var bookmarkedSetlists: [Setlist]?
   var setlists: [Setlist]?
   var page: Int = 1
   var totalPage: Int = 0
@@ -26,6 +26,7 @@ class ArtistViewModel: ObservableObject {
   @Published var isLoading2: Bool
   @Published var isLoading3: Bool
   @Published var image: UIImage?
+  @Published var isLikedArtist: Bool
 
   init() {
     self.showBookmarkedSetlists = false
@@ -33,6 +34,7 @@ class ArtistViewModel: ObservableObject {
     self.isLoading2 = false
     self.isLoading3 = false
     self.image = nil
+    self.isLikedArtist = false
   }
   
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
@@ -116,7 +118,7 @@ class ArtistViewModel: ObservableObject {
     }
   }
 
-  func getFormattedDate(date: String) -> String? {
+  func getFormattedDateFromString(date: String, format: String) -> String? {
     let inputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateFormat = "dd-MM-yyyy"
@@ -125,7 +127,7 @@ class ArtistViewModel: ObservableObject {
     
     let outputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
-      formatter.dateFormat = "MM.dd"
+      formatter.dateFormat = format
       return formatter
     }()
     
@@ -136,10 +138,34 @@ class ArtistViewModel: ObservableObject {
     }
   }
   
+  func getFormattedDateFromDate(date: Date, format: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: date)
+  }
+  
   func isEmptySetlist(_ setlist: Setlist) -> Bool {
     if setlist.sets?.setsSet?.isEmpty == true {
       return true
     }
     return false
+  }
+  
+  func toggleLikeButton() {
+    if self.isLikedArtist {
+//      dataManager.deleteLikeArtist() // TODO: 좋아요 취소 어떻게 하는지 모르겠어요...
+      self.isLikedArtist.toggle()
+    } else {
+      dataManager.addLikeArtist(
+        name: self.artistInfo?.name ?? "",
+        country: "",
+        alias: self.artistInfo?.alias ?? "",
+        mbid: self.artistInfo?.mbid ?? "",
+        gid: self.artistInfo?.gid ?? 0,
+        imageUrl: self.artistInfo?.imageUrl ?? "",
+        songList: self.artistInfo?.songList ?? []
+      )
+      self.isLikedArtist.toggle()
+    }
   }
 }
