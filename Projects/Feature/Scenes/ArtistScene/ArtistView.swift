@@ -188,11 +188,11 @@ private struct BookmarkedView: View {
         
         // MARK: Venue
         VStack(alignment: .leading) {
-          Text(concert.setlist.venue) // MARK: venue name 말고도 city, country를 저장해둬야 할 듯
+          Text(concert.setlist.venue) // TODO: venue name 말고도 city, country를 저장해둬야 할 듯
             .font(.subheadline)
-          Text("여기에 뭐가 들어가야 할까용?")
+          Text("여기에 뭐가 들어가야 할까용?") // TODO: 수정 필수!!!
             .font(.footnote)
-            .foregroundStyle(Color(hex: 0xC7C7CC)) // MARK: 컬러 값 수정 필요!
+            .foregroundStyle(Color(hex: 0xC7C7CC)) // TODO: 컬러 값 수정 필요!
         }
         .lineLimit(1)
         .frame(width: screenWidth * 0.5, alignment: .leading)
