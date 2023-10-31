@@ -298,7 +298,7 @@ private struct ListView: View {
         if vm.isLoading3 {
           ProgressView()
             .padding()
-        } else {
+        } else 
           Text("더보기")
             .font(.system(size: 14))
             .fontWeight(.bold)
