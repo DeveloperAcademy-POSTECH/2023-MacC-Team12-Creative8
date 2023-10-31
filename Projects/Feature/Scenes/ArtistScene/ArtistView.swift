@@ -110,7 +110,7 @@ private struct ArtistImageView: View {
 
 private struct BookmarkedView: View {
   @ObservedObject var vm: ArtistViewModel
-  // TODO: 아티스트 이름 필터 들어가야 함
+  // TODO: 쿼리에 아티스트 이름 필터 들어가야 함
   @Query var concertInfo: [ArchivedConcertInfo]
   
   var body: some View {
@@ -156,7 +156,7 @@ private struct BookmarkedView: View {
   }
   
   private var emptyLayer: some View {
-    VStack(alignment: .center, spacing: 5) {
+    VStack(alignment: .center) {
       Text("다시 듣기한 공연이 없습니다.")
         .font(.headline)
         .padding(.bottom)
@@ -200,13 +200,24 @@ private struct BookmarkedView: View {
         
         Spacer()
         
-        // MARK: Button
-        Button(action: {
-          
-        }, label: {
+        // MARK: Menu Button
+        Menu {
+          Button {
+            // TODO: 여기서 SetlistView를 호출해야 하는데 어떻게 해야할지 잘 모르겠음...
+          } label: {
+            Text("세트리스트 보기")
+          }
+
+          Button {
+            vm.dataManager.deleteArchivedConcertInfo(concert)
+          } label: {
+            Text("공연 북마크 취소")
+          }
+
+        } label: {
           Image(systemName: "ellipsis")
             .font(.title3)
-        })
+        }
         
         Spacer()
       }
@@ -220,7 +231,7 @@ private struct BookmarkedView: View {
   
   private var navigationLayer: some View {
     NavigationLink {
-      // Archiving View + Artist Filter
+      // TODO: Archiving View + Artist Filter
     } label: {
       HStack {
         Spacer()
