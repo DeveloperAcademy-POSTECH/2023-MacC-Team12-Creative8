@@ -14,28 +14,28 @@ struct ServiceExplainView: View {
   @ObservedObject var viewModel = SettingViewModel()
   
   var body: some View {
-    ScrollView {
       ZStack {
-        Color(Color.settingTextBoxWhite)
-        VStack {
-          SectionBackgroundView(height: 1100)
-            .overlay {
-              VStack(alignment: .leading) {
-                TermsTitleView(title: "서비스 이용 약관")
-                
-                // 약관 상세 내용
-                TermsView(terms: viewModel.termsOfService, bulletPoint: "")
-                  .padding(.bottom, 53)
+        Color(Color.backgroundGrey)
+        ScrollView {
+          VStack {
+            SectionBackgroundView(height: 1100)
+              .overlay {
+                VStack(alignment: .leading) {
+                  TermsTitleView(title: "서비스 이용 약관")
+                  
+                  // 약관 상세 내용
+                  TermsView(terms: viewModel.termsOfService, bulletPoint: "")
+                    .padding(.bottom, 53)
+                }
+                .padding(.horizontal, 26)
               }
-              .padding(.horizontal, 26)
-            }
-            .padding(EdgeInsets(top: 132, leading: 20, bottom: 40, trailing: 20))
+              .padding(EdgeInsets(top: 120, leading: 20, bottom: 40, trailing: 20))
+          }
         }
       }
+      .ignoresSafeArea()
     }
-    .ignoresSafeArea()
   }
-}
 
 struct TermsOfSetlistfm: View {
   
@@ -43,7 +43,7 @@ struct TermsOfSetlistfm: View {
   
   var body: some View {
     ZStack {
-      Color(hex: 0xEEEEEF).ignoresSafeArea()
+      Color(Color.backgroundGrey)
       VStack {
         SectionBackgroundView(height: 571)
           .overlay {
@@ -54,16 +54,17 @@ struct TermsOfSetlistfm: View {
               TermsView(terms: viewModel.termsOfSelistfmAPI, bulletPoint: "•")
               
               // Setlist.fm 약관 이동 버튼
-              SetlistfmLink(
+              SetlistfmLinkButton(
                 setlistfmURL: "https://www.setlist.fm/help/terms",
                 linkLabel: "Setlist.fm 약관 자세히 보기")
               .padding(EdgeInsets(top: 16, leading: 0, bottom: 35, trailing: 0))
             }
             .padding(.horizontal, 26)
           }
-          .padding(EdgeInsets(top: 0, leading: 20, bottom: 80, trailing: 20))
+          .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 20))
       }
     }
+    .ignoresSafeArea()
   }
 }
 
@@ -75,8 +76,9 @@ struct TermsTitleView: View {
     Text(title)
       .font(.system(size: 18, weight: .semibold))
       .foregroundStyle(Color.fontBlack)
-      .padding(EdgeInsets(top: 32, leading: 0, bottom: 16, trailing: 0))
+      .padding(EdgeInsets(top: 32, leading: 0, bottom: 5, trailing: 0))
     Divider()
+      .foregroundStyle(Color.lineGrey1)
   }
 }
 
@@ -111,7 +113,7 @@ struct SectionBackgroundView: View {
   
   var body: some View {
     RoundedRectangle(cornerRadius: 12)
-      .fill(Color.backgroundWhite)
+      .fill(Color.settingTextBoxWhite)
       .frame(height: height)
   }
 }
