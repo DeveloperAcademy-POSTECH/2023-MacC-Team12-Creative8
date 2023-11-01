@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Core
 
 private let gray: Color = Color(hex: 0xEAEAEA)
@@ -15,7 +16,7 @@ struct SetlistView: View {
   let setlist: Setlist
   let artistInfo: ArtistInfo?
   @StateObject var vm = SetlistViewModel()
-  @State private var isShowModal = false
+  @Query var concertInfo: [ArchivedConcertInfo]
   
   var body: some View {
     ZStack {
@@ -29,6 +30,11 @@ struct SetlistView: View {
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
             Button(action: {
+              if vm.isBookmarked {
+                
+              } else {
+                
+              }
               vm.isBookmarked.toggle()
             }, label: {
               Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
@@ -36,18 +42,16 @@ struct SetlistView: View {
           }
         }
         .onAppear {
-          if setlist.sets?.setsSet?.isEmpty == true {
-            vm.isEmptySetlist = true
-          }
+//          vm.isBookmarked = vm.dataManager.
         }
-        .sheet(isPresented: self.$isShowModal) {
-          BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm) // TODO: BottomModalView 복사해와야 함!
+        .sheet(isPresented: $vm.showModal) {
+          BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
             .presentationDetents([.fraction(0.4)])
             .presentationDragIndicator(.visible)
         }
       }
-      if !vm.isEmptySetlist {
-        ExportPlaylistButtonView()
+      if !vm.isEmptySetlist(setlist) {
+        ExportPlaylistButtonView(vm: vm)
           .padding(.horizontal, 30)
       }
     }
@@ -66,7 +70,7 @@ struct SetlistView: View {
   }
   
   var dotLine: some View {
-    Rectangle() // TODO: 임시 점선 -> 수정 필요!
+    Rectangle()
       .stroke(style: StrokeStyle(dash: [5]))
       .frame(height: 1)
       .padding(.horizontal)
@@ -79,18 +83,18 @@ struct SetlistView: View {
         .cornerRadius(14, corners: [.topLeft, .topRight])
         .foregroundStyle(Color.backgroundWhite)
         .ignoresSafeArea()
-      if vm.isEmptySetlist == true {
+      if vm.isEmptySetlist(setlist) {
         EmptySetlistView()
           .padding(30)
       } else {
-         VStack {
-           ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-             .padding(30)
-           Divider() // TODO: divider 때문에 padding(30)을 다 따로 줘야하는데 방법이 없나?
-             .padding(.horizontal)
-           BottomView()
-             .padding(30)
-         }
+        VStack {
+          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            .padding(30)
+          Divider() // TODO: divider 때문에 padding(30)을 다 따로 줘야하는데 방법이 없나?
+            .padding(.horizontal)
+          BottomView()
+            .padding(30)
+        }
       }
     }
   }
@@ -102,7 +106,7 @@ private struct ConcertInfoView: View {
   var body: some View {
     VStack {
       Group {
-//        Text("Noel Gallagher’s High Flying Birds ")
+        //        Text("Noel Gallagher’s High Flying Birds ")
         Text("Post Malone ")
         +
         Text("Setlist")
@@ -153,7 +157,7 @@ private struct EmptySetlistView: View {
         .foregroundStyle(Color.fontGrey2)
         .font(.footnote)
         .multilineTextAlignment(.center)
-
+      
       SetlistFMLinkButtonView()
         .padding(.top, 100)
     }
@@ -162,11 +166,13 @@ private struct EmptySetlistView: View {
 
 // MARK: ExportPlaylistButtonView
 struct ExportPlaylistButtonView: View {
+  @ObservedObject var vm: SetlistViewModel
+  
   var body: some View {
     VStack {
       Spacer()
       Button(action: {
-        // TODO: 플레이리스트 내보내기 action
+        vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")
           .foregroundStyle(Color.blockFontWhite)
@@ -185,18 +191,18 @@ struct ExportPlaylistButtonView: View {
 struct SetlistFMLinkButtonView: View {
   var body: some View {
     VStack {
-      Button(action: {
-        // TODO: setlist.fm 링크 넣기
-      }, label: {
-        Text("Setlist.fm 바로가기")
-          .foregroundStyle(Color.primary) // TODO: Accent Color 변경되면 빼도 될 듯?
-          .font(.callout)
-          .fontWeight(.semibold)
-          .frame(maxWidth: .infinity)
-          .padding(.vertical, 20)
-          .background(Color.mainGrey1)
-          .cornerRadius(14)
-      })
+      if let url = URL(string: "https://www.setlist.fm") {
+        Link(destination: url) {
+          Text("Setlist.fm 바로가기")
+            .foregroundStyle(Color.primary) // TODO: Accent Color 변경되면 빼도 될 듯?
+            .font(.callout)
+            .fontWeight(.semibold)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+            .background(Color.mainGrey1)
+            .cornerRadius(14)
+        }
+      }
     }
   }
 }
@@ -205,7 +211,6 @@ struct SetlistFMLinkButtonView: View {
 private struct ListView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
-  let koreanConverter: KoreanConverter = KoreanConverter.shared
   @ObservedObject var vm: SetlistViewModel
   
   var body: some View {
@@ -229,21 +234,21 @@ private struct ListView: View {
                 if song.tape != nil && song.tape == true {
                   ListRowView(
                     index: nil,
-                    title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
+                    title: vm.koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                     info: song.info
                   )
                   .opacity(0.6)
                 } else {
                   ListRowView(
                     index: index + 1,
-                    title: koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
+                    title: vm.koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title,
                     info: song.info
                   )
                 }
               }
               .padding(.horizontal)
               .padding(.vertical, 10)
-
+              
               if index + 1 < songs.count {
                 Divider()
               }
@@ -254,7 +259,7 @@ private struct ListView: View {
               }
               
               // 스크린샷용 음악 배열
-              let tmp = koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
+              let tmp = vm.koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
               if !vm.setlistSongKoreanName.contains(tmp) {
                 let _ = vm.setlistSongKoreanName.append(tmp)
               }
@@ -371,14 +376,28 @@ private struct BottomModalView: View {
   }
 }
 
+extension View {
+  func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
+    
+    if let date = dateFormatter.date(from: dateString) {
+      return date
+    } else {
+      return nil // 날짜 형식이 맞지 않을 경우 nil 반환
+    }
+  }
+}
+
 // MARK: Preview
 #Preview {
-//  NavigationStack {
-//    SetlistView()
-//  }
-//  EmptySetlistView()
-//  ConcertInfoView()
-//  AddPlaylistButtonView()
-//  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
+  //  NavigationStack {
+  //    SetlistView()
+  //  }
+  //  EmptySetlistView()
+  //  ConcertInfoView()
+  //  AddPlaylistButtonView()
+  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
   BottomView()
 }
