@@ -151,21 +151,4 @@ class ArtistViewModel: ObservableObject {
     return false
   }
   
-  func toggleLikeButton() {
-    if self.isLikedArtist {
-//      dataManager.deleteLikeArtist() // TODO: 좋아요 취소 어떻게 하는지 모르겠어요...
-      self.isLikedArtist.toggle()
-    } else {
-      dataManager.addLikeArtist(
-        name: self.artistInfo?.name ?? "",
-        country: "",
-        alias: self.artistInfo?.alias ?? "",
-        mbid: self.artistInfo?.mbid ?? "",
-        gid: self.artistInfo?.gid ?? 0,
-        imageUrl: self.artistInfo?.imageUrl ?? "",
-        songList: self.artistInfo?.songList ?? []
-      )
-      self.isLikedArtist.toggle()
-    }
-  }
 }

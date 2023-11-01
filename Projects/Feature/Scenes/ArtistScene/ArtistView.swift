@@ -73,7 +73,7 @@ private struct ArtistImageView: View {
     .onAppear {
       vm.loadImage()
       vm.dataManager.modelContext = modelContext
-      vm.isLikedArtist = vm.dataManager.isLikeArtist(likeArtist, vm.artistInfo?.mbid ?? "")
+      vm.isLikedArtist = vm.dataManager.isAddedLikeArtist(likeArtist, vm.artistInfo?.mbid ?? "")
     }
   }
   
@@ -94,7 +94,20 @@ private struct ArtistImageView: View {
   
   private var buttonLayer: some View {
     Button {
-      vm.toggleLikeButton()
+      if vm.isLikedArtist {
+        vm.dataManager.findArtistAndDelete(likeArtist, vm.artistInfo?.mbid ?? "")
+      } else {
+        vm.dataManager.addLikeArtist(
+          name: vm.artistInfo?.name ?? "",
+          country: "",
+          alias: vm.artistInfo?.alias ?? "",
+          mbid: vm.artistInfo?.mbid ?? "",
+          gid: vm.artistInfo?.gid ?? 0,
+          imageUrl: vm.artistInfo?.imageUrl ?? "",
+          songList: vm.artistInfo?.songList ?? []
+        )
+      }
+      vm.isLikedArtist.toggle()
     } label: {
       Circle()
         .frame(width: screenWidth * 0.1)
@@ -188,11 +201,12 @@ private struct BookmarkedView: View {
         
         // MARK: Venue
         VStack(alignment: .leading) {
-          Text(concert.setlist.venue) // TODO: venue name 말고도 city, country를 저장해둬야 할 듯
+          let venue = "\(concert.setlist.city), \(concert.setlist.country)"
+          Text(venue)
             .font(.subheadline)
           Text("여기에 뭐가 들어가야 할까용?") // TODO: 수정 필수!!!
             .font(.footnote)
-            .foregroundStyle(Color(hex: 0xC7C7CC)) // TODO: 컬러 값 수정 필요!
+            .foregroundStyle(Color.fontGrey25)
         }
         .lineLimit(1)
         .frame(width: screenWidth * 0.5, alignment: .leading)
@@ -203,7 +217,7 @@ private struct BookmarkedView: View {
         // MARK: Menu Button
         Menu {
           Button {
-            // TODO: 여기서 SetlistView를 호출해야 하는데 어떻게 해야할지 잘 모르겠음...
+            // TODO: SetlistView 호출 (SetlistView 먼저 수정 필요!)
           } label: {
             Text("세트리스트 보기")
           }
@@ -231,7 +245,7 @@ private struct BookmarkedView: View {
   
   private var navigationLayer: some View {
     NavigationLink {
-      // TODO: Archiving View + Artist Filter
+      ArchivingView() // TODO: 아티스트 필터 적용돼야 함
     } label: {
       HStack {
         Spacer()
@@ -297,11 +311,12 @@ private struct ListView: View {
               if vm.isEmptySetlist(setlist) {
                 Text("세트리스트 정보가 아직 없습니다")
               } else {
-                Text("01 ") + Text(setlist.sets?.setsSet?.first?.song?.first?.name ?? "") // TODO: 곡 제목 한글화 필요!
+                let songTitle: String = setlist.sets?.setsSet?.first?.song?.first?.name ?? ""
+                Text("01 \(vm.koreanConverter.findKoreanTitle(title: songTitle, songList: vm.artistInfo?.songList ?? []) ?? songTitle)")
               }
             }
             .font(.footnote)
-            .foregroundStyle(Color(hex: 0xC7C7CC)) // TODO: 컬러 값 수정 필요!
+            .foregroundStyle(Color.fontGrey25)
           }
           .lineLimit(1)
           .frame(width: screenWidth * 0.5, alignment: .leading)
