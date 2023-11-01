@@ -216,7 +216,7 @@ private struct BookmarkedView: View {
         // MARK: Menu Button
         Menu {
           Button {
-            // TODO: SetlistView 호출 (SetlistView 먼저 수정 필요!)
+            SetlistView(setlistId: concert.setlist.id)
           } label: {
             Text("세트리스트 보기")
           }
