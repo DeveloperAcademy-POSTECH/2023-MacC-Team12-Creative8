@@ -22,7 +22,7 @@ public struct MainView: View {
   
   @Query var likeArtists: [LikeArtist]
   
-  @ObservedObject var viewModel = MainViewModel()
+  @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   @ObservedObject var setlistViewModel = ArtistViewModel()
   
@@ -42,7 +42,7 @@ public struct MainView: View {
           if likeArtists.isEmpty {
             EmptyMainView()
               .frame(width: geometry.size.width)
-              .frame(minHeight: geometry.size.height * 0.75)
+              .frame(minHeight: geometry.size.height * 0.9)
           } else {
             mainArtistsView
           }
@@ -133,10 +133,18 @@ public struct MainView: View {
     .onChange(of: viewModel.scrollToIndex) {
       viewModel.selectedIndex = viewModel.scrollToIndex
     }
+    //    .onAppear {
+    //      if likeArtists.count != 0 {
+    //        viewModel.selectedIndex = 0
+    //        viewModel.scrollToIndex = 0
+    //      }
+    //    }
     .onAppear {
-      if likeArtists.count != 0 {
-        viewModel.selectedIndex = 0
-        viewModel.scrollToIndex = 0
+      if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
+        if !likeArtists.isEmpty {
+          viewModel.selectedIndex = 0
+          viewModel.scrollToIndex = 0
+        }
       }
     }
   }
@@ -144,7 +152,7 @@ public struct MainView: View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
         HStack(spacing: screenWidth * 0.13) {
-          ForEach(0..<likeArtists.count, id: \.self) { data in
+          ForEach(0..<likeArtists.prefix(5).count, id: \.self) { data in
             let artistName = viewModel.replaceFirstSpaceWithNewline(likeArtists[data].artistInfo.name)
             Text(.init(artistName))
               .background(Color.clear)
@@ -179,7 +187,7 @@ public struct MainView: View {
   public var artistContentView: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 18) {
-        ForEach(0 ..< likeArtists.count, id: \.self) { data in
+        ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
               NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
@@ -225,56 +233,109 @@ public struct MainView: View {
                 VStack {
                   Spacer()
                   ProgressView()
-                    .background(Color.orange)
+                    .frame(width: UIWidth * 0.5, height: UIHeight * 0.2)
                   Spacer()
                 }
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
-                ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
-                  let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-                  let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-                  let city = item?.venue?.city?.name ?? ""
-                  let country = item?.venue?.city?.country?.name ?? ""
-                  VStack(spacing: 0) {
-                    // TODO: 세트리스트뷰 연결
-                    //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
-                    HStack(spacing: 0) {
-                      VStack(alignment: .center, spacing: 0) {
-                        Text(year ?? "")
-                          .foregroundStyle(Color.fontGrey25)
-                          .padding(.bottom, 2)
-                        Text(dateAndMonth ?? "")
-                          .foregroundStyle(Color.fontBlack)
-                          .kerning(-0.5)
+//                if current.isEmpty {
+//                  EmptyMainSetlistView()
+//                } else {
+//                  ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
+//                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+//                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+//                    let city = item?.venue?.city?.name ?? ""
+//                    let country = item?.venue?.city?.country?.name ?? ""
+//                    VStack(spacing: 0) {
+//                      // TODO: 세트리스트뷰 연결
+//                      //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
+//                      HStack(spacing: 0) {
+//                        VStack(alignment: .center, spacing: 0) {
+//                          Text(year ?? "")
+//                            .foregroundStyle(Color.fontGrey25)
+//                            .padding(.bottom, 2)
+//                          Text(dateAndMonth ?? "")
+//                            .foregroundStyle(Color.fontBlack)
+//                            .kerning(-0.5)
+//                        }
+//                        .font(.headline)
+//                        Spacer()
+//                          .frame(width: screenWidth * 0.08)
+//                        VStack(alignment: .leading, spacing: 0) {
+//                          Text(city + ", " + country)
+//                            .font(.subheadline)
+//                            .lineLimit(1)
+//                            .padding(.bottom, 3)
+//                          Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
+//                            .font(.footnote)
+//                            .lineLimit(1)
+//                            .foregroundStyle(Color.fontGrey25)
+//                        }
+//                        .foregroundStyle(Color.fontBlack)
+//                        .font(.system(size: 14))
+//                        Spacer()
+//                      }
+//                      .padding(.vertical)
+//                      .padding(.horizontal)
+//                      //                  } // 내비
+//                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+//                        Divider()
+//                          .foregroundStyle(Color.fontGrey25)
+//                      }
+//                    }
+//                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+//                    .animation(.easeInOut(duration: 0.1))
+//                    .frame(width: screenWidth * 0.78)
+//                  }
+//                }
+                  ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
+                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                    let city = item?.venue?.city?.name ?? ""
+                    let country = item?.venue?.city?.country?.name ?? ""
+                    VStack(spacing: 0) {
+                      // TODO: 세트리스트뷰 연결
+                      //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
+                      HStack(spacing: 0) {
+                        VStack(alignment: .center, spacing: 0) {
+                          Text(year ?? "")
+                            .foregroundStyle(Color.fontGrey25)
+                            .padding(.bottom, 2)
+                          Text(dateAndMonth ?? "")
+                            .foregroundStyle(Color.fontBlack)
+                            .kerning(-0.5)
+                        }
+                        .font(.headline)
+                        Spacer()
+                          .frame(width: screenWidth * 0.08)
+                        VStack(alignment: .leading, spacing: 0) {
+                          Text(city + ", " + country)
+                            .font(.subheadline)
+                            .lineLimit(1)
+                            .padding(.bottom, 3)
+                          Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
+                            .font(.footnote)
+                            .lineLimit(1)
+                            .foregroundStyle(Color.fontGrey25)
+                        }
+                        .foregroundStyle(Color.fontBlack)
+                        .font(.system(size: 14))
+                        Spacer()
                       }
-                      .font(.headline)
-                      Spacer()
-                        .frame(width: screenWidth * 0.08)
-                      VStack(alignment: .leading, spacing: 0) {
-                        Text(city + ", " + country)
-                          .font(.subheadline)
-                          .lineLimit(1)
-                          .padding(.bottom, 3)
-                        Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
-                          .font(.footnote)
-                          .lineLimit(1)
+                      .padding(.vertical)
+                      .padding(.horizontal)
+                      //                  } // 내비
+                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+                        Divider()
                           .foregroundStyle(Color.fontGrey25)
                       }
-                      .foregroundStyle(Color.fontBlack)
-                      .font(.system(size: 14))
-                      Spacer()
                     }
-                    .padding(.vertical)
-                    .padding(.horizontal)
-                    //                  } // 내비
-                    if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-                      Divider()
-                        .foregroundStyle(Color.fontGrey25)
-                    }
+                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                    .animation(.easeInOut(duration: 0.1))
+                    .frame(width: screenWidth * 0.78)
                   }
-                  .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                  .animation(.easeInOut(duration: 0.1))
-                  .frame(width: screenWidth * 0.78)
+                if current.isEmpty {
+                  EmptyMainSetlistView()
                 }
               }
               Spacer()
@@ -304,7 +365,7 @@ struct EmptyMainView: View {
         Text("아티스트 찜하러 가기 →")
           .foregroundStyle(Color.fontWhite)
           .font(.system(size: 14))
-          .padding(EdgeInsets(top: 17, leading: 8, bottom: 17, trailing: 8))
+          .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
           .background(RoundedRectangle(cornerRadius: 14)
             .foregroundStyle(Color.buttonBlack))
           .bold()
@@ -333,6 +394,45 @@ struct TopButtonView: View {
           .font(.system(size: 10))
       }
     }.tag(buttonType)
+  }
+}
+
+struct EmptyMainSetlistView: View {
+  let screenWidth = UIScreen.main.bounds.size.width
+  let screenHeight = UIScreen.main.bounds.size.height
+  
+  var body: some View {
+    VStack(alignment: .leading, spacing: 0) {
+      Spacer()
+      Text("세트리스트 정보가 없습니다.")
+        .font(.system(size: 16))
+        .fontWeight(.semibold)
+        .padding(.horizontal)
+      Group {
+        Text("찜한 가수의 세트리스트가 없다면,\n")
+        +
+        Text("Setlist.fm")
+          .underline()
+        +
+        Text("에서 직접 추가할 수 있어요.")
+      }
+      .foregroundStyle(Color.fontGrey2)
+      .font(.footnote)
+      .padding()
+      Link(destination: URL(string: "https://www.setlist.fm")!) {
+        RoundedRectangle(cornerRadius: 14)
+          .foregroundStyle(Color.mainGrey1)
+          .frame(height: screenHeight * 0.06)
+          .overlay {
+            Text("Setlist.fm 바로가기")
+              .foregroundStyle(Color.primary)
+              .bold()
+          }
+          .padding(.top)
+      }
+      Spacer()
+    }
+    .frame(width: screenWidth * 0.78)
   }
 }
 // 로고 만들기
