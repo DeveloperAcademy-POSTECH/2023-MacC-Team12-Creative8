@@ -80,6 +80,7 @@ public struct MainView: View {
         }
       } // 스크롤
       .scrollIndicators(.hidden)
+      .id(likeArtists)
     }
     .onAppear {
       dataManager.modelContext = modelContext
@@ -89,6 +90,7 @@ public struct MainView: View {
         idx += 1
       }
     }
+    // TODO: 툴바 이상한거 고치기
         .toolbar(content: {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 logo
@@ -186,99 +188,105 @@ public struct MainView: View {
       HStack(spacing: 18) {
         ForEach(0 ..< likeArtists.count, id: \.self) { data in
           VStack(spacing: 0) {
-            NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
-              AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
-                image
-                  .resizable()
-                  .scaledToFill()
-                  .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-                  .overlay {
-                    ZStack {
-                      Color.black
-                        .opacity(0.2)
-                      VStack {
-                        Spacer()
-                        HStack {
+            if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
+              NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
+                AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
+                  image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                    .overlay {
+                      ZStack {
+                        Color.black
+                          .opacity(0.2)
+                        VStack {
                           Spacer()
-                          Circle()
-                            .frame(width: screenWidth * 0.15)
-                            .foregroundStyle(Color.mainBlack)
-                            .overlay {
-                              Image(systemName: "arrow.right")
-                                .foregroundStyle(Color.backgroundWhite)
-                            }
-                            .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
+                          HStack {
+                            Spacer()
+                            Circle()
+                              .frame(width: screenWidth * 0.15)
+                              .foregroundStyle(Color.mainBlack)
+                              .overlay {
+                                Image(systemName: "arrow.right")
+                                  .foregroundStyle(Color.backgroundWhite)
+                              }
+                              .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
+                          }
                         }
+                        .padding([.trailing, .bottom])
                       }
-                      .padding([.trailing, .bottom])
                     }
-                  }
-                  .clipShape(RoundedRectangle(cornerRadius: 15))
-              } placeholder: {
-                ProgressView()
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                } placeholder: {
+                  ProgressView()
+                }
               }
-            }
-            
-            HStack {
-              Text("\(likeArtists[data].artistInfo.name)의 최근 공연")
-                .font(.caption)
-                .foregroundStyle(Color.fontGrey2)
+              HStack {
+                Text("\(likeArtists[data].artistInfo.name)의 최근 공연")
+                  .font(.caption)
+                  .foregroundStyle(Color.fontGrey2)
+                Spacer()
+              }
+              .padding([.horizontal, .top])
+              if viewModel.isLoading {
+                VStack {
+                  Spacer()
+                  ProgressView()
+                    .background(Color.orange)
+                  Spacer()
+                }
+              } else {
+                let current: [Setlist?] = viewModel.setlists[data] ?? []
+                ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
+                  let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                  let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                  let city = item?.venue?.city?.name ?? ""
+                  let country = item?.venue?.city?.country?.name ?? ""
+                  VStack(spacing: 0) {
+                    // TODO: 세트리스트뷰 연결
+  //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
+                      HStack(spacing: 0) {
+                        VStack(alignment: .center, spacing: 0) {
+                          Text(year ?? "")
+                            .foregroundStyle(Color.fontGrey25)
+                            .padding(.bottom, 2)
+                          Text(dateAndMonth ?? "")
+                            .foregroundStyle(Color.fontBlack)
+                            .kerning(-0.5)
+                        }
+                        .font(.headline)
+                        Spacer()
+                          .frame(width: screenWidth * 0.08)
+                        VStack(alignment: .leading, spacing: 0) {
+                          Text(city + ", " + country)
+                            .font(.subheadline)
+                            .lineLimit(1)
+                            .padding(.bottom, 3)
+                          Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
+                            .font(.footnote)
+                            .lineLimit(1)
+                            .foregroundStyle(Color.fontGrey25)
+                        }
+                        .foregroundStyle(Color.fontBlack)
+                        .font(.system(size: 14))
+                        Spacer()
+                      }
+                      .padding(.vertical)
+                      .padding(.horizontal)
+  //                  } // 내비
+                    // TODO: 디바이더 에러 해결하기
+                    if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+                           Divider()
+                               .foregroundStyle(Color.fontGrey25)
+                       }
+                  }
+                  .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                  .animation(.easeInOut(duration: 0.1))
+                  .frame(width: screenWidth * 0.78)
+                }
+              }
               Spacer()
             }
-            .padding([.horizontal, .top])
-            
-            if viewModel.isLoading {
-              ProgressView()
-            } else {
-              let current: [Setlist?] = viewModel.setlists[data] ?? []
-              ForEach(current.prefix(3), id: \.?.id) { item in
-                let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-                let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-                let city = item?.venue?.city?.name ?? ""
-                let country = item?.venue?.city?.country?.name ?? ""
-                VStack(spacing: 0) {
-//                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) { //
-                    HStack(spacing: 0) {
-                      VStack(alignment: .center, spacing: 0) {
-                        Text(year ?? "")
-                          .foregroundStyle(Color.fontGrey25)
-                          .padding(.bottom, 2)
-                        Text(dateAndMonth ?? "")
-                          .foregroundStyle(Color.fontBlack)
-                          .kerning(-0.5)
-                      }
-                      .font(.headline)
-                      Spacer()
-                        .frame(width: screenWidth * 0.08)
-                      VStack(alignment: .leading, spacing: 0) {
-                        Text(city + ", " + country)
-                          .font(.subheadline)
-                          .lineLimit(1)
-                          .padding(.bottom, 3)
-                        Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
-                          .font(.footnote)
-                          .lineLimit(1)
-                          .foregroundStyle(Color.fontGrey25)
-                      }
-                      .foregroundStyle(Color.fontBlack)
-                      .font(.system(size: 14))
-                      Spacer()
-                    }
-                    .padding(.vertical)
-                    .padding(.horizontal)
-//                  } //
-                  if item != current.prefix(3).last {
-                    Divider()
-                      .foregroundStyle(Color.lineGrey1)
-                  }
-//                    .opacity(isLastElement ? 0 : 1)
-                }
-                .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                .animation(.easeInOut(duration: 0.1))
-                .frame(width: screenWidth * 0.78)
-              }
-            }
-            Spacer()
           }
         }
       }
@@ -300,7 +308,6 @@ struct EmptyMainView: View {
         .foregroundStyle(
           Color.fontGrey2)
         .padding(.bottom)
-      // TODO: 찜하기 화면 연결
       NavigationLink(destination: SearchView()) {
         Text("아티스트 찜하러 가기 →")
           .foregroundStyle(Color.fontWhite)
@@ -337,7 +344,6 @@ struct TopButtonView: View {
     }.tag(buttonType)
   }
 }
-
 // 로고 만들기
 extension View {
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
