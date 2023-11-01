@@ -12,6 +12,87 @@ import UI
 import Core
 
 private let gray: Color = Color(hex: 0xEAEAEA)
+private let screenWidth = UIScreen.main.bounds.width
+private let screenHeight = UIScreen.main.bounds.height
+
+struct TestView: View {
+  var body: some View {
+//    ScrollView {
+      VStack(spacing: 0) {
+        ZStack {
+          Rectangle()
+            .cornerRadius(14, corners: [.bottomLeft, .bottomRight])
+            .foregroundStyle(Color.white)
+            .ignoresSafeArea()
+          VStack {
+            Group {
+              Text("Post Malone ")
+              +
+              Text("Setlist")
+                .foregroundStyle(Color.fontGrey2)
+            }
+            .font(.largeTitle)
+            .fontWeight(.semibold)
+
+            HStack {
+              Spacer()
+              Text("날짜")
+                .padding()
+                .background(Color.mainGrey1.cornerRadius(12))
+              Spacer()
+              Text("2023년 10월 13일")
+                .font(.body)
+                .frame(width: screenWidth * 0.5, alignment: .leading)
+              Spacer()
+            }
+            HStack {
+              Spacer()
+              Text("장소")
+                .padding()
+                .background(Color.mainGrey1.cornerRadius(12))
+              Spacer()
+              Text("Olympic Hall, Seoul, South Korea")
+                .font(.body)
+                .frame(width: screenWidth * 0.5, alignment: .leading)
+              Spacer()
+            }
+            HStack {
+              Spacer()
+              Text("공연")
+                .padding()
+                .background(Color.mainGrey1.cornerRadius(12))
+              Spacer()
+              Text("If Yall Weren’t Here, I’de be cryin")
+                .font(.body)
+                .frame(width: screenWidth * 0.5, alignment: .leading)
+              Spacer()
+            }
+          }
+        }
+        Rectangle()
+          .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+          .frame(height: 1)
+          .padding(.horizontal)
+        ZStack {
+          Rectangle()
+            .cornerRadius(14, corners: [.topLeft, .topRight])
+            .foregroundStyle(Color.white)
+            .ignoresSafeArea()
+        }
+      }
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button(action: {
+  //          vm.isBookmarked.toggle()
+          }, label: {
+            Image(systemName: "bookmark")
+          })
+        }
+      }
+      .background(Color.black)
+//    }
+  }
+}
 
 struct SetlistView: View {
   let setlist: Setlist
@@ -372,7 +453,7 @@ private struct BottomModalView: View {
           description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
           action: {
             takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
-
+            
           }
         )
       }
@@ -395,14 +476,13 @@ private struct BottomModalView: View {
       }
       Spacer()
       Image(systemName: "chevron.right")
-          .foregroundStyle(.gray)
-          .onTapGesture {
-              action()
-      }
+        .foregroundStyle(.gray)
+        .onTapGesture {
+          action()
+        }
     }
   }
 }
-
 extension View {
   func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
     let dateFormatter = DateFormatter()
