@@ -73,13 +73,21 @@ public final class SwiftDataManager: ObservableObject {
     self.save()
   }
 
-  public func isLikeArtist(_ infos: [LikeArtist], _ mbid: String) -> Bool {
+  public func isAddedLikeArtist(_ infos: [LikeArtist], _ mbid: String) -> Bool {
     for info in infos {
       if info.artistInfo.mbid == mbid {
         return true
       }
     }
     return false
+  }
+
+  public func findArtistAndDelete(_ infos: [LikeArtist], _ mbid: String) {
+    for info in infos {
+      if info.artistInfo.mbid == mbid {
+        modelContext?.delete(info)
+      }
+    }
   }
 
   //MARK: - SearchHistory
@@ -133,5 +141,13 @@ public final class SwiftDataManager: ObservableObject {
       }
     }
     return false
+  }
+
+  public func findConcertAndDelete(_ infos: [ArchivedConcertInfo], _ setlistId: String) {
+    for concertInfo in infos {
+      if concertInfo.setlist.setlistId == setlistId {
+        modelContext?.delete(concertInfo)
+      }
+    }
   }
 }
