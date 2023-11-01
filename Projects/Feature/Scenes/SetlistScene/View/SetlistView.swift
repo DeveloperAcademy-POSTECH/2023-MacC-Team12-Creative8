@@ -31,9 +31,22 @@ struct SetlistView: View {
           ToolbarItem(placement: .topBarTrailing) {
             Button(action: {
               if vm.isBookmarked {
-                
+                vm.dataManager.findConcertAndDelete(concertInfo, setlist.id ?? "")
               } else {
-                
+                let newArtist = SaveArtistInfo(
+                  name: setlist.artist?.name ?? "",
+                  country: setlist.venue?.city?.country?.name ?? "",
+                  alias: artistInfo?.alias ?? "",
+                  mbid: artistInfo?.mbid ?? "",
+                  gid: artistInfo?.gid ?? 0,
+                  imageUrl: artistInfo?.imageUrl ?? "",
+                  songList: artistInfo?.songList ?? [])
+                let newSetlist = SaveSetlist(
+                  setlistId: setlist.id ?? "",
+                  date: convertDateStringToDate(setlist.eventDate ?? "") ?? Date(),
+                  venue: setlist.venue?.name ?? "",
+                  title: setlist.tour?.name ?? "")
+                vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
               }
               vm.isBookmarked.toggle()
             }, label: {
@@ -42,7 +55,7 @@ struct SetlistView: View {
           }
         }
         .onAppear {
-//          vm.isBookmarked = vm.dataManager.
+          vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist.id ?? "")
         }
         .sheet(isPresented: $vm.showModal) {
           BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
