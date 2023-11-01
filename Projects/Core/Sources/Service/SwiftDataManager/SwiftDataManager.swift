@@ -47,6 +47,23 @@ public final class SwiftDataManager: ObservableObject {
     self.save()
   }
 
+  public func isAddedLikeArtist(_ infos: [LikeArtist], _ mbid: String) -> Bool {
+    for info in infos {
+      if info.artistInfo.mbid == mbid {
+        return true
+      }
+    }
+    return false
+  }
+
+  public func findArtistAndDelete(_ infos: [LikeArtist], _ mbid: String) {
+    for info in infos {
+      if info.artistInfo.mbid == mbid {
+        modelContext?.delete(info)
+      }
+    }
+  }
+
   //MARK: - SearchHistory
   public func addSearchHistory(name: String,
                                country: String,
@@ -89,5 +106,22 @@ public final class SwiftDataManager: ObservableObject {
 
   public func deleteArchivedConcertInfo(_ item: ArchivedConcertInfo) {
     modelContext?.delete(item)
+  }
+
+  public func isAddedConcert(_ infos: [ArchivedConcertInfo], _ setlistId: String) -> Bool {
+    for concertInfo in infos {
+      if concertInfo.setlist.setlistId == setlistId {
+        return true
+      }
+    }
+    return false
+  }
+
+  public func findConcertAndDelete(_ infos: [ArchivedConcertInfo], _ setlistId: String) {
+    for concertInfo in infos {
+      if concertInfo.setlist.setlistId == setlistId {
+        modelContext?.delete(concertInfo)
+      }
+    }
   }
 }
