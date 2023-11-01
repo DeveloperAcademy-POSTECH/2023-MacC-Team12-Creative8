@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,7 +22,6 @@
 		4C0C8A9631102214FC39D7B5 /* ServiceExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */; };
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
-		74B26ABF6B16078CF3850773 /* OldSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFBBCAB557635C999AB84A7 /* OldSetlistView.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
 		803A0225C7AE83CA856EFC58 /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F08254667A402FB3CD401A1 /* ArchiveArtistCell.swift */; };
 		8109EF2B904B3554B527353F /* ConcertListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1A05AAA65CFA9DF59D42CE /* ConcertListView.swift */; };
@@ -84,7 +83,6 @@
 		3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceExplainView.swift; sourceTree = "<group>"; };
-		5AFBBCAB557635C999AB84A7 /* OldSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSetlistView.swift; sourceTree = "<group>"; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
 		63FF76D13D3DC0AE954F175F /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		811EED38EE073FA6E9252D7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 		0DC793669A8FFC3F4C7741FB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5AFBBCAB557635C999AB84A7 /* OldSetlistView.swift */,
 				F13B904D1DF7D17856476773 /* SetlistView.swift */,
 			);
 			path = View;
@@ -432,8 +429,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -518,7 +513,6 @@
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
-				74B26ABF6B16078CF3850773 /* OldSetlistView.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,
 				26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */,

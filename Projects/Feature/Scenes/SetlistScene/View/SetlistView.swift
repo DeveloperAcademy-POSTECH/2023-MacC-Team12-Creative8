@@ -13,10 +13,14 @@ import Core
 private let gray: Color = Color(hex: 0xEAEAEA)
 
 struct SetlistView: View {
-  let setlist: Setlist
-  let artistInfo: ArtistInfo?
+  @State var setlist: Setlist?
+  var setlistId: String?
+  var artistInfo: ArtistInfo?
+  
   @StateObject var vm = SetlistViewModel()
   @Query var concertInfo: [ArchivedConcertInfo]
+  @Environment(\.modelContext) var modelContext
+  @State private var showToastMessage = false
   
   var body: some View {
     ZStack {
@@ -31,22 +35,26 @@ struct SetlistView: View {
           ToolbarItem(placement: .topBarTrailing) {
             Button(action: {
               if vm.isBookmarked {
-                vm.dataManager.findConcertAndDelete(concertInfo, setlist.id ?? "")
+                vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
               } else {
                 let newArtist = SaveArtistInfo(
-                  name: setlist.artist?.name ?? "",
-                  country: setlist.venue?.city?.country?.name ?? "",
+                  name: setlist?.artist?.name ?? "",
+                  country: setlist?.venue?.city?.country?.name ?? "",
                   alias: artistInfo?.alias ?? "",
                   mbid: artistInfo?.mbid ?? "",
                   gid: artistInfo?.gid ?? 0,
                   imageUrl: artistInfo?.imageUrl ?? "",
                   songList: artistInfo?.songList ?? [])
                 let newSetlist = SaveSetlist(
-                  setlistId: setlist.id ?? "",
-                  date: convertDateStringToDate(setlist.eventDate ?? "") ?? Date(),
-                  venue: setlist.venue?.name ?? "",
-                  title: setlist.tour?.name ?? "")
+                  setlistId: setlist?.id ?? "",
+                  date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+                  venue: setlist?.venue?.name ?? "",
+                  title: setlist?.tour?.name ?? "")
                 vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+                showToastMessage = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                  showToastMessage = false
+                }
               }
               vm.isBookmarked.toggle()
             }, label: {
@@ -54,19 +62,35 @@ struct SetlistView: View {
             })
           }
         }
-        .onAppear {
-          vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist.id ?? "")
-        }
-        .sheet(isPresented: $vm.showModal) {
-          BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-            .presentationDetents([.fraction(0.4)])
-            .presentationDragIndicator(.visible)
+      }
+      if let setlist = setlist {
+        if !vm.isEmptySetlist(setlist) {
+          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            .padding(.horizontal, 30)
         }
       }
-      if !vm.isEmptySetlist(setlist) {
-        ExportPlaylistButtonView(vm: vm)
-          .padding(.horizontal, 30)
+      if showToastMessage {
+        VStack {
+          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
+            .padding(.horizontal, 30)
+          Spacer()
+        }
       }
+    }
+    .onAppear {
+      if setlistId != nil {
+        vm.dataService.fetchOneSetlistFromSetlistFM(setlistId: setlistId!) { result in
+          if let result = result {
+            vm.isLoading = true
+            DispatchQueue.main.async {
+              self.setlist = result
+              vm.isLoading = false
+            }
+          }
+        }
+      }
+      vm.dataManager.modelContext = modelContext
+      vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
     }
   }
   
@@ -76,7 +100,12 @@ struct SetlistView: View {
         .cornerRadius(14, corners: [.bottomLeft, .bottomRight])
         .foregroundStyle(Color.backgroundWhite)
         .ignoresSafeArea()
-      ConcertInfoView()
+      ConcertInfoView(
+        artist: artistInfo?.name ?? "-",
+        date: vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "yyyy년 MM월 dd일") ?? "-",
+        venue: setlist?.venue?.name ?? "-",
+        tour: setlist?.tour?.name ?? "-"
+      )
         .padding(30)
         .padding(.bottom)
     }
@@ -96,17 +125,19 @@ struct SetlistView: View {
         .cornerRadius(14, corners: [.topLeft, .topRight])
         .foregroundStyle(Color.backgroundWhite)
         .ignoresSafeArea()
-      if vm.isEmptySetlist(setlist) {
-        EmptySetlistView()
-          .padding(30)
-      } else {
-        VStack {
-          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+      if let setlist = setlist {
+        if vm.isEmptySetlist(setlist) {
+          EmptySetlistView()
             .padding(30)
-          Divider() // TODO: divider 때문에 padding(30)을 다 따로 줘야하는데 방법이 없나?
-            .padding(.horizontal)
-          BottomView()
-            .padding(30)
+        } else {
+          VStack {
+            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+              .padding(30)
+            Divider() // TODO: divider 때문에 padding(30)을 다 따로 줘야하는데 방법이 없나?
+              .padding(.horizontal)
+            BottomView()
+              .padding(30)
+          }
         }
       }
     }
@@ -116,11 +147,15 @@ struct SetlistView: View {
 
 // MARK: ConcertInfoView
 private struct ConcertInfoView: View {
+  var artist: String
+  var date: String
+  var venue: String
+  var tour: String
+  
   var body: some View {
     VStack {
       Group {
-        //        Text("Noel Gallagher’s High Flying Birds ")
-        Text("Post Malone ")
+        Text("\(artist) ")
         +
         Text("Setlist")
           .foregroundStyle(Color.fontGrey2)
@@ -129,9 +164,9 @@ private struct ConcertInfoView: View {
       .fontWeight(.semibold)
       .frame(maxWidth: .infinity, alignment: .leading)
       
-      InfoComponent(text1: "날짜", text2: "2023년 10월 13일")
-      InfoComponent(text1: "장소", text2: "Olympic Hall, Seoul, South Korea")
-      InfoComponent(text1: "공연", text2: "If Yall Weren’t Here, I’de be cryin")
+      InfoComponent(text1: "날짜", text2: date)
+      InfoComponent(text1: "장소", text2: venue)
+      InfoComponent(text1: "공연", text2: tour)
       
     }
   }
@@ -179,11 +214,17 @@ private struct EmptySetlistView: View {
 
 // MARK: ExportPlaylistButtonView
 struct ExportPlaylistButtonView: View {
+  let setlist: Setlist?
+  let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
+  @State private var showToastMessage = false
   
   var body: some View {
     VStack {
       Spacer()
+      if showToastMessage {
+        ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+      }
       Button(action: {
         vm.showModal.toggle()
       }, label: {
@@ -196,6 +237,11 @@ struct ExportPlaylistButtonView: View {
           .background(Color.blockFontBlack)
           .cornerRadius(14)
       })
+    }
+    .sheet(isPresented: $vm.showModal) {
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage: $showToastMessage)
+        .presentationDetents([.fraction(0.3)])
+        .presentationDragIndicator(.visible)
     }
   }
 }
@@ -341,31 +387,37 @@ private struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
+  @Binding var showToastMessage: Bool
   
   var body: some View {
-    Spacer().frame(height: UIHeight * 0.07)
-    VStack(alignment: .leading, spacing: UIHeight * 0.03) {
-      Group {
-        listView(title: "Apple Music에 옮기기", description: nil, action: {
-          AppleMusicService().requestMusicAuthorization()
-          CheckAppleMusicSubscription.shared.appleMusicSubscription()
-          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "") @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name, venue: setlist?.venue?.name)
-          
-        })
-        
-        listView(
-          title: "세트리스트 캡처하기",
-          description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
-          action: {
-            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
-            
-          }
-        )
-      }
-      .opacity(0.6)
+    VStack(alignment: .leading) {
+      Spacer()
+      
+      listView(title: "Apple Music에 옮기기", description: nil, action: {
+        AppleMusicService().requestMusicAuthorization()
+        CheckAppleMusicSubscription.shared.appleMusicSubscription()
+        AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+        vm.showModal.toggle()
+        showToastMessage = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+          showToastMessage = false
+        }
+      })
+      
+      Spacer()
+      
+      listView(
+        title: "세트리스트 캡처하기",
+        description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
+        action: {
+          takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+          vm.showModal.toggle()
+        }
+      )
+      
       Spacer()
     }
-    .padding(.horizontal, 20)
+    .padding(.horizontal, 30)
   }
   
   private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
@@ -389,28 +441,32 @@ private struct BottomModalView: View {
   }
 }
 
-extension View {
-  func convertDateStringToDate(_ dateString: String, format: String = "dd-MM-yyyy") -> Date? {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = format
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Optional: Specify the locale
-    
-    if let date = dateFormatter.date(from: dateString) {
-      return date
-    } else {
-      return nil // 날짜 형식이 맞지 않을 경우 nil 반환
-    }
+private struct ToastMessageView: View {
+  let message: String
+  
+  var body: some View {
+     Text(message)
+      .foregroundStyle(Color.fontWhite)
+      .font(.subheadline)
+      .padding(.vertical)
+      .frame(maxWidth: .infinity)
+      .background(
+        Color.fontGrey2
+          .cornerRadius(27)
+      )
   }
 }
 
 // MARK: Preview
-#Preview {
-  //  NavigationStack {
-  //    SetlistView()
-  //  }
-  //  EmptySetlistView()
-  //  ConcertInfoView()
-  //  AddPlaylistButtonView()
-  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
-  BottomView()
-}
+//#Preview {
+//  //  NavigationStack {
+//  //    SetlistView()
+//  //  }
+//  //  EmptySetlistView()
+//  //  ConcertInfoView()
+//  //  AddPlaylistButtonView()
+//  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
+////  BottomView()
+//  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+//    .padding(30)
+//}
