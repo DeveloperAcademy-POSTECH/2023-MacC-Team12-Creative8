@@ -23,7 +23,7 @@ public struct MainView: View {
   @Query var likeArtists: [LikeArtist]
   
   @ObservedObject var viewModel = MainViewModel()
-  @ObservedObject var dataManager = SwiftDataManager()
+  @State var dataManager = SwiftDataManager()
   @ObservedObject var setlistViewModel = ArtistViewModel()
   
   @Environment(\.modelContext) var modelContext
@@ -33,54 +33,53 @@ public struct MainView: View {
   
   public var body: some View {
     GeometryReader { geometry in
-      //            ScrollView { // 스크롤
-      VStack(spacing: 0) {
+      ScrollView { // 스크롤
         VStack(spacing: 0) {
-          HStack {
-            logo
-            Spacer()
-            ZStack(alignment: .trailingFirstTextBaseline) {
-              Button {
-                // 다크모드 기능 넣기
-                viewModel.isTapped.toggle()
-              } label: {
-                if colorScheme == .dark {
-                  Image(systemName: "sun.max.fill")
-                    .font(.title3)
-                } else {
-                  Image(systemName: "moon.fill")
-                    .font(.title3)
-                }
-              }
-              .foregroundColor(Color.mainBlack)
-              .opacity(viewModel.isTapped ? 0 : 1)
-              .padding(6)
-              .overlay {
-                if viewModel.isTapped {
-                  darkmodeButtons
-                    .offset(x: -(screenWidth * 0.16))
-                }
-              }
-            }
-          }
-          .padding(.horizontal, 24)
-        }
-        .padding(.vertical)
-        Divider()
-          .padding(.leading, 24)
-          .padding(.vertical)
-          .foregroundStyle(Color.lineGrey1)
-        if likeArtists.isEmpty {
-          EmptyMainView()
-            .frame(width: geometry.size.width)
-            .frame(minHeight: geometry.size.height * 0.75)
-        } else {
-          ScrollView {
+//          VStack(spacing: 0) {
+            //            HStack {
+            //              logo
+            //              Spacer()
+            //              ZStack(alignment: .trailingFirstTextBaseline) {
+            //                Button {
+            //                  // 다크모드 기능 넣기
+            //                  viewModel.isTapped.toggle()
+            //                } label: {
+            //                  if colorScheme == .dark {
+            //                    Image(systemName: "sun.max.fill")
+            //                      .font(.title3)
+            //                  } else {
+            //                    Image(systemName: "moon.fill")
+            //                      .font(.title3)
+            //                  }
+            //                }
+            //                .foregroundColor(Color.mainBlack)
+            //                .opacity(viewModel.isTapped ? 0 : 1)
+            //                .padding(6)
+            //                .overlay {
+            //                  if viewModel.isTapped {
+            //                    darkmodeButtons
+            //                      .offset(x: -(screenWidth * 0.16))
+            //                  }
+            //                }
+            //              }
+            //            }
+            //            .padding(.horizontal, 24)
+//          }
+//          .padding(.vertical)
+          Divider()
+            .padding(.leading, 24)
+            .padding(.bottom)
+            .foregroundStyle(Color.lineGrey1)
+          if likeArtists.isEmpty {
+            EmptyMainView()
+              .frame(width: geometry.size.width)
+              .frame(minHeight: geometry.size.height * 0.75)
+          } else {
             mainArtistsView
           }
         }
-      }
-      //            } // 스크롤
+      } // 스크롤
+      .scrollIndicators(.hidden)
     }
     .onAppear {
       dataManager.modelContext = modelContext
@@ -90,6 +89,11 @@ public struct MainView: View {
         idx += 1
       }
     }
+        .toolbar(content: {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                logo
+            }
+        })
   }
   public var logo: some View {
     HStack(spacing: 0) {
@@ -233,35 +237,41 @@ public struct MainView: View {
                 let city = item?.venue?.city?.name ?? ""
                 let country = item?.venue?.city?.country?.name ?? ""
                 VStack(spacing: 0) {
-                      HStack(spacing: 0) {
-                          VStack(alignment: .center, spacing: 0) {
-                            Text(year ?? "")
-                              .foregroundStyle(Color.fontGrey25)
-                              .padding(.bottom, 2)
-                            Text(dateAndMonth ?? "")
-                              .foregroundStyle(Color.fontBlack)
-                          }
-                          .font(.headline)
-                          Spacer()
-                            .frame(width: screenWidth * 0.08)
-                          VStack(alignment: .leading, spacing: 0) {
-                            Text(city + ", " + country)
-                              .font(.subheadline)
-                              .lineLimit(1)
-                              .padding(.bottom, 3)
-                            Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
-                              .font(.footnote)
-                              .lineLimit(1)
-                              .foregroundStyle(Color.fontGrey25)
-                          }
+//                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) { //
+                    HStack(spacing: 0) {
+                      VStack(alignment: .center, spacing: 0) {
+                        Text(year ?? "")
+                          .foregroundStyle(Color.fontGrey25)
+                          .padding(.bottom, 2)
+                        Text(dateAndMonth ?? "")
                           .foregroundStyle(Color.fontBlack)
-                          .font(.system(size: 14))
-                          Spacer()
-                        }
-                        .padding(.vertical)
-                      .padding(.horizontal)
-                  Divider()
-                    .foregroundStyle(Color.lineGrey1)
+                          .kerning(-0.5)
+                      }
+                      .font(.headline)
+                      Spacer()
+                        .frame(width: screenWidth * 0.08)
+                      VStack(alignment: .leading, spacing: 0) {
+                        Text(city + ", " + country)
+                          .font(.subheadline)
+                          .lineLimit(1)
+                          .padding(.bottom, 3)
+                        Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
+                          .font(.footnote)
+                          .lineLimit(1)
+                          .foregroundStyle(Color.fontGrey25)
+                      }
+                      .foregroundStyle(Color.fontBlack)
+                      .font(.system(size: 14))
+                      Spacer()
+                    }
+                    .padding(.vertical)
+                    .padding(.horizontal)
+//                  } //
+                  if item != current.prefix(3).last {
+                    Divider()
+                      .foregroundStyle(Color.lineGrey1)
+                  }
+//                    .opacity(isLastElement ? 0 : 1)
                 }
                 .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
                 .animation(.easeInOut(duration: 0.1))
@@ -291,7 +301,7 @@ struct EmptyMainView: View {
           Color.fontGrey2)
         .padding(.bottom)
       // TODO: 찜하기 화면 연결
-      NavigationLink(destination: Text("아티스트 찜하기 이동")) {
+      NavigationLink(destination: SearchView()) {
         Text("아티스트 찜하러 가기 →")
           .foregroundStyle(Color.fontWhite)
           .font(.system(size: 14))
