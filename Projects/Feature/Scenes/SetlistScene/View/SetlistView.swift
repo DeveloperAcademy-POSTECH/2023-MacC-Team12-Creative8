@@ -135,7 +135,7 @@ private struct ConcertInfoView: View {
               venue: setlist?.venue?.name ?? "",
               title: setlist?.tour?.name ?? "",
               city: setlist?.venue?.city?.name ?? "",
-              contry: setlist?.venue?.city?.country?.name ?? "")
+              country: setlist?.venue?.city?.country?.name ?? "")
             dataManager.addArchivedConcertInfo(newArtist, newSetlist)
           }
         }, label: {
