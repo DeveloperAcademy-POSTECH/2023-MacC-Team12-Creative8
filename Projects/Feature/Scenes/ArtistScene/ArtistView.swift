@@ -201,10 +201,9 @@ private struct BookmarkedView: View {
         
         // MARK: Venue
         VStack(alignment: .leading) {
-          let venue = "\(concert.setlist.city), \(concert.setlist.country)"
-          Text(venue)
+          Text("\(concert.setlist.city), \(concert.setlist.country)")
             .font(.subheadline)
-          Text("여기에 뭐가 들어가야 할까용?") // TODO: 수정 필수!!!
+          Text(concert.setlist.venue)
             .font(.footnote)
             .foregroundStyle(Color.fontGrey25)
         }
