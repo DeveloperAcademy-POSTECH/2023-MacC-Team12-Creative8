@@ -77,7 +77,8 @@ struct SetlistView: View {
         if showToastMessage {
           VStack {
             ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-              .padding(.horizontal, 30)
+              .padding(.leading, 80)
+              .padding(.trailing, 20)
             Spacer()
           }
         }
@@ -474,7 +475,7 @@ private struct ToastMessageView: View {
      Text(message)
       .foregroundStyle(Color.fontWhite)
       .font(.subheadline)
-      .padding(.vertical)
+      .padding(.vertical, 15)
       .frame(maxWidth: .infinity)
       .background(
         Color.fontGrey2
