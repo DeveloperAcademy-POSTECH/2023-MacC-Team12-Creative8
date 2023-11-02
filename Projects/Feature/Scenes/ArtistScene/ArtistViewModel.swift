@@ -109,11 +109,11 @@ class ArtistViewModel: ObservableObject {
         }
         .resume()
       } else {
-        //MARK: 아티스트를 찾지 못했을 때 사용할 디폴트 이미지 필요!
-        self.image = UIImage(systemName: "person.crop.circle")
+        self.image = UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
         print("Invalid Image URL")
       }
     } else {
+      self.image = UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
       return
     }
   }
