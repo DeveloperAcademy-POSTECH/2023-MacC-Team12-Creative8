@@ -46,11 +46,15 @@ final class OnboardingViewModel: ObservableObject {
             let worksheet = try file.parseWorksheet(at: path)
             if let sharedString = try file.parseSharedStrings() {
               model = (worksheet.data?.rows.map { row in
-                let name = row.cells[0].stringValue(sharedString) ?? ""
-                let mbid = row.cells[1].stringValue(sharedString) ?? ""
+                guard let name = row.cells[safe: 0]?.stringValue(sharedString), !name.isEmpty else {
+                    return nil
+                }
+                let mbid = row.cells[safe: 1]?.stringValue(sharedString) ?? ""
                 let filters = row.cells.dropFirst(2).compactMap { $0.stringValue(sharedString) }
+                print(OnboardingModel(name: name, mbid: mbid, filters: filters))
+
                 return OnboardingModel(name: name, mbid: mbid, filters: filters)
-              })! 
+              }.compactMap { $0 })!
               
             }
           }
@@ -60,4 +64,10 @@ final class OnboardingViewModel: ObservableObject {
       }
     }
   }
+}
+
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
 }
