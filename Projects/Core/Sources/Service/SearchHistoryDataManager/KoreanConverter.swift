@@ -17,7 +17,7 @@ public final class KoreanConverter {
     guard let aliases = artist.aliases else { return (artist.name!, nil) }
     
     for alias in aliases {
-      if (alias.locale == "ko" || alias.locale == "ko_KR") {
+      if ((alias.locale == "ko" || alias.locale == "ko_KR") && (alias.name?.lowercased() != artist.name?.lowercased())) {
         primaryAlias = alias.name
         return (artist.name!, primaryAlias)
       }

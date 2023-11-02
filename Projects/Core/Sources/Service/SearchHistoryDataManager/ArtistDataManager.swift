@@ -124,7 +124,6 @@ public final class ArtistDataManager {
   
   private func stringFilter(_ str: String) -> String {
     return str
-      .lowercased()
       .trimmingCharacters(in: .whitespaces)
       .replacingOccurrences(of: " ", with: "")
       .filter { $0.unicodeScalars.first?.value != 8203 }
