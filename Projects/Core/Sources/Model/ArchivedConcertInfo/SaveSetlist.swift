@@ -13,11 +13,15 @@ public struct SaveSetlist: Codable {
   public var date: Date
   public var venue: String
   public var title: String
+  public var city: String
+  public var country: String
 
-  public init(setlistId: String, date: Date, venue: String, title: String) {
+  public init(setlistId: String, date: Date, venue: String, title: String, city: String, country: String) {
     self.setlistId = setlistId
     self.date = date
     self.venue = venue
     self.title = title
+    self.city = city
+    self.country = country
   }
 }

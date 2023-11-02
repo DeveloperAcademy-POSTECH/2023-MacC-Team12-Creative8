@@ -130,5 +130,7 @@ struct LinkLabelView: View {
 }
 
 #Preview {
-    SettingView()
+	NavigationStack {
+		SettingView()
+	}
 }
