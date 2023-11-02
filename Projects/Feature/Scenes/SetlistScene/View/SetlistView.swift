@@ -245,7 +245,7 @@ struct ExportPlaylistButtonView: View {
         vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")
-          .foregroundStyle(Color.blockFontWhite)
+          .foregroundStyle((showToastMessage1 || showToastMessage2) ? Color.fontWhite3 : Color.fontWhite)
           .font(.callout)
           .fontWeight(.bold)
           .frame(maxWidth: .infinity)
