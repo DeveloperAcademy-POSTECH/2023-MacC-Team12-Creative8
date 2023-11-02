@@ -48,7 +48,7 @@ public final class ArtistDataManager {
   }
   
   public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
-    var parsedSongList: [(String, String?)] = []
+    var parsedSongList: [Titles] = []
     var artistInfo: ArtistInfo?
     var songList: [String] = []
     
@@ -61,10 +61,7 @@ public final class ArtistDataManager {
             if let result = result {
               songList = result
               for song in songList {
-                parsedSongList.append(
-                  (self.extractTextBeforeParentheses(from: song),
-                   self.extractTextInsideFirstParentheses(from: song))
-                )
+                parsedSongList.append(Titles(title: self.extractTextBeforeParentheses(from: song), subTitle: self.extractTextInsideFirstParentheses(from: song) ?? ""))
               }
               artistInfo?.songList = parsedSongList
               completion(artistInfo)
@@ -127,7 +124,6 @@ public final class ArtistDataManager {
   
   private func stringFilter(_ str: String) -> String {
     return str
-      .lowercased()
       .trimmingCharacters(in: .whitespaces)
       .replacingOccurrences(of: " ", with: "")
       .filter { $0.unicodeScalars.first?.value != 8203 }

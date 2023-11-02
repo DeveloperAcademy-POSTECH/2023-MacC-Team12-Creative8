@@ -45,13 +45,14 @@ struct SetlistView: View {
                   mbid: artistInfo?.mbid ?? "",
                   gid: artistInfo?.gid ?? 0,
                   imageUrl: artistInfo?.imageUrl ?? "",
-//                  songList: artistInfo?.songList ?? [])
-                  songList: [])
+                  songList: artistInfo?.songList ?? [])
                 let newSetlist = SaveSetlist(
                   setlistId: setlist?.id ?? "",
                   date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
                   venue: setlist?.venue?.name ?? "",
-                  title: setlist?.tour?.name ?? "")
+                  title: setlist?.tour?.name ?? "",
+                  city: setlist?.venue?.city?.name ?? "",
+                  country: setlist?.venue?.city?.country?.name ?? "")
                 vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
                 showToastMessage = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

@@ -21,15 +21,16 @@ public struct SearchView: View {
   
   public var body: some View {
     ScrollViewReader { proxy in
-      ScrollView {
-        Group {
-          headView
+      Group {
+        headView
+        ScrollView {
           searchingHistoryView
           //          artistView
         }
-        .padding(.horizontal)
       }
-      .scrollDisabled(viewModel.searchIsPresented)
+      .padding(.horizontal)
+//      .scrollDisabled(viewModel.searchIsPresented)
+      .scrollIndicators(.hidden)
       .onChange(of: viewModel.searchIsPresented) { _, newValue in
         withAnimation { proxy.scrollTo(newValue ? ScrollID.searchBar : ScrollID.top, anchor: .top) }
       }
@@ -48,9 +49,6 @@ public struct SearchView: View {
         .padding([.leading, .vertical], 10)
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
-        .onChange(of: viewModel.searchText) {
-          viewModel.getArtistList()
-        }
     }
     .padding(.top)
   }
@@ -89,27 +87,25 @@ public struct SearchView: View {
 //  }
 //  
   private var searchingHistoryView: some View {
-    ScrollView {
-      LazyVStack {
-        if viewModel.searchText.isEmpty {
-          HStack {
-            Text("최근 검색")
-              .bold()
-              .foregroundStyle(Color.fontBlack)
-            Spacer()
-            Button("모두 지우기") {
-              dataManager.deleteSearchHistoryAll()
-            }
-            .foregroundStyle(Color.blockOrange)
+    VStack {
+      if viewModel.searchText.isEmpty {
+        HStack {
+          Text("최근 검색")
             .bold()
+            .foregroundStyle(Color.fontBlack)
+          Spacer()
+          Button("모두 지우기") {
+            dataManager.deleteSearchHistoryAll()
           }
-          
-          ForEach(history, id: \.self) { item in
-            SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
-          }
-        } else {
-          SearchArtistList(viewModel: viewModel)
+          .foregroundStyle(Color.blockOrange)
+          .bold()
         }
+        
+        ForEach(history, id: \.self) { item in
+          SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
+        }
+      } else {
+        SearchArtistList(viewModel: viewModel)
       }
     }
     .onAppear { dataManager.modelContext = modelContext }
