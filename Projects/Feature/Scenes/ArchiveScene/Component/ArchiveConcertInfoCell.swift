@@ -76,7 +76,7 @@ struct ArchiveConcertInfoCell: View {
 											mbid: info.artistInfo.mbid,
 											gid: info.artistInfo.gid,
 											imageUrl: info.artistInfo.imageUrl,
-											songList: dataManager.songListDecoder(info.artistInfo.songList))
+											songList: info.artistInfo.songList)
 
 				SetlistView(setlist: setlist, artistInfo: artistInfo)
 			}

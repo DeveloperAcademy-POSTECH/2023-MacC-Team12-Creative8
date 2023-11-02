@@ -37,19 +37,19 @@ public final class KoreanConverter {
     return (artist.name!, primaryAlias)
   }
   
-  public func findKoreanTitle(title: String, songList: [(String, String?)]) -> String? {
+  public func findKoreanTitle(title: String, songList: [Titles]) -> String? {
     for song in songList {
-      if title.lowercased() == song.0.lowercased() {
+      if title.lowercased() == song.title.lowercased() {
         return title
-      } else if title.lowercased() == song.1?.lowercased() {
-        return song.0
+      } else if title.lowercased() == song.subTitle.lowercased() {
+        return song.title
       }
     }
     
     for song in songList {
-      if compareSongTitles(title.lowercased(), song.1?.lowercased() ?? "") >= 0.6 {
-        print("similarity: \(compareSongTitles(title.lowercased(), song.1?.lowercased() ?? ""))")
-        return song.0
+      if compareSongTitles(title.lowercased(), song.subTitle.lowercased()) >= 0.6 {
+        print("similarity: \(compareSongTitles(title.lowercased(), song.subTitle.lowercased()))")
+        return song.title
       }
     }
     
