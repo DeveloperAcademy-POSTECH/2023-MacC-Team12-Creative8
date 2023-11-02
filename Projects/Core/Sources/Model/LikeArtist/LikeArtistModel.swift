@@ -12,8 +12,10 @@ import SwiftData
 @Model
 public final class LikeArtist {
   public var artistInfo: SaveArtistInfo
+  public var orderIndex: Int
 
-  init(artistInfo: SaveArtistInfo) {
+  public init(artistInfo: SaveArtistInfo, orderIndex: Int) {
     self.artistInfo = artistInfo
+    self.orderIndex = orderIndex
   }
 }
