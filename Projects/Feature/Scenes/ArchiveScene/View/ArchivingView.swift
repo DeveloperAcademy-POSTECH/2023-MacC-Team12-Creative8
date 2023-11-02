@@ -13,21 +13,22 @@ import UI
 
 struct ArchivingView: View {
   @Query(sort: \LikeArtist.orderIndex) var likeArtist: [LikeArtist]
-	@Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
-	@StateObject var viewModel = ArchivingViewModel()
-
+  @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
+  @StateObject var viewModel = ArchivingViewModel()
+  
   var body: some View {
-    VStack {
-        Divider()
-        segmentedButtonsView
-        if viewModel.selectSegment {
-          bookmarkView
-        } else {
-          artistView
+    VStack(spacing: 0) {
+      Divider()
+        .foregroundStyle(Color.lineGrey1)
+        .padding(.leading, 24)
+      segmentedButtonsView
+      if viewModel.selectSegment {
+        bookmarkView
+      } else {
+        artistView
       }
     }
     .padding()
-    .navigationTitle("보관함")
   }
 }
 
@@ -40,22 +41,22 @@ struct ArchivingView: View {
 extension ArchivingView {
   private var segmentedButtonsView: some View {
     HStack {
-        Button("북마크한 공연") {
-          viewModel.selectSegment = true
-        }
-        //.foregroundStyle(viewModel.selectSegment ? Color.fontBlack : Color.fontGrey3)
-
-        Button("찜한 아티스트") {
-          viewModel.selectSegment = false
-        }
-        //.foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.fontBlack)
-        .padding(.horizontal)
+      Button("북마크한 공연") {
+        viewModel.selectSegment = true
       }
-      .font(.headline)
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding(.vertical)
+      .foregroundStyle(viewModel.selectSegment ? Color.mainBlack : Color.fontGrey3)
+      
+      Button("찜한 아티스트") {
+        viewModel.selectSegment = false
+      }
+      .foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.mainBlack)
+      .padding(.horizontal)
+    }
+    .font(.headline)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(.vertical)
   }
-
+  
   private var bookmarkView: some View {
     Group {
       if concertInfo.isEmpty {
@@ -67,7 +68,7 @@ extension ArchivingView {
       }
     }
   }
-
+  
   private var bookmarkListView: some View {
     VStack {
       ScrollView(.horizontal) {
@@ -86,25 +87,26 @@ extension ArchivingView {
         }
       }
       .padding(.vertical)
-
+      
       ForEach(concertInfo) { item in
         if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
           ArchiveConcertInfoCell(info: item)
           Divider()
+            .foregroundStyle(Color.lineGrey1)
         }
       }
       .padding(.horizontal)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
   }
-
+  
   private var artistView: some View {
     Group {
       if likeArtist.isEmpty {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
-          Text("찜한 아티스트 중. 상단의 5명만 메인에 등장합니다\n변경을 원하신다면 편집을눌러 순서를 옮겨보세요")
+          Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다\n변경을 원하신다면 아티스트를 꾹 눌러 순서를 옮겨주세요")
             .font(.footnote)
             .foregroundStyle(Color.fontGrey2)
             .padding(.top)
@@ -117,18 +119,18 @@ extension ArchivingView {
       }
     }
   }
-
+  
   private var artistListView: some View {
     ForEach(Array(likeArtist.enumerated()), id: \.element) { index, item in
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
         Text("\(item.artistInfo.name)")
-          //.foregroundStyle(index < 5 ? Color.mainOrange : Color.fontBlack)
+          .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
             NavigationLink("", destination: ArtistView(artistName: item.artistInfo.name,
-                                                      artistAlias: item.artistInfo.alias,
-                                                      artistMbid: item.artistInfo.mbid))
-              .opacity(0)
+                                                       artistAlias: item.artistInfo.alias,
+                                                       artistMbid: item.artistInfo.mbid))
+            .opacity(0)
           )
         Spacer()
         MenuButton(item: item)

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct MenuButton: View {
   let item: LikeArtist
@@ -15,11 +16,11 @@ struct MenuButton: View {
   @Environment(\.modelContext) var modelContext
   var body: some View {
     Menu {
-      NavigationLink("아티스트로 가기") { ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
-      Button("좋아요 취소") { dataManager.deleteLikeArtist(item) }
+      NavigationLink("아티스트 보기") { ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
+      Button("찜하기 취소") { dataManager.deleteLikeArtist(item) }
     } label: {
       Image(systemName: "ellipsis")
-        //.foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
         .padding()
         .background(Color.clear)
     }

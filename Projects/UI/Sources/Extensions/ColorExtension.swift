@@ -77,8 +77,4 @@ public extension Color {
   static var toastBurn: Color {
       Color("toastBurn", bundle: setaBundle)
   }
-  
-  static var gradationGrey: Color {
-      Color("gradationGrey", bundle: setaBundle)
-  }
 }

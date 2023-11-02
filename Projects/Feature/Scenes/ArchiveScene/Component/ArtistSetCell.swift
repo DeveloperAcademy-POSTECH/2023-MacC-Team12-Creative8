@@ -7,14 +7,15 @@
 //
 
 import SwiftUI
+import UI
 
 struct ArtistSetCell: View {
 	let name: String
 	let isSelected: Bool
 	var body: some View {
 		Text(name)
-			.foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
-			.padding()
+			.foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
+			.padding(12)
 			.background {
 				let color = isSelected ? Color.mainBlack : Color.mainGrey1
 				color.clipShape(RoundedRectangle(cornerRadius: 12))

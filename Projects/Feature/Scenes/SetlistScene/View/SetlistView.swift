@@ -11,8 +11,6 @@ import SwiftData
 import Core
 import UI
 
-//private let gray: Color = Color(hex: 0xEAEAEA)
-
 struct SetlistView: View {
   @State var setlist: Setlist?
   var setlistId: String?

@@ -20,7 +20,7 @@ struct ArchiveArtistCell: View {
           .clipShape(RoundedRectangle(cornerRadius: 20))
           .overlay(
                   RoundedRectangle(cornerRadius: 20)
-                      .stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                      .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
               )
       } placeholder: {
         ProgressView()

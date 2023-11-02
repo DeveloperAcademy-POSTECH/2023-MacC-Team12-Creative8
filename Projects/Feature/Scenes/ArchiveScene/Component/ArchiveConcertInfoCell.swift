@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct ArchiveConcertInfoCell: View {
 	let info: ArchivedConcertInfo
@@ -64,7 +65,7 @@ struct ArchiveConcertInfoCell: View {
 				Button("공연 북마크 취소") { dataManager.deleteArchivedConcertInfo(info) }
 			} label: {
 				Image(systemName: "ellipsis")
-					//.foregroundStyle(Color.fontBlack)
+					.foregroundStyle(Color.mainBlack)
 					.padding()
 					.background(Color.clear)
 			}

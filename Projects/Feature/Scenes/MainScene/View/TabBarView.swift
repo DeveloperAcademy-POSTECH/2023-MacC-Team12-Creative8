@@ -41,14 +41,18 @@ public struct TabBarView: View {
 
       NavigationStack {
         ArchivingView()
+          .background(Color.backgroundWhite)
+          .navigationTitle("보관함")
       }
       .tabItem {
-        Label("아카이빙", systemImage: "heart.fill")
+        Label("보관함", systemImage: "heart.fill")
       }
       .tag(Tab.archiving)
 
       NavigationStack {
         SettingView()
+          .background(Color.backgroundWhite)
+          .navigationTitle("더보기")
       }
       .tabItem {
         Label("더보기", systemImage: "ellipsis")

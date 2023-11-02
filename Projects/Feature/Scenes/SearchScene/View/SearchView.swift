@@ -46,8 +46,8 @@ public struct SearchView: View {
 //        .frame(width: 37, height: 21)
 //        .opacity(viewModel.searchIsPresented ? 0 : 1)
 //        .id(ScrollID.top)
-      MainView().logo
-        .padding([.leading, .vertical], 10)
+//      MainView().logo
+//        .padding([.leading, .vertical], 10)
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
     }
