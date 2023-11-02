@@ -133,7 +133,9 @@ private struct ConcertInfoView: View {
               setlistId: setlist?.id ?? "",
               date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
               venue: setlist?.venue?.name ?? "",
-              title: setlist?.tour?.name ?? "")
+              title: setlist?.tour?.name ?? "",
+              city: setlist?.venue?.city?.name ?? "",
+              country: setlist?.venue?.city?.country?.name ?? "")
             dataManager.addArchivedConcertInfo(newArtist, newSetlist)
           }
         }, label: {
