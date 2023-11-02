@@ -13,10 +13,10 @@ struct ArtistSetCell: View {
 	let isSelected: Bool
 	var body: some View {
 		Text(name)
-			.foregroundStyle(isSelected ? Color.fontWhite : Color.fontBlack)
+			.foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
 			.padding()
 			.background {
-				let color = isSelected ? Color.fontBlack : Color.mainGrey1
+				let color = isSelected ? Color.mainBlack : Color.mainGrey1
 				color.clipShape(RoundedRectangle(cornerRadius: 12))
 			}
 	}

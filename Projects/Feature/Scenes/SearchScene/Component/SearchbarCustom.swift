@@ -59,7 +59,7 @@ struct SearchBar: View {
           }
           UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
-        .foregroundStyle(Color.fontBlack)
+        //.foregroundStyle(Color.fontBlack)
         .padding(.horizontal, 10)
       }
     }

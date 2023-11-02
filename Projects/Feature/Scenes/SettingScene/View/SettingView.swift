@@ -78,7 +78,7 @@ struct SectionTitleView: View {
     VStack(alignment: .leading) {
       Text(sectionTitle)
         .font(.headline)
-        .foregroundStyle(Color.fontBlack)
+        //.foregroundStyle(Color.fontBlack)
         .padding(EdgeInsets(top: 30, leading: 0, bottom: 20, trailing: 0))
       Text(sectionDescription)
         .font(.footnote)
@@ -103,7 +103,7 @@ struct SetlistfmLinkButton: View {
       }
       .frame(height: 54)
       .background(Color.mainGrey1)
-      .foregroundStyle(Color.fontBlack)
+      //.foregroundStyle(Color.fontBlack)
       .clipShape(RoundedRectangle(cornerRadius: 14))
       .padding(.horizontal, 7)
     })
@@ -125,7 +125,7 @@ struct LinkLabelView: View {
         .frame(width: 10, height: 15)
         .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 15))
     }
-    .foregroundStyle(Color.fontBlack)
+    //.foregroundStyle(Color.fontBlack)
   }
 }
 

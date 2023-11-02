@@ -43,12 +43,12 @@ extension ArchivingView {
         Button("북마크한 공연") {
           viewModel.selectSegment = true
         }
-        .foregroundStyle(viewModel.selectSegment ? Color.fontBlack : Color.fontGrey3)
+        //.foregroundStyle(viewModel.selectSegment ? Color.fontBlack : Color.fontGrey3)
 
         Button("찜한 아티스트") {
           viewModel.selectSegment = false
         }
-        .foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.fontBlack)
+        //.foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.fontBlack)
         .padding(.horizontal)
       }
       .font(.headline)
@@ -123,7 +123,7 @@ extension ArchivingView {
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
         Text("\(item.artistInfo.name)")
-          .foregroundStyle(index < 5 ? Color.mainOrange : Color.fontBlack)
+          //.foregroundStyle(index < 5 ? Color.mainOrange : Color.fontBlack)
           .background(
             NavigationLink("", destination: ArtistView(artistName: item.artistInfo.name,
                                                       artistAlias: item.artistInfo.alias,

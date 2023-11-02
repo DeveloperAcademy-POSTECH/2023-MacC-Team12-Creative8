@@ -32,7 +32,7 @@ struct ArchiveConcertInfoCell: View {
 		HStack {
 			VStack {
 				Text(yearFormatter.string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25)
-				Text(decimalFormatter.string(from: info.setlist.date)).foregroundStyle(Color.fontBlack)
+				Text(decimalFormatter.string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
 			}
 			.font(.headline)
 
@@ -44,8 +44,8 @@ struct ArchiveConcertInfoCell: View {
               }})
       } label: {
         VStack(alignment: .leading) {
-          Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.fontBlack)
-          Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.fontBlack)
+          Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.mainBlack)
+          Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
         }
       }
 			.padding(.leading)
@@ -64,7 +64,7 @@ struct ArchiveConcertInfoCell: View {
 				Button("공연 북마크 취소") { dataManager.deleteArchivedConcertInfo(info) }
 			} label: {
 				Image(systemName: "ellipsis")
-					.foregroundStyle(Color.fontBlack)
+					//.foregroundStyle(Color.fontBlack)
 					.padding()
 					.background(Color.clear)
 			}

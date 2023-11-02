@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
@@ -55,5 +56,8 @@ public struct TabBarView: View {
       .tag(Tab.setting)
     }
     .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
+    .onAppear {
+      UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
+    }
   }
 }

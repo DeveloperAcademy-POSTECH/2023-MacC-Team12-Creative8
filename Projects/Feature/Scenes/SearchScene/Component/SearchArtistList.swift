@@ -46,7 +46,7 @@ public struct ListRow: View {
       VStack(alignment: .leading) {
         Text(namePair.0)
           .font(.subheadline)
-          .foregroundStyle(Color.fontBlack)
+          //.foregroundStyle(Color.fontBlack)
           .lineLimit(1)
         
         Group {

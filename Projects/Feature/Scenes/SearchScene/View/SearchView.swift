@@ -92,12 +92,12 @@ public struct SearchView: View {
         HStack {
           Text("최근 검색")
             .bold()
-            .foregroundStyle(Color.fontBlack)
+            //.foregroundStyle(Color.fontBlack)
           Spacer()
           Button("모두 지우기") {
             dataManager.deleteSearchHistoryAll()
           }
-          .foregroundStyle(Color.blockOrange)
+          //.foregroundStyle(Color.blockOrange)
           .bold()
         }
         

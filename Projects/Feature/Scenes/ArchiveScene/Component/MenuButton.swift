@@ -19,7 +19,7 @@ struct MenuButton: View {
       Button("좋아요 취소") { dataManager.deleteLikeArtist(item) }
     } label: {
       Image(systemName: "ellipsis")
-        .foregroundStyle(Color.fontBlack)
+        //.foregroundStyle(Color.fontBlack)
         .padding()
         .background(Color.clear)
     }
