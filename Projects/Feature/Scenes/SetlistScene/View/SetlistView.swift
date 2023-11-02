@@ -24,6 +24,7 @@ struct SetlistView: View {
   
   var body: some View {
     ZStack {
+      Color.white
       ScrollView {
         VStack(spacing: -1) {
           concertInfoArea
@@ -44,7 +45,8 @@ struct SetlistView: View {
                   mbid: artistInfo?.mbid ?? "",
                   gid: artistInfo?.gid ?? 0,
                   imageUrl: artistInfo?.imageUrl ?? "",
-                  songList: artistInfo?.songList ?? [])
+//                  songList: artistInfo?.songList ?? [])
+                  songList: [])
                 let newSetlist = SaveSetlist(
                   setlistId: setlist?.id ?? "",
                   date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
@@ -52,7 +54,7 @@ struct SetlistView: View {
                   title: setlist?.tour?.name ?? "")
                 vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
                 showToastMessage = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                   showToastMessage = false
                 }
               }
@@ -66,7 +68,6 @@ struct SetlistView: View {
       if let setlist = setlist {
         if !vm.isEmptySetlist(setlist) {
           ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-            .padding(.horizontal, 30)
         }
       }
       if showToastMessage {
@@ -77,6 +78,7 @@ struct SetlistView: View {
         }
       }
     }
+    .edgesIgnoringSafeArea(.bottom)
     .onAppear {
       if setlistId != nil {
         vm.dataService.fetchOneSetlistFromSetlistFM(setlistId: setlistId!) { result in
@@ -133,10 +135,7 @@ struct SetlistView: View {
           VStack {
             ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
               .padding(30)
-            Divider() // TODO: divider 때문에 padding(30)을 다 따로 줘야하는데 방법이 없나?
-              .padding(.horizontal)
             BottomView()
-              .padding(30)
           }
         }
       }
@@ -236,6 +235,9 @@ struct ExportPlaylistButtonView: View {
           .padding(.vertical, 20)
           .background(Color.blockFontBlack)
           .cornerRadius(14)
+          .padding(.horizontal, 30)
+          .padding(.bottom, 30)
+          .background(Rectangle().foregroundStyle(Gradient(colors: [.clear, .mainWhite, .mainWhite])))
       })
     }
     .sheet(isPresented: $vm.showModal) {
@@ -363,12 +365,13 @@ private struct ListRowView: View {
 
 private struct BottomView: View {
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack {
       Text("세트리스트 정보 수정을 원하시나요?")
         .font(.headline)
+        .padding(.top, 50)
         .padding(.bottom, 30)
       
-      VStack(alignment: .leading) {
+      VStack {
         Text("잘못된 세트리스트 정보를 발견하셨다면,")
         Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다.")
       }
@@ -377,9 +380,11 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 50)
+        .padding(.bottom, 100)
+        .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
+    .background(Color.mainGrey1)
   }
 }
 
@@ -399,7 +404,7 @@ private struct BottomModalView: View {
         AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
         vm.showModal.toggle()
         showToastMessage = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
           showToastMessage = false
         }
       })
@@ -458,15 +463,15 @@ private struct ToastMessageView: View {
 }
 
 // MARK: Preview
-//#Preview {
-//  //  NavigationStack {
-//  //    SetlistView()
-//  //  }
-//  //  EmptySetlistView()
-//  //  ConcertInfoView()
-//  //  AddPlaylistButtonView()
-//  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
-////  BottomView()
+#Preview {
+  //  NavigationStack {
+  //    SetlistView()
+  //  }
+  //  EmptySetlistView()
+  //  ConcertInfoView()
+//  ExportPlaylistButtonView()
+  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
+  BottomView()
 //  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
 //    .padding(30)
-//}
+}
