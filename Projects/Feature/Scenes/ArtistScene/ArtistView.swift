@@ -216,7 +216,7 @@ private struct BookmarkedView: View {
         // MARK: Menu Button
         Menu {
           Button {
-            SetlistView(setlistId: concert.setlist.id)
+            SetlistView(setlistId: concert.setlist.setlistId)
           } label: {
             Text("세트리스트 보기")
           }
