@@ -9,14 +9,15 @@
 import Foundation
 
 public struct OnboardingModel: Identifiable {
-    public var id = UUID()
-    public var name: String
-    public var mbid: String
-    public var filters: [String]
+  public var id = UUID()
+  public var selected = false
+  public var name: String
+  public var mbid: String
+  public var filters: [String]
   
   public init(name: String, mbid: String, filters: [String]) {
-      self.name = name
-      self.mbid = mbid
-      self.filters = filters
+    self.name = name
+    self.mbid = mbid
+    self.filters = filters
   }
 }

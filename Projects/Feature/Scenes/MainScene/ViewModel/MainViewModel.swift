@@ -16,7 +16,7 @@ final class MainViewModel: ObservableObject {
     @Published var scrollToIndex: Int?
     @Published var isTapped: Bool = false
     @Published var isLoading: Bool = false
-    var setlists = [[Setlist?]?](repeating: nil, count: 100) //MARK: 나중에 꼭 수정하기!
+    var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
     
     let dateMonthFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -95,6 +95,7 @@ final class MainViewModel: ObservableObject {
 
 public enum ButtonType: Int, CaseIterable, Identifiable {
     public var id: Int { self.rawValue }
+  
     case dark, light, automatic
     
    public var icon: String {

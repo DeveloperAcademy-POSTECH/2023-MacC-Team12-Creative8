@@ -48,7 +48,7 @@ public final class SwiftDataManager: ObservableObject {
     return decodedList
   }
 
-  //MARK: - LikeArtist
+  // MARK: - LikeArtist
   public func addLikeArtist(name: String,
                             country: String,
                             alias: String,
@@ -73,7 +73,7 @@ public final class SwiftDataManager: ObservableObject {
     self.save()
   }
 
-  //MARK: - SearchHistory
+  // MARK: - SearchHistory
   public func addSearchHistory(name: String,
                                country: String,
                                alias: String,

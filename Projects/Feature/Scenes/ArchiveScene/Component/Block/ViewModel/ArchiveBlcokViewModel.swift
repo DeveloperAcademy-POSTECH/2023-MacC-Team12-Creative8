@@ -15,7 +15,7 @@ final class ArchiveViewModel: ObservableObject {
   @Published var selecteYear: Int = 0
   @Published var artistUnique: [String] = []
   @Published var isActiveButton: Bool = false
-  var setlist: Setlist? = nil
+  var setlist: Setlist?
   
   @Published var userSelection = "music.note.list"
   let options = ["list.bullet", "batteryblock"]

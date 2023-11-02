@@ -115,9 +115,9 @@ private struct ConcertInfoView: View {
         
         Button(action: {
           if vm.isBookmarked {
-            for i in 0..<concertInfo.count {
-              if concertInfo[i].setlist.setlistId == setlist?.id {
-                dataManager.deleteArchivedConcertInfo(concertInfo[i])
+            for index in 0..<concertInfo.count {
+              if concertInfo[index].setlist.setlistId == setlist?.id {
+                dataManager.deleteArchivedConcertInfo(concertInfo[index])
               }
             }
           } else {

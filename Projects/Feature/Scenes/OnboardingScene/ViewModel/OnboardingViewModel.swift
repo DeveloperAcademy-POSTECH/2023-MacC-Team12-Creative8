@@ -18,9 +18,8 @@ final class OnboardingViewModel: ObservableObject {
   private var filePath: String?
   
   @Published var model: [OnboardingModel] = []
-  @Published var genres = ["케이팝", "힙합", "밴드", "인디", "발라드", "해외가수"]
-  @Published var isGenreSelected = false
-  @Published var isArtistselected = false
+  @Published var genres: [(name: String, isSelected: Bool)] = [("케이팝", false), ("힙합", false),
+      ("밴드", false), ("인디", false), ("발라드", false), ("해외가수", false)]
   @Published var isShowToastBar = false
   @Published var artistSelectedCount = 0
   
@@ -51,8 +50,6 @@ final class OnboardingViewModel: ObservableObject {
                 }
                 let mbid = row.cells[safe: 1]?.stringValue(sharedString) ?? ""
                 let filters = row.cells.dropFirst(2).compactMap { $0.stringValue(sharedString) }
-                print(OnboardingModel(name: name, mbid: mbid, filters: filters))
-
                 return OnboardingModel(name: name, mbid: mbid, filters: filters)
               }.compactMap { $0 })!
               

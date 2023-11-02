@@ -15,8 +15,8 @@ final class SetlistViewModel: ObservableObject {
 
   func isBookmark(_ concertInfo: [ArchivedConcertInfo], _ setlist: Setlist?) {
     self.isBookmarked = {
-      for i in 0..<concertInfo.count {
-        if concertInfo[i].setlist.setlistId == setlist?.id { return true }
+      for index in 0..<concertInfo.count {
+        if concertInfo[index].setlist.setlistId == setlist?.id { return true }
       }
       return false
     }()

@@ -56,7 +56,7 @@ public struct OnboardingView: View {
       Text("아티스트 찜하기")
         .font(.system(.headline))
       Spacer().frame(height: 16)
-      Text("관심있는 아티스트를 찜하고\n공연 및 세트리스트 정보를 빠르게 확인해보세요")
+      Text("찜한 아티스트 중 최대 5명까지 메인화면에 나옵니다.\n메인 화면에 없는 아티스트는 보관함에서 확인해주세요.")
         .font(.system(.footnote))
         .foregroundStyle(.black)
         .opacity(0.8)
@@ -68,30 +68,30 @@ public struct OnboardingView: View {
   private var genresFilterButton: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack {
-        ForEach(viewModel.genres, id: \.self) { genre in
+        ForEach(viewModel.genres.indices, id: \.self) { index in
           Button {
-            viewModel.isGenreSelected.toggle()
+            viewModel.genres[index].isSelected.toggle()
           } label: {
-            Text(genre)
+            Text(viewModel.genres[index].name)
               .font(.system(.subheadline))
               .padding(10)
-              .background(viewModel.isGenreSelected ? .black: .gray)
+              .background(viewModel.genres[index].isSelected ? .black: .gray)
               .cornerRadius(12)
-              .foregroundStyle(viewModel.isGenreSelected ? .white: .black)
+              .foregroundStyle(viewModel.genres[index].isSelected ? .white: .black)
           }
         }
       }
       .padding(.leading, 24)
-      Spacer().frame(height: 40)
+      .padding(.bottom, 30)
     }
   }
   
   private var artistNameButton: some View {
     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-      ForEach(viewModel.model) { artist in
+      ForEach(viewModel.model.indices, id: \.self) { index in
         Button {
-          viewModel.isArtistselected.toggle()
-          if viewModel.isArtistselected {
+          viewModel.model[index].selected.toggle()
+          if viewModel.model[index].selected {
             viewModel.artistSelectedCount += 1
           } else {
             viewModel.artistSelectedCount -= 1
@@ -101,10 +101,10 @@ public struct OnboardingView: View {
             .frame(width: 125, height: 68)
             .foregroundStyle(.clear)
             .overlay {
-              Text(artist.name)
+              Text(viewModel.model[index].name)
                 .frame(width: 100, height: 48)
                 .font(.system(size: 34, weight: .semibold))
-                .foregroundColor(viewModel.isArtistselected ? .black : .gray)
+                .foregroundColor(viewModel.model[index].selected ? .black : .gray)
                 .minimumScaleFactor(0.3)
             }
         }

@@ -73,7 +73,6 @@ public final class SetlistDataService {
       }
     }
 
-
   public func fetchSetlistsFromSetlistFM(artistMbid: String, page: Int, completion: @escaping (SetlistListModel?) -> Void) {
     if let url = URL(string: "https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=\(artistMbid)&p=\(page)") {
       let headers = [
