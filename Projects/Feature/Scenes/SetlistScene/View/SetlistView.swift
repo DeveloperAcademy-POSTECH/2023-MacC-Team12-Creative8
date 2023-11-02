@@ -77,7 +77,8 @@ struct SetlistView: View {
         if showToastMessage {
           VStack {
             ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-              .padding(.horizontal, 30)
+              .padding(.leading, 80)
+              .padding(.trailing, 20)
             Spacer()
           }
         }
@@ -116,8 +117,8 @@ struct SetlistView: View {
         venue: setlist?.venue?.name ?? "-",
         tour: setlist?.tour?.name ?? "-"
       )
-        .padding(30)
-        .padding(.bottom)
+      .padding([.horizontal, .bottom], 30)
+      .padding(.vertical, 15)
     }
   }
   
@@ -224,32 +225,40 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @State private var showToastMessage = false
+  @State private var showToastMessage1 = false
+  @State private var showToastMessage2 = false
   
   var body: some View {
     VStack {
       Spacer()
-      if showToastMessage {
-        ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+      
+      Group {
+        if showToastMessage1 {
+          ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+        } else if showToastMessage2 {
+          ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
+        }
       }
+      .padding(.horizontal, 30)
+      
       Button(action: {
         vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")
-          .foregroundStyle(Color.blockFontWhite)
+          .foregroundStyle((showToastMessage1 || showToastMessage2) ? Color.fontWhite3 : Color.fontWhite)
           .font(.callout)
-          .fontWeight(.semibold)
+          .fontWeight(.bold)
           .frame(maxWidth: .infinity)
           .padding(.vertical, 20)
           .background(Color.blockFontBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
-          .padding(.bottom, 30)
+          .padding(.bottom, 60)
           .background(Rectangle().foregroundStyle(Gradient(colors: [.clear, .mainWhite, .mainWhite])))
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage: $showToastMessage)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage1: $showToastMessage1, showToastMessage2: $showToastMessage2)
         .presentationDetents([.fraction(0.3)])
         .presentationDragIndicator(.visible)
     }
@@ -268,7 +277,7 @@ struct SetlistFMLinkButtonView: View {
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color.mainGrey1)
+            .background(Color.fontGrey3)
             .cornerRadius(14)
         }
       }
@@ -388,7 +397,7 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 100)
+        .padding(.bottom, 150)
         .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -400,7 +409,8 @@ private struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @Binding var showToastMessage: Bool
+  @Binding var showToastMessage1: Bool
+  @Binding var showToastMessage2: Bool
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -411,9 +421,9 @@ private struct BottomModalView: View {
         CheckAppleMusicSubscription.shared.appleMusicSubscription()
         AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
         vm.showModal.toggle()
-        showToastMessage = true
+        showToastMessage1 = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          showToastMessage = false
+          showToastMessage1 = false
         }
       })
       
@@ -425,6 +435,10 @@ private struct BottomModalView: View {
         action: {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
+          showToastMessage2 = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            showToastMessage2 = false
+          }
         }
       )
       
@@ -461,7 +475,7 @@ private struct ToastMessageView: View {
      Text(message)
       .foregroundStyle(Color.fontWhite)
       .font(.subheadline)
-      .padding(.vertical)
+      .padding(.vertical, 15)
       .frame(maxWidth: .infinity)
       .background(
         Color.fontGrey2
