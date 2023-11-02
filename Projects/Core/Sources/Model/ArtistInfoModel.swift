@@ -14,9 +14,9 @@ public struct ArtistInfo {
   public var mbid: String
   public var gid: Int?
   public var imageUrl: String?
-  public var songList: [(String, String?)]?
+  public var songList: [Titles]?
 
-  public init(name: String, alias: String? = nil, mbid: String, gid: Int? = nil, imageUrl: String? = nil, songList: [(String, String?)]? = nil) {
+  public init(name: String, alias: String? = nil, mbid: String, gid: Int? = nil, imageUrl: String? = nil, songList: [Titles]? = nil) {
     self.name = name
     self.alias = alias
     self.mbid = mbid

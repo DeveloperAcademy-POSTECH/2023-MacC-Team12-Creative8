@@ -14,9 +14,9 @@ class ArtistViewModel: ObservableObject {
   let dataService: SetlistDataService = SetlistDataService.shared
   let koreanConverter: KoreanConverter = KoreanConverter.shared
   let artistDataManager: ArtistDataManager = ArtistDataManager.shared
+  let dataManager = SwiftDataManager()
   
   var artistInfo: ArtistInfo?
-  var bookmarkedSetlists: [Setlist]?
   var setlists: [Setlist]?
   var page: Int = 1
   var totalPage: Int = 0
@@ -26,13 +26,15 @@ class ArtistViewModel: ObservableObject {
   @Published var isLoading2: Bool
   @Published var isLoading3: Bool
   @Published var image: UIImage?
+  @Published var isLikedArtist: Bool
 
   init() {
-    self.showBookmarkedSetlists = true
+    self.showBookmarkedSetlists = false
     self.isLoading1 = false
     self.isLoading2 = false
     self.isLoading3 = false
     self.image = nil
+    self.isLikedArtist = false
   }
   
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
@@ -96,21 +98,27 @@ class ArtistViewModel: ObservableObject {
   }
   
   func loadImage() {
-    if let url = URL(string: self.artistInfo?.imageUrl ?? "") {
-      URLSession.shared.dataTask(with: url) { data, _, _ in
-        if let data = data, let image = UIImage(data: data) {
-          DispatchQueue.main.async {
-            self.image = image
+    if let imageUrl = artistInfo?.imageUrl {
+      if let url = URL(string: imageUrl) {
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+          if let data = data, let image = UIImage(data: data) {
+            DispatchQueue.main.async {
+              self.image = image
+            }
           }
         }
+        .resume()
+      } else {
+        //MARK: 아티스트를 찾지 못했을 때 사용할 디폴트 이미지 필요!
+        self.image = UIImage(systemName: "person.crop.circle")
+        print("Invalid Image URL")
       }
-      .resume()
     } else {
-      print("Invalid Image URL")
+      return
     }
   }
 
-  func getFormattedDate(date: String) -> String? {
+  func getFormattedDateFromString(date: String, format: String) -> String? {
     let inputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateFormat = "dd-MM-yyyy"
@@ -119,7 +127,7 @@ class ArtistViewModel: ObservableObject {
     
     let outputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
-      formatter.dateFormat = "MM.dd"
+      formatter.dateFormat = format
       return formatter
     }()
     
@@ -128,6 +136,19 @@ class ArtistViewModel: ObservableObject {
     } else {
       return nil
     }
+  }
+  
+  func getFormattedDateFromDate(date: Date, format: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: date)
+  }
+  
+  func isEmptySetlist(_ setlist: Setlist) -> Bool {
+    if setlist.sets?.setsSet?.isEmpty == true {
+      return true
+    }
+    return false
   }
   
 }
