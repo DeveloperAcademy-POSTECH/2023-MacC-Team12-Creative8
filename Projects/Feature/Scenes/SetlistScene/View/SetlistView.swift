@@ -224,14 +224,22 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @State private var showToastMessage = false
+  @State private var showToastMessage1 = false
+  @State private var showToastMessage2 = false
   
   var body: some View {
     VStack {
       Spacer()
-      if showToastMessage {
-        ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+      
+      Group {
+        if showToastMessage1 {
+          ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+        } else if showToastMessage2 {
+          ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
+        }
       }
+      .padding(.horizontal, 30)
+      
       Button(action: {
         vm.showModal.toggle()
       }, label: {
@@ -249,7 +257,7 @@ struct ExportPlaylistButtonView: View {
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage: $showToastMessage)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage1: $showToastMessage1, showToastMessage2: $showToastMessage2)
         .presentationDetents([.fraction(0.3)])
         .presentationDragIndicator(.visible)
     }
@@ -400,7 +408,8 @@ private struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @Binding var showToastMessage: Bool
+  @Binding var showToastMessage1: Bool
+  @Binding var showToastMessage2: Bool
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -411,9 +420,9 @@ private struct BottomModalView: View {
         CheckAppleMusicSubscription.shared.appleMusicSubscription()
         AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
         vm.showModal.toggle()
-        showToastMessage = true
+        showToastMessage1 = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          showToastMessage = false
+          showToastMessage1 = false
         }
       })
       
@@ -425,6 +434,10 @@ private struct BottomModalView: View {
         action: {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
+          showToastMessage2 = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            showToastMessage2 = false
+          }
         }
       )
       
