@@ -117,8 +117,8 @@ struct SetlistView: View {
         venue: setlist?.venue?.name ?? "-",
         tour: setlist?.tour?.name ?? "-"
       )
-        .padding(30)
-        .padding(.bottom)
+      .padding([.horizontal, .bottom], 30)
+      .padding(.vertical, 15)
     }
   }
   
