@@ -9,6 +9,7 @@
 import SwiftUI
 import Foundation
 import CoreXLSX
+import Core
 
 final class OnboardingViewModel: ObservableObject {
   
@@ -16,9 +17,13 @@ final class OnboardingViewModel: ObservableObject {
   private var fileType: String
   private var filePath: String?
   
-  @Published var artistName = []
-  @Published var genres = ["K-pop", "힙합", "밴드", "인디", "발라드", "해외가수"]
+  @Published var model: [OnboardingModel] = []
+  @Published var genres = ["케이팝", "힙합", "밴드", "인디", "발라드", "해외가수"]
   @Published var isGenreSelected = false
+  @Published var isArtistselected = false
+  @Published var isShowToastBar = false
+  @Published var artistSelectedCount = 0
+  
   init(fileName: String, fileType: String, filePath: String?) {
     self.fileName = fileName
     self.fileType = fileType
@@ -26,7 +31,7 @@ final class OnboardingViewModel: ObservableObject {
   }
   
   convenience init() {
-    self.init(fileName: "test", fileType: "xlsx", filePath: nil)
+    self.init(fileName: "onboardingArtist", fileType: "xlsx", filePath: nil)
   }
   
   func readXslx() {
@@ -35,17 +40,18 @@ final class OnboardingViewModel: ObservableObject {
         fatalError("XLSX file at \(String(describing: self.filePath)) is corrupted or does not exist")
       }
       
-      do {// 파일에서 excel의 통합문서를 지칭하는 workbook을 배열로 반환
+      do {
         for wbk in try file.parseWorkbooks() {
-          // workbook에서 sheet의 이름과 그 경로를 순환하며 name과 path 변수에 반환
           for (_, path) in try file.parseWorksheetPathsAndNames(workbook: wbk) {
-            
-            // sheet의 경로(path)를 이용하여 해당 sheet를 worksheet 변수에 반환
             let worksheet = try file.parseWorksheet(at: path)
-            // 아래의 세 줄이 sheet별 A열에 해당하는 값을 배열로 반환합니다.
             if let sharedString = try file.parseSharedStrings() {
-              artistName = worksheet.cells(atColumns: [ColumnReference("B")!])
-                .compactMap {$0.stringValue(sharedString)}
+              model = (worksheet.data?.rows.map { row in
+                let name = row.cells[0].stringValue(sharedString) ?? ""
+                let mbid = row.cells[1].stringValue(sharedString) ?? ""
+                let filters = row.cells.dropFirst(2).compactMap { $0.stringValue(sharedString) }
+                return OnboardingModel(name: name, mbid: mbid, filters: filters)
+              })! 
+              
             }
           }
         }
