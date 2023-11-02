@@ -16,7 +16,7 @@ struct ArtistSetCell: View {
 			.foregroundStyle(isSelected ? Color.fontWhite : Color.fontBlack)
 			.padding()
 			.background {
-				let color = isSelected ? Color.fontBlack : Color.lineGrey1
+				let color = isSelected ? Color.fontBlack : Color.mainGrey1
 				color.clipShape(RoundedRectangle(cornerRadius: 12))
 			}
 	}

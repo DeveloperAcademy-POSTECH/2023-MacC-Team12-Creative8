@@ -22,33 +22,38 @@ public struct TabBarView: View {
   }
   
   public var body: some View {
-	  NavigationStack {
-		  TabView(selection: $selectedTab) {
-			  MainView()
-				  .tabItem {
-					  Label("세트리스트", systemImage: "music.note.house.fill")
-				  }
-				  .tag(Tab.home)
+    TabView(selection: $selectedTab) {
+      NavigationStack {
+        MainView()
+      }
+      .tabItem {
+        Label("세트리스트", systemImage: "music.note.house.fill")
+      }
+      .tag(Tab.home)
+      NavigationStack {
+        SearchView()
+      }
+      .tabItem {
+        Label("검색", systemImage: "magnifyingglass")
+      }
+      .tag(Tab.search)
 
-			  SearchView()
-				  .tabItem {
-					  Label("검색", systemImage: "magnifyingglass")
-				  }
-				  .tag(Tab.search)
+      NavigationStack {
+        ArchivingView()
+      }
+      .tabItem {
+        Label("아카이빙", systemImage: "heart.fill")
+      }
+      .tag(Tab.archiving)
 
-			  ArchivingView()
-				  .tabItem {
-					  Label("아카이빙", systemImage: "heart.fill")
-				  }
-				  .tag(Tab.archiving)
-				  SettingView()
-					  .tabItem {
-						  Label("더보기", systemImage: "ellipsis")
-					  }
-					  .tag(Tab.setting)
-		  }
-		  .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
-//		  .navigationBarBackButtonHidden(true)
-	  }
+      NavigationStack {
+        SettingView()
+      }
+      .tabItem {
+        Label("더보기", systemImage: "ellipsis")
+      }
+      .tag(Tab.setting)
+    }
+    .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
   }
 }

@@ -36,11 +36,18 @@ struct ArchiveConcertInfoCell: View {
 			}
 			.font(.headline)
 
-			VStack(alignment: .leading) {
-				Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.fontBlack)
-				Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.fontBlack)
-				Text("01 LoveXXL").font(.footnote).foregroundStyle(Color.fontGrey25)
-			}
+      Button {
+        dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
+              if let setlist = setlist {
+                self.setlist = setlist
+                isActiveSetlist.toggle()
+              }})
+      } label: {
+        VStack(alignment: .leading) {
+          Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.fontBlack)
+          Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.fontBlack)
+        }
+      }
 			.padding(.leading)
 
 			Spacer()

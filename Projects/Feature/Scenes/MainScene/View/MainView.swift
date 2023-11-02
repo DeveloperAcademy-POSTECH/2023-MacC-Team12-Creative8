@@ -20,8 +20,8 @@ public struct MainView: View {
     let screenWidth = UIScreen.main.bounds.size.width
     let screenHeight = UIScreen.main.bounds.size.height
     
-    @Query var likeArtists: [LikeArtist]
-    
+    @Query(sort: \LikeArtist.orderIndex) var likeArtists: [LikeArtist]
+
     @ObservedObject var viewModel = MainViewModel()
     @ObservedObject var dataManager = SwiftDataManager()
     @ObservedObject var setlistViewModel = ArtistViewModel()
