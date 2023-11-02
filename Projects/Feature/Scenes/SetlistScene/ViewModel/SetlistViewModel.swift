@@ -24,7 +24,7 @@ final class SetlistViewModel: ObservableObject {
   init() {
     self.isBookmarked = false
     self.showModal = false
-    self.isLoading = true
+    self.isLoading = false
   }
   
   func isEmptySetlist(_ setlist: Setlist) -> Bool {

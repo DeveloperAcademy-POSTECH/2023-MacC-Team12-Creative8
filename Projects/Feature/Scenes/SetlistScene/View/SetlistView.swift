@@ -24,76 +24,83 @@ struct SetlistView: View {
   
   var body: some View {
     ZStack {
-      Color.white
-      ScrollView {
-        VStack(spacing: -1) {
-          concertInfoArea
-          dotLine
-          setlistArea
-        }
-        .background(Color.black)
-        .toolbar {
-          ToolbarItem(placement: .topBarTrailing) {
-            Button(action: {
-              if vm.isBookmarked {
-                vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
-              } else {
-                let newArtist = SaveArtistInfo(
-                  name: setlist?.artist?.name ?? "",
-                  country: setlist?.venue?.city?.country?.name ?? "",
-                  alias: artistInfo?.alias ?? "",
-                  mbid: artistInfo?.mbid ?? "",
-                  gid: artistInfo?.gid ?? 0,
-                  imageUrl: artistInfo?.imageUrl ?? "",
-                  songList: artistInfo?.songList ?? [])
-                let newSetlist = SaveSetlist(
-                  setlistId: setlist?.id ?? "",
-                  date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
-                  venue: setlist?.venue?.name ?? "",
-                  title: setlist?.tour?.name ?? "",
-                  city: setlist?.venue?.city?.name ?? "",
-                  country: setlist?.venue?.city?.country?.name ?? "")
-                vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
-                showToastMessage = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                  showToastMessage = false
+      if vm.isLoading {
+        ProgressView()
+      } else {
+        ScrollView {
+          VStack(spacing: -1) {
+            concertInfoArea
+            dotLine
+            setlistArea
+          }
+          .background(Color.black)
+          .toolbar(.hidden, for: .tabBar)
+          .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+              Button(action: {
+                if vm.isBookmarked {
+                  vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
+                } else {
+                  let newArtist = SaveArtistInfo(
+                    name: setlist?.artist?.name ?? "",
+                    country: setlist?.venue?.city?.country?.name ?? "",
+                    alias: artistInfo?.alias ?? "",
+                    mbid: artistInfo?.mbid ?? "",
+                    gid: artistInfo?.gid ?? 0,
+                    imageUrl: artistInfo?.imageUrl ?? "",
+                    songList: artistInfo?.songList ?? [])
+                  let newSetlist = SaveSetlist(
+                    setlistId: setlist?.id ?? "",
+                    date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+                    venue: setlist?.venue?.name ?? "",
+                    title: setlist?.tour?.name ?? "",
+                    city: setlist?.venue?.city?.name ?? "",
+                    country: setlist?.venue?.city?.country?.name ?? "")
+                  vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+                  showToastMessage = true
+                  DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    showToastMessage = false
+                  }
                 }
-              }
-              vm.isBookmarked.toggle()
-            }, label: {
-              Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-            })
+                vm.isBookmarked.toggle()
+              }, label: {
+                Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
+              })
+            }
           }
         }
-      }
-      if let setlist = setlist {
-        if !vm.isEmptySetlist(setlist) {
-          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+        if let setlist = setlist {
+          if !vm.isEmptySetlist(setlist) {
+            ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+          }
         }
-      }
-      if showToastMessage {
-        VStack {
-          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-            .padding(.horizontal, 30)
-          Spacer()
+        if showToastMessage {
+          VStack {
+            ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
+              .padding(.horizontal, 30)
+            Spacer()
+          }
         }
       }
     }
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
       if setlistId != nil {
+        vm.isLoading = true
         vm.dataService.fetchOneSetlistFromSetlistFM(setlistId: setlistId!) { result in
           if let result = result {
-            vm.isLoading = true
             DispatchQueue.main.async {
               self.setlist = result
+              vm.dataManager.modelContext = modelContext
+              vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
               vm.isLoading = false
             }
           }
         }
+      } else {
+        vm.dataManager.modelContext = modelContext
+        vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
       }
-      vm.dataManager.modelContext = modelContext
-      vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
     }
   }
   
@@ -461,18 +468,4 @@ private struct ToastMessageView: View {
           .cornerRadius(27)
       )
   }
-}
-
-// MARK: Preview
-#Preview {
-  //  NavigationStack {
-  //    SetlistView()
-  //  }
-  //  EmptySetlistView()
-  //  ConcertInfoView()
-//  ExportPlaylistButtonView()
-  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
-  BottomView()
-//  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
-//    .padding(30)
 }

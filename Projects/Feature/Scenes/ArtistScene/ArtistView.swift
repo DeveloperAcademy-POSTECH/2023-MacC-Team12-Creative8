@@ -123,7 +123,6 @@ private struct ArtistImageView: View {
 
 private struct BookmarkedView: View {
   @ObservedObject var vm: ArtistViewModel
-  // TODO: 쿼리에 아티스트 이름 필터 들어가야 함
   @Query var concertInfo: [ArchivedConcertInfo]
   
   var body: some View {
@@ -215,8 +214,8 @@ private struct BookmarkedView: View {
         
         // MARK: Menu Button
         Menu {
-          Button {
-            SetlistView(setlistId: concert.setlist.setlistId)
+          NavigationLink {
+            SetlistView(setlistId: concert.setlist.setlistId, artistInfo: vm.artistInfo)
           } label: {
             Text("세트리스트 보기")
           }
