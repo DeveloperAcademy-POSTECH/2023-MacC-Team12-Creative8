@@ -17,9 +17,6 @@ public struct MainView: View {
   
   @Environment(\.colorScheme) var colorScheme
   
-  let screenWidth = UIScreen.main.bounds.size.width
-  let screenHeight = UIScreen.main.bounds.size.height
-  
   @Query var likeArtists: [LikeArtist]
   
   @StateObject var viewModel = MainViewModel()
@@ -106,10 +103,10 @@ public struct MainView: View {
     ZStack(alignment: .center) {
       RoundedRectangle(cornerRadius: 36)
         .foregroundStyle(Color.mainGrey1)
-        .frame(width: screenWidth * 0.45, height: screenWidth * 0.09)
+        .frame(width: UIWidth * 0.45, height: UIWidth * 0.09)
         .padding(.bottom)
       VStack {
-        HStack(spacing: screenWidth * 0.07) {
+        HStack(spacing: UIWidth * 0.07) {
           ForEach(ButtonType.allCases) { mode in
             TopButtonView(buttonType: mode, viewModel: viewModel)
               .tag(mode)
@@ -127,7 +124,7 @@ public struct MainView: View {
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
         .scrollPosition(id: $viewModel.scrollToIndex)
-        .safeAreaPadding(.horizontal, screenWidth * 0.11)
+        .safeAreaPadding(.horizontal, UIWidth * 0.11)
       Spacer()
     }
     .onChange(of: viewModel.scrollToIndex) {
@@ -145,7 +142,7 @@ public struct MainView: View {
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
-        HStack(spacing: screenWidth * 0.13) {
+        HStack(spacing: UIWidth * 0.13) {
           ForEach(0..<likeArtists.prefix(5).count, id: \.self) { data in
             let artistName = viewModel.replaceFirstSpaceWithNewline(likeArtists[data].artistInfo.name)
             Text(.init(artistName))
@@ -163,7 +160,7 @@ public struct MainView: View {
               }
           }
           Color.clear
-            .frame(width: screenWidth * 0.6)
+            .frame(width: UIWidth * 0.6)
         }
         .onChange(of: viewModel.scrollToIndex) {
           viewModel.selectedIndex = viewModel.scrollToIndex
@@ -174,9 +171,9 @@ public struct MainView: View {
         .scrollTargetLayout()
       }
     }
-    .frame(minWidth: screenWidth * 0.16)
+    .frame(minWidth: UIWidth * 0.16)
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, screenWidth * 0.12)
+    .safeAreaPadding(.leading, UIWidth * 0.12)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
@@ -192,7 +189,7 @@ public struct MainView: View {
                     image
                       .resizable()
                       .scaledToFill()
-                      .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                      .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
                       .overlay {
                         artistImageOverlayButton
                       }
@@ -238,7 +235,7 @@ public struct MainView: View {
                         }
                         .font(.headline)
                         Spacer()
-                          .frame(width: screenWidth * 0.08)
+                          .frame(width: UIWidth * 0.08)
                         VStack(alignment: .leading, spacing: 0) {
                           Text(city + ", " + country)
                             .font(.subheadline)
@@ -263,7 +260,7 @@ public struct MainView: View {
                     }
                     .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
                     .animation(.easeInOut(duration: 0.1))
-                    .frame(width: screenWidth * 0.78)
+                    .frame(width: UIWidth * 0.78)
                   }
                 if current.isEmpty {
                   EmptyMainSetlistView()
@@ -286,12 +283,12 @@ public struct MainView: View {
             .renderingMode(.template)
             .foregroundStyle(Color.mainGrey1)
             .aspectRatio(contentMode: .fit)
-            .frame(width: screenWidth * 0.43)
+            .frame(width: UIWidth * 0.43)
             .overlay {
               artistImageOverlayButton
             }
         )
-        .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+        .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
   }
   public var artistImageOverlayButton: some View {
     ZStack {
@@ -302,7 +299,7 @@ public struct MainView: View {
         HStack {
           Spacer()
           Circle()
-            .frame(width: screenWidth * 0.15)
+            .frame(width: UIWidth * 0.15)
             .foregroundStyle(Color.mainBlack)
             .overlay {
               Image(systemName: "arrow.right")
@@ -365,9 +362,6 @@ struct TopButtonView: View {
   }
 }
 struct EmptyMainSetlistView: View {
-  let screenWidth = UIScreen.main.bounds.size.width
-  let screenHeight = UIScreen.main.bounds.size.height
-  
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
       Spacer()
@@ -389,7 +383,7 @@ struct EmptyMainSetlistView: View {
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
-          .frame(height: screenHeight * 0.06)
+          .frame(height: UIHeight * 0.06)
           .overlay {
             Text("Setlist.fm 바로가기")
               .foregroundStyle(Color.primary)
@@ -399,7 +393,7 @@ struct EmptyMainSetlistView: View {
       }
       Spacer()
     }
-    .frame(width: screenWidth * 0.78)
+    .frame(width: UIWidth * 0.78)
   }
 }
 // 로고 만들기
