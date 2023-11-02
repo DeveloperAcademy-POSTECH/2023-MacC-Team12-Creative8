@@ -277,7 +277,7 @@ struct SetlistFMLinkButtonView: View {
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color.mainGrey1)
+            .background(Color.fontGrey3)
             .cornerRadius(14)
         }
       }
