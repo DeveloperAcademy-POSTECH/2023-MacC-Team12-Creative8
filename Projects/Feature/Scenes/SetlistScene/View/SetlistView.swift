@@ -247,13 +247,13 @@ struct ExportPlaylistButtonView: View {
         Text("플레이리스트 내보내기")
           .foregroundStyle(Color.blockFontWhite)
           .font(.callout)
-          .fontWeight(.semibold)
+          .fontWeight(.bold)
           .frame(maxWidth: .infinity)
           .padding(.vertical, 20)
           .background(Color.blockFontBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
-          .padding(.bottom, 30)
+          .padding(.bottom, 60)
           .background(Rectangle().foregroundStyle(Gradient(colors: [.clear, .mainWhite, .mainWhite])))
       })
     }
@@ -397,7 +397,7 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 100)
+        .padding(.bottom, 150)
         .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
