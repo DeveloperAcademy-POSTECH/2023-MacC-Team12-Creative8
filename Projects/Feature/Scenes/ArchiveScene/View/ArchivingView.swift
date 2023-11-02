@@ -43,15 +43,6 @@ struct ArchivingView: View {
 }
 
 extension ArchivingView {
-  private var bookmarkView: some View {
-    Group {
-      if concertInfo.isEmpty {
-        IsEmptyCell(type: .bookmark)
-      } else {
-        bookmarkListView
-      }
-    }
-  }
   private var segmentedButtonsView: some View {
     HStack {
         Button("북마크한 공연") {
@@ -70,29 +61,14 @@ extension ArchivingView {
       .padding(.vertical)
   }
 
-  private var artistView: some View {
+  private var bookmarkView: some View {
     Group {
-      if likeArtist.isEmpty {
-        IsEmptyCell(type: .likeArtist)
+      if concertInfo.isEmpty {
+        IsEmptyCell(type: .bookmark)
       } else {
-        allartistListView
+        bookmarkListView
       }
     }
-  }
-
-  private var allartistListView: some View {
-    List {
-      Text("찜한 아티스트 중. 상단의 5명만 메인에 등장합니다\n변경을 원하신다면 편집을눌러 순서를 옮겨보세요")
-        .font(.footnote)
-        .foregroundStyle(Color.fontGrey2)
-        .padding(.top)
-      artistListView
-        .listRowSeparator(.hidden)
-    }
-    .scrollIndicators(.hidden)
-    .listStyle(.plain)
-    .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
-
   }
 
   private var bookmarkListView: some View {
@@ -123,6 +99,31 @@ extension ArchivingView {
       .padding(.horizontal)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
+  }
+
+  private var artistView: some View {
+    Group {
+      if likeArtist.isEmpty {
+        IsEmptyCell(type: .likeArtist)
+      } else {
+        allartistListView
+      }
+    }
+  }
+
+  private var allartistListView: some View {
+    List {
+      Text("찜한 아티스트 중. 상단의 5명만 메인에 등장합니다\n변경을 원하신다면 편집을눌러 순서를 옮겨보세요")
+        .font(.footnote)
+        .foregroundStyle(Color.fontGrey2)
+        .padding(.top)
+      artistListView
+        .listRowSeparator(.hidden)
+    }
+    .scrollIndicators(.hidden)
+    .listStyle(.plain)
+    .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
+
   }
 
   private var artistListView: some View {
