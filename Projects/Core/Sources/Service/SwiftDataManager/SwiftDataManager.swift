@@ -21,32 +21,6 @@ public final class SwiftDataManager: ObservableObject {
     }
   }
 
-  // MARK: - songList Encoder, Decoder
-  public func songListEncoder(_ songList: [(String, String?)]) -> [Titles] {
-    var titlesList: [Titles] = []
-
-    for (title, subTitle) in songList {
-      let subTitleValue = subTitle ?? ""
-      let titleObject = Titles(title: title, subTitle: subTitleValue)
-      titlesList.append(titleObject)
-    }
-
-    return titlesList
-  }
-
-  public func songListDecoder(_ songList: [Titles]) -> [(String, String?)] {
-    var decodedList: [(String, String?)] = []
-
-    for title in songList {
-      let titleValue = title.title
-      let subTitleValue = title.subTitle
-      let decodedTuple: (String, String?) = (titleValue, subTitleValue)
-      decodedList.append(decodedTuple)
-    }
-
-    return decodedList
-  }
-
   //MARK: - LikeArtist
   public func addLikeArtist(name: String,
                             country: String,
@@ -54,7 +28,7 @@ public final class SwiftDataManager: ObservableObject {
                             mbid: String,
                             gid: Int,
                             imageUrl: String?,
-                            songList: [(String, String?)]) {
+                            songList: [Titles]) {
 
     let descriptor = FetchDescriptor<LikeArtist>()
     let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name,
@@ -63,7 +37,7 @@ public final class SwiftDataManager: ObservableObject {
                                                               mbid: mbid,
                                                               gid: gid,
                                                               imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
-                                                              songList: self.songListEncoder(songList)),
+                                                              songList: songList),
                                                               orderIndex: (try? modelContext?.fetchCount(descriptor)) ?? 0)
     modelContext?.insert(newLikeArtist)
     self.save()
@@ -98,7 +72,7 @@ public final class SwiftDataManager: ObservableObject {
                                mbid: String,
                                gid: Int,
                                imageUrl: String?,
-                               songList: [(String, String?)]) {
+                               songList: [Titles]) {
 
     let newSearchHistory = SearchHistory(artistInfo: SaveArtistInfo(name: name,
                                                                     country: country,
@@ -106,7 +80,7 @@ public final class SwiftDataManager: ObservableObject {
                                                                     mbid: mbid,
                                                                     gid: gid,
                                                                     imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
-                                                                    songList: self.songListEncoder(songList)))
+                                                                    songList: songList))
     modelContext?.insert(newSearchHistory)
     self.save()
   }

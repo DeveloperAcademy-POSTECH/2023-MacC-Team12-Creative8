@@ -128,7 +128,7 @@ private struct ConcertInfoView: View {
               mbid: artistInfo?.mbid ?? "",
               gid: artistInfo?.gid ?? 0,
               imageUrl: artistInfo?.imageUrl ?? "",
-              songList: dataManager.songListEncoder(artistInfo?.songList ?? []))
+              songList: artistInfo?.songList ?? [])
             let newSetlist = SaveSetlist(
               setlistId: setlist?.id ?? "",
               date: convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
