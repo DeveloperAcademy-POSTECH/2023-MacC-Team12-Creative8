@@ -14,65 +14,58 @@ public struct SettingView: View {
   public init() {}
   
   public var body: some View {
-      VStack {
-        HStack {
-          Text("더보기")
-            .font(.system(size: 24, weight: .semibold))
-            .foregroundStyle(Color.fontBlack)
-            .padding(EdgeInsets(top: 0, leading: 24, bottom: 11, trailing: 0))
-          Spacer()
-        }
+    ZStack {
+      Color.backgroundWhite
+      ScrollView {
         Divider()
           .foregroundStyle(Color.lineGrey1)
           .padding(.leading, 24)
-        
-        // 세트리스트 추가 및 수정하기
-        VStack(alignment: .leading) {
-          SectionTitleView(
-            sectionTitle: "세트리스트 추가 및 수정하기",
-            sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
-          SetlistfmLink(
-            setlistfmURL: "https://www.setlist.fm",
-            linkLabel: "Setlist.fm 바로가기")
-          .padding(.bottom, 20)
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
-        }
-        .padding(.horizontal, 24)
-
-        // 서비스 이용 관련
-        VStack(alignment: .leading) {
-          SectionTitleView(
-            sectionTitle: "서비스 이용 관련",
-            sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
-          
-          // 이용 약관
-          NavigationLink {
-            ServiceExplainView()
-              .navigationBarTitle("이용 약관", displayMode: .inline)
-          } label: {
-            LinkLabelView(linkLabel: "이용 약관")
+          // 세트리스트 추가 및 수정하기
+          VStack(alignment: .leading) {
+            SectionTitleView(
+              sectionTitle: "세트리스트 추가 및 수정하기",
+              sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
+            SetlistfmLinkButton(
+              setlistfmURL: "https://www.setlist.fm",
+              linkLabel: "Setlist.fm 바로가기")
+            .padding(.bottom, 20)
           }
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
+          .padding(.horizontal, 24)
           
-          // Setlist.fm 약관
-          NavigationLink {
-            TermsOfSetlistfm()
-              .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
-          } label: {
-            LinkLabelView(linkLabel: "Setlist.fm 약관")
+          // 서비스 이용 관련
+          VStack(alignment: .leading) {
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+            SectionTitleView(
+              sectionTitle: "서비스 이용 관련",
+              sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
+            // 이용 약관
+            NavigationLink {
+              ServiceExplainView()
+                .navigationBarTitle("이용 약관", displayMode: .inline)
+            } label: {
+              LinkLabelView(linkLabel: "이용 약관")
+            }
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+            
+            // Setlist.fm 약관
+            NavigationLink {
+              TermsOfSetlistfm()
+                .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
+            } label: {
+              LinkLabelView(linkLabel: "Setlist.fm 약관")
+            }
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+            
+            // 문의하기
+            AskView()
           }
-          Divider()
-          
-          // 문의하기
-          AskView()
-        }
-        .padding(.horizontal, 24)
+          .padding(.horizontal, 24)
       }
-      .ignoresSafeArea()
+    }
+    .ignoresSafeArea()
   }
 }
 
@@ -82,18 +75,20 @@ struct SectionTitleView: View {
   var sectionDescription: String
   
   var body: some View {
-    Text(sectionTitle)
-      .font(.system(size: 20, weight: .semibold))
-      .foregroundStyle(Color.fontBlack)
-      .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
-    Text(sectionDescription)
-      .font(.footnote)
-      .foregroundStyle(Color.fontGrey2)
-      .padding(.bottom, 16)
+    VStack(alignment: .leading) {
+      Text(sectionTitle)
+        .font(.headline)
+        .foregroundStyle(Color.fontBlack)
+        .padding(EdgeInsets(top: 30, leading: 0, bottom: 20, trailing: 0))
+      Text(sectionDescription)
+        .font(.footnote)
+        .foregroundStyle(Color.fontGrey2)
+        .padding(.bottom, 30)
+    }
   }
 }
 
-struct SetlistfmLink: View {
+struct SetlistfmLinkButton: View {
   
   var setlistfmURL: String
   var linkLabel: String
@@ -103,12 +98,12 @@ struct SetlistfmLink: View {
       HStack {
         Spacer()
         Text(linkLabel)
-          .font(.system(.footnote, weight: .semibold))
+          .font(.system(.callout, weight: .semibold))
         Spacer()
       }
       .frame(height: 54)
-      .background(.black)
-      .foregroundStyle(Color.fontWhite)
+      .background(Color.mainGrey1)
+      .foregroundStyle(Color.fontBlack)
       .clipShape(RoundedRectangle(cornerRadius: 14))
       .padding(.horizontal, 7)
     })
@@ -122,18 +117,20 @@ struct LinkLabelView: View {
   var body: some View {
     HStack {
       Text(linkLabel)
-        .font(.footnote)
-        .padding(EdgeInsets(top: 20, leading: 26, bottom: 20, trailing: 0))
+        .font(.subheadline)
+        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
       Spacer()
       Image(systemName: "chevron.right")
         .resizable()
-        .frame(width: 6, height: 12)
-        .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 36))
+        .frame(width: 10, height: 15)
+        .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 15))
     }
     .foregroundStyle(Color.fontBlack)
   }
 }
 
 #Preview {
-  SettingView()
+	NavigationStack {
+		SettingView()
+	}
 }
