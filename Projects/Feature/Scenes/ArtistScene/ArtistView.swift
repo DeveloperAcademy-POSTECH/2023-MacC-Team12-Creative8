@@ -184,7 +184,7 @@ private struct BookmarkedView: View {
   }
   
   private var setlistsLayer: some View {
-    ForEach(concertInfo.prefix(3), id: \.self) { concert in
+    ForEach(concertInfo.filter { $0.artistInfo.name == vm.artistInfo?.name }, id: \.self) { concert in
       HStack {
         Spacer()
         
