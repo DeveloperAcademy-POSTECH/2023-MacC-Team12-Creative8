@@ -24,13 +24,13 @@ struct SearchBar: View {
         .autocorrectionDisabled(true)
         .padding(12.5)
         .padding(.horizontal, 20)
-        .foregroundColor(.gray)
-        .background(Color(.systemGray6))
+        .foregroundColor(.fontGrey2)
+        .background(Color.mainGrey1)
         .cornerRadius(20)
         .overlay(
           HStack {
             Image(systemName: "magnifyingglass")
-              .foregroundColor(.gray)
+              .foregroundColor(.fontGrey2)
               .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
               .padding(.leading, 7.5)
             
@@ -39,7 +39,7 @@ struct SearchBar: View {
                 self.text = ""
               } label: {
                 Image(systemName: "multiply.circle.fill")
-                  .foregroundColor(.gray)
+                  .foregroundColor(.fontGrey2)
                   .padding(.trailing, 7.5)
               }
             }
@@ -59,7 +59,7 @@ struct SearchBar: View {
           }
           UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
-        //.foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
         .padding(.horizontal, 10)
       }
     }

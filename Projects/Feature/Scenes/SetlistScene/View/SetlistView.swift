@@ -81,6 +81,7 @@ struct SetlistView: View {
         }
       }
     }
+    .toolbar(.hidden, for: .tabBar)
     .background(Color.backgroundWhite)
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
@@ -245,7 +246,7 @@ struct ExportPlaylistButtonView: View {
           .cornerRadius(14)
           .padding(.horizontal, 30)
           .padding(.bottom, 30)
-          .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite])))
+          .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite, .backgroundWhite])))
       })
     }
     .sheet(isPresented: $vm.showModal) {
