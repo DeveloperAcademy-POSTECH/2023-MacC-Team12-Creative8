@@ -221,37 +221,46 @@ public struct MainView: View {
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
+                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
                     VStack(spacing: 0) {
-                      // TODO: 세트리스트뷰 연결
-                      //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
-                      HStack(spacing: 0) {
-                        VStack(alignment: .center, spacing: 0) {
-                          Text(year ?? "")
-                            .foregroundStyle(Color.fontGrey25)
-                            .padding(.bottom, 2)
-                          Text(dateAndMonth ?? "")
-                            .foregroundStyle(Color.fontBlack)
-                            .kerning(-0.5)
+                      NavigationLink {
+                        SetlistView(setlistId: item?.id ?? "", artistInfo: ArtistInfo(
+                          name: likeArtists[data].artistInfo.name,
+                          alias: likeArtists[data].artistInfo.alias,
+                          mbid: likeArtists[data].artistInfo.mbid,
+                          gid: likeArtists[data].artistInfo.gid,
+                          imageUrl: likeArtists[data].artistInfo.imageUrl,
+                          songList: likeArtists[data].artistInfo.songList)
+                        )
+                      } label: {
+                        HStack(spacing: 0) {
+                          VStack(alignment: .center, spacing: 0) {
+                            Text(year ?? "")
+                              .foregroundStyle(Color.fontGrey25)
+                              .padding(.bottom, 2)
+                            Text(dateAndMonth ?? "")
+                              .foregroundStyle(Color.fontBlack)
+                              .kerning(-0.5)
+                          }
+                          .font(.headline)
+                          Spacer()
+                            .frame(width: UIWidth * 0.08)
+                          VStack(alignment: .leading, spacing: 0) {
+                            Text(city + ", " + country)
+                              .font(.subheadline)
+                              .lineLimit(1)
+                              .padding(.bottom, 3)
+                            Text(firstSong)
+                              .font(.footnote)
+                              .lineLimit(1)
+                              .foregroundStyle(Color.fontGrey25)
+                          }
+                          .foregroundStyle(Color.fontBlack)
+                          .font(.system(size: 14))
+                          Spacer()
                         }
-                        .font(.headline)
-                        Spacer()
-                          .frame(width: UIWidth * 0.08)
-                        VStack(alignment: .leading, spacing: 0) {
-                          Text(city + ", " + country)
-                            .font(.subheadline)
-                            .lineLimit(1)
-                            .padding(.bottom, 3)
-                          Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
-                            .font(.footnote)
-                            .lineLimit(1)
-                            .foregroundStyle(Color.fontGrey25)
-                        }
-                        .foregroundStyle(Color.fontBlack)
-                        .font(.system(size: 14))
-                        Spacer()
+                        .padding()
                       }
-                      .padding(.vertical)
-                      .padding(.horizontal)
                       //                  } // 내비
                       if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
                         Divider()
