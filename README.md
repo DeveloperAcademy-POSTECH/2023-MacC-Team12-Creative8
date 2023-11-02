@@ -12,6 +12,7 @@
  - `docs` : 문서 작성 및 수정 (설명 주석 추가 등)
  - `chore` : 기타 변경 사항 (git, .github, gradle task 등의 수정)
  - `style` : 코드 포맷팅
+ - `design` : UI 디자인 변경
 
 ## 네이밍
 *노션에 작업 등록 후 이슈 업뎃*
