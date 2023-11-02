@@ -17,19 +17,14 @@ struct ArchivingView: View {
 	@StateObject var viewModel = ArchivingViewModel()
 
   var body: some View {
-    GeometryReader { geo in
-      ScrollView {
+    VStack {
         Divider()
         segmentedButtonsView
         if viewModel.selectSegment {
           bookmarkView
-            .frame(height: concertInfo.isEmpty ? (geo.size.height/1.2) : nil)
         } else {
           artistView
-            .frame(width: geo.size.width - 5, height: likeArtist.isEmpty ? geo.size.height/1.2 : geo.size.height - 50, alignment: .center)
-        }
       }
-      .scrollIndicators(.hidden)
     }
     .padding()
     .navigationTitle("보관함")
@@ -57,7 +52,7 @@ extension ArchivingView {
         .padding(.horizontal)
       }
       .font(.headline)
-          .frame(maxWidth: .infinity, alignment: .leading)
+      .frame(maxWidth: .infinity, alignment: .leading)
       .padding(.vertical)
   }
 
@@ -66,7 +61,9 @@ extension ArchivingView {
       if concertInfo.isEmpty {
         IsEmptyCell(type: .bookmark)
       } else {
-        bookmarkListView
+        ScrollView {
+          bookmarkListView
+        }
       }
     }
   }
@@ -106,24 +103,19 @@ extension ArchivingView {
       if likeArtist.isEmpty {
         IsEmptyCell(type: .likeArtist)
       } else {
-        allartistListView
+        List {
+          Text("찜한 아티스트 중. 상단의 5명만 메인에 등장합니다\n변경을 원하신다면 편집을눌러 순서를 옮겨보세요")
+            .font(.footnote)
+            .foregroundStyle(Color.fontGrey2)
+            .padding(.top)
+          artistListView
+            .listRowSeparator(.hidden)
+        }
+        .scrollIndicators(.hidden)
+        .listStyle(.plain)
+        .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
       }
     }
-  }
-
-  private var allartistListView: some View {
-    List {
-      Text("찜한 아티스트 중. 상단의 5명만 메인에 등장합니다\n변경을 원하신다면 편집을눌러 순서를 옮겨보세요")
-        .font(.footnote)
-        .foregroundStyle(Color.fontGrey2)
-        .padding(.top)
-      artistListView
-        .listRowSeparator(.hidden)
-    }
-    .scrollIndicators(.hidden)
-    .listStyle(.plain)
-    .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
-
   }
 
   private var artistListView: some View {

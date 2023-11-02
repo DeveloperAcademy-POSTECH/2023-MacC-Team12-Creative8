@@ -23,10 +23,10 @@ struct IsEmptyCell: View {
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     .multilineTextAlignment(.center)
   }
 }
-
 
 #Preview {
   IsEmptyCell(type: .bookmark)
