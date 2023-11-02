@@ -10,7 +10,6 @@ import SwiftData
 
 public final class SwiftDataManager: ObservableObject {
   public var modelContext: ModelContext?
-
   public init(modelContext: ModelContext? = nil) { self.modelContext = modelContext }
 
   // MARK: - Save SwiftData func
@@ -57,13 +56,15 @@ public final class SwiftDataManager: ObservableObject {
                             imageUrl: String?,
                             songList: [(String, String?)]) {
 
-    let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name, 
+    let descriptor = FetchDescriptor<LikeArtist>()
+    let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name,
                                                               country: country,
                                                               alias: alias,
                                                               mbid: mbid,
                                                               gid: gid,
                                                               imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
-                                                              songList: self.songListEncoder(songList)))
+                                                              songList: self.songListEncoder(songList)),
+                                                              orderIndex: (try? modelContext?.fetchCount(descriptor)) ?? 0)
     modelContext?.insert(newLikeArtist)
     self.save()
   }

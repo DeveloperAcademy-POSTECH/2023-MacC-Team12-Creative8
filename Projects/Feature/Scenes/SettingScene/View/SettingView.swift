@@ -15,13 +15,13 @@ public struct SettingView: View {
   
   public var body: some View {
       VStack {
-        HStack {
-          Text("더보기")
-            .font(.system(size: 24, weight: .semibold))
-            .foregroundStyle(Color.fontBlack)
-            .padding(EdgeInsets(top: 0, leading: 24, bottom: 11, trailing: 0))
-          Spacer()
-        }
+//        HStack {
+//          Text("더보기")
+//            .font(.system(size: 24, weight: .semibold))
+//            .foregroundStyle(Color.fontBlack)
+//            .padding(EdgeInsets(top: 0, leading: 24, bottom: 11, trailing: 0))
+//          Spacer()
+//        }
         Divider()
           .foregroundStyle(Color.lineGrey1)
           .padding(.leading, 24)
@@ -73,6 +73,7 @@ public struct SettingView: View {
         .padding(.horizontal, 24)
       }
       .ignoresSafeArea()
+	  .navigationTitle("더보기")
   }
 }
 
@@ -135,5 +136,7 @@ struct LinkLabelView: View {
 }
 
 #Preview {
-  SettingView()
+	NavigationStack {
+		SettingView()
+	}
 }
