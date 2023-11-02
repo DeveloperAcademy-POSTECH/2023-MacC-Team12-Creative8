@@ -216,7 +216,8 @@ private struct BookmarkedView: View {
       } label: {
         HStack {
           Spacer()
-          Text("\(vm.artistInfo?.name ?? "") 아카이빙에서 보기")
+          Text("\(vm.artistInfo?.name ?? 
+               "") 아카이빙에서 보기")
           Image(systemName: "arrow.right")
         }
         .font(.system(size: 14))
