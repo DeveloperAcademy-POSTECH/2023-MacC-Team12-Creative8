@@ -30,7 +30,6 @@ public struct MainView: View {
   
   public init() {
   }
-  
   public var body: some View {
     GeometryReader { geometry in
       ScrollView { // 스크롤
@@ -51,6 +50,7 @@ public struct MainView: View {
       .scrollIndicators(.hidden)
       .id(likeArtists)
     }
+    .navigationTitle("")
     .onAppear {
       dataManager.modelContext = modelContext
       var idx = 0
@@ -133,12 +133,6 @@ public struct MainView: View {
     .onChange(of: viewModel.scrollToIndex) {
       viewModel.selectedIndex = viewModel.scrollToIndex
     }
-    //    .onAppear {
-    //      if likeArtists.count != 0 {
-    //        viewModel.selectedIndex = 0
-    //        viewModel.scrollToIndex = 0
-    //      }
-    //    }
     .onAppear {
       if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
         if !likeArtists.isEmpty {
@@ -191,35 +185,22 @@ public struct MainView: View {
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
               NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
-                AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
-                  image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
-                    .overlay {
-                      ZStack {
-                        Color.black
-                          .opacity(0.2)
-                        VStack {
-                          Spacer()
-                          HStack {
-                            Spacer()
-                            Circle()
-                              .frame(width: screenWidth * 0.15)
-                              .foregroundStyle(Color.mainBlack)
-                              .overlay {
-                                Image(systemName: "arrow.right")
-                                  .foregroundStyle(Color.backgroundWhite)
-                              }
-                              .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
-                          }
-                        }
-                        .padding([.trailing, .bottom])
+                if likeArtists[data].artistInfo.imageUrl.isEmpty {
+                  artistEmptyImage
+                } else {
+                  AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
+                    image
+                      .resizable()
+                      .scaledToFill()
+                      .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+                      .overlay {
+                        artistImageOverlayButton
                       }
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                } placeholder: {
-                  ProgressView()
+                      .clipShape(RoundedRectangle(cornerRadius: 15))
+                          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.lineGrey1, lineWidth: 1))
+                  } placeholder: {
+                    ProgressView()
+                  }
                 }
               }
               HStack {
@@ -238,56 +219,6 @@ public struct MainView: View {
                 }
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
-//                if current.isEmpty {
-//                  EmptyMainSetlistView()
-//                } else {
-//                  ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
-//                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-//                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-//                    let city = item?.venue?.city?.name ?? ""
-//                    let country = item?.venue?.city?.country?.name ?? ""
-//                    VStack(spacing: 0) {
-//                      // TODO: 세트리스트뷰 연결
-//                      //                  NavigationLink(destination: SetlistView(setlist: item, artistInfo: likeArtists[data].artistInfo)) {
-//                      HStack(spacing: 0) {
-//                        VStack(alignment: .center, spacing: 0) {
-//                          Text(year ?? "")
-//                            .foregroundStyle(Color.fontGrey25)
-//                            .padding(.bottom, 2)
-//                          Text(dateAndMonth ?? "")
-//                            .foregroundStyle(Color.fontBlack)
-//                            .kerning(-0.5)
-//                        }
-//                        .font(.headline)
-//                        Spacer()
-//                          .frame(width: screenWidth * 0.08)
-//                        VStack(alignment: .leading, spacing: 0) {
-//                          Text(city + ", " + country)
-//                            .font(.subheadline)
-//                            .lineLimit(1)
-//                            .padding(.bottom, 3)
-//                          Text(item?.sets?.setsSet?.first?.name ?? "세트리스트 정보가 아직 없습니다.")
-//                            .font(.footnote)
-//                            .lineLimit(1)
-//                            .foregroundStyle(Color.fontGrey25)
-//                        }
-//                        .foregroundStyle(Color.fontBlack)
-//                        .font(.system(size: 14))
-//                        Spacer()
-//                      }
-//                      .padding(.vertical)
-//                      .padding(.horizontal)
-//                      //                  } // 내비
-//                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-//                        Divider()
-//                          .foregroundStyle(Color.fontGrey25)
-//                      }
-//                    }
-//                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-//                    .animation(.easeInOut(duration: 0.1))
-//                    .frame(width: screenWidth * 0.78)
-//                  }
-//                }
                   ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
                     let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
@@ -346,6 +277,43 @@ public struct MainView: View {
       .scrollTargetLayout()
     }
   }
+  public var artistEmptyImage: some View {
+    RoundedRectangle(cornerRadius: 15)
+        .foregroundStyle(Color.fontGrey3)
+        .overlay(
+          Image("mainViewTicket")
+            .resizable()
+            .renderingMode(.template)
+            .foregroundStyle(Color.mainGrey1)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: screenWidth * 0.43)
+            .overlay {
+              artistImageOverlayButton
+            }
+        )
+        .frame(width: screenWidth * 0.78, height: screenWidth * 0.78)
+  }
+  public var artistImageOverlayButton: some View {
+    ZStack {
+      Color.black
+        .opacity(0.2)
+      VStack {
+        Spacer()
+        HStack {
+          Spacer()
+          Circle()
+            .frame(width: screenWidth * 0.15)
+            .foregroundStyle(Color.mainBlack)
+            .overlay {
+              Image(systemName: "arrow.right")
+                .foregroundStyle(Color.backgroundWhite)
+            }
+            .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
+        }
+      }
+      .padding([.trailing, .bottom])
+    }
+  }
 }
 struct EmptyMainView: View {
   var body: some View {
@@ -396,7 +364,6 @@ struct TopButtonView: View {
     }.tag(buttonType)
   }
 }
-
 struct EmptyMainSetlistView: View {
   let screenWidth = UIScreen.main.bounds.size.width
   let screenHeight = UIScreen.main.bounds.size.height
