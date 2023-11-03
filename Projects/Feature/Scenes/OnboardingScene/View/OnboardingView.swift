@@ -45,6 +45,7 @@ public struct OnboardingView: View {
     }
     .onAppear {
       viewModel.readXslx()
+      viewModel.updateFilteredModels()
     }
   }
   
@@ -69,16 +70,17 @@ public struct OnboardingView: View {
   private var genresFilterButton: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack {
-        ForEach(viewModel.genres.indices, id: \.self) { index in
+        ForEach(OnboardingFilterType.allCases, id: \.self) { buttonType in
           Button {
-            viewModel.genres[index].isSelected.toggle()
+            viewModel.selectedGenere = buttonType
+            viewModel.updateFilteredModels()
           } label: {
-            Text(viewModel.genres[index].name)
+            Text(buttonType.rawValue)
               .font(.system(.subheadline))
               .padding(10)
-              .background(viewModel.genres[index].isSelected ? .black: .gray)
+              .background(viewModel.selectedGenere == buttonType ? .black: .gray)
               .cornerRadius(12)
-              .foregroundStyle(viewModel.genres[index].isSelected ? .white: .black)
+              .foregroundStyle(viewModel.selectedGenere == buttonType ? .white: .black)
           }
         }
       }
@@ -88,22 +90,19 @@ public struct OnboardingView: View {
   }
   
   private var artistNameButton: some View {
-    let filteredModels = viewModel.getFilteredModels()
-
-    return LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-      ForEach(filteredModels.indices, id: \.self) { index in
+    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+      ForEach(viewModel.filteredArtist.indices, id: \.self) { index in
         Button {
-          viewModel.artistSelectionAction(at: filteredModels[index].number)
-          print(filteredModels)
+          viewModel.artistSelectionAction(at: index)
         } label: {
           Rectangle()
             .frame(width: 125, height: 68)
             .foregroundStyle(.clear)
             .overlay {
-              Text(filteredModels[index].name)
+              Text(viewModel.filteredArtist[index].name)
                 .frame(width: 100, height: 48)
                 .font(.system(size: 34, weight: .semibold))
-                .foregroundColor(filteredModels[index].selected ? .black : .gray)
+                .foregroundColor(viewModel.selectedArtist.contains(where: { $0.id == viewModel.filteredArtist[index].id }) ? .black : .gray)
                 .minimumScaleFactor(0.3)
             }
         }

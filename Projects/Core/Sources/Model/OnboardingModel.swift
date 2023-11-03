@@ -10,16 +10,23 @@ import Foundation
 
 public struct OnboardingModel: Identifiable {
   public var id = UUID()
-  public var number: Int
-  public var selected = false
   public var name: String
   public var mbid: String
-  public var filters: [String]
+  public var filter: String
   
-  public init(number: Int, name: String, mbid: String, filters: [String]) {
-    self.number = number
+  public init(name: String, mbid: String, filter: String) {
     self.name = name
     self.mbid = mbid
-    self.filters = filters
+    self.filter = filter
   }
+}
+
+public enum OnboardingFilterType: String, CaseIterable {
+  case all = "전체"
+  case kpop = "케이팝"
+  case hiphop = "힙합"
+  case band = "밴드"
+  case indie = "인디"
+  case ballad = "발라드"
+  case pop = "해외가수"
 }

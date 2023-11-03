@@ -16,21 +16,11 @@ final class OnboardingViewModel: ObservableObject {
   private var fileName: String
   private var fileType: String
   private var filePath: String?
-  private var filteredModels: [OnboardingModel] = []
-  
-  @Published var model: [OnboardingModel] = []
-  @Published var genres: [(name: String, isSelected: Bool)] = [("케이팝", false),
-                                                               ("힙합", false),
-                                                               ("밴드", false),
-                                                               ("인디", false),
-                                                               ("발라드", false),
-                                                               ("해외가수", false)] {
-    didSet {
-      objectWillChange.send()
-      updateFilteredModels()
-    }
-  }
-  
+  @Published var allArtist: [OnboardingModel] = []
+  @Published var filteredArtist: [OnboardingModel] = []
+  @Published var selectedArtist: [OnboardingModel] = []
+
+  @Published var selectedGenere: OnboardingFilterType = .all
   @Published var isShowToastBar = false
   @Published var artistSelectedCount = 0
   
@@ -55,16 +45,14 @@ final class OnboardingViewModel: ObservableObject {
           for (_, path) in try file.parseWorksheetPathsAndNames(workbook: wbk) {
             let worksheet = try file.parseWorksheet(at: path)
             if let sharedString = try file.parseSharedStrings() {
-              model = (worksheet.data?.rows.map { row in
+              allArtist = (worksheet.data?.rows.compactMap { row -> OnboardingModel? in
                 guard let name = row.cells[safe: 1]?.stringValue(sharedString), !name.isEmpty,
-                      let numberString = row.cells[safe: 0]?.stringValue(sharedString),
-                      let number = Int(numberString),
-                      let mbid = row.cells[safe: 2]?.stringValue(sharedString) else {
+                      let mbid = row.cells[safe: 2]?.stringValue(sharedString),
+                      let filter = row.cells[safe: 3]?.stringValue(sharedString) else {
                   return nil
                 }
-                let filters = row.cells.dropFirst(3).compactMap { $0.stringValue(sharedString) }
-                return OnboardingModel(number: number, name: name, mbid: mbid, filters: filters)
-              }.compactMap { $0 })!
+                return OnboardingModel(name: name, mbid: mbid, filter: filter)
+              })!
             }
           }
         }
@@ -76,27 +64,30 @@ final class OnboardingViewModel: ObservableObject {
   }
   
   func artistSelectionAction(at index: Int) {
-    model[index].selected.toggle()
+    let selectedModel = filteredArtist[index]
     
-    if model[index].selected {
-      artistSelectedCount += 1
-    } else {
+    if let existingIndex = selectedArtist.firstIndex(where: { $0.id == selectedModel.id }) {
+      // If the model is already selected, remove it
+      selectedArtist.remove(at: existingIndex)
       artistSelectedCount -= 1
+    } else {
+      // If the model is not selected, add it
+      selectedArtist.append(selectedModel)
+      artistSelectedCount += 1
     }
   }
   
   func getFilteredModels() -> [OnboardingModel] {
-    let selectedGenres = genres.filter { $0.isSelected }.map { $0.name }
-    
-    return model.filter { model in
-      !selectedGenres.isEmpty && model.filters.contains { selectedGenres.contains($0)}
-    }
+    return allArtist.filter { $0.filter == selectedGenere.rawValue }
   }
   
   func updateFilteredModels() {
-    filteredModels = getFilteredModels()
+    if selectedGenere == .all {
+      filteredArtist = allArtist
+    } else {
+      filteredArtist = getFilteredModels()
+    }
   }
-  
 }
 
 // array nil 분기 처리
