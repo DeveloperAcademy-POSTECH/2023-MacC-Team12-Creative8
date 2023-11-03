@@ -12,31 +12,37 @@ import Core
 
 @main
 struct SetlistApp: App {
-    @AppStorage("appearance")
-    var appearnace: ButtonType = .automatic
-    
+  @AppStorage("appearance")
+  var appearnace: ButtonType = .automatic
+  
+  @AppStorage("isOnboarding")
+  var isOnboarding: Bool = true
+  
   var sharedModelContainer: ModelContainer = {
-      let schema = Schema([
-        ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
-      ])
-      let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-      do {
-          return try ModelContainer(for: schema, configurations: [modelConfiguration])
-      } catch {
-          fatalError("Could not create ModelContainer: \(error)")
-      }
+    let schema = Schema([
+      ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    
+    do {
+      return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+      fatalError("Could not create ModelContainer: \(error)")
+    }
   }()
-
+  
   var body: some Scene {
     WindowGroup {
-      NavigationStack {
-//        TabBarView()
-//              .preferredColorScheme(appearnace.getColorScheme())
+      if isOnboarding {
         OnboardingView()
+      } else {
+        NavigationStack {
+          TabBarView()
+            .preferredColorScheme(appearnace.getColorScheme())
+        }
       }
     }
     .modelContainer(sharedModelContainer)
-
+    
   }
 }

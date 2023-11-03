@@ -13,7 +13,8 @@ import UI
 public struct OnboardingView: View {
   
   @ObservedObject var viewModel = OnboardingViewModel()
-  
+  @AppStorage("isOnboarding") var isOnboarding: Bool?
+
   public init() {
   }
   
@@ -116,11 +117,13 @@ public struct OnboardingView: View {
       Button(action: {
         if viewModel.artistSelectedCount < 3 {
           viewModel.isShowToastBar.toggle()
+        } else {
+          isOnboarding = false
         }
       }, label: {
         RoundedRectangle(cornerRadius: 14)
           .frame(width: 328, height: 54)
-          .foregroundColor(viewModel.artistSelectedCount > 2 ? .blue : .black)
+          .foregroundColor(viewModel.artistSelectedCount < 3 ? .black : .blue)
           .overlay {
             Text(viewModel.artistSelectedCount == 0 ? "최소 3명 이상 선택" : "\(viewModel.artistSelectedCount)명 선택")
               .foregroundStyle(.white)
