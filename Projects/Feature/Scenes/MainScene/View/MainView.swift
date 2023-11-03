@@ -290,22 +290,19 @@ public struct MainView: View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
         .overlay(
-          Image("mainViewTicket")
+          Image("mainViewTicket", bundle: setaBundle)
             .resizable()
             .renderingMode(.template)
             .foregroundStyle(Color.lineGrey1)
             .aspectRatio(contentMode: .fit)
             .frame(width: UIWidth * 0.43)
-            .overlay {
-              artistImageOverlayButton
-            }
         )
+        .overlay {
+          artistImageOverlayButton
+        }
         .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
   }
   public var artistImageOverlayButton: some View {
-    ZStack {
-      Color.black
-        .opacity(0.2)
       VStack {
         Spacer()
         HStack {
@@ -317,11 +314,9 @@ public struct MainView: View {
               Image(systemName: "arrow.right")
                 .foregroundStyle(Color.settingTextBoxWhite)
             }
-            .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
         }
       }
       .padding([.trailing, .bottom])
-    }
   }
 }
 struct EmptyMainView: View {
