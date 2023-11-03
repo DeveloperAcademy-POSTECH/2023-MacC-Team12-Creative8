@@ -65,18 +65,18 @@ struct SetlistView: View {
             })
           }
         }
-        if let setlist = setlist {
-          if !vm.isEmptySetlist(setlist) {
-            ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-          }
+      }
+      if let setlist = setlist {
+        if !vm.isEmptySetlist(setlist) {
+          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         }
-        if showToastMessage {
-          VStack {
-            ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-              .padding(.leading, 80)
-              .padding(.trailing, 20)
-            Spacer()
-          }
+      }
+      if showToastMessage {
+        VStack {
+          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
+            .padding(.leading, 80)
+            .padding(.trailing, 20)
+          Spacer()
         }
       }
     }
