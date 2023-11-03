@@ -21,7 +21,6 @@ public struct MainView: View {
   
   @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
-  @ObservedObject var setlistViewModel = ArtistViewModel()
   
   @Environment(\.modelContext) var modelContext
   
@@ -224,14 +223,14 @@ public struct MainView: View {
                     let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
                     VStack(spacing: 0) {
                       NavigationLink {
-                        SetlistView(setlistId: item?.id ?? "", artistInfo: ArtistInfo(
+                        let artistInfo = ArtistInfo(
                           name: likeArtists[data].artistInfo.name,
                           alias: likeArtists[data].artistInfo.alias,
                           mbid: likeArtists[data].artistInfo.mbid,
                           gid: likeArtists[data].artistInfo.gid,
                           imageUrl: likeArtists[data].artistInfo.imageUrl,
                           songList: likeArtists[data].artistInfo.songList)
-                        )
+                        SetlistView(setlistId: item?.id ?? "", artistInfo: artistInfo)
                       } label: {
                         HStack(spacing: 0) {
                           VStack(alignment: .center, spacing: 0) {
