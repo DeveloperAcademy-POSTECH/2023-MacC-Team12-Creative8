@@ -123,8 +123,8 @@ private struct ArtistImageView: View {
 
 private struct BookmarkedView: View {
   @ObservedObject var vm: ArtistViewModel
-  // TODO: 쿼리에 아티스트 이름 필터 들어가야 함
   @Query var concertInfo: [ArchivedConcertInfo]
+  @State var bookmarkedConcerts: [ArchivedConcertInfo] = []
   
   var body: some View {
     VStack {
@@ -133,7 +133,7 @@ private struct BookmarkedView: View {
       
       if vm.showBookmarkedSetlists {
         VStack {
-          if concertInfo.isEmpty == true {
+          if bookmarkedConcerts.isEmpty {
             emptyLayer
               .padding(.vertical, 20)
           } else {
@@ -151,6 +151,14 @@ private struct BookmarkedView: View {
         
       }
     }
+    .onAppear {
+      bookmarkedConcerts = []
+      for concert in concertInfo {
+        if concert.artistInfo.name == vm.artistInfo?.name {
+          bookmarkedConcerts.append(concert)
+        }
+      }
+    }
   }
   
   private var titleLayer: some View {
@@ -166,6 +174,7 @@ private struct BookmarkedView: View {
       }
       .foregroundStyle(Color.mainBlack)
     }
+    .padding(.horizontal, 10)
   }
   
   private var emptyLayer: some View {
@@ -184,7 +193,7 @@ private struct BookmarkedView: View {
   }
   
   private var setlistsLayer: some View {
-    ForEach(concertInfo.filter { $0.artistInfo.name == vm.artistInfo?.name }, id: \.self) { concert in
+    ForEach(bookmarkedConcerts, id: \.self) { concert in
       HStack {
         Spacer()
         
@@ -217,14 +226,19 @@ private struct BookmarkedView: View {
         
         // MARK: Menu Button
         Menu {
-          Button {
-            SetlistView(setlistId: concert.setlist.setlistId)
+          NavigationLink {
+            SetlistView(setlistId: concert.setlist.setlistId, artistInfo: vm.artistInfo)
           } label: {
             Text("세트리스트 보기")
           }
 
           Button {
             vm.dataManager.deleteArchivedConcertInfo(concert)
+            for (index, item) in bookmarkedConcerts.enumerated() {
+              if item.id == concert.id {
+                bookmarkedConcerts.remove(at: index)
+              }
+            }
           } label: {
             Text("공연 북마크 취소")
           }
@@ -256,6 +270,7 @@ private struct BookmarkedView: View {
       .foregroundColor(Color.mainBlack)
       .font(.footnote)
       .padding()
+      .padding(.horizontal, 10)
     }
   }
   
@@ -283,6 +298,7 @@ private struct ListView: View {
         .foregroundStyle(Color.mainBlack)
       Spacer()
     }
+    .padding(.horizontal, 10)
   }
   
   private var setlistsLayer: some View {
@@ -297,7 +313,7 @@ private struct ListView: View {
           VStack {
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
               .foregroundStyle(Color.fontGrey25)
-              .tracking(1.0)
+              .tracking(0.5)
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
               .foregroundStyle(Color.mainBlack)
           }

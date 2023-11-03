@@ -65,17 +65,18 @@ struct SetlistView: View {
             })
           }
         }
-      }
-      if let setlist = setlist {
-        if !vm.isEmptySetlist(setlist) {
-          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+        if let setlist = setlist {
+          if !vm.isEmptySetlist(setlist) {
+            ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+          }
         }
-      }
-      if showToastMessage {
-        VStack {
-          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-            .padding(.horizontal, 30)
-          Spacer()
+        if showToastMessage {
+          VStack {
+            ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
+              .padding(.leading, 80)
+              .padding(.trailing, 20)
+            Spacer()
+          }
         }
       }
     }
@@ -84,18 +85,21 @@ struct SetlistView: View {
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
       if setlistId != nil {
+        vm.isLoading = true
         vm.dataService.fetchOneSetlistFromSetlistFM(setlistId: setlistId!) { result in
           if let result = result {
-            vm.isLoading = true
             DispatchQueue.main.async {
               self.setlist = result
+              vm.dataManager.modelContext = modelContext
+              vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
               vm.isLoading = false
             }
           }
         }
+      } else {
+        vm.dataManager.modelContext = modelContext
+        vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
       }
-      vm.dataManager.modelContext = modelContext
-      vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
     }
   }
   
@@ -111,8 +115,8 @@ struct SetlistView: View {
         venue: setlist?.venue?.name ?? "-",
         tour: setlist?.tour?.name ?? "-"
       )
-        .padding(30)
-        .padding(.bottom)
+      .padding([.horizontal, .bottom], 30)
+      .padding(.vertical, 15)
     }
   }
   
@@ -223,21 +227,29 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @State private var showToastMessage = false
+  @State private var showToastMessage1 = false
+  @State private var showToastMessage2 = false
   
   var body: some View {
     VStack {
       Spacer()
-      if showToastMessage {
-        ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+      
+      Group {
+        if showToastMessage1 {
+          ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+        } else if showToastMessage2 {
+          ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
+        }
       }
+      .padding(.horizontal, 30)
+      
       Button(action: {
         vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")
           .foregroundStyle(Color.settingTextBoxWhite)
           .font(.callout)
-          .fontWeight(.semibold)
+          .fontWeight(.bold)
           .frame(maxWidth: .infinity)
           .padding(.vertical, 20)
           .background(Color.mainBlack)
@@ -248,7 +260,7 @@ struct ExportPlaylistButtonView: View {
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage: $showToastMessage)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage1: $showToastMessage1, showToastMessage2: $showToastMessage2)
         .presentationDetents([.fraction(0.3)])
         .presentationDragIndicator(.visible)
     }
@@ -267,7 +279,7 @@ struct SetlistFMLinkButtonView: View {
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color.mainGrey1)
+            .background(Color.fontGrey3)
             .cornerRadius(14)
         }
       }
@@ -391,7 +403,7 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 100)
+        .padding(.bottom, 150)
         .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
@@ -403,7 +415,8 @@ private struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @Binding var showToastMessage: Bool
+  @Binding var showToastMessage1: Bool
+  @Binding var showToastMessage2: Bool
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -414,9 +427,9 @@ private struct BottomModalView: View {
         CheckAppleMusicSubscription.shared.appleMusicSubscription()
         AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
         vm.showModal.toggle()
-        showToastMessage = true
+        showToastMessage1 = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          showToastMessage = false
+          showToastMessage1 = false
         }
       })
       
@@ -428,6 +441,10 @@ private struct BottomModalView: View {
         action: {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
+          showToastMessage2 = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            showToastMessage2 = false
+          }
         }
       )
       
@@ -464,25 +481,11 @@ private struct ToastMessageView: View {
      Text(message)
       .foregroundStyle(Color.settingTextBoxWhite)
       .font(.subheadline)
-      .padding(.vertical)
+      .padding(.vertical, 15)
       .frame(maxWidth: .infinity)
       .background(
         Color.toastBurn
           .cornerRadius(27)
       )
   }
-}
-
-// MARK: Preview
-#Preview {
-    NavigationStack {
-      SetlistView()
-    }
-  //  EmptySetlistView()
-  //  ConcertInfoView()
-//  ExportPlaylistButtonView()
-  //  ListRowView(index: 1, title: "후라이의 꿈", info: "info...")
-  //BottomView()
-//  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
-//    .padding(30)
 }
