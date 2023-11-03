@@ -240,7 +240,7 @@ public struct MainView: View {
                               .foregroundStyle(Color.fontGrey25)
                               .padding(.bottom, 2)
                             Text(dateAndMonth ?? "")
-                              .foregroundStyle(Color.fontBlack)
+                              .foregroundStyle(Color.mainBlack)
                               .kerning(-0.5)
                           }
                           .font(.headline)
@@ -249,6 +249,7 @@ public struct MainView: View {
                           VStack(alignment: .leading, spacing: 0) {
                             Text(city + ", " + country)
                               .font(.subheadline)
+                              .foregroundStyle(Color.mainBlack)
                               .lineLimit(1)
                               .padding(.bottom, 3)
                             Text(firstSong)
