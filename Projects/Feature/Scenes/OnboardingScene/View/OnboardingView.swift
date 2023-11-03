@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import UI
 
 public struct OnboardingView: View {
@@ -87,24 +88,22 @@ public struct OnboardingView: View {
   }
   
   private var artistNameButton: some View {
-    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-      ForEach(viewModel.model.indices, id: \.self) { index in
+    let filteredModels = viewModel.getFilteredModels()
+
+    return LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+      ForEach(filteredModels.indices, id: \.self) { index in
         Button {
-          viewModel.model[index].selected.toggle()
-          if viewModel.model[index].selected {
-            viewModel.artistSelectedCount += 1
-          } else {
-            viewModel.artistSelectedCount -= 1
-          }
+          viewModel.artistSelectionAction(at: filteredModels[index].number)
+          print(filteredModels)
         } label: {
           Rectangle()
             .frame(width: 125, height: 68)
             .foregroundStyle(.clear)
             .overlay {
-              Text(viewModel.model[index].name)
+              Text(filteredModels[index].name)
                 .frame(width: 100, height: 48)
                 .font(.system(size: 34, weight: .semibold))
-                .foregroundColor(viewModel.model[index].selected ? .black : .gray)
+                .foregroundColor(filteredModels[index].selected ? .black : .gray)
                 .minimumScaleFactor(0.3)
             }
         }

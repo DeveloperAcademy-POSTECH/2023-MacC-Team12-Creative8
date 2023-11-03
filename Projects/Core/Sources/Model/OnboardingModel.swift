@@ -10,12 +10,14 @@ import Foundation
 
 public struct OnboardingModel: Identifiable {
   public var id = UUID()
+  public var number: Int
   public var selected = false
   public var name: String
   public var mbid: String
   public var filters: [String]
   
-  public init(name: String, mbid: String, filters: [String]) {
+  public init(number: Int, name: String, mbid: String, filters: [String]) {
+    self.number = number
     self.name = name
     self.mbid = mbid
     self.filters = filters
