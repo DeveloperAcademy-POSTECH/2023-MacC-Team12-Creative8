@@ -9,8 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
-
-private let gray: Color = Color(hex: 0xEAEAEA)
+import UI
 
 struct SetlistView: View {
   @State var setlist: Setlist?
@@ -24,49 +23,46 @@ struct SetlistView: View {
   
   var body: some View {
     ZStack {
-      if vm.isLoading {
-        ProgressView()
-      } else {
-        ScrollView {
-          VStack(spacing: -1) {
-            concertInfoArea
-            dotLine
-            setlistArea
-          }
-          .background(Color.black)
-          .toolbar(.hidden, for: .tabBar)
-          .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-              Button(action: {
-                if vm.isBookmarked {
-                  vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
-                } else {
-                  let newArtist = SaveArtistInfo(
-                    name: artistInfo?.name ?? "",
-                    country: setlist?.venue?.city?.country?.name ?? "",
-                    alias: artistInfo?.alias ?? "",
-                    mbid: artistInfo?.mbid ?? "",
-                    gid: artistInfo?.gid ?? 0,
-                    imageUrl: artistInfo?.imageUrl ?? "",
-                    songList: artistInfo?.songList ?? [])
-                  let newSetlist = SaveSetlist(
-                    setlistId: setlist?.id ?? "",
-                    date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
-                    venue: setlist?.venue?.name ?? "",
-                    title: setlist?.tour?.name ?? "",
-                    city: setlist?.venue?.city?.name ?? "",
-                    country: setlist?.venue?.city?.country?.name ?? "")
-                  vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
-                  showToastMessage = true
-                  DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    showToastMessage = false
-                  }
+      Color.backgroundWhite
+      ScrollView(showsIndicators: false) {
+        VStack(spacing: -1) {
+          concertInfoArea
+          dotLine
+          setlistArea
+        }
+        .background(Color.mainBlack)
+        .toolbar {
+          ToolbarItem(placement: .topBarTrailing) {
+            Button(action: {
+              if vm.isBookmarked {
+                vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
+              } else {
+                let newArtist = SaveArtistInfo(
+                  name: setlist?.artist?.name ?? "",
+                  country: setlist?.venue?.city?.country?.name ?? "",
+                  alias: artistInfo?.alias ?? "",
+                  mbid: artistInfo?.mbid ?? "",
+                  gid: artistInfo?.gid ?? 0,
+                  imageUrl: artistInfo?.imageUrl ?? "",
+                  songList: artistInfo?.songList ?? [])
+                let newSetlist = SaveSetlist(
+                  setlistId: setlist?.id ?? "",
+                  date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
+                  venue: setlist?.venue?.name ?? "",
+                  title: setlist?.tour?.name ?? "",
+                  city: setlist?.venue?.city?.name ?? "",
+                  country: setlist?.venue?.city?.country?.name ?? "")
+                vm.dataManager.addArchivedConcertInfo(newArtist, newSetlist)
+                showToastMessage = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                  showToastMessage = false
                 }
-                vm.isBookmarked.toggle()
-              }, label: {
-                Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-              })
-            }
+              }
+              vm.isBookmarked.toggle()
+            }, label: {
+              Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
+                .foregroundStyle(Color.mainBlack)
+            })
           }
         }
         if let setlist = setlist {
@@ -84,6 +80,8 @@ struct SetlistView: View {
         }
       }
     }
+    .toolbar(.hidden, for: .tabBar)
+    .background(Color.backgroundWhite)
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
       if setlistId != nil {
@@ -127,7 +125,7 @@ struct SetlistView: View {
       .stroke(style: StrokeStyle(dash: [5]))
       .frame(height: 1)
       .padding(.horizontal)
-      .foregroundStyle(Color.gray)
+      .foregroundStyle(Color.fontGrey2)
   }
   
   var setlistArea: some View {
@@ -164,6 +162,7 @@ private struct ConcertInfoView: View {
     VStack {
       Group {
         Text("\(artist) ")
+          .foregroundStyle(Color.mainBlack)
         +
         Text("Setlist")
           .foregroundStyle(Color.fontGrey2)
@@ -187,11 +186,13 @@ private struct InfoComponent: View {
   var body: some View {
     HStack {
       Text(text1)
-        .padding()
+        .foregroundStyle(Color.mainBlack)
+        .padding(12)
         .background(Color.mainGrey1.cornerRadius(12))
       Spacer()
       Text(text2)
         .font(.body)
+        .foregroundStyle(Color.mainBlack)
         .frame(width: UIWidth * 0.5, alignment: .leading)
       Spacer()
     }
@@ -203,13 +204,14 @@ private struct InfoComponent: View {
 private struct EmptySetlistView: View {
   var body: some View {
     VStack {
-      Text("세트리스트가 없습니다.")
+      Text("세트리스트가 없습니다")
         .font(.callout)
         .fontWeight(.semibold)
+        .foregroundStyle(Color.mainBlack)
         .padding(.bottom)
         .padding(.top, 100)
       
-      Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요.")
+      Text("세트리스트를 직접 작성하고 싶으신가요?\nSetlist.fm 바로가기에서 추가하세요")
         .foregroundStyle(Color.fontGrey2)
         .font(.footnote)
         .multilineTextAlignment(.center)
@@ -245,16 +247,16 @@ struct ExportPlaylistButtonView: View {
         vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")
-          .foregroundStyle((showToastMessage1 || showToastMessage2) ? Color.fontWhite3 : Color.fontWhite)
+          .foregroundStyle(Color.settingTextBoxWhite)
           .font(.callout)
           .fontWeight(.bold)
           .frame(maxWidth: .infinity)
           .padding(.vertical, 20)
-          .background(Color.blockFontBlack)
+          .background(Color.mainBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
-          .padding(.bottom, 60)
-          .background(Rectangle().foregroundStyle(Gradient(colors: [.clear, .mainWhite, .mainWhite])))
+          .padding(.bottom, 30)
+          .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite, .backgroundWhite])))
       })
     }
     .sheet(isPresented: $vm.showModal) {
@@ -272,7 +274,7 @@ struct SetlistFMLinkButtonView: View {
       if let url = URL(string: "https://www.setlist.fm") {
         Link(destination: url) {
           Text("Setlist.fm 바로가기")
-            .foregroundStyle(Color.primary) // TODO: Accent Color 변경되면 빼도 될 듯?
+            .foregroundStyle(Color.mainBlack)
             .font(.callout)
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
@@ -359,12 +361,15 @@ private struct ListRowView: View {
     HStack(alignment: .top, spacing: 20) {
       if let index = index {
         Text(String(format: "%02d", index))
+          .foregroundStyle(Color.mainBlack)
       } else {
         Image(systemName: "recordingtape")
+          .foregroundStyle(Color.mainBlack)
       }
       
       VStack(alignment: .leading, spacing: 10) {
         Text(title)
+          .foregroundStyle(Color.mainBlack)
           .lineLimit(1)
         
         if let info = info {
@@ -385,12 +390,13 @@ private struct BottomView: View {
     VStack {
       Text("세트리스트 정보 수정을 원하시나요?")
         .font(.headline)
+        .foregroundStyle(Color.mainBlack)
         .padding(.top, 50)
         .padding(.bottom, 30)
       
       VStack {
         Text("잘못된 세트리스트 정보를 발견하셨다면,")
-        Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다.")
+        Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다")
       }
       .font(.footnote)
       .foregroundStyle(Color.fontGrey2)
@@ -473,12 +479,12 @@ private struct ToastMessageView: View {
   
   var body: some View {
      Text(message)
-      .foregroundStyle(Color.fontWhite)
+      .foregroundStyle(Color.settingTextBoxWhite)
       .font(.subheadline)
       .padding(.vertical, 15)
       .frame(maxWidth: .infinity)
       .background(
-        Color.fontGrey2
+        Color.toastBurn
           .cornerRadius(27)
       )
   }

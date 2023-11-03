@@ -33,6 +33,7 @@ struct ArtistView: View {
         }
       }
     }
+    .background(Color.backgroundWhite)
     .navigationTitle("")
     .toolbar {
       ToolbarItem(placement: .principal) {
@@ -41,7 +42,6 @@ struct ArtistView: View {
           .fontWeight(.semibold)
       }
     }
-    .foregroundStyle(Color.fontBlack)
     .onAppear {
       vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
       vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
@@ -89,7 +89,7 @@ private struct ArtistImageView: View {
     Text(vm.artistInfo?.name ?? "")
       .font(.largeTitle)
       .fontWeight(.semibold)
-      .foregroundStyle(Color.fontWhite)
+      .foregroundStyle(Color.mainWhite)
   }
   
   private var buttonLayer: some View {
@@ -114,7 +114,7 @@ private struct ArtistImageView: View {
         .foregroundStyle(Color.mainWhite1)
         .overlay(
           Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-            .foregroundStyle(vm.isLikedArtist ? Color.blockOrange : Color.mainWhite)
+            .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
         )
     }
   }
@@ -172,7 +172,7 @@ private struct BookmarkedView: View {
       } label: {
         Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
       }
-      .foregroundStyle(Color.fontBlack)
+      .foregroundStyle(Color.mainBlack)
     }
     .padding(.horizontal, 10)
   }
@@ -182,7 +182,7 @@ private struct BookmarkedView: View {
       Text("북마크한 공연이 없습니다.")
         .font(.headline)
         .padding(.bottom)
-        .foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
       Group {
         Text("관심있는 공연에 북마크를 눌러 표시해주세요")
         Text("보관함에서도 볼 수 있습니다")
@@ -203,6 +203,7 @@ private struct BookmarkedView: View {
             .foregroundStyle(Color.fontGrey25)
             .tracking(1)
           Text(vm.getFormattedDateFromDate(date: concert.setlist.date, format: "MM.dd"))
+            .foregroundStyle(Color.mainBlack)
         }
         .font(.headline)
         
@@ -212,6 +213,7 @@ private struct BookmarkedView: View {
         VStack(alignment: .leading) {
           Text("\(concert.setlist.city), \(concert.setlist.country)")
             .font(.subheadline)
+            .foregroundStyle(Color.mainBlack)
           Text(concert.setlist.venue)
             .font(.footnote)
             .foregroundStyle(Color.fontGrey25)
@@ -243,12 +245,12 @@ private struct BookmarkedView: View {
 
         } label: {
           Image(systemName: "ellipsis")
+            .foregroundStyle(Color.mainBlack)
             .font(.title3)
         }
         
         Spacer()
       }
-      .foregroundStyle(Color.fontBlack)
       
       Divider()
         .padding(.horizontal)
@@ -262,9 +264,10 @@ private struct BookmarkedView: View {
     } label: {
       HStack {
         Spacer()
-        Text("\(vm.artistInfo?.name ?? "") 아카이빙에서 보기")
+        Text("\(vm.artistInfo?.name ?? "") 보관함에서 보기")
         Image(systemName: "arrow.right")
       }
+      .foregroundColor(Color.mainBlack)
       .font(.footnote)
       .padding()
       .padding(.horizontal, 10)
@@ -292,7 +295,7 @@ private struct ListView: View {
       Text("전체 공연 보기")
         .font(.headline)
         .fontWeight(.bold)
-        .foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
       Spacer()
     }
     .padding(.horizontal, 10)
@@ -312,6 +315,7 @@ private struct ListView: View {
               .foregroundStyle(Color.fontGrey25)
               .tracking(0.5)
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
+              .foregroundStyle(Color.mainBlack)
           }
           .font(.headline)
           
@@ -322,6 +326,8 @@ private struct ListView: View {
             let venue = "\(setlist.venue?.city?.name ?? ""), \(setlist.venue?.city?.country?.name ?? "")"
             Text(venue)
               .font(.subheadline)
+              .fontWeight(.semibold)
+              .foregroundStyle(Color.mainBlack)
             Group {
               if vm.isEmptySetlist(setlist) {
                 Text("세트리스트 정보가 아직 없습니다")
@@ -342,10 +348,10 @@ private struct ListView: View {
           // MARK: Arrow
           Image(systemName: "arrow.right")
             .font(.title3)
+            .foregroundStyle(Color.mainBlack)
           
           Spacer()
         }
-        .foregroundStyle(Color.fontBlack)
       }
       
       Divider()
@@ -366,7 +372,7 @@ private struct ListView: View {
           Text("더보기")
             .font(.subheadline)
             .fontWeight(.bold)
-            .foregroundStyle(Color.fontBlack)
+            .foregroundStyle(Color.mainBlack)
             .padding()
         }
       }

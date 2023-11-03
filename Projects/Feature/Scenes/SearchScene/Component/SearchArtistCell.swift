@@ -21,9 +21,8 @@ struct SearchArtistCell: View {
         AsyncImage(url: imageURL)
       }
 
-
       Text("\(artistName)")
-        .foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
     }
   }
 }

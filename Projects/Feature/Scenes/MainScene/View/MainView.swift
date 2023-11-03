@@ -45,6 +45,7 @@ public struct MainView: View {
       } // 스크롤
       .scrollIndicators(.hidden)
       .id(likeArtists)
+      .background(Color.backgroundWhite)
     }
     .navigationTitle("")
     .onAppear {
@@ -97,6 +98,7 @@ public struct MainView: View {
         .cornerRadius(50, corners: .topLeft)
       
     }
+    .foregroundColor(Color.mainBlack)
   }
   public var darkmodeButtons: some View {
     ZStack(alignment: .center) {
@@ -109,7 +111,7 @@ public struct MainView: View {
           ForEach(ButtonType.allCases) { mode in
             TopButtonView(buttonType: mode, viewModel: viewModel)
               .tag(mode)
-              .foregroundStyle(mode == appearnace ?  Color.fontBlack: Color.fontGrey3)
+              .foregroundStyle(mode == appearnace ?  Color.mainBlack: Color.fontGrey3)
           }
         }
       }
@@ -193,7 +195,7 @@ public struct MainView: View {
                         artistImageOverlayButton
                       }
                       .clipShape(RoundedRectangle(cornerRadius: 15))
-                          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.lineGrey1, lineWidth: 1))
+                          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
                   } placeholder: {
                     ProgressView()
                   }
@@ -238,7 +240,7 @@ public struct MainView: View {
                               .foregroundStyle(Color.fontGrey25)
                               .padding(.bottom, 2)
                             Text(dateAndMonth ?? "")
-                              .foregroundStyle(Color.fontBlack)
+                              .foregroundStyle(Color.mainBlack)
                               .kerning(-0.5)
                           }
                           .font(.headline)
@@ -247,6 +249,7 @@ public struct MainView: View {
                           VStack(alignment: .leading, spacing: 0) {
                             Text(city + ", " + country)
                               .font(.subheadline)
+                              .foregroundStyle(Color.mainBlack)
                               .lineLimit(1)
                               .padding(.bottom, 3)
                             Text(firstSong)
@@ -263,7 +266,7 @@ public struct MainView: View {
                       //                  } // 내비
                       if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
                         Divider()
-                          .foregroundStyle(Color.fontGrey25)
+                          .foregroundStyle(Color.lineGrey1)
                       }
                     }
                     .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
@@ -284,12 +287,12 @@ public struct MainView: View {
   }
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
-        .foregroundStyle(Color.fontGrey3)
+        .foregroundStyle(Color.mainGrey1)
         .overlay(
           Image("mainViewTicket")
             .resizable()
             .renderingMode(.template)
-            .foregroundStyle(Color.mainGrey1)
+            .foregroundStyle(Color.lineGrey1)
             .aspectRatio(contentMode: .fit)
             .frame(width: UIWidth * 0.43)
             .overlay {
@@ -311,7 +314,7 @@ public struct MainView: View {
             .foregroundStyle(Color.mainBlack)
             .overlay {
               Image(systemName: "arrow.right")
-                .foregroundStyle(Color.backgroundWhite)
+                .foregroundStyle(Color.settingTextBoxWhite)
             }
             .shadow(color: .white.opacity(0.25), radius: 10, x: 0, y: 4)
         }
@@ -327,16 +330,15 @@ struct EmptyMainView: View {
       Text("찜한 아티스트가 없습니다")
         .font(.callout)
         .padding(.bottom)
-        .foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
       Text("관심있는 아티스트 정보를 빠르게\n확인하고 싶으시다면 찜을 해주세요")
         .font(.footnote)
         .multilineTextAlignment(.center)
-        .foregroundStyle(
-          Color.fontGrey2)
+        .foregroundStyle(Color.fontGrey2)
         .padding(.bottom)
       NavigationLink(destination: SearchView()) {
         Text("아티스트 찜하러 가기 →")
-          .foregroundStyle(Color.fontWhite)
+          .foregroundStyle(Color.mainWhite)
           .font(.system(size: 14))
           .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
           .background(RoundedRectangle(cornerRadius: 14)
@@ -361,10 +363,12 @@ struct TopButtonView: View {
     } label: {
       VStack {
         Image(systemName: buttonType.icon)
+          .foregroundStyle(buttonType == appearnace ? Color.mainBlack : Color.fontGrey3)
           .font(.subheadline)
           .padding(6)
         Text(buttonType.name)
           .font(.system(size: 10))
+          .foregroundStyle(buttonType == appearnace ? Color.mainBlack : Color.fontGrey2)
       }
     }.tag(buttonType)
   }
@@ -376,6 +380,7 @@ struct EmptyMainSetlistView: View {
       Text("세트리스트 정보가 없습니다.")
         .font(.system(size: 16))
         .fontWeight(.semibold)
+        .foregroundStyle(Color.mainBlack)
         .padding(.horizontal)
       Group {
         Text("찜한 가수의 세트리스트가 없다면,\n")
@@ -394,7 +399,7 @@ struct EmptyMainSetlistView: View {
           .frame(height: UIHeight * 0.06)
           .overlay {
             Text("Setlist.fm 바로가기")
-              .foregroundStyle(Color.primary)
+              .foregroundStyle(Color.mainBlack)
               .bold()
           }
           .padding(.top)

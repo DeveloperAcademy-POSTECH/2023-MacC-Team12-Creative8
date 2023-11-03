@@ -75,7 +75,7 @@ struct TermsTitleView: View {
   var body: some View {
     Text(title)
       .font(.system(size: 18, weight: .semibold))
-      .foregroundStyle(Color.fontBlack)
+      .foregroundStyle(Color.mainBlack)
       .padding(EdgeInsets(top: 32, leading: 0, bottom: 5, trailing: 0))
     Divider()
       .foregroundStyle(Color.lineGrey1)
