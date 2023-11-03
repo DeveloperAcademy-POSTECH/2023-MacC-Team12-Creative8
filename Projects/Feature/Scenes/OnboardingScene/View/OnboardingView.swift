@@ -119,6 +119,18 @@ public struct OnboardingView: View {
           viewModel.isShowToastBar.toggle()
         } else {
           isOnboarding = false
+          for index in 0..<viewModel.selectedArtist.count {
+            ArtistDataManager.shared.getGeniusIdAndImageUrl(mbid: viewModel.selectedArtist[index].mbid) { result in
+              if let (geniusId, imageUrl) = result {
+                // 성공적으로 데이터를 가져왔을 때의 동작
+                print("@Log Genius ID: \(geniusId), Image URL: \(imageUrl)")
+              } else {
+                // 데이터 가져오기에 실패했을 때의 동작
+                print("Failed to get Genius ID and Image URL")
+              }
+            }
+          }
+          
         }
       }, label: {
         RoundedRectangle(cornerRadius: 14)
