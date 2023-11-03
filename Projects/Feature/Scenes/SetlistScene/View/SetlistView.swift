@@ -42,7 +42,7 @@ struct SetlistView: View {
                   vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
                 } else {
                   let newArtist = SaveArtistInfo(
-                    name: setlist?.artist?.name ?? "",
+                    name: artistInfo?.name ?? "",
                     country: setlist?.venue?.city?.country?.name ?? "",
                     alias: artistInfo?.alias ?? "",
                     mbid: artistInfo?.mbid ?? "",
