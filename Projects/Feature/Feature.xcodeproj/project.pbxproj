@@ -21,6 +21,10 @@
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
+		79A5AD222AF61C3700770D1C /* EmptyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD212AF61C3700770D1C /* EmptyMainView.swift */; };
+		79A5AD252AF61CB500770D1C /* DarkModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD242AF61CB500770D1C /* DarkModeButton.swift */; };
+		79A5AD272AF61D8100770D1C /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */; };
+		79A5AD2A2AF61FAC00770D1C /* ArtistSetlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E319B5E5F3B22C401257A /* IsEmptyCell.swift */; };
 		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
@@ -83,6 +87,10 @@
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
 		63FF76D13D3DC0AE954F175F /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
+		79A5AD212AF61C3700770D1C /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
+		79A5AD242AF61CB500770D1C /* DarkModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeButton.swift; sourceTree = "<group>"; };
+		79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainSetlistView.swift; sourceTree = "<group>"; };
+		79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetlistCell.swift; sourceTree = "<group>"; };
 		811EED38EE073FA6E9252D7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +171,7 @@
 		1E4BCC9FA52881309D189527 /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				79A5AD232AF61C5800770D1C /* Component */,
 				472F1E8C6BF5F5D3FE5C5C64 /* View */,
 				C21CE84523F08E32BAC0A815 /* ViewModel */,
 			);
@@ -241,6 +250,17 @@
 				8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		79A5AD232AF61C5800770D1C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				79A5AD212AF61C3700770D1C /* EmptyMainView.swift */,
+				79A5AD242AF61CB500770D1C /* DarkModeButton.swift */,
+				79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */,
+				79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		8ECED7BE23A224945FDB9DCC /* View */ = {
@@ -474,14 +494,18 @@
 				2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */,
 				080A199A8C538F3C58813099 /* ArtistViewModel.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
+				79A5AD222AF61C3700770D1C /* EmptyMainView.swift in Sources */,
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
 				900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */,
+				79A5AD272AF61D8100770D1C /* EmptyMainSetlistView.swift in Sources */,
+				79A5AD2A2AF61FAC00770D1C /* ArtistSetlistCell.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
+				79A5AD252AF61CB500770D1C /* DarkModeButton.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,
 				26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */,
@@ -547,7 +571,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = X8LBXW983N;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -719,7 +742,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = X8LBXW983N;
 				INFOPLIST_FILE = "Derived/InfoPlists/FeatureTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

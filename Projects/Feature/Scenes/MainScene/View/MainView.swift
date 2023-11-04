@@ -26,6 +26,7 @@ public struct MainView: View {
   
   public init() {
   }
+  
   public var body: some View {
     GeometryReader { geometry in
       ScrollView { // 스크롤
@@ -63,7 +64,6 @@ public struct MainView: View {
       ToolbarItem(placement: .topBarTrailing) {
         ZStack(alignment: .trailingFirstTextBaseline) {
           Button {
-            // 다크모드 기능 넣기
             viewModel.isTapped.toggle()
           } label: {
             if colorScheme == .dark {
@@ -77,15 +77,14 @@ public struct MainView: View {
           .foregroundColor(Color.mainBlack)
           .opacity(viewModel.isTapped ? 0 : 1)
           .padding(6)
-          //              .overlay {
           if viewModel.isTapped {
             darkmodeButtons
           }
-          //              }
         }
       }
     }
   }
+  
   public var logo: some View {
     HStack(spacing: 0) {
       Rectangle()
@@ -100,6 +99,7 @@ public struct MainView: View {
     }
     .foregroundColor(Color.mainBlack)
   }
+  
   public var darkmodeButtons: some View {
     ZStack(alignment: .center) {
       RoundedRectangle(cornerRadius: 36)
@@ -109,7 +109,7 @@ public struct MainView: View {
       VStack {
         HStack(spacing: UIWidth * 0.07) {
           ForEach(ButtonType.allCases) { mode in
-            TopButtonView(buttonType: mode, viewModel: viewModel)
+            DarkModeButton(buttonType: mode, viewModel: viewModel)
               .tag(mode)
               .foregroundStyle(mode == appearnace ?  Color.mainBlack: Color.fontGrey3)
           }
@@ -117,6 +117,7 @@ public struct MainView: View {
       }
     }
   }
+  
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
       artistNameScrollView
@@ -140,6 +141,7 @@ public struct MainView: View {
       }
     }
   }
+  
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
@@ -176,6 +178,7 @@ public struct MainView: View {
     .scrollIndicators(.hidden)
     .safeAreaPadding(.leading, UIWidth * 0.12)
   }
+  
   public var artistContentView: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 18) {
@@ -223,47 +226,57 @@ public struct MainView: View {
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
                     let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                    let setlistId = item?.id ?? ""
+                    let artistInfo = ArtistInfo(
+                      name: likeArtists[data].artistInfo.name,
+                      alias: likeArtists[data].artistInfo.alias,
+                      mbid: likeArtists[data].artistInfo.mbid,
+                      gid: likeArtists[data].artistInfo.gid,
+                      imageUrl: likeArtists[data].artistInfo.imageUrl,
+                      songList: likeArtists[data].artistInfo.songList)
+            
                     VStack(spacing: 0) {
                       if data < likeArtists.count {
-                        NavigationLink {
-                          let artistInfo = ArtistInfo(
-                            name: likeArtists[data].artistInfo.name,
-                            alias: likeArtists[data].artistInfo.alias,
-                            mbid: likeArtists[data].artistInfo.mbid,
-                            gid: likeArtists[data].artistInfo.gid,
-                            imageUrl: likeArtists[data].artistInfo.imageUrl,
-                            songList: likeArtists[data].artistInfo.songList)
-                          SetlistView(setlistId: item?.id ?? "", artistInfo: artistInfo)
-                        } label: {
-                          HStack(spacing: 0) {
-                            VStack(alignment: .center, spacing: 0) {
-                              Text(year ?? "")
-                                .foregroundStyle(Color.fontGrey25)
-                                .padding(.bottom, 2)
-                              Text(dateAndMonth ?? "")
-                                .foregroundStyle(Color.mainBlack)
-                                .kerning(-0.5)
-                            }
-                            .font(.headline)
-                            Spacer()
-                              .frame(width: UIWidth * 0.08)
-                            VStack(alignment: .leading, spacing: 0) {
-                              Text(city + ", " + country)
-                                .font(.subheadline)
-                                .foregroundStyle(Color.mainBlack)
-                                .lineLimit(1)
-                                .padding(.bottom, 3)
-                              Text(firstSong)
-                                .font(.footnote)
-                                .lineLimit(1)
-                                .foregroundStyle(Color.fontGrey25)
-                            }
-                            .foregroundStyle(Color.mainBlack)
-                            .font(.system(size: 14))
-                            Spacer()
-                          }
-                          .padding()
-                        }
+                        ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
+//                        NavigationLink {
+//                          let artistInfo = ArtistInfo(
+//                            name: likeArtists[data].artistInfo.name,
+//                            alias: likeArtists[data].artistInfo.alias,
+//                            mbid: likeArtists[data].artistInfo.mbid,
+//                            gid: likeArtists[data].artistInfo.gid,
+//                            imageUrl: likeArtists[data].artistInfo.imageUrl,
+//                            songList: likeArtists[data].artistInfo.songList)
+//                          SetlistView(setlistId: item?.id ?? "", artistInfo: artistInfo)
+//                        } label: {
+//                          HStack(spacing: 0) {
+//                            VStack(alignment: .center, spacing: 0) {
+//                              Text(year ?? "")
+//                                .foregroundStyle(Color.fontGrey25)
+//                                .padding(.bottom, 2)
+//                              Text(dateAndMonth ?? "")
+//                                .foregroundStyle(Color.mainBlack)
+//                                .kerning(-0.5)
+//                            }
+//                            .font(.headline)
+//                            Spacer()
+//                              .frame(width: UIWidth * 0.08)
+//                            VStack(alignment: .leading, spacing: 0) {
+//                              Text(city + ", " + country)
+//                                .font(.subheadline)
+//                                .foregroundStyle(Color.mainBlack)
+//                                .lineLimit(1)
+//                                .padding(.bottom, 3)
+//                              Text(firstSong)
+//                                .font(.footnote)
+//                                .lineLimit(1)
+//                                .foregroundStyle(Color.fontGrey25)
+//                            }
+//                            .foregroundStyle(Color.mainBlack)
+//                            .font(.system(size: 14))
+//                            Spacer()
+//                          }
+//                          .padding()
+//                        }
                       }
                       if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
                         Divider()
@@ -286,6 +299,7 @@ public struct MainView: View {
       .scrollTargetLayout()
     }
   }
+  
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
@@ -319,92 +333,6 @@ public struct MainView: View {
       .padding([.trailing, .bottom])
   }
 }
-struct EmptyMainView: View {
-  var body: some View {
-    VStack {
-      Spacer()
-      Text("찜한 아티스트가 없습니다")
-        .font(.callout)
-        .padding(.bottom)
-        .foregroundStyle(Color.mainBlack)
-      Text("관심있는 아티스트 정보를 빠르게\n확인하고 싶으시다면 찜을 해주세요")
-        .font(.footnote)
-        .multilineTextAlignment(.center)
-        .foregroundStyle(Color.fontGrey2)
-        .padding(.bottom)
-      NavigationLink(destination: SearchView()) {
-        Text("아티스트 찜하러 가기 →")
-          .foregroundStyle(Color.mainWhite)
-          .font(.system(size: 14))
-          .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
-          .background(RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.buttonBlack))
-          .bold()
-      }
-      .padding(.vertical)
-      Spacer()
-    }
-  }
-}
-struct TopButtonView: View {
-  var buttonType: ButtonType
-  var viewModel: MainViewModel
-  @AppStorage("appearance")
-  var appearnace: ButtonType = .automatic
-  @Environment(\.colorScheme) var colorScheme
-  var body: some View {
-    Button {
-      viewModel.isTapped.toggle()
-      appearnace = buttonType
-    } label: {
-      VStack {
-        Image(systemName: buttonType.icon)
-          .foregroundStyle(buttonType == appearnace ? Color.mainBlack : Color.fontGrey3)
-          .font(.subheadline)
-          .padding(6)
-        Text(buttonType.name)
-          .font(.system(size: 10))
-          .foregroundStyle(buttonType == appearnace ? Color.mainBlack : Color.fontGrey2)
-      }
-    }.tag(buttonType)
-  }
-}
-struct EmptyMainSetlistView: View {
-  var body: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      Spacer()
-      Text("세트리스트 정보가 없습니다.")
-        .font(.system(size: 16))
-        .fontWeight(.semibold)
-        .foregroundStyle(Color.mainBlack)
-        .padding(.horizontal)
-      Group {
-        Text("찜한 가수의 세트리스트가 없다면,\n")
-        +
-        Text("Setlist.fm")
-          .underline()
-        +
-        Text("에서 직접 추가할 수 있어요.")
-      }
-      .foregroundStyle(Color.fontGrey2)
-      .font(.footnote)
-      .padding()
-      Link(destination: URL(string: "https://www.setlist.fm")!) {
-        RoundedRectangle(cornerRadius: 14)
-          .foregroundStyle(Color.mainGrey1)
-          .frame(height: UIHeight * 0.06)
-          .overlay {
-            Text("Setlist.fm 바로가기")
-              .foregroundStyle(Color.mainBlack)
-              .bold()
-          }
-          .padding(.top)
-      }
-      Spacer()
-    }
-    .frame(width: UIWidth * 0.78)
-  }
-}
 // 로고 만들기
 extension View {
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
@@ -414,6 +342,7 @@ extension View {
 struct RoundedCorner: Shape {
   var radius: CGFloat = .infinity
   var corners: UIRectCorner = .allCorners
+  
   func path(in rect: CGRect) -> Path {
     let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
     return Path(path.cgPath)
