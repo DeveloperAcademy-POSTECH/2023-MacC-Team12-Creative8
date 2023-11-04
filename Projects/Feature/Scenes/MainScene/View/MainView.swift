@@ -26,7 +26,7 @@ public struct MainView: View {
   
   public var body: some View {
     GeometryReader { geometry in
-      ScrollView { // 스크롤
+      ScrollView {
         VStack(spacing: 0) {
           Divider()
             .padding(.leading, 24)
@@ -40,7 +40,7 @@ public struct MainView: View {
             mainArtistsView
           }
         }
-      } // 스크롤
+      }
       .scrollIndicators(.hidden)
       .id(likeArtists)
       .background(Color.backgroundWhite)
@@ -59,25 +59,7 @@ public struct MainView: View {
         logo
       }
       ToolbarItem(placement: .topBarTrailing) {
-        ZStack(alignment: .trailingFirstTextBaseline) {
-          Button {
-            viewModel.isTapped.toggle()
-          } label: {
-            if colorScheme == .dark {
-              Image(systemName: "sun.max.fill")
-                .font(.subheadline)
-            } else {
-              Image(systemName: "moon.fill")
-                .font(.subheadline)
-            }
-          }
-          .foregroundColor(Color.mainBlack)
-          .opacity(viewModel.isTapped ? 0 : 1)
-          .padding(6)
-          if viewModel.isTapped {
-            ToolBarDarkModeButtons(viewModel: viewModel)
-          }
-        }
+        toolbarButton
       }
     }
   }
@@ -141,7 +123,7 @@ public struct MainView: View {
               }
           }
           Color.clear
-            .frame(width: UIWidth * 0.6)
+            .frame(width: UIWidth * 0.7)
         }
         .onChange(of: viewModel.scrollToIndex) {
           viewModel.selectedIndex = viewModel.scrollToIndex
@@ -156,7 +138,6 @@ public struct MainView: View {
     .scrollIndicators(.hidden)
     .safeAreaPadding(.leading, UIWidth * 0.12)
   }
-  
   public var artistContentView: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 18) {
@@ -187,6 +168,7 @@ public struct MainView: View {
                 }
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
+                if data < likeArtists.count {
                   ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
                     let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
@@ -214,6 +196,7 @@ public struct MainView: View {
                     .animation(.easeInOut(duration: 0.1))
                     .frame(width: UIWidth * 0.78)
                   }
+                }
                 if current.isEmpty {
                   EmptyMainSetlistView()
                 }
@@ -226,7 +209,27 @@ public struct MainView: View {
       .scrollTargetLayout()
     }
   }
-
+  public var toolbarButton: some View {
+    ZStack(alignment: .trailingFirstTextBaseline) {
+      Button {
+        viewModel.isTapped.toggle()
+      } label: {
+        if colorScheme == .dark {
+          Image(systemName: "sun.max.fill")
+            .font(.subheadline)
+        } else {
+          Image(systemName: "moon.fill")
+            .font(.subheadline)
+        }
+      }
+      .foregroundColor(Color.mainBlack)
+      .opacity(viewModel.isTapped ? 0 : 1)
+      .padding(6)
+      if viewModel.isTapped {
+        ToolbarDarkModeButtons(viewModel: viewModel)
+      }
+    }
+  }
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
@@ -267,6 +270,7 @@ extension View {
     clipShape( RoundedCorner(radius: radius, corners: corners) )
   }
 }
+
 struct RoundedCorner: Shape {
   var radius: CGFloat = .infinity
   var corners: UIRectCorner = .allCorners
@@ -276,6 +280,7 @@ struct RoundedCorner: Shape {
     return Path(path.cgPath)
   }
 }
+
 #Preview {
   MainView()
 }

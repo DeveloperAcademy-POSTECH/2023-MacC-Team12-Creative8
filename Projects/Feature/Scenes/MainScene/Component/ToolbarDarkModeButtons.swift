@@ -12,7 +12,7 @@ import SwiftData
 import Core
 import UI
 
-struct ToolBarDarkModeButtons: View {
+struct ToolbarDarkModeButtons: View {
   @AppStorage("appearance")
   var appearnace: ButtonType = .automatic
   
