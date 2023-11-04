@@ -14,7 +14,7 @@ import UI
 
 struct DarkModeButton: View {
   var buttonType: ButtonType
-  var viewModel: MainViewModel
+  @StateObject var viewModel: MainViewModel
   @AppStorage("appearance")
   var appearnace: ButtonType = .automatic
   @Environment(\.colorScheme) var colorScheme

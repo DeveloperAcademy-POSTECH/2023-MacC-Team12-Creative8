@@ -12,9 +12,6 @@ import Core
 import UI
 
 public struct MainView: View {
-  @AppStorage("appearance")
-  var appearnace: ButtonType = .automatic
-  
   @Environment(\.colorScheme) var colorScheme
   
   @Query(sort: \LikeArtist.orderIndex) var likeArtists: [LikeArtist]
@@ -78,7 +75,7 @@ public struct MainView: View {
           .opacity(viewModel.isTapped ? 0 : 1)
           .padding(6)
           if viewModel.isTapped {
-            darkmodeButtons
+            ToolBarDarkModeButtons(viewModel: viewModel)
           }
         }
       }
@@ -95,27 +92,8 @@ public struct MainView: View {
         .frame(width: 18, height: 20)
         .cornerRadius(50, corners: .topRight)
         .cornerRadius(50, corners: .topLeft)
-      
     }
     .foregroundColor(Color.mainBlack)
-  }
-  
-  public var darkmodeButtons: some View {
-    ZStack(alignment: .center) {
-      RoundedRectangle(cornerRadius: 36)
-        .foregroundStyle(Color.mainGrey1)
-        .frame(width: UIWidth * 0.45, height: UIWidth * 0.09)
-        .padding(.bottom)
-      VStack {
-        HStack(spacing: UIWidth * 0.07) {
-          ForEach(ButtonType.allCases) { mode in
-            DarkModeButton(buttonType: mode, viewModel: viewModel)
-              .tag(mode)
-              .foregroundStyle(mode == appearnace ?  Color.mainBlack: Color.fontGrey3)
-          }
-        }
-      }
-    }
   }
   
   public var mainArtistsView: some View {
@@ -189,19 +167,8 @@ public struct MainView: View {
                 if likeArtists[data].artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
-                  AsyncImage(url: URL(string: likeArtists[data].artistInfo.imageUrl)) { image in
-                    image
-                      .resizable()
-                      .scaledToFill()
-                      .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
-                      .overlay {
-                        artistImageOverlayButton
-                      }
-                      .clipShape(RoundedRectangle(cornerRadius: 15))
-                          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
-                  } placeholder: {
-                    ProgressView()
-                  }
+                  let imageUrl = likeArtists[data].artistInfo.imageUrl
+                  ArtistImage(imageUrl: imageUrl)
                 }
               }
               HStack {
@@ -234,49 +201,9 @@ public struct MainView: View {
                       gid: likeArtists[data].artistInfo.gid,
                       imageUrl: likeArtists[data].artistInfo.imageUrl,
                       songList: likeArtists[data].artistInfo.songList)
-            
                     VStack(spacing: 0) {
                       if data < likeArtists.count {
                         ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
-//                        NavigationLink {
-//                          let artistInfo = ArtistInfo(
-//                            name: likeArtists[data].artistInfo.name,
-//                            alias: likeArtists[data].artistInfo.alias,
-//                            mbid: likeArtists[data].artistInfo.mbid,
-//                            gid: likeArtists[data].artistInfo.gid,
-//                            imageUrl: likeArtists[data].artistInfo.imageUrl,
-//                            songList: likeArtists[data].artistInfo.songList)
-//                          SetlistView(setlistId: item?.id ?? "", artistInfo: artistInfo)
-//                        } label: {
-//                          HStack(spacing: 0) {
-//                            VStack(alignment: .center, spacing: 0) {
-//                              Text(year ?? "")
-//                                .foregroundStyle(Color.fontGrey25)
-//                                .padding(.bottom, 2)
-//                              Text(dateAndMonth ?? "")
-//                                .foregroundStyle(Color.mainBlack)
-//                                .kerning(-0.5)
-//                            }
-//                            .font(.headline)
-//                            Spacer()
-//                              .frame(width: UIWidth * 0.08)
-//                            VStack(alignment: .leading, spacing: 0) {
-//                              Text(city + ", " + country)
-//                                .font(.subheadline)
-//                                .foregroundStyle(Color.mainBlack)
-//                                .lineLimit(1)
-//                                .padding(.bottom, 3)
-//                              Text(firstSong)
-//                                .font(.footnote)
-//                                .lineLimit(1)
-//                                .foregroundStyle(Color.fontGrey25)
-//                            }
-//                            .foregroundStyle(Color.mainBlack)
-//                            .font(.system(size: 14))
-//                            Spacer()
-//                          }
-//                          .padding()
-//                        }
                       }
                       if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
                         Divider()
@@ -299,7 +226,7 @@ public struct MainView: View {
       .scrollTargetLayout()
     }
   }
-  
+
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
@@ -316,6 +243,7 @@ public struct MainView: View {
         }
         .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
   }
+
   public var artistImageOverlayButton: some View {
       VStack {
         Spacer()
