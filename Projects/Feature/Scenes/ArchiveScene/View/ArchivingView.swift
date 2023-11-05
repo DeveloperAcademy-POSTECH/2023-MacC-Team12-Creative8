@@ -12,7 +12,7 @@ import Core
 import UI
 
 struct ArchivingView: View {
-  @Query(sort: \LikeArtist.orderIndex) var likeArtist: [LikeArtist]
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtist: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchivingViewModel()
   
@@ -145,7 +145,7 @@ extension ArchivingView {
     }
     .onMove { source, destination in
       var updatedItems = likeArtist
-      updatedItems.move(fromOffsets: source, toOffset: destination)
+      updatedItems.move(fromOffsets: source, toOffset: likeArtist.count - 1 - destination)
       for (index, item) in updatedItems.enumerated() { item.orderIndex = index }
     }
   }

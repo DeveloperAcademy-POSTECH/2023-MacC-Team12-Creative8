@@ -17,8 +17,8 @@ public struct MainView: View {
   
   @Environment(\.colorScheme) var colorScheme
   
-  @Query(sort: \LikeArtist.orderIndex) var likeArtists: [LikeArtist]
-  
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+
   @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   
