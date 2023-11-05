@@ -15,7 +15,6 @@ struct ArchivingView: View {
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtist: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchivingViewModel()
-  
   var body: some View {
     VStack(spacing: 0) {
       Divider()
@@ -50,7 +49,7 @@ extension ArchivingView {
         viewModel.selectSegment = true
       }
       .foregroundStyle(viewModel.selectSegment ? Color.mainBlack : Color.fontGrey3)
-      
+
       Button("찜한 아티스트") {
         viewModel.selectSegment = false
       }
@@ -81,10 +80,10 @@ extension ArchivingView {
         HStack {
           ForEach(viewModel.artistSet.sorted(), id: \.self) { artist in
             Button {
-              if let index = viewModel.selectArtist.firstIndex(of: artist) {
-                viewModel.selectArtist.remove(at: index)
+              if viewModel.selectArtist == artist {
+                viewModel.selectArtist = ""
               } else {
-                viewModel.selectArtist.insert(artist, at: 0)
+                viewModel.selectArtist = artist
               }
             } label: {
               ArtistSetCell(name: artist, isSelected: viewModel.selectArtist.contains(artist))
@@ -105,6 +104,9 @@ extension ArchivingView {
       .padding(.horizontal)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
+    .onChange(of: concertInfo) { _, newValue in
+      viewModel.insertArtistSet(newValue)
+    }
   }
   
   private var artistView: some View {
@@ -145,8 +147,10 @@ extension ArchivingView {
     }
     .onMove { source, destination in
       var updatedItems = likeArtist
-      updatedItems.move(fromOffsets: source, toOffset: likeArtist.count - 1 - destination)
-      for (index, item) in updatedItems.enumerated() { item.orderIndex = index }
+      updatedItems.move(fromOffsets: source, toOffset: destination)
+      for (index, item) in updatedItems.enumerated() {
+        item.orderIndex = likeArtist.count - 1 - index
+      }
     }
   }
 }
