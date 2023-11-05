@@ -255,7 +255,7 @@ struct ExportPlaylistButtonView: View {
           .background(Color.mainBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
-          .padding(.bottom, 30)
+          .padding(.bottom, 50)
           .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite, .backgroundWhite])))
       })
     }
@@ -403,7 +403,7 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 150)
+        .padding(.bottom, 130)
         .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
