@@ -19,7 +19,8 @@ public struct SettingView: View {
       ScrollView {
         Divider()
           .foregroundStyle(Color.lineGrey1)
-          .padding(.leading, 24)
+          .padding(.leading)
+          .padding(.vertical)
           // 세트리스트 추가 및 수정하기
           VStack(alignment: .leading) {
             SectionTitleView(
@@ -65,6 +66,11 @@ public struct SettingView: View {
           .padding(.horizontal, 24)
       }
     }
+    .toolbar { ToolbarItem(placement: .topBarLeading) {
+      Text("더보기")
+        .font(.title2)
+        .fontWeight(.semibold)
+    } }
   }
 }
 

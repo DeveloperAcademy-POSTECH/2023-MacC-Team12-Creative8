@@ -14,7 +14,6 @@ import UI
 struct SearchHistoryCell: View {
   @Binding var searchText: String
   let history: SearchHistory
-  let dateFormatter = DateFormatter.monthDayFormatter()
   let dataManager: SwiftDataManager
 
     var body: some View {

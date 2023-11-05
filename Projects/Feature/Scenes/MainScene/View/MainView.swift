@@ -31,7 +31,7 @@ public struct MainView: View {
       ScrollView { // 스크롤
         VStack(spacing: 0) {
           Divider()
-            .padding(.leading, 24)
+            .padding(.leading)
             .padding(.vertical)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {

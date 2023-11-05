@@ -20,7 +20,7 @@ struct ArchivingView: View {
     VStack(spacing: 0) {
       Divider()
         .foregroundStyle(Color.lineGrey1)
-        .padding(.leading, 24)
+        .padding(.trailing, -20)
       segmentedButtonsView
       if viewModel.selectSegment {
         bookmarkView
@@ -29,6 +29,11 @@ struct ArchivingView: View {
       }
     }
     .padding()
+    .toolbar { ToolbarItem(placement: .topBarLeading) { 
+      Text("보관함")
+        .font(.title2)
+        .fontWeight(.semibold)
+    } }
   }
 }
 
@@ -65,6 +70,7 @@ extension ArchivingView {
         ScrollView {
           bookmarkListView
         }
+        .scrollIndicators(.hidden)
       }
     }
   }
@@ -86,6 +92,7 @@ extension ArchivingView {
           }
         }
       }
+      .scrollIndicators(.hidden)
       .padding(.vertical)
       
       ForEach(concertInfo) { item in

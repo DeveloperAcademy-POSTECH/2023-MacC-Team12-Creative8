@@ -42,7 +42,6 @@ public struct TabBarView: View {
       NavigationStack {
         ArchivingView()
           .background(Color.backgroundWhite)
-          .navigationTitle("보관함")
       }
       .tabItem {
         Label("보관함", systemImage: "heart.fill")
@@ -52,14 +51,12 @@ public struct TabBarView: View {
       NavigationStack {
         SettingView()
           .background(Color.backgroundWhite)
-          .navigationTitle("더보기")
       }
       .tabItem {
         Label("더보기", systemImage: "ellipsis")
       }
       .tag(Tab.setting)
     }
-    .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
     .onAppear {
       UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
     }
