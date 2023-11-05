@@ -257,7 +257,7 @@ public struct MainView: View {
                               .lineLimit(1)
                               .foregroundStyle(Color.fontGrey25)
                           }
-                          .foregroundStyle(Color.fontBlack)
+                          .foregroundStyle(Color.mainBlack)
                           .font(.system(size: 14))
                           Spacer()
                         }

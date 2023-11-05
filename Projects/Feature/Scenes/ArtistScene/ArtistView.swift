@@ -79,7 +79,9 @@ private struct ArtistImageView: View {
   
   private var imageLayer: some View {
     Image(uiImage: vm.image!)
+//      .renderingMode(.template)
       .centerCropped()
+//      .foregroundColor(.lineGrey1)
       .aspectRatio(1.5, contentMode: .fit)
       .cornerRadius(14)
       .overlay(Color.black.opacity(0.2).cornerRadius(14))
