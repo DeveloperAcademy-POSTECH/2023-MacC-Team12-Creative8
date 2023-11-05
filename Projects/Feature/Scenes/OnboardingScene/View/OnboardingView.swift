@@ -12,9 +12,11 @@ import UI
 
 public struct OnboardingView: View {
   
-  @ObservedObject var viewModel = OnboardingViewModel()
-  @AppStorage("isOnboarding") var isOnboarding: Bool?
-
+  @ObservedObject var onboardingViewModel = OnboardingViewModel()
+  @ObservedObject var artistViewModel = ArtistViewModel()
+  @Environment(\.modelContext) var modelContext
+  @ObservedObject var dataManager = SwiftDataManager()
+  
   public init() {
   }
   
@@ -31,22 +33,22 @@ public struct OnboardingView: View {
         bottomButton
       }
       
-      if viewModel.isShowToastBar {
+      if onboardingViewModel.isShowToastBar {
         toastBar
           .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
           .padding(.bottom, 120)
           .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
               withAnimation {
-                viewModel.isShowToastBar.toggle()
+                onboardingViewModel.isShowToastBar.toggle()
               }
             }
           }
       }
     }
     .onAppear {
-      viewModel.readXslx()
-      viewModel.updateFilteredModels()
+      onboardingViewModel.readXslx()
+      onboardingViewModel.updateFilteredModels()
     }
   }
   
@@ -73,15 +75,15 @@ public struct OnboardingView: View {
       HStack {
         ForEach(OnboardingFilterType.allCases, id: \.self) { buttonType in
           Button {
-            viewModel.selectedGenere = buttonType
-            viewModel.updateFilteredModels()
+            onboardingViewModel.selectedGenere = buttonType
+            onboardingViewModel.updateFilteredModels()
           } label: {
             Text(buttonType.rawValue)
               .font(.system(.subheadline))
               .padding(10)
-              .background(viewModel.selectedGenere == buttonType ? .black: .gray)
+              .background(onboardingViewModel.selectedGenere == buttonType ? .black: .gray)
               .cornerRadius(12)
-              .foregroundStyle(viewModel.selectedGenere == buttonType ? .white: .black)
+              .foregroundStyle(onboardingViewModel.selectedGenere == buttonType ? .white: .black)
           }
         }
       }
@@ -92,18 +94,18 @@ public struct OnboardingView: View {
   
   private var artistNameButton: some View {
     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-      ForEach(viewModel.filteredArtist.indices, id: \.self) { index in
+      ForEach(onboardingViewModel.filteredArtist.indices, id: \.self) { index in
         Button {
-          viewModel.artistSelectionAction(at: index)
+          onboardingViewModel.artistSelectionAction(at: index)
         } label: {
           Rectangle()
             .frame(width: 125, height: 68)
             .foregroundStyle(.clear)
             .overlay {
-              Text(viewModel.filteredArtist[index].name)
+              Text(onboardingViewModel.filteredArtist[index].name)
                 .frame(width: 100, height: 48)
                 .font(.system(size: 34, weight: .semibold))
-                .foregroundColor(viewModel.selectedArtist.contains(where: { $0.id == viewModel.filteredArtist[index].id }) ? .black : .gray)
+                .foregroundColor(onboardingViewModel.selectedArtist.contains(where: { $0.id == onboardingViewModel.filteredArtist[index].id }) ? .black : .gray)
                 .minimumScaleFactor(0.3)
             }
         }
@@ -115,35 +117,31 @@ public struct OnboardingView: View {
   private var bottomButton: some View {
     ZStack {
       Button(action: {
-        if viewModel.artistSelectedCount < 3 {
-          viewModel.isShowToastBar.toggle()
+        if onboardingViewModel.artistSelectedCount < 3 {
+          onboardingViewModel.isShowToastBar.toggle()
         } else {
-          isOnboarding = false
-          for index in 0..<viewModel.selectedArtist.count {
-            ArtistDataManager.shared.getGeniusIdAndImageUrl(mbid: viewModel.selectedArtist[index].mbid) { result in
-              if let (geniusId, imageUrl) = result {
-                // 성공적으로 데이터를 가져왔을 때의 동작
-                print("@Log Genius ID: \(geniusId), Image URL: \(imageUrl)")
-              } else {
-                // 데이터 가져오기에 실패했을 때의 동작
-                print("Failed to get Genius ID and Image URL")
-              }
-            }
+          Task {
+            await onboardingViewModel.getArtistInfoFromGenius(selectedArtists: onboardingViewModel.selectedArtist, index: 0)
+            
           }
-          
         }
+        
+        
       }, label: {
         RoundedRectangle(cornerRadius: 14)
           .frame(width: 328, height: 54)
-          .foregroundColor(viewModel.artistSelectedCount < 3 ? .black : .blue)
+          .foregroundColor(onboardingViewModel.artistSelectedCount < 3 ? .black : .blue)
           .overlay {
-            Text(viewModel.artistSelectedCount == 0 ? "최소 3명 이상 선택" : "\(viewModel.artistSelectedCount)명 선택")
+            Text(onboardingViewModel.artistSelectedCount == 0 ? "최소 3명 이상 선택" : "\(onboardingViewModel.artistSelectedCount)명 선택")
               .foregroundStyle(.white)
               .font(.callout)
               .fontWeight(.bold)
           }
           .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
+    }
+    .onAppear {
+      dataManager.modelContext = modelContext
     }
   }
   

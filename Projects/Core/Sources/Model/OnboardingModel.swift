@@ -11,11 +11,13 @@ import Foundation
 public struct OnboardingModel: Identifiable {
   public var id = UUID()
   public var name: String
+  public var genius: Int
   public var mbid: String
   public var filter: String
   
-  public init(name: String, mbid: String, filter: String) {
+  public init(name: String, genius:Int, mbid: String, filter: String) {
     self.name = name
+    self.genius = genius
     self.mbid = mbid
     self.filter = filter
   }
