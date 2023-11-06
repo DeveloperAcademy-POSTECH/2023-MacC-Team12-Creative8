@@ -41,6 +41,7 @@ public final class SwiftDataManager: ObservableObject {
                                                               orderIndex: (try? modelContext?.fetchCount(descriptor)) ?? 0)
     modelContext?.insert(newLikeArtist)
     self.save()
+    print(newLikeArtist.artistInfo)
   }
 
   public func deleteLikeArtist(_ item: LikeArtist) {

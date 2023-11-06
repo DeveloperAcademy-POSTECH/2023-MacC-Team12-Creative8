@@ -17,6 +17,11 @@ public struct OnboardingView: View {
   @Environment(\.modelContext) var modelContext
   @ObservedObject var dataManager = SwiftDataManager()
   
+  private let artistDataManager: ArtistDataManager = ArtistDataManager.shared
+  private let dataService: SetlistDataService = SetlistDataService.shared
+  var artistInfo: ArtistInfo?
+  @AppStorage("isOnboarding") var isOnboarding: Bool?
+
   public init() {
   }
   
@@ -47,6 +52,7 @@ public struct OnboardingView: View {
       }
     }
     .onAppear {
+      dataManager.modelContext = modelContext
       onboardingViewModel.readXslx()
       onboardingViewModel.updateFilteredModels()
     }
@@ -120,12 +126,26 @@ public struct OnboardingView: View {
         if onboardingViewModel.artistSelectedCount < 3 {
           onboardingViewModel.isShowToastBar.toggle()
         } else {
-          Task {
-            await onboardingViewModel.getArtistInfoFromGenius(selectedArtists: onboardingViewModel.selectedArtist, index: 0)
-            
+          for index in 0..<onboardingViewModel.selectedArtist.count {
+            if self.artistInfo == nil {
+              artistDataManager.getArtistInfo(
+                artistName: onboardingViewModel.selectedArtist[index].name,
+                artistAlias: "",
+                artistMbid: onboardingViewModel.selectedArtist[index].mbid) { result in
+                if let result = result {
+                  dataManager.addLikeArtist(name: result.name, 
+                                            country: "", 
+                                            alias: result.alias ?? "",
+                                            mbid: result.mbid, 
+                                            gid: result.gid ?? 0,
+                                            imageUrl: result.imageUrl,
+                                            songList: [])
+                }
+              }
+            }
           }
+          isOnboarding = false
         }
-        
         
       }, label: {
         RoundedRectangle(cornerRadius: 14)
@@ -140,9 +160,7 @@ public struct OnboardingView: View {
           .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
     }
-    .onAppear {
-      dataManager.modelContext = modelContext
-    }
+    
   }
   
   private var toastBar: some View {
@@ -156,6 +174,8 @@ public struct OnboardingView: View {
           .fontWeight(.bold)
       }
   }
+  
+  
 }
 
 #Preview {

@@ -13,40 +13,6 @@ public final class ArtistDataManager {
   
   let dataService: SetlistDataService = SetlistDataService.shared
   
-  // MARK: 온보딩에서 Genius ID 찾을 때 사용할 함수
-  public func getGeniusIdAndImageUrl(mbid: String, completion: @escaping ((Int, String)?) -> Void) {
-    let dataService = SetlistDataService.shared
-    let koreanConverter = KoreanConverter.shared
-    let artistDataManager = ArtistDataManager.shared
-    
-    dataService.fetchArtistFromMusicBrainz(artistMbid: mbid) { result in
-      if let result = result {
-        let namePair = koreanConverter.findKoreanName(artist: (result.artists?[0])!)
-        var artistInfo = ArtistInfo(name: namePair.0, mbid: mbid)
-        
-        artistDataManager.getArtistInfo(artistName: namePair.0, artistAlias: namePair.1 ?? "", artistMbid: mbid) { result in
-          if let result = result {
-            DispatchQueue.main.async {
-              artistInfo = result
-              completion((artistInfo.gid, artistInfo.imageUrl) as? (Int, String))
-            }
-          } else {
-            artistDataManager.getArtistInfo(artistName: namePair.1 ?? "", artistAlias: namePair.0, artistMbid: mbid) { result in
-              if let result = result {
-                DispatchQueue.main.async {
-                  artistInfo = result
-                  completion((artistInfo.gid, artistInfo.imageUrl) as? (Int, String))
-                }
-              } else {
-                completion(nil)
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
   public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [Titles] = []
     var artistInfo: ArtistInfo?
@@ -77,51 +43,59 @@ public final class ArtistDataManager {
       }
     }
   }
+  
+  public func getArtistImageURL(artistName: String, artistMbid: String) {
+    var artistInfo: ArtistInfo?
     
-    private func fetchAllSongs(artistId: Int, completion: @escaping ([String]?) -> Void) {
-      var songList: [String] = []
-      
-      func fetchPage(page: Int) {
-        dataService.fetchSongsFromGenius(artistId: artistId, page: page) { result in
-          guard let result = result, let songs = result.response?.songs else {
-            completion(nil)
-            return
-          }
-          for song in songs {
-            songList.append(song.title ?? "")
-          }
-          if let nextPage = result.response?.nextPage {
-            fetchPage(page: nextPage)
-          } else {
-            completion(songList)
-          }
+    dataService.searchArtistFromGenius(artistName: artistName) { result in
+      if let result = result {
+        DispatchQueue.main.async {
+          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: "", artistMbid: artistMbid, hits: result.response?.hits ?? [])
         }
       }
       
-      fetchPage(page: 1)
     }
+  }
+  
+  private func fetchAllSongs(artistId: Int, completion: @escaping ([String]?) -> Void) {
+    var songList: [String] = []
     
-    private func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
-      for hit in hits {
-        if let name = hit.result?.primaryArtist?.name {
-          let filteredName = stringFilter(name)
-          let filteredArtistName = stringFilter(artistName)
-          let filteredArtistAlias = stringFilter(artistAlias)
-          
-          if removeFirstParentheses(from: filteredName) == filteredArtistName ||
-              extractTextInsideFirstParentheses(from: filteredName) == filteredArtistName ||
-              removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
-              extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
-            print("FIND ARTIST: \(name)")
-            return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
-          }
+    func fetchPage(page: Int) {
+      dataService.fetchSongsFromGenius(artistId: artistId, page: page) { result in
+        guard let result = result, let songs = result.response?.songs else {
+          completion(nil)
+          return
+        }
+        for song in songs {
+          songList.append(song.title ?? "")
+        }
+        if let nextPage = result.response?.nextPage {
+          fetchPage(page: nextPage)
+        } else {
+          completion(songList)
         }
       }
-      
-      print("FAILED TO FIND ARTIST")
-      return nil
     }
     
+    fetchPage(page: 1)
+  }
+  
+  private func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
+    for hit in hits {
+      if let name = hit.result?.primaryArtist?.name {
+        let filteredName = stringFilter(name)
+        let filteredArtistName = stringFilter(artistName)
+        let filteredArtistAlias = stringFilter(artistAlias)
+        
+        if removeFirstParentheses(from: filteredName) == filteredArtistName ||
+            extractTextInsideFirstParentheses(from: filteredName) == filteredArtistName ||
+            removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
+            extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
+          print("FIND ARTIST: \(name)")
+          return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
+        }
+      }
+    }
     print("FAILED TO FIND ARTIST")
     return nil
   }
@@ -141,37 +115,27 @@ public final class ArtistDataManager {
     } else {
       return input
     }
-    
-    // 첫 번째 괄호 이전의 텍스트를 추출
-    private func extractTextBeforeParentheses(from input: String) -> String {
-      if let range = input.range(of: "(") {
-        let textBeforeParentheses = input[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
-        return String(textBeforeParentheses)
-      } else {
-        return input
-      }
-    }
-    
-    // 첫 번째 괄호 사이의 텍스트를 추출
-    private func extractTextInsideFirstParentheses(from input: String) -> String? {
-      if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
-        let range = (input.index(after: startIndex)..<endIndex)
-        let textInsideParentheses = input[range].trimmingCharacters(in: .whitespacesAndNewlines)
-        return String(textInsideParentheses)
-      } else {
-        return nil
-      }
-    }
-    
-    //  첫 번째 괄호를 제거
-    private func removeFirstParentheses(from input: String) -> String {
-      if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
-        let firstParenthesesRange = startIndex...endIndex
-        let modifiedString = input.replacingCharacters(in: firstParenthesesRange, with: "")
-        return modifiedString.trimmingCharacters(in: .whitespacesAndNewlines)
-      } else {
-        return input
-      }
-    }
-    
   }
+  
+  // 첫 번째 괄호 사이의 텍스트를 추출
+  private func extractTextInsideFirstParentheses(from input: String) -> String? {
+    if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
+      let range = (input.index(after: startIndex)..<endIndex)
+      let textInsideParentheses = input[range].trimmingCharacters(in: .whitespacesAndNewlines)
+      return String(textInsideParentheses)
+    } else {
+      return nil
+    }
+  }
+  
+  //  첫 번째 괄호를 제거
+  private func removeFirstParentheses(from input: String) -> String {
+    if let startIndex = input.firstIndex(of: "("), let endIndex = input.firstIndex(of: ")"), startIndex < endIndex {
+      let firstParenthesesRange = startIndex...endIndex
+      let modifiedString = input.replacingCharacters(in: firstParenthesesRange, with: "")
+      return modifiedString.trimmingCharacters(in: .whitespacesAndNewlines)
+    } else {
+      return input
+    }
+  }
+}

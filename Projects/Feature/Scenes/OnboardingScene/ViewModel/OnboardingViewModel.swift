@@ -33,7 +33,6 @@ final class OnboardingViewModel: ObservableObject {
   @ObservedObject var dataManager = SwiftDataManager()
   @AppStorage("isOnboarding") var isOnboarding: Bool?
   
-  
   init(fileName: String, fileType: String, filePath: String?) {
     self.fileName = fileName
     self.fileType = fileType
@@ -102,47 +101,42 @@ final class OnboardingViewModel: ObservableObject {
     }
   }
   
-  func getArtistInfoFromGenius(selectedArtists: [OnboardingModel], index: Int) async {
-    if self.artistInfo == nil {
-      artistDataManager.getArtistInfo(artistName: selectedArtists[index].name, artistAlias: "", artistMbid: selectedArtists[index].mbid) { result in
-        if let result = result {
-          DispatchQueue.main.async {
-            self.artistInfo = result
-            self.addLikeArtist()
+  func getArtistInfoFromGenius(selectedArtists: [OnboardingModel]) async {
+    for index in 0..<selectedArtists.count {
+      if self.artistInfo == nil {
+        artistDataManager.getArtistInfo(artistName: selectedArtists[index].name, artistAlias: "", artistMbid: selectedArtists[index].mbid) { result in
+          if let result = result {
+            //          DispatchQueue.main.async {
+            self.dataManager.addLikeArtist(
+              name: result.name,
+              country: "",
+              alias: result.alias ?? "",
+              mbid: result.mbid,
+              gid: result.gid ?? 0,
+              imageUrl: result.imageUrl,
+              songList: []
+            )
             self.isOnboarding = false
-            print(result)
+            //          }
           }
         }
       }
     }
   }
   
-  func addLikeArtist() {
-    dataManager.addLikeArtist(
-      name: self.artistInfo?.name ?? "",
-      country: "",
-      alias: self.artistInfo?.alias ?? "",
-      mbid: self.artistInfo?.mbid ?? "",
-      gid: self.artistInfo?.gid ?? 0,
-      imageUrl: self.artistInfo?.imageUrl ?? "",
-      songList: self.artistInfo?.songList ?? []
-    )
-  }
-  
-  func getSetlistFromSetlistFM(selectedArtists: [OnboardingModel], index: Int)  {
+  func getSetlistFromSetlistFM(selectedArtists: [OnboardingModel], index: Int) {
     if self.setlists == nil {
       dataService.fetchSetlistsFromSetlistFM(artistMbid: selectedArtists[index].mbid, page: page) { result in
         if let result = result {
           DispatchQueue.main.async {
             self.setlists = result.setlist
             self.totalPage = Int((result.total ?? 1) / (result.itemsPerPage ?? 1) + 1)
-            print("@Log setlist", self.setlists )
+            
           }
         }
       }
     }
   }
-  
 }
 
 // array nil 분기 처리
