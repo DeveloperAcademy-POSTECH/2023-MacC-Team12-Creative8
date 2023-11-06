@@ -184,7 +184,6 @@ public struct MainView: View {
                 }
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
-                if data < likeArtists.count {
                   ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
                     let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
@@ -192,27 +191,29 @@ public struct MainView: View {
                     let country = item?.venue?.city?.country?.name ?? ""
                     let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
                     let setlistId = item?.id ?? ""
-                    let artistInfo = ArtistInfo(
-                      name: likeArtists[data].artistInfo.name,
-                      alias: likeArtists[data].artistInfo.alias,
-                      mbid: likeArtists[data].artistInfo.mbid,
-                      gid: likeArtists[data].artistInfo.gid,
-                      imageUrl: likeArtists[data].artistInfo.imageUrl,
-                      songList: likeArtists[data].artistInfo.songList)
-                    VStack(spacing: 0) {
-                      if data < likeArtists.count {
-                        ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
+                    if data < likeArtists.count {
+                      let artistInfo = ArtistInfo(
+                        name: likeArtists[data].artistInfo.name,
+                        alias: likeArtists[data].artistInfo.alias,
+                        mbid: likeArtists[data].artistInfo.mbid,
+                        gid: likeArtists[data].artistInfo.gid,
+                        imageUrl: likeArtists[data].artistInfo.imageUrl,
+                        songList: likeArtists[data].artistInfo.songList)
+                      VStack(spacing: 0) {
+                        if data < likeArtists.count {
+                          ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
+                        }
+                        if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+                          Divider()
+                            .foregroundStyle(Color.lineGrey1)
+                        }
                       }
-                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-                        Divider()
-                          .foregroundStyle(Color.lineGrey1)
-                      }
+                      .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                      .animation(.easeInOut(duration: 0.1))
+                      .frame(width: UIWidth * 0.78)
                     }
-                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                    .animation(.easeInOut(duration: 0.1))
-                    .frame(width: UIWidth * 0.78)
                   }
-                }
+                
                 if current.isEmpty {
                   EmptyMainSetlistView()
                 }
