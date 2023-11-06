@@ -19,7 +19,15 @@ struct BottomView: View {
       
       VStack {
         Text("잘못된 세트리스트 정보를 발견하셨다면,")
-        Text("Setlist.fm").underline() + Text("에서 수정할 수 있습니다")
+        HStack(spacing: 0) {
+          if let url = URL(string: "https://www.setlist.fm") {
+            Link(destination: url) {
+              Text("Setlist.fm")
+                .underline()
+            }
+          }
+          Text("에서 수정할 수 있습니다")
+        }
       }
       .font(.footnote)
       .foregroundStyle(Color.fontGrey2)
@@ -35,5 +43,5 @@ struct BottomView: View {
 }
 
 #Preview {
-    BottomView()
+  BottomView()
 }

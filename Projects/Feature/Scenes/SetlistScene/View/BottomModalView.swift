@@ -13,8 +13,8 @@ struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @Binding var showToastMessage1: Bool
-  @Binding var showToastMessage2: Bool
+  @Binding var showToastMessageAppleMusic: Bool
+  @Binding var showToastMessageCapture: Bool
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -25,9 +25,9 @@ struct BottomModalView: View {
         CheckAppleMusicSubscription.shared.appleMusicSubscription()
         AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
         vm.showModal.toggle()
-        showToastMessage1 = true
+        showToastMessageAppleMusic = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          showToastMessage1 = false
+          showToastMessageAppleMusic = false
         }
       })
       
@@ -39,9 +39,9 @@ struct BottomModalView: View {
         action: {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
-          showToastMessage2 = true
+          showToastMessageCapture = true
           DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            showToastMessage2 = false
+            showToastMessageCapture = false
           }
         }
       )

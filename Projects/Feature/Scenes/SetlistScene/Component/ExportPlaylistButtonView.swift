@@ -13,17 +13,17 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @State private var showToastMessage1 = false
-  @State private var showToastMessage2 = false
+  @State private var showToastMessageAppleMusic = false
+  @State private var showToastMessageCapture = false
   
   var body: some View {
     VStack {
       Spacer()
       
       Group {
-        if showToastMessage1 {
+        if showToastMessageAppleMusic {
           ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
-        } else if showToastMessage2 {
+        } else if showToastMessageCapture {
           ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
         }
       }
@@ -46,7 +46,7 @@ struct ExportPlaylistButtonView: View {
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessage1: $showToastMessage1, showToastMessage2: $showToastMessage2)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
         .presentationDetents([.fraction(0.3)])
         .presentationDragIndicator(.visible)
     }
