@@ -69,7 +69,7 @@ struct SetlistView: View {
         vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
       }
       
-      if artistInfo.songList?.isEmpty == true || artistInfo.songList == nil {
+      if artistInfo.songList == nil || artistInfo.songList?.isEmpty == true {
         vm.artistDataManager.getArtistInfo(artistInfo: artistInfo) { result in
           if let result = result {
             artistInfo = result
@@ -81,11 +81,56 @@ struct SetlistView: View {
           }
         }
       }
-      
     }
     
   }
-
+  
+  private var concertInfoArea: some View {
+    ZStack {
+      Rectangle()
+        .cornerRadius(14, corners: [.bottomLeft, .bottomRight])
+        .foregroundStyle(Color.backgroundWhite)
+        .ignoresSafeArea()
+      ConcertInfoView(
+        artist: artistInfo.name,
+        date: vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "yyyy년 MM월 dd일") ?? "-",
+        venue: setlist?.venue?.name ?? "-",
+        tour: setlist?.tour?.name ?? "-"
+      )
+      .padding([.horizontal, .bottom], 30)
+      .padding(.vertical, 15)
+    }
+  }
+  
+  private var dotLine: some View {
+    Rectangle()
+      .stroke(style: StrokeStyle(dash: [5]))
+      .frame(height: 1)
+      .padding(.horizontal)
+      .foregroundStyle(Color.fontGrey2)
+  }
+  
+  private var setlistArea: some View {
+    ZStack {
+      Rectangle()
+        .cornerRadius(14, corners: [.topLeft, .topRight])
+        .foregroundStyle(Color.backgroundWhite)
+        .ignoresSafeArea()
+      if let setlist = setlist {
+        if vm.isEmptySetlist(setlist) {
+          EmptySetlistView()
+            .padding(30)
+        } else {
+          VStack {
+            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+              .padding(30)
+            BottomView()
+          }
+        }
+      }
+    }
+  }
+  
   private var toolbarBookmarkButton: some View {
     Button(action: {
       if vm.isBookmarked {
@@ -124,50 +169,5 @@ struct SetlistView: View {
     }
   }
   
-  var concertInfoArea: some View {
-    ZStack {
-      Rectangle()
-        .cornerRadius(14, corners: [.bottomLeft, .bottomRight])
-        .foregroundStyle(Color.backgroundWhite)
-        .ignoresSafeArea()
-      ConcertInfoView(
-        artist: artistInfo.name,
-        date: vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "yyyy년 MM월 dd일") ?? "-",
-        venue: setlist?.venue?.name ?? "-",
-        tour: setlist?.tour?.name ?? "-"
-      )
-      .padding([.horizontal, .bottom], 30)
-      .padding(.vertical, 15)
-    }
-  }
-  
-  var dotLine: some View {
-    Rectangle()
-      .stroke(style: StrokeStyle(dash: [5]))
-      .frame(height: 1)
-      .padding(.horizontal)
-      .foregroundStyle(Color.fontGrey2)
-  }
-  
-  var setlistArea: some View {
-    ZStack {
-      Rectangle()
-        .cornerRadius(14, corners: [.topLeft, .topRight])
-        .foregroundStyle(Color.backgroundWhite)
-        .ignoresSafeArea()
-      if let setlist = setlist {
-        if vm.isEmptySetlist(setlist) {
-          EmptySetlistView()
-            .padding(30)
-        } else {
-          VStack {
-            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-              .padding(30)
-            BottomView()
-          }
-        }
-      }
-    }
-  }
   
 }
