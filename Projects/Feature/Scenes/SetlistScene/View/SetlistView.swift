@@ -14,7 +14,7 @@ import UI
 struct SetlistView: View {
   @State var setlist: Setlist?
   var setlistId: String?
-  var artistInfo: ArtistInfo?
+  @State var artistInfo: ArtistInfo
   
   @StateObject var vm = SetlistViewModel()
   @Query var concertInfo: [ArchivedConcertInfo]
@@ -40,11 +40,11 @@ struct SetlistView: View {
                 let newArtist = SaveArtistInfo(
                   name: setlist?.artist?.name ?? "",
                   country: setlist?.venue?.city?.country?.name ?? "",
-                  alias: artistInfo?.alias ?? "",
-                  mbid: artistInfo?.mbid ?? "",
-                  gid: artistInfo?.gid ?? 0,
-                  imageUrl: artistInfo?.imageUrl ?? "",
-                  songList: artistInfo?.songList ?? [])
+                  alias: artistInfo.alias ?? "",
+                  mbid: artistInfo.mbid,
+                  gid: artistInfo.gid ?? 0,
+                  imageUrl: artistInfo.imageUrl ?? "",
+                  songList: artistInfo.songList ?? [])
                 let newSetlist = SaveSetlist(
                   setlistId: setlist?.id ?? "",
                   date: vm.convertDateStringToDate(setlist?.eventDate ?? "") ?? Date(),
@@ -100,6 +100,16 @@ struct SetlistView: View {
         vm.dataManager.modelContext = modelContext
         vm.isBookmarked = vm.dataManager.isAddedConcert(concertInfo, setlist?.id ?? "")
       }
+      
+      if artistInfo.songList?.isEmpty == true || artistInfo.songList == nil {
+        vm.artistDataManager.getArtistInfo(artistInfo: artistInfo) { result in
+          if let result = result {
+            artistInfo = result
+//            vm.dataManager.updateLikeArtistInfo(<#T##info: LikeArtist##LikeArtist#>, <#T##url: String##String#>, <#T##songList: [Titles]##[Titles]#>) // TODO: 이 부분을 어떻게 처리해야 할지 잘 모르겠음...
+          }
+        }
+      }
+      
     }
   }
   
@@ -110,7 +120,7 @@ struct SetlistView: View {
         .foregroundStyle(Color.backgroundWhite)
         .ignoresSafeArea()
       ConcertInfoView(
-        artist: artistInfo?.name ?? "-",
+        artist: artistInfo.name,
         date: vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "yyyy년 MM월 dd일") ?? "-",
         venue: setlist?.venue?.name ?? "-",
         tour: setlist?.tour?.name ?? "-"
@@ -336,8 +346,7 @@ private struct ListView: View {
               // 애플 뮤직용 음악 배열
               if !vm.setlistSongName.contains(title) {
                 let _ = vm.setlistSongName.append(title)
-              }
-              
+              } 
               // 스크린샷용 음악 배열
               let tmp = vm.koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
               if !vm.setlistSongKoreanName.contains(tmp) {

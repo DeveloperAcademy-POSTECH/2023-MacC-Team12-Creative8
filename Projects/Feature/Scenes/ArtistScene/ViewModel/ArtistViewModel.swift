@@ -17,7 +17,7 @@ class ArtistViewModel: ObservableObject {
   let archivingviewModel = ArchivingViewModel.shared
   let dataManager = SwiftDataManager()
   
-  var artistInfo: ArtistInfo?
+  var artistInfo: ArtistInfo
   var setlists: [Setlist]?
   var page: Int = 1
   var totalPage: Int = 0
@@ -36,29 +36,28 @@ class ArtistViewModel: ObservableObject {
     self.isLoading3 = false
     self.image = nil
     self.isLikedArtist = false
+    self.artistInfo = ArtistInfo(name: "", mbid: "")
   }
   
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
-    if self.artistInfo == nil {
-      self.isLoading1 = true
-      artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
-        if let result = result {
-          DispatchQueue.main.async {
-            self.artistInfo = result
-            self.isLoading1 = false
-          }
-        } else {
-          print("Failed to fetch artist info. 1")
-          self.artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
-            if let result = result {
-              DispatchQueue.main.async {
-                self.artistInfo = result
-                self.isLoading1 = false
-              }
-            } else {
+    self.isLoading1 = true
+    artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
+      if let result = result {
+        DispatchQueue.main.async {
+          self.artistInfo = result
+          self.isLoading1 = false
+        }
+      } else {
+        print("Failed to fetch artist info. 1")
+        self.artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
+          if let result = result {
+            DispatchQueue.main.async {
+              self.artistInfo = result
               self.isLoading1 = false
-              print("Failed to fetch artist info. 2")
             }
+          } else {
+            self.isLoading1 = false
+            print("Failed to fetch artist info. 2")
           }
         }
       }
@@ -100,7 +99,7 @@ class ArtistViewModel: ObservableObject {
   }
   
   func loadImage() {
-    if let imageUrl = artistInfo?.imageUrl {
+    if let imageUrl = artistInfo.imageUrl {
       if let url = URL(string: imageUrl) {
         URLSession.shared.dataTask(with: url) { data, _, _ in
           if let data = data, let image = UIImage(data: data) {

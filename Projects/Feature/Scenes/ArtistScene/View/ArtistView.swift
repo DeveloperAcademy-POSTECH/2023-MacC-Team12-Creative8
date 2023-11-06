@@ -38,7 +38,7 @@ struct ArtistView: View {
     .navigationTitle("")
     .toolbar {
       ToolbarItem(placement: .principal) {
-        Text(vm.artistInfo?.name ?? "")
+        Text(vm.artistInfo.name)
           .font(.title3)
           .fontWeight(.semibold)
       }
@@ -59,7 +59,7 @@ private struct ArtistImageView: View {
   var body: some View {
     ZStack(alignment: .bottom) {
       if vm.image != nil {
-        if vm.artistInfo?.imageUrl == nil {
+        if vm.artistInfo.imageUrl == nil {
           Image(uiImage: vm.image!)
             .renderingMode(.template)
             .foregroundStyle(Color.lineGrey1)
@@ -88,12 +88,12 @@ private struct ArtistImageView: View {
     .onAppear {
       vm.loadImage()
       vm.dataManager.modelContext = modelContext
-      vm.isLikedArtist = vm.dataManager.isAddedLikeArtist(likeArtist, vm.artistInfo?.mbid ?? "")
+      vm.isLikedArtist = vm.dataManager.isAddedLikeArtist(likeArtist, vm.artistInfo.mbid)
     }
   }
   
   private var textLayer: some View {
-    Text(vm.artistInfo?.name ?? "")
+    Text(vm.artistInfo.name)
       .font(.largeTitle)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainWhite)
@@ -102,16 +102,16 @@ private struct ArtistImageView: View {
   private var buttonLayer: some View {
     Button {
       if vm.isLikedArtist {
-        vm.dataManager.findArtistAndDelete(likeArtist, vm.artistInfo?.mbid ?? "")
+        vm.dataManager.findArtistAndDelete(likeArtist, vm.artistInfo.mbid)
       } else {
         vm.dataManager.addLikeArtist(
-          name: vm.artistInfo?.name ?? "",
+          name: vm.artistInfo.name,
           country: "",
-          alias: vm.artistInfo?.alias ?? "",
-          mbid: vm.artistInfo?.mbid ?? "",
-          gid: vm.artistInfo?.gid ?? 0,
-          imageUrl: vm.artistInfo?.imageUrl ?? "",
-          songList: vm.artistInfo?.songList ?? []
+          alias: vm.artistInfo.alias ?? "",
+          mbid: vm.artistInfo.mbid,
+          gid: vm.artistInfo.gid ?? 0,
+          imageUrl: vm.artistInfo.imageUrl ?? "",
+          songList: vm.artistInfo.songList ?? []
         )
       }
       vm.isLikedArtist.toggle()
@@ -163,7 +163,7 @@ private struct BookmarkedView: View {
     .onAppear {
       bookmarkedConcerts = []
       for concert in concertInfo {
-        if concert.artistInfo.name == vm.artistInfo?.name {
+        if concert.artistInfo.name == vm.artistInfo.name {
           bookmarkedConcerts.append(concert)
         }
       }
@@ -270,7 +270,7 @@ private struct BookmarkedView: View {
   private var navigationLayer: some View {
     Button {
       vm.archivingviewModel.selectSegment = .bookmark
-      vm.archivingviewModel.selectArtist = vm.artistInfo?.name ?? ""
+      vm.archivingviewModel.selectArtist = vm.artistInfo.name
       if selectedTab == .archiving {
         dismiss()
       } else {
@@ -280,7 +280,7 @@ private struct BookmarkedView: View {
     } label: {
       HStack {
         Spacer()
-        Text("\(vm.artistInfo?.name ?? "") 보관함에서 보기")
+        Text("\(vm.artistInfo.name) 보관함에서 보기")
         Image(systemName: "arrow.right")
       }
       .foregroundColor(Color.mainBlack)
@@ -349,7 +349,7 @@ private struct ListView: View {
                 Text("세트리스트 정보가 아직 없습니다")
               } else {
                 let songTitle: String = setlist.sets?.setsSet?.first?.song?.first?.name ?? ""
-                Text("01 \(vm.koreanConverter.findKoreanTitle(title: songTitle, songList: vm.artistInfo?.songList ?? []) ?? songTitle)")
+                Text("01 \(vm.koreanConverter.findKoreanTitle(title: songTitle, songList: vm.artistInfo.songList ?? []) ?? songTitle)")
               }
             }
             .font(.footnote)
@@ -379,7 +379,7 @@ private struct ListView: View {
   private var buttonLayer: some View {
     VStack {
       Button {
-        vm.fetchNextPage(artistMbid: vm.artistInfo?.mbid ?? "")
+        vm.fetchNextPage(artistMbid: vm.artistInfo.mbid)
       } label: {
         if vm.isLoading3 {
           ProgressView()
