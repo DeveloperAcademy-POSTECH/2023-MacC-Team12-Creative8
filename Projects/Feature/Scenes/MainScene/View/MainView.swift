@@ -239,9 +239,9 @@ struct MainView: View {
                               Text(year ?? "")
                                 .foregroundStyle(Color.fontGrey25)
                                 .padding(.bottom, 2)
+                                .tracking(0.5)
                               Text(dateAndMonth ?? "")
                                 .foregroundStyle(Color.mainBlack)
-                                .kerning(-0.5)
                             }
                             .font(.headline)
                             Spacer()
