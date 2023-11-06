@@ -23,7 +23,7 @@ public struct MainView: View {
   
   public init() {
   }
-  
+
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
@@ -234,7 +234,7 @@ public struct MainView: View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
         .overlay(
-          Image("mainViewTicket", bundle: setaBundle)
+          Image("ticket", bundle: setaBundle)
             .resizable()
             .renderingMode(.template)
             .foregroundStyle(Color.lineGrey1)

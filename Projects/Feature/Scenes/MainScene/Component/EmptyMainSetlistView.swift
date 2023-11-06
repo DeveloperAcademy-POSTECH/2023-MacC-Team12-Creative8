@@ -21,17 +21,24 @@ struct EmptyMainSetlistView: View {
         .fontWeight(.semibold)
         .foregroundStyle(Color.mainBlack)
         .padding(.horizontal)
-      Group {
-        Text("찜한 가수의 세트리스트가 없다면,\n")
-        +
-        Text("Setlist.fm")
-          .underline()
-        +
+      
+      Text("찜한 가수의 세트리스트가 없다면,")
+        .foregroundStyle(Color.fontGrey2)
+        .font(.footnote)
+        .padding([.horizontal, .top])
+      
+      HStack(spacing: 0) {
+        Link(destination: URL(string: "https://www.setlist.fm")!) {
+          Text("Setlist.fm")
+            .underline()
+            .foregroundStyle(Color.fontGrey2)
+            .font(.footnote)
+        }
         Text("에서 직접 추가할 수 있어요.")
+          .foregroundStyle(Color.fontGrey2)
+          .font(.footnote)
       }
-      .foregroundStyle(Color.fontGrey2)
-      .font(.footnote)
-      .padding()
+      .padding([.horizontal, .bottom])
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
@@ -50,5 +57,5 @@ struct EmptyMainSetlistView: View {
 }
 
 #Preview {
-    EmptyMainSetlistView()
+  EmptyMainSetlistView()
 }
