@@ -11,7 +11,7 @@ import Core
 
 class ArchivingViewModel: ObservableObject {
   static let shared = ArchivingViewModel()
-	@Published var selectSegment: Bool = true
+  @Published var selectSegment: SelectEnum = .bookmark
 	@Published var selectArtist: String = ""
 	@Published var artistSet: Set<String> = []
 
@@ -27,4 +27,9 @@ class ArchivingViewModel: ObservableObject {
 			artistSet.insert(info[index].artistInfo.name)
 		}
 	}
+
+  enum SelectEnum {
+    case bookmark
+    case likeArtist
+  }
 }

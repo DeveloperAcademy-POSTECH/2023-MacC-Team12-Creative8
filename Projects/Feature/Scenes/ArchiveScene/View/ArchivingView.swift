@@ -12,16 +12,18 @@ import Core
 import UI
 
 struct ArchivingView: View {
+  @Binding var selectedTab: Tab
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtist: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
-  @StateObject var viewModel = ArchivingViewModel()
+  @StateObject var viewModel = ArchivingViewModel.shared
+
   var body: some View {
-    VStack(spacing: 0) {
+    VStack {
       Divider()
         .foregroundStyle(Color.lineGrey1)
         .padding(.trailing, -20)
       segmentedButtonsView
-      if viewModel.selectSegment {
+      if viewModel.selectSegment == .bookmark {
         bookmarkView
       } else {
         artistView
@@ -38,7 +40,7 @@ struct ArchivingView: View {
 
 #Preview {
   NavigationStack {
-    ArchivingView()
+    ArchivingView(selectedTab: .constant(.archiving))
   }
 }
 
@@ -46,19 +48,19 @@ extension ArchivingView {
   private var segmentedButtonsView: some View {
     HStack {
       Button("북마크한 공연") {
-        viewModel.selectSegment = true
+        viewModel.selectSegment = .bookmark
       }
-      .foregroundStyle(viewModel.selectSegment ? Color.mainBlack : Color.fontGrey3)
+      .foregroundStyle(viewModel.selectSegment == .bookmark ? Color.mainBlack : Color.fontGrey3)
 
       Button("찜한 아티스트") {
-        viewModel.selectSegment = false
+        viewModel.selectSegment = .likeArtist
       }
-      .foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.mainBlack)
+      .foregroundStyle(viewModel.selectSegment == .bookmark ? Color.fontGrey3 : Color.mainBlack)
       .padding(.horizontal)
     }
     .font(.headline)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(.vertical)
+    .padding(.top)
   }
   
   private var bookmarkView: some View {
@@ -96,7 +98,7 @@ extension ArchivingView {
       
       ForEach(concertInfo) { item in
         if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
-          ArchiveConcertInfoCell(info: item)
+          ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
         }
@@ -136,13 +138,14 @@ extension ArchivingView {
         Text("\(item.artistInfo.name)")
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
-            NavigationLink("", destination: ArtistView(artistName: item.artistInfo.name,
+            NavigationLink("", destination: ArtistView(selectedTab: $selectedTab,
+                                                       artistName: item.artistInfo.name,
                                                        artistAlias: item.artistInfo.alias,
                                                        artistMbid: item.artistInfo.mbid))
             .opacity(0)
           )
         Spacer()
-        MenuButton(item: item)
+        MenuButton(selectedTab: $selectedTab, item: item)
       }
     }
     .onMove { source, destination in

@@ -11,7 +11,8 @@ import SwiftData
 import Core
 import UI
 
-public struct MainView: View {
+struct MainView: View {
+  @Binding var selectedTab: Tab
   @AppStorage("appearance")
   var appearnace: ButtonType = .automatic
   
@@ -23,10 +24,8 @@ public struct MainView: View {
   @State var dataManager = SwiftDataManager()
   
   @Environment(\.modelContext) var modelContext
-  
-  public init() {
-  }
-  public var body: some View {
+
+  var body: some View {
     GeometryReader { geometry in
       ScrollView { // 스크롤
         VStack(spacing: 0) {
@@ -35,7 +34,7 @@ public struct MainView: View {
             .padding(.vertical)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {
-            EmptyMainView()
+            EmptyMainView(selectedTab: $selectedTab)
               .frame(width: geometry.size.width)
               .frame(minHeight: geometry.size.height * 0.9)
           } else {
@@ -182,7 +181,7 @@ public struct MainView: View {
         ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
-              NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
+              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
                 if likeArtists[data].artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
@@ -325,6 +324,7 @@ public struct MainView: View {
   }
 }
 struct EmptyMainView: View {
+  @Binding var selectedTab: Tab
   var body: some View {
     VStack {
       Spacer()
@@ -337,15 +337,15 @@ struct EmptyMainView: View {
         .multilineTextAlignment(.center)
         .foregroundStyle(Color.fontGrey2)
         .padding(.bottom)
-      NavigationLink(destination: SearchView()) {
-        Text("아티스트 찜하러 가기 →")
-          .foregroundStyle(Color.mainWhite)
-          .font(.system(size: 14))
-          .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
-          .background(RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.buttonBlack))
-          .bold()
+      Button("아티스트 찜하러 가기 →") {
+        selectedTab = .search
       }
+      .foregroundStyle(Color.mainWhite)
+      .font(.system(size: 14))
+      .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
+      .background(RoundedRectangle(cornerRadius: 14)
+        .foregroundStyle(Color.buttonBlack))
+      .bold()
       .padding(.vertical)
       Spacer()
     }
@@ -425,5 +425,5 @@ struct RoundedCorner: Shape {
   }
 }
 #Preview {
-  MainView()
+  MainView(selectedTab: .constant(.home))
 }

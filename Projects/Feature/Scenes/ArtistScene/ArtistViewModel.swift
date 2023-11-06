@@ -14,6 +14,7 @@ class ArtistViewModel: ObservableObject {
   let dataService: SetlistDataService = SetlistDataService.shared
   let koreanConverter: KoreanConverter = KoreanConverter.shared
   let artistDataManager: ArtistDataManager = ArtistDataManager.shared
+  let archivingviewModel = ArchivingViewModel.shared
   let dataManager = SwiftDataManager()
   
   var artistInfo: ArtistInfo?

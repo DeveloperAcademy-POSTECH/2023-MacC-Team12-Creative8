@@ -11,12 +11,13 @@ import Core
 import UI
 
 struct MenuButton: View {
+  @Binding var selectedTab: Tab
   let item: LikeArtist
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
   var body: some View {
     Menu {
-      NavigationLink("아티스트 보기") { ArtistView(artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
+      NavigationLink("아티스트 보기") { ArtistView(selectedTab: $selectedTab, artistName: item.artistInfo.name, artistAlias: item.artistInfo.alias, artistMbid: item.artistInfo.mbid) }
       Button("찜하기 취소") { dataManager.deleteLikeArtist(item) }
     } label: {
       Image(systemName: "ellipsis")
