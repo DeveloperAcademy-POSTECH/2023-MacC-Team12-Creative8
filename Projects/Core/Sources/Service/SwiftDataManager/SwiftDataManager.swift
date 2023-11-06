@@ -21,7 +21,7 @@ public final class SwiftDataManager: ObservableObject {
     }
   }
 
-  //MARK: - LikeArtist
+  // MARK: - LikeArtist
   public func addLikeArtist(name: String,
                             country: String,
                             alias: String,
@@ -57,6 +57,12 @@ public final class SwiftDataManager: ObservableObject {
     return false
   }
 
+  public func updateLikeArtistInfo(_ info: LikeArtist, _ url: String, _ songList: [Titles]) {
+    info.artistInfo.imageUrl = url
+    info.artistInfo.songList = songList
+    self.save()
+  }
+
   public func findArtistAndDelete(_ infos: [LikeArtist], _ mbid: String) {
     for info in infos {
       if info.artistInfo.mbid == mbid {
@@ -65,7 +71,7 @@ public final class SwiftDataManager: ObservableObject {
     }
   }
 
-  //MARK: - SearchHistory
+  // MARK: - SearchHistory
   public func addSearchHistory(name: String,
                                country: String,
                                alias: String,
@@ -73,7 +79,6 @@ public final class SwiftDataManager: ObservableObject {
                                gid: Int,
                                imageUrl: String?,
                                songList: [Titles]) {
-
     let newSearchHistory = SearchHistory(artistInfo: SaveArtistInfo(name: name,
                                                                     country: country,
                                                                     alias: alias,
