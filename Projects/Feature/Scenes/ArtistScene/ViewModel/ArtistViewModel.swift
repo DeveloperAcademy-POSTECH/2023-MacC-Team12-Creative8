@@ -41,14 +41,15 @@ class ArtistViewModel: ObservableObject {
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
     if self.artistInfo == nil {
       self.isLoading1 = true
-      artistDataManager.getArtistInfo(artistName: artistName, artistAlias: artistAlias ?? "", artistMbid: artistMbid) { result in
+      artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
         if let result = result {
           DispatchQueue.main.async {
             self.artistInfo = result
             self.isLoading1 = false
           }
         } else {
-          self.artistDataManager.getArtistInfo(artistName: artistAlias ?? "", artistAlias: artistName, artistMbid: artistMbid) { result in
+          print("Failed to fetch artist info. 1")
+          self.artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
             if let result = result {
               DispatchQueue.main.async {
                 self.artistInfo = result
@@ -56,7 +57,7 @@ class ArtistViewModel: ObservableObject {
               }
             } else {
               self.isLoading1 = false
-              print("Failed to fetch artist info.")
+              print("Failed to fetch artist info. 2")
             }
           }
         }

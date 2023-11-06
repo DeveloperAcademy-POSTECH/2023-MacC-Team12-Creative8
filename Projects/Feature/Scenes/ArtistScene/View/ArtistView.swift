@@ -59,7 +59,23 @@ private struct ArtistImageView: View {
   var body: some View {
     ZStack(alignment: .bottom) {
       if vm.image != nil {
-        imageLayer
+        if vm.artistInfo?.imageUrl == nil {
+          Image(uiImage: vm.image!)
+            .renderingMode(.template)
+            .cornerRadius(14)
+            .foregroundStyle(Color.lineGrey1)
+          
+            .background {
+              Color.mainGrey1
+                .cornerRadius(14)
+            }
+        } else {
+          Image(uiImage: vm.image!)
+            .centerCropped()
+            .aspectRatio(1.5, contentMode: .fit)
+            .cornerRadius(14)
+            .overlay(Color.black.opacity(0.2).cornerRadius(14))
+        }
       } else {
         ProgressView()
       }
@@ -76,14 +92,6 @@ private struct ArtistImageView: View {
       vm.dataManager.modelContext = modelContext
       vm.isLikedArtist = vm.dataManager.isAddedLikeArtist(likeArtist, vm.artistInfo?.mbid ?? "")
     }
-  }
-  
-  private var imageLayer: some View {
-    Image(uiImage: vm.image!)
-      .centerCropped()
-      .aspectRatio(1.5, contentMode: .fit)
-      .cornerRadius(14)
-      .overlay(Color.black.opacity(0.2).cornerRadius(14))
   }
   
   private var textLayer: some View {
@@ -128,6 +136,7 @@ private struct BookmarkedView: View {
   @State var bookmarkedConcerts: [ArchivedConcertInfo] = []
   @Environment(\.dismiss) var dismiss
   @Binding var selectedTab: Tab
+  
   var body: some View {
     VStack {
       titleLayer
@@ -396,4 +405,5 @@ private struct ListView: View {
 
 #Preview {
   ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//  ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
 }
