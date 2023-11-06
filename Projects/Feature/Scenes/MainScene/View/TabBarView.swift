@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
@@ -23,31 +24,44 @@ public struct TabBarView: View {
   
   public var body: some View {
     TabView(selection: $selectedTab) {
-      MainView()
-        .tabItem {
-          Label("세트리스트", systemImage: "music.note.house.fill")
-        }
-        .tag(Tab.home)
-      
-      SearchView()
-        .tabItem {
-          Label("검색", systemImage: "magnifyingglass")
-        }
-        .tag(Tab.search)
-      
-      ArchivingView()
-        .tabItem {
-          Label("아카이빙", systemImage: "heart.fill")
-        }
-        .tag(Tab.archiving)
-      
-      SettingView()
-        .tabItem {
-          Label("더보기", systemImage: "ellipsis")
-        }
-        .tag(Tab.setting)
+      NavigationStack {
+        MainView()
+      }
+      .tabItem {
+        Label("세트리스트", systemImage: "music.note.house.fill")
+      }
+      .tag(Tab.home)
+      NavigationStack {
+        SearchView()
+      }
+      .tabItem {
+        Label("검색", systemImage: "magnifyingglass")
+      }
+      .tag(Tab.search)
+
+      NavigationStack {
+        ArchivingView()
+          .background(Color.backgroundWhite)
+          .navigationTitle("보관함")
+      }
+      .tabItem {
+        Label("보관함", systemImage: "heart.fill")
+      }
+      .tag(Tab.archiving)
+
+      NavigationStack {
+        SettingView()
+          .background(Color.backgroundWhite)
+          .navigationTitle("더보기")
+      }
+      .tabItem {
+        Label("더보기", systemImage: "ellipsis")
+      }
+      .tag(Tab.setting)
     }
-    .accentColor(.blue)
-    .navigationBarBackButtonHidden(true)
+    .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
+    .onAppear {
+      UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
+    }
   }
 }

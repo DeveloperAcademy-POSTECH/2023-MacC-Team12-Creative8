@@ -21,8 +21,7 @@ struct SearchArtistList: View {
       ForEach(viewModel.artistList, id: \.name) { artist in
         let namePair: (String, String?) = viewModel.koreanConverter.findKoreanName(artist: artist)
         let info: String = ((namePair.1 != nil) ? namePair.1! + ", " : "") + (artist.area?.name ?? "")
-        
-        ScrollView {
+        VStack {
           NavigationLink {
             ArtistView(artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
           } label: {
@@ -46,19 +45,25 @@ public struct ListRow: View {
     VStack(alignment: .leading) {
       VStack(alignment: .leading) {
         Text(namePair.0)
-          .font(.system(size: 16))
-          .foregroundStyle(Color.fontBlack)
-        if info == "" {
-          Text(" ")
-            .font(.system(size: 13))
-        } else {
-          Text(info)
-            .font(.system(size: 13))
-            .foregroundStyle(Color.fontGrey25)
+          .font(.subheadline)
+          .foregroundStyle(Color.mainBlack)
+          .lineLimit(1)
+        
+        Group {
+          if info == "" {
+            Text(" ")
+          } else {
+            Text(info)
+          }
         }
+        .lineLimit(1)
+        .font(.footnote)
+        .foregroundStyle(Color.fontGrey25)
+
       }
       .padding(.horizontal)
       .padding(.vertical, 5)
+      
       Divider()
         .foregroundStyle(Color.lineGrey1)
         .padding(.horizontal)

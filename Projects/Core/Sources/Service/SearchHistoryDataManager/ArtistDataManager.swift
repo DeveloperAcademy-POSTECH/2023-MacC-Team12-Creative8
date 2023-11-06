@@ -48,7 +48,7 @@ public final class ArtistDataManager {
   }
   
   public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
-    var parsedSongList: [(String, String?)] = []
+    var parsedSongList: [Titles] = []
     var artistInfo: ArtistInfo?
     var songList: [String] = []
     
@@ -61,10 +61,7 @@ public final class ArtistDataManager {
             if let result = result {
               songList = result
               for song in songList {
-                parsedSongList.append(
-                  (self.extractTextBeforeParentheses(from: song),
-                   self.extractTextInsideFirstParentheses(from: song))
-                )
+                parsedSongList.append(Titles(title: self.extractTextBeforeParentheses(from: song), subTitle: self.extractTextInsideFirstParentheses(from: song) ?? ""))
               }
               artistInfo?.songList = parsedSongList
               completion(artistInfo)
@@ -125,12 +122,24 @@ public final class ArtistDataManager {
       return nil
     }
     
-    private func stringFilter(_ str: String) -> String {
-      return str
-        .lowercased()
-        .trimmingCharacters(in: .whitespaces)
-        .replacingOccurrences(of: " ", with: "")
-        .filter { $0.unicodeScalars.first?.value != 8203 }
+    print("FAILED TO FIND ARTIST")
+    return nil
+  }
+  
+  private func stringFilter(_ str: String) -> String {
+    return str
+      .trimmingCharacters(in: .whitespaces)
+      .replacingOccurrences(of: " ", with: "")
+      .filter { $0.unicodeScalars.first?.value != 8203 }
+  }
+  
+  // 첫 번째 괄호 이전의 텍스트를 추출
+  private func extractTextBeforeParentheses(from input: String) -> String {
+    if let range = input.range(of: "(") {
+      let textBeforeParentheses = input[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
+      return String(textBeforeParentheses)
+    } else {
+      return input
     }
     
     // 첫 번째 괄호 이전의 텍스트를 추출

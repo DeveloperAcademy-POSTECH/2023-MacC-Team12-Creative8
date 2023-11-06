@@ -22,7 +22,7 @@ struct SearchArtistCell: View {
       }
 
       Text("\(artistName)")
-        .foregroundStyle(Color.fontBlack)
+        .foregroundStyle(Color.mainBlack)
     }
   }
 }

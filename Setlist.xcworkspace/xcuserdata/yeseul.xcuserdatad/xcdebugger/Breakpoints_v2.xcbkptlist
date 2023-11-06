@@ -165,7 +165,7 @@
             landmarkType = "7">
 =======
             uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
@@ -193,7 +193,7 @@
                </Location>
                <Location
                   uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 6dea8f16548af972"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Feature.SearchArtistList.dataManager.getter : Core.SwiftDataManager"
@@ -208,7 +208,7 @@
                </Location>
                <Location
                   uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - bdb3ea932d62fed9"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Feature.SearchArtistList.$dataManager.getter : SwiftUI.ObservedObject&lt;Core.SwiftDataManager&gt;.Wrapper"
@@ -223,7 +223,7 @@
                </Location>
                <Location
                   uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 4c5da9bbdcf113e7"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "default argument 1 of Feature.SearchArtistList.init(viewModel: Feature.SearchViewModel, dataManager: @autoclosure () -&gt; Core.SwiftDataManager, modelContext: SwiftUI.Environment&lt;SwiftData.ModelContext&gt;) -&gt; Feature.SearchArtistList"
@@ -235,6 +235,96 @@
                   startingLineNumber = "0"
                   endingLineNumber = "0"
                   offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - b37a86a0219c67b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Feature.SearchArtistList.viewModel : Feature.SearchViewModel"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - a17738204e2f3988"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.viewModel.getter : Feature.SearchViewModel"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 1b4c411fb6d4238a"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.viewModel.setter : Feature.SearchViewModel"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - 4161c4f27a68ed15"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.viewModel.modify : Feature.SearchViewModel"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - e16380838853703a"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.viewModel.modify : Feature.SearchViewModel with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - c3e01c32277921d7"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Feature.SearchArtistList.$viewModel.getter : SwiftUI.ObservedObject&lt;Feature.SearchViewModel&gt;.Wrapper"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeseul/setlist/Projects/Feature/Scenes/SearchScene/Component/SearchArtistList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
 >>>>>>> aba74f170fab71773c85935df5e87fce0294fcfe

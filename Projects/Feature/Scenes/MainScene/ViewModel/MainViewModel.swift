@@ -95,8 +95,7 @@ final class MainViewModel: ObservableObject {
 
 public enum ButtonType: Int, CaseIterable, Identifiable {
     public var id: Int { self.rawValue }
-  
-    case dark, light, automatic
+    case automatic, light, dark
     
    public var icon: String {
         switch self {

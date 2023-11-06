@@ -10,58 +10,59 @@ import SwiftUI
 import UI
 
 struct SearchBar: View {
-    @Binding var text: String
-    @Binding var isEditing: Bool
-
-    init(text: Binding<String>, isEditing: Binding<Bool>) {
-        self._text = text
-        self._isEditing = isEditing
-    }
-
-    var body: some View {
-        HStack {
-            TextField("아티스트를 검색하세요", text: $text)
-                .padding(12.5)
-                .padding(.horizontal, 20)
-                .foregroundColor(.gray)
-                .background(Color(.systemGray6))
-                .cornerRadius(20)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 7.5)
-
-                      if isEditing && text.count != 0 {
-                        Button {
-                          self.text = ""
-                        } label: {
-                          Image(systemName: "multiply.circle.fill")
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 7.5)
-                        }
-                      }
-                    }
-                )
-                .onTapGesture {
-                  withAnimation {
-                    self.isEditing = true
-                  }
-                }
-
-          if isEditing {
-            Button("취소") {
-              withAnimation {
-                self.isEditing = false
+  @Binding var text: String
+  @Binding var isEditing: Bool
+  
+  init(text: Binding<String>, isEditing: Binding<Bool>) {
+    self._text = text
+    self._isEditing = isEditing
+  }
+  
+  var body: some View {
+    HStack {
+      TextField("아티스트를 검색하세요", text: $text)
+        .autocorrectionDisabled(true)
+        .padding(12.5)
+        .padding(.horizontal, 20)
+        .foregroundColor(.fontGrey2)
+        .background(Color.mainGrey1)
+        .cornerRadius(20)
+        .overlay(
+          HStack {
+            Image(systemName: "magnifyingglass")
+              .foregroundColor(.fontGrey2)
+              .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+              .padding(.leading, 7.5)
+            
+            if isEditing && text.count != 0 {
+              Button {
                 self.text = ""
+              } label: {
+                Image(systemName: "multiply.circle.fill")
+                  .foregroundColor(.fontGrey2)
+                  .padding(.trailing, 7.5)
               }
-              UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
-            .foregroundStyle(Color.fontBlack)
-            .padding(.horizontal, 10)
+          }
+        )
+        .onTapGesture {
+          withAnimation {
+            self.isEditing = true
           }
         }
-        .textCase(.none)
+      
+      if isEditing {
+        Button("취소") {
+          withAnimation {
+            self.isEditing = false
+            self.text = ""
+          }
+          UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+        .foregroundStyle(Color.mainBlack)
+        .padding(.horizontal, 10)
+      }
     }
+    .textCase(.none)
+  }
 }

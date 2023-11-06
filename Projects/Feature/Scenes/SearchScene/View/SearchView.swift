@@ -21,19 +21,21 @@ public struct SearchView: View {
   
   public var body: some View {
     ScrollViewReader { proxy in
-      ScrollView {
-        Group {
-          headView
+      Group {
+        headView
+        ScrollView {
           searchingHistoryView
           //          artistView
         }
-        .padding(.horizontal)
       }
-      .scrollDisabled(viewModel.searchIsPresented)
+      .padding(.horizontal)
+//      .scrollDisabled(viewModel.searchIsPresented)
+      .scrollIndicators(.hidden)
       .onChange(of: viewModel.searchIsPresented) { _, newValue in
         withAnimation { proxy.scrollTo(newValue ? ScrollID.searchBar : ScrollID.top, anchor: .top) }
       }
     }
+    .background(Color.backgroundWhite)
   }
   
   // MARK: 상단, ScrollViewReader의 사용을 위해 id 활용
@@ -44,13 +46,10 @@ public struct SearchView: View {
 //        .frame(width: 37, height: 21)
 //        .opacity(viewModel.searchIsPresented ? 0 : 1)
 //        .id(ScrollID.top)
-      MainView().logo
-        .padding([.leading, .vertical], 10)
+//      MainView().logo
+//        .padding([.leading, .vertical], 10)
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         .id(ScrollID.searchBar)
-        .onChange(of: viewModel.searchText) {
-          viewModel.getArtistList()
-        }
     }
     .padding(.top)
   }
@@ -69,6 +68,7 @@ public struct SearchView: View {
 //  private var domesticArtistView: some View {
 //    VStack(alignment: .leading) {
 //      Text("국내 아티스트").bold()
+//        .foregroundStyle(Color.mainBlack)
 //      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
 //        ForEach(tempColor, id: \.self) { item in
 //          SearchArtistCell(tempColor: item, artistName: "Dummy")
@@ -80,6 +80,7 @@ public struct SearchView: View {
 //  private var foreignArtistView: some View {
 //    VStack(alignment: .leading) {
 //      Text("해외 아티스트").bold()
+//        .foregroundStyle(Color.mainBlack)
 //      LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
 //        ForEach(tempColor, id: \.self) { item in
 //          SearchArtistCell(tempColor: item, artistName: "Dummy")
@@ -89,27 +90,25 @@ public struct SearchView: View {
 //  }
 //  
   private var searchingHistoryView: some View {
-    ScrollView {
-      LazyVStack {
-        if viewModel.searchText.isEmpty {
-          HStack {
-            Text("최근 검색")
-              .bold()
-              .foregroundStyle(Color.fontBlack)
-            Spacer()
-            Button("모두 지우기") {
-              dataManager.deleteSearchHistoryAll()
-            }
-            .foregroundStyle(Color.blockOrange)
+    VStack {
+      if viewModel.searchText.isEmpty {
+        HStack {
+          Text("최근 검색")
             .bold()
+            .foregroundStyle(Color.mainBlack)
+          Spacer()
+          Button("모두 지우기") {
+            dataManager.deleteSearchHistoryAll()
           }
-          
-          ForEach(history, id: \.self) { item in
-            SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
-          }
-        } else {
-          SearchArtistList(viewModel: viewModel)
+          .foregroundStyle(Color.mainOrange)
+          .bold()
         }
+        
+        ForEach(history, id: \.self) { item in
+          SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
+        }
+      } else {
+        SearchArtistList(viewModel: viewModel)
       }
     }
     .onAppear { dataManager.modelContext = modelContext }

@@ -14,9 +14,9 @@ struct ServiceExplainView: View {
   @ObservedObject var viewModel = SettingViewModel()
   
   var body: some View {
-    ScrollView {
-      ZStack {
-        Color(Color.settingTextBoxWhite)
+    ZStack {
+      Color(Color.backgroundGrey)
+      ScrollView {
         VStack {
           SectionBackgroundView(height: 1100)
             .overlay {
@@ -29,7 +29,7 @@ struct ServiceExplainView: View {
               }
               .padding(.horizontal, 26)
             }
-            .padding(EdgeInsets(top: 132, leading: 20, bottom: 40, trailing: 20))
+            .padding(EdgeInsets(top: 120, leading: 20, bottom: 40, trailing: 20))
         }
       }
     }
@@ -43,9 +43,9 @@ struct TermsOfSetlistfm: View {
   
   var body: some View {
     ZStack {
-      Color(hex: 0xEEEEEF).ignoresSafeArea()
+      Color(Color.backgroundGrey)
       VStack {
-        SectionBackgroundView(height: 571)
+        SectionBackgroundView(height: 570)
           .overlay {
             VStack(alignment: .leading) {
               TermsTitleView(title: "Setlist.fm API 약관")
@@ -54,16 +54,17 @@ struct TermsOfSetlistfm: View {
               TermsView(terms: viewModel.termsOfSelistfmAPI, bulletPoint: "•")
               
               // Setlist.fm 약관 이동 버튼
-              SetlistfmLink(
+              SetlistfmLinkButton(
                 setlistfmURL: "https://www.setlist.fm/help/terms",
                 linkLabel: "Setlist.fm 약관 자세히 보기")
               .padding(EdgeInsets(top: 16, leading: 0, bottom: 35, trailing: 0))
             }
             .padding(.horizontal, 26)
           }
-          .padding(EdgeInsets(top: 0, leading: 20, bottom: 80, trailing: 20))
+          .padding(EdgeInsets(top: 80, leading: 20, bottom: 40, trailing: 20))
       }
     }
+    .ignoresSafeArea()
   }
 }
 
@@ -74,9 +75,10 @@ struct TermsTitleView: View {
   var body: some View {
     Text(title)
       .font(.system(size: 18, weight: .semibold))
-      .foregroundStyle(Color.fontBlack)
-      .padding(EdgeInsets(top: 32, leading: 0, bottom: 16, trailing: 0))
+      .foregroundStyle(Color.mainBlack)
+      .padding(EdgeInsets(top: 32, leading: 0, bottom: 5, trailing: 0))
     Divider()
+      .foregroundStyle(Color.lineGrey1)
   }
 }
 
@@ -111,7 +113,7 @@ struct SectionBackgroundView: View {
   
   var body: some View {
     RoundedRectangle(cornerRadius: 12)
-      .fill(Color.backgroundWhite)
+      .fill(Color.settingTextBoxWhite)
       .frame(height: height)
   }
 }
@@ -119,3 +121,24 @@ struct SectionBackgroundView: View {
 #Preview {
   TermsOfSetlistfm()
 }
+
+/// UIViewReperesentable을 사용해서 UIKit을 매핑해야함.
+/// UILabel()의 linebreakmode 설정을 하면 단어 단위로 다음 줄로 넘어가게 할 수 있음
+/// 만약 Hstack 내부에서 저 장문의 글만 처리하려고 하면 Geometry Reader를 써서 width를 넘겨줘야 할듯함
+/// 제일 쉬운 방법 : 이미지 다크-라이트모드로 걍 넣으셈
+
+// struct SUILabel: UIViewRepresentable {
+//
+//    private(set) var preferredMaxLayoutWidth: CGFloat = 0
+//    func makeUIView(context: UIViewRepresentableContext<SUILabel>) -> UILabel {
+//        let label = UILabel()
+//        label.text = """
+//        HIHI
+//        """
+//        label.numberOfLines = 0
+//        label.textColor = UIColor.white
+//        return label
+//    }
+//
+//    func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<SUILabel>) { }
+// }
