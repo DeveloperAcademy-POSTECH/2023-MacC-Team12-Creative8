@@ -12,27 +12,20 @@ import UI
 public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
   
-  enum Tab {
-    case home
-    case search
-    case archiving
-    case setting
-  }
-  
   public init() {
   }
   
   public var body: some View {
     TabView(selection: $selectedTab) {
       NavigationStack {
-        MainView()
+        MainView(selectedTab: $selectedTab)
       }
       .tabItem {
         Label("세트리스트", systemImage: "music.note.house.fill")
       }
       .tag(Tab.home)
       NavigationStack {
-        SearchView()
+        SearchView(selectedTab: $selectedTab)
       }
       .tabItem {
         Label("검색", systemImage: "magnifyingglass")
@@ -40,9 +33,8 @@ public struct TabBarView: View {
       .tag(Tab.search)
 
       NavigationStack {
-        ArchivingView()
+        ArchivingView(selectedTab: $selectedTab)
           .background(Color.backgroundWhite)
-          .navigationTitle("보관함")
       }
       .tabItem {
         Label("보관함", systemImage: "heart.fill")
@@ -52,16 +44,21 @@ public struct TabBarView: View {
       NavigationStack {
         SettingView()
           .background(Color.backgroundWhite)
-          .navigationTitle("더보기")
       }
       .tabItem {
         Label("더보기", systemImage: "ellipsis")
       }
       .tag(Tab.setting)
     }
-    .navigationTitle(selectedTab == .archiving ? "보관함" : selectedTab == .setting ? "더보기" : "")
     .onAppear {
       UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
     }
   }
+}
+
+enum Tab {
+  case home
+  case search
+  case archiving
+  case setting
 }

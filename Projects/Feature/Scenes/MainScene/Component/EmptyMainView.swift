@@ -13,6 +13,8 @@ import Core
 import UI
 
 struct EmptyMainView: View {
+  @Binding var selectedTab: Tab
+  
   var body: some View {
     VStack {
       Spacer()
@@ -25,21 +27,17 @@ struct EmptyMainView: View {
         .multilineTextAlignment(.center)
         .foregroundStyle(Color.fontGrey2)
         .padding(.bottom)
-      NavigationLink(destination: SearchView()) {
-        Text("아티스트 찜하러 가기 →")
-          .foregroundStyle(Color.mainWhite)
-          .font(.system(size: 14))
-          .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
-          .background(RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.buttonBlack))
-          .bold()
+      Button("아티스트 찜하러 가기 →") {
+        selectedTab = .search
       }
+      .foregroundStyle(Color.mainWhite)
+      .font(.system(size: 14))
+      .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
+      .background(RoundedRectangle(cornerRadius: 14)
+        .foregroundStyle(Color.buttonBlack))
+      .bold()
       .padding(.vertical)
       Spacer()
     }
   }
-}
-
-#Preview {
-    EmptyMainView()
 }

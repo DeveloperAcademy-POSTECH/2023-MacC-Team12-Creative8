@@ -16,20 +16,8 @@ final class MainViewModel: ObservableObject {
     @Published var scrollToIndex: Int?
     @Published var isTapped: Bool = false
     @Published var isLoading: Bool = false
-    var setlists = [[Setlist?]?](repeating: nil, count: 100) //MARK: 나중에 꼭 수정하기!
-    
-    let dateMonthFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter
-    }()
-    let yearFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "YYYY"
-        return formatter
-    }()
-    
+    var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
+
     func replaceFirstSpaceWithNewline(_ input: String) -> String {
         guard let range = input.rangeOfCharacter(from: .whitespaces) else {
             return input

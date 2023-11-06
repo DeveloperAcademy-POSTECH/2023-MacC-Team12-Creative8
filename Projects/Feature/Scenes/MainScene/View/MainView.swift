@@ -12,28 +12,26 @@ import Core
 import UI
 
 public struct MainView: View {
+  @Binding var selectedTab: Tab
   @Environment(\.colorScheme) var colorScheme
   
-  @Query(sort: \LikeArtist.orderIndex) var likeArtists: [LikeArtist]
-  
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+
   @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   
   @Environment(\.modelContext) var modelContext
   
-  public init() {
-  }
-
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
         VStack(spacing: 0) {
           Divider()
-            .padding(.leading, 24)
+            .padding(.leading)
             .padding(.vertical)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {
-            EmptyMainView()
+            EmptyMainView(selectedTab: $selectedTab)
               .frame(width: geometry.size.width)
               .frame(minHeight: geometry.size.height * 0.9)
           } else {
@@ -63,7 +61,6 @@ public struct MainView: View {
       }
     }
   }
-  
   public var logo: some View {
     HStack(spacing: 0) {
       Rectangle()
@@ -77,7 +74,27 @@ public struct MainView: View {
     }
     .foregroundColor(Color.mainBlack)
   }
-  
+  public var toolbarButton: some View {
+    ZStack(alignment: .trailingFirstTextBaseline) {
+      Button {
+        viewModel.isTapped.toggle()
+      } label: {
+        if colorScheme == .dark {
+          Image(systemName: "sun.max.fill")
+            .font(.subheadline)
+        } else {
+          Image(systemName: "moon.fill")
+            .font(.subheadline)
+        }
+      }
+      .foregroundColor(Color.mainBlack)
+      .opacity(viewModel.isTapped ? 0 : 1)
+      .padding(6)
+      if viewModel.isTapped {
+        ToolbarDarkModeButtons(viewModel: viewModel)
+      }
+    }
+  }
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
       artistNameScrollView
@@ -101,7 +118,6 @@ public struct MainView: View {
       }
     }
   }
-  
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
@@ -144,12 +160,12 @@ public struct MainView: View {
         ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
-              NavigationLink(destination: ArtistView(artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
+              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
                 if likeArtists[data].artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
                   let imageUrl = likeArtists[data].artistInfo.imageUrl
-                  ArtistImage(imageUrl: imageUrl)
+                  ArtistImage(selectedTab: $selectedTab, imageUrl: imageUrl)
                 }
               }
               HStack {
@@ -209,27 +225,6 @@ public struct MainView: View {
       .scrollTargetLayout()
     }
   }
-  public var toolbarButton: some View {
-    ZStack(alignment: .trailingFirstTextBaseline) {
-      Button {
-        viewModel.isTapped.toggle()
-      } label: {
-        if colorScheme == .dark {
-          Image(systemName: "sun.max.fill")
-            .font(.subheadline)
-        } else {
-          Image(systemName: "moon.fill")
-            .font(.subheadline)
-        }
-      }
-      .foregroundColor(Color.mainBlack)
-      .opacity(viewModel.isTapped ? 0 : 1)
-      .padding(6)
-      if viewModel.isTapped {
-        ToolbarDarkModeButtons(viewModel: viewModel)
-      }
-    }
-  }
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
         .foregroundStyle(Color.mainGrey1)
@@ -262,15 +257,15 @@ public struct MainView: View {
         }
       }
       .padding([.trailing, .bottom])
+    }
   }
-}
+
 // 로고 만들기
 extension View {
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
     clipShape( RoundedCorner(radius: radius, corners: corners) )
   }
 }
-
 struct RoundedCorner: Shape {
   var radius: CGFloat = .infinity
   var corners: UIRectCorner = .allCorners
@@ -282,5 +277,5 @@ struct RoundedCorner: Shape {
 }
 
 #Preview {
-  MainView()
+  MainView(selectedTab: .constant(.home))
 }

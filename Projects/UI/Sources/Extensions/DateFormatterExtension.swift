@@ -9,9 +9,16 @@
 import Foundation
 
 public extension DateFormatter {
-    static func monthDayFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter
-    }
+  static func dateMonthFormatter() -> DateFormatter {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MM.dd"
+      return formatter
+  }
+  
+  static func yearFormatter() -> DateFormatter {
+      let formatter = DateFormatter()
+      formatter.locale = Locale(identifier: "ko_KR")
+      formatter.dateFormat = "YYYY"
+      return formatter
+  }
 }

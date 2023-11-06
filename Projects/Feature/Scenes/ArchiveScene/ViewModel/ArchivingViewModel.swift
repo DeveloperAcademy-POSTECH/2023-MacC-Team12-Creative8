@@ -10,13 +10,26 @@ import Foundation
 import Core
 
 class ArchivingViewModel: ObservableObject {
-	@Published var selectSegment: Bool = true
-	@Published var selectArtist: [String] = []
+  static let shared = ArchivingViewModel()
+  @Published var selectSegment: SelectEnum = .bookmark
+	@Published var selectArtist: String = ""
 	@Published var artistSet: Set<String> = []
 
 	func insertArtistSet(_ info: [ArchivedConcertInfo]) {
-		for i in 0..<info.count {
-			artistSet.insert(info[i].artistInfo.name)
+    if !artistSet.isEmpty { 
+      artistSet.removeAll()
+      if !info.contains(where: { $0.artistInfo.name == selectArtist }) {
+        selectArtist = ""
+      }
+    }
+
+		for index in 0..<info.count {
+			artistSet.insert(info[index].artistInfo.name)
 		}
 	}
+
+  enum SelectEnum {
+    case bookmark
+    case likeArtist
+  }
 }
