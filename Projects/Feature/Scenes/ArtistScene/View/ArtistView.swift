@@ -62,9 +62,7 @@ private struct ArtistImageView: View {
         if vm.artistInfo?.imageUrl == nil {
           Image(uiImage: vm.image!)
             .renderingMode(.template)
-            .cornerRadius(14)
             .foregroundStyle(Color.lineGrey1)
-          
             .background {
               Color.mainGrey1
                 .cornerRadius(14)
@@ -404,6 +402,6 @@ private struct ListView: View {
 }
 
 #Preview {
-  ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
-//  ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//  ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+  ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
 }
