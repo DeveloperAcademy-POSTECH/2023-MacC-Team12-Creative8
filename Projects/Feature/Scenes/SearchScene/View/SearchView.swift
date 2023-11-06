@@ -11,15 +11,14 @@ import Core
 import SwiftData
 import UI
 
-public struct SearchView: View {
+struct SearchView: View {
+  @Binding var selectedTab: Tab
   @Query(sort: \SearchHistory.createdDate, order: .reverse) private var history: [SearchHistory] = []
   @StateObject var viewModel = SearchViewModel()
   @Environment (\.modelContext) var modelContext
   @StateObject var dataManager = SwiftDataManager()
-  
-  public init() {}
-  
-  public var body: some View {
+
+  var body: some View {
     ScrollViewReader { proxy in
       Group {
         headView
@@ -105,10 +104,10 @@ public struct SearchView: View {
         }
         
         ForEach(history, id: \.self) { item in
-          SearchHistoryCell(searchText: $viewModel.searchText, history: item, dataManager: dataManager)
+          SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
         }
       } else {
-        SearchArtistList(viewModel: viewModel)
+        SearchArtistList(selectedTab: $selectedTab, viewModel: viewModel)
       }
     }
     .onAppear { dataManager.modelContext = modelContext }

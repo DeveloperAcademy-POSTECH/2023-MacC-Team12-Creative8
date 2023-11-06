@@ -12,29 +12,35 @@ import Core
 import UI
 
 struct ArchivingView: View {
-  @Query(sort: \LikeArtist.orderIndex) var likeArtist: [LikeArtist]
+  @Binding var selectedTab: Tab
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
-  @StateObject var viewModel = ArchivingViewModel()
-  
+  @StateObject var viewModel = ArchivingViewModel.shared
+
   var body: some View {
-    VStack(spacing: 0) {
+    VStack {
       Divider()
         .foregroundStyle(Color.lineGrey1)
-        .padding(.leading, 24)
+        .padding(.trailing, -20)
       segmentedButtonsView
-      if viewModel.selectSegment {
+      if viewModel.selectSegment == .bookmark {
         bookmarkView
       } else {
         artistView
       }
     }
     .padding()
+    .toolbar { ToolbarItem(placement: .topBarLeading) { 
+      Text("보관함")
+        .font(.title2)
+        .fontWeight(.semibold)
+    } }
   }
 }
 
 #Preview {
   NavigationStack {
-    ArchivingView()
+    ArchivingView(selectedTab: .constant(.archiving))
   }
 }
 
@@ -42,19 +48,19 @@ extension ArchivingView {
   private var segmentedButtonsView: some View {
     HStack {
       Button("북마크한 공연") {
-        viewModel.selectSegment = true
+        viewModel.selectSegment = .bookmark
       }
-      .foregroundStyle(viewModel.selectSegment ? Color.mainBlack : Color.fontGrey3)
-      
+      .foregroundStyle(viewModel.selectSegment == .bookmark ? Color.mainBlack : Color.fontGrey3)
+
       Button("찜한 아티스트") {
-        viewModel.selectSegment = false
+        viewModel.selectSegment = .likeArtist
       }
-      .foregroundStyle(viewModel.selectSegment ? Color.fontGrey3 : Color.mainBlack)
+      .foregroundStyle(viewModel.selectSegment == .bookmark ? Color.fontGrey3 : Color.mainBlack)
       .padding(.horizontal)
     }
     .font(.headline)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(.vertical)
+    .padding(.top)
   }
   
   private var bookmarkView: some View {
@@ -65,6 +71,7 @@ extension ArchivingView {
         ScrollView {
           bookmarkListView
         }
+        .scrollIndicators(.hidden)
       }
     }
   }
@@ -75,10 +82,10 @@ extension ArchivingView {
         HStack {
           ForEach(viewModel.artistSet.sorted(), id: \.self) { artist in
             Button {
-              if let index = viewModel.selectArtist.firstIndex(of: artist) {
-                viewModel.selectArtist.remove(at: index)
+              if viewModel.selectArtist == artist {
+                viewModel.selectArtist = ""
               } else {
-                viewModel.selectArtist.insert(artist, at: 0)
+                viewModel.selectArtist = artist
               }
             } label: {
               ArtistSetCell(name: artist, isSelected: viewModel.selectArtist.contains(artist))
@@ -86,11 +93,12 @@ extension ArchivingView {
           }
         }
       }
+      .scrollIndicators(.hidden)
       .padding(.vertical)
       
       ForEach(concertInfo) { item in
         if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
-          ArchiveConcertInfoCell(info: item)
+          ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
         }
@@ -98,11 +106,14 @@ extension ArchivingView {
       .padding(.horizontal)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
+    .onChange(of: concertInfo) { _, newValue in
+      viewModel.insertArtistSet(newValue)
+    }
   }
   
   private var artistView: some View {
     Group {
-      if likeArtist.isEmpty {
+      if likeArtists.isEmpty {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
@@ -121,25 +132,28 @@ extension ArchivingView {
   }
   
   private var artistListView: some View {
-    ForEach(Array(likeArtist.enumerated()), id: \.element) { index, item in
+    ForEach(Array(likeArtists.enumerated()), id: \.element) { index, item in
       HStack {
-        ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
+        ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
         Text("\(item.artistInfo.name)")
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
-            NavigationLink("", destination: ArtistView(artistName: item.artistInfo.name,
+            NavigationLink("", destination: ArtistView(selectedTab: $selectedTab,
+                                                       artistName: item.artistInfo.name,
                                                        artistAlias: item.artistInfo.alias,
                                                        artistMbid: item.artistInfo.mbid))
             .opacity(0)
           )
         Spacer()
-        MenuButton(item: item)
+        MenuButton(selectedTab: $selectedTab, item: item)
       }
     }
     .onMove { source, destination in
-      var updatedItems = likeArtist
+      var updatedItems = likeArtists
       updatedItems.move(fromOffsets: source, toOffset: destination)
-      for (index, item) in updatedItems.enumerated() { item.orderIndex = index }
+      for (index, item) in updatedItems.enumerated() {
+        item.orderIndex = likeArtists.count - 1 - index
+      }
     }
   }
 }
