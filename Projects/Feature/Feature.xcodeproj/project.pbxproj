@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
+		8B7E4A012AF966800029170C /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A002AF966800029170C /* ArtistInfoView.swift */; };
+		8B7E4A032AF967560029170C /* BookmarkedSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A022AF967560029170C /* BookmarkedSetlistsView.swift */; };
+		8B7E4A052AF9691E0029170C /* AllSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A042AF9691E0029170C /* AllSetlistsView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E319B5E5F3B22C401257A /* IsEmptyCell.swift */; };
 		A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */; };
@@ -87,6 +90,9 @@
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingViewModel.swift; sourceTree = "<group>"; };
+		8B7E4A002AF966800029170C /* ArtistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoView.swift; sourceTree = "<group>"; };
+		8B7E4A022AF967560029170C /* BookmarkedSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedSetlistsView.swift; sourceTree = "<group>"; };
+		8B7E4A042AF9691E0029170C /* AllSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSetlistsView.swift; sourceTree = "<group>"; };
 		94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
 		A215FBB13B09E45FD00ED57C /* Feature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Feature-Info.plist"; sourceTree = "<group>"; };
@@ -190,6 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				203EB1D01BAE365D00E42F60 /* ArtistView.swift */,
+				8B7E4A002AF966800029170C /* ArtistInfoView.swift */,
+				8B7E4A022AF967560029170C /* BookmarkedSetlistsView.swift */,
+				8B7E4A042AF9691E0029170C /* AllSetlistsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,8 +424,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -490,10 +497,13 @@
 				50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */,
 				03EA814D84858AD2B3D35638 /* ArtistView.swift in Sources */,
 				A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */,
+				8B7E4A052AF9691E0029170C /* AllSetlistsView.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
+				8B7E4A012AF966800029170C /* ArtistInfoView.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
+				8B7E4A032AF967560029170C /* BookmarkedSetlistsView.swift in Sources */,
 				900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,

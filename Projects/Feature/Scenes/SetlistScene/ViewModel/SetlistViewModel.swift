@@ -29,10 +29,7 @@ final class SetlistViewModel: ObservableObject {
   }
   
   func isEmptySetlist(_ setlist: Setlist) -> Bool {
-    if setlist.sets?.setsSet?.isEmpty == true {
-      return true
-    }
-    return false
+    return setlist.sets?.setsSet?.isEmpty == true
   }
   
   func getFormattedDateFromString(date: String, format: String) -> String? {

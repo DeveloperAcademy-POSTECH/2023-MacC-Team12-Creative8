@@ -11,41 +11,30 @@ import Core
 import SwiftUI
 
 class ArtistViewModel: ObservableObject {
-  let dataService: SetlistDataService = SetlistDataService.shared
-  let koreanConverter: KoreanConverter = KoreanConverter.shared
-  let artistDataManager: ArtistDataManager = ArtistDataManager.shared
-  let archivingviewModel = ArchivingViewModel.shared
-  let dataManager = SwiftDataManager()
+  let dataService = SetlistDataService.shared
+  let koreanConverter = KoreanConverter.shared
+  let artistDataManager = ArtistDataManager.shared
+  let swiftDataManager = SwiftDataManager()
+  let archivingViewModel = ArchivingViewModel.shared
   
-  var artistInfo: ArtistInfo
+  var artistInfo: ArtistInfo = ArtistInfo(name: "", mbid: "")
   var setlists: [Setlist]?
   var page: Int = 1
   var totalPage: Int = 0
   
-  @Published var showBookmarkedSetlists: Bool
-  @Published var isLoading1: Bool
-  @Published var isLoading2: Bool
-  @Published var isLoading3: Bool
-  @Published var image: UIImage?
-  @Published var isLikedArtist: Bool
+  @Published var showBookmarkedSetlists: Bool = false
+  @Published var isLikedArtist: Bool = false
+  @Published var isLoadingArtistInfo: Bool = false
+  @Published var isLoadingSetlist: Bool = false
+  @Published var isLoadingNextPage: Bool = false
 
-  init() {
-    self.showBookmarkedSetlists = false
-    self.isLoading1 = false
-    self.isLoading2 = false
-    self.isLoading3 = false
-    self.image = nil
-    self.isLikedArtist = false
-    self.artistInfo = ArtistInfo(name: "", mbid: "")
-  }
-  
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
-    self.isLoading1 = true
+    self.isLoadingArtistInfo = true
     artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
       if let result = result {
         DispatchQueue.main.async {
           self.artistInfo = result
-          self.isLoading1 = false
+          self.isLoadingArtistInfo = false
         }
       } else {
         print("Failed to fetch artist info. 1")
@@ -53,10 +42,10 @@ class ArtistViewModel: ObservableObject {
           if let result = result {
             DispatchQueue.main.async {
               self.artistInfo = result
-              self.isLoading1 = false
+              self.isLoadingArtistInfo = false
             }
           } else {
-            self.isLoading1 = false
+            self.isLoadingArtistInfo = false
             print("Failed to fetch artist info. 2")
           }
         }
@@ -66,16 +55,16 @@ class ArtistViewModel: ObservableObject {
   
   func getSetlistsFromSetlistFM(artistMbid: String) {
     if self.setlists == nil {
-      self.isLoading2 = true
+      self.isLoadingSetlist = true
       dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: page) { result in
         if let result = result {
           DispatchQueue.main.async {
             self.setlists = result.setlist
             self.totalPage = Int((result.total ?? 1) / (result.itemsPerPage ?? 1) + 1)
-            self.isLoading2 = false
+            self.isLoadingSetlist = false
           }
         } else {
-          self.isLoading2 = false
+          self.isLoadingSetlist = false
           print("Failed to fetch setlist data.")
         }
       }
@@ -84,41 +73,20 @@ class ArtistViewModel: ObservableObject {
 
   func fetchNextPage(artistMbid: String) {
     page += 1
-    self.isLoading3 = true
+    self.isLoadingNextPage = true
     dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: page) { result in
       if let result = result {
         DispatchQueue.main.async {
           self.setlists?.append(contentsOf: result.setlist ?? [])
-          self.isLoading3 = false
+          self.isLoadingNextPage = false
         }
       } else {
-        self.isLoading3 = false
+        self.isLoadingNextPage = false
         print("Failed to fetch setlist data.")
       }
     }
   }
   
-  func loadImage() {
-    if let imageUrl = artistInfo.imageUrl {
-      if let url = URL(string: imageUrl) {
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-          if let data = data, let image = UIImage(data: data) {
-            DispatchQueue.main.async {
-              self.image = image
-            }
-          }
-        }
-        .resume()
-      } else {
-        self.image = UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-        print("Invalid Image URL")
-      }
-    } else {
-      self.image = UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-      return
-    }
-  }
-
   func getFormattedDateFromString(date: String, format: String) -> String? {
     let inputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
@@ -146,10 +114,7 @@ class ArtistViewModel: ObservableObject {
   }
   
   func isEmptySetlist(_ setlist: Setlist) -> Bool {
-    if setlist.sets?.setsSet?.isEmpty == true {
-      return true
-    }
-    return false
+    return setlist.sets?.setsSet?.isEmpty == true
   }
   
 }
