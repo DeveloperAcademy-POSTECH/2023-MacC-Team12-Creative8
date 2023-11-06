@@ -13,7 +13,7 @@ import UI
 
 struct ArchivingView: View {
   @Binding var selectedTab: Tab
-  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtist: [LikeArtist]
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchivingViewModel.shared
 
@@ -113,7 +113,7 @@ extension ArchivingView {
   
   private var artistView: some View {
     Group {
-      if likeArtist.isEmpty {
+      if likeArtists.isEmpty {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
@@ -132,7 +132,7 @@ extension ArchivingView {
   }
   
   private var artistListView: some View {
-    ForEach(Array(likeArtist.enumerated()), id: \.element) { index, item in
+    ForEach(Array(likeArtists.enumerated()), id: \.element) { index, item in
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl)!, isNewUpdate: false)
         Text("\(item.artistInfo.name)")
@@ -149,10 +149,10 @@ extension ArchivingView {
       }
     }
     .onMove { source, destination in
-      var updatedItems = likeArtist
+      var updatedItems = likeArtists
       updatedItems.move(fromOffsets: source, toOffset: destination)
       for (index, item) in updatedItems.enumerated() {
-        item.orderIndex = likeArtist.count - 1 - index
+        item.orderIndex = likeArtists.count - 1 - index
       }
     }
   }
