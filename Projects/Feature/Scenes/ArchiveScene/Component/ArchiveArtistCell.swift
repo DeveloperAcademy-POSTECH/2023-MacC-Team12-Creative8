@@ -12,6 +12,7 @@ import UI
 struct ArchiveArtistCell: View {
   let artistUrl: URL?
   let isNewUpdate: Bool
+  @Environment(\.colorScheme) var colorScheme
   var body: some View {
     Group {
       if let url = artistUrl {
@@ -22,8 +23,13 @@ struct ArchiveArtistCell: View {
           ProgressView()
         }
       } else {
-        Image(uiImage: UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
-          .centerCropped()
+        if colorScheme == .light {
+          Image(uiImage:UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+            .centerCropped()
+        } else {
+          Image(uiImage:UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+            .centerCropped()
+        }
       }
     }
     .aspectRatio(1.0, contentMode: .fit)
