@@ -64,4 +64,16 @@ final class SetlistViewModel: ObservableObject {
     }
   }
 
+  func addElementToArray(title: String, songList: [Titles]) {
+    // 애플 뮤직용 음악 배열
+    if !self.setlistSongName.contains(title) {
+      self.setlistSongName.append(title)
+    }
+    // 스크린샷용 음악 배열
+    let tmp = self.koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title
+    if !self.setlistSongKoreanName.contains(tmp) {
+      self.setlistSongKoreanName.append(tmp)
+    }
+  }
+  
 }

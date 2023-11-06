@@ -54,22 +54,14 @@ struct ListView: View {
                 Divider()
               }
               
-              // 애플 뮤직용 음악 배열
-              if !vm.setlistSongName.contains(title) {
-                let _ = vm.setlistSongName.append(title)
-              }
-              // 스크린샷용 음악 배열
-              let tmp = vm.koreanConverter.findKoreanTitle(title: title, songList: artistInfo?.songList ?? []) ?? title
-              if !vm.setlistSongKoreanName.contains(tmp) {
-                let _ = vm.setlistSongKoreanName.append(tmp)
-              }
+              let _ = vm.addElementToArray(title: title, songList: artistInfo?.songList ?? [])
               
             }
           }
         }
       }
     }
-  }
+  }  
 }
 
 private struct ListRowView: View {

@@ -24,6 +24,6 @@ struct ToastMessageView: View {
   }
 }
 
-//#Preview {
-//    ToastMessageView()
-//}
+#Preview {
+  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
+}
