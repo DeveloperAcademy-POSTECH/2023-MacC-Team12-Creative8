@@ -10,22 +10,29 @@ import SwiftUI
 import UI
 
 struct ArchiveArtistCell: View {
-  let artistUrl: URL
+  let artistUrl: URL?
   let isNewUpdate: Bool
   var body: some View {
-      AsyncImage(url: artistUrl) { image in
-        image
+    Group {
+      if let url = artistUrl {
+        AsyncImage(url: artistUrl) { image in
+          image
+            .centerCropped()
+        } placeholder: {
+          ProgressView()
+        }
+      } else {
+        Image(uiImage: UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
           .centerCropped()
-          .aspectRatio(1.0, contentMode: .fit)
-          .clipShape(RoundedRectangle(cornerRadius: 20))
-          .overlay(
-                  RoundedRectangle(cornerRadius: 20)
-                      .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
-              )
-      } placeholder: {
-        ProgressView()
       }
-      .frameForCell()
+    }
+    .aspectRatio(1.0, contentMode: .fit)
+    .clipShape(RoundedRectangle(cornerRadius: 20))
+    .overlay(
+      RoundedRectangle(cornerRadius: 20)
+        .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+    )
+    .frameForCell()
   }
 }
 

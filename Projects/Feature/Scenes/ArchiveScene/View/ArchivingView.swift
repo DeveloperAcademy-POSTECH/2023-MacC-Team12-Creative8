@@ -134,7 +134,7 @@ extension ArchivingView {
   private var artistListView: some View {
     ForEach(Array(likeArtists.enumerated()), id: \.element) { index, item in
       HStack {
-        ArchiveArtistCell(artistUrl: (URL(string: item.artistInfo.imageUrl) ?? URL(string: ""))!, isNewUpdate: false)
+        ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
         Text("\(item.artistInfo.name)")
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
