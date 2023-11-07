@@ -19,9 +19,10 @@ public struct SettingView: View {
       ScrollView {
         VStack(alignment: .leading) {
           Text("더보기").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
+            .padding(.top, 23)
           Divider()
             .foregroundStyle(Color.lineGrey1)
-            .padding(.top)
+            .padding(.top, 7)
             .padding(.trailing, -25)
           // 세트리스트 추가 및 수정하기
           VStack(alignment: .leading) {

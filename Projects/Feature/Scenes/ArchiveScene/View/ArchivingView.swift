@@ -20,10 +20,11 @@ struct ArchivingView: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text("보관함").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
+        .padding(.top, 23)
       Divider()
         .foregroundStyle(Color.lineGrey1)
         .padding(.trailing, -25)
-        .padding(.top)
+        .padding(.top, 7)
       segmentedButtonsView
       if viewModel.selectSegment == .bookmark {
         bookmarkView
