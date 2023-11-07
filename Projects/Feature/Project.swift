@@ -13,7 +13,8 @@ let project = Project.makeModule(
     product: .framework,
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),
-        .project(target: "UI", path: .relativeToRoot("Projects/UI"))
+        .project(target: "UI", path: .relativeToRoot("Projects/UI")),
+        .SPM.CoreXLSX
     ],
     sources: ["Scenes/**"]
 )
