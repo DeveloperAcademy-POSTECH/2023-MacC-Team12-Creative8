@@ -20,9 +20,10 @@ struct SearchView: View {
   @State private var randomIndexes: [Int] = []
   
   var body: some View {
-    ScrollViewReader { proxy in
       Group {
         SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
+          .padding(.top)
+          .padding(.top)
         ScrollView {
           artistView
         }
@@ -30,7 +31,6 @@ struct SearchView: View {
       .padding(.horizontal)
       .scrollDisabled(viewModel.searchIsPresented)
       .scrollIndicators(.hidden)
-    }
     .background(Color.backgroundWhite)
     .onAppear {
       generateRandomIndexes()
