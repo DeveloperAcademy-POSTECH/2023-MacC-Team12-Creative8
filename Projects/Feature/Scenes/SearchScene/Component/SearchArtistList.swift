@@ -18,6 +18,7 @@ struct SearchArtistList: View {
   var body: some View {
     if viewModel.isLoading {
       ProgressView()
+        .toolbar(.hidden, for: .tabBar)
     } else {
       ForEach(viewModel.artistList, id: \.name) { artist in
         let namePair: (String, String?) = viewModel.koreanConverter.findKoreanName(artist: artist)
@@ -33,8 +34,10 @@ struct SearchArtistList: View {
           })
         }
       }
-      .onAppear { dataManager.modelContext = modelContext}
+      .onAppear { dataManager.modelContext = modelContext }
+      .toolbar(.hidden, for: .tabBar)
     }
+
   }
 }
 

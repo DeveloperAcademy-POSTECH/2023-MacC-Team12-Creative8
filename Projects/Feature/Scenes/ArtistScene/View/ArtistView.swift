@@ -31,7 +31,6 @@ struct ArtistView: View {
       }
     }
     .background(Color.backgroundWhite)
-    .navigationTitle("")
     .toolbar { ToolbarItem(placement: .principal) { toolbarArtistName } }
     .onAppear {
       vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)

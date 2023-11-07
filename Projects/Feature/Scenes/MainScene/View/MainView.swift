@@ -55,7 +55,6 @@ public struct MainView: View {
       .id(likeArtists)
       .background(Color.backgroundWhite)
     }
-    .navigationTitle("")
     .onAppear {
       dataManager.modelContext = modelContext
       var idx = 0
