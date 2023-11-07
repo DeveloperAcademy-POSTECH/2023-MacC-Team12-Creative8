@@ -19,12 +19,13 @@ struct ArchiveConcertInfoCell: View {
 
 	var body: some View {
 		HStack {
+      Spacer()
 			VStack {
         Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25).tracking(0.5)
 				Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
 			}
 			.font(.headline)
-
+      Spacer()
       NavigationLink {
         SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
       } label: {
@@ -32,11 +33,11 @@ struct ArchiveConcertInfoCell: View {
           Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.mainBlack)
           Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
         }
+        .lineLimit(1)
+        .frame(width: UIWidth * 0.5, alignment: .leading)
+        .padding(.vertical, 10)
       }
-			.padding(.leading)
-
 			Spacer()
-
 			Menu {
         NavigationLink("아티스트 보기") { ArtistView(selectedTab: $selectedTab, artistName: info.artistInfo.name, artistAlias: info.artistInfo.alias, artistMbid: info.artistInfo.mbid) }
 				NavigationLink("세트리스트 보기") {
@@ -45,10 +46,10 @@ struct ArchiveConcertInfoCell: View {
 				Button("공연 북마크 취소") { dataManager.deleteArchivedConcertInfo(info) }
 			} label: {
 				Image(systemName: "ellipsis")
+          .font(.title3)
 					.foregroundStyle(Color.mainBlack)
-					.padding()
-					.background(Color.clear)
 			}
+      Spacer()
 		}
 		.onAppear { dataManager.modelContext = modelContext }
 	}
