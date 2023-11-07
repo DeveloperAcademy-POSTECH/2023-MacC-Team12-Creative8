@@ -20,15 +20,11 @@ struct SearchArtistCell: View {
       NavigationLink {
         ArtistView(selectedTab: $selectedTab, artistName: artistName, artistAlias: "", artistMbid: artistMbid)
       }label: {
-        AsyncImage(url: URL(string: imageURL)) { image in
-          image
+        Image(imageURL, bundle: Bundle(identifier: "com.creative8.seta.UI"))
             .resizable()
             .scaledToFill()
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
-        } placeholder: {
-          ProgressView()
-        }
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.mainGrey1, lineWidth: 1))
       }
  
       Text("\(artistName)")
