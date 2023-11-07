@@ -22,17 +22,17 @@ struct SearchBar: View {
     HStack {
       TextField("아티스트를 검색하세요", text: $text)
         .autocorrectionDisabled(true)
-        .padding(12.5)
-        .padding(.horizontal, 20)
+        .padding(7)
+        .padding(.horizontal, 34)
         .foregroundColor(.fontGrey2)
         .background(Color.mainGrey1)
-        .cornerRadius(20)
+        .cornerRadius(10)
         .overlay(
           HStack {
             Image(systemName: "magnifyingglass")
               .foregroundColor(.fontGrey2)
               .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-              .padding(.leading, 7.5)
+              .padding(.leading, 16)
             
             if isEditing && text.count != 0 {
               Button {

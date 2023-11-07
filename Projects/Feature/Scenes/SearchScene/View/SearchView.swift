@@ -48,8 +48,9 @@ struct SearchView: View {
 //      MainView().logo
 //        .padding([.leading, .vertical], 10)
       SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
-        .id(ScrollID.searchBar)
+//        .id(ScrollID.searchBar)
     }
+//    .searchable(text: $viewModel.searchText, placement: .toolbar, prompt: "아티스트를 검색하세오")
     .padding(.top)
   }
   

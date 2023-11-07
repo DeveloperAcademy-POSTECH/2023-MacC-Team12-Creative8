@@ -24,14 +24,14 @@ public final class ArtistDataManager {
         let namePair = koreanConverter.findKoreanName(artist: (result.artists?[0])!)
         var artistInfo = ArtistInfo(name: namePair.0, mbid: mbid)
 
-        artistDataManager.getArtistInfo(artistName: namePair.0, artistAlias: namePair.1 ?? "", artistMbid: mbid) { result in
+        artistDataManager.getArtistInfo(artistInfo: artistInfo) { result in
           if let result = result {
             DispatchQueue.main.async {
               artistInfo = result
               completion((artistInfo.gid, artistInfo.imageUrl) as? (Int, String))
             }
           } else {
-            artistDataManager.getArtistInfo(artistName: namePair.1 ?? "", artistAlias: namePair.0, artistMbid: mbid) { result in
+            artistDataManager.getArtistInfo(artistInfo: artistInfo) { result in
               if let result = result {
                 DispatchQueue.main.async {
                   artistInfo = result
@@ -47,33 +47,33 @@ public final class ArtistDataManager {
     }
   }
   
-  public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
+  public func getArtistInfo(artistInfo: ArtistInfo, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [Titles] = []
-    var artistInfo: ArtistInfo?
+    var newArtistInfo: ArtistInfo = artistInfo
     var songList: [String] = []
     
-    dataService.searchArtistFromGenius(artistName: artistName) { result in
+    dataService.searchArtistFromGenius(artistName: newArtistInfo.name ) { result in
       if let result = result {
         DispatchQueue.main.async {
-          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid, hits: result.response?.hits ?? [])
+          newArtistInfo = self.findArtistIdAndImage(artistInfo: newArtistInfo, hits: result.response?.hits ?? [])
           
-          self.fetchAllSongs(artistId: artistInfo?.gid ?? 0) { result in
+          self.fetchAllSongs(artistId: newArtistInfo.gid ?? 0) { result in
             if let result = result {
               songList = result
               for song in songList {
                 parsedSongList.append(Titles(title: self.extractTextBeforeParentheses(from: song), subTitle: self.extractTextInsideFirstParentheses(from: song) ?? ""))
               }
-              artistInfo?.songList = parsedSongList
-              completion(artistInfo)
+              newArtistInfo.songList = parsedSongList
+              completion(newArtistInfo)
             } else {
-              completion(nil)
+              completion(newArtistInfo)
             }
           }
-          completion(artistInfo)
+          completion(newArtistInfo)
           
         }
       } else {
-        completion(nil)
+        completion(newArtistInfo)
       }
     }
   }
@@ -101,25 +101,32 @@ public final class ArtistDataManager {
     fetchPage(page: 1)
   }
   
-  private func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
+  private func findArtistIdAndImage(artistInfo: ArtistInfo, hits: [Hit]) -> ArtistInfo {
     for hit in hits {
       if let name = hit.result?.primaryArtist?.name {
         let filteredName = stringFilter(name)
-        let filteredArtistName = stringFilter(artistName)
-        let filteredArtistAlias = stringFilter(artistAlias)
+        let filteredArtistName = stringFilter(artistInfo.name)
+        let filteredArtistAlias = stringFilter(artistInfo.alias ?? "")
         
         if removeFirstParentheses(from: filteredName) == filteredArtistName ||
             extractTextInsideFirstParentheses(from: filteredName) == filteredArtistName ||
             removeFirstParentheses(from: filteredName) == filteredArtistAlias ||
             extractTextInsideFirstParentheses(from: filteredName) == filteredArtistAlias {
           print("FIND ARTIST: \(name)")
-          return ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid, gid: hit.result?.primaryArtist?.id, imageUrl: hit.result?.primaryArtist?.imageURL, songList: nil)
+          return ArtistInfo(
+            name: artistInfo.name,
+            alias: artistInfo.alias,
+            mbid: artistInfo.mbid,
+            gid: hit.result?.primaryArtist?.id,
+            imageUrl: hit.result?.primaryArtist?.imageURL,
+            songList: nil
+          )
         }
       }
     }
     
     print("FAILED TO FIND ARTIST")
-    return nil
+    return artistInfo
   }
   
   private func stringFilter(_ str: String) -> String {

@@ -16,6 +16,7 @@ final class SetlistViewModel: ObservableObject {
   
   let koreanConverter = KoreanConverter.shared
   let dataService = SetlistDataService.shared
+  let artistDataManager = ArtistDataManager.shared
   let dataManager = SwiftDataManager()
   
   var setlistSongName: [String] = []
@@ -28,10 +29,7 @@ final class SetlistViewModel: ObservableObject {
   }
   
   func isEmptySetlist(_ setlist: Setlist) -> Bool {
-    if setlist.sets?.setsSet?.isEmpty == true {
-      return true
-    }
-    return false
+    return setlist.sets?.setsSet?.isEmpty == true
   }
   
   func getFormattedDateFromString(date: String, format: String) -> String? {
@@ -66,4 +64,16 @@ final class SetlistViewModel: ObservableObject {
     }
   }
 
+  func addElementToArray(title: String, songList: [Titles]) {
+    // 애플 뮤직용 음악 배열
+    if !self.setlistSongName.contains(title) {
+      self.setlistSongName.append(title)
+    }
+    // 스크린샷용 음악 배열
+    let tmp = self.koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title
+    if !self.setlistSongKoreanName.contains(tmp) {
+      self.setlistSongKoreanName.append(tmp)
+    }
+  }
+  
 }
