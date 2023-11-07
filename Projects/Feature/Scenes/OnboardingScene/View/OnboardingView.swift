@@ -21,7 +21,7 @@ public struct OnboardingView: View {
   private let dataService: SetlistDataService = SetlistDataService.shared
   var artistInfo: ArtistInfo?
   @AppStorage("isOnboarding") var isOnboarding: Bool?
-
+  
   public init() {
   }
   
@@ -128,23 +128,24 @@ public struct OnboardingView: View {
         } else {
           for index in 0..<onboardingViewModel.selectedArtist.count {
             if self.artistInfo == nil {
-              artistDataManager.getArtistImageURL(
+              onboardingViewModel.getArtistInfo(
                 artistName: onboardingViewModel.selectedArtist[index].name,
-          
                 artistMbid: onboardingViewModel.selectedArtist[index].mbid) { result in
-                if let result = result {
-                  dataManager.addLikeArtist(name: result.name, 
-                                            country: "", 
-                                            alias: result.alias ?? "",
-                                            mbid: result.mbid, 
-                                            gid: result.gid ?? 0,
-                                            imageUrl: result.imageUrl,
-                                            songList: [])
+                  if let result = result {
+                    dataManager.addLikeArtist(name: result.name,
+                                              country: "",
+                                              alias: result.alias ?? "",
+                                              mbid: result.mbid,
+                                              gid: result.gid ?? 0,
+                                              imageUrl: result.imageUrl,
+                                              songList: [])
                 }
               }
             }
           }
-          isOnboarding = false
+          DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            isOnboarding = false
+          }
         }
         
       }, label: {
@@ -160,7 +161,6 @@ public struct OnboardingView: View {
           .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
     }
-    
   }
   
   private var toastBar: some View {
@@ -174,8 +174,6 @@ public struct OnboardingView: View {
           .fontWeight(.bold)
       }
   }
-  
-  
 }
 
 #Preview {

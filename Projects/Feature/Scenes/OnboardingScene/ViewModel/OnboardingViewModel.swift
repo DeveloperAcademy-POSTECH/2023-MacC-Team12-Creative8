@@ -11,25 +11,26 @@ import Foundation
 import CoreXLSX
 import Core
 
-final class OnboardingViewModel: ObservableObject {
+public final class OnboardingViewModel: ObservableObject {
   
+  private let artistDataManager: ArtistDataManager = ArtistDataManager.shared
+  private let dataService: SetlistDataService = SetlistDataService.shared
   private var fileName: String
   private var fileType: String
   private var filePath: String?
+  private var page: Int = 1
+  private var totalPage: Int = 0
+  
+  var setlists: [Setlist]?
+  var artistInfo: ArtistInfo?
+  
   @Published var allArtist: [OnboardingModel] = []
   @Published var filteredArtist: [OnboardingModel] = []
   @Published var selectedArtist: [OnboardingModel] = []
-  
   @Published var selectedGenere: OnboardingFilterType = .all
   @Published var isShowToastBar = false
   @Published var artistSelectedCount = 0
   
-  private let artistDataManager: ArtistDataManager = ArtistDataManager.shared
-  private let dataService: SetlistDataService = SetlistDataService.shared
-  var artistInfo: ArtistInfo?
-  private var setlists: [Setlist]?
-  private var page: Int = 1
-  private var totalPage: Int = 0
   @ObservedObject var dataManager = SwiftDataManager()
   @AppStorage("isOnboarding") var isOnboarding: Bool?
   
@@ -101,9 +102,22 @@ final class OnboardingViewModel: ObservableObject {
     }
   }
   
-  func getSetlistFromSetlistFM(selectedArtists: [OnboardingModel], index: Int) {
+  public func getArtistInfo(artistName: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
+    dataService.searchArtistFromGenius(artistName: artistName) { result in
+      if let result = result {
+        DispatchQueue.main.async {
+          self.artistInfo = self.artistDataManager.findArtistIdAndImage(artistName: artistName, artistAlias: "", artistMbid: artistMbid, hits: result.response?.hits ?? [])
+          completion(self.artistInfo)
+        }
+      } else {
+        completion(nil)
+      }
+    }
+  }
+  
+  func getSetlistFromSetlistFM(artistMbid: String, index: Int) {
     if self.setlists == nil {
-      dataService.fetchSetlistsFromSetlistFM(artistMbid: selectedArtists[index].mbid, page: page) { result in
+      dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: page) { result in
         if let result = result {
           DispatchQueue.main.async {
             self.setlists = result.setlist

@@ -85,11 +85,6 @@ public struct MainView: View {
         }
       }
     }
-    .onAppear {
-      for likeArtist in likeArtists {
-        print(likeArtist.artistInfo.songList)
-      }
-    }
   }
   public var logo: some View {
     HStack(spacing: 0) {

@@ -10,9 +10,8 @@ import Foundation
 
 public final class ArtistDataManager {
   public static let shared = ArtistDataManager()
-  
   let dataService: SetlistDataService = SetlistDataService.shared
-  
+
   public func getArtistInfo(artistName: String, artistAlias: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
     var parsedSongList: [Titles] = []
     var artistInfo: ArtistInfo?
@@ -43,20 +42,7 @@ public final class ArtistDataManager {
       }
     }
   }
-  
-  public func getArtistImageURL(artistName: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
-    var artistInfo: ArtistInfo?
     
-    dataService.searchArtistFromGenius(artistName: artistName) { result in
-      if let result = result {
-        DispatchQueue.main.async {
-          artistInfo = self.findArtistIdAndImage(artistName: artistName, artistAlias: "", artistMbid: artistMbid, hits: result.response?.hits ?? [])
-        }
-      }
-      
-    }
-  }
-  
   private func fetchAllSongs(artistId: Int, completion: @escaping ([String]?) -> Void) {
     var songList: [String] = []
     
@@ -80,7 +66,7 @@ public final class ArtistDataManager {
     fetchPage(page: 1)
   }
   
-  private func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
+  public func findArtistIdAndImage(artistName: String, artistAlias: String, artistMbid: String, hits: [Hit]) -> ArtistInfo? {
     for hit in hits {
       if let name = hit.result?.primaryArtist?.name {
         let filteredName = stringFilter(name)

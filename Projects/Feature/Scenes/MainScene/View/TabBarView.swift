@@ -38,7 +38,7 @@ public struct TabBarView: View {
         Label("검색", systemImage: "magnifyingglass")
       }
       .tag(Tab.search)
-
+      
       NavigationStack {
         ArchivingView()
           .background(Color.backgroundWhite)
@@ -48,7 +48,7 @@ public struct TabBarView: View {
         Label("보관함", systemImage: "heart.fill")
       }
       .tag(Tab.archiving)
-
+      
       NavigationStack {
         SettingView()
           .background(Color.backgroundWhite)
