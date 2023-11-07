@@ -29,6 +29,7 @@ public struct MainView: View {
           HStack { logo }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
+            .padding(.top, 23)
             .overlay {
               HStack { toolbarButton }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
@@ -38,7 +39,7 @@ public struct MainView: View {
           Divider()
             .padding(.leading, 25)
             .padding(.vertical)
-            .padding(.top, 12)
+            .padding(.top, 3)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {
             EmptyMainView(selectedTab: $selectedTab)
