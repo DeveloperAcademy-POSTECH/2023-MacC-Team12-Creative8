@@ -193,7 +193,7 @@ public struct MainView: View {
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
-                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다"
                     let setlistId = item?.id ?? ""
                     if data < likeArtists.count {
                       let artistInfo = ArtistInfo(

@@ -100,10 +100,10 @@ extension ArchivingView {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
+            .padding(.horizontal)
         }
       }
-      .padding(.vertical, 5)
-      .padding(.horizontal, 5)
+      .padding(.horizontal, -25)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
     .onChange(of: concertInfo) { _, newValue in
