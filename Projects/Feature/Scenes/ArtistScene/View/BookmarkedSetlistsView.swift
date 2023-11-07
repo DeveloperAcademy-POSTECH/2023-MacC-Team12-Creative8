@@ -42,7 +42,12 @@ struct BookmarkedSetlistsView: View {
       }
       
     }
-    .onAppear { getBookmarkedSetlists() }
+    .onAppear {
+      getBookmarkedSetlists()
+      if !bookmarkedSetlists.isEmpty {
+        vm.showBookmarkedSetlists = true
+      }
+    }
   }
   
   private func getBookmarkedSetlists() {
