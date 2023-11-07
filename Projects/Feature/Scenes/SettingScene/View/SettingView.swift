@@ -18,7 +18,7 @@ public struct SettingView: View {
       Color.backgroundWhite
       ScrollView {
         VStack(alignment: .leading) {
-          Text("더보기").font(.title2).fontWeight(.semibold)
+          Text("더보기").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
           Divider()
             .foregroundStyle(Color.lineGrey1)
             .padding(.top)

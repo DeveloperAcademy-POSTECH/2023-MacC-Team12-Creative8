@@ -19,7 +19,7 @@ struct ArchivingView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Text("보관함").font(.title2).fontWeight(.semibold)
+      Text("보관함").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
       Divider()
         .foregroundStyle(Color.lineGrey1)
         .padding(.trailing, -25)
