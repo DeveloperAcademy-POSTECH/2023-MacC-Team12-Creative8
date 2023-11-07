@@ -168,6 +168,4 @@ struct SetlistView: View {
       showToastMessage = false
     }
   }
-  
-  
 }
