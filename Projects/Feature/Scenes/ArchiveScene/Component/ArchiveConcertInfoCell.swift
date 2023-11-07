@@ -11,38 +11,22 @@ import Core
 import UI
 
 struct ArchiveConcertInfoCell: View {
+  @Binding var selectedTab: Tab
 	let info: ArchivedConcertInfo
 	let dataServiece = SetlistDataService.shared
-	@State var setlist: Setlist? = nil
-	@State var isActiveSetlist: Bool = false
 	@StateObject var dataManager = SwiftDataManager()
 	@Environment(\.modelContext) var modelContext
-	let yearFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy"
-		return formatter
-	}()
-
-	let decimalFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "M.dd"
-		return formatter
-	}()
 
 	var body: some View {
 		HStack {
 			VStack {
-				Text(yearFormatter.string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25)
-				Text(decimalFormatter.string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
+        Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25).tracking(0.5)
+				Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
 			}
 			.font(.headline)
 
-      Button {
-        dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
-              if let setlist = setlist {
-                self.setlist = setlist
-                isActiveSetlist.toggle()
-              }})
+      NavigationLink {
+        SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
       } label: {
         VStack(alignment: .leading) {
           Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.mainBlack)
@@ -54,13 +38,9 @@ struct ArchiveConcertInfoCell: View {
 			Spacer()
 
 			Menu {
-				NavigationLink("아티스트 보기") { ArtistView(artistName: info.artistInfo.name, artistAlias: info.artistInfo.alias, artistMbid: info.artistInfo.mbid) }
-				Button("세트리스트 보기") {
-					dataServiece.fetchOneSetlistFromSetlistFM(setlistId: info.setlist.setlistId, completion: { setlist in
-							  if let setlist = setlist {
-								  self.setlist = setlist
-								  isActiveSetlist.toggle()
-							  }})
+        NavigationLink("아티스트 보기") { ArtistView(selectedTab: $selectedTab, artistName: info.artistInfo.name, artistAlias: info.artistInfo.alias, artistMbid: info.artistInfo.mbid) }
+				NavigationLink("세트리스트 보기") {
+          SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
 				}
 				Button("공연 북마크 취소") { dataManager.deleteArchivedConcertInfo(info) }
 			} label: {
@@ -68,18 +48,6 @@ struct ArchiveConcertInfoCell: View {
 					.foregroundStyle(Color.mainBlack)
 					.padding()
 					.background(Color.clear)
-			}
-		}
-		.navigationDestination(isPresented: $isActiveSetlist) {
-			if let setlist = setlist {
-				let artistInfo = ArtistInfo(name: info.artistInfo.name,
-											alias: info.artistInfo.name,
-											mbid: info.artistInfo.mbid,
-											gid: info.artistInfo.gid,
-											imageUrl: info.artistInfo.imageUrl,
-											songList: info.artistInfo.songList)
-
-				SetlistView(setlist: setlist, artistInfo: artistInfo)
 			}
 		}
 		.onAppear { dataManager.modelContext = modelContext }

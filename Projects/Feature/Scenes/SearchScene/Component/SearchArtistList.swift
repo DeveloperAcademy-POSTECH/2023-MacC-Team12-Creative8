@@ -11,6 +11,7 @@ import Core
 import UI
 
 struct SearchArtistList: View {
+  @Binding var selectedTab: Tab
   @ObservedObject var viewModel: SearchViewModel
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
@@ -23,7 +24,7 @@ struct SearchArtistList: View {
         let info: String = ((namePair.1 != nil) ? namePair.1! + ", " : "") + (artist.area?.name ?? "")
         VStack {
           NavigationLink {
-            ArtistView(artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
+            ArtistView(selectedTab: $selectedTab, artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
           } label: {
             ListRow(namePair: namePair, info: info)
           }

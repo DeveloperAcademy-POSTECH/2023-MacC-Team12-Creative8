@@ -15,10 +15,11 @@ private let screenWidth = UIScreen.main.bounds.width
 private let screenHeight = UIScreen.main.bounds.height
 
 struct ArtistView: View {
+  @Binding var selectedTab: Tab
   let artistName: String
   let artistAlias: String?
   let artistMbid: String
-  
+
   @StateObject var vm = ArtistViewModel()
   
   var body: some View {
@@ -28,7 +29,7 @@ struct ArtistView: View {
       } else {
         ScrollView {
           ArtistImageView(vm: vm)
-          BookmarkedView(vm: vm)
+          BookmarkedView(vm: vm, selectedTab: $selectedTab)
           ListView(vm: vm)
         }
       }
@@ -127,7 +128,8 @@ private struct BookmarkedView: View {
   @ObservedObject var vm: ArtistViewModel
   @Query var concertInfo: [ArchivedConcertInfo]
   @State var bookmarkedConcerts: [ArchivedConcertInfo] = []
-  
+  @Environment(\.dismiss) var dismiss
+  @Binding var selectedTab: Tab
   var body: some View {
     VStack {
       titleLayer
@@ -261,8 +263,15 @@ private struct BookmarkedView: View {
   }
   
   private var navigationLayer: some View {
-    NavigationLink {
-      ArchivingView() // TODO: 아티스트 필터 적용돼야 함
+    Button {
+      vm.archivingviewModel.selectSegment = .bookmark
+      vm.archivingviewModel.selectArtist = vm.artistInfo?.name ?? ""
+      if selectedTab == .archiving {
+        dismiss()
+      } else {
+        selectedTab = .archiving
+      }
+
     } label: {
       HStack {
         Spacer()
@@ -388,5 +397,5 @@ private struct ListView: View {
 }
 
 #Preview {
-  ArtistView(artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+  ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
 }

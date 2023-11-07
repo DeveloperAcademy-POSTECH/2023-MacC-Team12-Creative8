@@ -65,18 +65,18 @@ struct SetlistView: View {
             })
           }
         }
-        if let setlist = setlist {
-          if !vm.isEmptySetlist(setlist) {
-            ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-          }
+      }
+      if let setlist = setlist {
+        if !vm.isEmptySetlist(setlist) {
+          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
         }
-        if showToastMessage {
-          VStack {
-            ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-              .padding(.leading, 80)
-              .padding(.trailing, 20)
-            Spacer()
-          }
+      }
+      if showToastMessage {
+        VStack {
+          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
+            .padding(.leading, 80)
+            .padding(.trailing, 20)
+          Spacer()
         }
       }
     }
@@ -255,7 +255,7 @@ struct ExportPlaylistButtonView: View {
           .background(Color.mainBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
-          .padding(.bottom, 30)
+          .padding(.bottom, 50)
           .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite, .backgroundWhite])))
       })
     }
@@ -403,7 +403,7 @@ private struct BottomView: View {
       .padding(.bottom, 50)
       
       SetlistFMLinkButtonView()
-        .padding(.bottom, 150)
+        .padding(.bottom, 130)
         .padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, alignment: .leading)

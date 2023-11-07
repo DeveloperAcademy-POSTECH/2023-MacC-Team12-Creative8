@@ -19,7 +19,8 @@ public struct SettingView: View {
       ScrollView {
         Divider()
           .foregroundStyle(Color.lineGrey1)
-          .padding(.leading, 24)
+          .padding(.leading)
+          .padding(.vertical)
           // 세트리스트 추가 및 수정하기
           VStack(alignment: .leading) {
             SectionTitleView(
@@ -30,7 +31,7 @@ public struct SettingView: View {
               linkLabel: "Setlist.fm 바로가기")
             .padding(.bottom, 20)
           }
-          .padding(.horizontal, 24)
+          .padding(.horizontal)
           
           // 서비스 이용 관련
           VStack(alignment: .leading) {
@@ -62,9 +63,14 @@ public struct SettingView: View {
             // 문의하기
             AskView()
           }
-          .padding(.horizontal, 24)
+          .padding(.horizontal)
       }
     }
+    .toolbar { ToolbarItem(placement: .topBarLeading) {
+      Text("더보기")
+        .font(.title2)
+        .fontWeight(.semibold)
+    } }
   }
 }
 
@@ -78,7 +84,7 @@ struct SectionTitleView: View {
       Text(sectionTitle)
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
-        .padding(EdgeInsets(top: 30, leading: 0, bottom: 20, trailing: 0))
+        .padding(.bottom, 20)
       Text(sectionDescription)
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
