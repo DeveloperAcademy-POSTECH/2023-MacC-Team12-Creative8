@@ -25,10 +25,20 @@ public struct MainView: View {
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
-        VStack(spacing: 0) {
+        VStack {
+          HStack { logo }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 25)
+            .overlay {
+              HStack { toolbarButton }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                .padding(.horizontal, 25)
+            }
+
           Divider()
-            .padding(.leading)
+            .padding(.leading, 25)
             .padding(.vertical)
+            .padding(.top, 12)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {
             EmptyMainView(selectedTab: $selectedTab)
@@ -38,6 +48,7 @@ public struct MainView: View {
             mainArtistsView
           }
         }
+        .padding(.vertical)
       }
       .scrollIndicators(.hidden)
       .id(likeArtists)
@@ -50,14 +61,6 @@ public struct MainView: View {
       for artist in likeArtists {
         viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
         idx += 1
-      }
-    }
-    .toolbar {
-      ToolbarItem(placement: .topBarLeading) {
-        logo
-      }
-      ToolbarItem(placement: .topBarTrailing) {
-        toolbarButton
       }
     }
   }
@@ -89,7 +92,7 @@ public struct MainView: View {
       }
       .foregroundColor(Color.mainBlack)
       .opacity(viewModel.isTapped ? 0 : 1)
-      .padding(6)
+//      .padding(6)
       if viewModel.isTapped {
         ToolbarDarkModeButtons(viewModel: viewModel)
       }

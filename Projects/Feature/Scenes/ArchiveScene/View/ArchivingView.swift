@@ -18,10 +18,12 @@ struct ArchivingView: View {
   @StateObject var viewModel = ArchivingViewModel.shared
 
   var body: some View {
-    VStack {
+    VStack(alignment: .leading) {
+      Text("보관함").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
       Divider()
         .foregroundStyle(Color.lineGrey1)
-        .padding(.trailing, -20)
+        .padding(.trailing, -25)
+        .padding(.top)
       segmentedButtonsView
       if viewModel.selectSegment == .bookmark {
         bookmarkView
@@ -29,12 +31,8 @@ struct ArchivingView: View {
         artistView
       }
     }
-    .padding()
-    .toolbar { ToolbarItem(placement: .topBarLeading) { 
-      Text("보관함")
-        .font(.title2)
-        .fontWeight(.semibold)
-    } }
+    .padding(.horizontal, 25)
+    .padding(.vertical)
   }
 }
 
@@ -95,7 +93,7 @@ extension ArchivingView {
       }
       .scrollIndicators(.hidden)
       .padding(.vertical)
-      
+
       ForEach(concertInfo) { item in
         if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
@@ -103,7 +101,8 @@ extension ArchivingView {
             .foregroundStyle(Color.lineGrey1)
         }
       }
-      .padding(.horizontal)
+      .padding(.vertical, 5)
+      .padding(.horizontal, 5)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
     .onChange(of: concertInfo) { _, newValue in
