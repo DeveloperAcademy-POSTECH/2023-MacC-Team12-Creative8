@@ -25,8 +25,10 @@ struct ServiceExplainView: View {
                 
                 // 약관 상세 내용
                 TermsView(terms: viewModel.termsOfService, bulletPoint: "")
+                  .padding(.bottom, 51)
               }
               .padding(.horizontal, 26)
+              .padding(.top, 30)
             }
             .padding(EdgeInsets(top: 120, leading: 20, bottom: 40, trailing: 20))
         }
@@ -43,24 +45,26 @@ struct TermsOfSetlistfm: View {
   var body: some View {
     ZStack {
       Color(Color.backgroundGrey)
-      VStack {
-        SectionBackgroundView(height: 570)
-          .overlay {
-            VStack(alignment: .leading) {
-              TermsTitleView(title: "Setlist.fm API 약관")
-              
-              // 약관 상세 내용
-              TermsView(terms: viewModel.termsOfSelistfmAPI, bulletPoint: "•")
-              
-              // Setlist.fm 약관 이동 버튼
-              SetlistfmLinkButton(
-                setlistfmURL: "https://www.setlist.fm/help/terms",
-                linkLabel: "Setlist.fm 약관 자세히 보기")
-              .padding(EdgeInsets(top: 16, leading: 0, bottom: 35, trailing: 0))
+      ScrollView {
+        VStack {
+          SectionBackgroundView(height: 570)
+            .overlay {
+              VStack(alignment: .leading) {
+                TermsTitleView(title: "Setlist.fm API 약관")
+                
+                // 약관 상세 내용
+                TermsView(terms: viewModel.termsOfSelistfmAPI, bulletPoint: "•")
+                
+                // Setlist.fm 약관 이동 버튼
+                SetlistfmLinkButton(
+                  setlistfmURL: "https://www.setlist.fm/help/terms",
+                  linkLabel: "Setlist.fm 약관 자세히 보기")
+                .padding(EdgeInsets(top: 16, leading: 0, bottom: 35, trailing: 0))
+              }
+              .padding(.horizontal, 26)
             }
-            .padding(.horizontal, 26)
-          }
-          .padding(EdgeInsets(top: 80, leading: 20, bottom: 40, trailing: 20))
+            .padding(EdgeInsets(top: 120, leading: 20, bottom: 40, trailing: 20))
+        }
       }
     }
     .ignoresSafeArea()

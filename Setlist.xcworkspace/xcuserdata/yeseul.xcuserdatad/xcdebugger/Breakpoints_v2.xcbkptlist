@@ -37,7 +37,7 @@
             <Locations>
                <Location
                   uuid = "21EE15E8-72C4-47BD-83D8-1CC7B77D8E26 - fabb8442fe7b6c2c"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "property wrapper backing initializer of Feature.SearchArtistList.dataManager : Core.SwiftDataManager"
