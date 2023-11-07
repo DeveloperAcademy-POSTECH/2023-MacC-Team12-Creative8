@@ -10,17 +10,27 @@ import SwiftUI
 import UI
 
 struct SearchArtistCell: View {
-  let imageURL: URL
+  @Binding var selectedTab: Tab
+  let imageURL: String
   let artistName: String
-
+  let artistMbid: String
+  
   var body: some View {
     VStack(alignment: .leading) {
       NavigationLink {
-
-      } label: {
-        AsyncImage(url: imageURL)
+        ArtistView(selectedTab: $selectedTab, artistName: artistName, artistAlias: "", artistMbid: artistMbid)
+      }label: {
+        AsyncImage(url: URL(string: imageURL)) { image in
+          image
+            .resizable()
+            .scaledToFill()
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
+        } placeholder: {
+          ProgressView()
+        }
       }
-
+ 
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)
     }
