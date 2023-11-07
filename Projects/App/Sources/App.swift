@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import Feature
 import Core
+import FirebaseAnalytics
 
 @main
 struct SetlistApp: App {

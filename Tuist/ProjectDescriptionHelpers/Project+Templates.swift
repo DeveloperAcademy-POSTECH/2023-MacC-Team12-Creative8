@@ -8,7 +8,8 @@ public extension Project {
         organizationName: String = "com.creative8.seta",
         packages: [Package] = [],
         deploymentTarget: DeploymentTarget? = .iOS(targetVersion: "17.0", devices: [.iphone]),
-        dependencies: [TargetDependency] = [],
+        dependencies: [TargetDependency] = [
+        ],
         sources: SourceFilesList? = nil,
         resources: ResourceFileElements? = nil,
         infoPlist: InfoPlist = .default

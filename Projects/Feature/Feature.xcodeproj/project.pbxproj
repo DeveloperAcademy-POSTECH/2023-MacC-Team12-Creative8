@@ -13,7 +13,6 @@
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */; };
-		2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF76D13D3DC0AE954F175F /* ArtistView.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
 		351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF56B0153354883134B7D3 /* MenuButton.swift */; };
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
@@ -105,7 +104,6 @@
 		57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalView.swift; sourceTree = "<group>"; };
 		5AAF56B0153354883134B7D3 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
-		63FF76D13D3DC0AE954F175F /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainSetlistView.swift; sourceTree = "<group>"; };
 		6E0BE38C7EFD9CE48B16FAE4 /* DarkModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeButton.swift; sourceTree = "<group>"; };
 		7391501B4523A254694E36D3 /* ConcertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertInfoView.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 			children = (
 				3CE39C84C0D9A5BE5F955C95 /* View */,
 				2EDD6F1A1A82585AB101B146 /* ViewModel */,
-				63FF76D13D3DC0AE954F175F /* ArtistView.swift */,
 			);
 			path = ArtistScene;
 			sourceTree = "<group>";
@@ -486,6 +483,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -557,7 +556,6 @@
 				351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */,
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
 				50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */,
-				2EEBA57C3CFD174FABC6A808 /* ArtistView.swift in Sources */,
 				D022D62B0566852C9B0ADB70 /* AllSetlistsView.swift in Sources */,
 				9BDAC9C92EE177410F1DBF27 /* ArtistInfoView.swift in Sources */,
 				03EA814D84858AD2B3D35638 /* ArtistView.swift in Sources */,

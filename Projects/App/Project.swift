@@ -19,7 +19,8 @@ let project = Project.makeModule(
     )
   ],
   dependencies: [
-    .Projcet.Feature
+    .Projcet.Feature,
+    .package(product: "FirebaseAnalytics")
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],
