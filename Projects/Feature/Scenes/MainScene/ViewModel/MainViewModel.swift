@@ -93,7 +93,7 @@ public enum ButtonType: Int, CaseIterable, Identifiable {
     case .light:
       return "sun.max.fill"
     case .dark:
-      return "moon.fill"
+      return "moon.stars.fill"
     }
   }
   

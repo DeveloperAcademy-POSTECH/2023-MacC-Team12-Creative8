@@ -26,25 +26,23 @@ public struct MainView: View {
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
-          VStack {
+        VStack(spacing: 0) {
             HStack {
               logo
                 .opacity(0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
-            .padding(.top, 23)
             .overlay {
-              HStack {
+              HStack(spacing: 0) {
                 toolbarButton
               }
               .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-              .padding(.horizontal, 25)
+              .padding(.horizontal, UIWidth * 0.11)
             }
+            .padding(.bottom, 34)
             Divider()
               .padding(.leading, 25)
-              .padding(.vertical)
-              .padding(.top, 12)
               .foregroundStyle(Color.lineGrey1)
             if likeArtists.isEmpty {
               EmptyMainView(selectedTab: $selectedTab)
@@ -60,7 +58,6 @@ public struct MainView: View {
       .id(likeArtists)
       .background(Color.backgroundWhite)
     }
-    .navigationTitle("")
     .onAppear {
       dataManager.modelContext = modelContext
       var idx = 0
@@ -92,7 +89,7 @@ public struct MainView: View {
           Image(systemName: "sun.max.fill")
             .font(.title3)
         } else {
-          Image(systemName: "moon.fill")
+          Image(systemName: "moon.stars.fill")
             .font(.title3)
         }
       }
@@ -107,7 +104,6 @@ public struct MainView: View {
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
       artistNameScrollView
-        .padding(.bottom)
       artistContentView
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
@@ -134,6 +130,7 @@ public struct MainView: View {
           ForEach(0..<likeArtists.prefix(5).count, id: \.self) { data in
             let artistName = viewModel.replaceFirstSpaceWithNewline(likeArtists[data].artistInfo.name)
             Text(.init(artistName))
+              .padding(.vertical, 16.5)
               .background(Color.clear)
               .font(.system(size: 25))
               .bold()
@@ -161,7 +158,7 @@ public struct MainView: View {
     }
     .frame(minWidth: UIWidth * 0.16)
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.12)
+    .safeAreaPadding(.leading, UIWidth * 0.13)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
@@ -169,7 +166,7 @@ public struct MainView: View {
         ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
-              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid).toolbarRole(.editor)) {
+              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
                 if likeArtists[data].artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
@@ -267,6 +264,7 @@ public struct MainView: View {
           .foregroundStyle(Color.mainBlack)
           .overlay {
             Image(systemName: "arrow.right")
+              .font(.title3)
               .foregroundStyle(Color.settingTextBoxWhite)
           }
       }
