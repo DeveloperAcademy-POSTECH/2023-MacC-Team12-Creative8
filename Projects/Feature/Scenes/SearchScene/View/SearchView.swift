@@ -119,6 +119,7 @@ struct SearchView: View {
         ForEach(history, id: \.self) { item in
           SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
         }
+        .toolbar(viewModel.searchIsPresented ? .hidden : .visible, for: .tabBar)
       } else {
         SearchArtistList(selectedTab: $selectedTab, viewModel: viewModel)
       }

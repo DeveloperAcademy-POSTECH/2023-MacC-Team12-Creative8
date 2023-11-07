@@ -67,10 +67,11 @@ public struct OnboardingView: View {
       Spacer().frame(height: 40)
       Text("아티스트 찜하기")
         .font(.system(.headline))
+        .foregroundStyle(Color.mainBlack)
       Spacer().frame(height: 16)
       Text("찜한 아티스트 중 최대 5명까지 메인화면에 나옵니다.\n메인 화면에 없는 아티스트는 보관함에서 확인해주세요.")
         .font(.system(.footnote))
-        .foregroundStyle(.black)
+        .foregroundStyle(Color.fontGrey2)
         .opacity(0.8)
       Spacer().frame(height: 48)
     }
@@ -88,9 +89,9 @@ public struct OnboardingView: View {
             Text(buttonType.rawValue)
               .font(.system(.subheadline))
               .padding(10)
-              .background(onboardingViewModel.selectedGenere == buttonType ? .black: .gray)
+              .background(onboardingViewModel.selectedGenere == buttonType ? Color.mainBlack: Color.mainGrey1)
               .cornerRadius(12)
-              .foregroundStyle(onboardingViewModel.selectedGenere == buttonType ? .white: .black)
+              .foregroundStyle(onboardingViewModel.selectedGenere == buttonType ? Color.settingTextBoxWhite: Color.fontGrey2)
           }
         }
       }
@@ -111,8 +112,8 @@ public struct OnboardingView: View {
             .overlay {
               Text(onboardingViewModel.filteredArtist[index].name)
                 .frame(width: 100, height: 48)
-                .font(.system(size: 34, weight: .semibold))
-                .foregroundColor(onboardingViewModel.selectedArtist.contains(where: { $0.id == onboardingViewModel.filteredArtist[index].id }) ? .black : .gray)
+                .font(.system(.largeTitle, weight: .semibold))
+                .foregroundColor(onboardingViewModel.selectedArtist.contains(where: { $0.id == onboardingViewModel.filteredArtist[index].id }) ? .mainBlack : .fontGrey3)
                 .minimumScaleFactor(0.3)
             }
         }
@@ -153,10 +154,10 @@ public struct OnboardingView: View {
       }, label: {
         RoundedRectangle(cornerRadius: 14)
           .frame(width: 328, height: 54)
-          .foregroundColor(onboardingViewModel.artistSelectedCount < 3 ? .black : .blue)
+          .foregroundColor(onboardingViewModel.artistSelectedCount < 3 ? .mainGrey1 : .mainBlack)
           .overlay {
             Text(onboardingViewModel.artistSelectedCount == 0 ? "최소 3명 이상 선택" : "\(onboardingViewModel.artistSelectedCount)명 선택")
-              .foregroundStyle(.white)
+              .foregroundStyle(onboardingViewModel.artistSelectedCount < 3 ? Color.mainBlack : Color.settingTextBoxWhite)
               .font(.callout)
               .fontWeight(.bold)
           }
@@ -167,13 +168,13 @@ public struct OnboardingView: View {
   }
   
   private var toastBar: some View {
-    RoundedRectangle(cornerRadius: 14)
-      .frame(width: 328, height: 54)
-      .foregroundColor(.black)
+    RoundedRectangle(cornerRadius: 27)
+      .frame(width: 328, height: 44)
+      .foregroundColor(.toastBurn)
       .overlay {
         Text("아직 아티스트 3명이 선택되지 않았어요.")
-          .foregroundStyle(.white)
-          .font(.callout)
+          .foregroundStyle(Color.settingTextBoxWhite)
+          .font(.subheadline)
           .fontWeight(.bold)
       }
   }

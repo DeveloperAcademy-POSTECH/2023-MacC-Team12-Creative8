@@ -45,7 +45,7 @@ public struct SettingView: View {
             // 이용 약관
             NavigationLink {
               ServiceExplainView()
-                .navigationBarTitle("이용 약관", displayMode: .inline)
+                .navigationBarTitleDisplayMode(.inline)
             } label: {
               LinkLabelView(linkLabel: "이용 약관")
             }
@@ -55,7 +55,7 @@ public struct SettingView: View {
             // Setlist.fm 약관
             NavigationLink {
               TermsOfSetlistfm()
-                .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
+                .navigationBarTitleDisplayMode(.inline)
             } label: {
               LinkLabelView(linkLabel: "Setlist.fm 약관")
             }

@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct BookmarkedSetlistsView: View {
   @ObservedObject var vm: ArtistViewModel
@@ -53,7 +54,7 @@ struct BookmarkedSetlistsView: View {
   private func getBookmarkedSetlists() {
     bookmarkedSetlists = []
     for concert in concertInfo {
-      if concert.artistInfo.name == vm.artistInfo.name {
+      if concert.artistInfo.mbid == vm.artistInfo.mbid {
         bookmarkedSetlists.append(concert)
       }
     }

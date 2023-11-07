@@ -141,13 +141,13 @@ struct SetlistView: View {
       vm.isBookmarked.toggle()
     }, label: {
       Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-        .foregroundStyle(Color.mainBlack)
+        .foregroundStyle(vm.isBookmarked ? Color.mainOrange : Color.mainBlack)
     })
   }
   
   private func saveData() {
     let newArtist = SaveArtistInfo(
-      name: setlist?.artist?.name ?? "",
+      name: artistInfo.name,
       country: setlist?.venue?.city?.country?.name ?? "",
       alias: artistInfo.alias ?? "",
       mbid: artistInfo.mbid,

@@ -100,10 +100,10 @@ extension ArchivingView {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
+            .padding(.horizontal)
         }
       }
-      .padding(.vertical, 5)
-      .padding(.horizontal, 5)
+      .padding(.horizontal, -25)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
     .onChange(of: concertInfo) { _, newValue in
@@ -121,9 +121,12 @@ extension ArchivingView {
             .font(.footnote)
             .foregroundStyle(Color.fontGrey2)
             .padding(.top)
+            .listRowBackground(Color.backgroundWhite)
           artistListView
             .listRowSeparator(.hidden)
+            .listRowBackground(Color.backgroundWhite)
         }
+        
         .scrollIndicators(.hidden)
         .listStyle(.plain)
         .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
@@ -136,6 +139,7 @@ extension ArchivingView {
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
         Text("\(item.artistInfo.name)")
+          .font(.subheadline)
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
             NavigationLink("", destination: ArtistView(selectedTab: $selectedTab,
