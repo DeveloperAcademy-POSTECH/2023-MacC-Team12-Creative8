@@ -16,6 +16,7 @@ public struct OnboardingView: View {
   @ObservedObject var artistViewModel = ArtistViewModel()
   @Environment(\.modelContext) var modelContext
   @ObservedObject var dataManager = SwiftDataManager()
+  @State private var isButtonEnabled = true
   
   private let artistDataManager: ArtistDataManager = ArtistDataManager.shared
   private let dataService: SetlistDataService = SetlistDataService.shared
@@ -126,6 +127,7 @@ public struct OnboardingView: View {
         if onboardingViewModel.artistSelectedCount < 3 {
           onboardingViewModel.isShowToastBar.toggle()
         } else {
+          isButtonEnabled = false
           for index in 0..<onboardingViewModel.selectedArtist.count {
             if self.artistInfo == nil {
               onboardingViewModel.getArtistInfo(
@@ -160,6 +162,7 @@ public struct OnboardingView: View {
           }
           .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
+      .disabled(!isButtonEnabled)
     }
   }
   
@@ -179,5 +182,3 @@ public struct OnboardingView: View {
 #Preview {
   OnboardingView()
 }
-
-

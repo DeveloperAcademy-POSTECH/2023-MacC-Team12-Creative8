@@ -32,14 +32,12 @@ public final class ArtistDataManager {
               newArtistInfo.songList = parsedSongList
               completion(newArtistInfo)
             } else {
-              completion(newArtistInfo)
+              completion(nil)
             }
           }
-          completion(newArtistInfo)
-          
         }
       } else {
-        completion(newArtistInfo)
+        completion(nil)
       }
     }
   }

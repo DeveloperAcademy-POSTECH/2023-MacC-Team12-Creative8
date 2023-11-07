@@ -33,6 +33,7 @@ public struct MainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
+            .padding(.top, 23)
             .overlay {
               HStack {
                 toolbarButton
