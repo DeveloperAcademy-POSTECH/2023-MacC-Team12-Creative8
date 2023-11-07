@@ -29,6 +29,7 @@ public struct MainView: View {
           HStack { logo }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
+            .padding(.top, 23)
             .overlay {
               HStack { toolbarButton }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
@@ -38,7 +39,7 @@ public struct MainView: View {
           Divider()
             .padding(.leading, 25)
             .padding(.vertical)
-            .padding(.top, 12)
+            .padding(.top, 3)
             .foregroundStyle(Color.lineGrey1)
           if likeArtists.isEmpty {
             EmptyMainView(selectedTab: $selectedTab)
@@ -54,7 +55,6 @@ public struct MainView: View {
       .id(likeArtists)
       .background(Color.backgroundWhite)
     }
-    .navigationTitle("")
     .onAppear {
       dataManager.modelContext = modelContext
       var idx = 0
@@ -192,7 +192,7 @@ public struct MainView: View {
                     let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
-                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다"
                     let setlistId = item?.id ?? ""
                     if data < likeArtists.count {
                       let artistInfo = ArtistInfo(

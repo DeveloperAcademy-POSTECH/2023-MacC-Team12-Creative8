@@ -81,11 +81,12 @@ struct ArtistInfoView: View {
       vm.isLikedArtist.toggle()
     } label: {
       Circle()
-        .frame(width: UIWidth * 0.1)
+        .frame(width: UIWidth * 0.15)
         .foregroundStyle(Color.mainWhite1)
         .overlay(
           Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
             .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
+            .font(.title3)
         )
     }
   }

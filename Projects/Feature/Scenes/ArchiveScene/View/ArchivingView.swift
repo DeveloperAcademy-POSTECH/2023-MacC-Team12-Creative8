@@ -20,10 +20,11 @@ struct ArchivingView: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text("보관함").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
+        .padding(.top, 23)
       Divider()
         .foregroundStyle(Color.lineGrey1)
         .padding(.trailing, -25)
-        .padding(.top)
+        .padding(.top, 7)
       segmentedButtonsView
       if viewModel.selectSegment == .bookmark {
         bookmarkView
@@ -99,10 +100,10 @@ extension ArchivingView {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
+            .padding(.horizontal)
         }
       }
-      .padding(.vertical, 5)
-      .padding(.horizontal, 5)
+      .padding(.horizontal, -25)
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
     .onChange(of: concertInfo) { _, newValue in
@@ -135,6 +136,7 @@ extension ArchivingView {
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
         Text("\(item.artistInfo.name)")
+          .font(.subheadline)
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
             NavigationLink("", destination: ArtistView(selectedTab: $selectedTab,
