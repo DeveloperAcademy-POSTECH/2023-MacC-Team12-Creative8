@@ -103,7 +103,7 @@ public struct MainView: View {
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
         .scrollPosition(id: $viewModel.scrollToIndex)
-        .safeAreaPadding(.horizontal, UIWidth * 0.13)
+        .safeAreaPadding(.horizontal, UIWidth * 0.11)
       Spacer()
     }
     .onChange(of: viewModel.scrollToIndex) {
@@ -156,7 +156,7 @@ public struct MainView: View {
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
-      HStack(spacing: 18) {
+      HStack(spacing: 16) {
         ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ

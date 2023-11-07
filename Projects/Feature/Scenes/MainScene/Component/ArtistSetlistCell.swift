@@ -55,7 +55,8 @@ struct ArtistSetlistCell: View {
               .font(.system(size: 14))
               Spacer()
             }
-            .padding()
+            .padding(.vertical)
+            .padding(.horizontal, 11)
           }
     }
 }
