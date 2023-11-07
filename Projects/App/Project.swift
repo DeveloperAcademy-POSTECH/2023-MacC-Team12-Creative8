@@ -13,9 +13,14 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   packages: [
+    .remote(
+      url: "https://github.com/firebase/firebase-ios-sdk.git",
+      requirement: .upToNextMajor(from: "10.17.0")
+    )
   ],
   dependencies: [
-    .Projcet.Feature
+    .Projcet.Feature,
+    .package(product: "FirebaseAnalytics")
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

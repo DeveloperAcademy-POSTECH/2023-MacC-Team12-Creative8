@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCCgP87-LaBtaVdwsmoAxwpTl_b8MLbiRY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>126154503966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creative8.seta.Seta</string>
+	<key>PROJECT_ID</key>
+	<string>seta-e6522</string>
+	<key>STORAGE_BUCKET</key>
+	<string>seta-e6522.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:126154503966:ios:27c1f4b0d3093c2b45fb0f</string>
+</dict>
+</plist>

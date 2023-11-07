@@ -9,29 +9,35 @@ import SwiftUI
 import SwiftData
 import Feature
 import Core
+import Firebase
+
 
 @main
 struct SetlistApp: App {
-    @AppStorage("appearance")
-    var appearnace: ButtonType = .automatic
-    
-  var sharedModelContainer: ModelContainer = {
-      let schema = Schema([
-        ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
-      ])
-      let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+  @AppStorage("appearance")
+  var appearnace: ButtonType = .automatic
 
-      do {
-          return try ModelContainer(for: schema, configurations: [modelConfiguration])
-      } catch {
-          fatalError("Could not create ModelContainer: \(error)")
-      }
+  var sharedModelContainer: ModelContainer = {
+    let schema = Schema([
+      ArchivedConcertInfo.self, LikeArtist.self, SearchHistory.self
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+    do {
+      return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+      fatalError("Could not create ModelContainer: \(error)")
+    }
   }()
+
+  init() {
+    FirebaseApp.configure()
+  }
 
   var body: some Scene {
     WindowGroup {
-        TabBarView()
-              .preferredColorScheme(appearnace.getColorScheme())
+      TabBarView()
+        .preferredColorScheme(appearnace.getColorScheme())
     }
     .modelContainer(sharedModelContainer)
 
