@@ -103,7 +103,7 @@ public struct MainView: View {
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
         .scrollPosition(id: $viewModel.scrollToIndex)
-        .safeAreaPadding(.horizontal, UIWidth * 0.11)
+        .safeAreaPadding(.horizontal, UIWidth * 0.13)
       Spacer()
     }
     .onChange(of: viewModel.scrollToIndex) {
@@ -152,7 +152,7 @@ public struct MainView: View {
     }
     .frame(minWidth: UIWidth * 0.16)
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.12)
+    .safeAreaPadding(.leading, UIWidth * 0.14)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
@@ -174,7 +174,9 @@ public struct MainView: View {
                   .foregroundStyle(Color.fontGrey2)
                 Spacer()
               }
-              .padding([.horizontal, .top])
+              .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+              .padding(.top)
+              .padding(.horizontal, 11)
               if viewModel.isLoading {
                 VStack {
                   Spacer()
@@ -190,6 +192,7 @@ public struct MainView: View {
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
                     let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+//                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo?.songList ?? []) ?? firstSong
                     let setlistId = item?.id ?? ""
                     if data < likeArtists.count {
                       let artistInfo = ArtistInfo(
