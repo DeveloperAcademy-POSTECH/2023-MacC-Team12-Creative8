@@ -26,6 +26,7 @@
 		E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4F12A755C30296E33F86F /* KoreanConverter.swift */; };
 		E443D461EB2E1D55C196E6F1 /* SaveArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DD837E5346A7627964873 /* SaveArtistInfo.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
+		F6FB06B6DA0BE1FE264F7B7E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109A8C5BADA31C5966791E4F /* SearchModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		109A8C5BADA31C5966791E4F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		143BA5525B0777162DED185D /* SaveSetlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSetlist.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 				B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */,
 				FAC0C440B4634AAB35C8E3D0 /* GeniusSongsModel.swift */,
 				B2623E283DF2E5382F8E9EA4 /* OnboardingModel.swift */,
+				109A8C5BADA31C5966791E4F /* SearchModel.swift */,
 				75600AD4887E89C2223BF659 /* SetlistListModel.swift */,
 			);
 			path = Model;
@@ -386,6 +389,7 @@
 				48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */,
 				8FA0920398EC647EC4B21451 /* OnboardingModel.swift in Sources */,
 				03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */,
+				F6FB06B6DA0BE1FE264F7B7E /* SearchModel.swift in Sources */,
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
