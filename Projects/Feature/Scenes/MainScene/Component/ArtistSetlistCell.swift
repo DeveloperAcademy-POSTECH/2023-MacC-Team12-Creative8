@@ -46,10 +46,17 @@ struct ArtistSetlistCell: View {
                   .foregroundStyle(Color.mainBlack)
                   .lineLimit(1)
                   .padding(.bottom, 3)
-                Text(firstSong)
-                  .font(.footnote)
-                  .lineLimit(1)
-                  .foregroundStyle(Color.fontGrey25)
+                if firstSong != "세트리스트 정보가 아직 없습니다." {
+                           Text("01 \(firstSong)")
+                             .font(.footnote)
+                             .lineLimit(1)
+                             .foregroundStyle(Color.fontGrey25)
+                         } else {
+                           Text(firstSong)
+                             .font(.footnote)
+                             .lineLimit(1)
+                             .foregroundStyle(Color.fontGrey25)
+                         }
               }
               .foregroundStyle(Color.mainBlack)
               .font(.system(size: 14))

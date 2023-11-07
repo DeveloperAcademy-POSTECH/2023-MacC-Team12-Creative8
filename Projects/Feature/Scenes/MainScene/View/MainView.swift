@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftData
 import Core
 import UI
+import Combine
 
 public struct MainView: View {
   @Binding var selectedTab: Tab
@@ -92,7 +93,6 @@ public struct MainView: View {
       }
       .foregroundColor(Color.mainBlack)
       .opacity(viewModel.isTapped ? 0 : 1)
-//      .padding(6)
       if viewModel.isTapped {
         ToolbarDarkModeButtons(viewModel: viewModel)
       }
@@ -155,7 +155,7 @@ public struct MainView: View {
     }
     .frame(minWidth: UIWidth * 0.16)
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.14)
+    .safeAreaPadding(.leading, UIWidth * 0.12)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
@@ -195,7 +195,7 @@ public struct MainView: View {
                     let city = item?.venue?.city?.name ?? ""
                     let country = item?.venue?.city?.country?.name ?? ""
                     let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
-//                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo?.songList ?? []) ?? firstSong
+                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
                     let setlistId = item?.id ?? ""
                     if data < likeArtists.count {
                       let artistInfo = ArtistInfo(
@@ -207,7 +207,7 @@ public struct MainView: View {
                         songList: likeArtists[data].artistInfo.songList)
                       VStack(spacing: 0) {
                         if data < likeArtists.count {
-                          ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
+                          ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
                         }
                         if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
                           Divider()
@@ -222,6 +222,7 @@ public struct MainView: View {
                 
                 if current.isEmpty {
                   EmptyMainSetlistView()
+                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
                 }
               }
               Spacer()
