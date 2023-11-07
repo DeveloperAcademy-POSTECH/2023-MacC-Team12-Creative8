@@ -100,6 +100,11 @@ public struct MainView: View {
           .padding(.top)
       }
     }
+    .onDisappear {
+      if viewModel.isTapped {
+        viewModel.isTapped = false
+      }
+    }
   }
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
