@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct BookmarkedSetlistsView: View {
   @ObservedObject var vm: ArtistViewModel

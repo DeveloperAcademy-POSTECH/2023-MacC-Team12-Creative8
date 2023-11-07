@@ -23,7 +23,7 @@ public struct CaptureSetlistView: View {
 
         VStack(alignment: .leading) {
           Text("SETA")
-            .font(.largeTitle)
+            .font(.system(size: 34))
             .opacity(0.3)
             .padding(.horizontal, 30)
           Rectangle()
@@ -35,6 +35,7 @@ public struct CaptureSetlistView: View {
                 Text("\(artist)")
               }
               .padding(.horizontal, 30)
+              .font(.system(size: 17))
             .foregroundStyle(.black)
             Rectangle()
               .foregroundStyle(.black)

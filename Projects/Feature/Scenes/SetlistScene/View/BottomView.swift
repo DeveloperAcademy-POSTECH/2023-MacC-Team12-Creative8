@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct BottomView: View {
   var body: some View {
