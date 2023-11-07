@@ -58,7 +58,16 @@ public struct MainView: View {
     .onAppear {
       dataManager.modelContext = modelContext
       var idx = 0
-      for artist in likeArtists {
+      if viewModel.setlists[0] == nil {
+        for artist in likeArtists {
+          viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+          idx += 1
+        }
+      }
+    }
+    .onChange(of: likeArtists) { _, newValue in
+      var idx = 0
+      for artist in newValue {
         viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
         idx += 1
       }
