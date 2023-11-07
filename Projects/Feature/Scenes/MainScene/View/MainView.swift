@@ -27,32 +27,32 @@ public struct MainView: View {
     GeometryReader { geometry in
       ScrollView {
         VStack(spacing: 0) {
-            HStack {
-              logo
-                .opacity(0)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(.horizontal, 25)
-            .overlay {
-              HStack(spacing: 0) {
-                toolbarButton
-              }
-              .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-              .padding(.horizontal, UIWidth * 0.11)
-            }
-            .padding(.bottom, 34)
-            Divider()
-              .padding(.leading, 25)
-              .foregroundStyle(Color.lineGrey1)
-            if likeArtists.isEmpty {
-              EmptyMainView(selectedTab: $selectedTab)
-                .frame(width: geometry.size.width)
-                .frame(minHeight: geometry.size.height * 0.9)
-            } else {
-              mainArtistsView
-            }
+          HStack {
+            logo
+              .opacity(0)
           }
-          .padding(.vertical)
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+          .padding(.horizontal, 25)
+          .overlay {
+            HStack(spacing: 0) {
+              toolbarButton
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+            .padding(.horizontal, UIWidth * 0.11)
+          }
+          .padding(.bottom, 34)
+          Divider()
+            .padding(.leading, 25)
+            .foregroundStyle(Color.lineGrey1)
+          if likeArtists.isEmpty {
+            EmptyMainView(selectedTab: $selectedTab)
+              .frame(width: geometry.size.width)
+              .frame(minHeight: geometry.size.height * 0.9)
+          } else {
+            mainArtistsView
+          }
+        }
+        .padding(.vertical)
       }
       .scrollIndicators(.hidden)
       .id(likeArtists)
@@ -193,14 +193,15 @@ public struct MainView: View {
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
                 ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
-                  let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-                  let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-                  let city = item?.venue?.city?.name ?? ""
-                  let country = item?.venue?.city?.country?.name ?? ""
-                  let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
-                  let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
-                  let setlistId = item?.id ?? ""
                   if data < likeArtists.count {
+                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                    let city = item?.venue?.city?.name ?? ""
+                    let country = item?.venue?.city?.country?.name ?? ""
+                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
+                    let setlistId = item?.id ?? ""
+                    
                     let artistInfo = ArtistInfo(
                       name: likeArtists[data].artistInfo.name,
                       alias: likeArtists[data].artistInfo.alias,
