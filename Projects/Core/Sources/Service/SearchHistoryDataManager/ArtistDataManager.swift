@@ -44,7 +44,7 @@ public final class ArtistDataManager {
     }
   }
   
-  public func getArtistImageURL(artistName: String, artistMbid: String) {
+  public func getArtistImageURL(artistName: String, artistMbid: String, completion: @escaping (ArtistInfo?) -> Void) {
     var artistInfo: ArtistInfo?
     
     dataService.searchArtistFromGenius(artistName: artistName) { result in

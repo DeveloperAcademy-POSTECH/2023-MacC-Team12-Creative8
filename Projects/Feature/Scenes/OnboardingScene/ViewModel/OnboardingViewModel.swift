@@ -101,29 +101,6 @@ final class OnboardingViewModel: ObservableObject {
     }
   }
   
-  func getArtistInfoFromGenius(selectedArtists: [OnboardingModel]) async {
-    for index in 0..<selectedArtists.count {
-      if self.artistInfo == nil {
-        artistDataManager.getArtistInfo(artistName: selectedArtists[index].name, artistAlias: "", artistMbid: selectedArtists[index].mbid) { result in
-          if let result = result {
-            //          DispatchQueue.main.async {
-            self.dataManager.addLikeArtist(
-              name: result.name,
-              country: "",
-              alias: result.alias ?? "",
-              mbid: result.mbid,
-              gid: result.gid ?? 0,
-              imageUrl: result.imageUrl,
-              songList: []
-            )
-            self.isOnboarding = false
-            //          }
-          }
-        }
-      }
-    }
-  }
-  
   func getSetlistFromSetlistFM(selectedArtists: [OnboardingModel], index: Int) {
     if self.setlists == nil {
       dataService.fetchSetlistsFromSetlistFM(artistMbid: selectedArtists[index].mbid, page: page) { result in

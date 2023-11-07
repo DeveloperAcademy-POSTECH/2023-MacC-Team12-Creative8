@@ -128,9 +128,9 @@ public struct OnboardingView: View {
         } else {
           for index in 0..<onboardingViewModel.selectedArtist.count {
             if self.artistInfo == nil {
-              artistDataManager.getArtistInfo(
+              artistDataManager.getArtistImageURL(
                 artistName: onboardingViewModel.selectedArtist[index].name,
-                artistAlias: "",
+          
                 artistMbid: onboardingViewModel.selectedArtist[index].mbid) { result in
                 if let result = result {
                   dataManager.addLikeArtist(name: result.name, 
