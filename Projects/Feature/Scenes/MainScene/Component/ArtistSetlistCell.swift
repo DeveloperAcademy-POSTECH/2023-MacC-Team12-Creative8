@@ -23,47 +23,42 @@ struct ArtistSetlistCell: View {
   var firstSong: String
   var setlistId: String
   var artistInfo: ArtistInfo
-  
-    var body: some View {
-          NavigationLink {
-            SetlistView(setlistId: setlistId, artistInfo: artistInfo)
-          } label: {
-            HStack(spacing: 0) {
-              VStack(alignment: .center, spacing: 0) {
-                Text(year)
-                  .foregroundStyle(Color.fontGrey25)
-                  .padding(.bottom, 2)
-                Text(dateAndMonth)
-                  .foregroundStyle(Color.mainBlack)
-                  .kerning(-0.5)
-              }
-              .font(.headline)
-              Spacer()
-                .frame(width: UIWidth * 0.08)
-              VStack(alignment: .leading, spacing: 0) {
-                Text(city + ", " + country)
-                  .font(.subheadline)
-                  .foregroundStyle(Color.mainBlack)
-                  .lineLimit(1)
-                  .padding(.bottom, 3)
-                if firstSong != "세트리스트 정보가 아직 없습니다." {
-                           Text("01 \(firstSong)")
-                             .font(.footnote)
-                             .lineLimit(1)
-                             .foregroundStyle(Color.fontGrey25)
-                         } else {
-                           Text(firstSong)
-                             .font(.footnote)
-                             .lineLimit(1)
-                             .foregroundStyle(Color.fontGrey25)
-                         }
-              }
-              .foregroundStyle(Color.mainBlack)
-              .font(.system(size: 14))
-              Spacer()
+  var body: some View {
+    NavigationLink {
+      SetlistView(setlistId: setlistId, artistInfo: artistInfo)
+    } label: {
+      HStack {
+        VStack(alignment: .center) {
+          Text(year)
+            .foregroundStyle(Color.fontGrey25)
+            .tracking(0.5)
+          Text(dateAndMonth)
+            .foregroundStyle(Color.mainBlack)
+        }
+        .font(.headline)
+        Spacer()
+          .frame(width: UIWidth * 0.08)
+        VStack(alignment: .leading) {
+          Text(city + ", " + country)
+            .font(.subheadline)
+            .foregroundStyle(Color.mainBlack)
+            .lineLimit(1)
+          Group {
+            if firstSong == "세트리스트 정보가 아직 없습니다" {
+              Text(firstSong)
+            } else {
+              Text("01 \(firstSong)")
             }
-            .padding(.vertical)
-            .padding(.horizontal, 11)
           }
+          .font(.footnote)
+          .lineLimit(1)
+          .foregroundStyle(Color.fontGrey25)
+          
+        }
+        .foregroundStyle(Color.mainBlack)
+        Spacer()
+      }
+      .padding()
     }
+  }
 }

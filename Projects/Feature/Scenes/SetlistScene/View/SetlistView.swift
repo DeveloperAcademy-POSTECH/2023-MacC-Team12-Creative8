@@ -147,7 +147,7 @@ struct SetlistView: View {
   
   private func saveData() {
     let newArtist = SaveArtistInfo(
-      name: setlist?.artist?.name ?? "",
+      name: artistInfo.name,
       country: setlist?.venue?.city?.country?.name ?? "",
       alias: artistInfo.alias ?? "",
       mbid: artistInfo.mbid,

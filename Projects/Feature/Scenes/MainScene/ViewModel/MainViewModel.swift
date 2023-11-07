@@ -17,7 +17,7 @@ final class MainViewModel: ObservableObject {
   @Published var scrollToIndex: Int?
   @Published var isTapped: Bool = false
   @Published var isLoading: Bool = false
-  var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
+  var setlists = [[Setlist?]?](repeating: nil, count: 10) // MARK: 나중에 꼭 수정하기!
   
   func replaceFirstSpaceWithNewline(_ input: String) -> String {
     guard let range = input.rangeOfCharacter(from: .whitespaces) else {

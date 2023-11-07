@@ -62,7 +62,7 @@ public struct MainView: View {
       dataManager.modelContext = modelContext
       var idx = 0
       for artist in likeArtists {
-        viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+          viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
         idx += 1
       }
     }
@@ -150,16 +150,6 @@ public struct MainView: View {
               viewModel.selectedIndex = 0
               viewModel.scrollToIndex = 0
             }
-          } else {
-            if likeArtists.count == 1 {
-              viewModel.selectedIndex = 0
-              viewModel.scrollToIndex = 0
-            } else if viewModel.selectedIndex == likeArtists.count-1 {
-              viewModel.selectedIndex = likeArtists.count-2
-              viewModel.scrollToIndex = likeArtists.count-2
-            } else {
-              viewModel.scrollToIndex = viewModel.selectedIndex
-            }
           }
         }
         .onChange(of: viewModel.scrollToIndex) {
@@ -168,6 +158,10 @@ public struct MainView: View {
             scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
           }
         }
+        .onChange(of: likeArtists, { _, _ in
+          viewModel.selectedIndex = 0
+          viewModel.scrollToIndex = 0
+        })
         .scrollTargetLayout()
       }
     }
@@ -211,8 +205,7 @@ public struct MainView: View {
                   let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
                   let city = item?.venue?.city?.name ?? ""
                   let country = item?.venue?.city?.country?.name ?? ""
-                  let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
-                  let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: data.artistInfo.songList) ?? firstSong
+                  let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다"
                   let setlistId = item?.id ?? ""
                   let artistInfo = ArtistInfo(
                     name: data.artistInfo.name,
@@ -222,7 +215,7 @@ public struct MainView: View {
                     imageUrl: data.artistInfo.imageUrl,
                     songList: data.artistInfo.songList)
                   VStack(spacing: 0) {
-                      ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
+                      ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: firstSong, setlistId: setlistId, artistInfo: artistInfo)
                     if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), setlist != lastIndex {
                       Divider()
                         .foregroundStyle(Color.lineGrey1)
@@ -231,8 +224,8 @@ public struct MainView: View {
                   .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
                   .animation(.easeInOut(duration: 0.1))
                   .frame(width: UIWidth * 0.78)
+                  .id(index)
                 }
-                
                 if current.isEmpty {
                   EmptyMainSetlistView()
                     .opacity(viewModel.selectedIndex == index ? 1.0 : 0)

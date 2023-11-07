@@ -6,7 +6,12 @@
 //  Copyright © 2023 com.creative8.seta. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
+import SwiftData
+import Core
+import UI
+import Combine
 
 struct ArtistImage: View {
   @Binding var selectedTab: Tab

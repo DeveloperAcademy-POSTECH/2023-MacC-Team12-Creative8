@@ -29,8 +29,16 @@ public final class SwiftDataManager: ObservableObject {
                             gid: Int,
                             imageUrl: String?,
                             songList: [Titles]) {
-
+    
     let descriptor = FetchDescriptor<LikeArtist>()
+    let likeArtist = try? modelContext?.fetch(descriptor)
+    var max = 0
+    guard let likeArtist = likeArtist else { return }
+    for i in 0..<likeArtist.count {
+      if max < likeArtist[i].orderIndex {
+        max = likeArtist[i].orderIndex
+      }
+    }
     let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name,
                                                               country: country,
                                                               alias: alias,
@@ -38,7 +46,7 @@ public final class SwiftDataManager: ObservableObject {
                                                               gid: gid,
                                                               imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
                                                               songList: songList),
-                                                              orderIndex: (try? modelContext?.fetchCount(descriptor)) ?? 0)
+                                                              orderIndex: max+1)
     modelContext?.insert(newLikeArtist)
     self.save()
   }
