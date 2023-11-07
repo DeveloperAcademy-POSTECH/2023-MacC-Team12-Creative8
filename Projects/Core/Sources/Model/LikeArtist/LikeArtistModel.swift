@@ -11,8 +11,8 @@ import SwiftData
 
 @Model
 public final class LikeArtist {
-  public var artistInfo: SaveArtistInfo
-  public var orderIndex: Int
+  public var artistInfo: SaveArtistInfo = SaveArtistInfo(name: "", country: "", alias: "", mbid: "", gid: 0, imageUrl: "", songList: [])
+  public var orderIndex: Int = 0
 
   public init(artistInfo: SaveArtistInfo, orderIndex: Int) {
     self.artistInfo = artistInfo

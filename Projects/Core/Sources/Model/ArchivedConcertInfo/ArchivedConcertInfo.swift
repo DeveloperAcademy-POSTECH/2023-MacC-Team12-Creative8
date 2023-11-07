@@ -11,8 +11,8 @@ import SwiftData
 
 @Model
 public class ArchivedConcertInfo {
-  public var artistInfo: SaveArtistInfo
-  public var setlist: SaveSetlist
+  public var artistInfo: SaveArtistInfo = SaveArtistInfo(name: "", country: "", alias: "", mbid: "", gid: 0, imageUrl: "", songList: [])
+  public var setlist: SaveSetlist = SaveSetlist(setlistId: "", date: Date(), venue: "", title: "", city: "", country: "")
 
   public init(artistInfo: SaveArtistInfo, setlist: SaveSetlist) {
     self.artistInfo = artistInfo

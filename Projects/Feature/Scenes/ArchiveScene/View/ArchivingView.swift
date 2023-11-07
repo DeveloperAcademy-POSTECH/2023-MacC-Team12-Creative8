@@ -94,7 +94,7 @@ extension ArchivingView {
       }
       .scrollIndicators(.hidden)
       .padding(.vertical)
-
+      
       ForEach(concertInfo) { item in
         if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)

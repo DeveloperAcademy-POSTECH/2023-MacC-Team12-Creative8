@@ -20,17 +20,17 @@ struct SearchView: View {
   @State private var randomIndexes: [Int] = []
   
   var body: some View {
-      Group {
-        SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
-          .padding(.top)
-          .padding(.top)
-        ScrollView {
-          artistView
-        }
+    Group {
+      SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
+        .padding(.top)
+        .padding(.top)
+      ScrollView {
+        artistView
       }
-      .padding(.horizontal)
-      .scrollDisabled(viewModel.searchIsPresented)
-      .scrollIndicators(.hidden)
+    }
+    .padding(.horizontal)
+    .scrollDisabled(viewModel.searchIsPresented)
+    .scrollIndicators(.hidden)
     .background(Color.backgroundWhite)
     .onAppear {
       generateRandomIndexes()

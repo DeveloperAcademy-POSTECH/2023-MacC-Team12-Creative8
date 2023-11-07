@@ -11,8 +11,8 @@ import SwiftData
 
 @Model
 public final class SearchHistory {
-  public var artistInfo: SaveArtistInfo
-  public var createdDate: Date
+  public var artistInfo: SaveArtistInfo = SaveArtistInfo(name: "", country: "", alias: "", mbid: "", gid: 0, imageUrl: "", songList: [])
+  public var createdDate: Date = Date()
 
   init(artistInfo: SaveArtistInfo) {
     self.artistInfo = artistInfo

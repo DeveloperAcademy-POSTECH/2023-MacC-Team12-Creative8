@@ -20,6 +20,7 @@ public struct TabBarView: View {
     TabView(selection: $selectedTab) {
       NavigationStack {
         MainView(selectedTab: $selectedTab)
+          .navigationBarTitleDisplayMode(.inline)
       }
       .tabItem {
         Label("세트리스트", systemImage: "music.note.house.fill")
@@ -27,6 +28,7 @@ public struct TabBarView: View {
       .tag(Tab.home)
       NavigationStack {
         SearchView(selectedTab: $selectedTab)
+          .navigationBarTitleDisplayMode(.inline)
       }
       .tabItem {
         Label("검색", systemImage: "magnifyingglass")
@@ -34,6 +36,7 @@ public struct TabBarView: View {
       .tag(Tab.search)
       NavigationStack {
         ArchivingView(selectedTab: $selectedTab)
+          .navigationBarTitleDisplayMode(.inline)
           .background(Color.backgroundWhite)
       }
       .tabItem {
@@ -43,6 +46,7 @@ public struct TabBarView: View {
 
       NavigationStack {
         SettingView()
+          .navigationBarTitleDisplayMode(.inline)
           .background(Color.backgroundWhite)
       }
       .tabItem {

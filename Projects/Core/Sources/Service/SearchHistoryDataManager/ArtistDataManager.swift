@@ -35,6 +35,7 @@ public final class ArtistDataManager {
               completion(nil)
             }
           }
+          completion(nil)
         }
       } else {
         completion(nil)
