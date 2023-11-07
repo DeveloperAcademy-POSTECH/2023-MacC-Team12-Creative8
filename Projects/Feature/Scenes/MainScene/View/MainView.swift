@@ -261,7 +261,9 @@ struct MainView: View {
                             .font(.system(size: 14))
                             Spacer()
                           }
-                          .padding()
+                          .foregroundStyle(Color.mainBlack)
+                          .font(.system(size: 14))
+                          Spacer()
                         }
                       }
                       if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
