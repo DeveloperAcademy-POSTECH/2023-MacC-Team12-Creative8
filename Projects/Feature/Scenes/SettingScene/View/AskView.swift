@@ -32,9 +32,17 @@ struct AskView: View {
       let composeViewController = MFMailComposeViewController()
       composeViewController.mailComposeDelegate = coordinator
       
-      let bodyString = """
-                             // 이메일 내용
-                             """
+      let bodyString =
+      """
+      안녕하세요. Seta 입니다. 아래 내용을 보내주시면 문의 확인에 도움이 됩니다.
+      
+        - iOS 버전 :
+        - 기기 모델명 :
+        - 문제발생일시 :
+        - 문의 내용 :
+      
+      
+      """
       
       composeViewController.setToRecipients(["thecreative8team@gmail.com"])
       composeViewController.setSubject("<SETA> 문의 및 의견")
