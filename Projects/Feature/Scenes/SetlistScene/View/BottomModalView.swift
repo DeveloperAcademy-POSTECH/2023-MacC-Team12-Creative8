@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct BottomModalView: View {
   let setlist: Setlist?
