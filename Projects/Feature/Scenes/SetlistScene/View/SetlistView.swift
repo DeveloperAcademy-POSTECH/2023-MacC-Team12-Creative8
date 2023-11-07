@@ -141,7 +141,7 @@ struct SetlistView: View {
       vm.isBookmarked.toggle()
     }, label: {
       Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-        .foregroundStyle(Color.mainBlack)
+        .foregroundStyle(vm.isBookmarked ? Color.mainOrange : Color.mainBlack)
     })
   }
   

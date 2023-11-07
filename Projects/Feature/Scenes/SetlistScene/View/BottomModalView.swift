@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct BottomModalView: View {
   let setlist: Setlist?
@@ -49,22 +50,24 @@ struct BottomModalView: View {
       Spacer()
     }
     .padding(.horizontal, 30)
+    .background(Color.settingTextBoxWhite)
   }
   
   private func listRowView(title: String, description: String?, action: @escaping () -> Void) -> some View {
     HStack {
       VStack(alignment: .leading, spacing: UIHeight * 0.01) {
         Text(title)
-          .font(.system(size: 16, weight: .semibold))
+          .font(.headline)
+          .foregroundStyle(Color.mainBlack)
         if let description = description {
           Text(description)
-            .font(.system(size: 12, weight: .regular))
-            .opacity(0.8)
+            .font(.caption)
+            .foregroundStyle(Color.fontGrey2)
         }
       }
       Spacer()
       Image(systemName: "chevron.right")
-        .foregroundStyle(.gray)
+        .foregroundStyle(Color.mainBlack)
     }
     .onTapGesture {
       action()

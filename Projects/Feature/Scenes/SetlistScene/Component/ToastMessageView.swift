@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct ToastMessageView: View {
   let message: String

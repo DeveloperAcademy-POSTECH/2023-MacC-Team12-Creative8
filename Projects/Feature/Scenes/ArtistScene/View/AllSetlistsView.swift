@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct AllSetlistsView: View {
   @ObservedObject var vm: ArtistViewModel

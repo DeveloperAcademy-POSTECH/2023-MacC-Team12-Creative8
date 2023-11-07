@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct ArtistImage: View {
   @Binding var selectedTab: Tab

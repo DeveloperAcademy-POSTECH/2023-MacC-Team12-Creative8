@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 import Core
+import UI
 
 struct ArtistInfoView: View {
   @ObservedObject var vm: ArtistViewModel
@@ -82,10 +83,10 @@ struct ArtistInfoView: View {
     } label: {
       Circle()
         .frame(width: UIWidth * 0.15)
-        .foregroundStyle(Color.mainWhite1)
+        .foregroundStyle(Color.mainWhite)
         .overlay(
           Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-            .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
+            .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
             .font(.title3)
         )
     }

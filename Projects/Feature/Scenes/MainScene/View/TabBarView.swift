@@ -55,9 +55,6 @@ public struct TabBarView: View {
       }
       .tag(Tab.setting)
     }
-    .onAppear {
-      UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
-    }
   }
 }
 
