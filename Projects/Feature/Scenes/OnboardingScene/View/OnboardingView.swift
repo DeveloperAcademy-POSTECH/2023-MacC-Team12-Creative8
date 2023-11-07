@@ -143,9 +143,7 @@ public struct OnboardingView: View {
               }
             }
           }
-          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             isOnboarding = false
-          }
         }
         
       }, label: {
