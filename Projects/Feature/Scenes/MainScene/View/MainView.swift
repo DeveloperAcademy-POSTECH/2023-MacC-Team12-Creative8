@@ -27,32 +27,32 @@ public struct MainView: View {
     GeometryReader { geometry in
       ScrollView {
         VStack(spacing: 0) {
-          HStack {
-            logo
-              .opacity(0)
-          }
-          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-          .padding(.horizontal, 25)
-          .overlay {
-            HStack(spacing: 0) {
-              toolbarButton
+            HStack {
+              logo
+                .opacity(0)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-            .padding(.horizontal, UIWidth * 0.11)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 25)
+            .overlay {
+              HStack(spacing: 0) {
+                toolbarButton
+              }
+              .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+              .padding(.horizontal, UIWidth * 0.11)
+            }
+            .padding(.bottom, 34)
+            Divider()
+              .padding(.leading, 25)
+              .foregroundStyle(Color.lineGrey1)
+            if likeArtists.isEmpty {
+              EmptyMainView(selectedTab: $selectedTab)
+                .frame(width: geometry.size.width)
+                .frame(minHeight: geometry.size.height * 0.9)
+            } else {
+              mainArtistsView
+            }
           }
-          .padding(.bottom, 34)
-          Divider()
-            .padding(.leading, 25)
-            .foregroundStyle(Color.lineGrey1)
-          if likeArtists.isEmpty {
-            EmptyMainView(selectedTab: $selectedTab)
-              .frame(width: geometry.size.width)
-              .frame(minHeight: geometry.size.height * 0.9)
-          } else {
-            mainArtistsView
-          }
-        }
-        .padding(.vertical)
+          .padding(.vertical)
       }
       .scrollIndicators(.hidden)
       .id(likeArtists)
@@ -114,38 +114,48 @@ public struct MainView: View {
     .onChange(of: viewModel.scrollToIndex) {
       viewModel.selectedIndex = viewModel.scrollToIndex
     }
-    .onAppear {
-      if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
-        if !likeArtists.isEmpty {
-          viewModel.selectedIndex = 0
-          viewModel.scrollToIndex = 0
-        }
-      }
-    }
   }
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
         HStack(spacing: UIWidth * 0.13) {
-          ForEach(0..<likeArtists.prefix(5).count, id: \.self) { data in
-            let artistName = viewModel.replaceFirstSpaceWithNewline(likeArtists[data].artistInfo.name)
+          ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
+            let artistName = viewModel.replaceFirstSpaceWithNewline(data.artistInfo.name)
             Text(.init(artistName))
               .padding(.vertical, 16.5)
               .background(Color.clear)
               .font(.system(size: 25))
               .bold()
-              .id(data)
-              .foregroundColor(viewModel.selectedIndex == data ? Color.mainBlack : Color.fontGrey3)
+              .id(index)
+              .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
               .animation(.easeInOut(duration: 0.2))
               .onTapGesture {
                 withAnimation {
-                  viewModel.selectedIndex = data
-                  viewModel.scrollToIndex = data
+                  viewModel.selectedIndex = index
+                  viewModel.scrollToIndex = index
                 }
               }
           }
           Color.clear
             .frame(width: UIWidth * 0.7)
+        }
+        .onAppear {
+          if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
+            if !likeArtists.isEmpty {
+              viewModel.selectedIndex = 0
+              viewModel.scrollToIndex = 0
+            }
+          } else {
+            if likeArtists.count == 1 {
+              viewModel.selectedIndex = 0
+              viewModel.scrollToIndex = 0
+            } else if viewModel.selectedIndex == likeArtists.count-1 {
+              viewModel.selectedIndex = likeArtists.count-2
+              viewModel.scrollToIndex = likeArtists.count-2
+            } else {
+              viewModel.scrollToIndex = viewModel.selectedIndex
+            }
+          }
         }
         .onChange(of: viewModel.scrollToIndex) {
           viewModel.selectedIndex = viewModel.scrollToIndex
@@ -163,24 +173,23 @@ public struct MainView: View {
   public var artistContentView: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 16) {
-        ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
+        ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
           VStack(spacing: 0) {
-            if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
-              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
-                if likeArtists[data].artistInfo.imageUrl.isEmpty {
+              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: data.artistInfo.name, artistAlias: data.artistInfo.alias, artistMbid: data.artistInfo.mbid)) {
+                if data.artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
-                  let imageUrl = likeArtists[data].artistInfo.imageUrl
+                  let imageUrl = data.artistInfo.imageUrl
                   ArtistImage(selectedTab: $selectedTab, imageUrl: imageUrl)
                 }
               }
               HStack {
-                Text("\(likeArtists[data].artistInfo.name)의 최근 공연")
+                Text("\(data.artistInfo.name)의 최근 공연")
                   .font(.caption)
                   .foregroundStyle(Color.fontGrey2)
                 Spacer()
               }
-              .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+              .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
               .padding(.top)
               .padding(.horizontal, 11)
               if viewModel.isLoading {
@@ -191,47 +200,43 @@ public struct MainView: View {
                   Spacer()
                 }
               } else {
-                let current: [Setlist?] = viewModel.setlists[data] ?? []
-                ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
-                  if data < likeArtists.count {
-                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-                    let city = item?.venue?.city?.name ?? ""
-                    let country = item?.venue?.city?.country?.name ?? ""
-                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
-                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
-                    let setlistId = item?.id ?? ""
-                    
-                    let artistInfo = ArtistInfo(
-                      name: likeArtists[data].artistInfo.name,
-                      alias: likeArtists[data].artistInfo.alias,
-                      mbid: likeArtists[data].artistInfo.mbid,
-                      gid: likeArtists[data].artistInfo.gid,
-                      imageUrl: likeArtists[data].artistInfo.imageUrl,
-                      songList: likeArtists[data].artistInfo.songList)
-                    VStack(spacing: 0) {
-                      if data < likeArtists.count {
-                        ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
-                      }
-                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-                        Divider()
-                          .foregroundStyle(Color.lineGrey1)
-                      }
+                let current: [Setlist?] = viewModel.setlists[index] ?? []
+                ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { setlist, item in
+                  let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                  let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                  let city = item?.venue?.city?.name ?? ""
+                  let country = item?.venue?.city?.country?.name ?? ""
+                  let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                  let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: data.artistInfo.songList) ?? firstSong
+                  let setlistId = item?.id ?? ""
+                  let artistInfo = ArtistInfo(
+                    name: data.artistInfo.name,
+                    alias: data.artistInfo.alias,
+                    mbid: data.artistInfo.mbid,
+                    gid: data.artistInfo.gid,
+                    imageUrl: data.artistInfo.imageUrl,
+                    songList: data.artistInfo.songList)
+                  VStack(spacing: 0) {
+                      ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
+                    if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), setlist != lastIndex {
+                      Divider()
+                        .foregroundStyle(Color.lineGrey1)
                     }
-                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                    .animation(.easeInOut(duration: 0.1))
-                    .frame(width: UIWidth * 0.78)
                   }
+                  .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
+                  .animation(.easeInOut(duration: 0.1))
+                  .frame(width: UIWidth * 0.78)
                 }
                 
                 if current.isEmpty {
                   EmptyMainSetlistView()
-                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                    .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
                     .padding(.vertical)
                 }
               }
               Spacer()
-            }
+              
+//            }
           }
         }
       }
