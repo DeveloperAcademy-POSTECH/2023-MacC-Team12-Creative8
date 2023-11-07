@@ -22,18 +22,14 @@ struct SearchView: View {
   var body: some View {
     ScrollViewReader { proxy in
       Group {
-        headView
+        SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
         ScrollView {
-          searchingHistoryView
           artistView
         }
       }
       .padding(.horizontal)
       .scrollDisabled(viewModel.searchIsPresented)
       .scrollIndicators(.hidden)
-      .onChange(of: viewModel.searchIsPresented) { _, newValue in
-        withAnimation { proxy.scrollTo(newValue ? ScrollID.searchBar : ScrollID.top, anchor: .top) }
-      }
     }
     .background(Color.backgroundWhite)
     .onAppear {
@@ -41,31 +37,15 @@ struct SearchView: View {
     }
   }
   
-  // MARK: 상단, ScrollViewReader의 사용을 위해 id 활용
-  private var headView: some View {
-    VStack(alignment: .leading) {
-      Image("logo")
-        .resizable()
-        .frame(width: 37, height: 21)
-        .opacity(viewModel.searchIsPresented ? 0 : 1)
-        .id(ScrollID.top)
-      
-      SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
-        .id(ScrollID.searchBar)
-    }
-    .searchable(text: $viewModel.searchText, placement: .toolbar, prompt: "아티스트를 검색하세오")
-    .padding(.top)
-  }
-  
   private var artistView: some View {
-    LazyVStack(alignment: .leading) {
+    VStack(alignment: .leading) {
       domesticArtistView
         .padding(.vertical, 64)
       foreignArtistView
     }
     .disabled(viewModel.searchIsPresented)
     .opacity(viewModel.searchIsPresented ? 0 : 1)
-    .overlay { searchingHistoryView }
+    .overlay(searchingHistoryView)
   }
   
   private var domesticArtistView: some View {

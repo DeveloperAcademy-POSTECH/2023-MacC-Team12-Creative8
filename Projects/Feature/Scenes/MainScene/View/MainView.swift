@@ -26,13 +26,14 @@ public struct MainView: View {
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
-        VStack(spacing: 0) {
+        VStack {
             HStack {
               logo
                 .opacity(0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
+            .padding(.top, 40)
             .overlay {
               HStack(spacing: 0) {
                 toolbarButton
@@ -40,7 +41,7 @@ public struct MainView: View {
               .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
               .padding(.horizontal, UIWidth * 0.11)
             }
-            .padding(.bottom, 34)
+            
             Divider()
               .padding(.leading, 25)
               .foregroundStyle(Color.lineGrey1)
