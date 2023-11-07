@@ -136,6 +136,7 @@ extension ArchivingView {
       HStack {
         ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
         Text("\(item.artistInfo.name)")
+          .font(.subheadline)
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
           .background(
             NavigationLink("", destination: ArtistView(selectedTab: $selectedTab,
