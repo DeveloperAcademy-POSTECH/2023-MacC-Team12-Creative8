@@ -26,7 +26,7 @@ struct DarkModeButton: View {
       VStack {
         Image(systemName: buttonType.icon)
           .foregroundStyle(buttonType == appearnace ? Color.mainBlack : Color.fontGrey3)
-          .font(.subheadline)
+          .font(.title3)
           .padding(6)
         Text(buttonType.name)
           .font(.system(size: 10))

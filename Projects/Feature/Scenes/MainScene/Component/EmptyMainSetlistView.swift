@@ -14,7 +14,7 @@ import UI
 
 struct EmptyMainSetlistView: View {
   var body: some View {
-    VStack(alignment: .leading, spacing: 0) {
+    VStack(alignment: .center, spacing: 0) {
       Spacer()
       Text("세트리스트 정보가 없습니다.")
         .font(.system(size: 16))

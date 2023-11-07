@@ -23,7 +23,6 @@ struct ArtistSetlistCell: View {
   var firstSong: String
   var setlistId: String
   var artistInfo: ArtistInfo
-  
   var body: some View {
     NavigationLink {
       SetlistView(setlistId: setlistId, artistInfo: artistInfo)
@@ -44,7 +43,6 @@ struct ArtistSetlistCell: View {
             .font(.subheadline)
             .foregroundStyle(Color.mainBlack)
             .lineLimit(1)
-          
           Group {
             if firstSong == "세트리스트 정보가 아직 없습니다" {
               Text(firstSong)
