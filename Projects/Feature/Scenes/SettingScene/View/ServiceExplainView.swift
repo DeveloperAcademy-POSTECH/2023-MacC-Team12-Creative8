@@ -18,14 +18,13 @@ struct ServiceExplainView: View {
       Color(Color.backgroundGrey)
       ScrollView {
         VStack {
-          SectionBackgroundView(height: 1100)
+          SectionBackgroundView(height: 1050)
             .overlay {
               VStack(alignment: .leading) {
                 TermsTitleView(title: "서비스 이용 약관")
                 
                 // 약관 상세 내용
                 TermsView(terms: viewModel.termsOfService, bulletPoint: "")
-                  .padding(.bottom, 53)
               }
               .padding(.horizontal, 26)
             }
@@ -76,7 +75,6 @@ struct TermsTitleView: View {
     Text(title)
       .font(.system(size: 18, weight: .semibold))
       .foregroundStyle(Color.mainBlack)
-      .padding(EdgeInsets(top: 32, leading: 0, bottom: 5, trailing: 0))
     Divider()
       .foregroundStyle(Color.lineGrey1)
   }
@@ -119,7 +117,7 @@ struct SectionBackgroundView: View {
 }
 
 #Preview {
-  TermsOfSetlistfm()
+  ServiceExplainView()
 }
 
 /// UIViewReperesentable을 사용해서 UIKit을 매핑해야함.
