@@ -38,13 +38,14 @@ class ArtistViewModel: ObservableObject {
         }
       } else {
         print("Failed to fetch artist info. 1")
-        self.artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
+        self.artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistAlias ?? "", alias: artistName, mbid: artistMbid)) { result in
           if let result = result {
             DispatchQueue.main.async {
               self.artistInfo = result
               self.isLoadingArtistInfo = false
             }
           } else {
+            self.artistInfo = ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)
             self.isLoadingArtistInfo = false
             print("Failed to fetch artist info. 2")
           }
