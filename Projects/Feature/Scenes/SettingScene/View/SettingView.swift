@@ -17,60 +17,58 @@ public struct SettingView: View {
     ZStack {
       Color.backgroundWhite
       ScrollView {
-        Divider()
-          .foregroundStyle(Color.lineGrey1)
-          .padding(.leading)
-          .padding(.top)
-        // 세트리스트 추가 및 수정하기
         VStack(alignment: .leading) {
-          SectionTitleView(
-            sectionTitle: "세트리스트 추가 및 수정하기",
-            sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
-          SetlistfmLinkButton(
-            setlistfmURL: "https://www.setlist.fm",
-            linkLabel: "Setlist.fm 바로가기")
-          .padding(.bottom, 20)
-        }
-        .padding(.horizontal)
-        
-        // 서비스 이용 관련
-        VStack(alignment: .leading) {
+          Text("더보기").font(.title2).fontWeight(.semibold)
           Divider()
             .foregroundStyle(Color.lineGrey1)
-          SectionTitleView(
-            sectionTitle: "서비스 이용 관련",
-            sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
-          // 이용 약관
-          NavigationLink {
-            ServiceExplainView()
-              .navigationBarTitle("이용 약관", displayMode: .inline)
-          } label: {
-            LinkLabelView(linkLabel: "이용 약관")
+            .padding(.top)
+            .padding(.trailing, -25)
+          // 세트리스트 추가 및 수정하기
+          VStack(alignment: .leading) {
+            SectionTitleView(
+              sectionTitle: "세트리스트 추가 및 수정하기",
+              sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
+            SetlistfmLinkButton(
+              setlistfmURL: "https://www.setlist.fm",
+              linkLabel: "Setlist.fm 바로가기")
+            .padding(.bottom, 20)
           }
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
-          
-          // Setlist.fm 약관
-          NavigationLink {
-            TermsOfSetlistfm()
-              .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
-          } label: {
-            LinkLabelView(linkLabel: "Setlist.fm 약관")
+
+          // 서비스 이용 관련
+          VStack(alignment: .leading) {
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+            SectionTitleView(
+              sectionTitle: "서비스 이용 관련",
+              sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
+            // 이용 약관
+            NavigationLink {
+              ServiceExplainView()
+                .navigationBarTitle("이용 약관", displayMode: .inline)
+            } label: {
+              LinkLabelView(linkLabel: "이용 약관")
+            }
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+
+            // Setlist.fm 약관
+            NavigationLink {
+              TermsOfSetlistfm()
+                .navigationBarTitle("Setlist.fm 약관", displayMode: .inline)
+            } label: {
+              LinkLabelView(linkLabel: "Setlist.fm 약관")
+            }
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+
+            // 문의하기
+            AskView()
           }
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
-          
-          // 문의하기
-          AskView()
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 25)
+        .padding(.vertical)
       }
     }
-    .toolbar { ToolbarItem(placement: .topBarLeading) {
-      Text("더보기")
-        .font(.title2)
-        .fontWeight(.semibold)
-    }}
   }
 }
 
@@ -84,8 +82,7 @@ struct SectionTitleView: View {
       Text(sectionTitle)
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
-        .padding(.bottom, 20)
-        .padding(.top, 30)
+        .padding(.vertical)
       Text(sectionDescription)
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
