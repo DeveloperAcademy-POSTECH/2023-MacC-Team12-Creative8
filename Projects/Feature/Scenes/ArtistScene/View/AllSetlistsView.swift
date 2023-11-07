@@ -58,7 +58,6 @@ struct AllSetlistsView: View {
             let venue = "\(setlist.venue?.city?.name ?? ""), \(setlist.venue?.city?.country?.name ?? "")"
             Text(venue)
               .font(.subheadline)
-              .fontWeight(.semibold)
               .foregroundStyle(Color.mainBlack)
             Group {
               if vm.isEmptySetlist(setlist) {

@@ -69,10 +69,12 @@ struct BookmarkedSetlistsView: View {
         vm.showBookmarkedSetlists.toggle()
       } label: {
         Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
+          .font(.title3)
       }
       .foregroundStyle(Color.mainBlack)
     }
-    .padding(.horizontal, 10)
+    .padding(.leading, 10)
+    .padding(.trailing, 20)
   }
   
   private var emptyLayer: some View {
@@ -170,9 +172,9 @@ struct BookmarkedSetlistsView: View {
       HStack {
         Spacer()
         Text("\(vm.artistInfo.name) 보관함에서 보기")
-        Image(systemName: "arrow.right")
+          .underline()
       }
-      .font(.footnote)
+      .font(.subheadline)
       .foregroundColor(Color.mainBlack)
       .padding()
       .padding(.horizontal, 10)
