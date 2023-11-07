@@ -32,7 +32,7 @@ struct EmptyMainView: View {
       }
       .foregroundStyle(Color.mainWhite)
       .font(.system(size: 14))
-      .padding(EdgeInsets(top: 17, leading: 23, bottom: 17, trailing: 23))
+      .padding(EdgeInsets(top: 17, leading: 0, bottom: 17, trailing: 0))
       .background(RoundedRectangle(cornerRadius: 14)
         .foregroundStyle(Color.buttonBlack))
       .bold()
