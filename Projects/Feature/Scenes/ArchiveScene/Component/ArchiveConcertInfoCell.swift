@@ -20,7 +20,7 @@ struct ArchiveConcertInfoCell: View {
 	var body: some View {
 		HStack {
 			VStack {
-        Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25)
+        Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25).tracking(0.5)
 				Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
 			}
 			.font(.headline)

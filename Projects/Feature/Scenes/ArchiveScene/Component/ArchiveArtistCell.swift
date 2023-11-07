@@ -24,10 +24,10 @@ struct ArchiveArtistCell: View {
         }
       } else {
         if colorScheme == .light {
-          Image(uiImage:UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+          Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
         } else {
-          Image(uiImage:UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+          Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
         }
       }
