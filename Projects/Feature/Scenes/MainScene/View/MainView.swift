@@ -17,7 +17,7 @@ public struct MainView: View {
   @Environment(\.colorScheme) var colorScheme
   
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
-
+  
   @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   
@@ -26,30 +26,34 @@ public struct MainView: View {
   public var body: some View {
     GeometryReader { geometry in
       ScrollView {
-        VStack {
-          HStack { logo }
+          VStack {
+            HStack {
+              logo
+                .opacity(0)
+            }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
             .overlay {
-              HStack { toolbarButton }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-                .padding(.horizontal, 25)
+              HStack {
+                toolbarButton
+              }
+              .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+              .padding(.horizontal, 25)
             }
-
-          Divider()
-            .padding(.leading, 25)
-            .padding(.vertical)
-            .padding(.top, 12)
-            .foregroundStyle(Color.lineGrey1)
-          if likeArtists.isEmpty {
-            EmptyMainView(selectedTab: $selectedTab)
-              .frame(width: geometry.size.width)
-              .frame(minHeight: geometry.size.height * 0.9)
-          } else {
-            mainArtistsView
+            Divider()
+              .padding(.leading, 25)
+              .padding(.vertical)
+              .padding(.top, 12)
+              .foregroundStyle(Color.lineGrey1)
+            if likeArtists.isEmpty {
+              EmptyMainView(selectedTab: $selectedTab)
+                .frame(width: geometry.size.width)
+                .frame(minHeight: geometry.size.height * 0.9)
+            } else {
+              mainArtistsView
+            }
           }
-        }
-        .padding(.vertical)
+          .padding(.vertical)
       }
       .scrollIndicators(.hidden)
       .id(likeArtists)
@@ -85,16 +89,17 @@ public struct MainView: View {
       } label: {
         if colorScheme == .dark {
           Image(systemName: "sun.max.fill")
-            .font(.subheadline)
+            .font(.title3)
         } else {
           Image(systemName: "moon.fill")
-            .font(.subheadline)
+            .font(.title3)
         }
       }
       .foregroundColor(Color.mainBlack)
       .opacity(viewModel.isTapped ? 0 : 1)
       if viewModel.isTapped {
         ToolbarDarkModeButtons(viewModel: viewModel)
+          .padding(.top)
       }
     }
   }
@@ -163,7 +168,7 @@ public struct MainView: View {
         ForEach(0 ..< likeArtists.prefix(5).count, id: \.self) { data in
           VStack(spacing: 0) {
             if data < likeArtists.count { // 아카이빙 뷰에서 지울 때마다 인덱스 에러 나서 이렇게 했습니다 ㅠ.ㅠ
-              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid)) {
+              NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: likeArtists[data].artistInfo.name, artistAlias: likeArtists[data].artistInfo.alias, artistMbid: likeArtists[data].artistInfo.mbid).toolbarRole(.editor)) {
                 if likeArtists[data].artistInfo.imageUrl.isEmpty {
                   artistEmptyImage
                 } else {
@@ -189,40 +194,41 @@ public struct MainView: View {
                 }
               } else {
                 let current: [Setlist?] = viewModel.setlists[data] ?? []
-                  ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
-                    let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
-                    let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
-                    let city = item?.venue?.city?.name ?? ""
-                    let country = item?.venue?.city?.country?.name ?? ""
-                    let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
-                    let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
-                    let setlistId = item?.id ?? ""
-                    if data < likeArtists.count {
-                      let artistInfo = ArtistInfo(
-                        name: likeArtists[data].artistInfo.name,
-                        alias: likeArtists[data].artistInfo.alias,
-                        mbid: likeArtists[data].artistInfo.mbid,
-                        gid: likeArtists[data].artistInfo.gid,
-                        imageUrl: likeArtists[data].artistInfo.imageUrl,
-                        songList: likeArtists[data].artistInfo.songList)
-                      VStack(spacing: 0) {
-                        if data < likeArtists.count {
-                          ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
-                        }
-                        if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-                          Divider()
-                            .foregroundStyle(Color.lineGrey1)
-                        }
+                ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { index, item in
+                  let dateAndMonth = viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "")
+                  let year = viewModel.getFormattedYear(date: item?.eventDate ?? "")
+                  let city = item?.venue?.city?.name ?? ""
+                  let country = item?.venue?.city?.country?.name ?? ""
+                  let firstSong = item?.sets?.setsSet?.first?.song?.first?.name ?? "세트리스트 정보가 아직 없습니다."
+                  let convertedFirstSong = viewModel.koreanConverter.findKoreanTitle(title: firstSong, songList: likeArtists[data].artistInfo.songList) ?? firstSong
+                  let setlistId = item?.id ?? ""
+                  if data < likeArtists.count {
+                    let artistInfo = ArtistInfo(
+                      name: likeArtists[data].artistInfo.name,
+                      alias: likeArtists[data].artistInfo.alias,
+                      mbid: likeArtists[data].artistInfo.mbid,
+                      gid: likeArtists[data].artistInfo.gid,
+                      imageUrl: likeArtists[data].artistInfo.imageUrl,
+                      songList: likeArtists[data].artistInfo.songList)
+                    VStack(spacing: 0) {
+                      if data < likeArtists.count {
+                        ArtistSetlistCell(dateAndMonth: dateAndMonth ?? "", year: year ?? "", city: city, country: country, firstSong: convertedFirstSong, setlistId: setlistId, artistInfo: artistInfo)
                       }
-                      .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
-                      .animation(.easeInOut(duration: 0.1))
-                      .frame(width: UIWidth * 0.78)
+                      if let lastIndex = current.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+                        Divider()
+                          .foregroundStyle(Color.lineGrey1)
+                      }
                     }
+                    .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                    .animation(.easeInOut(duration: 0.1))
+                    .frame(width: UIWidth * 0.78)
                   }
+                }
                 
                 if current.isEmpty {
                   EmptyMainSetlistView()
                     .opacity(viewModel.selectedIndex == data ? 1.0 : 0)
+                    .padding(.vertical)
                 }
               }
               Spacer()
@@ -235,38 +241,38 @@ public struct MainView: View {
   }
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
-        .foregroundStyle(Color.mainGrey1)
-        .overlay(
-          Image("ticket", bundle: setaBundle)
-            .resizable()
-            .renderingMode(.template)
-            .foregroundStyle(Color.lineGrey1)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: UIWidth * 0.43)
-        )
-        .overlay {
-          artistImageOverlayButton
-        }
-        .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
-  }
-
-  public var artistImageOverlayButton: some View {
-      VStack {
-        Spacer()
-        HStack {
-          Spacer()
-          Circle()
-            .frame(width: UIWidth * 0.15)
-            .foregroundStyle(Color.mainBlack)
-            .overlay {
-              Image(systemName: "arrow.right")
-                .foregroundStyle(Color.settingTextBoxWhite)
-            }
-        }
+      .foregroundStyle(Color.mainGrey1)
+      .overlay(
+        Image("ticket", bundle: setaBundle)
+          .resizable()
+          .renderingMode(.template)
+          .foregroundStyle(Color.lineGrey1)
+          .aspectRatio(contentMode: .fit)
+          .frame(width: UIWidth * 0.43)
+      )
+      .overlay {
+        artistImageOverlayButton
       }
-      .padding([.trailing, .bottom])
-    }
+      .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
   }
+  
+  public var artistImageOverlayButton: some View {
+    VStack {
+      Spacer()
+      HStack {
+        Spacer()
+        Circle()
+          .frame(width: UIWidth * 0.15)
+          .foregroundStyle(Color.mainBlack)
+          .overlay {
+            Image(systemName: "arrow.right")
+              .foregroundStyle(Color.settingTextBoxWhite)
+          }
+      }
+    }
+    .padding([.trailing, .bottom])
+  }
+}
 
 // 로고 만들기
 extension View {
