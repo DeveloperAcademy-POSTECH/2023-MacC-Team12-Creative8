@@ -13,11 +13,13 @@ public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
   
   public init() {
-    let appearance = UITabBarAppearance()
-    appearance.configureWithOpaqueBackground()
-    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+//    let appearance = UITabBarAppearance()
+//    appearance.configureWithOpaqueBackground()
+//    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+//
+//    UITabBar.appearance().standardAppearance = appearance
 
-    UITabBar.appearance().standardAppearance = appearance
+    UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
     
   }
   
@@ -55,6 +57,9 @@ public struct TabBarView: View {
       }
       .tag(Tab.setting)
     }
+//    .onAppear {
+//      UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite")
+//    }
   }
 }
 

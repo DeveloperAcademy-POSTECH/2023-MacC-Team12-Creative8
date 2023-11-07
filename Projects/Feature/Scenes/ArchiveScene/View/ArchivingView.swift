@@ -121,9 +121,12 @@ extension ArchivingView {
             .font(.footnote)
             .foregroundStyle(Color.fontGrey2)
             .padding(.top)
+            .listRowBackground(Color.backgroundWhite)
           artistListView
             .listRowSeparator(.hidden)
+            .listRowBackground(Color.backgroundWhite)
         }
+        
         .scrollIndicators(.hidden)
         .listStyle(.plain)
         .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
