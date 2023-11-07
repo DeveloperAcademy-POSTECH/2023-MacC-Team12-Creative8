@@ -20,9 +20,18 @@
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
+<<<<<<< HEAD
 		8B7E4A012AF966800029170C /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A002AF966800029170C /* ArtistInfoView.swift */; };
 		8B7E4A032AF967560029170C /* BookmarkedSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A022AF967560029170C /* BookmarkedSetlistsView.swift */; };
 		8B7E4A052AF9691E0029170C /* AllSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E4A042AF9691E0029170C /* AllSetlistsView.swift */; };
+=======
+		79A5AD222AF61C3700770D1C /* EmptyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD212AF61C3700770D1C /* EmptyMainView.swift */; };
+		79A5AD252AF61CB500770D1C /* DarkModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD242AF61CB500770D1C /* DarkModeButton.swift */; };
+		79A5AD272AF61D8100770D1C /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */; };
+		79A5AD2A2AF61FAC00770D1C /* ArtistSetlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */; };
+		79A5AD2C2AF62B1300770D1C /* ArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD2B2AF62B1300770D1C /* ArtistImage.swift */; };
+		79A5AD2E2AF62C6800770D1C /* ToolbarDarkModeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AD2D2AF62C6800770D1C /* ToolbarDarkModeButtons.swift */; };
+>>>>>>> 25bdddb6c7ddf76ac6285ac6f60a2422dbd71f68
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E319B5E5F3B22C401257A /* IsEmptyCell.swift */; };
 		A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */; };
@@ -86,6 +95,12 @@
 		5AAF56B0153354883134B7D3 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
+		79A5AD212AF61C3700770D1C /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
+		79A5AD242AF61CB500770D1C /* DarkModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeButton.swift; sourceTree = "<group>"; };
+		79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainSetlistView.swift; sourceTree = "<group>"; };
+		79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetlistCell.swift; sourceTree = "<group>"; };
+		79A5AD2B2AF62B1300770D1C /* ArtistImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistImage.swift; sourceTree = "<group>"; };
+		79A5AD2D2AF62C6800770D1C /* ToolbarDarkModeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDarkModeButtons.swift; sourceTree = "<group>"; };
 		811EED38EE073FA6E9252D7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +184,7 @@
 		1E4BCC9FA52881309D189527 /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				79A5AD232AF61C5800770D1C /* Component */,
 				472F1E8C6BF5F5D3FE5C5C64 /* View */,
 				C21CE84523F08E32BAC0A815 /* ViewModel */,
 			);
@@ -266,6 +282,19 @@
 				8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		79A5AD232AF61C5800770D1C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				79A5AD212AF61C3700770D1C /* EmptyMainView.swift */,
+				79A5AD242AF61CB500770D1C /* DarkModeButton.swift */,
+				79A5AD2D2AF62C6800770D1C /* ToolbarDarkModeButtons.swift */,
+				79A5AD262AF61D8100770D1C /* EmptyMainSetlistView.swift */,
+				79A5AD292AF61FAC00770D1C /* ArtistSetlistCell.swift */,
+				79A5AD2B2AF62B1300770D1C /* ArtistImage.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		8ECED7BE23A224945FDB9DCC /* View */ = {
@@ -479,7 +508,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+<<<<<<< HEAD
 			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+=======
+			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+>>>>>>> 25bdddb6c7ddf76ac6285ac6f60a2422dbd71f68
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -488,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79A5AD2E2AF62C6800770D1C /* ToolbarDarkModeButtons.swift in Sources */,
 				C56D12C45B540DEA352BA4CF /* ArchiveArtistCell.swift in Sources */,
 				EC3070A8E0E0C591E7EB8D83 /* ArchiveConcertInfoCell.swift in Sources */,
 				5FE54878808838FA5FDA55AE /* ArtistSetCell.swift in Sources */,
@@ -499,18 +533,23 @@
 				A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */,
 				8B7E4A052AF9691E0029170C /* AllSetlistsView.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
+				79A5AD222AF61C3700770D1C /* EmptyMainView.swift in Sources */,
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
 				8B7E4A012AF966800029170C /* ArtistInfoView.swift in Sources */,
 				CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */,
 				8B7E4A032AF967560029170C /* BookmarkedSetlistsView.swift in Sources */,
 				900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */,
+				79A5AD272AF61D8100770D1C /* EmptyMainSetlistView.swift in Sources */,
+				79A5AD2A2AF61FAC00770D1C /* ArtistSetlistCell.swift in Sources */,
 				33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */,
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
+				79A5AD252AF61CB500770D1C /* DarkModeButton.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,
+				79A5AD2C2AF62B1300770D1C /* ArtistImage.swift in Sources */,
 				26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */,
 				4C0C8A9631102214FC39D7B5 /* ServiceExplainView.swift in Sources */,
 				D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */,

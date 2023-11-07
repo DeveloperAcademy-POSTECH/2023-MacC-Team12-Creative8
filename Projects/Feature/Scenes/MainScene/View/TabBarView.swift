@@ -13,6 +13,12 @@ public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
   
   public init() {
+    let appearance = UITabBarAppearance()
+    appearance.configureWithOpaqueBackground()
+    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+
+    UITabBar.appearance().standardAppearance = appearance
+    
   }
   
   public var body: some View {
@@ -31,7 +37,6 @@ public struct TabBarView: View {
         Label("검색", systemImage: "magnifyingglass")
       }
       .tag(Tab.search)
-
       NavigationStack {
         ArchivingView(selectedTab: $selectedTab)
           .background(Color.backgroundWhite)

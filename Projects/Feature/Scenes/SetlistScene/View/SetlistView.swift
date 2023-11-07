@@ -460,22 +460,25 @@ private struct BottomModalView: View {
       Spacer()
     }
     .padding(.horizontal, 30)
+    .background(Color.settingTextBoxWhite)
   }
   
   private func listView(title: String, description: String?, action: @escaping () -> Void) -> some View {
     HStack {
       VStack(alignment: .leading, spacing: UIHeight * 0.01) {
         Text(title)
-          .font(.system(size: 16, weight: .semibold))
+          .font(.callout)
+          .fontWeight(.semibold)
+          .foregroundStyle(Color.mainBlack)
         if let description = description {
           Text(description)
-            .font(.system(size: 12, weight: .regular))
-            .opacity(0.8)
+            .font(.caption)
+            .foregroundStyle(Color.fontGrey2)
         }
       }
       Spacer()
       Image(systemName: "chevron.right")
-        .foregroundStyle(.gray)
+        .foregroundStyle(Color.mainBlack)
         .onTapGesture {
           action()
         }
