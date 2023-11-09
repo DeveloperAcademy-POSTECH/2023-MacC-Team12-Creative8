@@ -60,7 +60,6 @@ public final class SetlistDataService {
   }
 
   public func fetchOneSetlistFromSetlistFM(setlistId: String, completion: @escaping (Setlist?) -> Void) {
-      print("Function Called")
       if let url = URL(string: "https://api.setlist.fm/rest/1.0/setlist/\(setlistId)") {
         let headers = [
           "x-api-key": APIKeys().setlistFM,

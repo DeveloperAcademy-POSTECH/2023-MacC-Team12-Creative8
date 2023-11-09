@@ -35,7 +35,7 @@ public final class ArtistDataManager {
               completion(nil)
             }
           }
-          completion(nil)
+          completion(newArtistInfo)
         }
       } else {
         completion(nil)
@@ -82,7 +82,7 @@ public final class ArtistDataManager {
         }
       }
     }
-    print("FAILED TO FIND ARTIST")
+    print("FAILED TO FIND ARTIST : \(artistName)")
     return nil
   }
   

@@ -45,7 +45,11 @@ struct SearchView: View {
     }
     .disabled(viewModel.searchIsPresented)
     .opacity(viewModel.searchIsPresented ? 0 : 1)
-    .overlay(searchingHistoryView)
+    .overlay { 
+      if viewModel.searchIsPresented {
+        searchingHistoryView
+      }
+    }
   }
   
   private var domesticArtistView: some View {
@@ -82,30 +86,33 @@ struct SearchView: View {
   }
   
   private var searchingHistoryView: some View {
-    VStack {
-      if viewModel.searchText.isEmpty {
-        HStack {
-          Text("최근 검색")
+    ScrollView {
+      VStack {
+        if viewModel.searchText.isEmpty {
+          HStack {
+            Text("최근 검색")
+              .bold()
+              .foregroundStyle(Color.mainBlack)
+            Spacer()
+            Button("모두 지우기") {
+              dataManager.deleteSearchHistoryAll()
+            }
+            .foregroundStyle(Color.mainOrange)
             .bold()
-            .foregroundStyle(Color.mainBlack)
-          Spacer()
-          Button("모두 지우기") {
-            dataManager.deleteSearchHistoryAll()
           }
-          .foregroundStyle(Color.mainOrange)
-          .bold()
+          
+          ForEach(history, id: \.self) { item in
+            SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
+          }
+          .toolbar(viewModel.searchIsPresented ? .hidden : .visible, for: .tabBar)
+        } else {
+          SearchArtistList(selectedTab: $selectedTab, viewModel: viewModel)
         }
-        
-        ForEach(history, id: \.self) { item in
-          SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
-        }
-        .toolbar(viewModel.searchIsPresented ? .hidden : .visible, for: .tabBar)
-      } else {
-        SearchArtistList(selectedTab: $selectedTab, viewModel: viewModel)
       }
+      .onAppear { dataManager.modelContext = modelContext }
+      .opacity(viewModel.searchIsPresented ? 1 : 0)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
-    .onAppear { dataManager.modelContext = modelContext }
-    .opacity(viewModel.searchIsPresented ? 1 : 0)
-    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .scrollIndicators(.hidden)
   }
 }

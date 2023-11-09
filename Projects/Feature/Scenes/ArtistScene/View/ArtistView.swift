@@ -25,7 +25,7 @@ struct ArtistView: View {
       } else {
         ScrollView {
           ArtistInfoView(vm: vm)
-          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+//          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
           AllSetlistsView(vm: vm)
         }
       }
@@ -33,8 +33,10 @@ struct ArtistView: View {
     .background(Color.backgroundWhite)
     .toolbar { ToolbarItem(placement: .principal) { toolbarArtistName } }
     .onAppear {
-      vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
-      vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
+      if vm.artistInfo.gid == nil {
+        vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
+        vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
+      }
     }
   }
   

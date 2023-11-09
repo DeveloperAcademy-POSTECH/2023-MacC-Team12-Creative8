@@ -108,7 +108,7 @@ public final class OnboardingViewModel: ObservableObject {
         DispatchQueue.main.async {
           self.artistInfo = self.artistDataManager.findOnboardingArtistImage(artistName: artistName, artistAlias: "", artistMbid: artistMbid, hits: result.response?.hits ?? [])
           completion(self.artistInfo)
-          print(self.artistInfo?.imageUrl)
+
         }
       } else {
         completion(nil)

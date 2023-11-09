@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.creative8.Seta</string>
+		<string>iCloud.seta.cloudKit.creative8</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
@@ -15,7 +15,9 @@
 	</array>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>iCloud.creative8.Seta</string>
+		<string>iCloud.seta.cloudKit.creative8</string>
 	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
 </dict>
 </plist>

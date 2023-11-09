@@ -32,7 +32,7 @@ public struct OnboardingView: View {
         ScrollView(showsIndicators: false) {
           VStack(alignment: .leading) {
             onboardingTitle
-            genresFilterButton
+//            genresFilterButton
             artistNameButton
           }
         }
@@ -114,7 +114,7 @@ public struct OnboardingView: View {
                 .frame(width: 100, height: 48)
                 .font(.system(.largeTitle, weight: .semibold))
                 .foregroundColor(onboardingViewModel.selectedArtist.contains(where: { $0.id == onboardingViewModel.filteredArtist[index].id }) ? .mainBlack : .fontGrey3)
-                .minimumScaleFactor(0.3)
+                .minimumScaleFactor(0.01)
             }
         }
       }

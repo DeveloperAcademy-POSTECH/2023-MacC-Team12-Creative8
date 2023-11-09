@@ -48,7 +48,6 @@ public final class KoreanConverter {
     
     for song in songList {
       if compareSongTitles(title.lowercased(), song.subTitle.lowercased()) >= 0.6 {
-        print("similarity: \(compareSongTitles(title.lowercased(), song.subTitle.lowercased()))")
         return song.title
       }
     }
