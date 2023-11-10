@@ -61,10 +61,7 @@ public struct OnboardingView: View {
   
   private var onboardingTitle: some View {
     VStack(alignment: .leading) {
-      Image("logo", bundle: setaBundle)
-        .resizable()
-        .frame(width: 37, height: 21)
-      Spacer().frame(height: 40)
+      Spacer().frame(height: 70)
       Text("아티스트 찜하기")
         .font(.system(.headline))
         .foregroundStyle(Color.mainBlack)

@@ -25,7 +25,7 @@ struct ArtistView: View {
       } else {
         ScrollView {
           ArtistInfoView(vm: vm)
-//          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
           AllSetlistsView(vm: vm)
         }
       }

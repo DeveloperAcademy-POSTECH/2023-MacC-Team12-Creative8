@@ -94,7 +94,7 @@ struct BookmarkedSetlistsView: View {
   }
   
   private var setlistsLayer: some View {
-    ForEach(bookmarkedSetlists, id: \.self) { concert in
+    ForEach(Array(bookmarkedSetlists.prefix(3)), id: \.self) { concert in
       HStack {
         Spacer()
         
