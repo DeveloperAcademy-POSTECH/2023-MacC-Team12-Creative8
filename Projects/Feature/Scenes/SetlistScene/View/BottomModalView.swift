@@ -9,13 +9,16 @@
 import SwiftUI
 import Core
 import UI
+import UIKit
 
 struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
+  let image = UIImage(systemName: "star")
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
+  @State var isSharePresented = false
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -48,6 +51,16 @@ struct BottomModalView: View {
       )
       
       Spacer()
+      
+      // 공유하기
+      Button {
+        self.isSharePresented = true
+      } label: {
+        Text("공유하기")
+      }
+      .sheet(isPresented: $isSharePresented, content: {
+        ActivityViewController(activityItems: [image])
+      })
     }
     .padding(.horizontal, 30)
     .background(Color.settingTextBoxWhite)
@@ -73,4 +86,27 @@ struct BottomModalView: View {
       action()
     }
   }
+}
+
+struct ActivityViewController: UIViewControllerRepresentable {
+  var activityItems: [Any]
+  var applicationActivities: [UIActivity]? = nil
+  @Environment(\.presentationMode) var presentationMode
+  
+  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
+  ) -> UIActivityViewController {
+    let controller = UIActivityViewController(
+      activityItems: activityItems,
+      applicationActivities: applicationActivities
+    )
+    controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+      self.presentationMode.wrappedValue.dismiss()
+    }
+    return controller
+  }
+  
+  func updateUIViewController(
+    _ uiViewController: UIActivityViewController,
+    context: UIViewControllerRepresentableContext<ActivityViewController>
+  ) {}
 }
