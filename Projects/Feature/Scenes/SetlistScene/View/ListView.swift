@@ -19,15 +19,12 @@ struct ListView: View {
     VStack {
       ForEach(setlist?.sets?.setsSet ?? [], id: \.self) { session in
         VStack(alignment: .leading) {
-//          if let sessionName = session.name {
           Text(session.name ?? "")
               .font(.headline)
               .fontWeight(.bold)
               .foregroundStyle(Color.fontGrey25)
               .padding(.horizontal)
               .padding(.top, 30)
-//          }
-          let _ = print(session.encore)
           let songs = session.song ?? []
           ForEach(Array(songs.enumerated()), id: \.offset) { index, song in
             if let title = song.name {
