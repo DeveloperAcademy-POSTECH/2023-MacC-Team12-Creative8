@@ -114,6 +114,7 @@ public struct OnboardingView: View {
                 .minimumScaleFactor(0.01)
             }
         }
+        .buttonStyle(BasicButtonStyle())
       }
     }
     .padding(.horizontal, 7)
@@ -147,7 +148,6 @@ public struct OnboardingView: View {
             isOnboarding = false
           }
         }
-        
       }, label: {
         RoundedRectangle(cornerRadius: 14)
           .frame(width: 328, height: 54)
@@ -158,11 +158,55 @@ public struct OnboardingView: View {
               .font(.callout)
               .fontWeight(.bold)
           }
-          .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       })
+      .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
       .disabled(!isButtonEnabled)
     }
   }
+  
+//  private var bottomButton: some View {
+//    ZStack {
+//      Button(action: {
+//        if onboardingViewModel.artistSelectedCount < 3 {
+//          onboardingViewModel.isShowToastBar.toggle()
+//        } else {
+//          isButtonEnabled = false
+//          for index in 0..<onboardingViewModel.selectedArtist.count {
+//            if self.artistInfo == nil {
+//              onboardingViewModel.getArtistInfo(
+//                artistName: onboardingViewModel.selectedArtist[index].name,
+//                artistMbid: onboardingViewModel.selectedArtist[index].mbid) { result in
+//                  if let result = result {
+//                    dataManager.addLikeArtist(name: result.name,
+//                                              country: "",
+//                                              alias: result.alias ?? "",
+//                                              mbid: result.mbid,
+//                                              gid: result.gid ?? 0,
+//                                              imageUrl: result.imageUrl,
+//                                              songList: [])
+//                }
+//              }
+//            }
+//          }
+//          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//            isOnboarding = false
+//          }
+//        }
+//      }, label: {
+//        RoundedRectangle(cornerRadius: 14)
+//          .frame(width: 328, height: 54)
+//          .foregroundColor(onboardingViewModel.artistSelectedCount < 3 ? .mainGrey1 : .mainBlack)
+//          .overlay {
+//            Text(onboardingViewModel.artistSelectedCount == 0 ? "최소 3명 이상 선택" : "\(onboardingViewModel.artistSelectedCount)명 선택")
+//              .foregroundStyle(onboardingViewModel.artistSelectedCount < 3 ? Color.mainBlack : Color.settingTextBoxWhite)
+//              .font(.callout)
+//              .fontWeight(.bold)
+//          }
+//          .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
+//      })
+//      .disabled(!isButtonEnabled)
+//    }
+//  }
   
   private var toastBar: some View {
     RoundedRectangle(cornerRadius: 27)
@@ -175,6 +219,12 @@ public struct OnboardingView: View {
           .fontWeight(.bold)
       }
   }
+}
+
+struct BasicButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+      configuration.label
+    }
 }
 
 #Preview {
