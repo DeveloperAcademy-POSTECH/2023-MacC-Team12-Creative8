@@ -19,7 +19,7 @@ struct ListView: View {
     VStack {
       ForEach(setlist?.sets?.setsSet ?? [], id: \.self) { session in
         VStack(alignment: .leading) {
-          Text(session.name ?? "")
+          Text(session.name != nil ? session.name! : session.encore != nil ? "Encore" : "")
               .font(.headline)
               .fontWeight(.bold)
               .foregroundStyle(Color.fontGrey25)
