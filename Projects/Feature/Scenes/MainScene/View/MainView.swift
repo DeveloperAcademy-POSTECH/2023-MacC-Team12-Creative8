@@ -206,7 +206,6 @@ public struct MainView: View {
                 VStack {
                   Spacer()
                   ProgressView()
-                    .frame(width: UIWidth * 0.5, height: UIHeight * 0.2)
                   Spacer()
                 }
               } else {
@@ -244,8 +243,6 @@ public struct MainView: View {
                 }
               }
               Spacer()
-              
-//            }
           }
         }
       }

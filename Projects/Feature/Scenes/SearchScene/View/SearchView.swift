@@ -33,6 +33,7 @@ struct SearchView: View {
           if viewModel.searchIsPresented {
             ScrollView {
               searchingHistoryView
+                .padding(.top, 32)
             }
             .scrollIndicators(.hidden)
           }
@@ -103,8 +104,6 @@ struct SearchView: View {
               .foregroundStyle(Color.mainOrange)
               .bold()
             }
-            .padding(.top, 32)
-            
             ForEach(history, id: \.self) { item in
               SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
             }
