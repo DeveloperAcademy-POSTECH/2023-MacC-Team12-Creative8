@@ -18,8 +18,8 @@ public struct OnboardingView: View {
   @ObservedObject var dataManager = SwiftDataManager()
   @State private var isButtonEnabled = true
   
-  private let artistDataManager: ArtistDataManager = ArtistDataManager.shared
-  private let dataService: SetlistDataService = SetlistDataService.shared
+  private let artistDataManager = ArtistDataManager()
+  private let dataService = SetlistDataService()
   var artistInfo: ArtistInfo?
   @AppStorage("isOnboarding") var isOnboarding: Bool?
   
