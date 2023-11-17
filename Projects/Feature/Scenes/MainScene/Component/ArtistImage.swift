@@ -15,23 +15,42 @@ import Combine
 
 struct ArtistImage: View {
   @Binding var selectedTab: Tab
-  
   var imageUrl: String
-    var body: some View {
-      AsyncImage(url: URL(string: imageUrl)) { image in
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
+  
+  var body: some View {
+    AsyncImage(url: URL(string: imageUrl)) { image in
+      image
+        .resizable()
+        .scaledToFill()
+        .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
+        .overlay {
+          artistImageOverlayButton
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
+    } placeholder: {
+      ProgressView()
+    }
+  }
+  
+  public var artistImageOverlayButton: some View {
+    VStack {
+      Spacer()
+      HStack {
+        Spacer()
+        Circle()
+          .frame(width: UIWidth * 0.15)
+          .foregroundStyle(Color.mainOrange)
           .overlay {
-            MainView(selectedTab: $selectedTab).artistImageOverlayButton
+            Image(systemName: "arrow.right")
+              .font(.title3)
+              .foregroundStyle(Color.settingTextBoxWhite)
           }
-          .clipShape(RoundedRectangle(cornerRadius: 15))
-              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
-      } placeholder: {
-        ProgressView()
+          .shadow(color: Color.mainWhite.opacity(0.25), radius: 20, y: 4)
       }
     }
+    .padding([.trailing, .bottom])
+  }
 }
 
 #Preview {

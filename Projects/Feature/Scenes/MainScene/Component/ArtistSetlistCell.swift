@@ -53,7 +53,6 @@ struct ArtistSetlistCell: View {
           .font(.footnote)
           .lineLimit(1)
           .foregroundStyle(Color.fontGrey25)
-          
         }
         .foregroundStyle(Color.mainBlack)
         Spacer()

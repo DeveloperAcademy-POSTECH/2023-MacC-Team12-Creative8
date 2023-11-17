@@ -34,14 +34,7 @@ public struct MainView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 25)
             .padding(.top, 40)
-            .overlay {
-              HStack(spacing: 0) {
-                toolbarButton
-              }
-              .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-              .padding(.horizontal, UIWidth * 0.11)
-            }
-            
+
             Divider()
               .padding(.leading, 25)
               .foregroundStyle(Color.lineGrey1)
@@ -89,32 +82,6 @@ public struct MainView: View {
         .cornerRadius(50, corners: .topLeft)
     }
     .foregroundColor(Color.mainBlack)
-  }
-  public var toolbarButton: some View {
-    ZStack(alignment: .trailingFirstTextBaseline) {
-      Button {
-        viewModel.isTapped.toggle()
-      } label: {
-        if colorScheme == .dark {
-          Image(systemName: "sun.max.fill")
-            .font(.title3)
-        } else {
-          Image(systemName: "moon.stars.fill")
-            .font(.title3)
-        }
-      }
-      .foregroundColor(Color.mainBlack)
-      .opacity(viewModel.isTapped ? 0 : 1)
-      if viewModel.isTapped {
-        ToolbarDarkModeButtons(viewModel: viewModel)
-          .padding(.top)
-      }
-    }
-    .onDisappear {
-      if viewModel.isTapped {
-        viewModel.isTapped = false
-      }
-    }
   }
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
@@ -263,27 +230,9 @@ public struct MainView: View {
           .frame(width: UIWidth * 0.43)
       )
       .overlay {
-        artistImageOverlayButton
+//        artistImageOverlayButton
       }
       .frame(width: UIWidth * 0.78, height: UIWidth * 0.78)
-  }
-  
-  public var artistImageOverlayButton: some View {
-    VStack {
-      Spacer()
-      HStack {
-        Spacer()
-        Circle()
-          .frame(width: UIWidth * 0.15)
-          .foregroundStyle(Color.mainBlack)
-          .overlay {
-            Image(systemName: "arrow.right")
-              .font(.title3)
-              .foregroundStyle(Color.settingTextBoxWhite)
-          }
-      }
-    }
-    .padding([.trailing, .bottom])
   }
 }
 
