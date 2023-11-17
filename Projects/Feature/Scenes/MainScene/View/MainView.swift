@@ -192,6 +192,7 @@ public struct MainView: View {
                   ArtistImage(selectedTab: $selectedTab, imageUrl: imageUrl)
                 }
               }
+              .buttonStyle(BasicButtonStyle())
               HStack {
                 Text("\(data.artistInfo.name)의 최근 공연")
                   .font(.caption)
