@@ -208,6 +208,7 @@ public struct MainView: View {
                   ProgressView()
                   Spacer()
                 }
+                .frame(width: UIWidth, height: UIHeight * 0.3) //TODO: 수정 필요!
               } else {
                 let current: [Setlist?] = viewModel.setlists[index] ?? []
                 ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { setlist, item in
