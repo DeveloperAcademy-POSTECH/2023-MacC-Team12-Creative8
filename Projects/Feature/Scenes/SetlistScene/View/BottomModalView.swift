@@ -59,7 +59,8 @@ struct BottomModalView: View {
         Text("공유하기")
       }
       .sheet(isPresented: $isSharePresented, content: {
-        ActivityViewController(activityItems: [image])
+         let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+         ActivityViewController(activityItems: [image])
       })
     }
     .padding(.horizontal, 30)
@@ -93,12 +94,14 @@ struct ActivityViewController: UIViewControllerRepresentable {
   var applicationActivities: [UIActivity]? = nil
   @Environment(\.presentationMode) var presentationMode
   
+  
   func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
   ) -> UIActivityViewController {
     let controller = UIActivityViewController(
       activityItems: activityItems,
       applicationActivities: applicationActivities
     )
+    print("activityItems \(activityItems)")
     controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
       self.presentationMode.wrappedValue.dismiss()
     }

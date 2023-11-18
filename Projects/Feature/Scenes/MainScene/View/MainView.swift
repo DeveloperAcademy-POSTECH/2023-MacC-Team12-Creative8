@@ -243,8 +243,6 @@ public struct MainView: View {
                 }
               }
               Spacer()
-              
-//            }
           }
         }
       }
