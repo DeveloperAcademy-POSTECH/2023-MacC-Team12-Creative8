@@ -159,6 +159,7 @@ public struct MainView: View {
                   ArtistImage(selectedTab: $selectedTab, imageUrl: imageUrl)
                 }
               }
+              .buttonStyle(BasicButtonStyle())
               HStack {
                 Text("\(data.artistInfo.name)의 최근 공연")
                   .font(.caption)
@@ -172,9 +173,9 @@ public struct MainView: View {
                 VStack {
                   Spacer()
                   ProgressView()
-                    .frame(width: UIWidth * 0.5, height: UIHeight * 0.2)
                   Spacer()
                 }
+                .frame(width: UIWidth, height: UIHeight * 0.3) //TODO: 수정 필요!
               } else {
                 let current: [Setlist?] = viewModel.setlists[index] ?? []
                 ForEach(Array(current.prefix(3).enumerated()), id: \.element?.id) { setlist, item in
@@ -210,8 +211,6 @@ public struct MainView: View {
                 }
               }
               Spacer()
-              
-//            }
           }
         }
       }
