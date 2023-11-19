@@ -14,7 +14,7 @@ import UIKit
 struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
-  let image = UIImage(systemName: "star")
+
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
@@ -93,7 +93,6 @@ struct ActivityViewController: UIViewControllerRepresentable {
   var activityItems: [Any]
   var applicationActivities: [UIActivity]? = nil
   @Environment(\.presentationMode) var presentationMode
-  
   
   func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
   ) -> UIActivityViewController {

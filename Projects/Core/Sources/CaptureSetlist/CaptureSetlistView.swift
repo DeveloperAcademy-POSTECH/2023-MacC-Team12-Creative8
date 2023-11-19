@@ -22,7 +22,7 @@ public struct CaptureSetlistView: View {
         .opacity(0.15)
 
         VStack(alignment: .leading) {
-          Text("SETA")
+          Text("Seta")
             .font(.system(size: 34))
             .opacity(0.3)
             .padding(.horizontal, 30)
