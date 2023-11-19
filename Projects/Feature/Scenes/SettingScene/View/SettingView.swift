@@ -41,7 +41,7 @@ public struct SettingView: View {
             
             // 언어 변경
             NavigationLink {
-              FAQView()
+              LanguageView()
             }label: {
               HStack {
                 Text("언어")

@@ -9,30 +9,83 @@
 import SwiftUI
 import UI
 
-struct FAQView: View {
+struct LanguageView: View {
   
-  @ObservedObject var viewModel = SettingViewModel()
+  @State private var language = "한국어"
   
-    var body: some View {
-      ZStack {
-        Color.backgroundGrey
-        ScrollView {
-          VStack {
-            HStack(alignment: .top) {
-              Text("Q.")
-              Text(viewModel.fiveArtistsMain[0])
-            }
-            .padding(26)
-          }
-          .background(Color.settingTextBoxWhite)
-          .padding(.vertical, 24)
-          .padding(.horizontal, 20)
-        }
+  let languages = ["한국어", "English"]
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      Button {
+        
+      } label: {
+        Text("한국어")
       }
-      .ignoresSafeArea()
+      
+      Divider()
+        .foregroundStyle(Color.lineGrey1)
+      
+      Button {
+        
+      } label: {
+        Text("English")
+      }
     }
+    .padding(24)
+  }
 }
 
-#Preview {
-    FAQView()
-}
+//func setLanguage() {
+//
+//  // 설정된 언어 코드 가져오기
+//  let language = UserDefaults.standard.array(forKey: "AppleLanguages")?.first as! String // 초기에 "ko-KR" , "en-KR" 등으로 저장되어있음
+//  let index = language.index(language.startIndex, offsetBy: 2)
+//  let languageCode = String(language[..<index]) // "ko" , "en" 등
+//  
+//  // 설정된 언어 파일 가져오기
+//  let path = Bundle.main.path(forResource: languageCode, ofType: "lproj")
+//  let bundle = Bundle(path: path!)
+//  
+//}
+//
+//@IBAction func koreanClicked(_ sender: UIButton) {
+//    //한국어로 변경
+//    UserDefaults.standard.set(["ko"], forKey: "AppleLanguages")
+//    UserDefaults.standard.synchronize()
+//    
+//    //보통 메인화면으로 이동시켜줌
+//    setLanguage()
+//}
+//@IBAction func englishClicked(_ sender: UIButton) {
+//    //영어로 변경
+//    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+//    UserDefaults.standard.synchronize()
+//    
+//    //보통 메인화면으로 이동시켜줌
+//    setLanguage()
+//}
+
+
+//@IBAction func onClickKorean(_ sender: Any) {
+//        UserDefaults.standard.setValue("ko", forKey: "languageType")
+//        Localize.setCurrentLanguage("ko")
+//
+//        setUI()
+//
+//    }
+//    @IBAction func onClickEnglish(_ sender: Any) {
+//        UserDefaults.standard.setValue("en", forKey: "languageType")
+//        Localize.setCurrentLanguage("en")
+//        setUI()
+//    }
+//
+//private func setUI(){
+//        let languageType = UserDefaults.standard.string(forKey: "languageType") ?? "ko"
+//        setButtonUI(languageType:languageType)
+//    }
+
+  
+  #Preview {
+    LanguageView()
+  }
