@@ -18,7 +18,7 @@ struct ArtistNameView: View {
   
     var body: some View {
       HStack(spacing: 0) {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!\n123")
               .font(.title)
               .bold()
               .padding(.trailing, 40)

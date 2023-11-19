@@ -42,9 +42,15 @@ public struct NewMainView: View {
         HStack(spacing: 0) {
           ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { index in
               ArtistNameView(selectedTab: $selectedTab)
+              .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+              .frame(minHeight: UIWidth * 0.22)
+              .background(.red)
               .id(index)
           }
           .safeAreaPadding(.horizontal, 36)
+          
+          Color.clear
+            .frame(width: UIWidth * 0.7)
         }
         .onAppear {
           if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
@@ -78,8 +84,8 @@ public struct NewMainView: View {
             .id(index)
             .frame(width: UIWidth * 0.78)
         }
-        .scrollTargetLayout()
       }
+      .scrollTargetLayout()
     }
     .safeAreaPadding(.horizontal, 36)
     .scrollPosition(id: $viewModel.scrollToIndex)
