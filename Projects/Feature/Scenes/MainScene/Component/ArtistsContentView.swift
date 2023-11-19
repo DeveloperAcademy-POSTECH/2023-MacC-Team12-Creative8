@@ -15,16 +15,25 @@ import Combine
 
 struct ArtistsContentView: View {
   @Binding var selectedTab: Tab
+  @StateObject var viewModel: NewMainViewModel
+  var index: Int
+  
     var body: some View {
       VStack(spacing: 0) {
         artistImage
-        commentText
-        artistSetlistCell
+        Group {
+          commentText
+          artistSetlistCell
+        }
+        .animation(.easeInOut(duration: 0.1))
+        .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
       }
+      .frame(width: UIWidth * 0.81)
+      .id(index)
     }
   
   private var artistImage: some View {
-    ArtistImage(selectedTab: $selectedTab, imageUrl: "https://image.msscdn.net/mfile_s01/cms-files/6385a60227efe0.85848275.jpg?v=20221130142610")
+    ArtistImage(selectedTab: $selectedTab, imageUrl: "https://mblogthumb-phinf.pstatic.net/MjAxNzExMDdfMjg5/MDAxNTA5OTk0MzM0MTI0.XpQ9OUJQWRBuecqvCR_pWjkN9BHbuV37WgIYf599x3og.RTorQ_2W7j0lI0J7YTp5GDtrG8_PhegGmDW2uu2s_XIg.JPEG.bgbgrec/02_실리카겔_-_뚝방길.mov_20171107_035202.631.jpg?type=w800")
   }
   
   private var commentText: some View {
@@ -52,5 +61,7 @@ struct ArtistsContentView: View {
 }
 
 #Preview {
-  ArtistsContentView(selectedTab: .constant(.home))
+  ArtistsContentView(selectedTab: .constant(.home), 
+                     viewModel: NewMainViewModel(),
+                     index: 1)
 }

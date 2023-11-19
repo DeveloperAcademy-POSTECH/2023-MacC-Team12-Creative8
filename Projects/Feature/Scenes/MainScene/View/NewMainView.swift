@@ -23,42 +23,44 @@ public struct NewMainView: View {
   public var body: some View {
     VStack(spacing: 0) {
       artistsNameScroll
-      artistsContent
-        .scrollTargetBehavior(.viewAligned)
-        .scrollIndicators(.hidden)
-        .scrollPosition(id: $viewModel.scrollToIndex)
+        .padding(.top, 33)
+      artistContent
+      Spacer()
     }
     .onAppear {
       dataManager.modelContext = modelContext
     }
+    .onAppear {
+//      if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
+//        if !likeArtists.isEmpty {
+//          viewModel.selectedIndex = 0
+//          viewModel.scrollToIndex = 0
+//        }
+//      }
+      viewModel.selectedIndex = 0
+      viewModel.scrollToIndex = viewModel.selectedIndex
+    }
     .onChange(of: viewModel.scrollToIndex) {
       viewModel.selectedIndex = viewModel.scrollToIndex
     }
+    .onChange(of: likeArtists, { _, _ in
+      viewModel.selectedIndex = 0
+      viewModel.scrollToIndex = viewModel.selectedIndex
+    })
+    .background(Color.mainWhite)
   }
   
   private var artistsNameScroll: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { proxy in
-        HStack(spacing: 0) {
+        HStack(spacing: UIWidth * 0.13) {
           ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { index in
-              ArtistNameView(selectedTab: $selectedTab)
-              .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
-              .frame(minHeight: UIWidth * 0.22)
-              .background(.red)
-              .id(index)
+            ArtistNameView(selectedTab: $selectedTab, 
+                           viewModel: viewModel,
+                           index: index)
           }
-          .safeAreaPadding(.horizontal, 36)
-          
           Color.clear
-            .frame(width: UIWidth * 0.7)
-        }
-        .onAppear {
-          if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
-            if !likeArtists.isEmpty {
-              viewModel.selectedIndex = 0
-              viewModel.scrollToIndex = 0
-            }
-          }
+            .frame(width: UIWidth * 0.3)
         }
         .onChange(of: viewModel.scrollToIndex) {
           viewModel.selectedIndex = viewModel.scrollToIndex
@@ -66,30 +68,27 @@ public struct NewMainView: View {
             proxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
           }
         }
-        .onChange(of: likeArtists, { _, _ in
-          viewModel.selectedIndex = 0
-          viewModel.scrollToIndex = 0
-        })
-        .scrollTargetLayout()
       }
     }
+    .frame(maxHeight: UIWidth * 0.22)
     .scrollIndicators(.hidden)
+    .safeAreaPadding(.horizontal, 36)
   }
-  
-  private var artistsContent: some View {
+  private var artistContent: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 12) {
         ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { index in
-          ArtistsContentView(selectedTab: $selectedTab)
-            .id(index)
-            .frame(width: UIWidth * 0.78)
+          ArtistsContentView(selectedTab: $selectedTab, 
+                             viewModel: viewModel,
+                             index: index)
         }
       }
       .scrollTargetLayout()
     }
-    .safeAreaPadding(.horizontal, 36)
     .scrollPosition(id: $viewModel.scrollToIndex)
+    .scrollTargetBehavior(.viewAligned)
     .scrollIndicators(.hidden)
+    .safeAreaPadding(.horizontal, 36)
   }
 }
 
