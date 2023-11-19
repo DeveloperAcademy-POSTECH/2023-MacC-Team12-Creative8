@@ -20,10 +20,6 @@ public struct SettingView: View {
         VStack(alignment: .leading) {
           Text("더보기").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
             .padding(.top, 23)
-          Divider()
-            .foregroundStyle(Color.lineGrey1)
-            .padding(.top, 7)
-            .padding(.trailing, -25)
           // 세트리스트 추가 및 수정하기
           VStack(alignment: .leading) {
             SectionTitleView(
@@ -42,28 +38,51 @@ public struct SettingView: View {
             SectionTitleView(
               sectionTitle: "서비스 이용 관련",
               sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
-            // 이용 약관
+            
+            // 언어 변경
             NavigationLink {
-              ServiceExplainView()
-                .navigationBarTitleDisplayMode(.inline)
-            } label: {
-              LinkLabelView(linkLabel: "이용 약관")
+              FAQView()
+            }label: {
+              HStack {
+                Text("언어")
+                  .font(.subheadline)
+                  .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
+                Spacer()
+                Text("한국어")
+                  .foregroundStyle(Color.mainOrange)
+                Image(systemName: "chevron.right")
+                  .resizable()
+                  .frame(width: 10, height: 15)
+                  .padding(EdgeInsets(top: 18, leading: 12, bottom: 18, trailing: 15))
+              }
+              .foregroundStyle(Color.mainBlack)
             }
             Divider()
               .foregroundStyle(Color.lineGrey1)
-
-            // Setlist.fm 약관
-            NavigationLink {
-              TermsOfSetlistfm()
-                .navigationBarTitleDisplayMode(.inline)
-            } label: {
-              LinkLabelView(linkLabel: "Setlist.fm 약관")
-            }
+            
+            // FAQ
+            Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/FAQ-10f7d0c94c104015b5719ab2a26f2cf2?pvs=4")!, label: {
+              LinkLabelView(linkLabel: "FAQ")
+            })
             Divider()
               .foregroundStyle(Color.lineGrey1)
-
+            
             // 문의하기
             AskView()
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+            
+            // 이용 약관
+            Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/3b69b21a1afc4306bcccde7019d6379d?pvs=4")!, label: {
+              LinkLabelView(linkLabel: "이용 약관")
+            })
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
+
+            // 개인정보 처리방침
+            Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/1d16107bb0f34e629bcbd30a25ceb5d0?pvs=4")!, label: {
+              LinkLabelView(linkLabel: "개인정보 처리방침")
+            })
           }
         }
         .padding(.horizontal, 25)
