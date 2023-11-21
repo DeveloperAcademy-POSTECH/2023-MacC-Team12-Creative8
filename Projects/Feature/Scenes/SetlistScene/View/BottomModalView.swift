@@ -19,7 +19,8 @@ struct BottomModalView: View {
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @State var isSharePresented = false
-  @State var showSettingsAlert = false
+  @State var showLibrarySettingsAlert = false
+  @State var showMusicSettingsAlert = false
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -35,14 +36,28 @@ struct BottomModalView: View {
       Spacer()
       HStack(alignment: .center, spacing: 0) {
         platformButtonView(title: "Apple Music", image: "appleMusic") {
-            AppleMusicService().requestMusicAuthorization()
-            CheckAppleMusicSubscription.shared.appleMusicSubscription()
-            AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
-            vm.showModal.toggle()
-            showToastMessageAppleMusic = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-              showToastMessageAppleMusic = false
-            }
+          AppleMusicService().requestMusicAuthorization()
+          if exportViewModel.checkMusicKitPermission() {
+            showMusicSettingsAlert = true
+          } else {
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+          vm.showModal.toggle()
+          showToastMessageAppleMusic = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            showToastMessageAppleMusic = false
+          }
+        }
+        }
+        // 애플뮤직 권한 허용 거부 상태인 경우
+        .alert(isPresented: $showMusicSettingsAlert) {
+          Alert(
+            title: Text(""),
+            message: Text("플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."),
+            primaryButton: .default(Text("취소")),
+            secondaryButton:  .default(Text("설정").bold(), action: {
+              UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }))
         }
         Spacer()
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
@@ -59,41 +74,40 @@ struct BottomModalView: View {
         topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
         action: {
           if exportViewModel.checkPhotoPermission() {
-            showSettingsAlert = true
+            showLibrarySettingsAlert = true
           } else {
-          takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
-          vm.showModal.toggle()
-          showToastMessageCapture = true
-          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            showToastMessageCapture = false
+            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+            vm.showModal.toggle()
+            showToastMessageCapture = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+              showToastMessageCapture = false
+            }
           }
         }
-        }
       )
+      // 사진 권한 허용 거부 상태인 경우
+      .alert(isPresented: $showLibrarySettingsAlert) {
+        Alert(
+          title: Text(""),
+          message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
+          primaryButton: .default(Text("취소")),
+          secondaryButton:  .default(Text("설정").bold(), action: {
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+          }))
+      }
       Spacer()
       listRowView(title: "공유하기", topDescription: nil, bottomDescription: nil) {
         self.isSharePresented = true
       }
       .sheet(isPresented: $isSharePresented, content: {
-         let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
-         ActivityViewController(activityItems: [image])
+        let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+        ActivityViewController(activityItems: [image])
       })
       
       Spacer()
     }
     .padding(.horizontal)
     .background(Color.settingTextBoxWhite)
-    // 사진 권한 허용 거부 상태인 경우
-    .alert(isPresented: $showSettingsAlert) {
-         Alert(
-          title: Text(""),
-                message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
-               primaryButton: .default(Text("취소")),
-               secondaryButton:  .default(Text("설정").bold(), action: {
-           UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-       }))
-            }
-
   }
   
   private func listRowView(title: LocalizedStringResource, topDescription: LocalizedStringResource?, bottomDescription: LocalizedStringResource?, action: @escaping () -> Void) -> some View {

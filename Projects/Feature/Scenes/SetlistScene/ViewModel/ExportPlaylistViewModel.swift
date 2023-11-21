@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import MusicKit
 
 final class ExportPlaylistViewModel: ObservableObject {
   
@@ -21,6 +22,14 @@ final class ExportPlaylistViewModel: ObservableObject {
     }
     return status == .denied
   
+  }
+  
+  func checkMusicKitPermission() -> Bool {
+    var status: MusicAuthorization.Status = .notDetermined
+    
+    status = MusicAuthorization.currentStatus
+    
+    return status == .denied
   }
   
 }
