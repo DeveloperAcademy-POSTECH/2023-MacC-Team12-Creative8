@@ -19,12 +19,6 @@ struct ArchivingView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Text("보관함").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
-        .padding(.top, 23)
-      Divider()
-        .foregroundStyle(Color.lineGrey1)
-        .padding(.trailing, -25)
-        .padding(.top, 7)
       segmentedButtonsView
       if viewModel.selectSegment == .bookmark {
         bookmarkView
@@ -34,6 +28,7 @@ struct ArchivingView: View {
     }
     .padding(.horizontal, 25)
     .padding(.vertical)
+    .navigationTitle("보관함")
   }
 }
 
@@ -117,16 +112,26 @@ extension ArchivingView {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
-          Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다\n변경을 원하신다면 아티스트를 꾹 눌러 순서를 옮겨주세요")
-            .font(.footnote)
-            .foregroundStyle(Color.fontGrey2)
-            .padding(.top)
-            .listRowBackground(Color.backgroundWhite)
+          VStack(alignment: .leading, spacing: 0) {
+            Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다")
+              .font(.footnote)
+              .foregroundStyle(Color.fontGrey2)
+              .padding(.top)
+              .listRowBackground(Color.backgroundWhite)
+            HStack(spacing: 0) {
+              Text("변경을 원하신다면 ")
+                .font(.footnote)
+                .foregroundStyle(Color.fontGrey2)
+              Text("아티스트를 꾹 눌러 순서를 옮겨보세요")
+                .font(.footnote)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.fontGrey2)
+            }
+          }
           artistListView
             .listRowSeparator(.hidden)
             .listRowBackground(Color.backgroundWhite)
         }
-        
         .scrollIndicators(.hidden)
         .listStyle(.plain)
         .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
