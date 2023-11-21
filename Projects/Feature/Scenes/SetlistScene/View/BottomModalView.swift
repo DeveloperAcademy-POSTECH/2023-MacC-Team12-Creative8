@@ -14,12 +14,12 @@ import UIKit
 struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
-//  var platform: MusicPlatform
-
+  @StateObject var exportViewModel = ExportPlaylistViewModel()
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @State var isSharePresented = false
+  @State var showSettingsAlert = false
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -35,14 +35,14 @@ struct BottomModalView: View {
       Spacer()
       HStack(alignment: .center, spacing: 0) {
         platformButtonView(title: "Apple Music", image: "appleMusic") {
-          AppleMusicService().requestMusicAuthorization()
-          CheckAppleMusicSubscription.shared.appleMusicSubscription()
-          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
-          vm.showModal.toggle()
-          showToastMessageAppleMusic = true
-          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            showToastMessageAppleMusic = false
-          }
+            AppleMusicService().requestMusicAuthorization()
+            CheckAppleMusicSubscription.shared.appleMusicSubscription()
+            AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+            vm.showModal.toggle()
+            showToastMessageAppleMusic = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+              showToastMessageAppleMusic = false
+            }
         }
         Spacer()
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
@@ -58,12 +58,16 @@ struct BottomModalView: View {
         title: "플레이리스트용 캡쳐하기",
         topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
         action: {
+          if exportViewModel.checkPhotoPermission() {
+            showSettingsAlert = true
+          } else {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
           showToastMessageCapture = true
           DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             showToastMessageCapture = false
           }
+        }
         }
       )
       Spacer()
@@ -79,6 +83,17 @@ struct BottomModalView: View {
     }
     .padding(.horizontal)
     .background(Color.settingTextBoxWhite)
+    // 사진 권한 허용 거부 상태인 경우
+    .alert(isPresented: $showSettingsAlert) {
+         Alert(
+          title: Text(""),
+                message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
+               primaryButton: .default(Text("취소")),
+               secondaryButton:  .default(Text("설정").bold(), action: {
+           UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+       }))
+            }
+
   }
   
   private func listRowView(title: LocalizedStringResource, topDescription: LocalizedStringResource?, bottomDescription: LocalizedStringResource?, action: @escaping () -> Void) -> some View {
