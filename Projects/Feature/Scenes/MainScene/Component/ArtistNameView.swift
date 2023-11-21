@@ -19,14 +19,15 @@ struct ArtistNameView: View {
   var index: Int
   var name: String
   
-    var body: some View {
-      HStack(spacing: 0) {
-        Text(.init(name))
-              .font(.title)
-              .fontWeight(.medium)
-      }
-      .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+  var body: some View {
+    HStack(spacing: 0) {
+      Text(.init(name))
+        .kerning(-0.9)  // 노엘갤러거 한 화면에 안나오는 이슈로 인해
+        .font(.title)
+        .fontWeight(.semibold)
     }
+    .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+  }
 }
 
 #Preview {

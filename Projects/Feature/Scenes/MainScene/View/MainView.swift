@@ -20,15 +20,19 @@ public struct MainView: View {
   @Environment(\.modelContext) var modelContext
   
   public var body: some View {
-    Group {
-      if likeArtists.isEmpty {
-        EmptyMainView(selectedTab: $selectedTab)
-      } else {
-        mainArtistsView
-          .padding(.top, 22)
-          .id(likeArtists)
+
+      Group {
+        if likeArtists.isEmpty {
+          EmptyMainView(selectedTab: $selectedTab)
+        } else {
+          ScrollView {
+          mainArtistsView
+            .padding(.top, 11)
+            .id(likeArtists)
+          }
+          .scrollIndicators(.hidden)
+        }
       }
-    }
     .padding(.vertical)
     .background(Color.backgroundWhite)
     .onAppear {
@@ -53,7 +57,6 @@ public struct MainView: View {
     VStack(spacing: 0) {
       artistNameScrollView
       artistContentView
-      Spacer()
     }
     .onChange(of: viewModel.scrollToIndex) {
       viewModel.selectedIndex = viewModel.scrollToIndex
@@ -119,11 +122,9 @@ public struct MainView: View {
     .safeAreaPadding(.horizontal, UIWidth * 0.09)
   }
 }
-
-// 로고 만들기
 extension View {
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-    clipShape( RoundedCorner(radius: radius, corners: corners) )
+    clipShape(RoundedCorner(radius: radius, corners: corners))
   }
 }
 struct RoundedCorner: Shape {

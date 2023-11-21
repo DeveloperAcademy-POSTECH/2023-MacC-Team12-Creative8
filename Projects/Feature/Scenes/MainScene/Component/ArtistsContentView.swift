@@ -29,10 +29,9 @@ struct ArtistsContentView: View {
           artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
         } else {
           ProgressView()
-            .frame(width: UIWidth, height: UIHeight * 0.3) //TODO: 수정 필요!
+            .frame(width: UIWidth, height: UIWidth * 0.6) // TODO: 수정 필요!
         }
       }
-      .animation(.easeInOut(duration: 0.1))
       .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
     }
     .frame(width: UIWidth * 0.81)
@@ -46,7 +45,6 @@ struct ArtistsContentView: View {
         .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
     }
   }
-  
   private var commentText: some View {
     HStack(spacing: 0) {
       Text("\(artistInfo.name)의 최근 공연")
@@ -58,7 +56,7 @@ struct ArtistsContentView: View {
   }
   private var artistSetlistCells: some View {
     VStack(spacing: 0 ) {
-        var setlists: [Setlist?] = viewModel.setlists[index] ?? []
+      let setlists: [Setlist?] = viewModel.setlists[index] ?? []
       if setlists.isEmpty {
         EmptyMainSetlistView()
       } else {
