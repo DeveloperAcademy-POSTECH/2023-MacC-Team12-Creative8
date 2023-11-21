@@ -18,8 +18,7 @@ public struct SettingView: View {
       Color.backgroundWhite
       ScrollView {
         VStack(alignment: .leading) {
-          Text("더보기").font(.title2).fontWeight(.semibold).foregroundStyle(Color.mainBlack)
-            .padding(.top, 23)
+          
           // 세트리스트 추가 및 수정하기
           VStack(alignment: .leading) {
             SectionTitleView(
@@ -38,27 +37,6 @@ public struct SettingView: View {
             SectionTitleView(
               sectionTitle: "서비스 이용 관련",
               sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
-            
-            // 언어 변경
-            NavigationLink {
-              LanguageView()
-            }label: {
-              HStack {
-                Text("언어")
-                  .font(.subheadline)
-                  .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
-                Spacer()
-                Text("한국어")
-                  .foregroundStyle(Color.mainOrange)
-                Image(systemName: "chevron.right")
-                  .resizable()
-                  .frame(width: 10, height: 15)
-                  .padding(EdgeInsets(top: 18, leading: 12, bottom: 18, trailing: 15))
-              }
-              .foregroundStyle(Color.mainBlack)
-            }
-            Divider()
-              .foregroundStyle(Color.lineGrey1)
             
             // FAQ
             Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/FAQ-10f7d0c94c104015b5719ab2a26f2cf2?pvs=4")!, label: {
@@ -89,6 +67,7 @@ public struct SettingView: View {
         .padding(.vertical)
       }
     }
+    .navigationTitle("더보기")
   }
 }
 
