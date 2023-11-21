@@ -26,6 +26,7 @@ struct ArtistsContentView: View {
       Group {
         if !viewModel.isLoading {
           commentText
+            .background(.pink)
           artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
         } else {
           ProgressView()
@@ -52,7 +53,7 @@ struct ArtistsContentView: View {
         .foregroundStyle(Color.fontGrey2)
       Spacer()
     }
-    .padding(.top)
+    .padding(.top, UIWidth * 0.062)
   }
   private var artistSetlistCells: some View {
     VStack(spacing: 0 ) {
