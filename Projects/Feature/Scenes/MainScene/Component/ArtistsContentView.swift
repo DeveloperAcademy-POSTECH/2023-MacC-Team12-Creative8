@@ -26,7 +26,6 @@ struct ArtistsContentView: View {
       Group {
         if !viewModel.isLoading {
           commentText
-            .background(.pink)
           artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
         } else {
           ProgressView()
