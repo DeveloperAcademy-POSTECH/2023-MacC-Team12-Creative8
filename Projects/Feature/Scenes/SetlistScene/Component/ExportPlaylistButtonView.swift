@@ -48,7 +48,7 @@ struct ExportPlaylistButtonView: View {
     }
     .sheet(isPresented: $vm.showModal) {
       BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
-        .presentationDetents([.fraction(0.3)])
+        .presentationDetents([.fraction(0.5)])
         .presentationDragIndicator(.visible)
     }
   }

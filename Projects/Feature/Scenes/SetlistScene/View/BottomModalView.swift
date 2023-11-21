@@ -14,6 +14,7 @@ import UIKit
 struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
+//  var platform: MusicPlatform
 
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
@@ -23,23 +24,39 @@ struct BottomModalView: View {
   var body: some View {
     VStack(alignment: .leading) {
       Spacer()
-      
-      listRowView(title: "Apple Music에 옮기기", description: nil, action: {
-        AppleMusicService().requestMusicAuthorization()
-        CheckAppleMusicSubscription.shared.appleMusicSubscription()
-        AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
-        vm.showModal.toggle()
-        showToastMessageAppleMusic = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          showToastMessageAppleMusic = false
-        }
-      })
-      
+      HStack {
+        Spacer()
+        Text("플레이리스트를 내보낼 앱을 선택해주세요")
+          .font(.caption)
+          .foregroundStyle(Color.toastBurn)
+        Spacer()
+      }
+      .padding(.top)
       Spacer()
-      
+      HStack(alignment: .center, spacing: 0) {
+        platformButtonView(title: "Apple Music", image: "appleMusic") {
+          AppleMusicService().requestMusicAuthorization()
+          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+          vm.showModal.toggle()
+          showToastMessageAppleMusic = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            showToastMessageAppleMusic = false
+          }
+        }
+        Spacer()
+        platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
+          //TODO: 유튜브 뮤직 기능 연결
+        }
+        Spacer()
+        platformButtonView(title: "Spotify", image: "spotify") {
+          //TODO: 스포티파이 기능 연결
+        }
+      }
+      Spacer()
       listRowView(
-        title: "세트리스트 캡처하기",
-        description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
+        title: "플레이리스트용 캡쳐하기",
+        topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
         action: {
           takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
           vm.showModal.toggle()
@@ -49,46 +66,74 @@ struct BottomModalView: View {
           }
         }
       )
-      
       Spacer()
-      
-      // 공유하기
-      Button {
+      listRowView(title: "공유하기", topDescription: nil, bottomDescription: nil) {
         self.isSharePresented = true
-      } label: {
-        Text("공유하기")
       }
       .sheet(isPresented: $isSharePresented, content: {
          let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
          ActivityViewController(activityItems: [image])
       })
+      
+      Spacer()
     }
-    .padding(.horizontal, 30)
+    .padding(.horizontal)
     .background(Color.settingTextBoxWhite)
   }
   
-  private func listRowView(title: LocalizedStringResource, description: LocalizedStringResource?, action: @escaping () -> Void) -> some View {
+  private func listRowView(title: LocalizedStringResource, topDescription: LocalizedStringResource?, bottomDescription: LocalizedStringResource?, action: @escaping () -> Void) -> some View {
     HStack {
-      VStack(alignment: .leading, spacing: UIHeight * 0.01) {
+      VStack(alignment: .leading, spacing: 0) {
         Text(title)
-          .font(.headline)
-          .foregroundStyle(Color.mainBlack)
-        if let description = description {
-          Text(description)
-            .font(.caption)
-            .foregroundStyle(Color.fontGrey2)
+          .font(.subheadline)
+          .foregroundStyle(Color.toastBurn)
+        VStack(alignment: .leading, spacing: 3) {
+          if let topDescription = topDescription {
+            Text(topDescription)
+              .font(.caption)
+              .foregroundStyle(Color.fontGrey2)
+              .padding(.top, UIWidth * 0.04)
+          }
+          if let bottomDescription = bottomDescription {
+            Text(bottomDescription)
+              .font(.caption)
+              .foregroundStyle(Color.fontGrey2)
+          }
         }
       }
       Spacer()
-      Image(systemName: "chevron.right")
-        .foregroundStyle(Color.mainBlack)
+    }
+    .padding(.horizontal, UIWidth * 0.04)
+    .padding(.vertical)
+    .background(RoundedRectangle(cornerRadius: 14)
+      .foregroundStyle(Color.mainGrey1))
+    .onTapGesture {
+      action()
+    }
+  }
+  
+  private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
+    VStack(spacing: 0) {
+      Image(image, bundle: setaBundle)
+        .resizable()
+        .scaledToFit()
+        .frame(width: UIWidth * 0.1)
+        .padding(.vertical)
+        .padding(.horizontal, 32)
+        .background(RoundedRectangle(cornerRadius: 14)
+          .foregroundStyle(Color.mainGrey1)
+        )
+        .padding(.bottom, 11)
+      
+      Text(title)
+        .font(.caption2)
+        .foregroundStyle(Color.toastBurn)
     }
     .onTapGesture {
       action()
     }
   }
 }
-
 struct ActivityViewController: UIViewControllerRepresentable {
   var activityItems: [Any]
   var applicationActivities: [UIActivity]? = nil
