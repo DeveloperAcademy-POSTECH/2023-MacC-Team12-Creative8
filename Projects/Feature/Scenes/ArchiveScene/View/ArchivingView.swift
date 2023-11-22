@@ -141,6 +141,7 @@ extension ArchivingView {
         .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
       }
     }
+    .padding(.horizontal, 24)
   }
   
   private var artistListView: some View {
