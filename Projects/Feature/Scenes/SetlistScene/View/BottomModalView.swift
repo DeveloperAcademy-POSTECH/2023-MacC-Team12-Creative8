@@ -42,19 +42,7 @@ struct BottomModalView: View {
           } else {
           CheckAppleMusicSubscription.shared.appleMusicSubscription()
             exportViewModel.showAppleMusicAlert.toggle()
-            // TODO: 어떻게 하지 여기
-//            var name = ""
-//            if !exportViewModel.playlistTitle.isEmpty {
-//              name = exportViewModel.playlistTitle
-//            } else {
-//              name = "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")"
-//            }
-//          AppleMusicService().addPlayList(name: name, musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
-//          vm.showModal.toggle()
-//          showToastMessageAppleMusic = true
-//          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//            showToastMessageAppleMusic = false
-//          }
+            vm.showModal = false
             exportViewModel.playlistTitle = ""
         }
         }
@@ -69,13 +57,16 @@ struct BottomModalView: View {
             }))
         }
         Spacer()
+          .frame(width: 14)
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
-          //TODO: 유튜브 뮤직 기능 연결
-          exportViewModel.showAppleMusicAlert.toggle()
+//TODO: 유튜브 뮤직 기능 연결
+//          exportViewModel.showAppleMusicAlert.toggle()
+//          exportViewModel.playlistTitle = ""
         }
+        //MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
 //        Spacer()
 //        platformButtonView(title: "Spotify", image: "spotify") {
-//          //TODO: 스포티파이 기능 연결
+//
 //        }
       }
       Spacer()
@@ -153,16 +144,19 @@ struct BottomModalView: View {
   
   private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
     VStack(spacing: 0) {
-      Image(image, bundle: setaBundle)
-        .resizable()
-        .scaledToFit()
-        .frame(width: UIWidth * 0.1)
-        .padding(.vertical, UIWidth * 0.04)
-        .padding(.horizontal, 32)
-        .background(RoundedRectangle(cornerRadius: 14)
+      ZStack {
+        RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
-        )
-        .padding(.bottom, 11)
+          .frame(maxWidth: .infinity)
+          .padding(.vertical, UIWidth * 0.06)
+        
+        Image(image, bundle: setaBundle)
+          .resizable()
+          .scaledToFit()
+          .frame(width: UIWidth * 0.1)
+         
+      }
+      .padding(.bottom, 11)
       
       Text(title)
         .font(.caption2)

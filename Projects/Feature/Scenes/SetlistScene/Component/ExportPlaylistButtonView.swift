@@ -14,8 +14,6 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-//  @State private var showToastMessageAppleMusic = false
-//  @State private var showToastMessageCapture = false
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @ObservedObject var exportViewModel: ExportPlaylistViewModel

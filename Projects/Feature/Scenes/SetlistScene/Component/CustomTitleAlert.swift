@@ -36,32 +36,30 @@ struct CustomTitleAlert: View {
       buttonsView
     }
     .padding(.horizontal, 24)
-    .padding(.top, 24)
+    .padding(.top, 32)
     .padding(.bottom, 13)
-    .frame(width: 350)
-    .background(.white)
+    .background(Color.mainWhite)
     .cornerRadius(12)
   }
   
   @ViewBuilder
   private var titleView: some View {
       Text("플레이리스트 제목")
-        .foregroundColor(.black)
-        .font(.callout)
-        .bold()
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity, alignment: .center)
+      .foregroundColor(Color.mainBlack)
+      .font(.callout)
+      .fontWeight(.bold)
+      .multilineTextAlignment(.center)
+      .frame(maxWidth: .infinity, alignment: .center)
   }
   
   private var textFieldView: some View {
     TextField("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")",
                text: $text,
-               prompt: Text("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")").foregroundColor(.secondary)
+              prompt: Text("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")").foregroundColor(Color.fontGrey3)
     )
     .padding(.horizontal)
     .padding(.vertical, 7)
-
-    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray).stroke(.orange))
+    .background(RoundedRectangle(cornerRadius: 10).fill(Color.mainGrey1).stroke(Color.mainOrange))
   }
   
   private var buttonsView: some View {
@@ -87,8 +85,8 @@ struct CustomTitleAlert: View {
           button.action?()
         }
       }
-      .foregroundColor(Color.white)
-      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.orange))
+      .foregroundColor(Color.mainWhite)
+      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.mainOrange))
     }
   }
   
@@ -100,7 +98,7 @@ struct CustomTitleAlert: View {
           button.action?()
         }
       }
-      .foregroundColor(Color.black)
+      .foregroundColor(Color.mainBlack)
       .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.white))
     }
   }
@@ -169,6 +167,7 @@ extension CustomAlertModifier: ViewModifier {
           artistInfo: artistInfo,
           dismissButton: dismissButton,
           primaryButton: primaryButton, exportViewModel: exportViewModel)
+        .padding(.horizontal, 20)
         .zIndex(1) // 얼럿 창이 뒷 배경보다 위에 나타나도록 설정
         .navigationBarBackButtonHidden(true)
       }

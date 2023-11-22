@@ -58,14 +58,12 @@ struct SetlistView: View {
       }
     }
     .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
-      // TODO: 글자 넘겨주기
       AppleMusicService().addPlayList(name: exportViewModel.playlistTitle, musicList: vm.setlistSongName, singer: artistInfo.name ?? "", venue: setlist?.venue?.name)
-    vm.showModal = false
+    exportViewModel.showAppleMusicAlert = false
     showToastMessageAppleMusic = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
     showToastMessageAppleMusic = false
     }
-      vm.showModal.toggle()
     }), dismissButton: CustomAlertButton(title: "취소", action: {
       vm.showModal.toggle()
       exportViewModel.showAppleMusicAlert.toggle()
@@ -76,7 +74,7 @@ struct SetlistView: View {
     exportViewModel: exportViewModel
     )
     .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
-      // TODO: 글자 넘겨주기
+      // TODO: 유튜브뮤직
       vm.showModal.toggle()
     }), dismissButton: CustomAlertButton(title: "취소", action: {
       vm.showModal.toggle()
