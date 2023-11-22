@@ -14,7 +14,7 @@ import UIKit
 struct BottomModalView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
-  @StateObject var exportViewModel = ExportPlaylistViewModel()
+  @ObservedObject var exportViewModel: ExportPlaylistViewModel
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
@@ -41,12 +41,21 @@ struct BottomModalView: View {
             showMusicSettingsAlert = true
           } else {
           CheckAppleMusicSubscription.shared.appleMusicSubscription()
-          AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
-          vm.showModal.toggle()
-          showToastMessageAppleMusic = true
-          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            showToastMessageAppleMusic = false
-          }
+            exportViewModel.showAppleMusicAlert.toggle()
+            // TODO: 어떻게 하지 여기
+//            var name = ""
+//            if !exportViewModel.playlistTitle.isEmpty {
+//              name = exportViewModel.playlistTitle
+//            } else {
+//              name = "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")"
+//            }
+//          AppleMusicService().addPlayList(name: name, musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+//          vm.showModal.toggle()
+//          showToastMessageAppleMusic = true
+//          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//            showToastMessageAppleMusic = false
+//          }
+            exportViewModel.playlistTitle = ""
         }
         }
         // 애플뮤직 권한 허용 거부 상태인 경우
@@ -62,11 +71,12 @@ struct BottomModalView: View {
         Spacer()
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
           //TODO: 유튜브 뮤직 기능 연결
+          exportViewModel.showAppleMusicAlert.toggle()
         }
-        Spacer()
-        platformButtonView(title: "Spotify", image: "spotify") {
-          //TODO: 스포티파이 기능 연결
-        }
+//        Spacer()
+//        platformButtonView(title: "Spotify", image: "spotify") {
+//          //TODO: 스포티파이 기능 연결
+//        }
       }
       Spacer()
       listRowView(
@@ -91,7 +101,7 @@ struct BottomModalView: View {
           title: Text(""),
           message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
           primaryButton: .default(Text("취소")),
-          secondaryButton:  .default(Text("설정").bold(), action: {
+          secondaryButton: .default(Text("설정").bold(), action: {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
           }))
       }
@@ -147,7 +157,7 @@ struct BottomModalView: View {
         .resizable()
         .scaledToFit()
         .frame(width: UIWidth * 0.1)
-        .padding(.vertical)
+        .padding(.vertical, UIWidth * 0.04)
         .padding(.horizontal, 32)
         .background(RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)

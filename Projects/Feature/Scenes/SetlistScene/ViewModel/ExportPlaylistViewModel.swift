@@ -11,6 +11,9 @@ import Photos
 import MusicKit
 
 final class ExportPlaylistViewModel: ObservableObject {
+  @Published var playlistTitle: String = ""
+  @Published var showYouTubeAlert: Bool = false
+  @Published var showAppleMusicAlert: Bool = false
   
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
