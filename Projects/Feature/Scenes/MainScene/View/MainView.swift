@@ -51,12 +51,12 @@ public struct MainView: View {
                 .frame(minHeight: geometry.size.height * 0.9)
             } else {
               mainArtistsView
+                .id(likeArtists)
             }
           }
           .padding(.vertical)
       }
       .scrollIndicators(.hidden)
-      .id(likeArtists)
       .background(Color.backgroundWhite)
     }
     .onAppear {

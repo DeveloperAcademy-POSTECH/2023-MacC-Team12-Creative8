@@ -148,7 +148,7 @@ struct BottomModalView: View {
         RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
           .frame(maxWidth: .infinity)
-          .padding(.vertical, UIWidth * 0.06)
+          .frame(height: UIWidth * 0.2)
         
         Image(image, bundle: setaBundle)
           .resizable()
