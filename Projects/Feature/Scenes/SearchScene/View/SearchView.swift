@@ -26,7 +26,6 @@ struct SearchView: View {
         .padding(.top)
         ScrollView {
           artistView
-            .padding(.bottom, 50)
         }
         .scrollDisabled(viewModel.searchIsPresented)
         .scrollIndicators(.hidden)

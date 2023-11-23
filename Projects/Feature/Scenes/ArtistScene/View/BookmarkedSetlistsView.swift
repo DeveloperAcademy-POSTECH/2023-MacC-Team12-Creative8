@@ -150,6 +150,8 @@ struct BookmarkedSetlistsView: View {
           Image(systemName: "ellipsis")
             .foregroundStyle(Color.mainBlack)
             .font(.title3)
+            .padding()
+            .background(Color.clear)
         }
         
         Spacer()

@@ -50,6 +50,7 @@ struct ArtistsContentView: View {
       ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
         .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
     }
+    .buttonStyle(BasicButtonStyle())
   }
   private var commentText: some View {
     HStack(spacing: 0) {
