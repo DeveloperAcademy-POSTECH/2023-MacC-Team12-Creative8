@@ -81,7 +81,7 @@ struct BottomModalView: View {
             vm.showModal.toggle()
             showToastMessageCapture = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-              showToastMessageCapture = false
+            showToastMessageCapture = false
             }
           }
         }

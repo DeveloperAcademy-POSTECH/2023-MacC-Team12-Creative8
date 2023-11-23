@@ -44,7 +44,7 @@ struct SetlistView: View {
                                    artistInfo: artistInfo,
                                    vm: vm,
                                    showToastMessageAppleMusic: $showToastMessageAppleMusic,
-                                   showToastMessageCapture: $showToastMessage,
+                                   showToastMessageCapture: $showToastMessageCapture,
                                    exportViewModel: exportViewModel)
         }
       }
