@@ -20,7 +20,6 @@
 		390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */; };
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
 		460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52FD2A86596385940F794 /* ListView.swift */; };
-		4C0C8A9631102214FC39D7B5 /* ServiceExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */; };
 		50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */; };
 		5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */; };
 		5FE54878808838FA5FDA55AE /* ArtistSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */; };
@@ -41,7 +40,6 @@
 		A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */; };
 		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
-		B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */; };
 		BC673F669E7AA86747CB1BF0 /* ArtistSetlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889EFB2B0B903778FC545AE /* ArtistSetlistCell.swift */; };
 		BF015464C3C1BC99D09C647B /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 71467F9732576A14C6681C75 /* CoreXLSX */; };
 		BF3DF8B460FBB0671C7334C0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */; };
@@ -101,12 +99,10 @@
 		2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
-		3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistFMLinkButtonView.swift; sourceTree = "<group>"; };
 		4CB52FD2A86596385940F794 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
-		5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceExplainView.swift; sourceTree = "<group>"; };
 		57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalView.swift; sourceTree = "<group>"; };
 		5AAF56B0153354883134B7D3 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
@@ -214,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				98BE433AEE893FB59184DAA4 /* View */,
-				E8B1309BC430B4592B907BC0 /* ViewModel */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -378,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				B91DB9D35DA30A20216AC9A4 /* AskView.swift */,
-				5547AB6C678181B9B5E5E98A /* ServiceExplainView.swift */,
 				2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */,
 			);
 			path = View;
@@ -431,14 +425,6 @@
 				5AAF56B0153354883134B7D3 /* MenuButton.swift */,
 			);
 			path = Component;
-			sourceTree = "<group>";
-		};
-		E8B1309BC430B4592B907BC0 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		ED41C20DDFE82AF1DA140D73 /* ViewModel */ = {
@@ -582,7 +568,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/jangsumin/Documents/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -634,9 +620,7 @@
 				79C48B532B068DE100B3F8C7 /* ArtistSetlistCellView.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,
 				26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */,
-				4C0C8A9631102214FC39D7B5 /* ServiceExplainView.swift in Sources */,
 				D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */,
-				B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
