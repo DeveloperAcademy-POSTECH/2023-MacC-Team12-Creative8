@@ -97,5 +97,4 @@ final class SetlistViewModel: ObservableObject {
     }
     
   }
-  
 }

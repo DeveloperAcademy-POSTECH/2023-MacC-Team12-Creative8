@@ -22,6 +22,10 @@ struct SetlistView: View {
   @Environment(\.modelContext) var modelContext
   @State private var showToastMessage = false
   
+  @State private var showToastMessageAppleMusic = false
+  @State private var showToastMessageCapture = false
+  @StateObject var exportViewModel = ExportPlaylistViewModel()
+  
   var body: some View {
     ZStack {
       Color.backgroundWhite
@@ -36,7 +40,12 @@ struct SetlistView: View {
       }
       if let setlist = setlist {
         if !vm.isEmptySetlist(setlist) {
-          ExportPlaylistButtonView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+          ExportPlaylistButtonView(setlist: setlist,
+                                   artistInfo: artistInfo,
+                                   vm: vm,
+                                   showToastMessageAppleMusic: $showToastMessageAppleMusic,
+                                   showToastMessageCapture: $showToastMessageCapture,
+                                   exportViewModel: exportViewModel)
         }
       }
       if showToastMessage {
@@ -48,6 +57,34 @@ struct SetlistView: View {
         }
       }
     }
+    .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
+      AppleMusicService().addPlayList(name: exportViewModel.playlistTitle, musicList: vm.setlistSongName, venue: setlist?.venue?.name)
+      exportViewModel.showAppleMusicAlert = false
+      showToastMessageAppleMusic = true
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        showToastMessageAppleMusic = false
+      }
+    }), dismissButton: CustomAlertButton(title: "취소", action: {
+      vm.showModal.toggle()
+      exportViewModel.showAppleMusicAlert.toggle()
+    }),
+                 isPresented: $exportViewModel.showAppleMusicAlert,
+                 artistInfo: artistInfo,
+                 setlist: setlist,
+                 exportViewModel: exportViewModel
+    )
+    .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
+      // TODO: 유튜브뮤직
+      vm.showModal.toggle()
+    }), dismissButton: CustomAlertButton(title: "취소", action: {
+      vm.showModal.toggle()
+      exportViewModel.showAppleMusicAlert.toggle()
+    }),
+                 isPresented: $exportViewModel.showYouTubeAlert,
+                 artistInfo: artistInfo,
+                 setlist: setlist,
+                 exportViewModel: exportViewModel
+    )
     .toolbar(.hidden, for: .tabBar)
     .background(Color.backgroundWhite)
     .edgesIgnoringSafeArea(.bottom)
@@ -82,7 +119,6 @@ struct SetlistView: View {
         }
       }
     }
-    
   }
   
   private var concertInfoArea: some View {
@@ -167,5 +203,24 @@ struct SetlistView: View {
     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
       showToastMessage = false
     }
+  }
+}
+
+extension View {
+  func customAlert( primaryButton: CustomAlertButton, dismissButton: CustomAlertButton,
+                    isPresented: Binding<Bool>,
+                    artistInfo: ArtistInfo,
+                    setlist: Setlist?,
+                    exportViewModel: ExportPlaylistViewModel
+  ) -> some View {
+    return modifier(CustomAlertModifier(dismissButton: dismissButton,
+                                        primaryButton: primaryButton,
+                                        isPresented: isPresented,
+                                        artistInfo: artistInfo,
+                                        setlist: setlist,
+                                        exportViewModel: exportViewModel
+                                       )
+    )
+    
   }
 }

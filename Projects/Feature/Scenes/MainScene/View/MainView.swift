@@ -20,7 +20,6 @@ public struct MainView: View {
   @Environment(\.modelContext) var modelContext
   
   public var body: some View {
-
       Group {
         if likeArtists.isEmpty {
           EmptyMainView(selectedTab: $selectedTab)

@@ -14,9 +14,10 @@ struct ExportPlaylistButtonView: View {
   let setlist: Setlist?
   let artistInfo: ArtistInfo?
   @ObservedObject var vm: SetlistViewModel
-  @State private var showToastMessageAppleMusic = false
-  @State private var showToastMessageCapture = false
-  
+  @Binding var showToastMessageAppleMusic: Bool
+  @Binding var showToastMessageCapture: Bool
+  @ObservedObject var exportViewModel: ExportPlaylistViewModel
+
   var body: some View {
     VStack {
       Spacer()
@@ -48,8 +49,8 @@ struct ExportPlaylistButtonView: View {
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
-        .presentationDetents([.fraction(0.3)])
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
+        .presentationDetents([.fraction(0.5)])
         .presentationDragIndicator(.visible)
     }
   }
