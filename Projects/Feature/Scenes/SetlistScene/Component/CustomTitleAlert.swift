@@ -218,9 +218,3 @@ extension CustomAlertModifier {
     self.exportViewModel = exportViewModel
   }
 }
-
-//extension View {
-//  func hideKeyboard() {
-//    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//  }
-//}

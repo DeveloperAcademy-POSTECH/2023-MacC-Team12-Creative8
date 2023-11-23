@@ -112,58 +112,60 @@ struct BottomModalView: View {
   }
   
   private func listRowView(title: LocalizedStringResource, topDescription: LocalizedStringResource?, bottomDescription: LocalizedStringResource?, action: @escaping () -> Void) -> some View {
-    HStack {
-      VStack(alignment: .leading, spacing: 0) {
-        Text(title)
-          .font(.subheadline)
-          .foregroundStyle(Color.toastBurn)
-        VStack(alignment: .leading, spacing: 3) {
-          if let topDescription = topDescription {
-            Text(topDescription)
-              .font(.caption)
-              .foregroundStyle(Color.fontGrey2)
-              .padding(.top, UIWidth * 0.04)
-          }
-          if let bottomDescription = bottomDescription {
-            Text(bottomDescription)
-              .font(.caption)
-              .foregroundStyle(Color.fontGrey2)
+    Button {
+      action()
+    } label: {
+      HStack {
+        VStack(alignment: .leading, spacing: 0) {
+          Text(title)
+            .font(.subheadline)
+            .foregroundStyle(Color.toastBurn)
+          VStack(alignment: .leading, spacing: 3) {
+            if let topDescription = topDescription {
+              Text(topDescription)
+                .font(.caption)
+                .foregroundStyle(Color.fontGrey2)
+                .padding(.top, UIWidth * 0.04)
+            }
+            if let bottomDescription = bottomDescription {
+              Text(bottomDescription)
+                .font(.caption)
+                .foregroundStyle(Color.fontGrey2)
+            }
           }
         }
+        Spacer()
       }
-      Spacer()
-    }
-    .padding(.horizontal, UIWidth * 0.04)
-    .padding(.vertical)
-    .background(RoundedRectangle(cornerRadius: 14)
-      .foregroundStyle(Color.mainGrey1))
-    .onTapGesture {
-      action()
+      .padding(.horizontal, UIWidth * 0.04)
+      .padding(.vertical)
+      .background(RoundedRectangle(cornerRadius: 14)
+        .foregroundStyle(Color.mainGrey1))
     }
   }
   
   private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
-    VStack(spacing: 0) {
-      ZStack {
-        RoundedRectangle(cornerRadius: 14)
-          .foregroundStyle(Color.mainGrey1)
-          .frame(maxWidth: .infinity)
-          .frame(height: UIWidth * 0.2)
+    Button {
+        action()
+    } label: {
+      VStack(spacing: 0) {
+        ZStack {
+          RoundedRectangle(cornerRadius: 14)
+            .foregroundStyle(Color.mainGrey1)
+            .frame(maxWidth: .infinity)
+            .frame(height: UIWidth * 0.2)
+          
+          Image(image, bundle: setaBundle)
+            .resizable()
+            .scaledToFit()
+            .frame(width: UIWidth * 0.1)
+           
+        }
+        .padding(.bottom, 11)
         
-        Image(image, bundle: setaBundle)
-          .resizable()
-          .scaledToFit()
-          .frame(width: UIWidth * 0.1)
-         
+        Text(title)
+          .font(.caption2)
+          .foregroundStyle(Color.toastBurn)
       }
-      .padding(.bottom, 11)
-      
-      Text(title)
-        .font(.caption2)
-        .foregroundStyle(Color.toastBurn)
-    }
-    .onTapGesture {
-      action()
     }
   }
 }
