@@ -17,6 +17,8 @@ final class ExportPlaylistViewModel: ObservableObject {
   @Published var showAppleMusicAlert: Bool = false
   @Published var showToastMessageAppleMusic: Bool = false
   @Published var showToastMessageCapture = false
+  @Published var showLibrarySettingsAlert = false
+  @Published var showMusicSettingsAlert = false
   
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
@@ -35,7 +37,12 @@ final class ExportPlaylistViewModel: ObservableObject {
     
     status = MusicAuthorization.currentStatus
     
-    return status == .denied
+    return status == .denied || status == .notDetermined
+  }
+  
+  func getMusicKitPermissionStatus() -> MusicAuthorization.Status {
+      let status: MusicAuthorization.Status = MusicAuthorization.currentStatus
+      return status
   }
   
   func addToAppleMusic(musicList: [(String, String?)], setlist: Setlist?) {
@@ -51,6 +58,17 @@ final class ExportPlaylistViewModel: ObservableObject {
     }
   }
   
+  func handleAppleMusicButtonAction() {
+    if self.getMusicKitPermissionStatus() == .notDetermined {
+      AppleMusicService().requestMusicAuthorization()
+    } else if self.getMusicKitPermissionStatus() == .denied {
+      self.showMusicSettingsAlert = true
+    } else {
+      CheckAppleMusicSubscription.shared.appleMusicSubscription()
+      self.showAppleMusicAlert.toggle()
+      self.playlistTitle = ""
+    }
+  }
   func addToYouTubeMusic() {
     //TODO: 유튜브뮤직
   }
