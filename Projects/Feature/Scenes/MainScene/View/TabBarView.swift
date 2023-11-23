@@ -27,8 +27,8 @@ public struct TabBarView: View {
       }
       .tag(Tab.home)
       NavigationStack {
-//        SearchView(selectedTab: $selectedTab)
-//          .navigationBarTitleDisplayMode(.inline)
+        SearchView(selectedTab: $selectedTab)
+          .navigationBarTitleDisplayMode(.inline)
       }
       .tabItem {
         Label("검색", systemImage: "magnifyingglass")

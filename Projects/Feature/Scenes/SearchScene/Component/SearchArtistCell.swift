@@ -14,19 +14,35 @@ struct SearchArtistCell: View {
   let imageURL: String
   let artistName: String
   let artistMbid: String
-  
+
   var body: some View {
     VStack(alignment: .leading) {
       NavigationLink {
         ArtistView(selectedTab: $selectedTab, artistName: artistName, artistAlias: "", artistMbid: artistMbid)
       }label: {
-        Image(imageURL, bundle: Bundle(identifier: "com.creative8.seta.UI"))
-            .resizable()
-            .scaledToFill()
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.mainGrey1, lineWidth: 1))
+        AsyncImage(url: URL(string: imageURL)) { phase in
+          switch phase {
+          case .empty:
+            Image("ticket", bundle: setaBundle)
+              .resizable()
+              .scaledToFill()
+          case .success(let image):
+            image
+              .resizable()
+              .scaledToFill()
+          case .failure:
+            Image("ticket", bundle: setaBundle)
+              .resizable()
+              .scaledToFill()
+          @unknown default:
+            EmptyView()
+          }
+        }
       }
- 
+      .aspectRatio(contentMode: .fit)
+      .clipShape(RoundedRectangle(cornerRadius: 20))
+      .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.lineGrey1, lineWidth: 1))
+
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)
         .font(.footnote)
