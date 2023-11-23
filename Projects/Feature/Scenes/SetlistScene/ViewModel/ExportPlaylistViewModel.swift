@@ -20,6 +20,8 @@ final class ExportPlaylistViewModel: ObservableObject {
   @Published var showLibrarySettingsAlert = false
   @Published var showMusicSettingsAlert = false
   
+  //MARK: Photo
+  
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
     
@@ -28,33 +30,70 @@ final class ExportPlaylistViewModel: ObservableObject {
     } else {
       status = PHPhotoLibrary.authorizationStatus()
     }
-    return status == .denied
+    return status == .denied || status == .notDetermined
+    
+  }
   
+  func requestPhotoLibraryPermission() {
+      PHPhotoLibrary.requestAuthorization { status in
+          switch status {
+          case .authorized:
+              // 권한이 허용된 경우
+              print("Photo library access granted")
+          case .denied, .restricted:
+              // 권한이 거부되거나 제한된 경우
+              print("Photo library access denied")
+          case .notDetermined:
+              // 권한이 아직 결정되지 않은 경우
+              print("Photo library access not determined")
+          case .limited:
+            print("Photo library access limited")
+          @unknown default:
+              print("omg")
+          }
+      }
+  }
+  
+  func getPhotoLibraryPermissionStatus() -> PHAuthorizationStatus {
+    let status = PHPhotoLibrary.authorizationStatus()
+    return status
+  }
+  
+  func handlePhotoExportButtonAction() {
+    if self.getPhotoLibraryPermissionStatus() == .notDetermined {
+      self.requestPhotoLibraryPermission()
+    } else if self.getPhotoLibraryPermissionStatus() == .denied {
+      self.showLibrarySettingsAlert = true
+    } else {
+      self.showToastMessageCapture = true
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        self.showToastMessageCapture = false
+      }
+    }
+  }
+  
+  //MARK: AppleMusic
+  func getMusicKitPermissionStatus() -> MusicAuthorization.Status {
+    let status: MusicAuthorization.Status = MusicAuthorization.currentStatus
+    return status
   }
   
   func checkMusicKitPermission() -> Bool {
     var status: MusicAuthorization.Status = .notDetermined
-    
     status = MusicAuthorization.currentStatus
-    
     return status == .denied || status == .notDetermined
-  }
-  
-  func getMusicKitPermissionStatus() -> MusicAuthorization.Status {
-      let status: MusicAuthorization.Status = MusicAuthorization.currentStatus
-      return status
   }
   
   func addToAppleMusic(musicList: [(String, String?)], setlist: Setlist?) {
     AppleMusicService().addPlayList(
-            name: self.playlistTitle,
-            musicList: musicList,
-            venue: setlist?.venue?.name
-        )
+      name: self.playlistTitle,
+      musicList: musicList,
+      venue: setlist?.venue?.name
+    )
     self.showAppleMusicAlert = false
     self.showToastMessageAppleMusic = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-          self.showToastMessageAppleMusic = false
+      self.showToastMessageAppleMusic = false
     }
   }
   
@@ -69,6 +108,8 @@ final class ExportPlaylistViewModel: ObservableObject {
       self.playlistTitle = ""
     }
   }
+  
+  //MARK: YouTubeMusic
   func addToYouTubeMusic() {
     //TODO: 유튜브뮤직
   }

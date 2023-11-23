@@ -62,21 +62,15 @@ struct BottomModalView: View {
         //
         //        }
       }
-      
       Spacer()
       listRowView(
         title: "플레이리스트용 캡쳐하기",
         topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
         action: {
-          if exportViewModel.checkPhotoPermission() {
-            exportViewModel.showLibrarySettingsAlert = true
-          } else {
+          exportViewModel.handlePhotoExportButtonAction()
+          if !exportViewModel.checkPhotoPermission() {
             takeSetlistToImage(vm.setlistSongKoreanName)
             vm.showModal.toggle()
-            showToastMessageCapture = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-              showToastMessageCapture = false
-            }
           }
         }
       )
