@@ -44,7 +44,7 @@ public final class SwiftDataManager: ObservableObject {
                                                               alias: alias,
                                                               mbid: mbid,
                                                               gid: gid,
-                                                              imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
+                                                              imageUrl: imageUrl ?? "",
                                                               songList: songList),
                                                               orderIndex: max+1)
     modelContext?.insert(newLikeArtist)
@@ -92,7 +92,7 @@ public final class SwiftDataManager: ObservableObject {
                                                                     alias: alias,
                                                                     mbid: mbid,
                                                                     gid: gid,
-                                                                    imageUrl: imageUrl ?? "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
+                                                                    imageUrl: imageUrl ?? "selectedArtist.count",
                                                                     songList: songList))
     modelContext?.insert(newSearchHistory)
     self.save()
