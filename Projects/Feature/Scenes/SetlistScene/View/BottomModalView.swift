@@ -24,7 +24,7 @@ struct BottomModalView: View {
       listRowView(title: "Apple Music에 옮기기", description: nil, action: {
         AppleMusicService().requestMusicAuthorization()
         CheckAppleMusicSubscription.shared.appleMusicSubscription()
-        AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, singer: artistInfo?.name ?? "", venue: setlist?.venue?.name)
+        AppleMusicService().addPlayList(name: "\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")", musicList: vm.setlistSongName, venue: setlist?.venue?.name)
         vm.showModal.toggle()
         showToastMessageAppleMusic = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -38,7 +38,7 @@ struct BottomModalView: View {
         title: "세트리스트 캡처하기",
         description: "Bugs, FLO, genie, VIBE의 유저이신가요? OCR 서비스를\n사용해 캡쳐만으로 플레이리스트를 만들어 보세요.",
         action: {
-          takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+          takeSetlistToImage(vm.setlistSongKoreanName)
           vm.showModal.toggle()
           showToastMessageCapture = true
           DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
