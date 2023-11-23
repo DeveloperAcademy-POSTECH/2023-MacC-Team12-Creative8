@@ -55,6 +55,7 @@ struct ShareSetlistView: View {
           }
         }
       }
+      .foregroundStyle(Color.black)
     }
     //.padding(.top, 30)
   }
