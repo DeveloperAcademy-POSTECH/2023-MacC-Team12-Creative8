@@ -153,11 +153,9 @@ struct SetlistView: View {
           EmptySetlistView()
             .padding(30)
         } else {
-          VStack {
-            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-              .padding(30)
-            BottomView()
-          }
+          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            .padding(30)
+            .padding(.bottom, 130)
         }
       }
     }

@@ -41,12 +41,11 @@ struct BookmarkedSetlistsView: View {
         )
         .padding(.horizontal)
       }
-      
     }
     .onAppear {
       getBookmarkedSetlists()
       if !bookmarkedSetlists.isEmpty {
-        vm.showBookmarkedSetlists = true
+          vm.showBookmarkedSetlists = true
       }
     }
   }
@@ -67,10 +66,13 @@ struct BookmarkedSetlistsView: View {
         .fontWeight(.bold)
       Spacer()
       Button {
-        vm.showBookmarkedSetlists.toggle()
+//        withAnimation(Animation.spring()) { // MARK: 애니메이션 넣을까요 말까요?
+          vm.showBookmarkedSetlists.toggle()
+//        }
       } label: {
-        Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
-          .font(.title3)
+        Image(systemName: "chevron.right")
+          .rotationEffect(.degrees(vm.showBookmarkedSetlists ? 90 : 0))
+            .font(.title3)
       }
       .foregroundStyle(Color.mainBlack)
     }

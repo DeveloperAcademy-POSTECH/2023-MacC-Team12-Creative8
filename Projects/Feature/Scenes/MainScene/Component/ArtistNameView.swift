@@ -22,7 +22,7 @@ struct ArtistNameView: View {
   var body: some View {
     HStack(spacing: 0) {
       Text(.init(name))
-        .kerning(-0.9)  // 노엘갤러거 한 화면에 안나오는 이슈로 인해
+//        .kerning(-0.95)  // 노엘갤러거 한 화면에 안나오는 이슈로 인해
         .font(.title)
         .fontWeight(.semibold)
     }
