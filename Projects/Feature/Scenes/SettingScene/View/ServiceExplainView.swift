@@ -127,13 +127,13 @@ struct SectionBackgroundView: View {
 }
 
 #Preview {
-  TermsOfSetlistfm()
+  //TermsOfSetlistfm()
+  ServiceExplainView()
 }
 
 /// UIViewReperesentable을 사용해서 UIKit을 매핑해야함.
 /// UILabel()의 linebreakmode 설정을 하면 단어 단위로 다음 줄로 넘어가게 할 수 있음
 /// 만약 Hstack 내부에서 저 장문의 글만 처리하려고 하면 Geometry Reader를 써서 width를 넘겨줘야 할듯함
-/// 제일 쉬운 방법 : 이미지 다크-라이트모드로 걍 넣으셈
 
 // struct SUILabel: UIViewRepresentable {
 //

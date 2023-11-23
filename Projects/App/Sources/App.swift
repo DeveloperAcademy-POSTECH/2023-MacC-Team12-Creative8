@@ -13,8 +13,6 @@ import Firebase
 
 @main
 struct SetlistApp: App {
-  @AppStorage("appearance")
-  var appearnace: ButtonType = .automatic
   @AppStorage("isOnboarding")
   var isOnboarding: Bool = true
   
@@ -41,9 +39,7 @@ struct SetlistApp: App {
       if isOnboarding {
         OnboardingView()
       } else {
-        
         TabBarView()
-          .preferredColorScheme(appearnace.getColorScheme())
       }
     }
     .modelContainer(sharedModelContainer)

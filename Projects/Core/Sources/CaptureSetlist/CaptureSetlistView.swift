@@ -10,8 +10,7 @@ import SwiftUI
 import UI
 
 public struct CaptureSetlistView: View {
-  let song: [String]
-  let artist: String
+  let songList: [(String, String?)]
   let showingSongCount: Int
   let showingSongLastCount: Int
   let index: Int
@@ -20,6 +19,7 @@ public struct CaptureSetlistView: View {
       Color.white.ignoresSafeArea()
       Image(systemName: "\(index).circle")
         .font(.system(size: 200))
+        .foregroundStyle(Color.gray)
         .opacity(0.15)
 
         VStack(alignment: .leading) {
@@ -38,8 +38,8 @@ public struct CaptureSetlistView: View {
             .frame(height: 1)
           ForEach(showingSongCount..<showingSongLastCount, id: \.self) { index in
               VStack(alignment: .leading) {
-                Text("\(song[index])")
-                Text("\(artist)")
+                Text("\(songList[index].0)")
+                Text("\(songList[index].1 ?? "")")
               }
               .padding(.horizontal, 30)
               .font(.system(size: 17))
@@ -99,14 +99,13 @@ extension UIView {
 }
 
 public extension View {
-  func takeSetlistToImage(_ song: [String], _ artist: String) {
-    let songCount = song.count
+  func takeSetlistToImage(_ songList: [(String, String?)]) {
+    let songCount = songList.count
     let pagesongs = songCount / 10
     let remainsongs = songCount % 10
     let pictureCount = pagesongs + (remainsongs == 0 ? 0 : 1)
     for forI in 0..<pictureCount {
-      let captureView = CaptureSetlistView(song: song,
-                                           artist: artist,
+      let captureView = CaptureSetlistView(songList: songList,
                                            showingSongCount: 10 * forI,
                                            showingSongLastCount: forI == pictureCount-1 && remainsongs != 0 ?
                                            (10 * forI + remainsongs) : (10 * (forI + 1)),

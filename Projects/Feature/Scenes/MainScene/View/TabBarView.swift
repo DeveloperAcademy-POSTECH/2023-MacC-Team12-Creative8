@@ -42,7 +42,7 @@ public struct TabBarView: View {
       .tag(Tab.search)
       NavigationStack {
         ArchivingView(selectedTab: $selectedTab)
-          .navigationBarTitleDisplayMode(.inline)
+          .navigationBarTitleDisplayMode(.large)
           .background(Color.backgroundWhite)
       }
       .tabItem {
@@ -52,7 +52,7 @@ public struct TabBarView: View {
       
       NavigationStack {
         SettingView()
-          .navigationBarTitleDisplayMode(.inline)
+          .navigationBarTitleDisplayMode(.large)
           .background(Color.backgroundWhite)
       }
       .tabItem {

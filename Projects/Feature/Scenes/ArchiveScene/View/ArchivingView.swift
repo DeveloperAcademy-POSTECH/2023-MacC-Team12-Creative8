@@ -127,11 +127,22 @@ extension ArchivingView {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
-          Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다\n변경을 원하신다면 아티스트를 꾹 눌러 순서를 옮겨주세요")
-            .font(.footnote)
-            .foregroundStyle(Color.fontGrey2)
-            .padding(.top)
-            .listRowBackground(Color.backgroundWhite)
+          VStack(alignment: .leading, spacing: 0) {
+            Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다")
+              .font(.footnote)
+              .foregroundStyle(Color.fontGrey2)
+              .padding(.top)
+              .listRowBackground(Color.backgroundWhite)
+            HStack(spacing: 0) {
+              Text("변경을 원하신다면 ")
+                .font(.footnote)
+                .foregroundStyle(Color.fontGrey2)
+              Text("아티스트를 꾹 눌러 순서를 옮겨보세요")
+                .font(.footnote)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.fontGrey2)
+            }
+          }
           artistListView
             .listRowSeparator(.hidden)
             .listRowBackground(Color.backgroundWhite)
