@@ -11,11 +11,17 @@ import UI
 
 public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
-
+  
   public init() {
-    UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    let appearance = UITabBarAppearance()
+    let tabBar = UITabBar.appearance()
+    
+    appearance.shadowColor = UIColor.clear
+    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.unselectedItemTintColor = UIColor(named: "fontGrey25", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.standardAppearance = appearance
   }
-
+  
   public var body: some View {
     TabView(selection: $selectedTab) {
       NavigationStack {
@@ -43,7 +49,7 @@ public struct TabBarView: View {
         Label("보관함", systemImage: "heart.fill")
       }
       .tag(Tab.archiving)
-
+      
       NavigationStack {
         SettingView()
           .navigationBarTitleDisplayMode(.inline)
