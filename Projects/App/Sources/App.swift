@@ -31,6 +31,7 @@ struct SetlistApp: App {
   
   init() {
     FirebaseApp.configure()
+    Thread.sleep(forTimeInterval: 2)
   }
   
   var body: some Scene {

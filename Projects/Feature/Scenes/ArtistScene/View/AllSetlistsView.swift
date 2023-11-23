@@ -15,7 +15,6 @@ struct AllSetlistsView: View {
   var body: some View {
     VStack {
       titleLayer
-        .padding()
       setlistsLayer
       if vm.page != vm.totalPage {
         buttonLayer
@@ -31,7 +30,7 @@ struct AllSetlistsView: View {
         .foregroundStyle(Color.mainBlack)
       Spacer()
     }
-    .padding(.horizontal, 10)
+    .padding(EdgeInsets(top: 16, leading: 24, bottom: 24, trailing: 24))
   }
   
   private var setlistsLayer: some View {
@@ -40,7 +39,6 @@ struct AllSetlistsView: View {
         SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
-          Spacer()
           
           // MARK: Date
           VStack {
@@ -81,13 +79,12 @@ struct AllSetlistsView: View {
           Image(systemName: "arrow.right")
             .font(.title3)
             .foregroundStyle(Color.mainBlack)
-          
-          Spacer()
         }
+        .padding(.horizontal, 24)
       }
       
       Divider()
-        .padding(.horizontal)
+        .padding(.horizontal, 24)
         .foregroundColor(Color.lineGrey1)
     }
   }
@@ -114,9 +111,8 @@ struct AllSetlistsView: View {
         .padding(.horizontal)
     }
   }
-  
 }
 
 #Preview {
-    AllSetlistsView(vm: ArtistViewModel())
+  AllSetlistsView(vm: ArtistViewModel())
 }
