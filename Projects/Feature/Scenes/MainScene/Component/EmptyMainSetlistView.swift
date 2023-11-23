@@ -12,6 +12,8 @@ import SwiftData
 import Core
 import UI
 
+// TODO: 세트리스트 버튼 추후 수정하기
+
 struct EmptyMainSetlistView: View {
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
