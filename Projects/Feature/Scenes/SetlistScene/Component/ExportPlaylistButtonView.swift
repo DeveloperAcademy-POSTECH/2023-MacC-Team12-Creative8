@@ -32,6 +32,7 @@ struct ExportPlaylistButtonView: View {
       .padding(.horizontal, 30)
       
       Button(action: {
+        vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
         vm.showModal.toggle()
       }, label: {
         Text("플레이리스트 내보내기")

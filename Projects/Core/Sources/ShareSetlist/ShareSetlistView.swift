@@ -11,7 +11,7 @@ import UIKit
 
 struct ShareSetlistView: View {
   
-  let song: [String]
+  let songList: [(String, String?)]
   let artist: String
   let songCount: Int
   
@@ -30,7 +30,7 @@ struct ShareSetlistView: View {
             ForEach(0..<songCount, id: \.self) { index in
               HStack {
                 Text(String(format: "%02d", index + 1))
-                Text("\(song[index])")
+                Text("\(songList[index].0)")
               }
             }
           }
@@ -40,7 +40,7 @@ struct ShareSetlistView: View {
               ForEach(0..<25, id: \.self) { index in
                 HStack {
                   Text(String(format: "%02d", index + 1))
-                  Text("\(song[index])")
+                  Text("\(songList[index].0)")
                 }
               }
             }
@@ -48,7 +48,7 @@ struct ShareSetlistView: View {
               ForEach(25..<songCount, id: \.self) { index in
                 HStack {
                   Text(String(format: "%02d", index + 1))
-                  Text("\(song[index])")
+                  Text("\(songList[index].0)")
                 }
               }
             }
@@ -90,12 +90,12 @@ extension UIView {
 }
 
 public extension View {
-  func shareSetlistToImage(_ song: [String], _ artist: String) -> UIImage {
-    let songCount = song.count // 15 ,45, 50
+  func shareSetlistToImage(_ songList: [(String, String?)], _ artist: String) -> UIImage {
+    let songCount = songList.count // 15 ,45, 50
     let firstSectionSongs = songCount / 25 // 0, 1, 2
     let secondSectionSongs = songCount % 25 // 15, 20, 0
     let sectionCount = firstSectionSongs + (firstSectionSongs < 2 ? 1 : 0 ) // 1, 1, 2
-    let captureView = ShareSetlistView(song: song,
+    let captureView = ShareSetlistView(songList: songList,
                                        artist: artist,
                                        songCount: songCount)
     return captureView.setlistImage()

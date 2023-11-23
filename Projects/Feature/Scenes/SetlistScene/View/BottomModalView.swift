@@ -40,11 +40,11 @@ struct BottomModalView: View {
           if exportViewModel.checkMusicKitPermission() {
             showMusicSettingsAlert = true
           } else {
-          CheckAppleMusicSubscription.shared.appleMusicSubscription()
+            CheckAppleMusicSubscription.shared.appleMusicSubscription()
             exportViewModel.showAppleMusicAlert.toggle()
             vm.showModal = false
             exportViewModel.playlistTitle = ""
-        }
+          }
         }
         // 애플뮤직 권한 허용 거부 상태인 경우
         .alert(isPresented: $showMusicSettingsAlert) {
@@ -59,16 +59,17 @@ struct BottomModalView: View {
         Spacer()
           .frame(width: 14)
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
-//TODO: 유튜브 뮤직 기능 연결
-//          exportViewModel.showAppleMusicAlert.toggle()
-//          exportViewModel.playlistTitle = ""
+          //TODO: 유튜브 뮤직 기능 연결
+          //          exportViewModel.showAppleMusicAlert.toggle()
+          //          exportViewModel.playlistTitle = ""
         }
         //MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
-//        Spacer()
-//        platformButtonView(title: "Spotify", image: "spotify") {
-//
-//        }
+        //        Spacer()
+        //        platformButtonView(title: "Spotify", image: "spotify") {
+        //
+        //        }
       }
+      
       Spacer()
       listRowView(
         title: "플레이리스트용 캡쳐하기",
@@ -77,11 +78,11 @@ struct BottomModalView: View {
           if exportViewModel.checkPhotoPermission() {
             showLibrarySettingsAlert = true
           } else {
-            takeSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+            takeSetlistToImage(vm.setlistSongKoreanName)
             vm.showModal.toggle()
             showToastMessageCapture = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            showToastMessageCapture = false
+              showToastMessageCapture = false
             }
           }
         }
@@ -145,7 +146,7 @@ struct BottomModalView: View {
   
   private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
     Button {
-        action()
+      action()
     } label: {
       VStack(spacing: 0) {
         ZStack {
@@ -158,7 +159,7 @@ struct BottomModalView: View {
             .resizable()
             .scaledToFit()
             .frame(width: UIWidth * 0.1)
-           
+          
         }
         .padding(.bottom, 11)
         
