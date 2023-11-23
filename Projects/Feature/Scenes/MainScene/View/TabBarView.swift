@@ -11,13 +11,13 @@ import UI
 
 public struct TabBarView: View {
   @State private var selectedTab: Tab = .home
-
+  @Environment(\.dismiss) var dismiss
   public init() {
     UITabBar.appearance().backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
   }
-
+  
   public var body: some View {
-    TabView(selection: $selectedTab) {
+    TabView(selection: $selectedTab.onUpdate{ myFunction(item: selectedTab) }) {
       NavigationStack {
         MainView(selectedTab: $selectedTab)
           .navigationBarTitleDisplayMode(.inline)
@@ -43,7 +43,7 @@ public struct TabBarView: View {
         Label("보관함", systemImage: "heart.fill")
       }
       .tag(Tab.archiving)
-
+      
       NavigationStack {
         SettingView()
           .navigationBarTitleDisplayMode(.large)
@@ -54,6 +54,20 @@ public struct TabBarView: View {
       }
       .tag(Tab.setting)
     }
+  }
+  func myFunction(item: Tab) {
+
+  }
+}
+
+extension Binding {
+  func onUpdate(_ closure: @escaping () -> Void) -> Binding<Value> {
+    Binding(get: {
+      wrappedValue
+    }, set: { newValue in
+      wrappedValue = newValue
+      closure()
+    })
   }
 }
 

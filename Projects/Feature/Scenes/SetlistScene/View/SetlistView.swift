@@ -86,6 +86,7 @@ struct SetlistView: View {
                  exportViewModel: exportViewModel
     )
     .toolbar(.hidden, for: .tabBar)
+    .navigationBarTitleDisplayMode(.inline)
     .background(Color.backgroundWhite)
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
