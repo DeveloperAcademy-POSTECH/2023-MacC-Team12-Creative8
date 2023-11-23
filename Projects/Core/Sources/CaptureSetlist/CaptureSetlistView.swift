@@ -18,6 +18,7 @@ public struct CaptureSetlistView: View {
       Color.white.ignoresSafeArea()
       Image(systemName: "\(index).circle")
         .font(.system(size: 200))
+        .foregroundStyle(Color.gray)
         .opacity(0.15)
 
         VStack(alignment: .leading) {
