@@ -20,14 +20,21 @@ final class SearchViewModel: ObservableObject {
   @Published var artistList: [MusicBrainzArtist] = []
   @Published var isLoading: Bool = false
   @Published var allArtist: [OnboardingModel] = []
-
   private var cancellables = Set<AnyCancellable>()
 
   init() {
-    fetchData()
     let searchTextPublisher = $searchText
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
       .removeDuplicates()
+    searchTextPublisher
+      .sink { [weak self] _ in
+        self?.getSearchArtistList()
+      }
+      .store(in: &cancellables)
+
+    if allArtist.isEmpty { 
+      fetchData()
+    }
   }
 
   func fetchData() {
@@ -55,17 +62,21 @@ final class SearchViewModel: ObservableObject {
   }
 
   func getRandomKpopArtists() -> [OnboardingModel] {
+    if searchIsPresented == false {
       let kpopArtists = allArtist.filter { artist in
-          if let tags = artist.tags, artist.country == "South Korea" {
-              return tags.contains("K-Pop")
-          }
-          return false
+        if let tags = artist.tags, artist.country == "South Korea" {
+          return tags.contains("K-Pop")
+        }
+        return false
       }
 
       return Array(kpopArtists.shuffled().prefix(9))
+    }
+    return []
   }
 
   func getRandomPopArtists() -> [OnboardingModel] {
+    if searchIsPresented == false {
     let kpopArtists = allArtist.filter { artist in
       if let tags = artist.tags {
         return tags.contains("Pop")
@@ -74,6 +85,35 @@ final class SearchViewModel: ObservableObject {
     }
 
     return Array(kpopArtists.shuffled().prefix(9))
+    }
+    return []
+  }
+
+  func getSearchArtistList() {
+    self.isLoading = true
+
+    // Fetch artist list and update isLoading and artistList when completed
+    Future<[MusicBrainzArtist], Error> { promise in
+      self.dataService.searchArtistsFromMusicBrainz(artistName: self.searchText) { result in
+        if let result = result {
+          promise(.success(result.artists ?? []))
+        } else {
+          promise(.failure(NSError(domain: "YourDomain", code: 1, userInfo: nil)))
+        }
+      }
+    }
+    .receive(on: DispatchQueue.main)
+    .sink { completion in
+      switch completion {
+      case .finished:
+        self.isLoading = false
+      case .failure(let error):
+        print("Failed to fetch musicbrainz data: \(error)")
+      }
+    } receiveValue: { artists in
+      self.artistList = artists
+    }
+    .store(in: &cancellables)
   }
 }
 

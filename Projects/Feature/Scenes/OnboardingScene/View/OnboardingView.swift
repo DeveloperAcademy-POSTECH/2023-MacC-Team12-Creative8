@@ -137,9 +137,7 @@ public struct OnboardingView: View {
           for item in onboardingViewModel.selectedArtist {
             dataManager.addLikeArtist(name: item.name, country: item.country, alias: item.alias, mbid: item.mbid, gid: item.gid, imageUrl: item.url, songList: [])
           }
-          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             isOnboarding = false
-          }
         }
       }, label: {
         RoundedRectangle(cornerRadius: 14)
