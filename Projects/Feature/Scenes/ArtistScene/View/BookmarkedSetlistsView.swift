@@ -21,6 +21,7 @@ struct BookmarkedSetlistsView: View {
   var body: some View {
     VStack {
       titleLayer
+        .padding()
       
       if vm.showBookmarkedSetlists {
         VStack {
@@ -40,6 +41,7 @@ struct BookmarkedSetlistsView: View {
         )
         .padding(.horizontal)
       }
+      
     }
     .onAppear {
       getBookmarkedSetlists()
@@ -72,7 +74,8 @@ struct BookmarkedSetlistsView: View {
       }
       .foregroundStyle(Color.mainBlack)
     }
-    .padding(EdgeInsets(top: 20, leading: 24, bottom: 24, trailing: 24))
+    .padding(.leading, 10)
+    .padding(.trailing, 20)
   }
   
   private var emptyLayer: some View {
@@ -129,7 +132,7 @@ struct BookmarkedSetlistsView: View {
           } label: {
             Text("세트리스트 보기")
           }
-          
+
           Button {
             vm.swiftDataManager.deleteArchivedConcertInfo(concert)
             for (index, item) in bookmarkedSetlists.enumerated() {
@@ -140,7 +143,7 @@ struct BookmarkedSetlistsView: View {
           } label: {
             Text("공연 북마크 취소")
           }
-          
+
         } label: {
           Image(systemName: "ellipsis")
             .foregroundStyle(Color.mainBlack)
@@ -154,6 +157,7 @@ struct BookmarkedSetlistsView: View {
         .padding(.horizontal)
         .foregroundColor(Color.lineGrey1)
     }
+    
   }
   
   private var navigationLayer: some View {
@@ -177,6 +181,7 @@ struct BookmarkedSetlistsView: View {
       .padding(.horizontal, 10)
     }
   }
+  
 }
 
 #Preview {

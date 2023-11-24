@@ -19,17 +19,16 @@ struct ArchiveConcertInfoCell: View {
 
 	var body: some View {
 		HStack {
+      Spacer()
+			VStack {
+        Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25).tracking(0.5)
+				Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
+			}
+			.font(.headline)
+      Spacer()
       NavigationLink {
         SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
       } label: {
-        VStack {
-          Text(DateFormatter.yearFormatter().string(from: info.setlist.date)).foregroundStyle(Color.fontGrey25).tracking(0.5)
-          Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
-        }
-        .font(.headline)
-        
-        Spacer()
-        
         VStack(alignment: .leading) {
           Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.mainBlack)
           Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
@@ -49,10 +48,9 @@ struct ArchiveConcertInfoCell: View {
 				Image(systemName: "ellipsis")
           .font(.title3)
 					.foregroundStyle(Color.mainBlack)
-          .padding(.trailing, 14)
 			}
+      Spacer()
 		}
-    .padding(.horizontal, 24)
 		.onAppear { dataManager.modelContext = modelContext }
 	}
 }
