@@ -14,12 +14,12 @@ final class SearchViewModel: ObservableObject {
   let dataService = SetlistDataService()
   let artistDataManager = ArtistDataManager()
   let koreanConverter = KoreanConverter()
+  let artistFetchService = ArtistFetchService()
 
   @Published var searchText: String = ""
   @Published var searchIsPresented: Bool = false
   @Published var artistList: [MusicBrainzArtist] = []
   @Published var isLoading: Bool = false
-  @Published var allArtist: [OnboardingModel] = []
   private var cancellables = Set<AnyCancellable>()
 
   init() {
@@ -32,67 +32,31 @@ final class SearchViewModel: ObservableObject {
       }
       .store(in: &cancellables)
 
-    if allArtist.isEmpty { 
-      fetchData()
+    if artistFetchService.allArtist.isEmpty {
+      artistFetchService.fetchData()
     }
   }
 
-  func fetchData() {
-    let serverUrl = "https://port-0-seta-server-bkcl2bloxy1ug8.sel5.cloudtype.app/api/getArtists"
-    guard let url = URL(string: serverUrl) else { return }
-
-    URLSession.shared.dataTask(with: url) { data, _, error in
-      guard let data = data, error == nil else {
-        print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-        return
-      }
-
-      do {
-        let decoder = JSONDecoder()
-        let artists = try decoder.decode([OnboardingModel].self, from: data)
-
-        DispatchQueue.main.async {
-          self.allArtist = artists
-        }
-      } catch {
-        print("Error decoding data: \(error.localizedDescription)")
-        print("Decoding error details: \(error)")
-      }
-    }.resume()
+  enum ArtistKind {
+    case kpop
+    case pop
   }
 
-  func getRandomKpopArtists() -> [OnboardingModel] {
+  func getRandomArtists(_ kind: ArtistKind) -> [OnboardingModel] {
     if searchIsPresented == false {
-      let kpopArtists = allArtist.filter { artist in
-        if let tags = artist.tags, artist.country == "South Korea" {
-          return tags.contains("K-Pop")
+      let kpopArtists = artistFetchService.allArtist.filter { artist in
+        if let tags = artist.tags, artist.country == (kind == .kpop ? "South Korea" : "") {
+          return tags.contains(kind == .kpop ? "K-Pop" : "Pop")
         }
         return false
       }
-
       return Array(kpopArtists.shuffled().prefix(9))
-    }
-    return []
-  }
-
-  func getRandomPopArtists() -> [OnboardingModel] {
-    if searchIsPresented == false {
-    let kpopArtists = allArtist.filter { artist in
-      if let tags = artist.tags {
-        return tags.contains("Pop")
-      }
-      return false
-    }
-
-    return Array(kpopArtists.shuffled().prefix(9))
     }
     return []
   }
 
   func getSearchArtistList() {
     self.isLoading = true
-
-    // Fetch artist list and update isLoading and artistList when completed
     Future<[MusicBrainzArtist], Error> { promise in
       self.dataService.searchArtistsFromMusicBrainz(artistName: self.searchText) { result in
         if let result = result {
@@ -115,9 +79,4 @@ final class SearchViewModel: ObservableObject {
     }
     .store(in: &cancellables)
   }
-}
-
-enum ScrollID: String {
-  case top
-  case searchBar
 }

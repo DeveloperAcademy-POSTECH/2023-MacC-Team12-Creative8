@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F1995BE8972BD993B58 /* SearchHistoryModel.swift */; };
+		0B9B91B32B11B5D200182203 /* ArtistFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B91B22B11B5D200182203 /* ArtistFetchService.swift */; };
 		14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */; };
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B9B91B22B11B5D200182203 /* ArtistFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistFetchService.swift; sourceTree = "<group>"; };
 		109A8C5BADA31C5966791E4F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		143BA5525B0777162DED185D /* SaveSetlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSetlist.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
+				0B9B91B22B11B5D200182203 /* ArtistFetchService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -316,8 +319,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -401,6 +402,7 @@
 				8FA0920398EC647EC4B21451 /* OnboardingModel.swift in Sources */,
 				03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */,
 				F6FB06B6DA0BE1FE264F7B7E /* SearchModel.swift in Sources */,
+				0B9B91B32B11B5D200182203 /* ArtistFetchService.swift in Sources */,
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,

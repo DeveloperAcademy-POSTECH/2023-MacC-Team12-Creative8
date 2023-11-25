@@ -11,8 +11,8 @@ import Core
 import UI
 
 public struct OnboardingView: View {
-  
   @ObservedObject var onboardingViewModel = OnboardingViewModel()
+  @ObservedObject var artistFetchService = ArtistFetchService()
   @ObservedObject var artistViewModel = ArtistViewModel()
   @Environment(\.modelContext) var modelContext
   @ObservedObject var dataManager = SwiftDataManager()
@@ -54,6 +54,7 @@ public struct OnboardingView: View {
     }
     .onAppear {
       dataManager.modelContext = modelContext
+      artistFetchService.fetchData()
     }
   }
   
@@ -96,7 +97,7 @@ public struct OnboardingView: View {
   
   private var artistNameButton: some View {
     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-      ForEach(onboardingViewModel.allArtist.filter { artist in
+      ForEach(artistFetchService.allArtist.filter { artist in
         if onboardingViewModel.selectedGenere == .all { return true }
           if let tags = artist.tags, tags.contains(onboardingViewModel.findFilterTagName(onboardingViewModel.selectedGenere)) {
             return true

@@ -12,7 +12,7 @@ import CoreXLSX
 import Core
 
 public final class OnboardingViewModel: ObservableObject {
-  @Published var allArtist: [OnboardingModel] = []
+//  @Published var artistFetchService = ArtistFetchService()
   @Published var selectedArtist: [OnboardingModel] = []
   @Published var selectedGenere: OnboardingFilterType = .all
   @Published var isShowToastBar = false
@@ -20,31 +20,6 @@ public final class OnboardingViewModel: ObservableObject {
   @AppStorage("isOnboarding") var isOnboarding: Bool?
 
   init() {
-    fetchData()
-  }
-
-  func fetchData() {
-    let serverUrl = "https://port-0-seta-server-bkcl2bloxy1ug8.sel5.cloudtype.app/api/getArtists"
-    guard let url = URL(string: serverUrl) else { return }
-
-    URLSession.shared.dataTask(with: url) { data, _, error in
-      guard let data = data, error == nil else {
-        print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-        return
-      }
-
-      do {
-        let decoder = JSONDecoder()
-        let artists = try decoder.decode([OnboardingModel].self, from: data)
-
-        DispatchQueue.main.async {
-          self.allArtist = artists
-        }
-      } catch {
-        print("Error decoding data: \(error.localizedDescription)")
-        print("Decoding error details: \(error)")
-      }
-    }.resume()
   }
 
   func findFilterTagName(_ tag: OnboardingFilterType) -> String {
