@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 public struct CaptureSetlistView: View {
   let songList: [(String, String?)]
@@ -22,10 +23,16 @@ public struct CaptureSetlistView: View {
         .opacity(0.15)
 
         VStack(alignment: .leading) {
-          Text("Seta")
-            .font(.system(size: 34))
-            .opacity(0.3)
-            .padding(.horizontal, 30)
+          HStack {
+            Text("Seta")
+              .font(.system(size: 34))
+              .opacity(0.3)
+              .padding(.horizontal, 30)
+            Spacer()
+            logo
+              .opacity(0.3)
+              .padding(.trailing, 24)
+          }
           Rectangle()
             .foregroundStyle(.black)
             .frame(height: 1)
@@ -46,6 +53,19 @@ public struct CaptureSetlistView: View {
 
     }
   }
+  public var logo: some View {
+       HStack(spacing: 0) {
+         Rectangle()
+           .frame(width: 19, height: 20)
+           .cornerRadius(50, corners: .bottomRight)
+           .cornerRadius(50, corners: .bottomLeft)
+         Rectangle()
+           .frame(width: 18, height: 20)
+           .cornerRadius(50, corners: .topRight)
+           .cornerRadius(50, corners: .topLeft)
+       }
+       .foregroundColor(Color.mainBlack)
+     }
 }
 
 extension CaptureSetlistView {
@@ -91,5 +111,20 @@ public extension View {
                                            index: forI+1)
       captureView.screenShot()
     }
+  }
+}
+
+extension View {
+   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+     clipShape( RoundedCorner(radius: radius, corners: corners) )
+   }
+ }
+struct RoundedCorner: Shape {
+  var radius: CGFloat = .infinity
+  var corners: UIRectCorner = .allCorners
+
+  func path(in rect: CGRect) -> Path {
+    let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+    return Path(path.cgPath)
   }
 }

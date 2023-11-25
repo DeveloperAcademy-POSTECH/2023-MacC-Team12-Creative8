@@ -68,8 +68,7 @@ public struct OnboardingView: View {
         .font(.system(.headline))
         .foregroundStyle(Color.mainBlack)
       Spacer().frame(height: 16)
-      Text("찜한 아티스트 중 최대 5명까지 메인화면에 나옵니다.\n메인 화면에 없는 아티스트는 보관함에서 확인해주세요.")
-        .font(.system(.footnote))
+      Text("관심 있는 아티스트의 세트리스트 정보를\n메인 화면에서 바로 확인할 수 있어요")        .font(.system(.footnote))
         .foregroundStyle(Color.fontGrey2)
         .opacity(0.8)
       Spacer().frame(height: 48)
@@ -101,7 +100,6 @@ public struct OnboardingView: View {
   private var artistListView: some View {
     Group {
       if onboardingViewModel.artistFetchError {
-        Text("서버가 터졌어용")
       } else {
         artistNameButton
       }
@@ -121,7 +119,11 @@ public struct OnboardingView: View {
           if let index = onboardingViewModel.selectedArtist.firstIndex(of: item) {
               onboardingViewModel.selectedArtist.remove(at: index)
           } else {
-            onboardingViewModel.selectedArtist.insert(item, at: 0)
+            if onboardingViewModel.selectedArtist.count < 5 {
+              onboardingViewModel.selectedArtist.insert(item, at: 0)
+            } else {
+              onboardingViewModel.isShowToastBar.toggle()
+            }
           }
         } label: {
           Rectangle()
@@ -129,10 +131,11 @@ public struct OnboardingView: View {
             .foregroundStyle(.clear)
             .overlay {
               Text(item.name)
-                .frame(width: 100, height: 48)
-                .font(.system(.largeTitle, weight: .semibold))
+                .multilineTextAlignment(.center)
+                .frame(width: 110, height: 48)          .font(.system(.largeTitle, weight: .semibold))
                 .foregroundColor(onboardingViewModel.selectedArtist.contains(item) ? .mainBlack : .fontGrey3)
-                .minimumScaleFactor(0.01)
+                .minimumScaleFactor(0.1)
+                .padding(10)
             }
         }
         .buttonStyle(BasicButtonStyle())
@@ -144,7 +147,8 @@ public struct OnboardingView: View {
   private var bottomButton: some View {
     ZStack {
       Button(action: {
-        if onboardingViewModel.selectedArtist.count < 3 {
+        let artists = onboardingViewModel.selectedArtist.count
+        if artists < 1 {
           onboardingViewModel.isShowToastBar.toggle()
         } else {
           for item in onboardingViewModel.selectedArtist {
@@ -155,10 +159,10 @@ public struct OnboardingView: View {
       }, label: {
         RoundedRectangle(cornerRadius: 14)
           .frame(width: 328, height: 54)
-          .foregroundColor(onboardingViewModel.selectedArtist.count < 3 ? .mainGrey1 : .mainBlack)
+          .foregroundColor(onboardingViewModel.selectedArtist.count < 1 ? .mainGrey1 : .mainBlack)
           .overlay {
-            Text(onboardingViewModel.selectedArtist.count == 0 ? "최소 3명 이상 선택" : "\(onboardingViewModel.selectedArtist.count)명 선택")
-              .foregroundStyle(onboardingViewModel.selectedArtist.count < 3 ? Color.mainBlack : Color.settingTextBoxWhite)
+            Text(onboardingViewModel.selectedArtist.count == 0 ? "5명까지 선택할 수 있습니다" : "\(onboardingViewModel.selectedArtist.count)명 선택")
+              .foregroundStyle(onboardingViewModel.selectedArtist.count < 1 ? Color.mainBlack : Color.settingTextBoxWhite)
               .font(.callout)
               .fontWeight(.bold)
           }
@@ -172,8 +176,7 @@ public struct OnboardingView: View {
       .frame(width: 328, height: 44)
       .foregroundColor(.toastBurn)
       .overlay {
-        Text("아직 아티스트 3명이 선택되지 않았어요.")
-          .foregroundStyle(Color.settingTextBoxWhite)
+        Text("아티스트는 5명까지 선택할 수 있어요")         .foregroundStyle(Color.settingTextBoxWhite)
           .font(.subheadline)
           .fontWeight(.bold)
       }

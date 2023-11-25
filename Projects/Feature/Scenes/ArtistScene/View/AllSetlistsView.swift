@@ -39,8 +39,6 @@ struct AllSetlistsView: View {
         SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
-          Spacer()
-          
           // MARK: Date
           VStack {
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
@@ -80,13 +78,12 @@ struct AllSetlistsView: View {
           Image(systemName: "arrow.right")
             .font(.title3)
             .foregroundStyle(Color.mainBlack)
-          
-          Spacer()
         }
+        .padding(.horizontal, 24)
       }
       
       Divider()
-        .padding(.horizontal)
+        .padding(.horizontal, 24)
         .foregroundColor(Color.lineGrey1)
     }
   }

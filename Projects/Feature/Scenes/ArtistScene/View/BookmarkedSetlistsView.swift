@@ -21,8 +21,6 @@ struct BookmarkedSetlistsView: View {
   var body: some View {
     VStack {
       titleLayer
-        .padding()
-      
       if vm.showBookmarkedSetlists {
         VStack {
           if bookmarkedSetlists.isEmpty {
@@ -74,8 +72,7 @@ struct BookmarkedSetlistsView: View {
       }
       .foregroundStyle(Color.mainBlack)
     }
-    .padding(.leading, 10)
-    .padding(.trailing, 20)
+    .padding(EdgeInsets(top: 20, leading: 24, bottom: 24, trailing: 24))
   }
   
   private var emptyLayer: some View {
