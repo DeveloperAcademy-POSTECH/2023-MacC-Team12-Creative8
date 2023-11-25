@@ -70,7 +70,6 @@ public struct OnboardingView: View {
       Spacer().frame(height: 16)
       Text("관심 있는 아티스트의 세트리스트 정보를\n메인 화면에서 바로 확인할 수 있어요")        .font(.system(.footnote))
         .foregroundStyle(Color.fontGrey2)
-        .opacity(0.8)
       Spacer().frame(height: 48)
     }
     .padding(.leading, 24)

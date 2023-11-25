@@ -19,23 +19,16 @@ struct ArchivingView: View {
 
   var body: some View {
     VStack {
-           VStack(alignment: .leading) {
-             Text("보관함")
-               .font(.title2)
-               .fontWeight(.semibold)
-               .foregroundStyle(Color.mainBlack)
-               .padding(.top, 23)
-
-             segmentedButtonsView
-           }
-           .padding(.horizontal, 24)
-           .padding(.vertical)
+      segmentedButtonsView
+        .padding(.horizontal, 24)
+        .padding(.vertical)
       if viewModel.selectSegment == .bookmark {
         bookmarkView
       } else {
         artistView
       }
     }
+    .navigationTitle("보관함")
   }
 }
 
