@@ -33,7 +33,11 @@ final class SearchViewModel: ObservableObject {
       .store(in: &cancellables)
 
     if artistFetchService.allArtist.isEmpty {
-      artistFetchService.fetchData()
+      artistFetchService.fetchData { success in
+          if !success {
+            // 데이터 가져오기 실패시
+          }
+      }
     }
   }
 

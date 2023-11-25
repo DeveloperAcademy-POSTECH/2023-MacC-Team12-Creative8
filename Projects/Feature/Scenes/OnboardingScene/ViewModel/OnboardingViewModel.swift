@@ -12,10 +12,10 @@ import CoreXLSX
 import Core
 
 public final class OnboardingViewModel: ObservableObject {
-//  @Published var artistFetchService = ArtistFetchService()
   @Published var selectedArtist: [OnboardingModel] = []
   @Published var selectedGenere: OnboardingFilterType = .all
   @Published var isShowToastBar = false
+  @Published var artistFetchError = false
   @ObservedObject var dataManager = SwiftDataManager()
   @AppStorage("isOnboarding") var isOnboarding: Bool?
 

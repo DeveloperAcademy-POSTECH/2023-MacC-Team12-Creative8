@@ -16,7 +16,6 @@ public struct OnboardingView: View {
   @ObservedObject var artistViewModel = ArtistViewModel()
   @Environment(\.modelContext) var modelContext
   @ObservedObject var dataManager = SwiftDataManager()
-  @State private var isButtonEnabled = true
   
   private let artistDataManager = ArtistDataManager()
   private let dataService = SetlistDataService()
@@ -54,7 +53,11 @@ public struct OnboardingView: View {
     }
     .onAppear {
       dataManager.modelContext = modelContext
-      artistFetchService.fetchData()
+      artistFetchService.fetchData { success in
+          if !success {
+            onboardingViewModel.artistFetchError.toggle()
+          }
+      }
     }
   }
   
@@ -94,7 +97,17 @@ public struct OnboardingView: View {
       .padding(.bottom, 30)
     }
   }
-  
+
+  private var artistListView: some View {
+    Group {
+      if onboardingViewModel.artistFetchError {
+        Text("서버가 터졌어용")
+      } else {
+        artistNameButton
+      }
+    }
+  }
+
   private var artistNameButton: some View {
     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
       ForEach(artistFetchService.allArtist.filter { artist in
@@ -134,7 +147,6 @@ public struct OnboardingView: View {
         if onboardingViewModel.selectedArtist.count < 3 {
           onboardingViewModel.isShowToastBar.toggle()
         } else {
-          isButtonEnabled = false
           for item in onboardingViewModel.selectedArtist {
             dataManager.addLikeArtist(name: item.name, country: item.country, alias: item.alias, mbid: item.mbid, gid: item.gid, imageUrl: item.url, songList: [])
           }
@@ -152,7 +164,6 @@ public struct OnboardingView: View {
           }
       })
       .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
-      .disabled(!isButtonEnabled)
     }
   }
   

@@ -9,31 +9,36 @@
 import Foundation
 
 public final class ArtistFetchService: ObservableObject {
-  public init() { }
+    public init() { }
 
-  @Published public var allArtist: [OnboardingModel] = []
+    @Published public var allArtist: [OnboardingModel] = []
 
-  public func fetchData() {
-    let serverUrl = "https://seta-yb6k.onrender.com/api/getArtists"
-    guard let url = URL(string: serverUrl) else { return }
-
-    URLSession.shared.dataTask(with: url) { data, _, error in
-      guard let data = data, error == nil else {
-        print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-        return
-      }
-
-      do {
-        let decoder = JSONDecoder()
-        let artists = try decoder.decode([OnboardingModel].self, from: data)
-
-        DispatchQueue.main.async {
-          self.allArtist = artists
+    public func fetchData(completion: @escaping (Bool) -> Void) {
+        let serverUrl = "https://seta-yb6k.onrender.com/api/getArtists"
+        guard let url = URL(string: serverUrl) else {
+            completion(false)
+            return
         }
-      } catch {
-        print("Error decoding data: \(error.localizedDescription)")
-        print("Decoding error details: \(error)")
-      }
-    }.resume()
-  }
+
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+                completion(false)
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let artists = try decoder.decode([OnboardingModel].self, from: data)
+
+                DispatchQueue.main.async {
+                    self.allArtist = artists
+                    completion(true)
+                }
+            } catch {
+                print("Error decoding data: \(error.localizedDescription)")
+                print("Decoding error details: \(error)")
+                completion(false)
+            }
+        }.resume()
+    }
 }
