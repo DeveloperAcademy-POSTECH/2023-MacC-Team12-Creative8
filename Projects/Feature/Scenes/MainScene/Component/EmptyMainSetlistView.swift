@@ -12,9 +12,18 @@ import SwiftData
 import Core
 import UI
 
-// TODO: 세트리스트 버튼 추후 수정하기
+// TODO: 추후 수정하기
 
 struct EmptyMainSetlistView: View {
+  private var attributedString: AttributedString {
+      let string = "Attributed String"
+      var attributedString = AttributedString(string)
+      attributedString.foregroundColor = .blue
+      attributedString.font = .boldSystemFont(ofSize: 40)
+      attributedString.underlineStyle = .single
+      return attributedString
+  }
+  
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Spacer()
@@ -46,7 +55,7 @@ struct EmptyMainSetlistView: View {
           .foregroundStyle(Color.mainGrey1)
           .frame(height: UIHeight * 0.06)
           .overlay {
-            Text("Setlist.fm 바로가기")
+            Text("세트리스트 추가하기")
               .foregroundStyle(Color.mainBlack)
               .bold()
           }
@@ -56,6 +65,7 @@ struct EmptyMainSetlistView: View {
     }
     .frame(width: UIWidth * 0.78)
   }
+  
 }
 
 #Preview {

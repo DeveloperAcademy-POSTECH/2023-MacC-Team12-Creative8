@@ -80,7 +80,7 @@ extension ArchivingView {
           Button {
             viewModel.selectArtist = ""
           } label: {
-            ArtistSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
+            AllArtistsSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
           }
           ForEach(viewModel.artistSet.sorted(), id: \.self) { artist in
             Button {

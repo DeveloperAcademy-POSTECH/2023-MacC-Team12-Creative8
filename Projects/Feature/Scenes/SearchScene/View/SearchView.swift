@@ -86,11 +86,13 @@ struct SearchView: View {
                 .bold()
                 .foregroundStyle(Color.mainBlack)
               Spacer()
-              Button("모두 지우기") {
+              Button {
                 dataManager.deleteSearchHistoryAll()
+              } label: {
+                Text("모두 지우기")
+                  .foregroundStyle(Color.mainOrange)
+                  .bold()
               }
-              .foregroundStyle(Color.mainOrange)
-              .bold()
             }
             ForEach(history, id: \.self) { item in
               SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)

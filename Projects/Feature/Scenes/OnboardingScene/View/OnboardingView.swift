@@ -68,8 +68,12 @@ public struct OnboardingView: View {
         .font(.system(.headline))
         .foregroundStyle(Color.mainBlack)
       Spacer().frame(height: 16)
-      Text("관심 있는 아티스트의 세트리스트 정보를\n메인 화면에서 바로 확인할 수 있어요")        .font(.system(.footnote))
-        .foregroundStyle(Color.fontGrey2)
+      Group {
+        Text("관심 있는 아티스트의 세트리스트 정보를")
+        Text("메인 화면에서 바로 확인할 수 있어요")
+      }
+      .font(.system(.footnote))
+      .foregroundStyle(Color.fontGrey2)
       Spacer().frame(height: 48)
     }
     .padding(.leading, 24)
@@ -160,7 +164,10 @@ public struct OnboardingView: View {
           .frame(width: 328, height: 54)
           .foregroundColor(onboardingViewModel.selectedArtist.count < 1 ? .mainGrey1 : .mainBlack)
           .overlay {
-            Text(onboardingViewModel.selectedArtist.count == 0 ? "5명까지 선택할 수 있습니다" : "\(onboardingViewModel.selectedArtist.count)명 선택")
+            Group {
+              onboardingViewModel.selectedArtist.count == 0 ? Text("5명까지 선택할 수 있습니다") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
+
+            }
               .foregroundStyle(onboardingViewModel.selectedArtist.count < 1 ? Color.mainBlack : Color.settingTextBoxWhite)
               .font(.callout)
               .fontWeight(.bold)
@@ -175,7 +182,10 @@ public struct OnboardingView: View {
       .frame(width: 328, height: 44)
       .foregroundColor(.toastBurn)
       .overlay {
-        Text("아티스트는 5명까지 선택할 수 있어요")         .foregroundStyle(Color.settingTextBoxWhite)
+        Group {
+          onboardingViewModel.selectedArtist.count > 0 ? Text("아티스트 5명이 이미 선택되었어요") : Text("아티스트를 최대 5명까지 선택해주세요")
+        }
+        .foregroundStyle(Color.settingTextBoxWhite)
           .font(.subheadline)
           .fontWeight(.bold)
       }
