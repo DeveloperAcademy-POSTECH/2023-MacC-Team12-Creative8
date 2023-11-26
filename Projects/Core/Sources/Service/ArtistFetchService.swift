@@ -14,7 +14,7 @@ public final class ArtistFetchService: ObservableObject {
     @Published public var allArtist: [OnboardingModel] = []
 
     public func fetchData(completion: @escaping (Bool) -> Void) {
-        let serverUrl = "https://seta-yb6k.onrender.com/api/getArtists"
+        let serverUrl = "https://port-0-seta-server-bkcl2bloxy1ug8.sel5.cloudtype.app/api/getArtists"
         guard let url = URL(string: serverUrl) else {
             completion(false)
             return
