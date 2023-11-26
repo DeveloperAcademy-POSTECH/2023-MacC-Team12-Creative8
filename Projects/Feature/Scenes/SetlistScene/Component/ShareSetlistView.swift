@@ -70,7 +70,7 @@ struct ShareSetlistView: View {
                     Text("\(songList[index].0)")
                 }
               }
-            }         
+            }
           }
         }
         .padding(.horizontal)
