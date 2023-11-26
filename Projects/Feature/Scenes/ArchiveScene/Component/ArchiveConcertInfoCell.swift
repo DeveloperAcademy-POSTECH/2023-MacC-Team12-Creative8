@@ -19,6 +19,7 @@ struct ArchiveConcertInfoCell: View {
 
 	var body: some View {
 		HStack {
+
       NavigationLink {
         SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
       } label: {
@@ -27,9 +28,7 @@ struct ArchiveConcertInfoCell: View {
           Text(DateFormatter.dateMonthFormatter().string(from: info.setlist.date)).foregroundStyle(Color.mainBlack)
         }
         .font(.headline)
-        
         Spacer()
-        
         VStack(alignment: .leading) {
           Text(info.artistInfo.name).font(.subheadline).foregroundStyle(Color.mainBlack)
           Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
