@@ -31,8 +31,8 @@ struct ArtistsContentView: View {
           }
           .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
             content
-                     .opacity(phase.isIdentity ? 1 : 0)
-                     .blur(radius: phase.isIdentity ? 0 : 0.5)
+              .opacity(phase.isIdentity ? 1 : 0)
+              .blur(radius: phase.isIdentity ? 0 : 0.5)
           }
         } else {
           ProgressView()
@@ -119,7 +119,8 @@ struct ArtistsContentView: View {
           }
         }
       }
-      }
+    }
+    .frame(minHeight: UIWidth * 0.6, alignment: .topLeading)
   }
 }
 
