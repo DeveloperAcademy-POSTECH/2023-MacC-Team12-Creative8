@@ -345,7 +345,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add it from the"
+            "value" : "Add it from the Setlist.fm"
           }
         },
         "ko" : {
@@ -1139,12 +1139,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add it from the"
+            "value" : "can add it directly at  "
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "에서 직접 추가할 수 있어요."
           }
         }
@@ -1297,6 +1297,12 @@
     },
     "찜한 가수의 세트리스트가 없다면," : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you don't have a set list of singers,You "
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",

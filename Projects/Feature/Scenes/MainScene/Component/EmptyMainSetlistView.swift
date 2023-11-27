@@ -15,15 +15,7 @@ import UI
 // TODO: 추후 수정하기
 
 struct EmptyMainSetlistView: View {
-  private var attributedString: AttributedString {
-      let string = "Attributed String"
-      var attributedString = AttributedString(string)
-      attributedString.foregroundColor = .blue
-      attributedString.font = .boldSystemFont(ofSize: 40)
-      attributedString.underlineStyle = .single
-      return attributedString
-  }
-  
+  @ObservedObject var viewModel = MainViewModel()
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Spacer()
@@ -38,18 +30,33 @@ struct EmptyMainSetlistView: View {
         .font(.footnote)
         .padding([.horizontal, .top])
       
-      HStack(spacing: 0) {
-        Link(destination: URL(string: "https://www.setlist.fm")!) {
-          Text("Setlist.fm")
-            .underline()
+      if viewModel.isKorean() {
+        HStack(spacing: 0) {
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm")
+              .underline()
+              .foregroundStyle(Color.fontGrey2)
+              .font(.footnote)
+          }
+          Text("에서 직접 추가할 수 있어요.")
             .foregroundStyle(Color.fontGrey2)
             .font(.footnote)
         }
-        Text("에서 직접 추가할 수 있어요.")
-          .foregroundStyle(Color.fontGrey2)
-          .font(.footnote)
+        .padding([.horizontal, .bottom])
+      } else {
+        HStack(spacing: 0) {
+          Text("에서 직접 추가할 수 있어요.")
+                      .foregroundStyle(Color.fontGrey2)
+                      .font(.footnote)
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm")
+              .underline()
+              .foregroundStyle(Color.fontGrey2)
+              .font(.footnote)
+          }
+        }
+        .padding([.horizontal, .bottom])
       }
-      .padding([.horizontal, .bottom])
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
