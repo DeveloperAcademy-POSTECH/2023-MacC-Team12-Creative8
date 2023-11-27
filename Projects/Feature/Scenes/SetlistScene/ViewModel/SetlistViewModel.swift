@@ -79,8 +79,8 @@ final class SetlistViewModel: ObservableObject {
       guard let convertedDate = dateFormatter.date(from: inputDate) else {
           return ""
       }
-
-      dateFormatter.dateFormat = (languageCode == "ko") ? "yyyy년 MM월 dd일" : "dd.MM.yyyy"
+      // TODO: 날짜 형식 어떻게 보여줄지? 정하기
+      dateFormatter.dateFormat = (languageCode == "ko") ? "yyyy년 MM월 dd일" : "MMMM dd, yyyy"
 
       // 변환된 날짜를 설정한 형식으로 문자열로 반환
       return dateFormatter.string(from: convertedDate)
