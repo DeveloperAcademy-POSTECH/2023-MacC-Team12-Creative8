@@ -99,7 +99,7 @@ final class MainViewModel: ObservableObject {
       return dateFormatter.string(from: convertedDate)
   }
   func isKorean() -> Bool {
-      guard let languageCode = Locale.current.languageCode else { return false }
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return false }
       return languageCode == "ko"
   }
 }
