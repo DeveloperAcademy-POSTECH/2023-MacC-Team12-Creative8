@@ -72,7 +72,7 @@ struct ArtistsContentView: View {
                   Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
                     .foregroundStyle(Color.fontGrey25)
                     .tracking(0.5)
-                  Text(viewModel.getFormattedDateAndMonth(date: item?.eventDate ?? "MMdd") ?? "MMdd")
+                  Text(viewModel.dayAndMonthDateFormatter(inputDate: item?.eventDate ?? "") ?? "")
                     .foregroundStyle(Color.mainBlack)
                 }
                 .font(.headline)
