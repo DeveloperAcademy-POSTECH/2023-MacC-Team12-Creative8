@@ -13,7 +13,6 @@
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
-		73056E2530DABF35F2564BFA /* ShareSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F59CF8F892498011915DD /* ShareSetlistView.swift */; };
 		882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */; };
 		8FA0920398EC647EC4B21451 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2623E283DF2E5382F8E9EA4 /* OnboardingModel.swift */; };
 		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
@@ -80,7 +79,6 @@
 		845DD837E5346A7627964873 /* SaveArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveArtistInfo.swift; sourceTree = "<group>"; };
 		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
-		AC5F59CF8F892498011915DD /* ShareSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSetlistView.swift; sourceTree = "<group>"; };
 		B2623E283DF2E5382F8E9EA4 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusArtistsModel.swift; sourceTree = "<group>"; };
 		C004E9629A66EFA763B287E6 /* AppleMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicService.swift; sourceTree = "<group>"; };
@@ -168,14 +166,6 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		5154623CED8194312546D10C /* ShareSetlist */ = {
-			isa = PBXGroup;
-			children = (
-				AC5F59CF8F892498011915DD /* ShareSetlistView.swift */,
-			);
-			path = ShareSetlist;
-			sourceTree = "<group>";
-		};
 		6102295BF8EA6BD3F00B6FE2 /* SwiftDataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +196,6 @@
 				C8659EB7168B672214DC0E51 /* CaptureSetlist */,
 				3CE205FFA0B9CE31813EAD2B /* Model */,
 				4B1834DCC43C3F56D1CEA944 /* Service */,
-				5154623CED8194312546D10C /* ShareSetlist */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -375,8 +364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Documents/Setlist/160/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -412,7 +400,6 @@
 				E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
 				B5AEB3196F16E3C52EC16288 /* SwiftDataManager.swift in Sources */,
-				73056E2530DABF35F2564BFA /* ShareSetlistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

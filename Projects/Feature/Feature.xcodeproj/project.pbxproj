@@ -17,6 +17,7 @@
 		351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF56B0153354883134B7D3 /* MenuButton.swift */; };
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
 		390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */; };
+		3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */; };
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
 		460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52FD2A86596385940F794 /* ListView.swift */; };
 		50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		0262BAC1BBABEA8ACE800B1F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSetlistView.swift; sourceTree = "<group>"; };
 		1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		203EB1D01BAE365D00E42F60 /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */,
 				B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */,
 				493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */,
+				114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */,
 				520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */,
 			);
 			path = Component;
@@ -565,8 +568,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Documents/Setlist/160/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -606,6 +608,7 @@
 				F84986A12ECC7DCACB4C7309 /* CustomTitleAlert.swift in Sources */,
 				390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */,
 				802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */,
+				3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */,
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,

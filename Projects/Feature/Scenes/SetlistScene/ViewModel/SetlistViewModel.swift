@@ -43,6 +43,7 @@ final class SetlistViewModel: ObservableObject {
     let outputDateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateFormat = format
+      formatter.locale = Locale(identifier: "en_US")
       return formatter
     }()
     
