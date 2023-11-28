@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "\n" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     " " : {
       "localizations" : {
         "ko" : {
@@ -109,7 +119,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%@의 최근 공연"
           }
         }
@@ -204,8 +214,24 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "App Store로 이동하기"
+          }
+        }
+      }
+    },
+    "Apple Music으로 내보내기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export to Apple Music"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Music으로 내보내기"
           }
         }
       }
@@ -247,16 +273,6 @@
         }
       }
     },
-    "English" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "English"
-          }
-        }
-      }
-    },
     "FAQ" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -281,6 +297,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요."
+          }
+        }
+      }
+    },
+    "Seta" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         }
       }
@@ -862,7 +888,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."
           }
         }
@@ -1555,7 +1581,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."
           }
         }
@@ -1606,16 +1632,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "플레이리스트용 캡쳐하기"
-          }
-        }
-      }
-    },
-    "한국어" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "한국어"
           }
         }
       }
