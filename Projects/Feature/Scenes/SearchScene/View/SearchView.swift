@@ -28,6 +28,9 @@ struct SearchView: View {
           .padding(.top)
           ScrollViewReader { proxy in
             ScrollView {
+              searchingHistoryView
+                .padding(.top, 12)
+
               Spacer().id(topID)
               artistView
             }
@@ -35,6 +38,7 @@ struct SearchView: View {
               withAnimation {
                 proxy.scrollTo(topID)
               }
+
             }
           }
           .scrollDisabled(viewModel.searchIsPresented)
@@ -70,7 +74,8 @@ struct SearchView: View {
   private var artistView: some View {
     VStack(alignment: .leading) {
       domesticArtistView
-        .padding(.vertical, 64)
+        .padding(.top, 44)
+        .padding(.bottom, 64)
       foreignArtistView
         .padding(.bottom, 48)
     }
