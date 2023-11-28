@@ -10,13 +10,12 @@
 		03EA814D84858AD2B3D35638 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EB1D01BAE365D00E42F60 /* ArtistView.swift */; };
 		069FC56BB3B65A8510E24FE4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083107765017313EF49CE3A /* OnboardingViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
-		1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2175F963B082B7C3E85D54 /* BottomView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
 		351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF56B0153354883134B7D3 /* MenuButton.swift */; };
-		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
+		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */; };
 		3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */; };
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
@@ -38,7 +37,7 @@
 		9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E319B5E5F3B22C401257A /* IsEmptyCell.swift */; };
 		A66A957F0E714FF80FFBB9E1 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0196B4F556FF05FB8471C70 /* LanguageView.swift */; };
 		A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */; };
-		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; platformFilter = ios; };
+		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B53758CDA9A7C7A751579B33 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3232F2FEB4FD0BFCFCE0B77F /* SettingViewModel.swift */; };
 		B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */; };
@@ -53,7 +52,7 @@
 		D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */; };
 		EC3070A8E0E0C591E7EB8D83 /* ArchiveConcertInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9981CC6F7982EBE581173 /* ArchiveConcertInfoCell.swift */; };
 		F3E6A26AAF23964C5D5B2116 /* BookmarkedSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */; };
-		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; platformFilter = ios; };
+		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; };
 		F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */; };
 		F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */; };
 		F84986A12ECC7DCACB4C7309 /* CustomTitleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */; };
@@ -122,7 +121,6 @@
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingViewModel.swift; sourceTree = "<group>"; };
-		8F2175F963B082B7C3E85D54 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */,
-				8F2175F963B082B7C3E85D54 /* BottomView.swift */,
 				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
@@ -531,7 +528,7 @@
 				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -627,7 +624,6 @@
 				3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */,
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
-				1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */,
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
@@ -684,6 +680,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -709,6 +706,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -740,6 +738,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -878,6 +877,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

@@ -38,7 +38,7 @@ struct CustomTitleAlert: View {
     .padding(.horizontal, 24)
     .padding(.top, 32)
     .padding(.bottom, 13)
-    .background(Color.mainWhite)
+    .background(Color.settingTextBoxWhite)
     .cornerRadius(12)
   }
   
@@ -99,7 +99,7 @@ struct CustomTitleAlert: View {
         }
       }
       .foregroundColor(Color.mainBlack)
-      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.white))
+      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.settingTextBoxWhite))
     }
   }
   private func animate(isShown: Bool, completion: (() -> Void)? = nil) {

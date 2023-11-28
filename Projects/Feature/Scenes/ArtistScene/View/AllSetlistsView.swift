@@ -39,13 +39,12 @@ struct AllSetlistsView: View {
         SetlistView(setlist: setlist, artistInfo: vm.artistInfo)
       } label: {
         HStack {
-          
           // MARK: Date
           VStack {
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
               .foregroundStyle(Color.fontGrey25)
               .tracking(0.5)
-            Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
+            Text(vm.dayAndMonthDateFormatter(inputDate: setlist.eventDate ?? "") ?? "")
               .foregroundStyle(Color.mainBlack)
           }
           .font(.headline)
@@ -111,8 +110,9 @@ struct AllSetlistsView: View {
         .padding(.horizontal)
     }
   }
+  
 }
 
 #Preview {
-  AllSetlistsView(vm: ArtistViewModel())
+    AllSetlistsView(vm: ArtistViewModel())
 }

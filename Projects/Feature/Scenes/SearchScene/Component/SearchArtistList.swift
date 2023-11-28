@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Core
 import UI
 
@@ -15,6 +16,7 @@ struct SearchArtistList: View {
   @ObservedObject var viewModel: SearchViewModel
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
+  @Query var searchHistory: [SearchHistory]
   var body: some View {
     if viewModel.isLoading {
       VStack {
@@ -34,6 +36,7 @@ struct SearchArtistList: View {
             ListRow(namePair: namePair, info: info)
           }
           .simultaneousGesture(TapGesture().onEnded {
+            dataManager.findHistoryAndDelete(searchHistory, artist.id ?? "")
             dataManager.addSearchHistory(name: namePair.0, country: info, alias: namePair.1 ?? "", mbid: artist.id ?? "", gid: 0, imageUrl: "", songList: [])
           })
         }

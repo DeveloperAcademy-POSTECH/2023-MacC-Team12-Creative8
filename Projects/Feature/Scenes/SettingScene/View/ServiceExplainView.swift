@@ -74,7 +74,7 @@ struct TermsOfSetlistfm: View {
 
 struct TermsTitleView: View {
   
-  var title: String
+  var title: LocalizedStringResource
   
   var body: some View {
     VStack(alignment: .leading) {

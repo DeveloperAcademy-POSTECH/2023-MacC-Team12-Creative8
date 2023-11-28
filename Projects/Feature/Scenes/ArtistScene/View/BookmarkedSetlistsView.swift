@@ -21,7 +21,6 @@ struct BookmarkedSetlistsView: View {
   var body: some View {
     VStack {
       titleLayer
-      
       if vm.showBookmarkedSetlists {
         VStack {
           if bookmarkedSetlists.isEmpty {
@@ -44,7 +43,7 @@ struct BookmarkedSetlistsView: View {
     .onAppear {
       getBookmarkedSetlists()
       if !bookmarkedSetlists.isEmpty {
-        vm.showBookmarkedSetlists = true
+          vm.showBookmarkedSetlists = true
       }
     }
   }
@@ -65,10 +64,13 @@ struct BookmarkedSetlistsView: View {
         .fontWeight(.bold)
       Spacer()
       Button {
-        vm.showBookmarkedSetlists.toggle()
+//        withAnimation(Animation.spring()) { // MARK: 애니메이션 넣을까요 말까요?
+          vm.showBookmarkedSetlists.toggle()
+//        }
       } label: {
-        Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
-          .font(.title3)
+        Image(systemName: "chevron.right")
+          .rotationEffect(.degrees(vm.showBookmarkedSetlists ? 90 : 0))
+            .font(.title3)
       }
       .foregroundStyle(Color.mainBlack)
     }
@@ -129,7 +131,7 @@ struct BookmarkedSetlistsView: View {
           } label: {
             Text("세트리스트 보기")
           }
-          
+
           Button {
             vm.swiftDataManager.deleteArchivedConcertInfo(concert)
             for (index, item) in bookmarkedSetlists.enumerated() {
@@ -140,11 +142,13 @@ struct BookmarkedSetlistsView: View {
           } label: {
             Text("공연 북마크 취소")
           }
-          
+
         } label: {
           Image(systemName: "ellipsis")
             .foregroundStyle(Color.mainBlack)
             .font(.title3)
+            .padding()
+            .background(Color.clear)
         }
         
         Spacer()
@@ -154,6 +158,7 @@ struct BookmarkedSetlistsView: View {
         .padding(.horizontal)
         .foregroundColor(Color.lineGrey1)
     }
+    
   }
   
   private var navigationLayer: some View {
@@ -168,8 +173,11 @@ struct BookmarkedSetlistsView: View {
     } label: {
       HStack {
         Spacer()
-        Text("\(vm.artistInfo.name) 보관함에서 보기")
-          .underline()
+        Group {
+          Text("\(vm.artistInfo.name) 보관함에서 보기")
+            .multilineTextAlignment(.trailing)
+          Image(systemName: "arrow.right")
+        }
       }
       .font(.subheadline)
       .foregroundColor(Color.mainBlack)
@@ -177,6 +185,7 @@ struct BookmarkedSetlistsView: View {
       .padding(.horizontal, 10)
     }
   }
+  
 }
 
 #Preview {

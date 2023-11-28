@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import UI
 
 public struct CaptureSetlistView: View {
   let songList: [(String, String?)]
@@ -53,20 +52,19 @@ public struct CaptureSetlistView: View {
 
     }
   }
-  
   public var logo: some View {
-    HStack(spacing: 0) {
-      Rectangle()
-        .frame(width: 19, height: 20)
-        .cornerRadius(50, corners: .bottomRight)
-        .cornerRadius(50, corners: .bottomLeft)
-      Rectangle()
-        .frame(width: 18, height: 20)
-        .cornerRadius(50, corners: .topRight)
-        .cornerRadius(50, corners: .topLeft)
-    }
-    .foregroundColor(Color.mainBlack)
-  }
+       HStack(spacing: 0) {
+         Rectangle()
+           .frame(width: 19, height: 20)
+           .cornerRadius(50, corners: .bottomRight)
+           .cornerRadius(50, corners: .bottomLeft)
+         Rectangle()
+           .frame(width: 18, height: 20)
+           .cornerRadius(50, corners: .topRight)
+           .cornerRadius(50, corners: .topLeft)
+       }
+       .foregroundColor(Color.black)
+     }
 }
 
 extension CaptureSetlistView {
@@ -115,16 +113,15 @@ public extension View {
   }
 }
 
-// 로고 만들기
 extension View {
-  func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-    clipShape( RoundedCorner(radius: radius, corners: corners) )
-  }
-}
+   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+     clipShape( RoundedCorner(radius: radius, corners: corners) )
+   }
+ }
 struct RoundedCorner: Shape {
   var radius: CGFloat = .infinity
   var corners: UIRectCorner = .allCorners
-  
+
   func path(in rect: CGRect) -> Path {
     let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
     return Path(path.cgPath)

@@ -12,9 +12,10 @@ import SwiftData
 import Core
 import UI
 
-// TODO: 세트리스트 버튼 추후 수정하기
+// TODO: 추후 수정하기
 
 struct EmptyMainSetlistView: View {
+  @ObservedObject var viewModel = MainViewModel()
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Spacer()
@@ -29,24 +30,39 @@ struct EmptyMainSetlistView: View {
         .font(.footnote)
         .padding([.horizontal, .top])
       
-      HStack(spacing: 0) {
-        Link(destination: URL(string: "https://www.setlist.fm")!) {
-          Text("Setlist.fm")
-            .underline()
+      if viewModel.isKorean() {
+        HStack(spacing: 0) {
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm")
+              .underline()
+              .foregroundStyle(Color.fontGrey2)
+              .font(.footnote)
+          }
+          Text("에서 직접 추가할 수 있어요.")
             .foregroundStyle(Color.fontGrey2)
             .font(.footnote)
         }
-        Text("에서 직접 추가할 수 있어요.")
-          .foregroundStyle(Color.fontGrey2)
-          .font(.footnote)
+        .padding([.horizontal, .bottom])
+      } else {
+        HStack(spacing: 0) {
+          Text("에서 직접 추가할 수 있어요.")
+                      .foregroundStyle(Color.fontGrey2)
+                      .font(.footnote)
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm")
+              .underline()
+              .foregroundStyle(Color.fontGrey2)
+              .font(.footnote)
+          }
+        }
+        .padding([.horizontal, .bottom])
       }
-      .padding([.horizontal, .bottom])
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
           .foregroundStyle(Color.mainGrey1)
           .frame(height: UIHeight * 0.06)
           .overlay {
-            Text("Setlist.fm 바로가기")
+            Text("세트리스트 추가하기")
               .foregroundStyle(Color.mainBlack)
               .bold()
           }
@@ -56,6 +72,7 @@ struct EmptyMainSetlistView: View {
     }
     .frame(width: UIWidth * 0.78)
   }
+  
 }
 
 #Preview {

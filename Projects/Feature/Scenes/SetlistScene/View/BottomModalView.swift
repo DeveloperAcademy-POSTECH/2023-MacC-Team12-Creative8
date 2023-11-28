@@ -19,8 +19,6 @@ struct BottomModalView: View {
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @State var isSharePresented = false
-  @State var showLibrarySettingsAlert = false
-  @State var showMusicSettingsAlert = false
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -36,18 +34,13 @@ struct BottomModalView: View {
       Spacer()
       HStack(alignment: .center, spacing: 0) {
         platformButtonView(title: "Apple Music", image: "appleMusic") {
-          AppleMusicService().requestMusicAuthorization()
-          if exportViewModel.checkMusicKitPermission() {
-            showMusicSettingsAlert = true
-          } else {
-            CheckAppleMusicSubscription.shared.appleMusicSubscription()
-            exportViewModel.showAppleMusicAlert.toggle()
+          exportViewModel.handleAppleMusicButtonAction()
+          if !exportViewModel.checkMusicKitPermission() {
             vm.showModal = false
-            exportViewModel.playlistTitle = ""
           }
         }
         // 애플뮤직 권한 허용 거부 상태인 경우
-        .alert(isPresented: $showMusicSettingsAlert) {
+        .alert(isPresented: $exportViewModel.showMusicSettingsAlert) {
           Alert(
             title: Text(""),
             message: Text("플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."),
@@ -59,8 +52,8 @@ struct BottomModalView: View {
         Spacer()
           .frame(width: 14)
         platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
-          // TODO: 유튜브 뮤직 기능 연결
-          //          exportViewModel.showAppleMusicAlert.toggle()
+          //TODO: 유튜브 뮤직(플레이리스트 추가 부분은 ExportPlayListViewModel 안에서 추가하셔야 합니다!)
+          //          exportViewModel.showYouTubeMusicAlert.toggle()
           //          exportViewModel.playlistTitle = ""
         }
         // MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
@@ -69,26 +62,20 @@ struct BottomModalView: View {
         //
         //        }
       }
-      
       Spacer()
       listRowView(
         title: "플레이리스트용 캡쳐하기",
         topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
         action: {
-          if exportViewModel.checkPhotoPermission() {
-            showLibrarySettingsAlert = true
-          } else {
+          exportViewModel.handlePhotoExportButtonAction()
+          if !exportViewModel.checkPhotoPermission() {
             takeSetlistToImage(vm.setlistSongKoreanName)
             vm.showModal.toggle()
-            showToastMessageCapture = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-              showToastMessageCapture = false
-            }
           }
         }
       )
       // 사진 권한 허용 거부 상태인 경우
-      .alert(isPresented: $showLibrarySettingsAlert) {
+      .alert(isPresented: $exportViewModel.showLibrarySettingsAlert) {
         Alert(
           title: Text(""),
           message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
