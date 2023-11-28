@@ -14,11 +14,13 @@ struct SearchArtistCell: View {
   @Binding var selectedTab: Tab
   let imageURL: String
   let artistName: String
+  let artistAlias: String
   let artistMbid: String
+  let artistGid: Int
   
   var body: some View {
     VStack(alignment: .leading) {
-      NavigationLink(value: NavigationDelivery(artistInfo: SaveArtistInfo(name: artistName, country: "", alias: "", mbid: artistMbid, gid: 0, imageUrl: imageURL, songList: []))) {
+      NavigationLink(value: NavigationDelivery(artistInfo: SaveArtistInfo(name: artistName, country: "", alias: artistAlias, mbid: artistMbid, gid: artistGid, imageUrl: imageURL, songList: []))) {
         AsyncImage(url: URL(string: imageURL)) { phase in
           switch phase {
           case .empty:

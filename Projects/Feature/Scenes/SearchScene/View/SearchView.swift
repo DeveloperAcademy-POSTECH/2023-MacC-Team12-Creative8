@@ -90,7 +90,7 @@ struct SearchView: View {
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
         ForEach(viewModel.domesticArtists, id: \.self) { item in
-          SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
+          SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistAlias: item.alias, artistMbid: item.mbid, artistGid: item.gid)
         }
       }
     }
@@ -102,7 +102,7 @@ struct SearchView: View {
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
         ForEach(viewModel.foreignArtists, id: \.self) { item in
-          SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
+          SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistAlias: item.alias, artistMbid: item.mbid, artistGid: item.gid)
         }
       }
     }

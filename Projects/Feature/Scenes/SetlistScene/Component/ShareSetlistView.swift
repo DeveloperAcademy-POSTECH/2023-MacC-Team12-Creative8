@@ -138,7 +138,7 @@ struct ShareSetlistView: View {
             }
           }
         } else {
-          HStack {
+          HStack(spacing: 0) {
             VStack(alignment: .leading) {
               ForEach(0..<aLineMax) { index in
                 if sessionInfo[index].0 == "" && index == 0 { }
@@ -156,7 +156,7 @@ struct ShareSetlistView: View {
               }
 
             }
-            .frame(width: 520)
+            .frame(width: 510)
 
             VStack(alignment: .leading) {
               ForEach(aLineMax..<sessionInfo.count) { index in
@@ -174,7 +174,7 @@ struct ShareSetlistView: View {
                 }
               }
             }
-            .frame(width: 520)
+            .frame(width: 510)
           }
         }
       }
@@ -225,13 +225,14 @@ public extension View {
         sessionInfo.append((sessionName, true))
         if let song = session.song {
           for _ in song {
-            sessionInfo.append((songList[count].0, false))
-            count += 1
+            if count < songList.count {
+              sessionInfo.append((songList[count].0, false))
+              count += 1
+            }
           }
         }
       }
     }
-    print(sessionInfo.count)
     let captureView = ShareSetlistView(songList: songList,
                                        artist: artist,
                                        setlist: setlist,
@@ -239,75 +240,3 @@ public extension View {
     return captureView.setlistImage()
   }
 }
-
-//            VStack {
-//              ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
-//                let sessionName = setlist?.sets?.setsSet?[index].name ??
-//                (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
-//
-//                if sessionName != "" {
-//                  if index != 0 {
-//                    if textCount < aLineMax {
-//                      Text("\n")
-//                    }
-//                  }
-//                    Text("\(sessionName)")
-//                      .fontWeight(.semibold)
-//                      .underline()
-//                      .font(.system(size: fontSize))
-//                      .lineLimit(1)
-//
-//                }
-//                if let songs = setlist?.sets?.setsSet?[index].song {
-//                  ForEach(0..<songs.count, id: \.self) { songIndex in
-//                      Text(songList[songIndex].0)
-//                        .font(.system(size: fontSize))
-//                        .lineLimit(1)
-//                  }
-//                }
-//              }
-//            }
-//            .frame(width: 520)
-
-//            VStack {
-//              ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
-//                let sessionName = setlist?.sets?.setsSet?[index].name ??
-//                (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
-//
-//                if sessionName != "" {
-//                  if index != 0 {
-//                    if textCount2 >= aLineMax {
-//                      Text("\n")
-//                        .onAppear {
-//                          self.textCount2 += 1
-//                        }
-//                    }
-//                  }
-//
-//                  if textCount2 >= aLineMax {
-//                    Text("\(sessionName)")
-//                      .fontWeight(.semibold)
-//                      .underline()
-//                      .font(.system(size: fontSize))
-//                      .lineLimit(1)
-//                      .onAppear {
-//                        self.textCount2 += 1
-//                      }
-//                  }
-//                }
-//                if let songs = setlist?.sets?.setsSet?[index].song {
-//                  ForEach(0..<songs.count, id: \.self) { songIndex in
-//                    if textCount2 >= aLineMax {
-//                      Text(songList[songIndex].0)
-//                        .font(.system(size: fontSize))
-//                        .lineLimit(1)
-//                        .onAppear {
-//                          self.textCount2 += 1
-//                        }
-//                    }
-//                  }
-//                }
-//              }
-//            }
-//            .frame(width: 520)
-//            .foregroundStyle(.red)

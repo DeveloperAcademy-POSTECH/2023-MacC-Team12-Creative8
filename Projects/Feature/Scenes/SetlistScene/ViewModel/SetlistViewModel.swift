@@ -115,15 +115,11 @@ final class SetlistViewModel: ObservableObject {
           }
           
           // 영문 배열에 추가
-          if !self.setlistSongName.contains(where: { $0 == (title, name) }) {
-            self.setlistSongName.append((title, name))
-          }
+          self.setlistSongName.append((title, name))
           
           // 한글 배열에 추가
           let tmp = self.koreanConverter.findKoreanTitle(title: title, songList: songList) ?? title
-          if !self.setlistSongKoreanName.contains(where: { $0 == (tmp, name) }) {
-            self.setlistSongKoreanName.append((tmp, name))
-          }
+          self.setlistSongKoreanName.append((tmp, name))
           
         }
         
