@@ -64,7 +64,7 @@ public struct MainView: View {
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
-        HStack(spacing: UIWidth * 0.1) {
+        HStack(spacing: UIWidth * 0.12) {
           ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
             let artistName = viewModel.replaceFirstSpaceWithNewline(data.artistInfo.name)
             ArtistNameView(selectedTab: $selectedTab,

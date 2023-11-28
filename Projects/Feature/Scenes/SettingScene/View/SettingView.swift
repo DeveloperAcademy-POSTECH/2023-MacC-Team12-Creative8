@@ -23,7 +23,7 @@ public struct SettingView: View {
           VStack(alignment: .leading) {
             SectionTitleView(
               sectionTitle: "세트리스트 추가 및 수정하기",
-              sectionDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를\n추가 및 수정하세요")
+              sectionTopDescription: "Setlist.fm에서 다녀온 공연의 세트리스트를", sectionBottomDescription: "추가 및 수정하세요")
             SetlistfmLinkButton(
               setlistfmURL: "https://www.setlist.fm",
               linkLabel: "Setlist.fm 바로가기")
@@ -36,7 +36,7 @@ public struct SettingView: View {
               .foregroundStyle(Color.lineGrey1)
             SectionTitleView(
               sectionTitle: "서비스 이용 관련",
-              sectionDescription: "음악으로 연결되는 순간,\nSeta의 서비스 약관을 확인해보세요")
+              sectionTopDescription: "음악으로 연결되는 순간,", sectionBottomDescription: "Seta의 서비스 약관을 확인해보세요")
             
             // FAQ
             Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/FAQ-10f7d0c94c104015b5719ab2a26f2cf2?pvs=4")!, label: {
@@ -73,8 +73,9 @@ public struct SettingView: View {
 
 struct SectionTitleView: View {
   
-  var sectionTitle: String
-  var sectionDescription: String
+  var sectionTitle: LocalizedStringResource
+  var sectionTopDescription: LocalizedStringResource
+  var sectionBottomDescription: LocalizedStringResource
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -82,7 +83,10 @@ struct SectionTitleView: View {
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
         .padding(.vertical)
-      Text(sectionDescription)
+      VStack(alignment: .leading, spacing: 0) {
+        Text(sectionTopDescription)
+        Text(sectionBottomDescription)
+      }
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
         .padding(.bottom, 30)
@@ -93,7 +97,7 @@ struct SectionTitleView: View {
 struct SetlistfmLinkButton: View {
   
   var setlistfmURL: String
-  var linkLabel: String
+  var linkLabel: LocalizedStringResource
   
   var body: some View {
     Link(destination: URL(string: setlistfmURL)!, label: {
@@ -114,7 +118,7 @@ struct SetlistfmLinkButton: View {
 
 struct LinkLabelView: View {
   
-  var linkLabel: String
+  var linkLabel: LocalizedStringResource
   
   var body: some View {
     HStack {

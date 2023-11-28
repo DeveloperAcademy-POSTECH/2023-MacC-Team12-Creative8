@@ -10,7 +10,6 @@
 		03EA814D84858AD2B3D35638 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EB1D01BAE365D00E42F60 /* ArtistView.swift */; };
 		069FC56BB3B65A8510E24FE4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083107765017313EF49CE3A /* OnboardingViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
-		1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2175F963B082B7C3E85D54 /* BottomView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */; };
@@ -120,7 +119,6 @@
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingViewModel.swift; sourceTree = "<group>"; };
-		8F2175F963B082B7C3E85D54 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */,
-				8F2175F963B082B7C3E85D54 /* BottomView.swift */,
 				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
@@ -622,7 +619,6 @@
 				802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */,
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
-				1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */,
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,

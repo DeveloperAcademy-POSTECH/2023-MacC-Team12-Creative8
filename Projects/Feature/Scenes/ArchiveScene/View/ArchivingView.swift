@@ -16,27 +16,19 @@ struct ArchivingView: View {
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchivingViewModel.shared
-  
+
   var body: some View {
     VStack {
-      VStack(alignment: .leading) {
-        Text("보관함")
-          .font(.title2)
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.mainBlack)
-          .padding(.top, 23)
-        
-        segmentedButtonsView
-      }
-      .padding(.horizontal, 24)
-      .padding(.vertical)
-      
+      segmentedButtonsView
+        .padding(.horizontal, 24)
+        .padding(.vertical)
       if viewModel.selectSegment == .bookmark {
         bookmarkView
       } else {
         artistView
       }
     }
+    .navigationTitle("보관함")
   }
 }
 
@@ -53,7 +45,7 @@ extension ArchivingView {
         viewModel.selectSegment = .bookmark
       }
       .foregroundStyle(viewModel.selectSegment == .bookmark ? Color.mainBlack : Color.fontGrey3)
-      
+
       Button("찜한 아티스트") {
         viewModel.selectSegment = .likeArtist
       }
@@ -88,7 +80,7 @@ extension ArchivingView {
           Button {
             viewModel.selectArtist = ""
           } label: {
-            ArtistSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
+            AllArtistsSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
           }
           ForEach(viewModel.artistSet.sorted(), id: \.self) { artist in
             Button {
@@ -111,7 +103,7 @@ extension ArchivingView {
           ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item)
           Divider()
             .foregroundStyle(Color.lineGrey1)
-            .padding(.horizontal, 20)
+          .padding(.horizontal, 20)
         }
       }
     }

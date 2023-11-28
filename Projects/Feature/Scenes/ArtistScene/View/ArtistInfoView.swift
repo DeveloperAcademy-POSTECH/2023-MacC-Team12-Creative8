@@ -29,6 +29,7 @@ struct ArtistInfoView: View {
       .padding()
     }
     .padding(.horizontal, 24)
+    .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       vm.swiftDataManager.modelContext = modelContext
       vm.isLikedArtist = vm.swiftDataManager.isAddedLikeArtist(likeArtist, vm.artistInfo.mbid)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F1995BE8972BD993B58 /* SearchHistoryModel.swift */; };
 		14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */; };
+		2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569CF2C676DD875C163323FA /* ArtistFetchService.swift */; };
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
@@ -73,6 +74,7 @@
 		3E313EC3E53C9ED17660FD3F /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7A7F738C7D540C1FDA072E /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		4F5F16996E458A8A1147E2AE /* ArchivedConcertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedConcertInfo.swift; sourceTree = "<group>"; };
+		569CF2C676DD875C163323FA /* ArtistFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistFetchService.swift; sourceTree = "<group>"; };
 		752E25910681A644F3142B68 /* LikeArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArtistModel.swift; sourceTree = "<group>"; };
 		75600AD4887E89C2223BF659 /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
 		845DD837E5346A7627964873 /* SaveArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveArtistInfo.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				6102295BF8EA6BD3F00B6FE2 /* SwiftDataManager */,
 				8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */,
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
+				569CF2C676DD875C163323FA /* ArtistFetchService.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
 			);
 			path = Service;
@@ -403,6 +406,7 @@
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
+				2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */,
 				882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */,
 				E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
