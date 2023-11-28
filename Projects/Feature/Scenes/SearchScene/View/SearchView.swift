@@ -28,8 +28,8 @@ struct SearchView: View {
           .padding(.top)
           ScrollViewReader { proxy in
             ScrollView {
-              searchingHistoryView
-                .padding(.top, 12)
+//              searchingHistoryView
+//                .padding(.top, 12)
 
               Spacer().id(topID)
               artistView

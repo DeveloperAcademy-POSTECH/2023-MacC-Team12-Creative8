@@ -49,6 +49,7 @@ struct ShareSetlistView: View {
     }
     .kerning(1.1)
     .frame(width: 1080, height: 1920)
+    .foregroundColor(.black)
     .background(Color.mainBlack)
   }
 
