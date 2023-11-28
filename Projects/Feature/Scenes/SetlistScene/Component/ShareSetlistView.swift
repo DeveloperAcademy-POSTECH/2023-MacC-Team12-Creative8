@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct ShareSetlistView: View {
   //let setlist: Setlist?
@@ -18,79 +19,97 @@ struct ShareSetlistView: View {
   //@ObservedObject var vm: ArtistViewModel
   
   var body: some View {
-    VStack(spacing: -1) {
-      ZStack{
-        Rectangle()
-          .cornerRadius(14)
-          .foregroundStyle(.white)
-        VStack(alignment: .leading) {
-          Text(artist)
-            .padding(.top, 50)
+    ScrollView {
+      VStack(spacing: -1) {
+        ZStack{
           Rectangle()
-            .foregroundStyle(.black)
-            .frame(height: 1)
-          Text("tourrrrrrrrr")
-          //          Text(setlist?.tour?.name ?? "-")
-          Rectangle()
-            .foregroundStyle(.black)
-            .frame(height: 1)
-          //          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
-          //          Text(venue)
-          Text("Venuesefsfasdfa")
-          Rectangle()
-            .foregroundStyle(.black)
-            .frame(height: 1)
-          //          Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
-          Text("Nov 29, 2023")
-            .padding(.bottom)
+            .cornerRadius(20)
+            .foregroundStyle(.white)
+            .frame(width: 1080, height: 589)
+          VStack(alignment: .leading) {
+            Text(artist)
+              .font(.system(size: 50))
+              .padding(.top, 50)
+            Rectangle()
+              .foregroundStyle(.black)
+              .frame(height: 1)
+            Text("tourrrrrrrrr")
+              .font(.system(size: 50))
+            //          Text(setlist?.tour?.name ?? "-")
+            Rectangle()
+              .foregroundStyle(.black)
+              .frame(height: 1)
+            //          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
+            //          Text(venue)
+            Text("Venuesefsfasdfa")
+              .font(.system(size: 50))
+            Rectangle()
+              .foregroundStyle(.black)
+              .frame(height: 1)
+            //          Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
+            Text("Nov 29, 2023")
+              .font(.system(size: 50))
+              .padding(.bottom)
+          }
+          .padding(.horizontal, 28)
         }
-        .padding(.horizontal)
-      }
-      dotLine
-      ZStack {
-        Rectangle()
-          .cornerRadius(14)
-          .foregroundStyle(.white)
-        VStack(alignment: .leading) {
-          if songCount <= 36 {
-            VStack(alignment: .center) {
-              ForEach(0..<songCount, id: \.self) { index in
+        dotLine
+        ZStack {
+          Rectangle()
+            .cornerRadius(20)
+            .foregroundStyle(.white)
+            .frame(width: 1080, height: 1164)
+          VStack(alignment: .leading) {
+            if songCount <= 36 {
+              VStack(alignment: .center) {
+                ForEach(0..<songCount, id: \.self) { index in
                   Text("\(songList[index].0)")
-              }
-            }
-          } else {
-            HStack {
-              VStack {
-                ForEach(0..<25, id: \.self) { index in
-                    Text("\(songList[index].0)")
                 }
               }
-              VStack {
-                ForEach(25..<songCount, id: \.self) { index in
+            } else {
+              HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                  ForEach(0..<36, id: \.self) { index in
                     Text("\(songList[index].0)")
+                      .font(.system(size: 25))
+                  }
+                }
+                Spacer()
+                VStack(alignment: .leading) {
+                  ForEach(36..<songCount, id: \.self) { index in
+                    Text("\(songList[index].0)")
+                      .font(.system(size: 25))
+                  }
                 }
               }
+              .padding(.horizontal, 28)
             }
           }
+          .padding(.horizontal)
         }
-        .padding(.horizontal)
+        dotLine
+        ZStack {
+          Rectangle()
+            .cornerRadius(20)
+            .foregroundStyle(.white)
+            .frame(width: 1080, height: 162)
+          HStack {
+            Image("seta", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+              .padding(.vertical, 27)
+            Spacer()
+          }
+          .padding(.horizontal, 28)
+        }
       }
-      dotLine
-      ZStack {
-        Rectangle()
-          .cornerRadius(14)
-          .foregroundStyle(.white)
-        Text("Seta")
-      }
+      .background(.black)
     }
-    .background(.black)
-      }
+  }
   
   private var dotLine: some View {
     Rectangle()
-      .stroke(style: StrokeStyle(dash: [5]))
-      .frame(height: 1)
-      .foregroundStyle(Color.fontGrey2)
+      .stroke(style: StrokeStyle(dash: [10]))
+      .frame(height: 2)
+      .foregroundStyle(Color.black)
   }
 }
 
@@ -103,8 +122,12 @@ extension ShareSetlistView {
 
 extension View {
   func createSetlistImage(origin: CGPoint, size: CGSize) -> UIImage {
+    let origin = CGPoint(x: 0, y: 0)
+    let size = CGSize(width: 1080, height: 1920)
+    
     let window = UIWindow(frame: CGRect(origin: origin, size: size))
     let hosting = UIHostingController(rootView: self)
+    //hosting.view.frame = CGRect(origin: origin, size: size)
     hosting.view.frame = window.frame
     window.addSubview(hosting.view)
     window.makeKeyAndVisible()
@@ -131,14 +154,15 @@ public extension View {
     let secondSectionSongs = songCount % 25 // 15, 20, 0
     let sectionCount = firstSectionSongs + (firstSectionSongs < 2 ? 1 : 0 ) // 1, 1, 2
     let captureView = ShareSetlistView( songList: songList,
-                                       artist: artist,
-                                       songCount: songCount)
+                                        artist: artist,
+                                        songCount: songCount)
     return captureView.setlistImage()
   }
 }
 
 #Preview {
-  ShareSetlistView(songList: [("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+  ShareSetlistView(songList: [("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
@@ -173,8 +197,7 @@ public extension View {
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
