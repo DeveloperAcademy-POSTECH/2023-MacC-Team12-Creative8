@@ -12,8 +12,6 @@ import UI
 
 struct ShareSetlistView: View {
   @ObservedObject var vm = SetlistViewModel()
-  @State private var textCount = 0
-  @State private var textCount2 = 0
   let songList: [(String, String?)]
   let artist: String
   let setlist: Setlist?
