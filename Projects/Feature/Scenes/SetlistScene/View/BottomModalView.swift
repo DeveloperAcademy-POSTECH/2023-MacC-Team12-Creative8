@@ -119,6 +119,7 @@ struct BottomModalView: View {
               Text(bottomDescription)
                 .font(.caption)
                 .foregroundStyle(Color.fontGrey2)
+                .multilineTextAlignment(.leading)
             }
           }
         }
