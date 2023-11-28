@@ -89,7 +89,7 @@ struct SearchView: View {
       Text("국내 아티스트").bold()
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(viewModel.getRandomArtists(.kpop), id: \.self) { item in
+        ForEach(viewModel.domesticArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
         }
       }
@@ -101,7 +101,7 @@ struct SearchView: View {
       Text("해외 아티스트").bold()
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(viewModel.getRandomArtists(.pop), id: \.self) { item in
+        ForEach(viewModel.foreignArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
         }
       }
