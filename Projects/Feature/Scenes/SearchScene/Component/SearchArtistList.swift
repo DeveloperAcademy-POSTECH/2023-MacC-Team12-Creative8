@@ -33,6 +33,7 @@ struct SearchArtistList: View {
           NavigationLink {
             ArtistView(selectedTab: $selectedTab, artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
           } label: {
+
             ListRow(namePair: namePair, info: info)
           }
           .simultaneousGesture(TapGesture().onEnded {

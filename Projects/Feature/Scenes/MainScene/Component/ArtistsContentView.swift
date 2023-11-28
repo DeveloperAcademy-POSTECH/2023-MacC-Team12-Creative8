@@ -46,7 +46,7 @@ struct ArtistsContentView: View {
     }
   }
   private var artistImage: some View {
-    NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: artistInfo.name, artistAlias: artistInfo.alias, artistMbid: artistInfo.mbid)) {
+    NavigationLink(value: NavigationDelivery(artistInfo: artistInfo)) {
       ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
         .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
     }
@@ -65,15 +65,11 @@ struct ArtistsContentView: View {
     VStack(spacing: 0 ) {
       let setlists: [Setlist?] = viewModel.setlists[index] ?? []
       if setlists.isEmpty {
-        EmptyMainSetlistView()
+        EmptyMainSetlistView(viewModel: viewModel)
       } else {
         ForEach(Array(setlists.prefix(3).enumerated()), id: \.element?.id) { index, item in
           VStack(alignment: .leading, spacing: 0) {
-            NavigationLink(destination: SetlistView(setlistId: item?.id ?? "",
-                                                    artistInfo: ArtistInfo(name: artistInfo.name,
-                                                                           mbid: artistInfo.mbid, gid: artistInfo.gid,
-                                                                           imageUrl: artistInfo.imageUrl,
-                                                                           songList: artistInfo.songList)) ) {
+            NavigationLink(value: NavigationDelivery(setlistId: item?.id ?? "", artistInfo: artistInfo)) {
               HStack(spacing: 0) {
                 VStack(alignment: .center) {
                   Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
@@ -112,10 +108,11 @@ struct ArtistsContentView: View {
               }
               .padding(.vertical)
             }
-            if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-              Divider()
-                .foregroundStyle(Color.lineGrey1)
-            }
+          }
+          
+          if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
           }
         }
       }
