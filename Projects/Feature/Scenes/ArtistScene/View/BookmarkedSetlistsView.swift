@@ -39,12 +39,11 @@ struct BookmarkedSetlistsView: View {
         )
         .padding(.horizontal)
       }
-      
     }
     .onAppear {
       getBookmarkedSetlists()
       if !bookmarkedSetlists.isEmpty {
-        vm.showBookmarkedSetlists = true
+          vm.showBookmarkedSetlists = true
       }
     }
   }
@@ -65,10 +64,13 @@ struct BookmarkedSetlistsView: View {
         .fontWeight(.bold)
       Spacer()
       Button {
-        vm.showBookmarkedSetlists.toggle()
+//        withAnimation(Animation.spring()) { // MARK: 애니메이션 넣을까요 말까요?
+          vm.showBookmarkedSetlists.toggle()
+//        }
       } label: {
-        Image(systemName: vm.showBookmarkedSetlists ? "chevron.down" : "chevron.right")
-          .font(.title3)
+        Image(systemName: "chevron.right")
+          .rotationEffect(.degrees(vm.showBookmarkedSetlists ? 90 : 0))
+            .font(.title3)
       }
       .foregroundStyle(Color.mainBlack)
     }
@@ -145,6 +147,8 @@ struct BookmarkedSetlistsView: View {
           Image(systemName: "ellipsis")
             .foregroundStyle(Color.mainBlack)
             .font(.title3)
+            .padding()
+            .background(Color.clear)
         }
         
         Spacer()
@@ -169,8 +173,11 @@ struct BookmarkedSetlistsView: View {
     } label: {
       HStack {
         Spacer()
-        Text("\(vm.artistInfo.name) 보관함에서 보기")
-          .underline()
+        Group {
+          Text("\(vm.artistInfo.name) 보관함에서 보기")
+            .multilineTextAlignment(.trailing)
+          Image(systemName: "arrow.right")
+        }
       }
       .font(.subheadline)
       .foregroundColor(Color.mainBlack)

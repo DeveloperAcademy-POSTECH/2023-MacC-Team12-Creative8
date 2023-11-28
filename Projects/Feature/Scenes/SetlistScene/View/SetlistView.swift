@@ -22,8 +22,8 @@ struct SetlistView: View {
   @Environment(\.modelContext) var modelContext
   @State private var showToastMessage = false
   
-  @State private var showToastMessageAppleMusic = false
-  @State private var showToastMessageCapture = false
+//  @State private var showToastMessageAppleMusic = false
+//  @State private var showToastMessageCapture = false
   @StateObject var exportViewModel = ExportPlaylistViewModel()
   
   var body: some View {
@@ -43,8 +43,8 @@ struct SetlistView: View {
           ExportPlaylistButtonView(setlist: setlist,
                                    artistInfo: artistInfo,
                                    vm: vm,
-                                   showToastMessageAppleMusic: $showToastMessageAppleMusic,
-                                   showToastMessageCapture: $showToastMessageCapture,
+                                   showToastMessageAppleMusic: $exportViewModel.showToastMessageAppleMusic,
+                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture,
                                    exportViewModel: exportViewModel)
         }
       }
@@ -58,20 +58,16 @@ struct SetlistView: View {
       }
     }
     .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
-      AppleMusicService().addPlayList(name: exportViewModel.playlistTitle, musicList: vm.setlistSongName, venue: setlist?.venue?.name)
-      exportViewModel.showAppleMusicAlert = false
-      showToastMessageAppleMusic = true
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-        showToastMessageAppleMusic = false
-      }
+      let musicList = vm.setlistSongName
+      exportViewModel.addToAppleMusic(musicList: musicList, setlist: setlist)
     }), dismissButton: CustomAlertButton(title: "취소", action: {
       vm.showModal.toggle()
       exportViewModel.showAppleMusicAlert.toggle()
     }),
-                 isPresented: $exportViewModel.showAppleMusicAlert,
-                 artistInfo: artistInfo,
-                 setlist: setlist,
-                 exportViewModel: exportViewModel
+       isPresented: $exportViewModel.showAppleMusicAlert,
+       artistInfo: artistInfo,
+       setlist: setlist,
+       exportViewModel: exportViewModel
     )
     .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
       // TODO: 유튜브뮤직
@@ -80,10 +76,10 @@ struct SetlistView: View {
       vm.showModal.toggle()
       exportViewModel.showAppleMusicAlert.toggle()
     }),
-                 isPresented: $exportViewModel.showYouTubeAlert,
-                 artistInfo: artistInfo,
-                 setlist: setlist,
-                 exportViewModel: exportViewModel
+     isPresented: $exportViewModel.showYouTubeAlert,
+     artistInfo: artistInfo,
+     setlist: setlist,
+     exportViewModel: exportViewModel
     )
     .toolbar(.hidden, for: .tabBar)
     .background(Color.backgroundWhite)
@@ -157,11 +153,9 @@ struct SetlistView: View {
           EmptySetlistView()
             .padding(30)
         } else {
-          VStack {
-            ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-              .padding(30)
-            BottomView()
-          }
+          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+            .padding(30)
+            .padding(.bottom, 130)
         }
       }
     }
