@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Core
+import Combine
 
 final class MainViewModel: ObservableObject {
   let dataService = SetlistDataService()

@@ -30,7 +30,7 @@ struct ArtistNameView: View {
 }
 
 #Preview {
-  ArtistNameView(selectedTab: .constant(.home), 
-                 viewModel: MainViewModel(), 
+  ArtistNameView(selectedTab: .constant(.home),
+                 viewModel: MainViewModel(),
                  index: 1, name: "Silica Gel")
 }
