@@ -11,26 +11,134 @@ import Core
 import UI
 
 struct ShareSetlistView: View {
+  @ObservedObject var vm = SetlistViewModel()
   let songList: [(String, String?)]
   let artist: String
-  let sessionInfo: [(String, Int)]
+  let setlist: Setlist?
+  let headHeight: CGFloat
+  let fontSize: CGFloat
+  let aLineMax: Int
+  let is2Columns: Bool
+
+  init(songList: [(String, String?)], artist: String, setlist: Setlist?) {
+    self.songList = songList
+    self.artist = artist
+    self.setlist = setlist
+
+    let totalLine = songList.count + ((setlist?.sets?.setsSet ?? []).count-1) * 2
+    headHeight = setlist?.tour?.name == nil ? 530 : 600
+    aLineMax = totalLine > 50 ? 36 : 25
+    is2Columns = totalLine > 36 ? true : false
+    switch totalLine {
+    case 0...18: fontSize = 50
+    case 19...20: fontSize = 45
+    case 21...36: fontSize = 30
+    default: fontSize = 25
+    }
+  }
 
   var body: some View {
-    VStack {
-      RoundedRectangle(cornerRadius: 20)
-        .foregroundStyle(.white)
-        .frame(width: 1080, height: 589)
-
+    VStack(spacing: -3) {
+      headView
+      dotLine
+      shareListView
+      dotLine
+      bottomView
     }
+    .kerning(1.1)
     .frame(width: 1080, height: 1920)
     .background(Color.mainBlack)
   }
 
   private var dotLine: some View {
     Rectangle()
-      .stroke(style: StrokeStyle(dash: [10]))
-      .frame(height: 2)
+      .stroke(style: StrokeStyle(lineWidth: 6, dash: [12]))
+      .frame(height: 4)
       .foregroundStyle(Color.black)
+      .alignmentGuide(.top) { _ in 1 }
+      .padding(.horizontal, 40)
+  }
+
+  private var whiteBox: some View {
+    RoundedRectangle(cornerRadius: 40)
+      .foregroundStyle(.white)
+    
+  }
+
+  private var dividerLine: some View {
+    Rectangle()
+      .foregroundStyle(.black)
+      .frame(height: 3)
+      .padding(.vertical, -10)
+  }
+
+  private var headView: some View {
+    ZStack {
+      whiteBox
+      VStack(alignment: .leading) {
+        Text(artist)
+          .font(.system(size: 50))
+        dividerLine
+        if let tour = setlist?.tour?.name {
+          Text(tour)
+            .font(.system(size: 50))
+          dividerLine
+        }
+        let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
+        Text(venue)
+          .font(.system(size: 50))
+        dividerLine
+        Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
+          .font(.system(size: 50))
+          .padding(.bottom)
+      }
+      .padding([.horizontal, .bottom], 28)
+      .frame(maxWidth: .infinity, maxHeight: headHeight, alignment: .bottomLeading)
+    }
+    .frame(width: 1080, height: headHeight)
+  }
+
+  private var bottomView: some View {
+    ZStack {
+      whiteBox
+      Image("seta", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 28)
+    }
+      .frame(width: 1080, height: 162)
+  }
+
+  private var shareListView: some View {
+    ZStack {
+      whiteBox
+      
+      Group {
+        if !is2Columns {
+          VStack {
+            ForEach(setlist?.sets?.setsSet ?? [], id: \.self) { session in
+              let sessionName = session.name ?? (session.encore != nil ? "Encore" : "")
+              if sessionName != "" {
+                Text("\n\(sessionName)")
+                  .fontWeight(.semibold)
+                  .underline()
+                  .font(.system(size: fontSize))
+                  .lineLimit(2)
+              }
+              if let songs = session.song {
+                ForEach(0..<songs.count, id: \.self) { index in
+                  Text(songList[index].0)
+                    .font(.system(size: fontSize))
+                    .lineLimit(1)
+                }
+              }
+            }
+          }
+        } else {
+
+        }
+      }
+      .frame(width: 1040)
+    }
   }
 }
 
@@ -48,7 +156,6 @@ extension View {
     
     let window = UIWindow(frame: CGRect(origin: origin, size: size))
     let hosting = UIHostingController(rootView: self)
-    //hosting.view.frame = CGRect(origin: origin, size: size)
     hosting.view.frame = window.frame
     window.addSubview(hosting.view)
     window.makeKeyAndVisible()
@@ -79,73 +186,12 @@ public extension View {
     }
     let captureView = ShareSetlistView(songList: songList,
                                        artist: artist,
-                                       sessionInfo: sessionInfo)
+                                       setlist: setlist)
     return captureView.setlistImage()
   }
 }
 
-#Preview {
-  ShareSetlistView(songList: [("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ")]
-                   , artist: "Noel Gallagher’s High Flying Birds", sessionInfo: [("Encore", 4)])
-}
-
-#Preview {
-  ShareSetlistView(songList: [("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
-                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ")]
-                   , artist: "Noel Gallagher’s High Flying Birds", sessionInfo: [("Encore", 4)])
-}
-
-//Image("seta", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+//
 
 
 //ScrollView {
@@ -155,31 +201,7 @@ public extension View {
 //        .cornerRadius(20)
 //        .foregroundStyle(.white)
 //        .frame(width: 1080, height: 589)
-//      VStack(alignment: .leading) {
-//        Text(artist)
-//          .font(.system(size: 50))
-//          .padding(.top, 50)
-//        Rectangle()
-//          .foregroundStyle(.black)
-//          .frame(height: 1)
-//        //Text(setlist?.tour?.name ?? "-")
-//        Text("tourrrrrrrrr")
-//          .font(.system(size: 50))
-//        Rectangle()
-//          .foregroundStyle(.black)
-//          .frame(height: 1)
-//        //          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
-//        //          Text(venue)
-//        Text("Venuesefsfasdfa")
-//          .font(.system(size: 50))
-//        Rectangle()
-//          .foregroundStyle(.black)
-//          .frame(height: 1)
-//        //          Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
-//        Text("Nov 29, 2023")
-//          .font(.system(size: 50))
-//          .padding(.bottom)
-//      }
+
 //      .padding(.horizontal, 28)
 //    }
 //    dotLine

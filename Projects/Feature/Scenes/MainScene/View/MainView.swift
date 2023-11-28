@@ -43,6 +43,7 @@ public struct MainView: View {
           idx += 1
         }
       }
+
     }
     .onChange(of: likeArtists) { _, newValue in
       var idx = 0
