@@ -14,16 +14,17 @@ import GoogleAPIClientForREST
 public final class YoutubeService {
   private let service = GTLRYouTubeService()
   
-  var musicListsTitle: [String] = ["악뮤 Love Lee", "아이브 Either Way", "SZA Snooze", "Doja Cat Paint The Town Red", "Dua Lipa New Rules", "The Kid Stay", "Justin Stay", "JK 3D", "Kanye HomeComing", "Post Candy", "Post Malone Circle", "아이유 좋은날", "아이유 Good day", "비틀즈 렛잇비", "The Beatles Let it", "Doja Agora Hills", "The Weeknd Save yout tears", "정국 세븐", "비비 불륜", "해리 애즈잇워즈", "르세라핌 피어리스", "아이유 bbibbi", "lil nas X industry baby"]
+  public init() {
+  }
   
-  func createYouTubeService(user: GIDGoogleUser) -> GTLRYouTubeService {
+  public func createYouTubeService(user: GIDGoogleUser) -> GTLRYouTubeService {
     let service = GTLRYouTubeService()
     service.authorizer = user.fetcherAuthorizer
     
     return service
   }
   
-  func checkState() {
+  public func checkState() {
     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
       if error != nil || user == nil {
         print("Not Sign in")
@@ -33,12 +34,12 @@ public final class YoutubeService {
     }
   }
   
-  func googleSignIn(completionHandler: @escaping (Bool) -> Void) {
+  public func googleSignIn(completionHandler: @escaping (Bool) -> Void) {
     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
       if error == nil {
         print("Managed to restore previous sign in!\nScopes: \(String(describing: user?.grantedScopes))")
         
-        requestScopes(googleUser: user!) { success in
+        self.requestScopes(googleUser: user!) { success in
           if success == true {
             completionHandler(true)
           } else {
@@ -47,61 +48,56 @@ public final class YoutubeService {
         }
       } else {
         print("No previous user!\nThis is the error: \(String(describing: error?.localizedDescription))")
-        let signInConfig = GIDConfiguration.init(clientID: APIKeys().googleClientID)
+        _ = GIDConfiguration.init(clientID: APIKeys().googleClientID)
         guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, signInError in
           if signInError == nil {
             if let gUser = signInResult?.user {
-              requestScopes(googleUser: gUser) { signInSuccess in
-                if signInSuccess == true {
-                  completionHandler(true)
-                } else {
-                  completionHandler(false)
-                }
+              self.requestScopes(googleUser: gUser) { signInSuccess in
+                signInSuccess == true ? completionHandler(true) : completionHandler(false)
               }
-            } else {
-              print("error with signing in: \(String(describing: signInError)) ")
-              self.service.authorizer = nil
-              completionHandler(false)
             }
-          }
-        }
-      }
-    }
-    
-    
-    func requestScopes(googleUser: GIDGoogleUser, completionHandler: @escaping (Bool) -> Void) {
-      
-      let grantedScopes = googleUser.grantedScopes
-      if grantedScopes == nil || !grantedScopes!.contains(APIKeys().grantedScopes) {
-        let additionalScopes = APIKeys().additionalScopes
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
-        
-        googleUser.addScopes(additionalScopes, presenting: presentingViewController) { result, scopeError in
-          if scopeError == nil {
-            
-            googleUser.refreshTokensIfNeeded { user, error in
-              guard error == nil else { print("refreshError :  \(String(describing: error?.localizedDescription))")
-                return }
-              
-              let authorizer = user?.fetcherAuthorizer
-              self.service.authorizer = authorizer
-              completionHandler(true)
-            }
-            
           } else {
+            print("error with signing in: \(String(describing: signInError)) ")
+            self.service.authorizer = nil
             completionHandler(false)
-            print("Error with adding scopes: \(String(describing: scopeError?.localizedDescription))")
           }
         }
-      } else {
-        print("Already contains the scopes!")
-        completionHandler(true)
       }
     }
   }
   
-  func createPlaylist(service: GTLRYouTubeService, title: String) {
+  func requestScopes(googleUser: GIDGoogleUser, completionHandler: @escaping (Bool) -> Void) {
+    
+    let grantedScopes = googleUser.grantedScopes
+    if grantedScopes == nil || !grantedScopes!.contains(APIKeys().grantedScopes) {
+      let additionalScopes = APIKeys().additionalScopes
+      guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
+      
+      googleUser.addScopes(additionalScopes, presenting: presentingViewController) { result, scopeError in
+        if scopeError == nil {
+          
+          googleUser.refreshTokensIfNeeded { user, error in
+            guard error == nil else { print("refreshError :  \(String(describing: error?.localizedDescription))")
+              return }
+            
+            let authorizer = user?.fetcherAuthorizer
+            self.service.authorizer = authorizer
+            completionHandler(true)
+          }
+          
+        } else {
+          completionHandler(false)
+          print("Error with adding scopes: \(String(describing: scopeError?.localizedDescription))")
+        }
+      }
+    } else {
+      print("Already contains the scopes!")
+      completionHandler(true)
+    }
+  }
+  
+  public func createPlaylist(service: GTLRYouTubeService, title: String, musicList: [(String, String?)]) {
     let playlist = GTLRYouTube_Playlist()
     let snippet = GTLRYouTube_PlaylistSnippet()
     snippet.title = title
@@ -113,83 +109,83 @@ public final class YoutubeService {
         print("Error creating playlist: \(error.localizedDescription)")
       } else if let playlist = result as? GTLRYouTube_Playlist {
         let playlistId = playlist.identifier
-        self.searchAndInsertForMusicTitles(service: service, playlistId: playlistId!)
+        self.searchAndInsert(service: service, playlistId: playlistId!, musicList: musicList)
         print("Playlist created with ID: \(playlistId ?? "Unknown")")
       }
     }
   }
   
   
-  func getSearchList(service: GTLRYouTubeService, playlistId: String, title: String) {
+  func getSearchList(service: GTLRYouTubeService, playlistId: String, title: String, artist: String, completion: @escaping () -> Void) {
     let query = GTLRYouTubeQuery_SearchList.query(withPart: "snippet")
     query.maxResults = 1
     query.type = "video"
-    query.q = title
-    service.executeQuery(query) { ticket, searchList, ytError in
-      
-      if ytError == nil {
+    query.q = artist + " " + title
+    
+    service.executeQuery(query) { ticket, searchList, error in
+      if error == nil {
         let searchList = searchList as? GTLRYouTube_SearchListResponse
         if (searchList?.items) != nil {
           self.insertPlaylistItem(service: service, playlistId: playlistId, videoId: searchList?.items![0].identifier?.videoId ?? "")
+          completion()
+          
         } else {
           print("Search list empty")
+          completion()
+          
         }
       } else {
-        print("Youtube error: \(String(describing: ytError?.localizedDescription))")
+        print("Youtube Search error: \(String(describing: error?.localizedDescription))")
+        completion()
+        
       }
     }
   }
   
-  func insertPlaylistItem(service: GTLRYouTubeService, playlistId: String, videoId: String, maxRetries: Int = 10) {
-    var retryCount = 0
-    var backoffTime = 1
+  func insertPlaylistItem(service: GTLRYouTubeService, playlistId: String, videoId: String) {
     
-    func insert() {
-      let playlistItem = GTLRYouTube_PlaylistItem()
-      playlistItem.snippet = GTLRYouTube_PlaylistItemSnippet()
-      playlistItem.snippet!.playlistId = playlistId
-      
-      let resourceId = GTLRYouTube_ResourceId()
-      resourceId.kind = "youtube#video"
-      resourceId.videoId = videoId
-      
-      playlistItem.snippet!.resourceId = resourceId
-      
+    let playlistItem = GTLRYouTube_PlaylistItem()
+    playlistItem.snippet = GTLRYouTube_PlaylistItemSnippet()
+    playlistItem.snippet!.playlistId = playlistId
+    
+    let resourceId = GTLRYouTube_ResourceId()
+    resourceId.kind = "youtube#video"
+    resourceId.videoId = videoId
+    
+    playlistItem.snippet!.resourceId = resourceId
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
       let query = GTLRYouTubeQuery_PlaylistItemsInsert.query(withObject: playlistItem, part: "snippet")
       
       service.executeQuery(query) { (_, _, error) in
         if let error = error {
           print("Error adding video \(videoId) to playlist \(playlistId): \(error.localizedDescription)")
-          // Retry if needed
-          retry()
+          
         } else {
           print("Added video \(videoId) to playlist \(playlistId)")
         }
       }
     }
+  }
+  
+  func searchAndInsert(service: GTLRYouTubeService, playlistId: String, musicList: [(String, String?)]) {
+    var currentIndex = 0
     
-    func retry() {
-      retryCount += 1
-      if retryCount <= maxRetries {
-        print("Attempt \(retryCount) failed. Retrying in \(backoffTime) seconds...")
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(backoffTime)) {
-          backoffTime += 1  // Exponential backoff
-          insert()
+    func processNext() {
+      guard currentIndex < musicList.count else {
+        return
+      }
+      
+      let title = musicList[currentIndex].0
+      let artist = musicList[currentIndex].1 ?? ""
+      getSearchList(service: service, playlistId: playlistId, title: title, artist: artist) {
+        currentIndex += 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+          processNext()
         }
-      } else {
-        print("Max retry count reached. Unable to insert video \(videoId) to playlist \(playlistId)")
       }
     }
-    
-    // Try inserting initially
-    insert()
-  }
-  
-  
-  func searchAndInsertForMusicTitles(service: GTLRYouTubeService, playlistId: String) {
-    
-    for title in musicListsTitle {
-      getSearchList(service: service, playlistId: playlistId, title: title)
-    }
+    processNext()
   }
 }
+

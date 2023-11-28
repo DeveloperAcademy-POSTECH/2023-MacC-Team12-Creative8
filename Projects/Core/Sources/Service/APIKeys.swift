@@ -9,10 +9,10 @@
 import Foundation
 
 struct APIKeys {
-  let setlistFM = "K7QlHJ0nE6Ih48FX9wQfbo-6uFAq083uTU6g"
+  let setlistFM = "9zSVVMXDcxJSxmOB58YLT2iTncrEtu72TYWG"
   let musicBrainz = "API_KEY"
   let genius = "Bearer 7UINyw6MHKzr-CYFgeuL3ViZnpCLNvU1GeAo0ZKFEfyrvbyfSU5cWYMazDCXwIfh"
-  let googleClientID = "656710646232-9eo9khq1b0b2bn43hd0tlqfhiu0eql14.apps.googleusercontent.com"
+  let googleClientID = "345315119088-71prahgnc80mmj1k3bb2qnlk2gniofg5.apps.googleusercontent.com"
   let grantedScopes = "https://www.googleapis.com/auth/youtube"
   let additionalScopes = [
     "https://www.googleapis.com/auth/youtube",

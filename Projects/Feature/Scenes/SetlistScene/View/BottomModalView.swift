@@ -51,10 +51,9 @@ struct BottomModalView: View {
         }
         Spacer()
           .frame(width: 14)
-        platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
-          //TODO: 유튜브 뮤직(플레이리스트 추가 부분은 ExportPlayListViewModel 안에서 추가하셔야 합니다!)
-          //          exportViewModel.showYouTubeMusicAlert.toggle()
-          //          exportViewModel.playlistTitle = ""
+          platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
+          exportViewModel.showYouTubeAlert = true
+            vm.showModal = false
         }
         //MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
         //        Spacer()
