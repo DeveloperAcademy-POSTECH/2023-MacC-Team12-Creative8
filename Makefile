@@ -1,4 +1,4 @@
 project:
 	tuist clean
 	tuist fetch
-	tuist generate && pod install &&  open Setlist.xcworkspace
+	tuist generate --no-open && pod install &&  open Setlist.xcworkspace

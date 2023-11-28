@@ -24,16 +24,6 @@ public final class YoutubeService {
     return service
   }
   
-  public func checkState() {
-    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-      if error != nil || user == nil {
-        print("Not Sign in")
-      } else {
-        //로그인 된 상태
-      }
-    }
-  }
-  
   public func googleSignIn(completionHandler: @escaping (Bool) -> Void) {
     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
       if error == nil {
