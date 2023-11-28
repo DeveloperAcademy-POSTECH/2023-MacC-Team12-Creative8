@@ -194,6 +194,22 @@
         }
       }
     },
+    "App Store로 이동하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to App Store"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "App Store로 이동하기"
+          }
+        }
+      }
+    },
     "Bugs, FLO, genie, VIBE의 유저이신가요?" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -248,6 +264,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
+          }
+        }
+      }
+    },
+    "NSAppleMusicUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To enable the Export Playlist featureYou must allow access to 'Apple Music'"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공연의 세트리스트를 Apple Music 플레이리스트에 넣기 위해 접근을 허용해주세요"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To use the Photography featureYou must allow 'Photo/Video' access"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세트리스트를 사진첩에 저장하려면 권한이 필요합니다."
           }
         }
       }
@@ -621,6 +671,38 @@
         }
       }
     },
+    "메일 전송 실패" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to send email"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메일 전송 실패"
+          }
+        }
+      }
+    },
+    "메일을 보내려면 'Mail' 앱이 필요합니다. App Store에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To send an email, the 'Mail' app is required. Please restore the app from the App Store or check your email settings and try again."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메일을 보내려면 'Mail' 앱이 필요합니다. App Store에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요."
+          }
+        }
+      }
+    },
     "메탈" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -666,7 +748,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "문의하기"
           }
         }
@@ -886,16 +968,6 @@
         }
       }
     },
-    "세트리스트 정보 수정을 원하시나요?" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "세트리스트 정보 수정을 원하시나요?"
-          }
-        }
-      }
-    },
     "세트리스트 정보가 아직 없습니다" : {
       "localizations" : {
         "en" : {
@@ -1107,6 +1179,23 @@
         }
       }
     },
+    "안녕하세요. Seta 입니다. 아래 내용을 보내주시면 문의 확인에 도움이 됩니다.\n\n- iOS 버전 :\n- 기기 모델명 :\n- 문제발생일시 :\n- 문의 내용 :" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello, this is Seta. Providing the following information will help us investigate your inquiry:\n\n- iOS version:\n- Device model:\n- Date and time of issue:\n- Details of your inquiry:"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n      안녕하세요. Seta 입니다. 아래 내용을 보내주시면 문의 확인에 도움이 됩니다.\n      \n        - iOS 버전 :\n        - 기기 모델명 :\n        - 문제발생일시 :\n        - 문의 내용 :\n      \n      \n     "
+          }
+        }
+      }
+    },
     "알앤비" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1124,16 +1213,6 @@
         }
       }
     },
-    "에서 수정할 수 있습니다" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "에서 수정할 수 있습니다"
-          }
-        }
-      }
-    },
     "에서 직접 추가할 수 있어요." : {
       "localizations" : {
         "en" : {
@@ -1144,7 +1223,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "에서 직접 추가할 수 있어요."
           }
         }
@@ -1197,16 +1276,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "일렉트로닉"
-          }
-        }
-      }
-    },
-    "잘못된 세트리스트 정보를 발견하셨다면," : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "잘못된 세트리스트 정보를 발견하셨다면,"
           }
         }
       }
