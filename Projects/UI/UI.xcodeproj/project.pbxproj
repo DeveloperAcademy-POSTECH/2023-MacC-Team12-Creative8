@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,7 @@
 		2C975D6B60D2D29A2CB0F4BC /* ArchiveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3DD06ADBC0ACBC11D4D8B2 /* ArchiveExtension.swift */; };
 		4227D6225C566381E5480831 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957378EDAFAF88BFEB487132 /* Colors.xcassets */; };
 		7C3385EA0F326F238222C9B8 /* TuistBundle+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */; };
-		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; };
+		7E443D80626CA9BB9A1E0802 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1C9C9F198B162C645B7C84 /* UI.framework */; platformFilter = ios; };
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
 		9F7512161D1AE13D99D8517A /* TuistAssets+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */; };
 		A37BCE36A95F8C4A2A75FE92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A78FD64E60B33D4B9F3344 /* Images.xcassets */; };
@@ -228,13 +228,12 @@
 		5E1CDE9B685737937831E727 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
 			buildConfigurationList = 4EE41D1E035ADD9C5B3104DC /* Build configuration list for PBXProject "UI" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -289,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/jangsumin/Documents/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/Setlist/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -344,7 +343,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -434,7 +432,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -461,7 +458,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -546,7 +542,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

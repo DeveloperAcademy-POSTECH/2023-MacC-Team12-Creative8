@@ -45,7 +45,7 @@ struct BottomModalView: View {
             title: Text(""),
             message: Text("플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."),
             primaryButton: .default(Text("취소")),
-            secondaryButton:  .default(Text("설정").bold(), action: {
+            secondaryButton: .default(Text("설정").bold(), action: {
               UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         }
@@ -56,7 +56,7 @@ struct BottomModalView: View {
           //          exportViewModel.showYouTubeMusicAlert.toggle()
           //          exportViewModel.playlistTitle = ""
         }
-        //MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
+        // MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
         //        Spacer()
         //        platformButtonView(title: "Spotify", image: "spotify") {
         //
@@ -89,7 +89,7 @@ struct BottomModalView: View {
         self.isSharePresented = true
       }
       .sheet(isPresented: $isSharePresented, content: {
-        let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "")
+        let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "", setlist)
         ActivityViewController(activityItems: [image])
       })
       

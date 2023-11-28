@@ -66,6 +66,7 @@ public struct SettingView: View {
         .padding(.horizontal, 25)
         .padding(.vertical)
       }
+      .scrollIndicators(.hidden)
     }
     .navigationTitle("더보기")
   }

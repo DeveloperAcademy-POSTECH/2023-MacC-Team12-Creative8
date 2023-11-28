@@ -20,6 +20,8 @@ final class SearchViewModel: ObservableObject {
   @Published var searchIsPresented: Bool = false
   @Published var artistList: [MusicBrainzArtist] = []
   @Published var isLoading: Bool = false
+  @Published var domesticArtists: [OnboardingModel] = []
+  @Published var foreignArtists: [OnboardingModel] = []
   private var cancellables = Set<AnyCancellable>()
 
   init() {
@@ -34,8 +36,9 @@ final class SearchViewModel: ObservableObject {
 
     if artistFetchService.allArtist.isEmpty {
       artistFetchService.fetchData { success in
-          if !success {
-            // 데이터 가져오기 실패시
+          if success {
+            self.domesticArtists = self.getRandomArtists(.kpop)
+            self.foreignArtists = self.getRandomArtists(.pop)
           }
       }
     }
@@ -50,7 +53,9 @@ final class SearchViewModel: ObservableObject {
     if searchIsPresented == false {
       let kpopArtists = artistFetchService.allArtist.filter { artist in
         if let tags = artist.tags, artist.country == (kind == .kpop ? "South Korea" : "") {
-          return tags.contains(kind == .kpop ? "K-Pop" : "Pop")
+          if artist.url != nil && artist.url != "" {
+            return tags.contains(kind == .kpop ? "K-Pop" : "Pop")
+          }
         }
         return false
       }

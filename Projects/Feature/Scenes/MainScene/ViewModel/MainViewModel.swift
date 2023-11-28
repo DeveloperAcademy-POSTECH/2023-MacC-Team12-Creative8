@@ -21,7 +21,6 @@ final class MainViewModel: ObservableObject {
   var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
   
   func replaceFirstSpaceWithNewline(_ input: String) -> String {
-    print(input)
     if input == "Noel Gallagher’s High Flying Birds" {
       return "Noel Gallagher’s\nHigh Flying Birds"
     } else {

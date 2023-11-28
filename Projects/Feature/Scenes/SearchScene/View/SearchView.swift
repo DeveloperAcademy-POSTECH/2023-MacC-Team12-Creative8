@@ -28,6 +28,9 @@ struct SearchView: View {
           .padding(.top)
           ScrollViewReader { proxy in
             ScrollView {
+//              searchingHistoryView
+//                .padding(.top, 12)
+
               Spacer().id(topID)
               artistView
             }
@@ -35,6 +38,7 @@ struct SearchView: View {
               withAnimation {
                 proxy.scrollTo(topID)
               }
+
             }
           }
           .scrollDisabled(viewModel.searchIsPresented)
@@ -43,7 +47,7 @@ struct SearchView: View {
             if viewModel.searchIsPresented {
               ScrollView {
                 searchingHistoryView
-                  .padding(.top, 32)
+                  .padding(.top, 12)
               }
               .scrollIndicators(.hidden)
             }
@@ -70,7 +74,8 @@ struct SearchView: View {
   private var artistView: some View {
     VStack(alignment: .leading) {
       domesticArtistView
-        .padding(.vertical, 64)
+        .padding(.top, 44)
+        .padding(.bottom, 64)
       foreignArtistView
         .padding(.bottom, 48)
     }
@@ -84,7 +89,7 @@ struct SearchView: View {
       Text("국내 아티스트").bold()
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(viewModel.getRandomArtists(.kpop), id: \.self) { item in
+        ForEach(viewModel.domesticArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
         }
       }
@@ -96,7 +101,7 @@ struct SearchView: View {
       Text("해외 아티스트").bold()
         .foregroundStyle(Color.mainBlack)
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
-        ForEach(viewModel.getRandomArtists(.pop), id: \.self) { item in
+        ForEach(viewModel.foreignArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistMbid: item.mbid)
         }
       }
