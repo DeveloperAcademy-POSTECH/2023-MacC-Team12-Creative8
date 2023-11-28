@@ -16,7 +16,6 @@
 		95C6D0C842B1077EEACD8013 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */; };
 		9F7512161D1AE13D99D8517A /* TuistAssets+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0084635D6CE3F4E4B887B /* TuistAssets+UI.swift */; };
 		A37BCE36A95F8C4A2A75FE92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A78FD64E60B33D4B9F3344 /* Images.xcassets */; };
-		CAD2D08560582B458099B9B2 /* Seta_loading.lottie in Resources */ = {isa = PBXBuildFile; fileRef = BBDADF02E9BB884B0BF06F58 /* Seta_loading.lottie */; };
 		EEE6B3A9FC617A725B36BCCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E35A63B91A07E2482B3B278 /* ColorExtension.swift */; };
 		F1235D919AE6FF7287A83A0A /* ImageCropExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289741E57FAAE603ED95F014 /* ImageCropExtension.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		957378EDAFAF88BFEB487132 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E35A63B91A07E2482B3B278 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		B680330A80EF1CB1E7BDF9B1 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
-		BBDADF02E9BB884B0BF06F58 /* Seta_loading.lottie */ = {isa = PBXFileReference; path = Seta_loading.lottie; sourceTree = "<group>"; };
 		BDCBC9146BB3FC6A3C06D144 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A78FD64E60B33D4B9F3344 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EA107D337866699F71AD9912 /* UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UITests-Info.plist"; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 		56F3DCA032D4C8ADA6BAADB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F4C049A835775435D6630C3F /* Lotties */,
 				957378EDAFAF88BFEB487132 /* Colors.xcassets */,
 				D3A78FD64E60B33D4B9F3344 /* Images.xcassets */,
 			);
@@ -182,14 +179,6 @@
 				EA107D337866699F71AD9912 /* UITests-Info.plist */,
 			);
 			path = InfoPlists;
-			sourceTree = "<group>";
-		};
-		F4C049A835775435D6630C3F /* Lotties */ = {
-			isa = PBXGroup;
-			children = (
-				BBDADF02E9BB884B0BF06F58 /* Seta_loading.lottie */,
-			);
-			path = Lotties;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +266,6 @@
 			files = (
 				4227D6225C566381E5480831 /* Colors.xcassets in Resources */,
 				A37BCE36A95F8C4A2A75FE92 /* Images.xcassets in Resources */,
-				CAD2D08560582B458099B9B2 /* Seta_loading.lottie in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +289,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/jangsumin/Documents/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 

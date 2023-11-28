@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		03EA814D84858AD2B3D35638 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EB1D01BAE365D00E42F60 /* ArtistView.swift */; };
 		069FC56BB3B65A8510E24FE4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083107765017313EF49CE3A /* OnboardingViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
-		1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2175F963B082B7C3E85D54 /* BottomView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */; };
@@ -30,7 +29,6 @@
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7611BAD555C16F6A7E0CEA5C /* ArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
-		79EAD61A2B15AF070066B763 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 79EAD6192B15AF070066B763 /* Localizable.xcstrings */; };
 		802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D00D9D84D120E91EDCF4E /* ExportPlaylistViewModel.swift */; };
@@ -113,7 +111,6 @@
 		7391501B4523A254694E36D3 /* ConcertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertInfoView.swift; sourceTree = "<group>"; };
 		75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedSetlistsView.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
-		79EAD6192B15AF070066B763 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleAlert.swift; sourceTree = "<group>"; };
 		8083107765017313EF49CE3A /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
@@ -122,7 +119,6 @@
 		86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSetCell.swift; sourceTree = "<group>"; };
 		8A611D1693834F821CBD6EAD /* Feature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingViewModel.swift; sourceTree = "<group>"; };
-		8F2175F963B082B7C3E85D54 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistCell.swift; sourceTree = "<group>"; };
 		9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveArtistCell.swift; sourceTree = "<group>"; };
@@ -193,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */,
-				8F2175F963B082B7C3E85D54 /* BottomView.swift */,
 				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
@@ -405,7 +400,6 @@
 		C05AC50F60B178F60E99048B /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				79EAD6192B15AF070066B763 /* Localizable.xcstrings */,
 				47D9A39E45687A9BACB2BEC5 /* Derived */,
 				48F6722CA62D2646F716C0F0 /* Scenes */,
 			);
@@ -527,6 +521,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -559,7 +555,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79EAD61A2B15AF070066B763 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,8 +578,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/jangsumin/Documents/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
-
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -626,7 +620,6 @@
 				802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */,
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
-				1534C309B3179EAE42C4FFD2 /* BottomView.swift in Sources */,
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
