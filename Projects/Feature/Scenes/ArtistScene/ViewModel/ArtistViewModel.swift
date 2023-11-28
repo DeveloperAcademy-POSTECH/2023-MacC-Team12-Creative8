@@ -22,7 +22,6 @@ class ArtistViewModel: ObservableObject {
   var page: Int = 1
   var totalPage: Int = 0
   
-  @Published var showBookmarkedSetlists: Bool = false
   @Published var isLikedArtist: Bool = false
   @Published var isLoadingArtistInfo: Bool = false
   @Published var isLoadingSetlist: Bool = false

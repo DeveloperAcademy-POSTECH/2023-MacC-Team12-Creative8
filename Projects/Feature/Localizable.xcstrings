@@ -104,7 +104,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@'s latest show"
+            "value" : "%@’s latest show"
           }
         },
         "ko" : {
@@ -264,40 +264,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
-          }
-        }
-      }
-    },
-    "NSAppleMusicUsageDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To enable the Export Playlist featureYou must allow access to 'Apple Music'"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "공연의 세트리스트를 Apple Music 플레이리스트에 넣기 위해 접근을 허용해주세요"
-          }
-        }
-      }
-    },
-    "NSPhotoLibraryUsageDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To use the Photography featureYou must allow 'Photo/Video' access"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "세트리스트를 사진첩에 저장하려면 권한이 필요합니다."
           }
         }
       }
@@ -891,12 +857,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To use the Photography featureYou must allow 'Photo/Video' access"
+            "value" : "To use the Photography feature, You must allow 'Photo/Video' access"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."
           }
         }
@@ -1584,12 +1550,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To enable the Export Playlist featureYou must allow access to 'Apple Music'"
+            "value" : "To enable the Export Playlist feature, You must allow access to 'Apple Music'"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."
           }
         }

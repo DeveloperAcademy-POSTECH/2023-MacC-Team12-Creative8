@@ -21,7 +21,6 @@ final class ExportPlaylistViewModel: ObservableObject {
   @Published var showMusicSettingsAlert = false
   
   //MARK: Photo
-  
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
     
@@ -104,8 +103,12 @@ final class ExportPlaylistViewModel: ObservableObject {
       self.showMusicSettingsAlert = true
     } else {
       CheckAppleMusicSubscription.shared.appleMusicSubscription()
-      self.showAppleMusicAlert.toggle()
-      self.playlistTitle = ""
+      if CheckAppleMusicSubscription.shared.getCheckValue() {
+        self.showAppleMusicAlert.toggle()
+        self.playlistTitle = ""
+      } else {
+        
+      }
     }
   }
   

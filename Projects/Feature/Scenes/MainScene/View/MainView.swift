@@ -127,7 +127,7 @@ public struct MainView: View {
       }
     }
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.09)
+    .safeAreaPadding(.leading, UIWidth * 0.094)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
@@ -141,7 +141,8 @@ public struct MainView: View {
     .scrollTargetBehavior(.viewAligned)
     .scrollIndicators(.hidden)
     .scrollPosition(id: $viewModel.scrollToIndex)
-    .safeAreaPadding(.horizontal, UIWidth * 0.09)
+    .safeAreaPadding(.horizontal, UIWidth * 0.092)
+    .safeAreaPadding(.trailing, UIWidth * 0.005)
   }
 }
 extension View {

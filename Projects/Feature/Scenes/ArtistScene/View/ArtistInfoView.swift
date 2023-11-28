@@ -67,12 +67,14 @@ struct ArtistInfoView: View {
       })
     } else {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+        .resizable()
         .renderingMode(.template)
         .foregroundStyle(Color.lineGrey1)
         .background {
           Color.mainGrey1
             .cornerRadius(14)
         }
+        .aspectRatio(1.5, contentMode: .fit)
       )
     }
   }
