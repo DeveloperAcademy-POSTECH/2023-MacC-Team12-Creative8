@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UI
 
 public struct CaptureSetlistView: View {
   let songList: [(String, String?)]
@@ -16,22 +17,29 @@ public struct CaptureSetlistView: View {
   public var body: some View {
     ZStack {
       Color.white.ignoresSafeArea()
-      Image(systemName: "\(index).circle")
-        .font(.system(size: 200))
+      Text("\(index)")
+        .font(.system(size: 115))
         .foregroundStyle(Color.gray)
-        .opacity(0.15)
+        .opacity(0.3)
 
         VStack(alignment: .leading) {
-          HStack {
-            Text("Seta")
-              .font(.system(size: 34))
-              .opacity(0.3)
-              .padding(.horizontal, 30)
-            Spacer()
-            logo
-              .opacity(0.3)
-              .padding(.trailing, 24)
-          }
+//          HStack {
+//            Text("Seta")
+//              .font(.system(size: 34))
+//              .opacity(0.3)
+//              .padding(.horizontal, 30)
+//            Spacer()
+//            logo
+//              .opacity(0.3)
+//              .padding(.trailing, 24)
+//          }
+          Image("serviceForConcertgoers", bundle: setaBundle)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: UIWidth * 0.87)
+            .padding(.horizontal)
+            .padding(.bottom)
+          
           Rectangle()
             .foregroundStyle(.black)
             .frame(height: 1)
@@ -47,6 +55,12 @@ public struct CaptureSetlistView: View {
               .foregroundStyle(.black)
               .frame(height: 1)
           }
+          Image("screenshotforOCR", bundle: setaBundle)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: UIWidth * 0.68)
+            .padding(.horizontal)
+            .padding(.top)
         }
         .padding(.top, 30)
 
