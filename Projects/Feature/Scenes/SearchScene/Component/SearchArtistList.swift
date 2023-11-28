@@ -30,9 +30,7 @@ struct SearchArtistList: View {
         let namePair: (String, String?) = viewModel.koreanConverter.findKoreanName(artist: artist)
         let info: String = ((namePair.1 != nil) ? namePair.1! + ", " : "") + (artist.area?.name ?? "")
         VStack {
-          NavigationLink {
-            ArtistView(selectedTab: $selectedTab, artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
-          } label: {
+          NavigationLink(value: NavigationDelivery(artistInfo: SaveArtistInfo(name: namePair.0, country: "", alias: namePair.1 ?? "", mbid: artist.id ?? "", gid: 0, imageUrl: "", songList: []))) {
             ListRow(namePair: namePair, info: info)
           }
           .simultaneousGesture(TapGesture().onEnded {

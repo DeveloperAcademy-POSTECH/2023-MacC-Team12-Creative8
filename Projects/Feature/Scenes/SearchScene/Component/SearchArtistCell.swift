@@ -8,18 +8,17 @@
 
 import SwiftUI
 import UI
+import Core
 
 struct SearchArtistCell: View {
   @Binding var selectedTab: Tab
   let imageURL: String
   let artistName: String
   let artistMbid: String
-
+  
   var body: some View {
     VStack(alignment: .leading) {
-      NavigationLink {
-        ArtistView(selectedTab: $selectedTab, artistName: artistName, artistAlias: "", artistMbid: artistMbid)
-      }label: {
+      NavigationLink(value: NavigationDelivery(artistInfo: SaveArtistInfo(name: artistName, country: "", alias: "", mbid: artistMbid, gid: 0, imageUrl: imageURL, songList: []))) {
         AsyncImage(url: URL(string: imageURL)) { phase in
           switch phase {
           case .empty:
@@ -42,7 +41,7 @@ struct SearchArtistCell: View {
       .aspectRatio(contentMode: .fit)
       .clipShape(RoundedRectangle(cornerRadius: 20))
       .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.lineGrey1, lineWidth: 1))
-
+      
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)
         .font(.footnote)

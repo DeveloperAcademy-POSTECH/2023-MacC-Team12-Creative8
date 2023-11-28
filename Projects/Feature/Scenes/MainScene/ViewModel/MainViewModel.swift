@@ -11,29 +11,6 @@ import Core
 import Combine
 
 final class MainViewModel: ObservableObject {
-  
-  // MARK: Tab View
-  @Published var pageStack: [NavigationDelivery] = []
-  
-  private var subscription: AnyCancellable?
-  
-  init(consecutiveTaps: AnyPublisher<Void, Never>) {
-    subscription = consecutiveTaps
-      .sink { [weak self] in
-        guard let self else { return }
-        
-        withAnimation {
-          if self.pageStack.isEmpty {
-            self.selectedIndex = 0
-            self.scrollToIndex = 0
-          } else {
-            self.pageStack.removeLast()
-          }
-        }
-        
-      }
-  }
-  
   let dataService = SetlistDataService()
   let koreanConverter = KoreanConverter()
   

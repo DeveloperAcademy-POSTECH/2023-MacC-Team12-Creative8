@@ -123,6 +123,6 @@ struct ArtistsContentView: View {
 
 #Preview {
   ArtistsContentView(selectedTab: .constant(.home),
-                     viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()),
+                     viewModel: MainViewModel(),
                      artistInfo: SaveArtistInfo(name: "Silica Gel", country: "South Korea", alias: "실리카겔", mbid: "2c8b5bb2-6110-488d-bc15-abb08379d3c6", gid: 2382659, imageUrl: "https://i.namu.wiki/i/SCZmC5XQgajMHRv6wvMc406r6aoQyf0JjXNCIQkIxJ-oe035C8h6VTkKllE6gkp3p-A7RFwiIcd0d726O77rbQ.webp", songList: []), index: 1)
 }

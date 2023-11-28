@@ -15,12 +15,13 @@ import Combine
 public struct MainView: View {
   @Binding var selectedTab: Tab
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
-  @StateObject var viewModel: MainViewModel
+  @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
+  @StateObject var tabViewManager: TabViewManager
   
   public var body: some View {
-    NavigationStack(path: $viewModel.pageStack) {
+    NavigationStack(path: $tabViewManager.pageStack) {
       Group {
         if likeArtists.isEmpty {
           EmptyMainView(selectedTab: $selectedTab)
@@ -31,6 +32,12 @@ public struct MainView: View {
               .id(likeArtists)
           }
           .scrollIndicators(.hidden)
+          .onReceive(tabViewManager.$scrollToTop) { _ in
+            withAnimation {
+              viewModel.scrollToIndex = 0
+              viewModel.selectedIndex = 0
+            }
+          }
         }
       }
       .padding(.vertical)
@@ -153,5 +160,5 @@ struct RoundedCorner: Shape {
 }
 
 #Preview {
-  MainView(selectedTab: .constant(.home), viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
+  MainView(selectedTab: .constant(.home), viewModel: MainViewModel(), tabViewManager: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
 }

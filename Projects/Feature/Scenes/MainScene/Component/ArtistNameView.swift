@@ -31,6 +31,6 @@ struct ArtistNameView: View {
 
 #Preview {
   ArtistNameView(selectedTab: .constant(.home),
-                 viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()),
+                 viewModel: MainViewModel(),
                  index: 1, name: "Silica Gel")
 }

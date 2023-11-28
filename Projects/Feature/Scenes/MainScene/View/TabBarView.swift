@@ -16,8 +16,28 @@ struct NavigationDelivery: Hashable {
   var artistInfo: SaveArtistInfo
 }
 
-final class TabViewModel: ObservableObject {
+class TabViewManager: ObservableObject {
+  @Published var pageStack: [NavigationDelivery] = []
+  @Published var scrollToTop: Bool = false
   
+  private var subscription: AnyCancellable?
+  
+  init(consecutiveTaps: AnyPublisher<Void, Never>) {
+    subscription = consecutiveTaps
+      .sink { [weak self] in
+        guard let self else { return }
+        
+        if pageStack.isEmpty {
+          scrollToTop = true
+        } else {
+          pageStack.removeLast()
+        }
+        
+      }
+  }
+}
+
+final class TabViewModel: ObservableObject {
   @Published var selectedTab: Tab = .home
   
   typealias PairwiseTabs = (previous: Tab?, current: Tab)
@@ -31,47 +51,39 @@ final class TabViewModel: ObservableObject {
       .compactMap { $0.current == tab ? Void() : nil}
       .eraseToAnyPublisher()
   }
-  
 }
 
 public struct TabBarView: View {
   @StateObject var viewModel = TabViewModel()
-  @Environment(\.dismiss) var dismiss
   
   public init() {
     let appearance = UITabBarAppearance()
-         let tabBar = UITabBar.appearance()
-
-         appearance.shadowColor = UIColor.clear
-         appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-         tabBar.unselectedItemTintColor = UIColor(named: "fontGrey25", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-         tabBar.standardAppearance = appearance
+    let tabBar = UITabBar.appearance()
+    
+    appearance.shadowColor = UIColor.clear
+    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.unselectedItemTintColor = UIColor(named: "fontGrey25", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.standardAppearance = appearance
   }
-
+  
   public var body: some View {
     TabView(selection: $viewModel.selectedTab) {
-      MainView(selectedTab: $viewModel.selectedTab, viewModel: MainViewModel(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
+      MainView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
         .navigationBarTitleDisplayMode(.inline)
         .tabItem { Label("세트리스트", systemImage: "music.note.house.fill") }
         .tag(Tab.home)
       
-      NavigationStack {
-        SearchView(selectedTab: $viewModel.selectedTab, viewModel: SearchViewModel())
-          .navigationBarTitleDisplayMode(.inline)
-      }
-      .tabItem { Label("검색", systemImage: "magnifyingglass") }
-      .tag(Tab.search)
+      SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
+        .navigationBarTitleDisplayMode(.inline)
+        .tabItem { Label("검색", systemImage: "magnifyingglass") }
+        .tag(Tab.search)
       
-      NavigationStack {
-        ArchivingView(selectedTab: $viewModel.selectedTab)
-          .navigationBarTitleDisplayMode(.large)
-          .background(Color.backgroundWhite)
-      }
-      .tabItem {
-        Label("보관함", systemImage: "heart.fill")
-      }
-      .tag(Tab.archiving)
-
+      ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
+        .navigationBarTitleDisplayMode(.large)
+        .background(Color.backgroundWhite)
+        .tabItem { Label("보관함", systemImage: "heart.fill") }
+        .tag(Tab.archiving)
+      
       NavigationStack {
         SettingView()
           .navigationBarTitleDisplayMode(.large)

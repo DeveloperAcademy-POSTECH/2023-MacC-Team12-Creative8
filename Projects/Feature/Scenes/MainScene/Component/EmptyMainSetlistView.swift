@@ -78,5 +78,5 @@ struct EmptyMainSetlistView: View {
 }
 
 #Preview {
-  EmptyMainSetlistView(viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
+  EmptyMainSetlistView(viewModel: MainViewModel())
 }
