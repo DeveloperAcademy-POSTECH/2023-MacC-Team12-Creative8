@@ -21,7 +21,6 @@ final class ExportPlaylistViewModel: ObservableObject {
   @Published var showMusicSettingsAlert = false
   
   //MARK: Photo
-  
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
     

@@ -19,18 +19,19 @@ struct EmptyMainSetlistView: View {
   @ObservedObject var viewModel: MainViewModel
   
   var body: some View {
-    VStack(alignment: .center, spacing: 0) {
+    VStack(alignment: .leading, spacing: 0) {
       Spacer()
       Text("세트리스트 정보가 없습니다.")
         .font(.system(size: 16))
         .fontWeight(.semibold)
         .foregroundStyle(Color.mainBlack)
-        .padding(.horizontal)
+        .multilineTextAlignment(.leading)
       
       Text("찜한 가수의 세트리스트가 없다면,")
         .foregroundStyle(Color.fontGrey2)
         .font(.footnote)
-        .padding([.horizontal, .top])
+        .padding(.top)
+        .multilineTextAlignment(.leading)
       
       if viewModel.isKorean() {
         HStack(spacing: 0) {
@@ -43,13 +44,15 @@ struct EmptyMainSetlistView: View {
           Text("에서 직접 추가할 수 있어요.")
             .foregroundStyle(Color.fontGrey2)
             .font(.footnote)
+            .multilineTextAlignment(.leading)
         }
-        .padding([.horizontal, .bottom])
+        .padding(.bottom)
       } else {
         HStack(spacing: 0) {
           Text("에서 직접 추가할 수 있어요.")
                       .foregroundStyle(Color.fontGrey2)
                       .font(.footnote)
+                      .multilineTextAlignment(.leading)
           Link(destination: URL(string: "https://www.setlist.fm")!) {
             Text("Setlist.fm")
               .underline()
@@ -57,7 +60,7 @@ struct EmptyMainSetlistView: View {
               .font(.footnote)
           }
         }
-        .padding([.horizontal, .bottom])
+        .padding(.bottom)
       }
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
@@ -72,7 +75,7 @@ struct EmptyMainSetlistView: View {
       }
       Spacer()
     }
-    .frame(width: UIWidth * 0.78)
+    .frame(width: UIWidth * 0.81)
   }
   
 }

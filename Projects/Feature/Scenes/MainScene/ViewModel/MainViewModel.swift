@@ -21,10 +21,15 @@ final class MainViewModel: ObservableObject {
   var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
   
   func replaceFirstSpaceWithNewline(_ input: String) -> String {
-    guard let range = input.rangeOfCharacter(from: .whitespaces) else {
-      return input
+    print(input)
+    if input == "Noel Gallagher’s High Flying Birds" {
+      return "Noel Gallagher’s\nHigh Flying Birds"
+    } else {
+      guard let range = input.rangeOfCharacter(from: .whitespaces) else {
+        return input
+      }
+      return input.replacingCharacters(in: range, with: "\n")
     }
-    return input.replacingCharacters(in: range, with: "\n")
   }
   
   func getSetlistsFromSetlistFM(artistMbid: String, idx: Int) {
@@ -48,15 +53,6 @@ final class MainViewModel: ObservableObject {
         self.isLoading = false
         print("Failed to fetch setlist data.")
       }
-//      if let result = result {
-//        let filteredSetlists = result.setlist?.filter { $0.venue?.name != "SBS Inkigayo" && $0.venue?.name != "M Countdown" && $0.venue?.name != "Show! Music Core" && $0.venue?.name != "KBS Music Bank" && $0.venue?.name != "Show Champion" && $0.venue?.name != "KCON"} ?? []
-//                        
-//                        DispatchQueue.main.async {
-//                            self.setlists = filteredSetlists
-//                            self.totalPage = Int((result.total ?? 1) / (result.itemsPerPage ?? 1) + 1)
-//                            self.isLoadingSetlist = false
-//                        }
-//      }
     }
   }
   

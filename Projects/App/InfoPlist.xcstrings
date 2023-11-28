@@ -19,12 +19,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To enable the Export Playlist featureYou must allow access to 'Apple Music'"
+            "value" : "To enable the Export Playlist feature, You must allow access to 'Apple Music'"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "공연의 세트리스트를 Apple Music 플레이리스트에 넣기 위해 접근을 허용해주세요"
           }
         }
@@ -36,12 +36,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To use the Photography featureYou must allow 'Photo/Video' access"
+            "value" : "To use the Photography feature, You must allow 'Photo/Video' access"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "세트리스트를 사진첩에 저장하려면 권한이 필요합니다."
           }
         }
