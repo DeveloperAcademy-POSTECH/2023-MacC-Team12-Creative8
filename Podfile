@@ -3,28 +3,28 @@ use_frameworks!
 inhibit_all_warnings!
 
 workspace 'Setlist.xcworkspace'
-project 'App/Seta.xcodeproj'
-project 'Core/Core.xcodeproj'
-project 'Feature/Feature.xcodeproj'
-project 'UI/UI.xcodeproj'
+project 'Projects/App/Seta.xcodeproj'
+project 'Projects/Core/Core.xcodeproj'
+project 'Projects/Feature/Feature.xcodeproj'
+project 'Projects/UI/UI.xcodeproj'
 
 target 'Seta' do
-   project 'App/Seta.xcodeproj'
+   project 'Projects/App/Seta.xcodeproj'
    pod 'GoogleAPIClientForREST/YouTube', '~> 1.2.1'
 end
 
 target 'Core' do
-   project 'Core/Core.xcodeproj'
+   project 'Projects/Core/Core.xcodeproj'
    pod 'GoogleAPIClientForREST/YouTube', '~> 1.2.1'
 end
 
 target 'Feature' do
-   project 'Feature/Feature.xcodeproj'
+   project 'Projects/Feature/Feature.xcodeproj'
    pod 'GoogleAPIClientForREST/YouTube', '~> 1.2.1'
 end
 
 target 'UI' do
-   project 'UI/UI.xcodeproj'
+   project 'Projects/UI/UI.xcodeproj'
    pod 'GoogleAPIClientForREST/YouTube', '~> 1.2.1'
 end
 

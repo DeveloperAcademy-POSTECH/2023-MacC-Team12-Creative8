@@ -12,7 +12,7 @@ extension TargetDependency {
 }
 
 public extension TargetDependency.Projcet {
-    static let Feature = TargetDependency.project(target: "Feature", path: .relativeToRoot("Feature"))
+    static let Feature = TargetDependency.project(target: "Feature", path: .relativeToRoot("Projects/Feature"))
 }
 
 public enum Module {
@@ -37,7 +37,7 @@ extension Module {
   }
   
   public var path: ProjectDescription.Path {
-    return .relativeToRoot(self.name)
+    return .relativeToRoot("Projects/" + self.name)
   }
   
   public var project: TargetDependency {

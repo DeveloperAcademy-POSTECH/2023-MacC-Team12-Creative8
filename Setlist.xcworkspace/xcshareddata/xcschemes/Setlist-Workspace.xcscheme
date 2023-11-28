@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
                BuildableName = "Core.framework"
                BlueprintName = "Core"
-               ReferencedContainer = "container:Core/Core.xcodeproj">
+               ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "73B1A2AD90A7970B7DB39CDC"
                BuildableName = "CoreTests.xctest"
                BlueprintName = "CoreTests"
-               ReferencedContainer = "container:Core/Core.xcodeproj">
+               ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "889701595646A30881D30ED8"
                BuildableName = "Feature.framework"
                BlueprintName = "Feature"
-               ReferencedContainer = "container:Feature/Feature.xcodeproj">
+               ReferencedContainer = "container:Projects/Feature/Feature.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -59,7 +59,7 @@
                BlueprintIdentifier = "B80BEDE90B5E77851A6B8979"
                BuildableName = "FeatureTests.xctest"
                BlueprintName = "FeatureTests"
-               ReferencedContainer = "container:Feature/Feature.xcodeproj">
+               ReferencedContainer = "container:Projects/Feature/Feature.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -73,7 +73,7 @@
                BlueprintIdentifier = "611399E84463D116CB4F7010"
                BuildableName = "Seta.app"
                BlueprintName = "Seta"
-               ReferencedContainer = "container:App/Seta.xcodeproj">
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -87,7 +87,7 @@
                BlueprintIdentifier = "6F44DE949E94917A5BE3D2F4"
                BuildableName = "SetaTests.xctest"
                BlueprintName = "SetaTests"
-               ReferencedContainer = "container:App/Seta.xcodeproj">
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -101,7 +101,7 @@
                BlueprintIdentifier = "A71F8DD2A4C18857FFBFF581"
                BuildableName = "UI.framework"
                BlueprintName = "UI"
-               ReferencedContainer = "container:UI/UI.xcodeproj">
+               ReferencedContainer = "container:Projects/UI/UI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -115,7 +115,7 @@
                BlueprintIdentifier = "F5B409AA710E5F5513429B5E"
                BuildableName = "UITests.xctest"
                BlueprintName = "UITests"
-               ReferencedContainer = "container:UI/UI.xcodeproj">
+               ReferencedContainer = "container:Projects/UI/UI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -133,7 +133,7 @@
                BlueprintIdentifier = "73B1A2AD90A7970B7DB39CDC"
                BuildableName = "CoreTests.xctest"
                BlueprintName = "CoreTests"
-               ReferencedContainer = "container:Core/Core.xcodeproj">
+               ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -143,7 +143,7 @@
                BlueprintIdentifier = "B80BEDE90B5E77851A6B8979"
                BuildableName = "FeatureTests.xctest"
                BlueprintName = "FeatureTests"
-               ReferencedContainer = "container:Feature/Feature.xcodeproj">
+               ReferencedContainer = "container:Projects/Feature/Feature.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -153,7 +153,7 @@
                BlueprintIdentifier = "6F44DE949E94917A5BE3D2F4"
                BuildableName = "SetaTests.xctest"
                BlueprintName = "SetaTests"
-               ReferencedContainer = "container:App/Seta.xcodeproj">
+               ReferencedContainer = "container:Projects/App/Seta.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -163,7 +163,7 @@
                BlueprintIdentifier = "F5B409AA710E5F5513429B5E"
                BuildableName = "UITests.xctest"
                BlueprintName = "UITests"
-               ReferencedContainer = "container:UI/UI.xcodeproj">
+               ReferencedContainer = "container:Projects/UI/UI.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -184,7 +184,7 @@
             BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
             BuildableName = "Core.framework"
             BlueprintName = "Core"
-            ReferencedContainer = "container:Core/Core.xcodeproj">
+            ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -200,7 +200,7 @@
             BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
             BuildableName = "Core.framework"
             BlueprintName = "Core"
-            ReferencedContainer = "container:Core/Core.xcodeproj">
+            ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

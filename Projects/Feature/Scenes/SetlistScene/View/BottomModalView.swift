@@ -16,8 +16,8 @@ struct BottomModalView: View {
   let artistInfo: ArtistInfo?
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   @ObservedObject var vm: SetlistViewModel
-  @Binding var showToastMessageAppleMusic: Bool
-  @Binding var showToastMessageCapture: Bool
+  @Binding var showToastAppleMusic: Bool
+  @Binding var showToastCapture: Bool
   @State var isSharePresented = false
   
   var body: some View {

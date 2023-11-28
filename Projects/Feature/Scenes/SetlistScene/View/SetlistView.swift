@@ -43,8 +43,8 @@ struct SetlistView: View {
           ExportPlaylistButtonView(setlist: setlist,
                                    artistInfo: artistInfo,
                                    vm: vm,
-                                   showToastMessageAppleMusic: $exportViewModel.showToastMessageAppleMusic,
-                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture,
+                                   showToastAppleMusic: $exportViewModel.showToastMessageAppleMusic,
+                                   showToastCapture: $exportViewModel.showToastMessageCapture,
                                    exportViewModel: exportViewModel)
         }
       }
