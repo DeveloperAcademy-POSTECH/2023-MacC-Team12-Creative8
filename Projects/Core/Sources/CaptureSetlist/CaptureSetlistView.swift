@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import UI
 
 public struct CaptureSetlistView: View {
   let songList: [(String, String?)]
@@ -64,7 +63,7 @@ public struct CaptureSetlistView: View {
            .cornerRadius(50, corners: .topRight)
            .cornerRadius(50, corners: .topLeft)
        }
-       .foregroundColor(Color.mainBlack)
+       .foregroundColor(Color.black)
      }
 }
 
