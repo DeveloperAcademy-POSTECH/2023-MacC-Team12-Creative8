@@ -45,6 +45,7 @@ struct SearchArtistCell: View {
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)
         .font(.footnote)
+        .lineLimit(1)
     }
   }
 }
