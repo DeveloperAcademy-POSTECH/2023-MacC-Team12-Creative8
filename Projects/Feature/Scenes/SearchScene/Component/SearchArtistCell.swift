@@ -22,17 +22,31 @@ struct SearchArtistCell: View {
         AsyncImage(url: URL(string: imageURL)) { phase in
           switch phase {
           case .empty:
-            Image("ticket", bundle: setaBundle)
-              .resizable()
-              .scaledToFill()
+            RoundedRectangle(cornerRadius: 20)
+              .foregroundStyle(Color.mainGrey1)
+              .overlay(
+                Image("ticket", bundle: setaBundle)
+                  .resizable()
+                  .renderingMode(.template)
+                  .foregroundStyle(Color.lineGrey1)
+                  .scaledToFill()
+                  .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
+              )
           case .success(let image):
             image
               .resizable()
               .scaledToFill()
           case .failure:
-            Image("ticket", bundle: setaBundle)
-              .resizable()
-              .scaledToFill()
+            RoundedRectangle(cornerRadius: 20)
+              .foregroundStyle(Color.mainGrey1)
+              .overlay(
+                Image("ticket", bundle: setaBundle)
+                  .resizable()
+                  .renderingMode(.template)
+                  .foregroundStyle(Color.lineGrey1)
+                  .scaledToFill()
+                  .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
+              )
           @unknown default:
             EmptyView()
           }

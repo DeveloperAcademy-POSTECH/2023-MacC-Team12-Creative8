@@ -153,10 +153,11 @@ extension ArchivingView {
                 .foregroundStyle(Color.fontGrey2)
                 .padding(.top)
                 .listRowBackground(Color.backgroundWhite)
-              HStack(spacing: 0) {
+              Group {
                 Text("변경을 원하신다면 ")
                   .font(.footnote)
                   .foregroundStyle(Color.fontGrey2)
+                +
                 Text("아티스트를 꾹 눌러 순서를 옮겨보세요")
                   .font(.footnote)
                   .fontWeight(.semibold)
