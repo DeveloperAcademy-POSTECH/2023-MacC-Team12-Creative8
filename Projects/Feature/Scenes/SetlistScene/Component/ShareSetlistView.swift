@@ -117,65 +117,62 @@ struct ShareSetlistView: View {
       Group {
         if !is2Columns {
           VStack {
-            ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
-              let sessionName = setlist?.sets?.setsSet?[index].name ??
-              (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
-              if sessionName != "" {
-                if index != 0 { Text("\n") }
-                Text("\(sessionName)")
+            ForEach(0..<sessionInfo.count, id: \.self) { index in
+              if sessionInfo[index].0 == "" && index == 0 { }
+              else if sessionInfo[index].1 == true {
+                Text("\(sessionInfo[index].0)")
                   .fontWeight(.semibold)
                   .underline()
                   .font(.system(size: fontSize))
-                  .lineLimit(2)
-              }
-              if let songs = setlist?.sets?.setsSet?[index].song {
-                ForEach(0..<songs.count, id: \.self) { songIndex in
-                    Text(songList[songIndex].0)
-                      .font(.system(size: fontSize))
-                      .lineLimit(1)
-                }
+                  .lineLimit(1)
+              } else {
+                Text(sessionInfo[index].0)
+                  .font(.system(size: fontSize))
+                  .lineLimit(1)
               }
             }
           }
         } else {
           HStack(spacing: 0) {
-            VStack(alignment: .leading) {
-              ForEach(0..<aLineMax) { index in
-                if sessionInfo[index].0 == "" && index == 0 { }
-                else if sessionInfo[index].1 == true {
-                  Text("\(sessionInfo[index].0)")
-                    .fontWeight(.semibold)
-                    .underline()
-                    .font(.system(size: fontSize))
-                    .lineLimit(1)
-                } else {
-                  Text(sessionInfo[index].0)
-                    .font(.system(size: fontSize))
-                    .lineLimit(1)
+            Group {
+              VStack(alignment: .leading) {
+                ForEach(0..<aLineMax, id: \.self) { index in
+                  if sessionInfo[index].0 == "" && index == 0 { }
+                  else if sessionInfo[index].1 == true {
+                    Text("\(sessionInfo[index].0)")
+                      .fontWeight(.semibold)
+                      .underline()
+                      .font(.system(size: fontSize))
+                      .lineLimit(1)
+                  } else {
+                    Text(sessionInfo[index].0)
+                      .font(.system(size: fontSize))
+                      .lineLimit(1)
+                  }
                 }
+
               }
 
-            }
-            .frame(width: 510)
-
-            VStack(alignment: .leading) {
-              ForEach(aLineMax..<sessionInfo.count) { index in
-                if sessionInfo[index].0 == "" && index == aLineMax { }
-                else if sessionInfo[index].1 == true {
-                  Text("\(sessionInfo[index].0)")
-                    .fontWeight(.semibold)
-                    .underline()
-                    .font(.system(size: fontSize))
-                    .lineLimit(1)
-                } else {
-                  Text(sessionInfo[index].0)
-                    .font(.system(size: fontSize))
-                    .lineLimit(1)
+              VStack(alignment: .leading) {
+                ForEach(aLineMax..<sessionInfo.count, id: \.self) { index in
+                  if sessionInfo[index].0 == "" && index == aLineMax { }
+                  else if sessionInfo[index].1 == true {
+                    Text("\(sessionInfo[index].0)")
+                      .fontWeight(.semibold)
+                      .underline()
+                      .font(.system(size: fontSize))
+                      .lineLimit(1)
+                  } else {
+                    Text(sessionInfo[index].0)
+                      .font(.system(size: fontSize))
+                      .lineLimit(1)
+                  }
                 }
               }
             }
-            .frame(width: 510)
+            .frame(width: 510, alignment: .leading)
           }
+          .frame(width: 1080)
         }
       }
     }
@@ -216,6 +213,8 @@ extension UIView {
 
 public extension View {
   func shareSetlistToImage(_ songList: [(String, String?)], _ artist: String, _ setlist: Setlist?) -> UIImage {
+    print("songList.count: \(songList.count)")
+    print("songList: \(songList)")
     var sessionInfo: [(String, Bool)] = []
     var count = 0
     if let setsSet = setlist?.sets?.setsSet {
@@ -224,12 +223,17 @@ public extension View {
         sessionInfo.append(("", false))
         sessionInfo.append((sessionName, true))
         if let song = session.song {
+          
           for _ in song {
             if count < songList.count {
               sessionInfo.append((songList[count].0, false))
+              print(songList[count].0)
               count += 1
             }
           }
+          print(setsSet.count)
+          print("sessionInfo.count: \(sessionInfo.count)")
+          print("sessionInfo: \(sessionInfo)")
         }
       }
     }
