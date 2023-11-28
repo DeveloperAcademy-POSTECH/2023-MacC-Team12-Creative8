@@ -661,12 +661,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conact "
+            "value" : "Contact "
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "문의하기"
           }
         }

@@ -684,12 +684,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conact "
+            "value" : "Contact "
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "문의하기"
           }
         }
@@ -1182,7 +1182,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "can add it directly at "
+            "value" : "can add it directly at  "
           }
         },
         "ko" : {
