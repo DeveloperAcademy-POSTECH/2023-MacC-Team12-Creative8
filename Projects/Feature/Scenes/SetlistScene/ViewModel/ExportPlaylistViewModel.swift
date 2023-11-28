@@ -103,8 +103,12 @@ final class ExportPlaylistViewModel: ObservableObject {
       self.showMusicSettingsAlert = true
     } else {
       CheckAppleMusicSubscription.shared.appleMusicSubscription()
-      self.showAppleMusicAlert.toggle()
-      self.playlistTitle = ""
+      if CheckAppleMusicSubscription.shared.getCheckValue() {
+        self.showAppleMusicAlert.toggle()
+        self.playlistTitle = ""
+      } else {
+        
+      }
     }
   }
   

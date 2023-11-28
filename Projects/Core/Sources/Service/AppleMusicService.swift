@@ -84,4 +84,8 @@ public final class CheckAppleMusicSubscription: ObservableObject {
       if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) { self.check = false }
     }
   }
+  
+  public func getCheckValue() -> Bool {
+      return check
+  }
 }
