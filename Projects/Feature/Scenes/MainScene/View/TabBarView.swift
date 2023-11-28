@@ -8,10 +8,36 @@
 
 import SwiftUI
 import UI
+import Combine
+import Core
+
+struct NavigationDelivery: Hashable {
+  var setlistId: String?
+  var artistInfo: SaveArtistInfo
+}
+
+final class TabViewModel: ObservableObject {
+  
+  @Published var selectedTab: Tab = .home
+  
+  typealias PairwiseTabs = (previous: Tab?, current: Tab)
+  
+  func consecutiveTaps(on tab: Tab) -> AnyPublisher<Void, Never> {
+    $selectedTab
+      .scan(PairwiseTabs(previous: nil, current: selectedTab)) { previousPair, current in
+        PairwiseTabs(previous: previousPair.current, current: current)
+      }
+      .filter { $0.previous == $0.current}
+      .compactMap { $0.current == tab ? Void() : nil}
+      .eraseToAnyPublisher()
+  }
+  
+}
 
 public struct TabBarView: View {
-  @State private var selectedTab: Tab = .home
-
+  @StateObject var viewModel = TabViewModel()
+  @Environment(\.dismiss) var dismiss
+  
   public init() {
     let appearance = UITabBarAppearance()
          let tabBar = UITabBar.appearance()
@@ -23,25 +49,21 @@ public struct TabBarView: View {
   }
 
   public var body: some View {
-    TabView(selection: $selectedTab.onUpdate{ myFunction(item: selectedTab) }) {
+    TabView(selection: $viewModel.selectedTab) {
+      MainView(selectedTab: $viewModel.selectedTab, viewModel: MainViewModel(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
+        .navigationBarTitleDisplayMode(.inline)
+        .tabItem { Label("세트리스트", systemImage: "music.note.house.fill") }
+        .tag(Tab.home)
+      
       NavigationStack {
-        MainView(selectedTab: $selectedTab)
+        SearchView(selectedTab: $viewModel.selectedTab, viewModel: SearchViewModel())
           .navigationBarTitleDisplayMode(.inline)
       }
-      .tabItem {
-        Label("세트리스트", systemImage: "music.note.house.fill")
-      }
-      .tag(Tab.home)
-      NavigationStack {
-        SearchView(selectedTab: $selectedTab)
-          .navigationBarTitleDisplayMode(.inline)
-      }
-      .tabItem {
-        Label("검색", systemImage: "magnifyingglass")
-      }
+      .tabItem { Label("검색", systemImage: "magnifyingglass") }
       .tag(Tab.search)
+      
       NavigationStack {
-        ArchivingView(selectedTab: $selectedTab)
+        ArchivingView(selectedTab: $viewModel.selectedTab)
           .navigationBarTitleDisplayMode(.large)
           .background(Color.backgroundWhite)
       }
@@ -55,14 +77,9 @@ public struct TabBarView: View {
           .navigationBarTitleDisplayMode(.large)
           .background(Color.backgroundWhite)
       }
-      .tabItem {
-        Label("더보기", systemImage: "ellipsis")
-      }
+      .tabItem { Label("더보기", systemImage: "ellipsis") }
       .tag(Tab.setting)
     }
-  }
-  func myFunction(item: Tab) {
-
   }
 }
 

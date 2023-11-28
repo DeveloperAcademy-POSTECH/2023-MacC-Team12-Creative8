@@ -19,7 +19,6 @@ struct ArchiveConcertInfoCell: View {
 
 	var body: some View {
 		HStack {
-
       NavigationLink {
         SetlistView(setlistId: info.setlist.setlistId, artistInfo: ArtistInfo(name: info.artistInfo.name, mbid: info.artistInfo.mbid))
       } label: {
@@ -39,6 +38,7 @@ struct ArchiveConcertInfoCell: View {
         .padding(.vertical, 10)
       }
 			Spacer()
+
 			Menu {
         NavigationLink("아티스트 보기") { ArtistView(selectedTab: $selectedTab, artistName: info.artistInfo.name, artistAlias: info.artistInfo.alias, artistMbid: info.artistInfo.mbid) }
 				NavigationLink("세트리스트 보기") {

@@ -11,11 +11,13 @@ import SwiftUI
 import SwiftData
 import Core
 import UI
+import Combine
 
 // TODO: 추후 수정하기
 
 struct EmptyMainSetlistView: View {
-  @ObservedObject var viewModel = MainViewModel()
+  @ObservedObject var viewModel: MainViewModel
+  
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Spacer()
@@ -76,5 +78,5 @@ struct EmptyMainSetlistView: View {
 }
 
 #Preview {
-  EmptyMainSetlistView()
+  EmptyMainSetlistView(viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
 }

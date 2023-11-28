@@ -46,7 +46,7 @@ struct ArtistsContentView: View {
     }
   }
   private var artistImage: some View {
-    NavigationLink(destination: ArtistView(selectedTab: $selectedTab, artistName: artistInfo.name, artistAlias: artistInfo.alias, artistMbid: artistInfo.mbid)) {
+    NavigationLink(value: NavigationDelivery(artistInfo: artistInfo)) {
       ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
         .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
     }
@@ -65,15 +65,11 @@ struct ArtistsContentView: View {
     VStack(spacing: 0 ) {
       let setlists: [Setlist?] = viewModel.setlists[index] ?? []
       if setlists.isEmpty {
-        EmptyMainSetlistView()
+        EmptyMainSetlistView(viewModel: viewModel)
       } else {
         ForEach(Array(setlists.prefix(3).enumerated()), id: \.element?.id) { index, item in
           VStack(alignment: .leading, spacing: 0) {
-            NavigationLink(destination: SetlistView(setlistId: item?.id ?? "",
-                                                    artistInfo: ArtistInfo(name: artistInfo.name,
-                                                                           mbid: artistInfo.mbid, gid: artistInfo.gid,
-                                                                           imageUrl: artistInfo.imageUrl,
-                                                                           songList: artistInfo.songList)) ) {
+            NavigationLink(value: NavigationDelivery(setlistId: item?.id ?? "", artistInfo: artistInfo)) {
               HStack(spacing: 0) {
                 VStack(alignment: .center) {
                   Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
@@ -112,10 +108,11 @@ struct ArtistsContentView: View {
               }
               .padding(.vertical)
             }
-            if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-              Divider()
-                .foregroundStyle(Color.lineGrey1)
-            }
+          }
+          
+          if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
+            Divider()
+              .foregroundStyle(Color.lineGrey1)
           }
         }
       }
@@ -126,6 +123,6 @@ struct ArtistsContentView: View {
 
 #Preview {
   ArtistsContentView(selectedTab: .constant(.home),
-                     viewModel: MainViewModel(),
+                     viewModel: .init(consecutiveTaps: Empty().eraseToAnyPublisher()),
                      artistInfo: SaveArtistInfo(name: "Silica Gel", country: "South Korea", alias: "실리카겔", mbid: "2c8b5bb2-6110-488d-bc15-abb08379d3c6", gid: 2382659, imageUrl: "https://i.namu.wiki/i/SCZmC5XQgajMHRv6wvMc406r6aoQyf0JjXNCIQkIxJ-oe035C8h6VTkKllE6gkp3p-A7RFwiIcd0d726O77rbQ.webp", songList: []), index: 1)
 }
