@@ -62,6 +62,7 @@ public struct TabBarView: View {
     
     appearance.shadowColor = UIColor.clear
     appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
     tabBar.unselectedItemTintColor = UIColor(named: "fontGrey25", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
     tabBar.standardAppearance = appearance
   }

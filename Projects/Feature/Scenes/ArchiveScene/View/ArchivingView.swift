@@ -32,6 +32,7 @@ struct ArchivingView: View {
           artistView
         }
       }
+      .background(Color.backgroundWhite)
       .navigationTitle("보관함")
       .navigationDestination(for: NavigationDelivery.self) { value in
         if value.setlistId != nil {
@@ -146,7 +147,6 @@ extension ArchivingView {
       } else {
         ScrollViewReader { proxy in
           List {
-            Spacer().id(topID)
             VStack(alignment: .leading, spacing: 0) {
               Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다")
                 .font(.footnote)
@@ -162,7 +162,10 @@ extension ArchivingView {
                   .fontWeight(.semibold)
                   .foregroundStyle(Color.fontGrey2)
               }
-            }
+            }.id(topID)
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.backgroundWhite)
+            
             artistListView
               .listRowSeparator(.hidden)
               .listRowBackground(Color.backgroundWhite)
