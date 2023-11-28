@@ -18,40 +18,63 @@ public struct MainView: View {
   @StateObject var viewModel = MainViewModel()
   @State var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
+  @StateObject var tabViewManager: TabViewManager
   
   public var body: some View {
+    NavigationStack(path: $tabViewManager.pageStack) {
       Group {
         if likeArtists.isEmpty {
           EmptyMainView(selectedTab: $selectedTab)
         } else {
           ScrollView {
-          mainArtistsView
-            .padding(.top, 11)
-            .id(likeArtists)
+            mainArtistsView
+              .padding(.top, 11)
+              .id(likeArtists)
           }
           .scrollIndicators(.hidden)
+          .onReceive(tabViewManager.$scrollToTop) { _ in
+            withAnimation {
+              viewModel.scrollToIndex = 0
+              viewModel.selectedIndex = 0
+            }
+          }
         }
       }
-    .padding(.vertical)
-    .background(Color.backgroundWhite)
-    .onAppear {
-      dataManager.modelContext = modelContext
-      var idx = 0
-      if viewModel.setlists[0] == nil {
-        for artist in likeArtists {
+      .padding(.vertical)
+      .background(Color.backgroundWhite)
+      .onAppear {
+        dataManager.modelContext = modelContext
+        var idx = 0
+        if viewModel.setlists[0] == nil {
+          for artist in likeArtists {
+            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+            idx += 1
+          }
+        }
+      }
+      .onChange(of: likeArtists) { _, newValue in
+        var idx = 0
+        for artist in newValue {
           viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
           idx += 1
         }
       }
-    }
-    .onChange(of: likeArtists) { _, newValue in
-      var idx = 0
-      for artist in newValue {
-        viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-        idx += 1
+      .navigationDestination(for: NavigationDelivery.self) { value in
+        if value.setlistId != nil {
+          SetlistView(setlistId: value.setlistId, artistInfo: ArtistInfo(
+            name: value.artistInfo.name,
+            alias: value.artistInfo.alias,
+            mbid: value.artistInfo.mbid,
+            gid: value.artistInfo.gid,
+            imageUrl: value.artistInfo.imageUrl,
+            songList: value.artistInfo.songList))
+        } else {
+          ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
+        }
       }
     }
   }
+  
   public var mainArtistsView: some View {
     VStack(spacing: 0) {
       artistNameScrollView
@@ -137,5 +160,5 @@ struct RoundedCorner: Shape {
 }
 
 #Preview {
-  MainView(selectedTab: .constant(.home))
+  MainView(selectedTab: .constant(.home), viewModel: MainViewModel(), tabViewManager: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
 }
