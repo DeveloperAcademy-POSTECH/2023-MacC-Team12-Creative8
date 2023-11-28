@@ -887,6 +887,7 @@
       }
     },
     "세트리스트 정보 수정을 원하시나요?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -1125,6 +1126,7 @@
       }
     },
     "에서 수정할 수 있습니다" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -1202,6 +1204,7 @@
       }
     },
     "잘못된 세트리스트 정보를 발견하셨다면," : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
