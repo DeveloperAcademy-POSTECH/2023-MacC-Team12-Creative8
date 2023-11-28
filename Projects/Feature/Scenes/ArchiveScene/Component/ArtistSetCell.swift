@@ -20,6 +20,7 @@ struct ArtistSetCell: View {
          let color = isSelected ? Color.mainBlack : Color.mainGrey1
          color.clipShape(RoundedRectangle(cornerRadius: 12))
        }
+       .font(.subheadline)
    }
  }
 

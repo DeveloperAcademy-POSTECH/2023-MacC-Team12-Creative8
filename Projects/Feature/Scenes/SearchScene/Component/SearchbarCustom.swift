@@ -65,5 +65,6 @@ struct SearchBar: View {
       }
     }
     .textCase(.none)
+    .padding(.bottom, 20)
   }
 }
