@@ -25,14 +25,20 @@ struct ArtistsContentView: View {
       artistImage
       Group {
         if !viewModel.isLoading {
-          commentText
-          artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
+          Group {
+            commentText
+            artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
+          }
+          .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
+            content
+              .opacity(phase.isIdentity ? 1 : 0)
+              .blur(radius: phase.isIdentity ? 0 : 0.5)
+          }
         } else {
           ProgressView()
             .frame(width: UIWidth, height: UIWidth * 0.6) // TODO: 수정 필요!
         }
       }
-      .opacity(viewModel.selectedIndex == index ? 1.0 : 0)
     }
     .frame(width: UIWidth * 0.81)
     .onAppear {
@@ -44,6 +50,7 @@ struct ArtistsContentView: View {
       ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
         .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
     }
+    .buttonStyle(BasicButtonStyle())
   }
   private var commentText: some View {
     HStack(spacing: 0) {
@@ -112,7 +119,8 @@ struct ArtistsContentView: View {
           }
         }
       }
-      }
+    }
+    .frame(minHeight: UIWidth * 0.6, alignment: .topLeading)
   }
 }
 
