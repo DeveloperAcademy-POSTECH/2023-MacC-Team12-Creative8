@@ -27,7 +27,7 @@ class ArtistViewModel: ObservableObject {
   @Published var isLoadingArtistInfo: Bool = false
   @Published var isLoadingSetlist: Bool = false
   @Published var isLoadingNextPage: Bool = false
-
+  
   func getArtistInfoFromGenius(artistName: String, artistAlias: String?, artistMbid: String) {
     self.isLoadingArtistInfo = true
     artistDataManager.getArtistInfo(artistInfo: ArtistInfo(name: artistName, alias: artistAlias, mbid: artistMbid)) { result in
@@ -59,13 +59,21 @@ class ArtistViewModel: ObservableObject {
       self.isLoadingSetlist = true
       dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: page) { result in
         if let result = result {
-          let filteredSetlists = result.setlist?.filter { $0.venue?.name != "SBS Inkigayo" && $0.venue?.name != "M Countdown" && $0.venue?.name != "Show! Music Core" && $0.venue?.name != "KBS Music Bank" && $0.venue?.name != "Show Champion"} ?? []
-                          
-                          DispatchQueue.main.async {
-                              self.setlists = filteredSetlists
-                              self.totalPage = Int((result.total ?? 1) / (result.itemsPerPage ?? 1) + 1)
-                              self.isLoadingSetlist = false
-                          }
+          let filteredSetlists = result.setlist?.filter { 
+            $0.venue?.name != "SBS Inkigayo"
+            && $0.venue?.name != "M Countdown"
+            && $0.venue?.name != "Show! Music Core"
+            && $0.venue?.name != "KBS Music Bank"
+            && $0.venue?.name != "Show Champion"
+            && $0.venue?.name != "The Show"
+            && $0.venue?.name != "KBS Cool FM"
+          } ?? []
+          
+          DispatchQueue.main.async {
+            self.setlists = filteredSetlists
+            self.totalPage = Int((result.total ?? 1) / (result.itemsPerPage ?? 1) + 1)
+            self.isLoadingSetlist = false
+          }
         } else {
           self.isLoadingSetlist = false
           print("Failed to fetch setlist data.")
@@ -73,14 +81,22 @@ class ArtistViewModel: ObservableObject {
       }
     }
   }
-
+  
   func fetchNextPage(artistMbid: String) {
     page += 1
     self.isLoadingNextPage = true
     dataService.fetchSetlistsFromSetlistFM(artistMbid: artistMbid, page: page) { result in
       if let result = result {
+        let filteredSetlists = result.setlist?.filter { $0.venue?.name != "SBS Inkigayo"
+          && $0.venue?.name != "M Countdown"
+          && $0.venue?.name != "Show! Music Core"
+          && $0.venue?.name != "KBS Music Bank"
+          && $0.venue?.name != "Show Champion"
+          && $0.venue?.name != "The Show"
+          && $0.venue?.name != "KBS Cool FM"
+        } ?? []
         DispatchQueue.main.async {
-          self.setlists?.append(contentsOf: result.setlist ?? [])
+          self.setlists?.append(contentsOf: filteredSetlists )
           self.isLoadingNextPage = false
         }
       } else {
@@ -112,18 +128,18 @@ class ArtistViewModel: ObservableObject {
   
   func dayAndMonthDateFormatter(inputDate: String) -> String? {
     guard let languageCode = Locale.current.language.languageCode?.identifier else { return "" }
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "dd-MM-yyyy"
-
-      // 입력된 날짜 문자열을 "dd-MM-yyyy" 형식으로 변환
-      guard let convertedDate = dateFormatter.date(from: inputDate) else {
-          return ""
-      }
-
-      dateFormatter.dateFormat = (languageCode == "ko") ? "MM.dd" : "dd.MM"
-
-      // 변환된 날짜를 설정한 형식으로 문자열로 반환
-      return dateFormatter.string(from: convertedDate)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
+    
+    // 입력된 날짜 문자열을 "dd-MM-yyyy" 형식으로 변환
+    guard let convertedDate = dateFormatter.date(from: inputDate) else {
+      return ""
+    }
+    
+    dateFormatter.dateFormat = (languageCode == "ko") ? "MM.dd" : "dd.MM"
+    
+    // 변환된 날짜를 설정한 형식으로 문자열로 반환
+    return dateFormatter.string(from: convertedDate)
   }
   
   func getFormattedDateFromDate(date: Date, format: String) -> String {
