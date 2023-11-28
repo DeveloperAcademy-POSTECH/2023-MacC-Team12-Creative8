@@ -47,6 +47,7 @@
 		D022D62B0566852C9B0ADB70 /* AllSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81387F73BA3D6FEC0C217EE1 /* AllSetlistsView.swift */; };
 		D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391501B4523A254694E36D3 /* ConcertInfoView.swift */; };
 		D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */; };
+		DBE7FCEC2694DEA5E13ABBE4 /* CaptureSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */; };
 		EC3070A8E0E0C591E7EB8D83 /* ArchiveConcertInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9981CC6F7982EBE581173 /* ArchiveConcertInfoCell.swift */; };
 		F3E6A26AAF23964C5D5B2116 /* BookmarkedSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */; };
 		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; platformFilter = ios; };
@@ -98,6 +99,7 @@
 		2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSetlistView.swift; sourceTree = "<group>"; };
 		493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistFMLinkButtonView.swift; sourceTree = "<group>"; };
 		4CB52FD2A86596385940F794 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		41B843765E6AD7CE71E731A5 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				72A03F6D9078EC56B70BF0B9 /* CaptureSetlist */,
 				7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */,
 				B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */,
 				493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */,
@@ -316,6 +319,14 @@
 				1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		72A03F6D9078EC56B70BF0B9 /* CaptureSetlist */ = {
+			isa = PBXGroup;
+			children = (
+				46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */,
+			);
+			path = CaptureSetlist;
 			sourceTree = "<group>";
 		};
 		753539E5D5CC37A0AD027D79 /* ViewModel */ = {
@@ -600,6 +611,7 @@
 				CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */,
 				08A19712E89A1D55144198CA /* SearchView.swift in Sources */,
 				F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */,
+				DBE7FCEC2694DEA5E13ABBE4 /* CaptureSetlistView.swift in Sources */,
 				F84986A12ECC7DCACB4C7309 /* CustomTitleAlert.swift in Sources */,
 				390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */,
 				802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */,
