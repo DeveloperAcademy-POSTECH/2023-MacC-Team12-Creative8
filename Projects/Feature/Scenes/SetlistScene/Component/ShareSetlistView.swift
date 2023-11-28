@@ -12,18 +12,22 @@ import UI
 
 struct ShareSetlistView: View {
   @ObservedObject var vm = SetlistViewModel()
+  @State private var textCount = 0
+  @State private var textCount2 = 0
   let songList: [(String, String?)]
   let artist: String
   let setlist: Setlist?
+  let sessionInfo: [(String, Bool)]
   let headHeight: CGFloat
   let fontSize: CGFloat
   let aLineMax: Int
   let is2Columns: Bool
 
-  init(songList: [(String, String?)], artist: String, setlist: Setlist?) {
+  init(songList: [(String, String?)], artist: String, setlist: Setlist?, sessionInfo: [(String, Bool)]) {
     self.songList = songList
     self.artist = artist
     self.setlist = setlist
+    self.sessionInfo = sessionInfo
 
     let totalLine = songList.count + ((setlist?.sets?.setsSet ?? []).count-1) * 2
     headHeight = setlist?.tour?.name == nil ? 530 : 600
@@ -105,39 +109,76 @@ struct ShareSetlistView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 28)
     }
-      .frame(width: 1080, height: 162)
+    .frame(width: 1080, height: 162)
   }
 
   private var shareListView: some View {
     ZStack {
       whiteBox
-      
       Group {
         if !is2Columns {
           VStack {
-            ForEach(setlist?.sets?.setsSet ?? [], id: \.self) { session in
-              let sessionName = session.name ?? (session.encore != nil ? "Encore" : "")
+            ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
+              let sessionName = setlist?.sets?.setsSet?[index].name ??
+              (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
               if sessionName != "" {
-                Text("\n\(sessionName)")
+                if index != 0 { Text("\n") }
+                Text("\(sessionName)")
                   .fontWeight(.semibold)
                   .underline()
                   .font(.system(size: fontSize))
                   .lineLimit(2)
               }
-              if let songs = session.song {
-                ForEach(0..<songs.count, id: \.self) { index in
-                  Text(songList[index].0)
-                    .font(.system(size: fontSize))
-                    .lineLimit(1)
+              if let songs = setlist?.sets?.setsSet?[index].song {
+                ForEach(0..<songs.count, id: \.self) { songIndex in
+                    Text(songList[songIndex].0)
+                      .font(.system(size: fontSize))
+                      .lineLimit(1)
                 }
               }
             }
           }
         } else {
+          HStack {
+            VStack(alignment: .leading) {
+              ForEach(0..<aLineMax) { index in
+                if sessionInfo[index].0 == "" && index == 0 { }
+                else if sessionInfo[index].1 == true {
+                  Text("\(sessionInfo[index].0)")
+                    .fontWeight(.semibold)
+                    .underline()
+                    .font(.system(size: fontSize))
+                    .lineLimit(1)
+                } else {
+                  Text(sessionInfo[index].0)
+                    .font(.system(size: fontSize))
+                    .lineLimit(1)
+                }
+              }
 
+            }
+            .frame(width: 520)
+
+            VStack(alignment: .leading) {
+              ForEach(aLineMax..<sessionInfo.count) { index in
+                if sessionInfo[index].0 == "" && index == aLineMax { }
+                else if sessionInfo[index].1 == true {
+                  Text("\(sessionInfo[index].0)")
+                    .fontWeight(.semibold)
+                    .underline()
+                    .font(.system(size: fontSize))
+                    .lineLimit(1)
+                } else {
+                  Text(sessionInfo[index].0)
+                    .font(.system(size: fontSize))
+                    .lineLimit(1)
+                }
+              }
+            }
+            .frame(width: 520)
+          }
         }
       }
-      .frame(width: 1040)
     }
   }
 }
@@ -176,82 +217,98 @@ extension UIView {
 
 public extension View {
   func shareSetlistToImage(_ songList: [(String, String?)], _ artist: String, _ setlist: Setlist?) -> UIImage {
-    var sessionInfo: [(String, Int)] = []
+    var sessionInfo: [(String, Bool)] = []
+    var count = 0
     if let setsSet = setlist?.sets?.setsSet {
-            for session in setsSet {
-              let sessionName = session.name ?? (session.encore != nil ? "Encore" : "")
-              let newSession: (String, Int) = (sessionName, session.song?.count ?? 0)
-              sessionInfo.append(newSession)
-            }
+      for session in setsSet {
+        let sessionName = session.name ?? (session.encore != nil ? "Encore" : "")
+        sessionInfo.append(("", false))
+        sessionInfo.append((sessionName, true))
+        if let song = session.song {
+          for _ in song {
+            sessionInfo.append((songList[count].0, false))
+            count += 1
+          }
+        }
+      }
     }
+    print(sessionInfo.count)
     let captureView = ShareSetlistView(songList: songList,
                                        artist: artist,
-                                       setlist: setlist)
+                                       setlist: setlist,
+                                       sessionInfo: sessionInfo)
     return captureView.setlistImage()
   }
 }
 
+//            VStack {
+//              ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
+//                let sessionName = setlist?.sets?.setsSet?[index].name ??
+//                (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
 //
-
-
-//ScrollView {
-//  VStack(spacing: -1) {
-//    ZStack {
-//      Rectangle()
-//        .cornerRadius(20)
-//        .foregroundStyle(.white)
-//        .frame(width: 1080, height: 589)
-
-//      .padding(.horizontal, 28)
-//    }
-//    dotLine
-//    ZStack {
-//      Rectangle()
-//        .cornerRadius(20)
-//        .foregroundStyle(.white)
-//        .frame(width: 1080, height: 1164)
-//      VStack(alignment: .leading) {
-//        if songList.count <= 36 {
-//          VStack(alignment: .center) {
-//            ForEach(0..<songList.count, id: \.self) { index in
-//              Text("\(songList[index].0)")
-//            }
-//          }
-//        } else {
-//          HStack(alignment: .top) {
-//            VStack(alignment: .leading) {
-//              ForEach(0..<36, id: \.self) { index in
-//                Text("\(songList[index].0)")
-//                  .font(.system(size: 25))
+//                if sessionName != "" {
+//                  if index != 0 {
+//                    if textCount < aLineMax {
+//                      Text("\n")
+//                    }
+//                  }
+//                    Text("\(sessionName)")
+//                      .fontWeight(.semibold)
+//                      .underline()
+//                      .font(.system(size: fontSize))
+//                      .lineLimit(1)
+//
+//                }
+//                if let songs = setlist?.sets?.setsSet?[index].song {
+//                  ForEach(0..<songs.count, id: \.self) { songIndex in
+//                      Text(songList[songIndex].0)
+//                        .font(.system(size: fontSize))
+//                        .lineLimit(1)
+//                  }
+//                }
 //              }
 //            }
-//            Spacer()
-//            VStack(alignment: .leading) {
-//              ForEach(36..<songList.count, id: \.self) { index in
-//                Text("\(songList[index].0)")
-//                  .font(.system(size: 25))
+//            .frame(width: 520)
+
+//            VStack {
+//              ForEach(setlist?.sets?.setsSet?.indices ?? 0..<0, id: \.self) { index in
+//                let sessionName = setlist?.sets?.setsSet?[index].name ??
+//                (setlist?.sets?.setsSet?[index].encore != nil ? "Encore" : "")
+//
+//                if sessionName != "" {
+//                  if index != 0 {
+//                    if textCount2 >= aLineMax {
+//                      Text("\n")
+//                        .onAppear {
+//                          self.textCount2 += 1
+//                        }
+//                    }
+//                  }
+//
+//                  if textCount2 >= aLineMax {
+//                    Text("\(sessionName)")
+//                      .fontWeight(.semibold)
+//                      .underline()
+//                      .font(.system(size: fontSize))
+//                      .lineLimit(1)
+//                      .onAppear {
+//                        self.textCount2 += 1
+//                      }
+//                  }
+//                }
+//                if let songs = setlist?.sets?.setsSet?[index].song {
+//                  ForEach(0..<songs.count, id: \.self) { songIndex in
+//                    if textCount2 >= aLineMax {
+//                      Text(songList[songIndex].0)
+//                        .font(.system(size: fontSize))
+//                        .lineLimit(1)
+//                        .onAppear {
+//                          self.textCount2 += 1
+//                        }
+//                    }
+//                  }
+//                }
 //              }
 //            }
-//          }
-//          .padding(.horizontal, 28)
-//        }
-//      }
-//      .padding(.horizontal)
-//    }
-//    dotLine
-//    ZStack {
-//      Rectangle()
-//        .cornerRadius(20)
-//        .foregroundStyle(.white)
-//        .frame(width: 1080, height: 162)
-//      HStack {
-//
-//          .padding(.vertical, 27)
-//        Spacer()
-//      }
-//      .padding(.horizontal, 28)
-//    }
-//  }
-//  .background(.black)
-//}
-//}
+//            .frame(width: 520)
+//            .foregroundStyle(.red)
