@@ -104,12 +104,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@'s latest performance"
+            "value" : "%@'s latest show"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%@의 최근 공연"
           }
         }
