@@ -173,7 +173,7 @@ extension ArchivingView {
           }
           .scrollIndicators(.hidden)
           .listStyle(.plain)
-          .padding(EdgeInsets(top: -10, leading: -18, bottom: -10, trailing: -18))
+          .padding(EdgeInsets(top: -10, leading: -18, bottom: 10, trailing: -18))
           .onReceive(tabViewManager.$scrollToTop) { _ in
             withAnimation {
               proxy.scrollTo(topID)
