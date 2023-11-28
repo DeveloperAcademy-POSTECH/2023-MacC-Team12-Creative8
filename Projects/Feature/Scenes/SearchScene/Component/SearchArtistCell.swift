@@ -39,12 +39,13 @@ struct SearchArtistCell: View {
         }
       }
       .aspectRatio(contentMode: .fit)
-      .clipShape(RoundedRectangle(cornerRadius: 20))
-      .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.lineGrey1, lineWidth: 1))
+      .clipShape(RoundedRectangle(cornerRadius: 12))
+      .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.lineGrey1, lineWidth: 1))
       
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)
         .font(.footnote)
+        .lineLimit(1)
     }
   }
 }

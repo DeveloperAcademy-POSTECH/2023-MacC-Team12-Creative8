@@ -163,8 +163,8 @@ extension ArchivingView {
                   .foregroundStyle(Color.fontGrey2)
               }
             }.id(topID)
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.backgroundWhite)
+              .listRowSeparator(.hidden)
+              .listRowBackground(Color.backgroundWhite)
             
             artistListView
               .listRowSeparator(.hidden)
