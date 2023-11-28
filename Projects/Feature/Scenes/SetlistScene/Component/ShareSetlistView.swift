@@ -11,100 +11,21 @@ import Core
 import UI
 
 struct ShareSetlistView: View {
-  //let setlist: Setlist?
   let songList: [(String, String?)]
   let artist: String
-  let songCount: Int
-  
-  //@ObservedObject var vm: ArtistViewModel
-  
+  let sessionInfo: [(String, Int)]
+
   var body: some View {
-    ScrollView {
-      VStack(spacing: -1) {
-        ZStack{
-          Rectangle()
-            .cornerRadius(20)
-            .foregroundStyle(.white)
-            .frame(width: 1080, height: 589)
-          VStack(alignment: .leading) {
-            Text(artist)
-              .font(.system(size: 50))
-              .padding(.top, 50)
-            Rectangle()
-              .foregroundStyle(.black)
-              .frame(height: 1)
-            Text("tourrrrrrrrr")
-              .font(.system(size: 50))
-            //          Text(setlist?.tour?.name ?? "-")
-            Rectangle()
-              .foregroundStyle(.black)
-              .frame(height: 1)
-            //          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
-            //          Text(venue)
-            Text("Venuesefsfasdfa")
-              .font(.system(size: 50))
-            Rectangle()
-              .foregroundStyle(.black)
-              .frame(height: 1)
-            //          Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
-            Text("Nov 29, 2023")
-              .font(.system(size: 50))
-              .padding(.bottom)
-          }
-          .padding(.horizontal, 28)
-        }
-        dotLine
-        ZStack {
-          Rectangle()
-            .cornerRadius(20)
-            .foregroundStyle(.white)
-            .frame(width: 1080, height: 1164)
-          VStack(alignment: .leading) {
-            if songCount <= 36 {
-              VStack(alignment: .center) {
-                ForEach(0..<songCount, id: \.self) { index in
-                  Text("\(songList[index].0)")
-                }
-              }
-            } else {
-              HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                  ForEach(0..<36, id: \.self) { index in
-                    Text("\(songList[index].0)")
-                      .font(.system(size: 25))
-                  }
-                }
-                Spacer()
-                VStack(alignment: .leading) {
-                  ForEach(36..<songCount, id: \.self) { index in
-                    Text("\(songList[index].0)")
-                      .font(.system(size: 25))
-                  }
-                }
-              }
-              .padding(.horizontal, 28)
-            }
-          }
-          .padding(.horizontal)
-        }
-        dotLine
-        ZStack {
-          Rectangle()
-            .cornerRadius(20)
-            .foregroundStyle(.white)
-            .frame(width: 1080, height: 162)
-          HStack {
-            Image("seta", bundle: Bundle(identifier: "com.creative8.seta.UI"))
-              .padding(.vertical, 27)
-            Spacer()
-          }
-          .padding(.horizontal, 28)
-        }
-      }
-      .background(.black)
+    VStack {
+      RoundedRectangle(cornerRadius: 20)
+        .foregroundStyle(.white)
+        .frame(width: 1080, height: 589)
+
     }
+    .frame(width: 1080, height: 1920)
+    .background(Color.mainBlack)
   }
-  
+
   private var dotLine: some View {
     Rectangle()
       .stroke(style: StrokeStyle(dash: [10]))
@@ -148,14 +69,17 @@ extension UIView {
 
 public extension View {
   func shareSetlistToImage(_ songList: [(String, String?)], _ artist: String, _ setlist: Setlist?) -> UIImage {
-    //@ObservedObject var vm: ArtistViewModel
-    let songCount = songList.count // 15 ,45, 50
-    let firstSectionSongs = songCount / 25 // 0, 1, 2
-    let secondSectionSongs = songCount % 25 // 15, 20, 0
-    let sectionCount = firstSectionSongs + (firstSectionSongs < 2 ? 1 : 0 ) // 1, 1, 2
-    let captureView = ShareSetlistView( songList: songList,
-                                        artist: artist,
-                                        songCount: songCount)
+    var sessionInfo: [(String, Int)] = []
+    if let setsSet = setlist?.sets?.setsSet {
+            for session in setsSet {
+              let sessionName = session.name ?? (session.encore != nil ? "Encore" : "")
+              let newSession: (String, Int) = (sessionName, session.song?.count ?? 0)
+              sessionInfo.append(newSession)
+            }
+    }
+    let captureView = ShareSetlistView(songList: songList,
+                                       artist: artist,
+                                       sessionInfo: sessionInfo)
     return captureView.setlistImage()
   }
 }
@@ -205,5 +129,107 @@ public extension View {
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
                               ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ")]
-                   , artist: "Noel Gallagher’s High Flying Birds", songCount: 44)
+                   , artist: "Noel Gallagher’s High Flying Birds", sessionInfo: [("Encore", 4)])
 }
+
+#Preview {
+  ShareSetlistView(songList: [("Miss Americana & the Heartbreak Prince", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ"),
+                              ("ㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹㅁ", "ㅁㄴㅇㄹ")]
+                   , artist: "Noel Gallagher’s High Flying Birds", sessionInfo: [("Encore", 4)])
+}
+
+//Image("seta", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+
+
+//ScrollView {
+//  VStack(spacing: -1) {
+//    ZStack {
+//      Rectangle()
+//        .cornerRadius(20)
+//        .foregroundStyle(.white)
+//        .frame(width: 1080, height: 589)
+//      VStack(alignment: .leading) {
+//        Text(artist)
+//          .font(.system(size: 50))
+//          .padding(.top, 50)
+//        Rectangle()
+//          .foregroundStyle(.black)
+//          .frame(height: 1)
+//        //Text(setlist?.tour?.name ?? "-")
+//        Text("tourrrrrrrrr")
+//          .font(.system(size: 50))
+//        Rectangle()
+//          .foregroundStyle(.black)
+//          .frame(height: 1)
+//        //          let venue = "\(setlist?.venue?.name ?? ""), \(setlist?.venue?.city?.name ?? ""), \(setlist?.venue?.city?.country?.name ?? "")"
+//        //          Text(venue)
+//        Text("Venuesefsfasdfa")
+//          .font(.system(size: 50))
+//        Rectangle()
+//          .foregroundStyle(.black)
+//          .frame(height: 1)
+//        //          Text(vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "MMM dd, yyyy") ?? "")
+//        Text("Nov 29, 2023")
+//          .font(.system(size: 50))
+//          .padding(.bottom)
+//      }
+//      .padding(.horizontal, 28)
+//    }
+//    dotLine
+//    ZStack {
+//      Rectangle()
+//        .cornerRadius(20)
+//        .foregroundStyle(.white)
+//        .frame(width: 1080, height: 1164)
+//      VStack(alignment: .leading) {
+//        if songList.count <= 36 {
+//          VStack(alignment: .center) {
+//            ForEach(0..<songList.count, id: \.self) { index in
+//              Text("\(songList[index].0)")
+//            }
+//          }
+//        } else {
+//          HStack(alignment: .top) {
+//            VStack(alignment: .leading) {
+//              ForEach(0..<36, id: \.self) { index in
+//                Text("\(songList[index].0)")
+//                  .font(.system(size: 25))
+//              }
+//            }
+//            Spacer()
+//            VStack(alignment: .leading) {
+//              ForEach(36..<songList.count, id: \.self) { index in
+//                Text("\(songList[index].0)")
+//                  .font(.system(size: 25))
+//              }
+//            }
+//          }
+//          .padding(.horizontal, 28)
+//        }
+//      }
+//      .padding(.horizontal)
+//    }
+//    dotLine
+//    ZStack {
+//      Rectangle()
+//        .cornerRadius(20)
+//        .foregroundStyle(.white)
+//        .frame(width: 1080, height: 162)
+//      HStack {
+//
+//          .padding(.vertical, 27)
+//        Spacer()
+//      }
+//      .padding(.horizontal, 28)
+//    }
+//  }
+//  .background(.black)
+//}
+//}
