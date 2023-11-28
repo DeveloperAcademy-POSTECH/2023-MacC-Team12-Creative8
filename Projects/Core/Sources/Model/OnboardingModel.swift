@@ -18,15 +18,15 @@ public struct OnboardingModel: Decodable, Hashable {
     public var tags: [String]?
 }
 
-public enum OnboardingFilterType: String, CaseIterable {
-  case all = "전체"
-  case kpop = "케이팝"
-  case pop = "팝"
-  case hiphop = "힙합"
-  case rnb = "알앤비"
-  case rock = "락"
-  case metal = "메탈"
-  case elctronic = "일렉트로닉"
-  case folk = "포크"
-  case jpop = "제이팝"
+public enum OnboardingFilterType: LocalizedStringResource, CaseIterable {
+  case all = "전체"  // 전체
+  case kpop = "케이팝"  // 케이팝
+  case pop = "팝"  // 팝
+  case hiphop = "힙합"  // 힙합
+  case rnb = "알앤비"  // 알앤비
+  case rock = "락"  // 락
+  case metal = "메탈"  // 메탈
+  case elctronic = "일렉트로닉"  // 일렉트로닉
+  case folk = "포크"  // 포크
+  case jpop = "제이팝"  // 제이팝
 }

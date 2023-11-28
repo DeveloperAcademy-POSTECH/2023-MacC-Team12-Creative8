@@ -125,7 +125,7 @@ struct SetlistView: View {
         .ignoresSafeArea()
       ConcertInfoView(
         artist: artistInfo.name,
-        date: vm.getFormattedDateFromString(date: setlist?.eventDate ?? "", format: "yyyy년 MM월 dd일") ?? "-",
+        date: vm.allDateFormatter(inputDate: setlist?.eventDate ?? "") ?? "-",
         venue: setlist?.venue?.name ?? "-",
         tour: setlist?.tour?.name ?? "-"
       )
