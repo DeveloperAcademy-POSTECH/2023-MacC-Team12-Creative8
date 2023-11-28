@@ -47,7 +47,7 @@ struct SearchView: View {
             if viewModel.searchIsPresented {
               ScrollView {
                 searchingHistoryView
-                  .padding(.top, 32)
+                  .padding(.top, 12)
               }
               .scrollIndicators(.hidden)
             }
