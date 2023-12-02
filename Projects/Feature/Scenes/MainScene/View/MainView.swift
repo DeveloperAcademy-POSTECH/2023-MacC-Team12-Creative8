@@ -43,23 +43,23 @@ public struct MainView: View {
       .padding(.vertical)
       .background(Color.backgroundWhite)
       .onAppear {
-          dataManager.modelContext = modelContext
-            DispatchQueue.global(qos: .userInitiated).async {
-                for (idx, artist) in likeArtists.enumerated() {
-                    DispatchQueue.main.async {
-                        viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-                    }
-                }
-            }
-          
-      }
-      .onChange(of: likeArtists) { _, newValue in
+        dataManager.modelContext = modelContext
         if viewModel.setlists[0] == nil {
           DispatchQueue.global(qos: .userInitiated).async {
-            for (idx, artist) in newValue.enumerated() {
+            for (idx, artist) in likeArtists.enumerated() {
               DispatchQueue.main.async {
                 viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
               }
+            }
+          }
+        }
+        
+      }
+      .onChange(of: likeArtists) { _, newValue in
+        DispatchQueue.global(qos: .userInitiated).async {
+          for (idx, artist) in newValue.enumerated() {
+            DispatchQueue.main.async {
+              viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
             }
           }
         }
@@ -139,6 +139,7 @@ public struct MainView: View {
       HStack(spacing: 12) {
         ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
           ArtistsContentView(selectedTab: $selectedTab, viewModel: viewModel, artistInfo: data.artistInfo, index: index)
+            .background(.pink)
         }
       }
       .scrollTargetLayout()
