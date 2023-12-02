@@ -43,20 +43,29 @@ public struct MainView: View {
       .padding(.vertical)
       .background(Color.backgroundWhite)
       .onAppear {
-        dataManager.modelContext = modelContext
+          dataManager.modelContext = modelContext
+          var idx = 0
+          if viewModel.setlists[0] == nil {
+            DispatchQueue.global(qos: .userInitiated).async {
+                for (idx, artist) in likeArtists.enumerated() {
+                    DispatchQueue.main.async {
+                        viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+                    }
+                }
+            }
+          }
+      }
+      .onChange(of: likeArtists) { _, _ in
         var idx = 0
         if viewModel.setlists[0] == nil {
-          for artist in likeArtists {
-            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-            idx += 1
+          DispatchQueue.global(qos: .userInitiated).async {
+              for (idx, artist) in likeArtists.enumerated() {
+                  DispatchQueue.main.async {
+                      viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+                  }
+              }
           }
-        }
-      }
-      .onChange(of: likeArtists) { _, newValue in
-        var idx = 0
-        for artist in newValue {
-          viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-          idx += 1
+
         }
       }
       .navigationDestination(for: NavigationDelivery.self) { value in
