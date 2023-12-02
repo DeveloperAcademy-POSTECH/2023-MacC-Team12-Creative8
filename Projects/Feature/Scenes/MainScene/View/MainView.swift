@@ -44,8 +44,6 @@ public struct MainView: View {
       .background(Color.backgroundWhite)
       .onAppear {
           dataManager.modelContext = modelContext
-          var idx = 0
-          if viewModel.setlists[0] == nil {
             DispatchQueue.global(qos: .userInitiated).async {
                 for (idx, artist) in likeArtists.enumerated() {
                     DispatchQueue.main.async {
@@ -53,19 +51,17 @@ public struct MainView: View {
                     }
                 }
             }
-          }
+          
       }
-      .onChange(of: likeArtists) { _, _ in
-        var idx = 0
+      .onChange(of: likeArtists) { _, newValue in
         if viewModel.setlists[0] == nil {
           DispatchQueue.global(qos: .userInitiated).async {
-              for (idx, artist) in likeArtists.enumerated() {
-                  DispatchQueue.main.async {
-                      viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-                  }
+            for (idx, artist) in newValue.enumerated() {
+              DispatchQueue.main.async {
+                viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
               }
+            }
           }
-
         }
       }
       .navigationDestination(for: NavigationDelivery.self) { value in
@@ -150,7 +146,7 @@ public struct MainView: View {
     .scrollTargetBehavior(.viewAligned)
     .scrollIndicators(.hidden)
     .scrollPosition(id: $viewModel.scrollToIndex)
-    .safeAreaPadding(.horizontal, UIWidth * 0.092)
+    .safeAreaPadding(.horizontal, UIWidth * 0.09)
     .safeAreaPadding(.trailing, UIWidth * 0.005)
   }
 }
