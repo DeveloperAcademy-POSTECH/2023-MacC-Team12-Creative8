@@ -45,22 +45,27 @@ public struct MainView: View {
       .onAppear {
         dataManager.modelContext = modelContext
         if viewModel.setlists[0] == nil {
-          DispatchQueue.global(qos: .userInitiated).async {
-            for (idx, artist) in likeArtists.enumerated() {
-              DispatchQueue.main.async {
-                viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-              }
+//          for (idx, artist) in likeArtists.reversed() {
+//              DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+//              }
+//            }
+          var idx = likeArtists.count-1
+          for artist in likeArtists.reversed() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+              viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+              idx -= 1
             }
           }
         }
         
       }
       .onChange(of: likeArtists) { _, newValue in
-        DispatchQueue.global(qos: .userInitiated).async {
-          for (idx, artist) in newValue.enumerated() {
-            DispatchQueue.main.async {
-              viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-            }
+        var idx = likeArtists.count-1
+        for artist in likeArtists.reversed() {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+            idx -= 1
           }
         }
       }
@@ -139,7 +144,6 @@ public struct MainView: View {
       HStack(spacing: 12) {
         ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
           ArtistsContentView(selectedTab: $selectedTab, viewModel: viewModel, artistInfo: data.artistInfo, index: index)
-            .background(.pink)
         }
       }
       .scrollTargetLayout()
