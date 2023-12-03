@@ -25,7 +25,6 @@ struct SearchArtistCell: View {
           switch phase {
           case .empty:
             RoundedRectangle(cornerRadius: 20)
-              .foregroundStyle(Color.mainGrey1)
               .overlay(
                 Image("ticket", bundle: setaBundle)
                   .resizable()
@@ -34,13 +33,13 @@ struct SearchArtistCell: View {
                   .scaledToFill()
                   .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
               )
+              .foregroundStyle(Color.mainGrey1)
           case .success(let image):
             image
               .resizable()
               .scaledToFill()
           case .failure:
             RoundedRectangle(cornerRadius: 20)
-              .foregroundStyle(Color.mainGrey1)
               .overlay(
                 Image("ticket", bundle: setaBundle)
                   .resizable()
@@ -49,6 +48,7 @@ struct SearchArtistCell: View {
                   .scaledToFill()
                   .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
               )
+              .foregroundStyle(Color.mainGrey1)
           @unknown default:
             EmptyView()
           }

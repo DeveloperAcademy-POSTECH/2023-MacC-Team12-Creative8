@@ -63,12 +63,13 @@ public struct SettingView: View {
             })
           }
         }
-        .padding(.horizontal, 25)
+//        .padding(.horizontal, UIWidth * 0.049)
         .padding(.vertical)
       }
       .scrollIndicators(.hidden)
     }
     .navigationTitle("더보기")
+    
   }
 }
 
@@ -112,7 +113,6 @@ struct SetlistfmLinkButton: View {
       .background(Color.mainGrey1)
       .foregroundStyle(Color.mainBlack)
       .clipShape(RoundedRectangle(cornerRadius: 14))
-      .padding(.horizontal, 7)
     })
   }
 }
