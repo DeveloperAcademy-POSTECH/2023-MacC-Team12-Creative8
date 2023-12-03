@@ -47,7 +47,7 @@ public struct MainView: View {
         if viewModel.setlists[0] == nil {
           var idx = likeArtists.count-1
           for artist in likeArtists.reversed() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
               viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
               idx -= 1
             }
@@ -58,7 +58,7 @@ public struct MainView: View {
       .onChange(of: likeArtists) { _, newValue in
         var idx = likeArtists.count-1
         for artist in likeArtists.reversed() {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
             idx -= 1
           }
