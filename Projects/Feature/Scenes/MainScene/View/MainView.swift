@@ -45,11 +45,6 @@ public struct MainView: View {
       .onAppear {
         dataManager.modelContext = modelContext
         if viewModel.setlists[0] == nil {
-//          for (idx, artist) in likeArtists.reversed() {
-//              DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-//              }
-//            }
           var idx = likeArtists.count-1
           for artist in likeArtists.reversed() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -97,7 +92,7 @@ public struct MainView: View {
   public var artistNameScrollView: some View {
     ScrollView(.horizontal) {
       ScrollViewReader { scrollViewProxy in
-        HStack(spacing: UIWidth * 0.12) {
+        HStack(spacing: UIWidth * 0.13) {
           ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
             let artistName = viewModel.replaceFirstSpaceWithNewline(data.artistInfo.name)
             ArtistNameView(selectedTab: $selectedTab,
@@ -137,7 +132,7 @@ public struct MainView: View {
       }
     }
     .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.094)
+    .safeAreaPadding(.leading, UIWidth * 0.1)
   }
   public var artistContentView: some View {
     ScrollView(.horizontal) {
