@@ -56,7 +56,8 @@ struct SearchArtistCell: View {
       }
       .aspectRatio(contentMode: .fit)
       .clipShape(RoundedRectangle(cornerRadius: 12))
-      .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.lineGrey1, lineWidth: 1))
+      .overlay(RoundedRectangle(cornerRadius: 12)
+      .stroke(Color.mainGrey1, lineWidth: 1))
       
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)

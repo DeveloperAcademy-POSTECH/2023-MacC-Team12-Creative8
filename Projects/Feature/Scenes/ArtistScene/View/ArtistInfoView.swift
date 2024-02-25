@@ -23,10 +23,15 @@ struct ArtistInfoView: View {
       imageLayer
       HStack {
         nameLayer
+          .padding()
+          .padding(.bottom, 5)
+        Spacer(minLength: 60)
+      }
+      HStack {
         Spacer()
         buttonLayer
+          .padding()
       }
-      .padding()
     }
     .padding(.horizontal, 24)
     .navigationBarTitleDisplayMode(.inline)
@@ -84,6 +89,7 @@ struct ArtistInfoView: View {
       .font(.largeTitle)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainWhite)
+      .minimumScaleFactor(0.1)
   }
   
   private var buttonLayer: some View {
