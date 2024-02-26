@@ -33,7 +33,6 @@ struct SearchArtistList: View {
           NavigationLink {
             ArtistView(selectedTab: $selectedTab, artistName: namePair.0, artistAlias: namePair.1, artistMbid: artist.id ?? "")
           } label: {
-
             ListRow(namePair: namePair, info: info)
           }
           .simultaneousGesture(TapGesture().onEnded {
@@ -57,23 +56,26 @@ public struct ListRow: View {
   let info: String
   
   public var body: some View {
-      VStack(alignment: .leading) {
-        Text(namePair.0)
-          .font(.subheadline)
-          .foregroundStyle(Color.mainBlack)
-          .lineLimit(1)
-        
-        Group {
-          if info == "" {
-            Text(" ")
-          } else {
-            Text(info)
+      HStack {
+        VStack(alignment: .leading) {
+          Text(namePair.0)
+            .font(.subheadline)
+            .foregroundStyle(Color.mainBlack)
+            .lineLimit(1)
+          
+          Group {
+            if info == "" {
+              Text(" ")
+            } else {
+              Text(info)
+            }
           }
-        }
-        .lineLimit(1)
-        .font(.footnote)
-        .foregroundStyle(Color.fontGrey25)
+          .lineLimit(1)
+          .font(.footnote)
+          .foregroundStyle(Color.fontGrey25)
 
+        }
+        Spacer()
       }
       .padding(.vertical, 5)
   }
