@@ -21,43 +21,48 @@ public struct OnboardingView: View {
   private let dataService = SetlistDataService()
   var artistInfo: ArtistInfo?
   @AppStorage("isOnboarding") var isOnboarding: Bool?
+  @Environment(NetworkMonitor.self) private var networkMonitor
   
   public init() {
   }
   
   public var body: some View {
-    ZStack(alignment: .bottom) {
-      VStack(spacing: 0) {
-        ScrollView(showsIndicators: false) {
-          VStack(alignment: .leading) {
-            onboardingTitle
-            genresFilterButton
-            artistNameButton
-          }
-        }
-        bottomButton
-      }
-      
-      if onboardingViewModel.isShowToastBar {
-        toastBar
-          .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
-          .padding(.bottom, 120)
-          .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-              withAnimation {
-                onboardingViewModel.isShowToastBar.toggle()
-              }
+    if networkMonitor.isConnected {
+      ZStack(alignment: .bottom) {
+        VStack(spacing: 0) {
+          ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading) {
+              onboardingTitle
+              genresFilterButton
+              artistNameButton
             }
           }
+          bottomButton
+        }
+        
+        if onboardingViewModel.isShowToastBar {
+          toastBar
+            .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
+            .padding(.bottom, 120)
+            .onAppear {
+              DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                withAnimation {
+                  onboardingViewModel.isShowToastBar.toggle()
+                }
+              }
+            }
+        }
       }
-    }
-    .onAppear {
-      dataManager.modelContext = modelContext
-      artistFetchService.fetchData { success in
-          if !success {
-            onboardingViewModel.artistFetchError.toggle()
-          }
+      .onAppear {
+        dataManager.modelContext = modelContext
+        artistFetchService.fetchData { success in
+            if !success {
+              onboardingViewModel.artistFetchError.toggle()
+            }
+        }
       }
+    } else {
+        NetworkUnavailableView()
     }
   }
   

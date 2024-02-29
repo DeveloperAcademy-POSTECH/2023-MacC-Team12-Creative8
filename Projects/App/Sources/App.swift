@@ -15,6 +15,7 @@ import Firebase
 struct SetlistApp: App {
   @AppStorage("isOnboarding")
   var isOnboarding: Bool = true
+  @State var networkMonitor = NetworkMonitor()
   
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
@@ -43,6 +44,7 @@ struct SetlistApp: App {
       }
     }
     .modelContainer(sharedModelContainer)
+    .environmentObject(networkMonitor)
     
   }
 }

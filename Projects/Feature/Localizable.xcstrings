@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "\n" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -283,6 +284,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요." : {
       "extractionState" : "manual",
@@ -614,6 +618,23 @@
         }
       }
     },
+    "네트워크에 연결되어 있지 않습니다" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Internet"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네트워크에 연결되어 있지 않습니다"
+          }
+        }
+      }
+    },
     "더보기" : {
       "localizations" : {
         "en" : {
@@ -890,6 +911,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."
+          }
+        }
+      }
+    },
+    "새로고침" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새로고침"
           }
         }
       }
@@ -1251,6 +1288,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이용 약관"
+          }
+        }
+      }
+    },
+    "인터넷 연결을 확인한 뒤 다시 시도해 주세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check and try again."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인터넷 연결을 확인한 뒤 다시 시도해 주세요"
           }
         }
       }

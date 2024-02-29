@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
+		79FC54272B8CC3F600AFDABE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC54262B8CC3F600AFDABE /* NetworkManager.swift */; };
 		882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7A053F3B85B42931EE002B /* ArtistDataManager.swift */; };
 		8FA0920398EC647EC4B21451 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2623E283DF2E5382F8E9EA4 /* OnboardingModel.swift */; };
 		9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */; };
@@ -75,6 +76,7 @@
 		569CF2C676DD875C163323FA /* ArtistFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistFetchService.swift; sourceTree = "<group>"; };
 		752E25910681A644F3142B68 /* LikeArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArtistModel.swift; sourceTree = "<group>"; };
 		75600AD4887E89C2223BF659 /* SetlistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistListModel.swift; sourceTree = "<group>"; };
+		79FC54262B8CC3F600AFDABE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		845DD837E5346A7627964873 /* SaveArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveArtistInfo.swift; sourceTree = "<group>"; };
 		8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListModel.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				C004E9629A66EFA763B287E6 /* AppleMusicService.swift */,
 				569CF2C676DD875C163323FA /* ArtistFetchService.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
+				79FC54262B8CC3F600AFDABE /* NetworkManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -297,8 +300,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -382,6 +383,7 @@
 				03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */,
 				F6FB06B6DA0BE1FE264F7B7E /* SearchModel.swift in Sources */,
 				566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */,
+				79FC54272B8CC3F600AFDABE /* NetworkManager.swift in Sources */,
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
 				2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */,
