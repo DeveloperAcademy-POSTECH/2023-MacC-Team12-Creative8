@@ -19,6 +19,7 @@ struct ArchivingView: View {
   @StateObject var viewModel = ArchivingViewModel.shared
   @StateObject var tabViewManager: TabViewManager
   @Namespace var topID
+  @Environment(NetworkMonitor.self) private var networkMonitor
   
   var body: some View {
     NavigationStack(path: $tabViewManager.pageStack) {
@@ -46,6 +47,11 @@ struct ArchivingView: View {
         } else {
           ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
         }
+      }
+    }
+    .overlay {
+      if !networkMonitor.isConnected {
+        NetworkUnavailableView()
       }
     }
   }

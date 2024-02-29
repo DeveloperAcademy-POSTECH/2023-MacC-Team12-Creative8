@@ -15,6 +15,7 @@ import Firebase
 struct SetlistApp: App {
   @AppStorage("isOnboarding")
   var isOnboarding: Bool = true
+  @State var networkMonitor = NetworkMonitor()
   
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
@@ -37,9 +38,9 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       if isOnboarding {
-        OnboardingView()
+        OnboardingView().environmentObject(NetworkMonitor())
       } else {
-        TabBarView()
+        TabBarView().environmentObject(NetworkMonitor())
       }
     }
     .modelContainer(sharedModelContainer)

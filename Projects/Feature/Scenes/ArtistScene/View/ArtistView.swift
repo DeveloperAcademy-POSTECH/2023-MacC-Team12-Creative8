@@ -17,6 +17,7 @@ struct ArtistView: View {
   let artistName: String
   let artistAlias: String?
   let artistMbid: String
+  @Environment(NetworkMonitor.self) private var networkMonitor
   
   var body: some View {
     VStack {
@@ -39,6 +40,11 @@ struct ArtistView: View {
       }
     }
     .background(Color.backgroundWhite)
+    .overlay {
+      if !networkMonitor.isConnected {
+        NetworkUnavailableView()
+      }
+    }
   }
   
   private var toolbarArtistName: some View {

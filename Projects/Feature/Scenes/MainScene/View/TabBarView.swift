@@ -93,6 +93,7 @@ public struct TabBarView: View {
       .tabItem { Label("더보기", systemImage: "ellipsis") }
       .tag(Tab.setting)
     }
+    
   }
 }
 

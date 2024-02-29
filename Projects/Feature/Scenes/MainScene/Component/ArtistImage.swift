@@ -24,12 +24,11 @@ struct ArtistImage: View {
           AsyncImage(url: URL(string: imageUrl)) { image in
             image
               .resizable()
-              .scaledToFill()
+              .aspectRatio(contentMode: .fill)
               .overlay {
                 artistImageOverlayButton
                   .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
               }
-              .clipShape(RoundedRectangle(cornerRadius: 15))
               .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
           } placeholder: {
             ProgressView()
@@ -39,6 +38,8 @@ struct ArtistImage: View {
         }
       }
       .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
+      .clipShape(RoundedRectangle(cornerRadius: 15))
+      .clipped()
     }
   }
   

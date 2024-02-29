@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,8 @@
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7611BAD555C16F6A7E0CEA5C /* ArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
+		79FC54292B8CC46800AFDABE /* NetworkUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC54282B8CC46800AFDABE /* NetworkUnavailableView.swift */; };
+		79FC542D2B90782000AFDABE /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 79FC542C2B90782000AFDABE /* Localizable.xcstrings */; };
 		802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D00D9D84D120E91EDCF4E /* ExportPlaylistViewModel.swift */; };
@@ -110,6 +112,8 @@
 		7391501B4523A254694E36D3 /* ConcertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertInfoView.swift; sourceTree = "<group>"; };
 		75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedSetlistsView.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
+		79FC54282B8CC46800AFDABE /* NetworkUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUnavailableView.swift; sourceTree = "<group>"; };
+		79FC542C2B90782000AFDABE /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleAlert.swift; sourceTree = "<group>"; };
 		8083107765017313EF49CE3A /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 				B9DEE02445017E26BC98FA76 /* SearchScene */,
 				2AC800C4A6C6B50E5E5CCDAF /* SetlistScene */,
 				17CB872AC00E793C76D10747 /* SettingScene */,
+				79FC54282B8CC46800AFDABE /* NetworkUnavailableView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 		6DC82FD44AFA8E6846CC19FE = {
 			isa = PBXGroup;
 			children = (
+				79FC542C2B90782000AFDABE /* Localizable.xcstrings */,
 				C05AC50F60B178F60E99048B /* Project */,
 				FF84802DBECE1160D2AE52BE /* Frameworks */,
 				F37C3A4FE623C846745B9CE2 /* Products */,
@@ -518,8 +524,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -552,6 +556,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79FC542D2B90782000AFDABE /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +625,7 @@
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
+				79FC54292B8CC46800AFDABE /* NetworkUnavailableView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
