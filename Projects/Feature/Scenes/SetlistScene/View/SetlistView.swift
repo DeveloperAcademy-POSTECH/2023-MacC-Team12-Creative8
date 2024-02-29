@@ -25,7 +25,6 @@ struct SetlistView: View {
 //  @State private var showToastMessageAppleMusic = false
 //  @State private var showToastMessageCapture = false
   @StateObject var exportViewModel = ExportPlaylistViewModel()
-  @Environment(NetworkMonitor.self) private var networkMonitor
   
   var body: some View {
     ZStack {
@@ -115,11 +114,6 @@ struct SetlistView: View {
             }
           }
         }
-      }
-    }
-    .overlay {
-      if !networkMonitor.isConnected {
-        NetworkUnavailableView()
       }
     }
   }

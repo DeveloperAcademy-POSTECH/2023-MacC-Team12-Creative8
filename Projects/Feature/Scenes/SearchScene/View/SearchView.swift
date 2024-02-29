@@ -19,7 +19,6 @@ struct SearchView: View {
   @StateObject var dataManager = SwiftDataManager()
   @StateObject var tabViewManager: TabViewManager
   @Namespace var topID
-  @Environment(NetworkMonitor.self) private var networkMonitor
   
   var body: some View {
     NavigationStack(path: $tabViewManager.pageStack) {
@@ -68,11 +67,6 @@ struct SearchView: View {
         } else {
           ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
         }
-      }
-    }
-    .overlay {
-      if !networkMonitor.isConnected {
-        NetworkUnavailableView()
       }
     }
   }

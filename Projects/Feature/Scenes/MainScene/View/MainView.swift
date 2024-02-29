@@ -19,7 +19,6 @@ public struct MainView: View {
   @State var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
   @StateObject var tabViewManager: TabViewManager
-  @Environment(NetworkMonitor.self) private var networkMonitor
   
   public var body: some View {
     NavigationStack(path: $tabViewManager.pageStack) {
@@ -77,11 +76,6 @@ public struct MainView: View {
         } else {
           ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
         }
-      }
-    }
-    .overlay {
-      if !networkMonitor.isConnected {
-        NetworkUnavailableView()
       }
     }
   }

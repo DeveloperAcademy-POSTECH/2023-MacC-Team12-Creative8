@@ -38,12 +38,13 @@ struct SetlistApp: App {
   var body: some Scene {
     WindowGroup {
       if isOnboarding {
-        OnboardingView().environmentObject(NetworkMonitor())
+        OnboardingView()
       } else {
-        TabBarView().environmentObject(NetworkMonitor())
+        TabBarView()
       }
     }
     .modelContainer(sharedModelContainer)
+    .environmentObject(networkMonitor)
     
   }
 }

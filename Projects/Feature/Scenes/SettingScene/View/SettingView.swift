@@ -11,12 +11,10 @@ import UI
 import Core
 
 public struct SettingView: View {
-  @Environment(NetworkMonitor.self) private var networkMonitor
   
   public init() {}
   
   public var body: some View {
-    if networkMonitor.isConnected {
       ZStack {
         Color.backgroundWhite
         ScrollView {
@@ -72,9 +70,6 @@ public struct SettingView: View {
         .scrollIndicators(.hidden)
       }
       .navigationTitle("더보기")
-    } else {
-      NetworkUnavailableView()
-    }
   }
 }
 
