@@ -64,7 +64,7 @@ public struct SettingView: View {
               })
             }
           }
-  //        .padding(.horizontal, UIWidth * 0.049)
+          .padding(.horizontal, UIWidth * 0.049)
           .padding(.vertical)
         }
         .scrollIndicators(.hidden)

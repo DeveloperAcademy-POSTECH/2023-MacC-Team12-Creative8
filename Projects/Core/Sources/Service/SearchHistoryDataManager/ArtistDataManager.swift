@@ -121,6 +121,7 @@ public final class ArtistDataManager {
       .trimmingCharacters(in: .whitespaces)
       .replacingOccurrences(of: " ", with: "")
       .filter { $0.unicodeScalars.first?.value != 8203 }
+      .lowercased()
   }
   
   // 첫 번째 괄호 이전의 텍스트를 추출
