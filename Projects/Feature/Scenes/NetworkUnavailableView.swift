@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import Foundation
 
 struct NetworkUnavailableView: View {
   @Environment(NetworkMonitor.self) private var networkMonitor
