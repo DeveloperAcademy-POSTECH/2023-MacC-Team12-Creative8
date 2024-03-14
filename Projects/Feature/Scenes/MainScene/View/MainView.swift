@@ -40,7 +40,7 @@ public struct MainView: View {
           }
         }
       }
-      .padding(.vertical)
+      .padding(.top, 15)
       .background(Color.backgroundWhite)
       .onAppear {
         dataManager.modelContext = modelContext
