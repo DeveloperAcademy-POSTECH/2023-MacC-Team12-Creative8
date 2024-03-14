@@ -135,4 +135,8 @@ class ArtistViewModel: ObservableObject {
     return setlist.sets?.setsSet?.isEmpty == true
   }
   
+  func isKorean() -> Bool {
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return false }
+      return languageCode == "ko"
+  }
 }
