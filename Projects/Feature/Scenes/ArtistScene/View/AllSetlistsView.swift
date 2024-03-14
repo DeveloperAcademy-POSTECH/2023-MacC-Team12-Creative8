@@ -41,10 +41,10 @@ struct AllSetlistsView: View {
         HStack {
           // MARK: Date
           VStack {
-            Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
+            Text(vm.getFormattedDate(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
               .foregroundStyle(Color.fontGrey25)
               .tracking(0.5)
-            Text(vm.dayAndMonthDateFormatter(inputDate: setlist.eventDate ?? "") ?? "")
+            Text(vm.getFormattedDate(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
               .foregroundStyle(Color.mainBlack)
           }
           .font(.headline)
