@@ -118,7 +118,7 @@ struct AllSetlistsView: View {
 }
 
 private struct EmptyView: View {
-  var vm: ArtistViewModel
+  @ObservedObject var vm: ArtistViewModel
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
