@@ -3,7 +3,7 @@
 
  <img width="744" alt="스크린샷 2024-03-21 오후 5 19 06" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team12-Creative8/assets/81157265/b37beae8-82fc-44a2-b323-c2f41dfb69ae">
 
-![Generic badge](https://img.shields.io/badge/version-1.1.3-critical.svg) 
+![Generic badge](https://img.shields.io/badge/version-1.1.3-critical.svg) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDeveloperAcademy-POSTECH%2FMacC-Team12-Creative8&count_bg=%23EFDA11&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 [<img width="220" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://user-images.githubusercontent.com/55099365/196023806-5eb7be0f-c7cf-4661-bb39-35a15146c33a.png">](https://apps.apple.com/kr/app/seta-%EC%84%B8%ED%83%80/id6471524204)
 
@@ -51,6 +51,7 @@
 * Combine
 * URLSession
 * MusicKit
+* REST API
   
 ### 🔀 Git branch & [Git Flow]
 - `feature` : 새로운 기능
@@ -70,12 +71,66 @@
 
 <div align="center"> 
   
-| [고혜지(Hazzy)](https://github.com/Ko-HyeJi) | [김나윤(Nayla)](https://github.com/nylakim) | [김예슬(Suri)](https://github.com/suri0000) | [유인호(Musk)](https://github.com/Oreo-Mcflurry) | [이예은(Yelson)] | [장수민(Lorenzo)](https://github.com/sumintnals) | [정제명(Green)](https://github.com/JJemyeong) | [최효원(Wonni)](https://github.com/wonniiii) |
+| [고혜지(Hazzy)](https://github.com/Ko-HyeJi) | [김나윤(Nayla)](https://github.com/nylakim) | [김예슬(Suri)](https://github.com/suri0000) | [유인호(Musk)](https://github.com/Oreo-Mcflurry) | 이예은(Yelson) | [장수민(Lorenzo)](https://github.com/sumintnals) | [정제명(Green)](https://github.com/JJemyeong) | [최효원(Wonni)](https://github.com/wonniiii) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|<img width="100" alt="Hazzy" src="https://avatars.githubusercontent.com/u/88470545?v=4">|<img width="100" alt="Nayla" src="https://avatars.githubusercontent.com/u/128906664?v=4">|<img width="100" alt="Suri" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Musk" src="https://avatars.githubusercontent.com/u/96654328?v=4">|<img width="100" alt="Yelson" src="">|<img width="100" alt="Lorenzo" src="https://avatars.githubusercontent.com/u/127755029?v=4">|<img width="100" alt="Green" src="https://avatars.githubusercontent.com/u/130547132?v=4)">|<img width="100" alt="Wonni" src="https://github.com/account">|
+|<img width="100" alt="Hazzy" src="https://avatars.githubusercontent.com/u/88470545?v=4">|<img width="100" alt="Nayla" src="https://avatars.githubusercontent.com/u/128906664?v=4">|<img width="100" alt="Suri" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Musk" src="https://avatars.githubusercontent.com/u/96654328?v=4">|<img width="100" alt="Yelson" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Lorenzo" src="https://avatars.githubusercontent.com/u/127755029?v=4">|<img width="100" alt="Green" src="https://avatars.githubusercontent.com/u/130547132?v=4)">|<img width="100" alt="Wonni" src="https://avatars.githubusercontent.com/u/81157265?v=4">|
 
   
 </div>
+<br/>
+
+## 🗂️ Folder Architecture
+<pre>
+<code>
+📦Projects
+ ┣ 📂App
+ ┃ ┣ 📂Resources
+ ┃ ┣ 📂Sources
+ ┃ ┣ 📂Support
+ ┣ 📂Core
+ ┃ ┣ 📂Sources
+ ┃ ┃ ┣ 📂Model
+ ┃ ┃ ┃ ┣ 📂ArchivedConcertInfo
+ ┃ ┃ ┃ ┣ 📂ArtistInfoModel
+ ┃ ┃ ┃ ┣ 📂LikeArtist
+ ┃ ┃ ┃ ┣ 📂SearchHistory
+ ┃ ┃ ┗ 📂Service
+ ┃ ┃ ┃ ┣ 📂SearchHistoryDataManager
+ ┃ ┃ ┃ ┣ 📂SwiftDataManager
+ ┣ 📂Feature
+ ┃ ┣ 📂Scenes
+ ┃ ┃ ┣ 📂ArchiveScene
+ ┃ ┃ ┃ ┣ 📂Component
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂ArtistScene
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂MainScene
+ ┃ ┃ ┃ ┣ 📂Component
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂OnboardingScene
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂SearchScene
+ ┃ ┃ ┃ ┣ 📂Component
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂SetlistScene
+ ┃ ┃ ┃ ┣ 📂Component
+ ┃ ┃ ┃ ┃ ┣ 📂CaptureSetlist
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┗ 📂ViewModel
+ ┃ ┃ ┣ 📂SettingScene
+ ┃ ┃ ┃ ┗ 📂View
+ ┣ 📂UI
+ ┃ ┣ 📂Resources
+ ┃ ┃ ┣ 📂Colors.xcassets
+ ┃ ┣ 📂Sources
+ ┗ ┗ ┗ 📂Extensions
+</code>
+</pre>
 <br/>
 
 ## :lock_with_ink_pen: License
