@@ -74,18 +74,19 @@ public final class CheckAppleMusicSubscription: ObservableObject {
   public init() {
   }
   
-  public func appleMusicSubscription() {
+  public func appleMusicSubscription(completion: @escaping (Bool) -> Void) {
     SKCloudServiceController().requestCapabilities { (capability: SKCloudServiceCapability, err: Error?) in
-      // 에러 발생시
       guard err == nil else { return }
-      // 사용자가 애플 뮤직을 구독 중이라면
-      if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) { self.check = true }
-      // 사용자가 애플 뮤직을 구독 중이지 않다면
-      if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) { self.check = false }
+      if capability.contains(SKCloudServiceCapability.musicCatalogPlayback) {
+        self.check = true
+      } else if capability.contains(SKCloudServiceCapability.musicCatalogSubscriptionEligible) {
+        self.check = false
+      }
+      completion(self.check)
     }
   }
   
-  public func getCheckValue() -> Bool {
-      return check
+  public var checkValue: Bool {
+    return check
   }
 }

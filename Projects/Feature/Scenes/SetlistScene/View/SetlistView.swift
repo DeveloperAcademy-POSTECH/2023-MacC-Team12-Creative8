@@ -21,9 +21,6 @@ struct SetlistView: View {
   @Query var likeArtist: [LikeArtist]
   @Environment(\.modelContext) var modelContext
   @State private var showToastMessage = false
-  
-//  @State private var showToastMessageAppleMusic = false
-//  @State private var showToastMessageCapture = false
   @StateObject var exportViewModel = ExportPlaylistViewModel()
   
   var body: some View {
@@ -44,7 +41,7 @@ struct SetlistView: View {
                                    artistInfo: artistInfo,
                                    vm: vm,
                                    showToastMessageAppleMusic: $exportViewModel.showToastMessageAppleMusic,
-                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture,
+                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture, showToastMessageSubscription: $exportViewModel.showToastMessageSubscription,
                                    exportViewModel: exportViewModel)
         }
       }
@@ -64,22 +61,10 @@ struct SetlistView: View {
       vm.showModal.toggle()
       exportViewModel.showAppleMusicAlert.toggle()
     }),
-       isPresented: $exportViewModel.showAppleMusicAlert,
-       artistInfo: artistInfo,
-       setlist: setlist,
-       exportViewModel: exportViewModel
-    )
-    .customAlert(primaryButton: CustomAlertButton(title: "확인", action: {
-      // TODO: 유튜브뮤직
-      vm.showModal.toggle()
-    }), dismissButton: CustomAlertButton(title: "취소", action: {
-      vm.showModal.toggle()
-      exportViewModel.showAppleMusicAlert.toggle()
-    }),
-     isPresented: $exportViewModel.showYouTubeAlert,
-     artistInfo: artistInfo,
-     setlist: setlist,
-     exportViewModel: exportViewModel
+                 isPresented: $exportViewModel.showAppleMusicAlert,
+                 artistInfo: artistInfo,
+                 setlist: setlist,
+                 exportViewModel: exportViewModel
     )
     .toolbar(.hidden, for: .tabBar)
     .navigationBarTitleDisplayMode(.inline)

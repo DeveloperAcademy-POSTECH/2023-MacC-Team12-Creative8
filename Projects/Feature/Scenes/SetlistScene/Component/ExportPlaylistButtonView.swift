@@ -16,21 +16,27 @@ struct ExportPlaylistButtonView: View {
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
+  @Binding var showToastMessageSubscription: Bool
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
+  
+  private func toastMessageToShow() -> LocalizedStringResource? {
+    if showToastMessageAppleMusic {
+        return "1~2분 후 Apple Music에서 확인하세요"
+    } else if showToastMessageCapture {
+        return "캡쳐된 사진을 앨범에서 확인하세요"
+    } else if showToastMessageSubscription {
+        return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
+    } else {
+        return nil
+    }
+  }
 
   var body: some View {
     VStack {
       Spacer()
-      
-      Group {
-        if showToastMessageAppleMusic {
-          ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
-        } else if showToastMessageCapture {
-          ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
-        }
+      if let message = toastMessageToShow() {
+        ToastMessageView(message: message)
       }
-      .padding(.horizontal, 30)
-      
       Button(action: {
         vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
         vm.showModal.toggle()
