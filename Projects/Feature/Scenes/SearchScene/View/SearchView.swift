@@ -70,7 +70,6 @@ struct SearchView: View {
       }
     }
   }
-  
   private var artistView: some View {
     VStack(alignment: .leading) {
       domesticArtistView

@@ -55,6 +55,7 @@ final class TabViewModel: ObservableObject {
 
 public struct TabBarView: View {
   @StateObject var viewModel = TabViewModel()
+  @Environment(NetworkMonitor.self) private var networkMonitor
   
   public init() {
     let appearance = UITabBarAppearance()
@@ -69,29 +70,36 @@ public struct TabBarView: View {
   
   public var body: some View {
     TabView(selection: $viewModel.selectedTab) {
-      MainView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
-        .navigationBarTitleDisplayMode(.inline)
-        .tabItem { Label("세트리스트", systemImage: "music.note.house.fill") }
-        .tag(Tab.home)
-      
-      SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
-        .navigationBarTitleDisplayMode(.inline)
-        .tabItem { Label("검색", systemImage: "magnifyingglass") }
-        .tag(Tab.search)
-      
-      ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
-        .navigationBarTitleDisplayMode(.large)
-        .background(Color.backgroundWhite)
-        .tabItem { Label("보관함", systemImage: "heart.fill") }
-        .tag(Tab.archiving)
-      
-      NavigationStack {
-        SettingView()
+      Group {
+        MainView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
+          .navigationBarTitleDisplayMode(.inline)
+          .tabItem { Label("세트리스트", systemImage: "music.note.house.fill") }
+          .tag(Tab.home)
+        
+        SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
+          .navigationBarTitleDisplayMode(.inline)
+          .tabItem { Label("검색", systemImage: "magnifyingglass") }
+          .tag(Tab.search)
+        
+        ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
           .navigationBarTitleDisplayMode(.large)
           .background(Color.backgroundWhite)
+          .tabItem { Label("보관함", systemImage: "heart.fill") }
+          .tag(Tab.archiving)
+        
+        NavigationStack {
+          SettingView()
+            .navigationBarTitleDisplayMode(.large)
+            .background(Color.backgroundWhite)
+        }
+        .tabItem { Label("더보기", systemImage: "ellipsis") }
+        .tag(Tab.setting)
       }
-      .tabItem { Label("더보기", systemImage: "ellipsis") }
-      .tag(Tab.setting)
+      .overlay {
+        if !networkMonitor.isConnected {
+          NetworkUnavailableView()
+        }
+      }
     }
   }
 }
