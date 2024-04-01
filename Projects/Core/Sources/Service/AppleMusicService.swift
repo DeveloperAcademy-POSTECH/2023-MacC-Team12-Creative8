@@ -85,8 +85,4 @@ public final class CheckAppleMusicSubscription: ObservableObject {
       completion(self.check)
     }
   }
-  
-  public var checkValue: Bool {
-    return check
-  }
 }
