@@ -29,7 +29,7 @@
 		6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAF19513FC0FC8E2BBF031 /* MainViewModel.swift */; };
 		720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F2F8F05B58D59460428D7A /* TabBarView.swift */; };
 		7611BAD555C16F6A7E0CEA5C /* ArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */; };
-		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; }
+		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
 		802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D00D9D84D120E91EDCF4E /* ExportPlaylistViewModel.swift */; };
@@ -111,7 +111,6 @@
 		7391501B4523A254694E36D3 /* ConcertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertInfoView.swift; sourceTree = "<group>"; };
 		75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedSetlistsView.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
-    
 		7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleAlert.swift; sourceTree = "<group>"; };
 		8083107765017313EF49CE3A /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainView.swift; sourceTree = "<group>"; };
@@ -311,7 +310,6 @@
 		6DC82FD44AFA8E6846CC19FE = {
 			isa = PBXGroup;
 			children = (
-
 				C05AC50F60B178F60E99048B /* Project */,
 				FF84802DBECE1160D2AE52BE /* Frameworks */,
 				F37C3A4FE623C846745B9CE2 /* Products */,
@@ -557,7 +555,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +578,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/jangsumin/Documents/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 

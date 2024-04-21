@@ -65,7 +65,6 @@ public struct SettingView: View {
             }
           }
           .padding(.horizontal, UIWidth * 0.049)
-          .padding(.vertical)
         }
         .scrollIndicators(.hidden)
       }
@@ -84,14 +83,15 @@ struct SectionTitleView: View {
       Text(sectionTitle)
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
-        .padding(.vertical)
+        .padding(.top, 30)
+        .padding(.bottom, 20)
       VStack(alignment: .leading, spacing: 0) {
         Text(sectionTopDescription)
         Text(sectionBottomDescription)
       }
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
-        .padding(.bottom, 30)
+        .padding(.bottom, 20)
     }
   }
 }
@@ -104,12 +104,15 @@ struct SetlistfmLinkButton: View {
   var body: some View {
     Link(destination: URL(string: setlistfmURL)!, label: {
       HStack {
-        Spacer()
         Text(linkLabel)
           .font(.system(.callout, weight: .semibold))
+          .padding(.leading, 16)
         Spacer()
+        Image(systemName: "chevron.right")
+          .resizable()
+          .frame(width: 10, height: 15)
+          .padding(EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 15))
       }
-      .frame(height: 54)
       .background(Color.mainGrey1)
       .foregroundStyle(Color.mainBlack)
       .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -125,7 +128,7 @@ struct LinkLabelView: View {
     HStack {
       Text(linkLabel)
         .font(.subheadline)
-        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
+        .padding(.vertical, 5)
       Spacer()
       Image(systemName: "chevron.right")
         .resizable()
