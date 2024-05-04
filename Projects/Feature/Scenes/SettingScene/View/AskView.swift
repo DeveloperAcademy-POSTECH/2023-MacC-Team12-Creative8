@@ -64,7 +64,7 @@ struct AskView: View {
       composeViewController.setToRecipients(["thecreative8team@gmail.com"])
       composeViewController.setSubject("<SETA> 문의 및 의견")
       composeViewController.setMessageBody(bodyString, isHTML: false)
-      composeViewController.navigationBar.tintColor = .systemBlue
+      composeViewController.view.tintColor = .systemBlue
       
       if let presented = rootViewController.presentedViewController {
         presented.dismiss(animated: false) {
