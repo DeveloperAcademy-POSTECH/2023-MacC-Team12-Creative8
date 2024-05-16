@@ -12,8 +12,8 @@ import UI
 
 struct AskView: View {
   @State var isMailErrorAlertPresented: Bool = false
-  @ObservedObject var coordinator = Coordinator()
-  
+  @StateObject var coordinator = Coordinator()
+
   var body: some View {
     Button(action: {
       commentsButtonTapped()
