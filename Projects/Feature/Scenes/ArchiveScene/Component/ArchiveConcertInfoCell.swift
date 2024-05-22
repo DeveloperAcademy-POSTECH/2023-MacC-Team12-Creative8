@@ -57,8 +57,9 @@ struct ArchiveConcertInfoCell: View {
       NavigationLink(value: NavigationDelivery(setlistId: info.setlist.setlistId, artistInfo: SaveArtistInfo(name: info.artistInfo.name, country: "", alias: "", mbid: info.artistInfo.mbid, gid: 0, imageUrl: "", songList: []))) {
         HStack {
           VStack(alignment: .leading) {
+            // TODO: 색 변경
             Text(DateFormatter.dateFormatter().string(from: info.setlist.date))
-              .padding(3)
+              .padding(EdgeInsets(top: 3, leading: 7, bottom: 3, trailing: 7))
               .font(.caption)
               .background(Capsule().foregroundStyle(Color.mainOrange))
             Text(info.artistInfo.name).font(.subheadline).bold().foregroundStyle(Color.mainBlack)
@@ -67,7 +68,6 @@ struct ArchiveConcertInfoCell: View {
           }
           .lineLimit(1)
           .padding(.vertical)
-//          .padding(.bottom, 20)
           Spacer()
         }
       }
@@ -96,6 +96,7 @@ struct ArchiveConcertInfoCell: View {
           ProgressView()
         }
       } else {
+        // TODO: 이미지 변경?
         if colorScheme == .light {
           Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
