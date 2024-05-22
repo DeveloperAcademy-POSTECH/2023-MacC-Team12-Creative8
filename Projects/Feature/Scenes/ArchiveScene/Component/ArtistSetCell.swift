@@ -17,17 +17,15 @@ struct ArtistSetCell: View {
   
   var body: some View {
     HStack {
-      Group {
         artistImg
         Text(name)
           .font(.subheadline)
           .foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
-      }
-      .padding(6)
     }
+    .padding(6)
     .background {
       let color = isSelected ? Color.mainBlack : Color.mainGrey1
-      color.clipShape(RoundedRectangle(cornerRadius: 8))
+      color.clipShape(RoundedRectangle(cornerRadius: 12))
     }
   }
   
