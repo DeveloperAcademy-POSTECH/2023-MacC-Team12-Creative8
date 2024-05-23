@@ -64,7 +64,7 @@ struct SummarizedSetlistInfoView: View {
           Menu {
             NavigationLink {
               SetlistView(
-                setlistId: info?.setlistId,
+                setlistId: info?.id,
                 artistInfo: info?.artistInfo ?? ArtistInfo(name: "", mbid: "")
               )
             } label: {
@@ -135,7 +135,7 @@ enum ComponentType {
 
 struct SetlistInfo {
   var artistInfo: ArtistInfo
-  var setlistId: String
+  var id: String
   var date: String
   var title: String
   var venue: String
@@ -153,7 +153,7 @@ struct SetlistInfo {
 //          name: "Post Malone",
 //          mbid: ""
 //        ),
-//        setlistId: "",
+//        id: "",
 //        date: "2023년 11월 12일",
 //        title: "Main Concert Title",
 //        venue: "Venue Name\nCity, Country"
@@ -180,7 +180,7 @@ struct SetlistInfo {
 //          name: "Post Malone",
 //          mbid: ""
 //        ),
-//        setlistId: "",
+//        id: "",
 //        date: "2023년 11월 12일",
 //        title: "Main Concert Title",
 //        venue: "Venue Name\nCity, Country"
