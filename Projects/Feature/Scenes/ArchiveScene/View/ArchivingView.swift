@@ -73,8 +73,12 @@ extension ArchivingView {
     }
   }
   
-  private func findArtistImageURL(byName name: String) -> String? {
-      return likeArtists.first { $0.artistInfo.name.localizedStandardContains(name) }?.artistInfo.imageUrl
+  private func findArtistImageURL(byName name: String) -> String {
+    if let url = likeArtists.first(where: { $0.artistInfo.name.localizedStandardContains(name) })?.artistInfo.imageUrl {
+      return url
+    } else {
+      return ""
+    }
   }
   
   private var bookmarkListView: some View {
@@ -97,7 +101,7 @@ extension ArchivingView {
                 viewModel.selectArtist = artist
               }
             } label: {
-              ArtistSetCell(name: artist, artistImgUrl: URL(string: findArtistImageURL(byName: artist) ?? ""), isSelected: viewModel.selectArtist.contains(artist))
+              ArtistSetCell(name: artist, artistImgUrl: URL(string: findArtistImageURL(byName: artist)), isSelected: viewModel.selectArtist.contains(artist))
             }
           }
         }
