@@ -28,7 +28,7 @@ public struct SettingView: View {
               SetlistfmLinkButton(
                 setlistfmURL: "https://www.setlist.fm",
                 linkLabel: "Setlist.fm 바로가기")
-              .padding(.bottom, 20)
+              
             }
 
             // 서비스 이용 관련
@@ -37,7 +37,7 @@ public struct SettingView: View {
                 .foregroundStyle(Color.lineGrey1)
               SectionTitleView(
                 sectionTitle: "서비스 이용 관련",
-                sectionTopDescription: "음악으로 연결되는 순간,", sectionBottomDescription: "Seta의 서비스 약관을 확인해보세요")
+                sectionTopDescription: "음악이 연결되는 순간,", sectionBottomDescription: "Seta의 서비스 약관을 확인하세요")
               
               // FAQ
               Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/FAQ-10f7d0c94c104015b5719ab2a26f2cf2?pvs=4")!, label: {
@@ -65,7 +65,6 @@ public struct SettingView: View {
             }
           }
           .padding(.horizontal, UIWidth * 0.049)
-          .padding(.vertical)
         }
         .scrollIndicators(.hidden)
       }
@@ -84,14 +83,15 @@ struct SectionTitleView: View {
       Text(sectionTitle)
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
-        .padding(.vertical)
-      VStack(alignment: .leading, spacing: 0) {
+        .padding(.top, 30)
+        .padding(.bottom, 24)
+      VStack(alignment: .leading) {
         Text(sectionTopDescription)
         Text(sectionBottomDescription)
       }
         .font(.footnote)
         .foregroundStyle(Color.fontGrey2)
-        .padding(.bottom, 30)
+        .padding(.bottom, 20)
     }
   }
 }
@@ -104,15 +104,19 @@ struct SetlistfmLinkButton: View {
   var body: some View {
     Link(destination: URL(string: setlistfmURL)!, label: {
       HStack {
-        Spacer()
         Text(linkLabel)
           .font(.system(.callout, weight: .semibold))
+          .padding(.leading, 16)
         Spacer()
+        Image(systemName: "chevron.right")
+          .resizable()
+          .frame(width: 10, height: 15)
+          .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 15))
       }
-      .frame(height: 54)
       .background(Color.mainGrey1)
       .foregroundStyle(Color.mainBlack)
-      .clipShape(RoundedRectangle(cornerRadius: 14))
+      .clipShape(RoundedRectangle(cornerRadius: 12))
+      .padding(.bottom, 15)
     })
   }
 }
@@ -125,7 +129,7 @@ struct LinkLabelView: View {
     HStack {
       Text(linkLabel)
         .font(.subheadline)
-        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
+        .padding(.vertical, 4)
       Spacer()
       Image(systemName: "chevron.right")
         .resizable()
