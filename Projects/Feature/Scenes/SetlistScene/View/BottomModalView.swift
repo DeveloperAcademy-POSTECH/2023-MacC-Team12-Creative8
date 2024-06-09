@@ -120,8 +120,7 @@ struct BottomModalView: View {
         self.isSharePresented = true
       }
       .sheet(isPresented: $isSharePresented, content: {
-        let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "", setlist)
-        ActivityViewController(activityItems: [image])
+        SetlistImageShareView(artistInfo: artistInfo, setlist: setlist, viewModel: vm)
       })
       
       Spacer()
@@ -188,27 +187,4 @@ struct BottomModalView: View {
       }
     }
   }
-}
-struct ActivityViewController: UIViewControllerRepresentable {
-  var activityItems: [Any]
-  var applicationActivities: [UIActivity]? = nil
-  @Environment(\.presentationMode) var presentationMode
-  
-  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
-  ) -> UIActivityViewController {
-    let controller = UIActivityViewController(
-      activityItems: activityItems,
-      applicationActivities: applicationActivities
-    )
-    print("activityItems \(activityItems)")
-    controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
-      self.presentationMode.wrappedValue.dismiss()
-    }
-    return controller
-  }
-  
-  func updateUIViewController(
-    _ uiViewController: UIActivityViewController,
-    context: UIViewControllerRepresentableContext<ActivityViewController>
-  ) {}
 }

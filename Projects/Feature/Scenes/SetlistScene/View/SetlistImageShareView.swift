@@ -13,6 +13,7 @@ struct SetlistImageShareView: View {
   let artistInfo: ArtistInfo?
   let setlist: Setlist?
   @StateObject var viewModel: SetlistViewModel
+  @State var isPresented = false
   
   var body: some View {
     ZStack(alignment: .top) {
@@ -21,13 +22,14 @@ struct SetlistImageShareView: View {
         VStack {
           HStack {
             Button(action: {
-              
+              isPresented = false
             }, label: {
               Image(systemName: "xmark")
                 .foregroundStyle(.white)
             })
             .padding(.leading, 8)
             .padding(.trailing, 133)
+            
             Text("공유하기")
               .font(.headline)
               .foregroundStyle(.white)
@@ -40,55 +42,40 @@ struct SetlistImageShareView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: UIWidth * 0.54, height: UIHeight * 0.44)
-            .background(.blue)
             .padding(.bottom, 83)
           
+          let buttons = [
+            ButtonInfo(action: {
+              backgroundImage(backgroundImage: image)
+            }, label: "인스타그램 스토리", systemImageName: "star"),
+            
+            ButtonInfo(action: {
+              UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }, label: "이미지 저장", systemImageName: "square.and.arrow.down"),
+            
+            ButtonInfo(action: {
+              self.isPresented = true
+            }, label: "옵션 더보기", systemImageName: "ellipsis")
+          ]
+          
           List {
-            Button(action: {
-              
-            }, label: {
-              HStack {
-                Text("인스타그램 스토리")
-                Spacer()
-                Image(systemName: "star")
-              }
-              .foregroundStyle(.black)
-            })
-            .padding(.vertical, 8)
-            
-            Button(action: {
-              
-            }, label: {
-              HStack {
-                Text("이미지 저장")
-                Spacer()
-                Image(systemName: "square.and.arrow.down")
-              }
-              .foregroundStyle(.black)
-            })
-            .padding(.vertical, 8)
-            
-            Button(action: {
-              
-            }, label: {
-              HStack {
-                Text("옵션 더보기")
-                Spacer()
-                Image(systemName: "ellipsis")
-              }
-              .foregroundStyle(.black)
-            })
-            .padding(.vertical, 8)
+            ForEach(buttons) { button in
+              ShareOptionButtonView(action: button.action, label: button.label, systemImageName: button.systemImageName)
+                .sheet(isPresented: $isPresented) {
+                  if button.label == "옵션 더보기" {
+                    ActivityViewController(activityItems: [image])
+                  }
+                }
+            }
           }
           .listStyle(.plain)
-          .frame(height: UIHeight * 0.206)
-          .background(.red)
+          .frame(height: CGFloat(buttons.count) * 59)
           .cornerRadius(16)
           .scrollDisabled(true)
           .padding(.horizontal, 24)
           
           Button(action: {
-            
+            isPresented = false
           }, label: {
             HStack {
               Text("취소하기")
@@ -106,6 +93,49 @@ struct SetlistImageShareView: View {
     }
     .navigationTitle("공유하기")
   }
+  
+  func backgroundImage(backgroundImage: UIImage) {
+    if let urlScheme = URL(string: "instagram-stories://share") {
+      if UIApplication.shared.canOpenURL(urlScheme) {
+        let pasteboardItems = [["com.instagram.sharedSticker.stickerImage": backgroundImage.pngData(),
+                                "com.instagram.sharedSticker.backgroundImage": backgroundImage.pngData()]]
+        
+        let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60 * 5)]
+        
+        UIPasteboard.general.setItems(pasteboardItems, options: pasteboardOptions)
+        
+        UIApplication.shared.open(urlScheme as URL, options: [:], completionHandler: nil)
+      } else {
+        print("인스타 앱이 깔려있지 않습니다.")
+      }
+    }
+  }
+}
+
+struct ActivityViewController: UIViewControllerRepresentable {
+  var activityItems: [Any]
+  var applicationActivities: [UIActivity]? = nil
+  @Environment(\.presentationMode) var presentationMode
+  
+  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
+  ) -> UIActivityViewController {
+    let controller = UIActivityViewController(
+      activityItems: activityItems,
+      applicationActivities: applicationActivities
+    )
+    print("activityItems \(activityItems)")
+    controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+      self.presentationMode.wrappedValue.dismiss()
+    }
+    
+    controller.excludedActivityTypes = []
+    return controller
+  }
+  
+  func updateUIViewController(
+    _ uiViewController: UIActivityViewController,
+    context: UIViewControllerRepresentableContext<ActivityViewController>
+  ) {}
 }
 
 #Preview {
