@@ -60,7 +60,7 @@ struct BookmarkedSetlistsView: View {
           format: "yyyy년 MM월 dd일"
         ),
         title: bookmarkedSetlists[0].setlist.title,
-        venue: "\(bookmarkedSetlists[0].setlist.venue)\n\(bookmarkedSetlists[0].setlist.city),\(bookmarkedSetlists[0].setlist.country)"
+        venue: "\(bookmarkedSetlists[0].setlist.venue)\n\(bookmarkedSetlists[0].setlist.city), \(bookmarkedSetlists[0].setlist.country)"
       ),
       infoButtonAction: nil,
       cancelBookmarkAction: {
