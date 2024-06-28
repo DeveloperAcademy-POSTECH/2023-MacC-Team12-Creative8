@@ -11,16 +11,24 @@ import UI
 
 struct ToastMessageView: View {
   let message: LocalizedStringResource
+  let icon: String
+  let color: Color
   
   var body: some View {
-     Text(message)
-      .foregroundStyle(Color.settingTextBoxWhite)
-      .font(.subheadline)
-      .padding(.vertical, 15)
-      .frame(maxWidth: .infinity)
-      .background(
-        Color.toastBurn
-          .cornerRadius(27)
-      )
+     HStack {
+       Text(message)
+        .foregroundStyle(Color.settingTextBoxWhite)
+        .font(.subheadline)
+       Spacer()
+       Image(systemName: icon)
+         .renderingMode(.template)
+         .foregroundStyle(color)
+     }
+     .padding(15)
+     .frame(maxWidth: .infinity)
+     .background(
+       Color.toastBurn
+        .cornerRadius(6.0)
+     )
   }
 }
