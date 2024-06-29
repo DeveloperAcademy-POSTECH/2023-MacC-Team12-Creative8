@@ -21,4 +21,11 @@ public extension DateFormatter {
       formatter.dateFormat = "YYYY"
       return formatter
   }
+  
+  static func dateFormatter() -> DateFormatter {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "YYYY년 MM월dd일"
+    return formatter
+  }
 }
