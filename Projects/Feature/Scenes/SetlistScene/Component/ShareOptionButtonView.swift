@@ -28,7 +28,7 @@ struct ShareOptionButtonView: View {
   }
 }
 
-struct ButtonInfo: Identifiable {
+struct ShareOptionButton: Identifiable {
   let id = UUID()
   let action: () -> Void
   let label: String

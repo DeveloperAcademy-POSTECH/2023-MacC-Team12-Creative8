@@ -45,15 +45,15 @@ struct SetlistImageShareView: View {
             .padding(.bottom, 83)
           
           let buttons = [
-            ButtonInfo(action: {
+            ShareOptionButton(action: {
               backgroundImage(backgroundImage: image)
             }, label: "인스타그램 스토리", systemImageName: "star"),
             
-            ButtonInfo(action: {
+            ShareOptionButton(action: {
               UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }, label: "이미지 저장", systemImageName: "square.and.arrow.down"),
             
-            ButtonInfo(action: {
+            ShareOptionButton(action: {
               self.isPresented = true
             }, label: "옵션 더보기", systemImageName: "ellipsis")
           ]
@@ -66,6 +66,7 @@ struct SetlistImageShareView: View {
                     ActivityViewController(activityItems: [image])
                   }
                 }
+                .listRowBackground(Color.white)
             }
           }
           .listStyle(.plain)
