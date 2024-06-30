@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		03E77F13A6D46A0E34006733 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F1995BE8972BD993B58 /* SearchHistoryModel.swift */; };
+		0B5D7D602C3140DB0072C829 /* SpotifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D7D5F2C3140DB0072C829 /* SpotifyManager.swift */; };
+		0B5D7D622C315C270072C829 /* UserDefaultsManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D7D612C315C270072C829 /* UserDefaultsManger.swift */; };
+		0B5D7D642C315D250072C829 /* AccessTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D7D632C315D250072C829 /* AccessTokenModel.swift */; };
+		0B5D7D662C315D890072C829 /* AccessTokenRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D7D652C315D890072C829 /* AccessTokenRequestModel.swift */; };
 		14F67ACCF1E2EA452132B96E /* ArtistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03512B6F11F4C7FDA6C687A /* ArtistListModel.swift */; };
 		2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569CF2C676DD875C163323FA /* ArtistFetchService.swift */; };
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
@@ -64,6 +68,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B5D7D5F2C3140DB0072C829 /* SpotifyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyManager.swift; sourceTree = "<group>"; };
+		0B5D7D612C315C270072C829 /* UserDefaultsManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManger.swift; sourceTree = "<group>"; };
+		0B5D7D632C315D250072C829 /* AccessTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenModel.swift; sourceTree = "<group>"; };
+		0B5D7D652C315D890072C829 /* AccessTokenRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRequestModel.swift; sourceTree = "<group>"; };
 		109A8C5BADA31C5966791E4F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		143BA5525B0777162DED185D /* SaveSetlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSetlist.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
@@ -140,6 +148,8 @@
 				B2623E283DF2E5382F8E9EA4 /* OnboardingModel.swift */,
 				109A8C5BADA31C5966791E4F /* SearchModel.swift */,
 				75600AD4887E89C2223BF659 /* SetlistListModel.swift */,
+				0B5D7D652C315D890072C829 /* AccessTokenRequestModel.swift */,
+				0B5D7D632C315D250072C829 /* AccessTokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,6 +164,8 @@
 				569CF2C676DD875C163323FA /* ArtistFetchService.swift */,
 				2E92A58192634FABF25FF3BF /* NetworkManager.swift */,
 				F1E8FD75EE835B93B68B559F /* SetlistDataService.swift */,
+				0B5D7D5F2C3140DB0072C829 /* SpotifyManager.swift */,
+				0B5D7D612C315C270072C829 /* UserDefaultsManger.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -300,8 +312,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -357,7 +367,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -373,7 +383,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5D7D622C315C270072C829 /* UserDefaultsManger.swift in Sources */,
 				CFCE7846B7A050A6A39745F3 /* ArchivedConcertInfo.swift in Sources */,
+				0B5D7D642C315D250072C829 /* AccessTokenModel.swift in Sources */,
 				B6B2E5BD39B2856B9DE9966C /* SaveSetlist.swift in Sources */,
 				BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */,
 				E443D461EB2E1D55C196E6F1 /* SaveArtistInfo.swift in Sources */,
@@ -388,9 +400,11 @@
 				323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */,
 				B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */,
 				2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */,
+				0B5D7D602C3140DB0072C829 /* SpotifyManager.swift in Sources */,
 				C195034257141339557D9163 /* NetworkManager.swift in Sources */,
 				882E5DBFC616F2C001A621AA /* ArtistDataManager.swift in Sources */,
 				E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */,
+				0B5D7D662C315D890072C829 /* AccessTokenRequestModel.swift in Sources */,
 				9AC823A1A6AD6300B6EBE04A /* SetlistDataService.swift in Sources */,
 				B5AEB3196F16E3C52EC16288 /* SwiftDataManager.swift in Sources */,
 			);
@@ -465,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -488,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y7F2ZW9QG3;
 				INFOPLIST_FILE = "Derived/InfoPlists/CoreTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
