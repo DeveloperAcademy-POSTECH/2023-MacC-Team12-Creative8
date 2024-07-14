@@ -14,12 +14,14 @@ let project = Project.makeModule(
   product: .app,
   packages: [
     .CoreXLSX,
-    .Firebase
+    .Firebase,
+    .SpotifyAPI
   ],
   dependencies: [
     .Projcet.Feature,
     .SPM.CoreXLSX,
-    .SPM.Firebase
+    .SPM.Firebase,
+    .SPM.SpotifyAPI
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],
