@@ -1,5 +1,5 @@
 {
-  "originHash" : "5f02c4cf77f06ec48a1902a1165a8e5576b27c3e8436c46c3789cb5aa74cd33d",
+  "originHash" : "0b68ca6819a63e9f216a1ef70e62d5c0dd6da5c7efa2d6d9a3fe35c8c652213b",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -80,6 +80,15 @@
       "state" : {
         "revision" : "2d12673670417654f08f5f90fdd62926dc3a2648",
         "version" : "100.0.0"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
       }
     },
     {
