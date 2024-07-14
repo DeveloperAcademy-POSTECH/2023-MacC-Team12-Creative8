@@ -15,7 +15,7 @@ struct SpotifyWebAuthView: View {
   var body: some View {
     Button("Test") {
       viewModel.spotifyManger.authorize()
-    }
+    }.onOpenURL(perform: viewModel.spotifyManger.handleURL(_:))
   }
 }
 
