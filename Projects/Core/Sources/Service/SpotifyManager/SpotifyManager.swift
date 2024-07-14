@@ -12,26 +12,27 @@ import UIKit
 import KeychainAccess
 
 public final class SpotifyManager: ObservableObject {
+  public static let shared = SpotifyManager()
   
   private let authorizationManagerKey = "authorizationManager"
   private let loginCallbackURL = URL(string: "seta-login://callback")!
   private var authorizationState = String.randomURLSafe(length: 128)
   private let keychain = Keychain(service: "com.creative8.seta.Seta")
   
-  @Published public var isAuthorized = false
-  @Published public var isRetrievingTokens = false
-  @Published public var currentUser: SpotifyUser? = nil
+  private var isAuthorized = false
+  private var isRetrievingTokens = false
+  private var currentUser: SpotifyUser?
   
-  public let api = SpotifyAPI(
+  private let api = SpotifyAPI(
     authorizationManager: AuthorizationCodeFlowManager(
       clientId: APIKeys.spotifyClientID,
       clientSecret: APIKeys.spotifyClientSecreat
     )
   )
   
-  public var cancellables: Set<AnyCancellable> = []
+  private var cancellables: Set<AnyCancellable> = []
   
-  public init() {
+  private init() {
     self.api.apiRequestLogger.logLevel = .trace
     
     self.api.authorizationManagerDidChange
@@ -44,7 +45,12 @@ public final class SpotifyManager: ObservableObject {
       .sink(receiveValue: authorizationManagerDidDeauthorize)
       .store(in: &cancellables)
     
+    keychain[data: self.authorizationManagerKey] = nil
+    getAuthorizationManager()
     
+  }
+  
+  private func getAuthorizationManager() {
     if let authManagerData = keychain[data: self.authorizationManagerKey] {
       
       do {
@@ -60,14 +66,12 @@ public final class SpotifyManager: ObservableObject {
       } catch {
         print("could not decode authorizationManager from data:\n\(error)")
       }
-    }
-    else {
+    } else {
       print("did NOT find authorization information in keychain")
     }
-    
   }
   
-  public func authorize() {
+  private func authorize() {
     print(self.loginCallbackURL)
     let url = self.api.authorizationManager.makeAuthorizationURL(
       redirectURI: self.loginCallbackURL,
@@ -82,7 +86,7 @@ public final class SpotifyManager: ObservableObject {
     
   }
   
-  public func authorizationManagerDidChange() {
+  private func authorizationManagerDidChange() {
     
     self.isAuthorized = self.api.authorizationManager.isAuthorized()
     
@@ -110,7 +114,7 @@ public final class SpotifyManager: ObservableObject {
     
   }
   
-  public func authorizationManagerDidDeauthorize() {
+  private func authorizationManagerDidDeauthorize() {
     
     self.isAuthorized = false
     
@@ -128,7 +132,7 @@ public final class SpotifyManager: ObservableObject {
     }
   }
   
-  public func retrieveCurrentUser(onlyIfNil: Bool = true) {
+  private func retrieveCurrentUser(onlyIfNil: Bool = true) {
     
     if onlyIfNil && self.currentUser != nil {
       return
@@ -152,37 +156,47 @@ public final class SpotifyManager: ObservableObject {
   }
   
   public func handleURL(_ url: URL) {
-      guard url.scheme == self.loginCallbackURL.scheme else {
-        print("not handling URL: unexpected scheme: '\(url)'")
-        return
-      }
-
-      print("received redirect from Spotify: '\(url)'")
-
-      self.isRetrievingTokens = true
-
-      self.api.authorizationManager.requestAccessAndRefreshTokens(
-        redirectURIWithQuery: url,
-        state: self.authorizationState
-      )
-      .receive(on: RunLoop.main)
-      .sink(receiveCompletion: { completion in
-        self.isRetrievingTokens = false
-
-        if case .failure(let error) = completion {
-          print("couldn't retrieve access and refresh tokens:\n\(error)")
-          if let authError = error as? SpotifyAuthorizationError,
-             authError.accessWasDenied {
-          }
-        }
-      })
-      .store(in: &cancellables)
-
-      self.authorizationState = String.randomURLSafe(length: 128)
-
+    guard url.scheme == self.loginCallbackURL.scheme else {
+      print("not handling URL: unexpected scheme: '\(url)'")
+      return
     }
+    
+    print("received redirect from Spotify: '\(url)'")
+    
+    self.isRetrievingTokens = true
+    
+    self.api.authorizationManager.requestAccessAndRefreshTokens(
+      redirectURIWithQuery: url,
+      state: self.authorizationState
+    )
+    .receive(on: RunLoop.main)
+    .sink(receiveCompletion: { completion in
+      self.isRetrievingTokens = false
+      
+      if case .failure(let error) = completion {
+        print("couldn't retrieve access and refresh tokens:\n\(error)")
+        if let authError = error as? SpotifyAuthorizationError,
+           authError.accessWasDenied {
+        }
+      }
+    })
+    .store(in: &cancellables)
+    
+    self.authorizationState = String.randomURLSafe(length: 128)
+    authorizationManagerDidChange()
+    
+  }
+  
+  public func addPlayList(name: String, musicList: [(String, String?)], venue: String?, _ completionHandeler: ()->Void) {
+    if currentUser == nil {
+      authorize()
+    } else {
+      performPlaylistCreation(name: name, musicList: musicList, venue: venue)
+      completionHandeler()
+    }
+  }
 
-  public func performPlaylistCreation(name: String, musicList: [(String, String?)], venue: String?) {
+  private func performPlaylistCreation(name: String, musicList: [(String, String?)], venue: String?) {
     var trackUris: [String] = []
     var playlistUri: String = ""
     
@@ -257,7 +271,7 @@ public final class SpotifyManager: ObservableObject {
       .store(in: &cancellables)
   }
   
-  enum ErrorType: Error {
+  private enum ErrorType: Error {
     case trackNotFound
     case userNotFound
     case noTracksFound

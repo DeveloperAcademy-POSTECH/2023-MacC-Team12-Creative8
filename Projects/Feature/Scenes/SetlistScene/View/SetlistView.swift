@@ -41,7 +41,9 @@ struct SetlistView: View {
                                    artistInfo: artistInfo,
                                    vm: vm,
                                    showToastMessageAppleMusic: $exportViewModel.showToastMessageAppleMusic,
-                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture, showToastMessageSubscription: $exportViewModel.showToastMessageSubscription,
+                                   showToastMessageCapture: $exportViewModel.showToastMessageCapture,
+                                   showToastMessageSubscription: $exportViewModel.showToastMessageSubscription,
+                                   showSpotifyAlert: $exportViewModel.showSpotifyAlert,
                                    exportViewModel: exportViewModel)
         }
       }

@@ -17,6 +17,7 @@ struct ExportPlaylistButtonView: View {
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @Binding var showToastMessageSubscription: Bool
+  @Binding var showSpotifyAlert: Bool
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   
   private func toastMessageToShow() -> LocalizedStringResource? {
@@ -26,8 +27,10 @@ struct ExportPlaylistButtonView: View {
         return "캡쳐된 사진을 앨범에서 확인하세요"
     } else if showToastMessageSubscription {
         return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
+    } else if showSpotifyAlert {
+        return "10초 뒤 Spotify에서 확인하세요"
     } else {
-        return nil
+      return nil
     }
   }
 
@@ -55,7 +58,7 @@ struct ExportPlaylistButtonView: View {
       })
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture, showSpotifyAlert: $showSpotifyAlert)
         .presentationDetents([.fraction(0.5)])
         .presentationDragIndicator(.visible)
     }
