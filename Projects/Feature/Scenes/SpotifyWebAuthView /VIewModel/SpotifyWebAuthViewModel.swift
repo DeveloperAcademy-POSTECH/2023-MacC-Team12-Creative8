@@ -12,5 +12,5 @@ import Core
 
 final class SpotifyWebAuthViewModel: ObservableObject {
   
-  let spotifyManger = SpotifyAuthManager()
+  let spotifyManger = SpotifyManager()
 }

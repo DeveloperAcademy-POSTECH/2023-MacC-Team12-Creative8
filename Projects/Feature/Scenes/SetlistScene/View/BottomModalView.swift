@@ -16,6 +16,7 @@ struct BottomModalView: View {
   let artistInfo: ArtistInfo?
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   @ObservedObject var vm: SetlistViewModel
+  @StateObject var spotifyManager = SpotifyManager()
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
   @State var isSharePresented = false
@@ -51,6 +52,12 @@ struct BottomModalView: View {
           secondaryButton: .default(Text("설정").bold(), action: {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
           }))
+      }
+      
+      Button("Spotify") {
+        spotifyManager.performPlaylistCreation(name: setlist?.artist?.name ?? "",
+                                               musicList: vm.setlistSongName,
+                                               venue: setlist?.venue?.name ?? "")
       }
       Spacer()
       listRowView(
