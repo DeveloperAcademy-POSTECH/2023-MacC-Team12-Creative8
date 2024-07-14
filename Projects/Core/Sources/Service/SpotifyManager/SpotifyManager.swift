@@ -45,7 +45,6 @@ public final class SpotifyManager: ObservableObject {
       .sink(receiveValue: authorizationManagerDidDeauthorize)
       .store(in: &cancellables)
     
-    keychain[data: self.authorizationManagerKey] = nil
     getAuthorizationManager()
     
   }
