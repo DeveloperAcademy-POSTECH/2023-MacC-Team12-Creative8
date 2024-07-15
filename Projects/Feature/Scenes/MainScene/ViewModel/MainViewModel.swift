@@ -55,66 +55,41 @@ final class MainViewModel: ObservableObject {
     }
   }
   
-  func getFormattedDateAndMonth(date: String) -> String? {
-    let inputDateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "dd-MM-yyyy"
-      return formatter
-    }()
-    
-    let outputDateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "MM.dd"
-      return formatter
-    }()
-    
-    if let inputDate = inputDateFormatter.date(from: date) {
-      return outputDateFormatter.string(from: inputDate)
-    } else {
-      return nil
-    }
-  }
-  
-  func getFormattedYear(date: String) -> String? {
-    let inputDateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "dd-MM-yyyy"
-      return formatter
-    }()
-    
-    let outputDateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "YYYY"
-      return formatter
-    }()
-    
-    if let inputDate = inputDateFormatter.date(from: date) {
-      return outputDateFormatter.string(from: inputDate)
-    } else {
-      return nil
-    }
+  func getDateFormatted(dateString: String) -> String {
+      let inputFormatter = DateFormatter()
+      inputFormatter.dateFormat = "dd-MM-yyyy"
+      
+      let outputFormatter = DateFormatter()
+      outputFormatter.dateFormat = "yyyy년 MM월 dd일"
+      
+      if let date = inputFormatter.date(from: dateString) {
+          return outputFormatter.string(from: date)
+      } else {
+          return "-" 
+      }
   }
   
   // MARK: 현지화
   func dayAndMonthDateFormatter(inputDate: String) -> String? {
     guard let languageCode = Locale.current.language.languageCode?.identifier else { return "" }
-
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "dd-MM-yyyy"
-
-      // 입력된 날짜 문자열을 "dd-MM-yyyy" 형식으로 변환
-      guard let convertedDate = dateFormatter.date(from: inputDate) else {
-          return ""
-      }
-
-      dateFormatter.dateFormat = (languageCode == "ko") ? "MM.dd" : "dd.MM"
-
-      // 변환된 날짜를 설정한 형식으로 문자열로 반환
-      return dateFormatter.string(from: convertedDate)
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
+    
+    // 입력된 날짜 문자열을 "dd-MM-yyyy" 형식으로 변환
+    guard let convertedDate = dateFormatter.date(from: inputDate) else {
+      return ""
+    }
+    
+    dateFormatter.dateFormat = (languageCode == "ko") ? "MM.dd" : "dd.MM"
+    
+    // 변환된 날짜를 설정한 형식으로 문자열로 반환
+    return dateFormatter.string(from: convertedDate)
   }
+  
   func isKorean() -> Bool {
     guard let languageCode = Locale.current.language.languageCode?.identifier else { return false }
-      return languageCode == "ko"
+    return languageCode == "ko"
   }
 }
 

@@ -25,10 +25,6 @@ struct ArtistImage: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .overlay {
-                artistImageOverlayButton
-                  .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
-              }
               .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
           } placeholder: {
             ProgressView()
@@ -54,29 +50,7 @@ struct ArtistImage: View {
           .aspectRatio(contentMode: .fit)
           .frame(width: UIWidth * 0.43)
       )
-      .overlay {
-        artistImageOverlayButton
-      }
       .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
-  }
-  
-  public var artistImageOverlayButton: some View {
-    VStack {
-      Spacer()
-      HStack {
-        Spacer()
-        Circle()
-          .frame(width: UIWidth * 0.15)
-          .foregroundStyle(Color.mainBlack)
-          .overlay {
-            Image(systemName: "arrow.right")
-              .font(.title3)
-              .foregroundStyle(Color.settingTextBoxWhite)
-          }
-          .shadow(color: Color.mainWhite.opacity(0.25), radius: 20, y: 4)
-      }
-    }
-    .padding([.trailing, .bottom])
   }
 }
 
