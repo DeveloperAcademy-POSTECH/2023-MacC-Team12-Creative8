@@ -77,4 +77,24 @@ public extension Color {
   static var toastBurn: Color {
       Color("toastBurn", bundle: setaBundle)
   }
+  
+  static var gray6: Color {
+    Color("gray6", bundle: setaBundle)
+  }
+  
+  static var black850: Color {
+    Color("black850", bundle: setaBundle)
+  }
+  
+  static var orange100: Color {
+    Color("orange100", bundle: setaBundle)
+  }
+  
+  static var toast1: Color {
+    Color("toast1", bundle: setaBundle)
+  }
+  
+  static var toast2: Color {
+    Color("toast2", bundle: setaBundle)
+  }
 }
