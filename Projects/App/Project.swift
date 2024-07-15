@@ -13,12 +13,10 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   packages: [
-    .CoreXLSX,
     .Firebase
   ],
   dependencies: [
     .Projcet.Feature,
-    .SPM.CoreXLSX,
     .SPM.Firebase
   ],
   sources: ["Sources/**"],

@@ -6,31 +6,55 @@
 //  Copyright © 2023 com.creative8.seta. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-import SwiftData
-import Core
-import UI
-import Combine
+import Marquee
 
 struct ArtistNameView: View {
   @Binding var selectedTab: Tab
   @ObservedObject var viewModel: MainViewModel
   var index: Int
   var name: String
+  @State private var textWidth: CGFloat = 0
+  @State private var parentWidth: CGFloat = 0
   
   var body: some View {
     HStack(spacing: 0) {
-      Text(.init(name))
-        .font(.title)
-        .fontWeight(.semibold)
+      if textWidth > parentWidth {
+        Marquee {
+          Text(name)
+            .font(.title)
+            .fontWeight(.semibold)
+        }
+        .marqueeDuration(5.0)
+        .frame(width: UIWidth * 0.8)
+      } else {
+        Text(name)
+          .font(.title)
+          .fontWeight(.semibold)
+          .lineLimit(1)
+          .frame(width: UIWidth * 0.8, alignment: .center)
+      }
     }
     .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+    .background(
+      GeometryReader { geo in
+        Color.clear
+          .onAppear {
+            parentWidth = geo.size.width
+            measureTextWidth()
+          }
+      }
+    )
   }
-}
-
-#Preview {
-  ArtistNameView(selectedTab: .constant(.home),
-                 viewModel: MainViewModel(),
-                 index: 1, name: "Silica Gel")
+  
+  private func measureTextWidth() {
+    let text = Text(name)
+      .font(.title)
+      .fontWeight(.semibold)
+    
+    let controller = UIHostingController(rootView: text)
+    controller.view.frame.size = .zero
+    controller.view.sizeToFit()
+    textWidth = controller.view.intrinsicContentSize.width
+  }
 }

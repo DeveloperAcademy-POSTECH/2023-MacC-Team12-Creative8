@@ -97,53 +97,54 @@ public struct MainView: View {
   }
   
   public var artistNameScrollView: some View {
-      ScrollView(.horizontal, showsIndicators: false) {
-          ScrollViewReader { scrollViewProxy in
-              HStack(alignment: .center) {
-                  ForEach(Array(likeArtists.enumerated()), id: \.offset) { index, data in
-                      ArtistNameView(selectedTab: $selectedTab,
-                                     viewModel: viewModel,
-                                     index: index, name: data.artistInfo.name)
-                          .id(index)
-                          .frame(width: UIWidth)
-                          .onTapGesture {
-                              withAnimation {
-                                  viewModel.selectedIndex = index
-                                  viewModel.scrollToIndex = index
-                              }
-                          }
-                  }
-                
+    ScrollView(.horizontal, showsIndicators: false) {
+      ScrollViewReader { scrollViewProxy in
+        HStack(alignment: .center) {
+          ForEach(Array(likeArtists.enumerated()), id: \.offset) { index, data in
+            ArtistNameView(selectedTab: $selectedTab,
+                           viewModel: viewModel,
+                           index: index, name: data.artistInfo.name)
+            .id(index)
+            .frame(width: UIWidth)
+            .onTapGesture {
+              withAnimation {
+                viewModel.selectedIndex = index
+                viewModel.scrollToIndex = index
               }
-              .frame(height: UIWidth * 0.22)
-              .onAppear {
-                  if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
-                      if !likeArtists.isEmpty {
-                          viewModel.selectedIndex = 0
-                          viewModel.scrollToIndex = 0
-                      }
-                  }
-                  if let scrollToIndex = viewModel.scrollToIndex {
-                      scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
-                  }
-              }
-              .onChange(of: viewModel.scrollToIndex) {
-                  viewModel.selectedIndex = viewModel.scrollToIndex
-                  withAnimation(.easeInOut(duration: 0.1)) {
-                      scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .center)
-                  }
-              }
-              .onChange(of: likeArtists) { _, _ in
-                  viewModel.selectedIndex = 0
-                  viewModel.scrollToIndex = 0
-                  if let scrollToIndex = viewModel.scrollToIndex {
-                      scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
-                  }
-              }
+            }
           }
-      }
-  }
+          
+        }
+        .frame(height: UIWidth * 0.22)
 
+        .onAppear {
+          if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
+            if !likeArtists.isEmpty {
+              viewModel.selectedIndex = 0
+              viewModel.scrollToIndex = 0
+            }
+          }
+          if let scrollToIndex = viewModel.scrollToIndex {
+            scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
+          }
+        }
+        .onChange(of: viewModel.scrollToIndex) {
+          viewModel.selectedIndex = viewModel.scrollToIndex
+          withAnimation(.easeInOut(duration: 0.1)) {
+            scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .center)
+          }
+        }
+        .onChange(of: likeArtists) { _, _ in
+          viewModel.selectedIndex = 0
+          viewModel.scrollToIndex = 0
+          if let scrollToIndex = viewModel.scrollToIndex {
+            scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
+          }
+        }
+      }
+    }
+  }
+  
   public var artistContentView: some View {
     ScrollView(.horizontal) {
       HStack(spacing: 12) {
