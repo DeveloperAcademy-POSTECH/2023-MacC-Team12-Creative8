@@ -81,19 +81,41 @@ public struct MainView: View {
   }
   
   public var mainArtistsView: some View {
-    VStack(spacing: 0) {
-      HStack {
-        ForEach(0..<likeArtists.count, id: \.self) { idx in
-          Circle().frame(width: 8)
-            .foregroundColor(idx == selectedTab.hashValue ? .primary : .secondary.opacity(0.5))
-        }
+      VStack(spacing: 0) {
+          artistIndicators
+          artistNameScrollView
+          artistContentView
       }
-      artistNameScrollView
-      artistContentView
-    }
-    .onChange(of: viewModel.scrollToIndex) {
-      viewModel.selectedIndex = viewModel.scrollToIndex
-    }
+      .onChange(of: viewModel.scrollToIndex) {
+          viewModel.selectedIndex = viewModel.scrollToIndex
+      }
+  }
+
+  private var artistIndicators: some View {
+      HStack {
+          if likeArtists.count == 1 {
+              Circle()
+                  .frame(width: 8)
+                  .foregroundColor(.black)
+          } else {
+              ForEach(0..<likeArtists.count, id: \.self) { idx in
+                  indicator(for: idx)
+              }
+          }
+      }
+  }
+
+  @ViewBuilder
+  private func indicator(for idx: Int) -> some View {
+      if viewModel.selectedIndex == idx {
+          Capsule()
+              .frame(width: 16, height: 8)
+              .foregroundColor(.black)
+      } else {
+          Circle()
+              .frame(width: 8)
+              .foregroundColor(.secondary.opacity(0.5))
+      }
   }
   
   public var artistNameScrollView: some View {
@@ -116,7 +138,7 @@ public struct MainView: View {
           
         }
         .frame(height: UIWidth * 0.22)
-
+        
         .onAppear {
           if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
             if !likeArtists.isEmpty {
