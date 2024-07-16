@@ -16,7 +16,7 @@ public final class OnboardingViewModel: ObservableObject {
   @Published var selectedGenere: OnboardingFilterType = .all
   @Published var isShowToastBar = false
   @Published var artistFetchError = false
-  @ObservedObject var dataManager = SwiftDataManager()
+  @StateObject var dataManager = SwiftDataManager()
   @AppStorage("isOnboarding") var isOnboarding: Bool?
 
   init() {

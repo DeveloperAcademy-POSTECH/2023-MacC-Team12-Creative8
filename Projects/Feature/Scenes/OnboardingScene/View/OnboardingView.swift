@@ -11,11 +11,11 @@ import Core
 import UI
 
 public struct OnboardingView: View {
-  @ObservedObject var onboardingViewModel = OnboardingViewModel()
-  @ObservedObject var artistFetchService = ArtistFetchService()
-  @ObservedObject var artistViewModel = ArtistViewModel()
+  @StateObject var onboardingViewModel = OnboardingViewModel()
+  @StateObject var artistFetchService = ArtistFetchService()
+  @StateObject var artistViewModel = ArtistViewModel()
   @Environment(\.modelContext) var modelContext
-  @ObservedObject var dataManager = SwiftDataManager()
+  @StateObject var dataManager = SwiftDataManager()
   
   private let artistDataManager = ArtistDataManager()
   private let dataService = SetlistDataService()

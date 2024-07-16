@@ -23,50 +23,9 @@ struct BottomModalView: View {
   var body: some View {
     VStack(alignment: .leading) {
       Spacer()
-      HStack {
-        Spacer()
-        Text("플레이리스트를 내보낼 앱을 선택해주세요")
-          .font(.caption)
-          .foregroundStyle(Color.toastBurn)
-        Spacer()
-      }
-      .padding(.top)
-      Spacer()
-//      HStack(alignment: .center, spacing: 0) {
-//        platformButtonView(title: "Apple Music", image: "appleMusic") {
-//          exportViewModel.handleAppleMusicButtonAction()
-//          if !exportViewModel.checkMusicKitPermission() {
-//            vm.showModal = false
-//          }
-//        }
-//        // 애플뮤직 권한 허용 거부 상태인 경우
-//        .alert(isPresented: $exportViewModel.showMusicSettingsAlert) {
-//          Alert(
-//            title: Text(""),
-//            message: Text("플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다."),
-//            primaryButton: .default(Text("취소")),
-//            secondaryButton: .default(Text("설정").bold(), action: {
-//              UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-//            }))
-//        }
-//        Spacer()
-//          .frame(width: 14)
-//        platformButtonView(title: "Youtube Music", image: "youtubeMusic") {
-//          //TODO: 유튜브 뮤직(플레이리스트 추가 부분은 ExportPlayListViewModel 안에서 추가하셔야 합니다!)
-//          //          exportViewModel.showYouTubeMusicAlert.toggle()
-//          //          exportViewModel.playlistTitle = ""
-//        }
-//        // MARK: 만약을 위해 남겨두는 스포티파이 해지짱짱맨
-//        //        Spacer()
-//        //        platformButtonView(title: "Spotify", image: "spotify") {
-//        //
-//        //        }
-//      }
       Button {
-          exportViewModel.handleAppleMusicButtonAction()
-          if !exportViewModel.checkMusicKitPermission() {
-            vm.showModal = false
-          }
+        exportViewModel.handleAppleMusicButtonAction()
+        vm.showModal.toggle()
       } label: {
         HStack {
           Text("Apple Music으로 내보내기")
