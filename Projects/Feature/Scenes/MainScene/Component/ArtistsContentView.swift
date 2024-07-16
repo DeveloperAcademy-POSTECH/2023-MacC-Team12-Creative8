@@ -23,12 +23,13 @@ struct ArtistsContentView: View {
 
   var index: Int
   var body: some View {
-    VStack(spacing: 0) {
+    VStack(spacing: 24) {
       artistImage
       Group {
         if !viewModel.isLoading {
           Group {
             bothExistLayer
+              .frame(width: UIWidth * 0.92)
           }
           .padding(.horizontal, 3)
           .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
@@ -100,17 +101,4 @@ struct ArtistsContentView: View {
       )
     }
   }
-}
-
-extension SaveArtistInfo {
-    func toArtistInfo() -> ArtistInfo {
-        return ArtistInfo(
-            name: self.name,
-            alias: self.alias,
-            mbid: self.mbid,
-            gid: self.gid,
-            imageUrl: self.imageUrl,
-            songList: self.songList
-        )
-    }
 }

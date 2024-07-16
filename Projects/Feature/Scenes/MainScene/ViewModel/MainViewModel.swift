@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Core
 import Combine
+import SwiftData
 
 final class MainViewModel: ObservableObject {
   let dataService = SetlistDataService()
@@ -18,7 +19,13 @@ final class MainViewModel: ObservableObject {
   @Published var scrollToIndex: Int?
   @Published var isTapped: Bool = false
   @Published var isLoading: Bool = false
+  @Published var pageStack: [NavigationDelivery] = []
+  @Published var scrollToTop: Bool = false
+  @State var dataManager = SwiftDataManager()
+  @Environment(\.modelContext) var modelContext
   var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
+  
+  private var cancellables = Set<AnyCancellable>()
   
   func replaceFirstSpaceWithNewline(_ input: String) -> String {
     if input == "Noel Gallagher’s High Flying Birds" {
@@ -56,17 +63,72 @@ final class MainViewModel: ObservableObject {
   }
   
   func getDateFormatted(dateString: String) -> String {
-      let inputFormatter = DateFormatter()
-      inputFormatter.dateFormat = "dd-MM-yyyy"
-      
-      let outputFormatter = DateFormatter()
-      outputFormatter.dateFormat = "yyyy년 MM월 dd일"
-      
-      if let date = inputFormatter.date(from: dateString) {
-          return outputFormatter.string(from: date)
-      } else {
-          return "-" 
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = "dd-MM-yyyy"
+    
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = "yyyy년 MM월 dd일"
+    
+    if let date = inputFormatter.date(from: dateString) {
+      return outputFormatter.string(from: date)
+    } else {
+      return "-"
+    }
+  }
+  
+  func fetchInitialSetlists(likeArtists: [LikeArtist], modelContext: ModelContext) {
+    if setlists[0] == nil {
+      loadSetlists(likeArtists: likeArtists)
+    }
+  }
+  
+  func updateSetlists(likeArtists: [LikeArtist]) {
+    loadSetlists(likeArtists: likeArtists)
+  }
+  
+  private func loadSetlists(likeArtists: [LikeArtist]) {
+    var idx = likeArtists.count - 1
+    for artist in likeArtists.reversed() {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        self.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
+        idx -= 1
       }
+    }
+  }
+  func resetScroll() {
+    withAnimation {
+      scrollToIndex = 0
+      selectedIndex = 0
+    }
+  }
+  
+  func selectArtist(index: Int) {
+    withAnimation {
+      selectedIndex = index
+      scrollToIndex = index
+    }
+  }
+  
+  func scrollToSelectedIndex(proxy: ScrollViewProxy) {
+    if let scrollToIndex = scrollToIndex {
+      withAnimation(.easeInOut(duration: 0.1)) {
+        proxy.scrollTo(scrollToIndex, anchor: .center)
+      }
+    }
+  }
+  
+  func resetScrollToIndex(proxy: ScrollViewProxy, likeArtists: [LikeArtist]) {
+    selectedIndex = 0
+    scrollToIndex = 0
+    scrollToSelectedIndex(proxy: proxy)
+  }
+  
+  func navigationDestination(for value: NavigationDelivery) -> some View {
+    if let setlistId = value.setlistId {
+      return AnyView(SetlistView(setlistId: setlistId, artistInfo: value.artistInfo.toArtistInfo()))
+    } else {
+      return AnyView(ArtistView(selectedTab: .constant(.archiving), artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias ?? "", artistMbid: value.artistInfo.mbid))
+    }
   }
   
   // MARK: 현지화
@@ -122,5 +184,18 @@ public enum ButtonType: Int, CaseIterable, Identifiable {
     case .light: return .light
     case .dark: return .dark
     }
+  }
+}
+
+extension SaveArtistInfo {
+  func toArtistInfo() -> ArtistInfo {
+    return ArtistInfo(
+      name: self.name,
+      alias: self.alias,
+      mbid: self.mbid,
+      gid: self.gid,
+      imageUrl: self.imageUrl,
+      songList: self.songList
+    )
   }
 }

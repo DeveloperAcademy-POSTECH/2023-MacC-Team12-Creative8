@@ -16,7 +16,6 @@ public struct MainView: View {
   @Binding var selectedTab: Tab
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
   @StateObject var viewModel = MainViewModel()
-  @State var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
   @StateObject var tabViewManager: TabViewManager
   
@@ -26,96 +25,76 @@ public struct MainView: View {
         if likeArtists.isEmpty {
           EmptyMainView(selectedTab: $selectedTab)
         } else {
-          ScrollView {
-            mainArtistsView
-              .padding(.top, 11)
-              .id(likeArtists)
-          }
-          .scrollIndicators(.hidden)
-          .onReceive(tabViewManager.$scrollToTop) { _ in
-            withAnimation {
-              viewModel.scrollToIndex = 0
-              viewModel.selectedIndex = 0
-            }
-          }
+          content
         }
       }
-      .padding(.top, 15)
       .background(Color.backgroundGrey)
       .onAppear {
-        dataManager.modelContext = modelContext
-        if viewModel.setlists[0] == nil {
-          var idx = likeArtists.count-1
-          for artist in likeArtists.reversed() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-              viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-              idx -= 1
-            }
-          }
-        }
-        
+        viewModel.fetchInitialSetlists(likeArtists: likeArtists, modelContext: modelContext)
       }
-      .onChange(of: likeArtists) { _, _ in
-        var idx = likeArtists.count-1
-        for artist in likeArtists.reversed() {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-            idx -= 1
-          }
-        }
+      .onChange(of: likeArtists) { _, newValue in
+        viewModel.updateSetlists(likeArtists: newValue)
       }
-      .navigationDestination(for: NavigationDelivery.self) { value in
-        if value.setlistId != nil {
-          SetlistView(setlistId: value.setlistId, artistInfo: ArtistInfo(
-            name: value.artistInfo.name,
-            alias: value.artistInfo.alias,
-            mbid: value.artistInfo.mbid,
-            gid: value.artistInfo.gid,
-            imageUrl: value.artistInfo.imageUrl,
-            songList: value.artistInfo.songList))
-        } else {
-          ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
-        }
+      .navigationDestination(for: NavigationDelivery.self, destination: viewModel.navigationDestination(for:))
+    }
+  }
+  
+  private var content: some View {
+    ScrollView {
+      VStack {
+        seeAllButton
+          .padding(.trailing, 36)
+        Spacer().frame(height: 10)
+        artistIndicators
+        artistNameScrollView
+        Spacer().frame(height: 16)
+        artistContentView
+      }
+      .scrollIndicators(.hidden)
+      .onReceive(tabViewManager.$scrollToTop) { _ in
+        viewModel.resetScroll()
+      }
+      .onChange(of: viewModel.scrollToIndex) { _, newValue in
+        viewModel.selectedIndex = newValue
       }
     }
   }
   
-  public var mainArtistsView: some View {
-      VStack(spacing: 0) {
-          artistIndicators
-          artistNameScrollView
-          artistContentView
-      }
-      .onChange(of: viewModel.scrollToIndex) {
-          viewModel.selectedIndex = viewModel.scrollToIndex
-      }
+  private var seeAllButton: some View {
+    HStack {
+      Spacer()
+      Text("모두 보기")
+        .foregroundColor(.gray)
+        .font(.subheadline).bold()
+        .onTapGesture {
+          selectedTab = .archiving
+        }
+    }
   }
-
+  
   private var artistIndicators: some View {
-      HStack {
-          if likeArtists.count == 1 {
-              Circle()
-                  .frame(width: 8)
-                  .foregroundColor(.black)
-          } else {
-              ForEach(0..<likeArtists.count, id: \.self) { idx in
-                  indicator(for: idx)
-              }
-          }
+    HStack {
+      if likeArtists.count == 1 {
+        Circle()
+          .frame(width: 8)
+          .foregroundColor(.black)
+      } else {
+        ForEach(0..<likeArtists.count, id: \.self, content: indicator)
       }
+    }
   }
-
+  
   @ViewBuilder
   private func indicator(for idx: Int) -> some View {
-      if viewModel.selectedIndex == idx {
-          Capsule()
-              .frame(width: 16, height: 8)
-              .foregroundColor(.black)
-      } else {
-          Circle()
-              .frame(width: 8)
-              .foregroundColor(.secondary.opacity(0.5))
-      }
+    if viewModel.selectedIndex == idx {
+      Capsule()
+        .frame(width: 16, height: 8)
+        .foregroundColor(.black)
+    } else {
+      Circle()
+        .frame(width: 8)
+        .foregroundColor(.secondary.opacity(0.5))
+    }
   }
   
   public var artistNameScrollView: some View {
@@ -128,41 +107,13 @@ public struct MainView: View {
                            index: index, name: data.artistInfo.name)
             .id(index)
             .frame(width: UIWidth)
-            .onTapGesture {
-              withAnimation {
-                viewModel.selectedIndex = index
-                viewModel.scrollToIndex = index
-              }
-            }
+            .onTapGesture { viewModel.selectArtist(index: index) }
           }
-          
         }
         .frame(height: UIWidth * 0.22)
-        
-        .onAppear {
-          if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
-            if !likeArtists.isEmpty {
-              viewModel.selectedIndex = 0
-              viewModel.scrollToIndex = 0
-            }
-          }
-          if let scrollToIndex = viewModel.scrollToIndex {
-            scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
-          }
-        }
-        .onChange(of: viewModel.scrollToIndex) {
-          viewModel.selectedIndex = viewModel.scrollToIndex
-          withAnimation(.easeInOut(duration: 0.1)) {
-            scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .center)
-          }
-        }
-        .onChange(of: likeArtists) { _, _ in
-          viewModel.selectedIndex = 0
-          viewModel.scrollToIndex = 0
-          if let scrollToIndex = viewModel.scrollToIndex {
-            scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
-          }
-        }
+        .onAppear { viewModel.scrollToSelectedIndex(proxy: scrollViewProxy) }
+        .onChange(of: viewModel.scrollToIndex) { _, _ in viewModel.scrollToSelectedIndex(proxy: scrollViewProxy) }
+        .onChange(of: likeArtists) { _, _ in viewModel.resetScrollToIndex(proxy: scrollViewProxy, likeArtists: likeArtists) }
       }
     }
   }
