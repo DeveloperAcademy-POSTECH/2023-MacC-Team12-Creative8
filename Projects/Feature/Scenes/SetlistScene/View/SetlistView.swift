@@ -25,7 +25,7 @@ struct SetlistView: View {
   
   var body: some View {
     ZStack {
-      Color.backgroundGrey
+      Color.gray6
       ScrollView(showsIndicators: false) {
         VStack {
           SetlistInfoView(
@@ -80,7 +80,7 @@ struct SetlistView: View {
           ToastMessageView(
             message: vm.isBookmarked ? "보관함‑북마크한 공연에 담겼어요." : "보관이 취소되었어요!",
             icon: vm.isBookmarked ? "checkmark.circle.fill" : "checkmark.circle.badge.xmark.fill",
-            color: vm.isBookmarked ? Color.green : Color.red
+            color: vm.isBookmarked ? Color.toast1 : Color.toast2
           )
           .padding(.horizontal, UIWidth * 0.075)
           .padding(.top, 5)
@@ -103,7 +103,7 @@ struct SetlistView: View {
     .toolbar(.hidden, for: .tabBar)
     .navigationTitle("세트리스트")
     .navigationBarTitleDisplayMode(.inline)
-    .background(Color.backgroundWhite)
+    .background(Color.mainWhite)
     .edgesIgnoringSafeArea(.bottom)
     .onAppear {
       if setlistId != nil {
