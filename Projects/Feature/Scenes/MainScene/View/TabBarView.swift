@@ -62,9 +62,15 @@ public struct TabBarView: View {
     let tabBar = UITabBar.appearance()
     
     appearance.shadowColor = UIColor.clear
-    appearance.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-    tabBar.backgroundColor = UIColor(named: "backgroundWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
-    tabBar.unselectedItemTintColor = UIColor(named: "fontGrey25", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    appearance.backgroundColor = UIColor(named: "mainWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    tabBar.backgroundColor = UIColor(named: "mainWhite", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    
+    appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "mainBlack", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
+    appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor(named: "mainBlack", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)]
+    
+    appearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray3
+    appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray3]
+
     tabBar.standardAppearance = appearance
   }
   
