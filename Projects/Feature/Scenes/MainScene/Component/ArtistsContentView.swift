@@ -25,24 +25,24 @@ struct ArtistsContentView: View {
   var body: some View {
     VStack(spacing: 24) {
       artistImage
-      Group {
         if !viewModel.isLoading {
           Group {
             bothExistLayer
-              .frame(width: UIWidth * 0.92)
+            ArtistMainSetlistView(viewModel: viewModel, index: index)
           }
+          .frame(width: UIWidth * 0.92, alignment: .top)
           .padding(.horizontal, 3)
           .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
             content
               .opacity(phase.isIdentity ? 1 : 0)
               .blur(radius: phase.isIdentity ? 0 : 0.5)
           }
+          
         } else {
           ProgressView()
             .frame(width: UIWidth, height: UIWidth * 0.6) 
         }
-      }
-    
+      
     NavigationLink(destination: ArtistView(
                    selectedTab: $selectedTab,
                    artistName: artistInfo.name,

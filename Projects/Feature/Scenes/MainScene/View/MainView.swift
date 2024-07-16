@@ -127,6 +127,7 @@ public struct MainView: View {
       }
       .scrollTargetLayout()
     }
+    .frame(alignment: .top)
     .scrollTargetBehavior(.viewAligned)
     .scrollIndicators(.hidden)
     .scrollPosition(id: $viewModel.scrollToIndex)
