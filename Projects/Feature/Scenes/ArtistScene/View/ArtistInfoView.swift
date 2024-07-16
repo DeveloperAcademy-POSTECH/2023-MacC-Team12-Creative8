@@ -19,7 +19,7 @@ struct ArtistInfoView: View {
   @Environment(\.scenePhase) var scenePhase
   
   var body: some View {
-    VStack {
+    VStack(spacing: 24) {
       imageLayer
       HStack {
         nameLayer
@@ -60,8 +60,8 @@ struct ArtistInfoView: View {
           .centerCropped()
           .aspectRatio(1, contentMode: .fit)
           .frame(width: UIWidth * 0.57)
-          .cornerRadius(14)
-          .overlay(Color.black.opacity(0.2).cornerRadius(14))
+          .cornerRadius(12)
+          .overlay(Color.black.opacity(0.2).cornerRadius(12))
       } placeholder: {
         ProgressView()
       })
@@ -69,10 +69,10 @@ struct ArtistInfoView: View {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
         .resizable()
         .renderingMode(.template)
-        .foregroundStyle(Color.lineGrey1)
+        .foregroundStyle(Color(UIColor.systemGray3))
         .background {
-          Color.mainGrey1
-            .cornerRadius(14)
+          Color(UIColor.systemGray)
+            .cornerRadius(12)
         }
         .aspectRatio(1, contentMode: .fit)
         .frame(width: UIWidth * 0.57)
@@ -82,7 +82,7 @@ struct ArtistInfoView: View {
   
   private var nameLayer: some View {
     Text(vm.artistInfo.name)
-      .font(.largeTitle)
+      .font(.title3)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainBlack)
       .minimumScaleFactor(0.1)
@@ -93,7 +93,7 @@ struct ArtistInfoView: View {
       vm.isLikedArtist.toggle()
     } label: {
       Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color(UIColor.systemGray))
         .font(.title)
     }
     .onDisappear {

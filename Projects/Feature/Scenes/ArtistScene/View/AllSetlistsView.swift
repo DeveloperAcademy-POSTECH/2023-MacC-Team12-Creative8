@@ -24,7 +24,7 @@ struct AllSetlistsView: View {
   
   private var titleLayer: some View {
     HStack {
-      Text("전체 공연 보기")
+      Text("전체 공연")
         .font(.headline)
         .fontWeight(.bold)
         .foregroundStyle(Color.mainBlack)
@@ -42,7 +42,7 @@ struct AllSetlistsView: View {
           // MARK: Date
           VStack {
             Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
-              .foregroundStyle(Color.fontGrey25)
+              .foregroundStyle(Color(UIColor.systemGray2))
               .tracking(0.5)
             Text(vm.dayAndMonthDateFormatter(inputDate: setlist.eventDate ?? "") ?? "")
               .foregroundStyle(Color.mainBlack)
@@ -66,7 +66,7 @@ struct AllSetlistsView: View {
               }
             }
             .font(.footnote)
-            .foregroundStyle(Color.fontGrey25)
+            .foregroundStyle(Color(UIColor.systemGray3))
           }
           .lineLimit(1)
           .frame(width: UIWidth * 0.5, alignment: .leading)
@@ -75,7 +75,7 @@ struct AllSetlistsView: View {
           Spacer()
           
           // MARK: Arrow
-          Image(systemName: "arrow.right")
+          Image(systemName: "chevron.right")
             .font(.title3)
             .foregroundStyle(Color.mainBlack)
         }
@@ -84,7 +84,7 @@ struct AllSetlistsView: View {
       
       Divider()
         .padding(.horizontal, 24)
-        .foregroundColor(Color.lineGrey1)
+        .foregroundColor(Color(UIColor.systemGray3))
     }
   }
   
@@ -106,7 +106,7 @@ struct AllSetlistsView: View {
       }
       
       Divider()
-        .foregroundStyle(Color.lineGrey1)
+        .foregroundStyle(Color(UIColor.systemGray3))
         .padding(.horizontal)
     }
   }
