@@ -38,7 +38,7 @@ struct CustomTitleAlert: View {
     .padding(.horizontal, 24)
     .padding(.top, 32)
     .padding(.bottom, 13)
-    .background(Color.settingTextBoxWhite)
+    .background(Color.mainWhite)
     .cornerRadius(12)
   }
   

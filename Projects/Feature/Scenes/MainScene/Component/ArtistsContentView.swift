@@ -57,7 +57,7 @@ struct ArtistsContentView: View {
     HStack(spacing: 0) {
       Text("\(artistInfo.name)의 최근 공연")
         .font(.caption)
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color.black850)
       Spacer()
     }
     .padding(.top, UIWidth * 0.062)
@@ -74,7 +74,7 @@ struct ArtistsContentView: View {
               HStack(spacing: 0) {
                 VStack(alignment: .center) {
                   Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
-                    .foregroundStyle(Color.fontGrey25)
+                    .foregroundStyle(Color(UIColor.systemGray2))
                     .tracking(0.5)
                   Text(viewModel.dayAndMonthDateFormatter(inputDate: item?.eventDate ?? "") ?? "")
                     .foregroundStyle(Color.mainBlack)
@@ -103,7 +103,7 @@ struct ArtistsContentView: View {
                   }
                   .font(.footnote)
                   .lineLimit(1)
-                  .foregroundStyle(Color.fontGrey25)
+                  .foregroundStyle(Color(UIColor.systemGray2))
                 }
                 Spacer()
               }
@@ -113,7 +113,7 @@ struct ArtistsContentView: View {
           
           if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
             Divider()
-              .foregroundStyle(Color.lineGrey1)
+              .foregroundStyle(Color(UIColor.systemGray))
           }
         }
       }

@@ -29,7 +29,7 @@ struct ArtistImage: View {
                 artistImageOverlayButton
                   .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
               }
-              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
+              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color(UIColor.systemGray), lineWidth: 1))
           } placeholder: {
             ProgressView()
           }
@@ -45,12 +45,12 @@ struct ArtistImage: View {
   
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
-      .foregroundStyle(Color.mainGrey1)
+      .foregroundStyle(Color(UIColor.systemGray))
       .overlay(
         Image("ticket", bundle: setaBundle)
           .resizable()
           .renderingMode(.template)
-          .foregroundStyle(Color.lineGrey1)
+          .foregroundStyle(Color(UIColor.systemGray))
           .aspectRatio(contentMode: .fit)
           .frame(width: UIWidth * 0.43)
       )
@@ -71,7 +71,7 @@ struct ArtistImage: View {
           .overlay {
             Image(systemName: "arrow.right")
               .font(.title3)
-              .foregroundStyle(Color.settingTextBoxWhite)
+              .foregroundStyle(Color.mainWhite)
           }
           .shadow(color: Color.mainWhite.opacity(0.25), radius: 20, y: 4)
       }

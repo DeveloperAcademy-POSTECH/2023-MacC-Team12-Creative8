@@ -89,14 +89,14 @@ public struct TabBarView: View {
         
         ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
           .navigationBarTitleDisplayMode(.large)
-          .background(Color.backgroundWhite)
+//          .background(Color.backgroundWhite)
           .tabItem { Label("보관함", systemImage: "heart.fill") }
           .tag(Tab.archiving)
         
         NavigationStack {
           SettingView()
             .navigationBarTitleDisplayMode(.large)
-            .background(Color.backgroundWhite)
+//            .background(Color.backgroundWhite)
         }
         .tabItem { Label("더보기", systemImage: "ellipsis") }
         .tag(Tab.setting)
