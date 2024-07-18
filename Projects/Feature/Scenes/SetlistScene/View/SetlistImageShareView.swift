@@ -14,6 +14,7 @@ struct SetlistImageShareView: View {
   let setlist: Setlist?
   @StateObject var viewModel: SetlistViewModel
   @State var isPresented = false
+  @Binding var isSharePresented: Bool
   
   var body: some View {
     ZStack(alignment: .top) {
@@ -22,7 +23,7 @@ struct SetlistImageShareView: View {
         VStack {
           HStack {
             Button(action: {
-              isPresented = false
+              isSharePresented.toggle()
             }, label: {
               Image(systemName: "xmark")
                 .foregroundStyle(.white)
@@ -76,7 +77,7 @@ struct SetlistImageShareView: View {
           .padding(.horizontal, 24)
           
           Button(action: {
-            isPresented = false
+            isSharePresented.toggle()
           }, label: {
             HStack {
               Text("취소하기")
@@ -137,8 +138,4 @@ struct ActivityViewController: UIViewControllerRepresentable {
     _ uiViewController: UIActivityViewController,
     context: UIViewControllerRepresentableContext<ActivityViewController>
   ) {}
-}
-
-#Preview {
-  SetlistImageShareView(artistInfo: ArtistInfo(name: "Silica Gel", alias: "실리카겔", mbid: "2c8b5bb2-6110-488d-bc15-abb08379d3c6", gid: 2382659, imageUrl: "https://i.namu.wiki/i/SCZmC5XQgajMHRv6wvMc406r6aoQyf0JjXNCIQkIxJ-oe035C8h6VTkKllE6gkp3p-A7RFwiIcd0d726O77rbQ.webp", songList: []), setlist: Setlist(id: "4bab53aa", versionId: "g2bbec082", eventDate: "19-05-2024", lastUpdated: "2024-04-10T05:05:20.328+0000", artist: Artist(mbid: "2c8b5bb2-6110-488d-bc15-abb08379d3c6", name: "Silica Gel", sortName: "Silica Gel", disambiguation: "Korean band", url: "https://www.setlist.fm/setlists/silica-gel-5bfc9394.html"), venue: nil, sets: nil, url: nil, info: nil, tour: nil), viewModel: SetlistViewModel())
 }

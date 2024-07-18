@@ -120,7 +120,7 @@ struct BottomModalView: View {
         self.isSharePresented = true
       }
       .sheet(isPresented: $isSharePresented, content: {
-        SetlistImageShareView(artistInfo: artistInfo, setlist: setlist, viewModel: vm)
+        SetlistImageShareView(artistInfo: artistInfo, setlist: setlist, viewModel: vm, isSharePresented: $isSharePresented)
       })
       
       Spacer()
