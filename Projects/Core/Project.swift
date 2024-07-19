@@ -11,7 +11,5 @@ import ProjectDescriptionHelpers
 let project = Project.makeModule(
   name: "Core",
   product: .framework,
-  dependencies: [
-  ],
   sources: ["Sources/**"]
 )
