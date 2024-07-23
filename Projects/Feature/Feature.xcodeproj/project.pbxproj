@@ -23,7 +23,6 @@
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
 		460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52FD2A86596385940F794 /* ListView.swift */; };
 		50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */; };
-		55677FF78A2739B5F0A2D8C0 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = C9D71FF62FD75E5880D53EE9 /* FacebookShare */; };
 		5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */; };
 		5FE54878808838FA5FDA55AE /* ArtistSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */; };
 		6272736B46A19746BC5ECD16 /* EmptyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */; };
@@ -43,6 +42,7 @@
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */; };
 		BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6065131130D585C891E3C0 /* SetlistInfoView.swift */; };
+		BD6BAC88EEBC6C9BE9794F8A /* SetlistImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */; };
 		BF015464C3C1BC99D09C647B /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = C507ACC9995A73EA3B6D0A17 /* Marquee */; };
 		BF3DF8B460FBB0671C7334C0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
@@ -169,7 +169,6 @@
 				3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */,
 				AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */,
 				BF015464C3C1BC99D09C647B /* Marquee in Frameworks */,
-				55677FF78A2739B5F0A2D8C0 /* FacebookShare in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +202,7 @@
 				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
+				5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */,
 				EA6065131130D585C891E3C0 /* SetlistInfoView.swift */,
 				F13B904D1DF7D17856476773 /* SetlistView.swift */,
 			);
@@ -504,7 +504,6 @@
 			name = Feature;
 			packageProductDependencies = (
 				C507ACC9995A73EA3B6D0A17 /* Marquee */,
-				C9D71FF62FD75E5880D53EE9 /* FacebookShare */,
 			);
 			productName = Feature;
 			productReference = 8A611D1693834F821CBD6EAD /* Feature.framework */;
@@ -551,7 +550,6 @@
 			mainGroup = 6DC82FD44AFA8E6846CC19FE;
 			packageReferences = (
 				FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */,
-				A96510B8A5D163A0B37A341A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = F37C3A4FE623C846745B9CE2 /* Products */;
 			projectDirPath = "";
@@ -648,6 +646,7 @@
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
+				BD6BAC88EEBC6C9BE9794F8A /* SetlistImageShareView.swift in Sources */,
 				BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */,
@@ -938,14 +937,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A96510B8A5D163A0B37A341A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 14.1.0;
-			};
-		};
 		FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIKit/Marquee.git";
@@ -960,10 +951,6 @@
 		C507ACC9995A73EA3B6D0A17 /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Marquee;
-		};
-		C9D71FF62FD75E5880D53EE9 /* FacebookShare */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FacebookShare;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

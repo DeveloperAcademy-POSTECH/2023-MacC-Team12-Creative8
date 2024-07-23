@@ -97,18 +97,16 @@ struct SetlistImageShareView: View {
   }
   
   func backgroundImage(backgroundImage: UIImage) {
-    if let urlScheme = URL(string: "instagram-stories://share") {
+    let appIDString = "807909384825071"
+    if let urlScheme = URL(string: "instagram-stories://share?source_application=\(appIDString)") {
       if UIApplication.shared.canOpenURL(urlScheme) {
-        let pasteboardItems = [["com.instagram.sharedSticker.stickerImage": backgroundImage.pngData(),
-                                "com.instagram.sharedSticker.backgroundImage": backgroundImage.pngData()]]
-        
-        let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60 * 5)]
-        
-        UIPasteboard.general.setItems(pasteboardItems, options: pasteboardOptions)
+        let pasteboardItems = [["com.instagram.sharedSticker.backgroundImage": backgroundImage.pngData()]]
+                
+        UIPasteboard.general.setItems(pasteboardItems)
         
         UIApplication.shared.open(urlScheme as URL, options: [:], completionHandler: nil)
       } else {
-        print("인스타 앱이 깔려있지 않습니다.")
+        print("인스타 앱이 설치되어 있지 않습니다.")
       }
     }
   }

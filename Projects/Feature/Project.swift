@@ -13,13 +13,11 @@ let project = Project.makeModule(
     product: .framework,
     packages: [
         .Marquee,
-        .Facebook
     ],
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),
         .project(target: "UI", path: .relativeToRoot("Projects/UI")),
         .SPM.Marquee,
-        .SPM.Facebook
     ],
     sources: ["Scenes/**"]
 )

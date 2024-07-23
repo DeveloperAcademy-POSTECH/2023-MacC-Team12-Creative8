@@ -14,12 +14,10 @@ let project = Project.makeModule(
   product: .app,
   packages: [
     .Firebase,
-    .Facebook
   ],
   dependencies: [
     .project(target: "Feature", path: .relativeToRoot("Projects/Feature")),
     .SPM.Firebase,
-    .SPM.Facebook
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

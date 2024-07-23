@@ -16,7 +16,6 @@ struct SetlistApp: App {
   @AppStorage("isOnboarding")
   var isOnboarding: Bool = true
   @State var networkMonitor = NetworkMonitor()
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
   
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
