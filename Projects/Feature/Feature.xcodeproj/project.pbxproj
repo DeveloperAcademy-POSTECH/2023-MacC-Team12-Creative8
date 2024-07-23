@@ -22,7 +22,7 @@
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
 		460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52FD2A86596385940F794 /* ListView.swift */; };
 		50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */; };
-		55677FF78A2739B5F0A2D8C0 /* Facebook in Frameworks */ = {isa = PBXBuildFile; productRef = F132D6D4C4371E0890F9CB74 /* Facebook */; };
+		55677FF78A2739B5F0A2D8C0 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = C9D71FF62FD75E5880D53EE9 /* FacebookShare */; };
 		5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D7FEEBF2374CD2488C71B /* ToastMessageView.swift */; };
 		5FE54878808838FA5FDA55AE /* ArtistSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CF8DBA75F2F66BCEC1D711 /* ArtistSetCell.swift */; };
 		6272736B46A19746BC5ECD16 /* EmptyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */; };
@@ -166,7 +166,7 @@
 				3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */,
 				AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */,
 				BF015464C3C1BC99D09C647B /* Marquee in Frameworks */,
-				55677FF78A2739B5F0A2D8C0 /* Facebook in Frameworks */,
+				55677FF78A2739B5F0A2D8C0 /* FacebookShare in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +500,7 @@
 			name = Feature;
 			packageProductDependencies = (
 				C507ACC9995A73EA3B6D0A17 /* Marquee */,
-				F132D6D4C4371E0890F9CB74 /* Facebook */,
+				C9D71FF62FD75E5880D53EE9 /* FacebookShare */,
 			);
 			productName = Feature;
 			productReference = 8A611D1693834F821CBD6EAD /* Feature.framework */;
@@ -547,7 +547,7 @@
 			mainGroup = 6DC82FD44AFA8E6846CC19FE;
 			packageReferences = (
 				FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */,
-				B111B3FEF7A42DE97308455C /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				A96510B8A5D163A0B37A341A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = F37C3A4FE623C846745B9CE2 /* Products */;
 			projectDirPath = "";
@@ -594,7 +594,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -933,9 +933,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B111B3FEF7A42DE97308455C /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		A96510B8A5D163A0B37A341A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 14.1.0;
@@ -956,9 +956,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Marquee;
 		};
-		F132D6D4C4371E0890F9CB74 /* Facebook */ = {
+		C9D71FF62FD75E5880D53EE9 /* FacebookShare */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Facebook;
+			productName = FacebookShare;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

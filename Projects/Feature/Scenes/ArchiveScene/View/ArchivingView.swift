@@ -25,7 +25,6 @@ struct ArchivingView: View {
       VStack {
         bookmarkView
       }
-      // TODO: 색 변경
       .background(Color.gray)
       .navigationTitle("보관함")
       .navigationDestination(for: NavigationDelivery.self) { value in

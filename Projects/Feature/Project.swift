@@ -12,8 +12,8 @@ let project = Project.makeModule(
     name: "Feature",
     product: .framework,
     packages: [
-      .Marquee,
-      .Facebook
+        .Marquee,
+        .Facebook
     ],
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),

@@ -17,7 +17,7 @@ let project = Project.makeModule(
     .Facebook
   ],
   dependencies: [
-    .Projcet.Feature,
+    .project(target: "Feature", path: .relativeToRoot("Projects/Feature")),
     .SPM.Firebase,
     .SPM.Facebook
   ],

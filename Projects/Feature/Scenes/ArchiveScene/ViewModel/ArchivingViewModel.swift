@@ -25,7 +25,7 @@ class ArchivingViewModel: ObservableObject {
 //        
 //        withAnimation {
 //          if self.pageStack.isEmpty {
-//            // TODO: Scroll 최상단으로 이동
+//            // Scroll 최상단으로 이동
 //          } else {
 //            self.pageStack.removeLast()
 //          }

@@ -23,7 +23,6 @@ struct ArchiveArtistCell: View {
           ProgressView()
         }
       } else {
-        // TODO: 이미지 변경?
         if colorScheme == .light {
           Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
