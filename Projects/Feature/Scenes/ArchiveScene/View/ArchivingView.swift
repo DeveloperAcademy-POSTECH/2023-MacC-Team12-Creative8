@@ -113,11 +113,21 @@ extension ArchivingView {
         GridItem(.flexible(), spacing: 8, alignment: nil),
         GridItem(.flexible(), spacing: 8, alignment: nil)
       ], spacing: 16) {
+        var colorToggle = true
         ForEach(concertInfo) { item in
-          if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
-            ArchiveConcertInfoCell(selectedTab: $selectedTab, info: item, url: URL(string: item.artistInfo.imageUrl))
-              .frame(width: UIWidth * 0.43)
-          }
+            if viewModel.selectArtist.isEmpty || viewModel.selectArtist.contains(item.artistInfo.name) {
+                let url = URL(string: item.artistInfo.imageUrl)
+                let (backgroundColor, foregroundColor) = getColor(url: url, toggle: &colorToggle)
+                
+                ArchiveConcertInfoCell(
+                    selectedTab: $selectedTab,
+                    info: item,
+                    url: url,
+                    backgroundColor: backgroundColor,
+                    foregroundColor: foregroundColor
+                )
+                .frame(width: UIWidth * 0.43)
+            }
         }
       }
       .padding(.horizontal, 24)
@@ -126,6 +136,18 @@ extension ArchivingView {
     .onChange(of: concertInfo) { _, newValue in
       viewModel.insertArtistSet(newValue)
     }
+  }
+  
+  private func getColor(url: URL?, toggle: inout Bool) -> (Color, Color) {
+    guard url == nil else {
+      return (.clear, .clear)
+    }
+    //TODO: 색상 변경
+    let backgroundColor: Color = toggle ? .orange.opacity(0.1) : .white
+    let foregroundColor: Color = toggle ? .orange : .black
+    toggle.toggle()
+    
+    return (backgroundColor, foregroundColor)
   }
   
 //  private var artistView: some View {

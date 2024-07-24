@@ -25,7 +25,7 @@ public extension DateFormatter {
   static func dateFormatter() -> DateFormatter {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "ko_KR")
-    formatter.dateFormat = "YYYY년 MM월dd일"
+    formatter.dateFormat = "YYYY년 MM월 dd일"
     return formatter
   }
 }
