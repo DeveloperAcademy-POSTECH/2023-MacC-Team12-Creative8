@@ -13,83 +13,46 @@ struct SetlistImageShareView: View {
   let artistInfo: ArtistInfo?
   let setlist: Setlist?
   @StateObject var viewModel: SetlistViewModel
-  @State var isPresented = false
-  @Binding var isSharePresented: Bool
+  @State private var isPresented = false
+  @State private var showToastMessage = false
   
   var body: some View {
     ZStack(alignment: .top) {
       Color.black.ignoresSafeArea()
       ScrollView {
-        VStack {
-          HStack {
-            Button(action: {
-              isSharePresented.toggle()
-            }, label: {
-              Image(systemName: "xmark")
-                .foregroundStyle(.white)
-            })
-            .padding(.leading, 8)
-            .padding(.trailing, 133)
+        ZStack {
+          VStack {
+            let image = shareSetlistToImage(viewModel.setlistSongKoreanName, artistInfo?.name ?? "", setlist)
+            Image(uiImage: image)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: UIWidth * 0.72, height: UIHeight * 0.58)
+              .padding(.vertical, 28)
             
-            Text("공유하기")
-              .font(.headline)
-              .foregroundStyle(.white)
-            Spacer()
-          }
-          .padding(.bottom, 27)
-          
-          let image = shareSetlistToImage(viewModel.setlistSongKoreanName, artistInfo?.name ?? "", setlist)
-          Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: UIWidth * 0.54, height: UIHeight * 0.44)
-            .padding(.bottom, 83)
-          
-          let buttons = [
-            ShareOptionButton(action: {
-              backgroundImage(backgroundImage: image)
-            }, label: "인스타그램 스토리", systemImageName: "star"),
-            
-            ShareOptionButton(action: {
-              UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            }, label: "이미지 저장", systemImageName: "square.and.arrow.down"),
-            
-            ShareOptionButton(action: {
-              self.isPresented = true
-            }, label: "옵션 더보기", systemImageName: "ellipsis")
-          ]
-          
-          List {
-            ForEach(buttons) { button in
-              ShareOptionButtonView(action: button.action, label: button.label, systemImageName: button.systemImageName)
-                .sheet(isPresented: $isPresented) {
-                  if button.label == "옵션 더보기" {
-                    ActivityViewController(activityItems: [image])
-                  }
+            VStack(spacing: 0) {
+              ShareOptionButtonView(action: { backgroundImage(backgroundImage: image) }, label: "인스타그램 스토리", systemImageName: "star")
+              CustomDivider()
+              ShareOptionButtonView(action: {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                showToastMessage = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                  showToastMessage = false
                 }
-                .listRowBackground(Color.white)
+              }, label: "이미지 저장", systemImageName: "square.and.arrow.down")
+              CustomDivider()
+              ShareOptionButtonView(action: { self.isPresented = true }, label: "옵션 더보기", systemImageName: "ellipsis")
+                .sheet(isPresented: $isPresented) {
+                  ActivityViewController(activityItems: [image])
+                }
             }
+            .background(.white)
+            .cornerRadius(12)
+            .padding(.horizontal, 24)
           }
-          .listStyle(.plain)
-          .frame(height: CGFloat(buttons.count) * 59)
-          .cornerRadius(16)
-          .scrollDisabled(true)
-          .padding(.horizontal, 24)
-          
-          Button(action: {
-            isSharePresented.toggle()
-          }, label: {
-            HStack {
-              Text("취소하기")
-              Spacer()
-              Image(systemName: "xmark")
-            }
-            .foregroundStyle(.white)
-            .padding(EdgeInsets(top: 19, leading: 20, bottom: 19, trailing: 20))
-          })
-          .background(.white.opacity(0.32))
-          .cornerRadius(12)
-          .padding(.horizontal, 24)
+          // TODO: - 이미지 저장 토스트메시지 띄우기
+          if showToastMessage {
+            
+          }
         }
       }
     }
@@ -119,12 +82,8 @@ struct ActivityViewController: UIViewControllerRepresentable {
   var applicationActivities: [UIActivity]? = nil
   @Environment(\.presentationMode) var presentationMode
   
-  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>
-  ) -> UIActivityViewController {
-    let controller = UIActivityViewController(
-      activityItems: activityItems,
-      applicationActivities: applicationActivities
-    )
+  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+    let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
     print("activityItems \(activityItems)")
     controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
       self.presentationMode.wrappedValue.dismiss()
@@ -134,8 +93,5 @@ struct ActivityViewController: UIViewControllerRepresentable {
     return controller
   }
   
-  func updateUIViewController(
-    _ uiViewController: UIActivityViewController,
-    context: UIViewControllerRepresentableContext<ActivityViewController>
-  ) {}
+  func updateUIViewController (_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }

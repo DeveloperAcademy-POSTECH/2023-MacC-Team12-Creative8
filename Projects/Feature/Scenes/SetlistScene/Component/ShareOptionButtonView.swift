@@ -19,18 +19,22 @@ struct ShareOptionButtonView: View {
     }, label: {
       HStack {
         Text(label)
+          .font(.callout)
+          .fontWeight(.semibold)
         Spacer()
         Image(systemName: systemImageName)
       }
       .foregroundStyle(.black)
     })
-    .padding(.vertical, 8)
+    .padding(EdgeInsets(top: 19, leading: 20, bottom: 19, trailing: 16))
   }
 }
 
-struct ShareOptionButton: Identifiable {
-  let id = UUID()
-  let action: () -> Void
-  let label: String
-  let systemImageName: String
+struct CustomDivider: View {
+  var body: some View {
+    Rectangle()
+      .frame(height: 0.33)
+      .foregroundColor(.gray)
+      .padding(.leading, 20)
+  }
 }
