@@ -124,7 +124,6 @@ struct SummarizedSetlistInfoView: View {
         .cornerRadius(12, corners: [.topLeft, .topRight])
         .foregroundStyle(Color.backgroundWhite)
     )
-    .padding(.horizontal)
   }
 }
 
