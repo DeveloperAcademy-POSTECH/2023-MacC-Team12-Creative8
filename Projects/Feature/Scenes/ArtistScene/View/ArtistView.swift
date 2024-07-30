@@ -50,10 +50,13 @@ struct ArtistView: View {
 }
 
 #Preview {
+//  NavigationStack {
+//    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//  }
   NavigationStack {
-    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
   }
 //  NavigationStack {
-//    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//    ArtistView(selectedTab: .constant(.archiving), artistName: "커피소년", artistAlias: "커피소년", artistMbid: "5a9ef9b7-7581-4f64-a9e4-7b5c7bde0555")
 //  }
 }

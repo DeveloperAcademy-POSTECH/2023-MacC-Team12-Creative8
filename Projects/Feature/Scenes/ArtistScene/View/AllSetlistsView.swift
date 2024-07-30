@@ -15,10 +15,37 @@ struct AllSetlistsView: View {
   var body: some View {
     VStack {
       titleLayer
-      setlistsLayer
-      if vm.page != vm.totalPage {
-        buttonLayer
+      if vm.setlists?.count == 0 {
+        emptyLayer
+      } else {
+        setlistsLayer
+        if vm.page != vm.totalPage {
+          buttonLayer
+        }
       }
+    }
+  }
+  
+  private var emptyLayer: some View {
+    VStack {
+      Text("등록된 공연이 없어요")
+        .font(.headline)
+        .fontWeight(.semibold)
+        .padding(.top, UIHeight * 0.05)
+        .padding(.bottom, 5)
+      Text("공연과 세트리스트를 직접 등록하고 싶으신가요?")
+        .multilineTextAlignment(.center)
+        .font(.footnote)
+        .foregroundStyle(Color.fontGrey2)
+      HStack(spacing: 0) {
+        Link(destination: URL(string: "https://www.setlist.fm")!) {
+          Text("Setlist.fm")
+            .underline()
+        }
+        Text("에서 추가하세요.")
+      }
+      .foregroundStyle(Color.fontGrey2)
+      .font(.footnote)
     }
   }
   

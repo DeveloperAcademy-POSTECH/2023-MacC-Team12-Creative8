@@ -69,13 +69,6 @@ struct ArtistInfoView: View {
     } else {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
         .resizable()
-        .renderingMode(.template)
-        .foregroundStyle(Color.lineGrey1)
-        .background {
-          Color.mainGrey1
-            .cornerRadius(14)
-        }
-        .aspectRatio(1, contentMode: .fit)
         .frame(width: UIWidth * 0.57)
       )
     }
@@ -83,7 +76,7 @@ struct ArtistInfoView: View {
   
   private var nameLayer: some View {
     Text(vm.artistInfo.name)
-      .font(.largeTitle)
+      .font(.title)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainBlack)
       .minimumScaleFactor(0.1)
@@ -106,6 +99,7 @@ struct ArtistInfoView: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: UIWidth * 0.07)
+        .fontWeight(.thin)
         .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
         .scaleEffect(vm.isLikedArtist ? scale : 1.0)
     }
