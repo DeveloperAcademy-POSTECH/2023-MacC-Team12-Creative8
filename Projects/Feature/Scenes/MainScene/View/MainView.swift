@@ -15,6 +15,7 @@ import Combine
 public struct MainView: View {
   @Binding var selectedTab: Tab
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+  @AppStorage("hasClickedSeeArchiveArtistButton") private var hasClickedButton: Bool = false
   @StateObject var viewModel = MainViewModel()
   @Environment(\.modelContext) var modelContext
   @StateObject var tabViewManager: TabViewManager
@@ -45,11 +46,19 @@ public struct MainView: View {
         seeArchiveArtistButton
           .padding(.top)
           .padding(.trailing, 36)
-        Spacer().frame(height: 10)
-        artistIndicators
-        artistNameScrollView
-        Spacer().frame(height: 16)
-        artistContentView
+        ZStack(alignment: .topTrailing) {
+          VStack {
+            Spacer().frame(height: 10)
+            artistIndicators
+            artistNameScrollView
+            Spacer().frame(height: 16)
+            artistContentView
+          }
+          if !hasClickedButton {
+            MainTooltipView()
+              .padding(.trailing, 16)
+          }
+        }
       }
       .scrollIndicators(.hidden)
       .onReceive(tabViewManager.$scrollToTop) { _ in
@@ -69,6 +78,9 @@ public struct MainView: View {
           .foregroundColor(.gray)
           .font(.footnote).bold()
       }
+      .simultaneousGesture(TapGesture().onEnded {
+        hasClickedButton = true
+      })
     }
   }
   
