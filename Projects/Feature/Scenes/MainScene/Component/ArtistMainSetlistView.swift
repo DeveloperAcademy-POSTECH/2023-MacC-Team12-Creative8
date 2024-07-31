@@ -10,9 +10,9 @@ import SwiftUI
 import Core
 
 struct ArtistMainSetlistView: View {
-  @State private var isSetlistExist = false
   @State private var isExpanded = false
   @StateObject var viewModel: MainViewModel
+  @State private var showToast = false
   let index: Int
   
   var body: some View {
@@ -37,15 +37,19 @@ struct ArtistMainSetlistView: View {
   private var headerView: some View {
     HStack {
       Text("세트리스트")
+        .foregroundStyle(Color.mainOrange)
       Spacer()
-      Button {
-        
-      } label: {
-        Image(systemName: "info.circle")
-      }
-      .opacity(isSetlistExist ? 1 : 0)
+        Button {
+          showToast = true
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            showToast = false
+          }
+        } label: {
+          Image(systemName: "info.circle")
+            .foregroundStyle(Color.gray)
+        }
+        .opacity(viewModel.setlists.count > 0 ? 1 : 0)
     }
-    .foregroundStyle(Color.mainOrange)
     .padding(10)
     .background(
       RoundedRectangle(cornerRadius: 4)
@@ -115,11 +119,6 @@ struct ArtistMainSetlistView: View {
       if setlists.count > 3 {
         Text(isExpanded ? "세트리스트 접기" : "세트리스트 전체 보기")
         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-      } else {
-        Text("더보기에서 자세히 알아보기")
-        Image(systemName: "chevron.right")
-          .onTapGesture {
-          }
       }
     }
     .onTapGesture {
@@ -151,5 +150,13 @@ struct ArtistMainSetlistView: View {
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding(.leading, 10)
     }
+  }
+  
+  private var toastView: some View {
+    Text("세트리스트에 추가된 곡이 없어요.\n더보기 - setlist.fm 바로가기에서 곡을 추가하세요")
+      .foregroundColor(.white)
+      .padding(12)
+      .background(Color.gray)
+      .cornerRadius(4)
   }
 }

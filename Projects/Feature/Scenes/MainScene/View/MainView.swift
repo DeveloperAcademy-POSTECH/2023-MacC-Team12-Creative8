@@ -27,6 +27,7 @@ public struct MainView: View {
           EmptyMainView(selectedTab: $selectedTab)
         } else {
           content
+            .id(likeArtists)
         }
       }
       .background(Color.backgroundGrey)
@@ -91,7 +92,7 @@ public struct MainView: View {
           .frame(width: 8)
           .foregroundColor(.black)
       } else {
-        ForEach(0..<likeArtists.count, id: \.self, content: indicator)
+        ForEach(0..<min(likeArtists.count, 5), id: \.self, content: indicator)
       }
     }
   }
