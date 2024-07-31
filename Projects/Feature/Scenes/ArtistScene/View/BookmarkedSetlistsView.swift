@@ -55,7 +55,7 @@ struct BookmarkedSetlistsView: View {
       info: SetlistInfo(
         artistInfo: vm.artistInfo,
         id: bookmarkedSetlists[0].setlist.setlistId,
-        date: vm.getFormattedDateFromDate(
+        date: vm.getFormattedDate(
           date: bookmarkedSetlists[0].setlist.date,
           format: "yyyy년 MM월 dd일"
         ),

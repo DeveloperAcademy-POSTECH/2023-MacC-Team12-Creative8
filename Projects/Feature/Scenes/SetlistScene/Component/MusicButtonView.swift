@@ -18,12 +18,12 @@ struct MusicButtonView: View {
         .frame(width: 40, height: 40)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 21)
-        .background(Color.mainGrey1)
+        .background(Color.gray6)
         .clipShape(RoundedRectangle(cornerRadius: 14))
       
       Text(music.name)
         .font(.system(size: 15))
-        .foregroundStyle(Color.buttonBlack)
+        .foregroundStyle(Color.black)
         .opacity(0.6)
     }
       

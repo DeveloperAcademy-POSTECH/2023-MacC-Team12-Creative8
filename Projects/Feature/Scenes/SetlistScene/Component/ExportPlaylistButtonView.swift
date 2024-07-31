@@ -42,7 +42,7 @@ struct ExportPlaylistButtonView: View {
 //        ToastMessageView(message: message)
 //      }
       
-      Text("애플 뮤직으로 내보내기")
+      Text("플레이리스트 만들기")
         .foregroundStyle(Color.mainWhite)
         .font(.callout)
         .fontWeight(.semibold)
@@ -51,28 +51,17 @@ struct ExportPlaylistButtonView: View {
         .background(Color.mainBlack)
         .cornerRadius(14)
         .padding(.horizontal, 30)
+        .padding(.bottom, 50)
         .background(Rectangle().foregroundStyle(Color.gray6))
         .onTapGesture {
           vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
           vm.showModal.toggle()
         }
       
-      Text("다른 뮤직앱으로 내보내기")
-        .foregroundStyle(Color(UIColor.systemGray))
-        .font(.callout)
-        .fontWeight(.semibold)
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 30)
-        .padding(.top, 16)
-        .padding(.bottom, 38)
-        .background(Rectangle().foregroundStyle(Color.gray6))
-        .onTapGesture {
-          // TODO: 다른 뮤직앱으로 내보내기 Action 추가
-        }
     }
     .sheet(isPresented: $vm.showModal) {
       BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture, showSpotifyAlert: $showSpotifyAlert)
-        .presentationDetents([.fraction(0.5)])
+        .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
     }
   }

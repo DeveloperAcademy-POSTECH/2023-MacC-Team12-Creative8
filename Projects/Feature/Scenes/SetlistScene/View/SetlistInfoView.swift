@@ -40,9 +40,6 @@ struct SetlistInfoView: View {
           } else {
             Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
               .resizable()
-              .renderingMode(.template)
-              .foregroundStyle(Color(UIColor.systemGray))
-              .background { Color(UIColor.systemGray3).cornerRadius(12.0) }
               .frame(width: UIWidth * 0.9 * 0.38, height: UIWidth * 0.9 * 0.38)
           }
           

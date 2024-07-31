@@ -45,7 +45,7 @@ struct AllSetlistsView: View {
         HStack {
           // MARK: Date
           VStack {
-            Text(vm.getFormattedDateFromString(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
+            Text(vm.getFormattedDate(date: setlist.eventDate ?? "", format: "yyyy") ?? "")
               .foregroundStyle(Color(UIColor.systemGray2))
               .tracking(0.5)
             Text(vm.getFormattedDate(date: setlist.eventDate ?? "", format: "MM.dd") ?? "")
@@ -126,11 +126,11 @@ private struct EmptyView: View {
         Text("세트리스트 정보가 없습니다.")
           .font(.system(size: 16))
           .fontWeight(.semibold)
-          .foregroundStyle(Color.mainBlack)
+          .foregroundStyle(Color.black)
           .multilineTextAlignment(.leading)
         
         Text("찜한 가수의 세트리스트가 없다면,")
-          .foregroundStyle(Color.fontGrey2)
+          .foregroundStyle(Color.gray)
           .font(.footnote)
           .padding(.top)
           .multilineTextAlignment(.leading)
@@ -140,11 +140,11 @@ private struct EmptyView: View {
             Link(destination: URL(string: "https://www.setlist.fm")!) {
               Text("Setlist.fm")
                 .underline()
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color.gray)
                 .font(.footnote)
             }
             Text("에서 직접 추가할 수 있어요.")
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color.gray)
               .font(.footnote)
               .multilineTextAlignment(.leading)
           }
@@ -152,13 +152,13 @@ private struct EmptyView: View {
         } else {
           HStack(spacing: 0) {
             Text("에서 직접 추가할 수 있어요.")
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color.gray)
               .font(.footnote)
               .multilineTextAlignment(.leading)
             Link(destination: URL(string: "https://www.setlist.fm")!) {
               Text("Setlist.fm")
                 .underline()
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color.gray)
                 .font(.footnote)
             }
           }
@@ -169,7 +169,7 @@ private struct EmptyView: View {
       
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
-          .foregroundStyle(Color.mainGrey1)
+          .foregroundStyle(Color.gray)
           .frame(height: UIHeight * 0.06)
           .overlay {
             Text("세트리스트 추가하기")

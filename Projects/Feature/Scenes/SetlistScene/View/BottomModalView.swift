@@ -24,30 +24,19 @@ struct BottomModalView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      Spacer()
+      artistInfoView
+        .padding(.top)
+      Divider()
+        .padding(.vertical, UIHeight * 0.01)
       HStack {
         appleMusicButtonView
         spotifyButtonView
       }
-      Spacer()
       captureSetListButtonView
-      Spacer()
-      shareSetlistButtonView
-      
-      Spacer()
+        .padding()
     }
     .padding(.horizontal)
     .background(Color.mainWhite)
-  }
-  
-  private var shareSetlistButtonView: some View {
-    listRowView(title: "공유하기", topDescription: nil, bottomDescription: nil) {
-      self.isSharePresented = true
-    }
-    .sheet(isPresented: $isSharePresented, content: {
-      let image = shareSetlistToImage(vm.setlistSongKoreanName, artistInfo?.name ?? "", setlist)
-      ActivityViewController(activityItems: [image])
-    })
   }
   
   private var spotifyButtonView: some View {
@@ -65,6 +54,55 @@ struct BottomModalView: View {
       MusicButtonView(music: .spotify)
     }.onOpenURL(perform: spotifyManager.handleURL(_:))
     
+  }
+  
+  private var artistInfoView: some View {
+    HStack(alignment: .top) {
+      Group {
+        if let imageUrl = artistInfo?.imageUrl {
+          AsyncImage(url: URL(string: imageUrl)) { image in
+            image
+              .centerCropped()
+              .cornerRadius(12.0)
+          } placeholder: {
+            ProgressView()
+          }
+          .frame(width: UIWidth * 0.18, height: UIWidth * 0.18)
+          .padding(.trailing)
+        } else {
+          Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+            .resizable()
+            .frame(width: UIWidth * 0.18, height: UIWidth * 0.18)
+            .padding(.trailing)
+        }
+        
+        VStack(alignment: .leading) {
+          Text(artistInfo?.name ?? "")
+            .lineLimit(1)
+            .font(.headline)
+            .fontWeight(.regular)
+          Text(setlist?.tour?.name ?? "\(artistInfo?.name ?? "")의 세트리스트")
+            .lineLimit(1)
+            .font(.footnote)
+          Text("\(setlist?.venue?.city?.country?.name ?? "-"), \(setlist?.venue?.city?.name ?? "-") • \(vm.getFormattedDateFromString(date: setlist?.eventDate?.description ?? "", format: "yyyy년 MM월 dd일") ?? "-")")
+            .lineLimit(1)
+            .font(.footnote)
+            .foregroundStyle(Color.gray)
+        }
+        .frame(width: UIWidth * 0.5)
+        .padding(.trailing)
+        .padding(.top, UIHeight * 0.007)
+      }
+      .padding(.top)
+
+      Button {
+        vm.showModal = false
+      } label: {
+        Image("modalCloseButton", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+          .resizable()
+          .frame(width: UIWidth * 0.08, height: UIWidth * 0.08)
+      }
+    }
   }
   
   private var appleMusicButtonView: some View {
@@ -87,17 +125,17 @@ struct BottomModalView: View {
   }
   
   private var captureSetListButtonView: some View {
-    listRowView(
-      title: "플레이리스트용 캡쳐하기",
-      topDescription: "Bugs, FLO, genie, VIBE의 유저이신가요?", bottomDescription: "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요.",
-      action: {
-        exportViewModel.handlePhotoExportButtonAction()
-        if !exportViewModel.checkPhotoPermission() {
-          takeSetlistToImage(vm.setlistSongKoreanName)
-          vm.showModal.toggle()
-        }
+    Button(action: {
+      exportViewModel.handlePhotoExportButtonAction()
+      if !exportViewModel.checkPhotoPermission() {
+        takeSetlistToImage(vm.setlistSongKoreanName)
+        vm.showModal.toggle()
       }
-    )
+    }, label: {
+      Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
+        .font(.callout)
+        .foregroundStyle(Color.blue)
+    })
     // 사진 권한 허용 거부 상태인 경우
     .alert(isPresented: $exportViewModel.showLibrarySettingsAlert) {
       Alert(
@@ -107,39 +145,6 @@ struct BottomModalView: View {
         secondaryButton: .default(Text("설정").bold(), action: {
           UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }))
-    }
-  }
-  
-  private func listRowView(title: LocalizedStringResource, topDescription: LocalizedStringResource?, bottomDescription: LocalizedStringResource?, action: @escaping () -> Void) -> some View {
-    Button {
-      action()
-    } label: {
-      HStack {
-        VStack(alignment: .leading, spacing: 0) {
-          Text(title)
-            .font(.subheadline)
-            .foregroundStyle(Color(UIColor.systemGray))
-          VStack(alignment: .leading, spacing: 3) {
-            if let topDescription = topDescription {
-              Text(topDescription)
-                .font(.caption)
-                .foregroundStyle(Color(UIColor.systemGray))
-                .padding(.top, UIWidth * 0.04)
-            }
-            if let bottomDescription = bottomDescription {
-              Text(bottomDescription)
-                .font(.caption)
-                .foregroundStyle(Color(UIColor.systemGray))
-                .multilineTextAlignment(.leading)
-            }
-          }
-        }
-        Spacer()
-      }
-      .padding(.horizontal, UIWidth * 0.04)
-      .padding(.vertical)
-      .background(RoundedRectangle(cornerRadius: 14)
-        .foregroundStyle(Color(UIColor.systemGray)))
     }
   }
   
