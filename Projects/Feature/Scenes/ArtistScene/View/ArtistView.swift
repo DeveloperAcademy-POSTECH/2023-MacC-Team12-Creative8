@@ -32,7 +32,6 @@ struct ArtistView: View {
       }
     }
     .padding(.horizontal, 5)
-    .toolbar { ToolbarItem(placement: .principal) { toolbarArtistName } }
     .onAppear {
       if vm.artistInfo.gid == nil {
         vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
@@ -40,12 +39,6 @@ struct ArtistView: View {
       }
     }
     .background(Color.mainGrey1)
-  }
-  
-  private var toolbarArtistName: some View {
-    Text(vm.artistInfo.name)
-      .font(.title3)
-      .fontWeight(.semibold)
   }
 }
 

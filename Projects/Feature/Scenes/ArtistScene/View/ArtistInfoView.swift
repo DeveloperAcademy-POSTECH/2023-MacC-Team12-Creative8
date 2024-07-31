@@ -76,7 +76,7 @@ struct ArtistInfoView: View {
   
   private var nameLayer: some View {
     Text(vm.artistInfo.name)
-      .font(.title)
+      .font(.title3)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainBlack)
       .minimumScaleFactor(0.1)
