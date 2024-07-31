@@ -43,29 +43,29 @@ struct ExportPlaylistButtonView: View {
 //      }
       
       Text("애플 뮤직으로 내보내기")
-        .foregroundStyle(Color.settingTextBoxWhite)
+        .foregroundStyle(Color.mainWhite)
         .font(.callout)
         .fontWeight(.semibold)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 20)
+        .padding(.vertical, 16)
         .background(Color.mainBlack)
         .cornerRadius(14)
         .padding(.horizontal, 30)
-        .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundGrey, .backgroundGrey])))
+        .background(Rectangle().foregroundStyle(Color.gray6))
         .onTapGesture {
           vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
           vm.showModal.toggle()
         }
       
       Text("다른 뮤직앱으로 내보내기")
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color(UIColor.systemGray))
         .font(.callout)
         .fontWeight(.semibold)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 30)
-        .padding(.top, 20)
-        .padding(.bottom, 50)
-        .background(Rectangle().foregroundStyle(Color.backgroundGrey))
+        .padding(.top, 16)
+        .padding(.bottom, 38)
+        .background(Rectangle().foregroundStyle(Color.gray6))
         .onTapGesture {
           // TODO: 다른 뮤직앱으로 내보내기 Action 추가
         }

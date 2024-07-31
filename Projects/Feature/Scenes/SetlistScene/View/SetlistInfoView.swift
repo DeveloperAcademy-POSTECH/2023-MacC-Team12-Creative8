@@ -41,8 +41,8 @@ struct SetlistInfoView: View {
             Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
               .resizable()
               .renderingMode(.template)
-              .foregroundStyle(Color.lineGrey1)
-              .background { Color.mainGrey1.cornerRadius(12.0) }
+              .foregroundStyle(Color(UIColor.systemGray))
+              .background { Color(UIColor.systemGray3).cornerRadius(12.0) }
               .frame(width: UIWidth * 0.9 * 0.38, height: UIWidth * 0.9 * 0.38)
           }
           
@@ -57,10 +57,10 @@ struct SetlistInfoView: View {
               .padding(.bottom, 2)
             Text(venue)
               .font(.footnote)
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color(UIColor.systemGray))
             Text(location)
               .font(.footnote)
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color(UIColor.systemGray))
               .padding(.bottom, 7)
             HStack {
               Image(systemName: "calendar")
@@ -68,9 +68,10 @@ struct SetlistInfoView: View {
             }
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundStyle(Color.accentColor)
-            .padding(5)
-            .background(Color.accentColor.opacity(0.1))
+            .foregroundStyle(Color.mainOrange)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background(Color.orange100)
             .cornerRadius(20)
           }
           .lineLimit(1)
@@ -83,7 +84,7 @@ struct SetlistInfoView: View {
       
       Rectangle()
         .frame(width: UIWidth * 0.9, height: 2)
-        .foregroundStyle(Color.backgroundGrey)
+        .foregroundStyle(Color.gray6)
       
       ZStack {
         Rectangle()
@@ -98,12 +99,12 @@ struct SetlistInfoView: View {
               Image(systemName: "square.and.arrow.up")
               Text("공유")
             }
-            .foregroundStyle(Color.fontGrey2)
+            .foregroundStyle(Color(UIColor.systemGray))
           }
           Spacer()
           Rectangle()
             .frame(width: 2)
-            .foregroundStyle(Color.backgroundGrey)
+            .foregroundStyle(Color.gray6)
           Spacer()
           Button {
             bookmarkButtonAction()
@@ -112,7 +113,7 @@ struct SetlistInfoView: View {
               Image(systemName: isBookmarkedSetlist ? "bookmark.fill" : "bookmark")
               Text("저장")
             }
-            .foregroundStyle(Color.accentColor)
+            .foregroundStyle(Color.mainOrange)
           }
           Spacer()
         }

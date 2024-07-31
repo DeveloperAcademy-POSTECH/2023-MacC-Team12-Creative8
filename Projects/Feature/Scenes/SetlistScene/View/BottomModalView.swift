@@ -37,7 +37,7 @@ struct BottomModalView: View {
       Spacer()
     }
     .padding(.horizontal)
-    .background(Color.settingTextBoxWhite)
+    .background(Color.mainWhite)
   }
   
   private var shareSetlistButtonView: some View {
@@ -118,18 +118,18 @@ struct BottomModalView: View {
         VStack(alignment: .leading, spacing: 0) {
           Text(title)
             .font(.subheadline)
-            .foregroundStyle(Color.toastBurn)
+            .foregroundStyle(Color(UIColor.systemGray))
           VStack(alignment: .leading, spacing: 3) {
             if let topDescription = topDescription {
               Text(topDescription)
                 .font(.caption)
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color(UIColor.systemGray))
                 .padding(.top, UIWidth * 0.04)
             }
             if let bottomDescription = bottomDescription {
               Text(bottomDescription)
                 .font(.caption)
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color(UIColor.systemGray))
                 .multilineTextAlignment(.leading)
             }
           }
@@ -139,7 +139,7 @@ struct BottomModalView: View {
       .padding(.horizontal, UIWidth * 0.04)
       .padding(.vertical)
       .background(RoundedRectangle(cornerRadius: 14)
-        .foregroundStyle(Color.mainGrey1))
+        .foregroundStyle(Color(UIColor.systemGray)))
     }
   }
   
@@ -150,7 +150,7 @@ struct BottomModalView: View {
       VStack(spacing: 0) {
         ZStack {
           RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.mainGrey1)
+            .foregroundStyle(Color(UIColor.systemGray))
             .frame(maxWidth: .infinity)
             .frame(height: UIWidth * 0.2)
           
@@ -164,7 +164,7 @@ struct BottomModalView: View {
         
         Text(title)
           .font(.caption2)
-          .foregroundStyle(Color.toastBurn)
+          .foregroundStyle(Color.mainBlack)
       }
     }
   }

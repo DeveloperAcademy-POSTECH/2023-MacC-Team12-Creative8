@@ -39,7 +39,7 @@ struct ArtistView: View {
         vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
       }
     }
-    .background(Color.mainGrey1)
+    .background(Color.gray6)
   }
   
   private var toolbarArtistName: some View {

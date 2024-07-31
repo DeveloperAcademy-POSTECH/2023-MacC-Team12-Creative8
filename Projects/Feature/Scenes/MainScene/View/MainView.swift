@@ -41,7 +41,7 @@ public struct MainView: View {
         }
       }
       .padding(.top, 15)
-      .background(Color.backgroundWhite)
+      .background(Color.mainWhite)
       .onAppear {
         dataManager.modelContext = modelContext
         if viewModel.setlists[0] == nil {

@@ -26,7 +26,7 @@ struct ArchivingView: View {
         bookmarkView
       }
       // TODO: 색 변경
-      .background(Color.gray)
+      .background(Color.gray6)
       .navigationTitle("보관함")
       .navigationDestination(for: NavigationDelivery.self) { value in
         if value.setlistId != nil {

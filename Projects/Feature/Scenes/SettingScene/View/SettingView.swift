@@ -15,7 +15,7 @@ public struct SettingView: View {
   public init() {}
   public var body: some View {
       ZStack {
-        Color.backgroundWhite
+        Color.gray6.ignoresSafeArea()
         ScrollView {
           VStack(alignment: .leading) {
             
@@ -33,7 +33,7 @@ public struct SettingView: View {
             // 서비스 이용 관련
             VStack(alignment: .leading) {
               Divider()
-                .foregroundStyle(Color.lineGrey1)
+                .foregroundStyle(Color(UIColor.systemGray3))
               SectionTitleView(
                 sectionTitle: "서비스 이용 관련",
                 sectionTopDescription: "음악이 연결되는 순간,", sectionBottomDescription: "Seta의 서비스 약관을 확인하세요")
@@ -43,19 +43,19 @@ public struct SettingView: View {
                 LinkLabelView(linkLabel: "FAQ")
               })
               Divider()
-                .foregroundStyle(Color.lineGrey1)
+                .foregroundStyle(Color(UIColor.systemGray3))
               
               // 문의하기
               AskView()
               Divider()
-                .foregroundStyle(Color.lineGrey1)
+                .foregroundStyle(Color(UIColor.systemGray3))
               
               // 이용 약관
               Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/3b69b21a1afc4306bcccde7019d6379d?pvs=4")!, label: {
                 LinkLabelView(linkLabel: "이용 약관")
               })
               Divider()
-                .foregroundStyle(Color.lineGrey1)
+                .foregroundStyle(Color(UIColor.systemGray3))
 
               // 개인정보 처리방침
               Link(destination: URL(string: "https://inquisitive-digit-cfe.notion.site/1d16107bb0f34e629bcbd30a25ceb5d0?pvs=4")!, label: {
@@ -89,7 +89,7 @@ struct SectionTitleView: View {
         Text(sectionBottomDescription)
       }
         .font(.footnote)
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color(UIColor.systemGray))
         .padding(.bottom, 20)
     }
   }
@@ -112,7 +112,7 @@ struct SetlistfmLinkButton: View {
           .frame(width: 10, height: 15)
           .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 15))
       }
-      .background(Color.mainGrey1)
+      .background(Color.mainWhite)
       .foregroundStyle(Color.mainBlack)
       .clipShape(RoundedRectangle(cornerRadius: 12))
       .padding(.bottom, 15)

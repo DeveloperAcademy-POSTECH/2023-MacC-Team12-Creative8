@@ -41,6 +41,7 @@
 		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */; };
+		BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6065131130D585C891E3C0 /* SetlistInfoView.swift */; };
 		BF015464C3C1BC99D09C647B /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 71467F9732576A14C6681C75 /* CoreXLSX */; };
 		BF3DF8B460FBB0671C7334C0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
@@ -143,6 +144,7 @@
 		D5806DEE9B0B7C5659EF7F65 /* ArtistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoView.swift; sourceTree = "<group>"; };
 		DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistImage.swift; sourceTree = "<group>"; };
 		DEB9981CC6F7982EBE581173 /* ArchiveConcertInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveConcertInfoCell.swift; sourceTree = "<group>"; };
+		EA6065131130D585C891E3C0 /* SetlistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistInfoView.swift; sourceTree = "<group>"; };
 		F13B904D1DF7D17856476773 /* SetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistView.swift; sourceTree = "<group>"; };
 		FFAB8E69261DF7B00B491EB6 /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
+				EA6065131130D585C891E3C0 /* SetlistInfoView.swift */,
 				F13B904D1DF7D17856476773 /* SetlistView.swift */,
 			);
 			path = View;
@@ -631,6 +634,7 @@
 				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
+				BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */,
 				C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */,
 				94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */,
 				B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */,

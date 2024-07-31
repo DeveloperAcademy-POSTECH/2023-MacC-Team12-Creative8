@@ -17,7 +17,7 @@ struct ToastMessageView: View {
   var body: some View {
      HStack {
        Text(message)
-        .foregroundStyle(Color.settingTextBoxWhite)
+        .foregroundStyle(Color.mainWhite)
         .font(.subheadline)
        Spacer()
        Image(systemName: icon)
@@ -27,7 +27,7 @@ struct ToastMessageView: View {
      .padding(15)
      .frame(maxWidth: .infinity)
      .background(
-       Color.toastBurn
+       Color.black850
         .cornerRadius(6.0)
      )
   }
