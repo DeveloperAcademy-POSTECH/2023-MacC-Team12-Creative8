@@ -23,20 +23,22 @@ struct BottomModalView: View {
   @State var isSharePresented = false
   
   var body: some View {
-    VStack(alignment: .leading) {
-      artistInfoView
-        .padding(.top)
-      Divider()
-        .padding(.vertical, UIHeight * 0.01)
-      HStack {
-        appleMusicButtonView
-        spotifyButtonView
+    ZStack {
+      VStack(alignment: .leading) {
+        artistInfoView
+          .padding(.top)
+        Divider()
+          .padding(.vertical, UIHeight * 0.01)
+        HStack {
+          appleMusicButtonView
+          spotifyButtonView
+        }
+        captureSetListButtonView
+          .padding()
       }
-      captureSetListButtonView
-        .padding()
+      .padding(.horizontal)
+      .background(Color.mainWhite)
     }
-    .padding(.horizontal)
-    .background(Color.mainWhite)
   }
   
   private var spotifyButtonView: some View {
@@ -126,26 +128,13 @@ struct BottomModalView: View {
   
   private var captureSetListButtonView: some View {
     Button(action: {
-      exportViewModel.handlePhotoExportButtonAction()
-      if !exportViewModel.checkPhotoPermission() {
-        takeSetlistToImage(vm.setlistSongKoreanName)
-        vm.showModal.toggle()
-      }
+      vm.showModal = false
+      showToastMessageCapture = true
     }, label: {
       Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
         .font(.callout)
         .foregroundStyle(Color.blue)
     })
-    // 사진 권한 허용 거부 상태인 경우
-    .alert(isPresented: $exportViewModel.showLibrarySettingsAlert) {
-      Alert(
-        title: Text(""),
-        message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
-        primaryButton: .default(Text("취소")),
-        secondaryButton: .default(Text("설정").bold(), action: {
-          UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-        }))
-    }
   }
   
   private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
