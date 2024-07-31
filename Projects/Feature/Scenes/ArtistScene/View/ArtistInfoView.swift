@@ -19,21 +19,15 @@ struct ArtistInfoView: View {
   @Environment(\.scenePhase) var scenePhase
   
   var body: some View {
-    ZStack(alignment: .bottom) {
+    VStack {
       imageLayer
       HStack {
         nameLayer
-          .padding()
-          .padding(.bottom, 5)
-        Spacer(minLength: 60)
-      }
-      HStack {
         Spacer()
         buttonLayer
-          .padding()
       }
+      .padding(.horizontal, UIWidth * 0.07)
     }
-    .padding(.horizontal, 24)
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       vm.swiftDataManager.modelContext = modelContext
@@ -64,7 +58,8 @@ struct ArtistInfoView: View {
       return AnyView(AsyncImage(url: URL(string: imageUrl)) { image in
         image
           .centerCropped()
-          .aspectRatio(1.5, contentMode: .fit)
+          .aspectRatio(1, contentMode: .fit)
+          .frame(width: UIWidth * 0.57)
           .cornerRadius(14)
           .overlay(Color.black.opacity(0.2).cornerRadius(14))
       } placeholder: {
@@ -79,7 +74,8 @@ struct ArtistInfoView: View {
           Color.mainGrey1
             .cornerRadius(14)
         }
-        .aspectRatio(1.5, contentMode: .fit)
+        .aspectRatio(1, contentMode: .fit)
+        .frame(width: UIWidth * 0.57)
       )
     }
   }
@@ -88,7 +84,7 @@ struct ArtistInfoView: View {
     Text(vm.artistInfo.name)
       .font(.largeTitle)
       .fontWeight(.semibold)
-      .foregroundStyle(Color.mainWhite)
+      .foregroundStyle(Color.mainBlack)
       .minimumScaleFactor(0.1)
   }
   
@@ -96,14 +92,9 @@ struct ArtistInfoView: View {
     Button {
       vm.isLikedArtist.toggle()
     } label: {
-      Circle()
-        .frame(width: UIWidth * 0.15)
-        .foregroundStyle(Color.mainWhite)
-        .overlay(
-          Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-            .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
-            .font(.title3)
-        )
+      Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
+        .font(.title)
     }
     .onDisappear {
       if vm.isLikedArtist && !vm.swiftDataManager.isAddedLikeArtist(likeArtist, vm.artistInfo.mbid) { // 뷰를 나갈 때 swiftData에 추가되어있지 않은 상태에서 하트를 눌렀으면

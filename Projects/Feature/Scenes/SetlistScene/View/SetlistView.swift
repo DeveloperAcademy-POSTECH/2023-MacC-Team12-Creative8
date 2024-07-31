@@ -25,15 +25,45 @@ struct SetlistView: View {
   
   var body: some View {
     ZStack {
-      Color.backgroundWhite
+      Color.backgroundGrey
       ScrollView(showsIndicators: false) {
-        VStack(spacing: -1) {
-          concertInfoArea
-          dotLine
-          setlistArea
+        VStack {
+          SetlistInfoView(
+            imageUrl: artistInfo.imageUrl,
+            title: setlist?.tour?.name ?? "-",
+            artistName: artistInfo.name,
+            venue: setlist?.venue?.name ?? "-",
+            location: "\(setlist?.venue?.city?.name ?? "-"), \(setlist?.venue?.city?.country?.name ?? "-")",
+            date: vm.allDateFormatter(inputDate: setlist?.eventDate ?? "") ?? "-",
+            shareButtonAction: {},
+            bookmarkButtonAction: {
+              if vm.isBookmarked {
+                vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
+                showToastMessage = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                  showToastMessage = false
+                }
+              } else {
+                saveData()
+              }
+              vm.isBookmarked.toggle()
+            },
+            isBookmarkedSetlist: vm.isBookmarked
+          )
+          .padding(.top, 10)
+          .padding(.bottom, -40)
+        
+          if let setlist = setlist {
+            if vm.isEmptySetlist(setlist) {
+              EmptySetlistView()
+                .padding(UIWidth * 0.1)
+            } else {
+              ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
+                .padding(UIWidth * 0.1)
+                .padding(.bottom, 150)
+            }
+          }
         }
-        .background(Color.mainBlack)
-        .toolbar { ToolbarItem(placement: .topBarTrailing) { toolbarBookmarkButton } }
       }
       if let setlist = setlist {
         if !vm.isEmptySetlist(setlist) {
@@ -49,9 +79,13 @@ struct SetlistView: View {
       }
       if showToastMessage {
         VStack {
-          ToastMessageView(message: "북마크한 공연이 추가되었습니다.")
-            .padding(.leading, 80)
-            .padding(.trailing, 20)
+          ToastMessageView(
+            message: vm.isBookmarked ? "보관함‑북마크한 공연에 담겼어요." : "보관이 취소되었어요!",
+            icon: vm.isBookmarked ? "checkmark.circle.fill" : "checkmark.circle.badge.xmark.fill",
+            color: vm.isBookmarked ? Color.green : Color.red
+          )
+          .padding(.horizontal, UIWidth * 0.075)
+          .padding(.top, 5)
           Spacer()
         }
       }
@@ -69,6 +103,7 @@ struct SetlistView: View {
                  exportViewModel: exportViewModel
     )
     .toolbar(.hidden, for: .tabBar)
+    .navigationTitle("세트리스트")
     .navigationBarTitleDisplayMode(.inline)
     .background(Color.backgroundWhite)
     .edgesIgnoringSafeArea(.bottom)
@@ -103,64 +138,6 @@ struct SetlistView: View {
         }
       }
     }
-  }
-  
-  private var concertInfoArea: some View {
-    ZStack {
-      Rectangle()
-        .cornerRadius(14, corners: [.bottomLeft, .bottomRight])
-        .foregroundStyle(Color.backgroundWhite)
-        .ignoresSafeArea()
-      ConcertInfoView(
-        artist: artistInfo.name,
-        date: vm.allDateFormatter(inputDate: setlist?.eventDate ?? "") ?? "-",
-        venue: setlist?.venue?.name ?? "-",
-        tour: setlist?.tour?.name ?? "-"
-      )
-      .padding([.horizontal, .bottom], 30)
-      .padding(.vertical, 15)
-    }
-  }
-  
-  private var dotLine: some View {
-    Rectangle()
-      .stroke(style: StrokeStyle(dash: [5]))
-      .frame(height: 1)
-      .padding(.horizontal)
-      .foregroundStyle(Color.fontGrey2)
-  }
-  
-  private var setlistArea: some View {
-    ZStack {
-      Rectangle()
-        .cornerRadius(14, corners: [.topLeft, .topRight])
-        .foregroundStyle(Color.backgroundWhite)
-        .ignoresSafeArea()
-      if let setlist = setlist {
-        if vm.isEmptySetlist(setlist) {
-          EmptySetlistView()
-            .padding(30)
-        } else {
-          ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
-            .padding(30)
-            .padding(.bottom, 130)
-        }
-      }
-    }
-  }
-  
-  private var toolbarBookmarkButton: some View {
-    Button(action: {
-      if vm.isBookmarked {
-        vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")
-      } else {
-        saveData()
-      }
-      vm.isBookmarked.toggle()
-    }, label: {
-      Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
-        .foregroundStyle(vm.isBookmarked ? Color.mainOrange : Color.mainBlack)
-    })
   }
   
   private func saveData() {
