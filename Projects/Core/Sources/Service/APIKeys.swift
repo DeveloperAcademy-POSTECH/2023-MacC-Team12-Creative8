@@ -9,7 +9,9 @@
 import Foundation
 
 struct APIKeys {
-  let setlistFM = "YOUR_API_KEY"
-  let musicBrainz = "YOUR_API_KEY"
-  let genius = "YOUR_API_KEY"
+  let setlistFM = "API_KEY"
+  let musicBrainz = "API_KEY"
+  let genius = "API_KEY"
+  static let spotifyClientID = "API_KEY"
+  static let spotifyClientSecreat = "API_KEY"
 }

@@ -93,16 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				387FA7DF5581F4BC167E86EE /* Project */,
-				0B16989762CABD7642A656BB /* Frameworks */,
+				CB79D91663EAEE60B1700350 /* Compiled */,
 				B03C18C5BAECE53CE1E5DDE5 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		0B16989762CABD7642A656BB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		387FA7DF5581F4BC167E86EE /* Project */ = {
@@ -170,6 +163,13 @@
 				66CDCDF6E4282CD82B70FC00 /* TuistBundle+UI.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		CB79D91663EAEE60B1700350 /* Compiled */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Compiled;
 			sourceTree = "<group>";
 		};
 		D5036A44A2F2BCCB79343D9B /* InfoPlists */ = {
@@ -289,7 +289,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/a_mcflurry/Desktop/seta\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 

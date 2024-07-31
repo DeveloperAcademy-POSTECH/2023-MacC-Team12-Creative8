@@ -12,6 +12,8 @@ let project = Project.makeModule(
   name: "Core",
   product: .framework,
   dependencies: [
+    .SPM.SpotifyAPI,
+    .SPM.KeychainAccess
   ],
   sources: ["Sources/**"]
 )
