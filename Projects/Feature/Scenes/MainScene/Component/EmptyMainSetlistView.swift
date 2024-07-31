@@ -13,8 +13,6 @@ import Core
 import UI
 import Combine
 
-// TODO: 추후 수정하기
-
 struct EmptyMainSetlistView: View {
   @ObservedObject var viewModel: MainViewModel
   

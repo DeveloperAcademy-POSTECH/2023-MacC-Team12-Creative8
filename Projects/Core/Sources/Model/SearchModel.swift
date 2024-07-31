@@ -16,7 +16,7 @@ public let koreanArtistModel: [ArtistInfo] = [
     ArtistInfo(name: "카더가든", mbid: "9f2862c0-22a9-4fd2-9f1c-07e17f356137", imageUrl: "CarTheGarden"),
     ArtistInfo(name: "Paul Kim", mbid: "8968d1ad-c830-4ab2-92d2-bd6bea0b6f42", imageUrl: "PaulKim"),
     ArtistInfo(name: "Stray Kids", mbid: "142b343d-bf5a-428c-a64f-6d1a7566bbe9", imageUrl: "StrayKids"),
-    ArtistInfo(name: "NCT DREAM", mbid: "dc7c8277-d4b6-4bca-bdfe-50eee42536ac",  imageUrl: "NCTDream"),
+    ArtistInfo(name: "NCT DREAM", mbid: "dc7c8277-d4b6-4bca-bdfe-50eee42536ac", imageUrl: "NCTDream"),
     ArtistInfo(name: "이영지", mbid: "0433e75d-70b6-4118-9ff8-9b6f7e534093", imageUrl: "LeeYoungJi"),
     ArtistInfo(name: "윤하", mbid: "5e3bc4c7-adbe-40e0-b56e-57d755908d52", imageUrl: "Yoonha")
 ]

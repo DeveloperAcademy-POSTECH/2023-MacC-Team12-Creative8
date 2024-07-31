@@ -25,7 +25,6 @@ struct ArchivingView: View {
       VStack {
         bookmarkView
       }
-      // TODO: 색 변경
       .background(Color.gray)
       .navigationTitle("보관함")
       .navigationDestination(for: NavigationDelivery.self) { value in
@@ -127,75 +126,4 @@ extension ArchivingView {
       viewModel.insertArtistSet(newValue)
     }
   }
-  
-//  private var artistView: some View {
-//    Group {
-//      if likeArtists.isEmpty {
-//        IsEmptyCell(type: .likeArtist)
-//      } else {
-//        ScrollViewReader { proxy in
-//          List {
-//            VStack(alignment: .leading, spacing: 0) {
-//              Text("찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다")
-//                .font(.footnote)
-//                .foregroundStyle(Color.fontGrey2)
-//                .padding(.top)
-//                .listRowBackground(Color.backgroundWhite)
-//              Group {
-//                Text("변경을 원하신다면 ")
-//                  .font(.footnote)
-//                  .foregroundStyle(Color.fontGrey2)
-//                +
-//                Text("아티스트를 꾹 눌러 순서를 옮겨보세요")
-//                  .font(.footnote)
-//                  .fontWeight(.semibold)
-//                  .foregroundStyle(Color.fontGrey2)
-//              }
-//            }.id(topID)
-//              .listRowSeparator(.hidden)
-//              .listRowBackground(Color.backgroundWhite)
-//            
-//            artistListView
-//              .listRowSeparator(.hidden)
-//              .listRowBackground(Color.backgroundWhite)
-//          }
-//          .scrollIndicators(.hidden)
-//          .listStyle(.plain)
-//          .padding(EdgeInsets(top: -10, leading: -18, bottom: 10, trailing: -18))
-//          .onReceive(tabViewManager.$scrollToTop) { _ in
-//            withAnimation {
-//              proxy.scrollTo(topID)
-//            }
-//          }
-//        }
-//      }
-//    }
-//    .padding(.horizontal, 24)
-//  }
-  
-//  private var artistListView: some View {
-//    ForEach(Array(likeArtists.enumerated()), id: \.element) { index, item in
-//      HStack {
-//        ArchiveArtistCell(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
-//        Text("\(item.artistInfo.name)")
-//          .font(.subheadline)
-//          .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
-//          .background(
-//            NavigationLink(value: NavigationDelivery(artistInfo: SaveArtistInfo(name: item.artistInfo.name, country: "", alias: item.artistInfo.alias, mbid: item.artistInfo.mbid, gid: 0, imageUrl: "", songList: []))) {
-//              Text("")
-//            }
-//              .opacity(0)
-//          )
-//        Spacer()
-//        MenuButton(selectedTab: $selectedTab, item: item)
-//      }
-//    }
-//    .onMove { source, destination in
-//      var updatedItems = likeArtists
-//      updatedItems.move(fromOffsets: source, toOffset: destination)
-//      for (index, item) in updatedItems.enumerated() {
-//        item.orderIndex = likeArtists.count - 1 - index
-//      }
-//    }
-//  }
 }

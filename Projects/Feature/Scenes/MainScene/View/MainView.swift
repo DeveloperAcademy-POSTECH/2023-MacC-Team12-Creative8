@@ -42,7 +42,8 @@ public struct MainView: View {
   private var content: some View {
     ScrollView {
       VStack {
-        seeAllButton
+        seeArchiveArtistButton
+          .padding(.top)
           .padding(.trailing, 36)
         Spacer().frame(height: 10)
         artistIndicators
@@ -60,15 +61,14 @@ public struct MainView: View {
     }
   }
   
-  private var seeAllButton: some View {
+  private var seeArchiveArtistButton: some View {
     HStack {
       Spacer()
-      Text("모두 보기")
-        .foregroundColor(.gray)
-        .font(.subheadline).bold()
-        .onTapGesture {
-          selectedTab = .archiving
-        }
+      NavigationLink(destination: ArchivingArtistView()) {
+        Text("찜한 아티스트")
+          .foregroundColor(.gray)
+          .font(.footnote).bold()
+      }
     }
   }
   

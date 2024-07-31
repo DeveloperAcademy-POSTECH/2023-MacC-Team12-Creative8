@@ -13,11 +13,11 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   packages: [
-    .Firebase
+    .Firebase,
   ],
   dependencies: [
-    .Projcet.Feature,
-    .SPM.Firebase
+    .project(target: "Feature", path: .relativeToRoot("Projects/Feature")),
+    .SPM.Firebase,
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

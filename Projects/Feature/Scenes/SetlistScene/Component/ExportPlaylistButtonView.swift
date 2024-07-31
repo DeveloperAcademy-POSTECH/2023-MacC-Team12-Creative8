@@ -34,7 +34,7 @@ struct ExportPlaylistButtonView: View {
   var body: some View {
     VStack(spacing: 0) {
       Spacer()
-      // TODO: 토스트팝업 메시지랑 아이콘 수정해서 넣어야 함.
+      // 토스트팝업 메시지랑 아이콘 수정해서 넣어야 함.
 //      if let message = toastMessageToShow() {
 //        ToastMessageView(message: message)
 //      }
@@ -64,7 +64,7 @@ struct ExportPlaylistButtonView: View {
         .padding(.bottom, 50)
         .background(Rectangle().foregroundStyle(Color.backgroundGrey))
         .onTapGesture {
-          // TODO: 다른 뮤직앱으로 내보내기 Action 추가
+          // 다른 뮤직앱으로 내보내기 Action 추가
         }
     }
     .sheet(isPresented: $vm.showModal) {
