@@ -13,7 +13,6 @@ import Core
 public struct SettingView: View {
   
   public init() {}
-  
   public var body: some View {
       ZStack {
         Color.backgroundWhite
