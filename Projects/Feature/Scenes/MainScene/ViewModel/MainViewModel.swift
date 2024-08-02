@@ -15,13 +15,17 @@ final class MainViewModel: ObservableObject {
   let dataService = SetlistDataService()
   let koreanConverter = KoreanConverter()
   
-  @Published var selectedIndex: Int?
-  @Published var scrollToIndex: Int?
+  @Published var selectedIndex: Int = 0
+  @Published var scrollToIndex: Int = 0
   @Published var isTapped: Bool = false
   @Published var isLoading: Bool = false
   @Published var pageStack: [NavigationDelivery] = []
   @Published var scrollToTop: Bool = false
+  @Published var contentHeight: CGFloat = 0.0
+  
   @State var dataManager = SwiftDataManager()
+  @Published var navigateToArtistView = false
+  
   @Environment(\.modelContext) var modelContext
   var setlists = [[Setlist?]?](repeating: nil, count: 100) // MARK: 나중에 꼭 수정하기!
   
@@ -96,24 +100,19 @@ final class MainViewModel: ObservableObject {
     }
   }
   func resetScroll() {
-    withAnimation {
-      scrollToIndex = 0
-      selectedIndex = 0
-    }
+    scrollToIndex = 0
+    selectedIndex = 0
+
   }
   
   func selectArtist(index: Int) {
-    withAnimation {
-      selectedIndex = index
-      scrollToIndex = index
-    }
+    selectedIndex = index
+    scrollToIndex = index
   }
   
   func scrollToSelectedIndex(proxy: ScrollViewProxy) {
-    if let scrollToIndex = scrollToIndex {
-      withAnimation(.easeInOut(duration: 0.1)) {
-        proxy.scrollTo(scrollToIndex, anchor: .center)
-      }
+    withAnimation {
+      proxy.scrollTo(scrollToIndex, anchor: .center)
     }
   }
   

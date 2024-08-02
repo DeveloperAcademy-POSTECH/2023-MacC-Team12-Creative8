@@ -24,9 +24,10 @@ struct ArtistNameView: View {
           Text(name)
             .font(.title)
             .fontWeight(.semibold)
+            .fixedSize(horizontal: true, vertical: false) 
         }
         .marqueeDuration(5.0)
-        .frame(width: UIWidth * 0.8)
+        .frame(width: parentWidth)
       } else {
         Text(name)
           .font(.title)
@@ -58,3 +59,4 @@ struct ArtistNameView: View {
     textWidth = controller.view.intrinsicContentSize.width
   }
 }
+

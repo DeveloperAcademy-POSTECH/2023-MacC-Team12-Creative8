@@ -11,7 +11,6 @@ import UI
 
 struct ArchiveArtistCellImage: View {
   let artistUrl: URL?
-  let isNewUpdate: Bool
   @Environment(\.colorScheme) var colorScheme
   var body: some View {
     Group {

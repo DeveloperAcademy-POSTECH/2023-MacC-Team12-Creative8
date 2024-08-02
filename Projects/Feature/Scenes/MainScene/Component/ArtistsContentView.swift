@@ -5,13 +5,9 @@
 //  Created by 장수민 on 11/17/23.
 //  Copyright © 2023 com.creative8.seta. All rights reserved.
 //
-
-import Foundation
 import SwiftUI
-import SwiftData
 import Core
-import UI
-import Combine
+import SwiftData
 
 struct ArtistsContentView: View {
   @Binding var selectedTab: Tab
@@ -19,86 +15,89 @@ struct ArtistsContentView: View {
   @State var artistInfo: SaveArtistInfo
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
-  @State private var navigateToArtistView = false
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+  @StateObject var tabViewManager: TabViewManager
 
   var index: Int
+  
   var body: some View {
-    VStack(spacing: 24) {
-      artistImage
-        if !viewModel.isLoading {
-          Group {
-            bothExistLayer
-            ArtistMainSetlistView(viewModel: viewModel, index: index)
-          }
-          .frame(width: UIWidth * 0.92, alignment: .top)
-          .padding(.horizontal, 3)
-          .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
-            content
-              .opacity(phase.isIdentity ? 1 : 0)
-              .blur(radius: phase.isIdentity ? 0 : 0.5)
-          }
-          
+    NavigationStack(path: $tabViewManager.pageStack) {
+      VStack(spacing: 24) {
+        
+        if viewModel.isLoading {
+          loadingView
         } else {
-          ProgressView()
-            .frame(width: UIWidth, height: UIWidth * 0.6) 
+          contentView
         }
-      
-    NavigationLink(destination: ArtistView(
-                   selectedTab: $selectedTab,
-                   artistName: artistInfo.name,
-                   artistAlias: artistInfo.alias,
-                   artistMbid: artistInfo.mbid
-               ), isActive: $navigateToArtistView) {
-                   EmptyView()
-               }
-           }
-    .frame(width: UIWidth * 0.81)
-    .onAppear {
-      dataManager.modelContext = modelContext
+        
+        navigationLink
+      }
+      .onAppear {
+        dataManager.modelContext = modelContext
+      }
     }
-  }
-  private var artistImage: some View {
-    NavigationLink(value: NavigationDelivery(artistInfo: artistInfo)) {
-      ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
-        .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
-    }
-    .buttonStyle(BasicButtonStyle())
   }
   
-  private var bothExistLayer: some View {
+  private var loadingView: some View {
+    ProgressView()
+  }
+  
+  private var navigationLink: some View {
+    NavigationLink(destination: ArtistView(
+      selectedTab: $selectedTab,
+      artistName: artistInfo.name,
+      artistAlias: artistInfo.alias,
+      artistMbid: artistInfo.mbid
+    ), isActive: $viewModel.navigateToArtistView) {
+      EmptyView()
+    }
+  }
+  
+  private var contentView: some View {
     let setlists: [Setlist?] = viewModel.setlists[index] ?? []
     
-    if let firstSetlist = setlists.first {
-      
-      let venueName = firstSetlist?.venue?.name ?? ""
-      let city = firstSetlist?.venue?.city?.name ?? ""
-      let countryName = firstSetlist?.venue?.city?.country?.name ?? ""
-      let artistName = firstSetlist?.artist?.name ?? ""
-      
-      return SummarizedSetlistInfoView(
-        type: .recentConcert,
-        info: SetlistInfo(
-          artistInfo: artistInfo.toArtistInfo(),
-          id: firstSetlist?.id ?? "",
-          date: viewModel.getDateFormatted(dateString: firstSetlist?.eventDate ?? ""),
-          title: firstSetlist?.tour?.name ?? "\(artistName) Setlist",
-          venue: "\(venueName)\n\(city),\(countryName)"
-        ),
-        infoButtonAction: nil,
-        cancelBookmarkAction: nil,
-        chevronButtonAction: {
-          navigateToArtistView = true 
-
+    if let firstSetlist = setlists.compactMap({ $0 }).first {
+      return AnyView(
+        VStack(spacing: 12) {
+          summarizedSetlistView(for: firstSetlist)
+          ArtistMainSetlistView(viewModel: viewModel, index: index)
         }
       )
     } else {
-      return SummarizedSetlistInfoView(
-        type: .recentConcert,
-        info: nil,
-        infoButtonAction: nil,
-        cancelBookmarkAction: nil,
-        chevronButtonAction: nil
-      )
+      return AnyView(emptySetlistView)
     }
+  }
+  
+  private var emptySetlistView: some View {
+    SummarizedSetlistInfoView(
+      type: .recentConcert,
+      info: nil,
+      infoButtonAction: nil,
+      cancelBookmarkAction: nil,
+      chevronButtonAction: nil
+    )
+  }
+  
+  private func summarizedSetlistView(for setlist: Setlist) -> some View {
+    let venueName = setlist.venue?.name ?? ""
+    let city = setlist.venue?.city?.name ?? ""
+    let countryName = setlist.venue?.city?.country?.name ?? ""
+    let artistName = setlist.artist?.name ?? ""
+    
+    return SummarizedSetlistInfoView(
+      type: .recentConcert,
+      info: SetlistInfo(
+        artistInfo: artistInfo.toArtistInfo(),
+        id: setlist.id ?? "",
+        date: viewModel.getDateFormatted(dateString: setlist.eventDate ?? ""),
+        title: setlist.tour?.name ?? "\(artistName) Setlist",
+        venue: "\(venueName)\n\(city), \(countryName)"
+      ),
+      infoButtonAction: nil,
+      cancelBookmarkAction: nil,
+      chevronButtonAction: {
+        viewModel.navigateToArtistView = true
+      }
+    )
   }
 }

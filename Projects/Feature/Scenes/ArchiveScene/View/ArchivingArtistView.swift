@@ -16,6 +16,7 @@ struct ArchivingArtistView: View {
   @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
   @Query(sort: \ArchivedConcertInfo.setlist.date, order: .reverse) var concertInfo: [ArchivedConcertInfo]
   @StateObject var viewModel = ArchivingViewModel.shared
+  @Environment(\.modelContext) var modelContext
   @Namespace var topID
   
   var body: some View {
@@ -58,7 +59,7 @@ struct ArchivingArtistView: View {
   private var archiveArtistListCell: some View {
     ForEach(Array(likeArtists.enumerated()), id: \.element) { index, item in
       HStack(spacing: 16) {
-        ArchiveArtistCellImage(artistUrl: URL(string: item.artistInfo.imageUrl), isNewUpdate: false)
+        ArchiveArtistCellImage(artistUrl: URL(string: item.artistInfo.imageUrl))
         Text(item.artistInfo.name)
           .font(.subheadline)
           .foregroundStyle(index < 5 ? Color.mainOrange : Color.mainBlack)
@@ -72,11 +73,20 @@ struct ArchivingArtistView: View {
           .background(Color.gray)
       }
     }
+    ///순서 변ㄱ
     .onMove { source, destination in
       var updatedItems = likeArtists
       updatedItems.move(fromOffsets: source, toOffset: destination)
+      
+      // Update CoreData context and save changes
       for (index, item) in updatedItems.enumerated() {
         item.orderIndex = likeArtists.count - 1 - index
+      }
+      // Assuming `modelContext` is available
+      do {
+        try modelContext.save()
+      } catch {
+        print("Failed to save context: \(error)")
       }
     }
   }
