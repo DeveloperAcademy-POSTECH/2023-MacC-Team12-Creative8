@@ -39,17 +39,280 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F174316E-738D-4A5E-9F29-77744D41A2DE"
+            uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Projects/Core/Sources/Service/SpotifyManager/SpotifyManager.swift"
+            filePath = "Projects/Feature/Scenes/MainScene/View/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "authorizationManagerDidChange()"
-            landmarkType = "7">
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "mainArtistsView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "620">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "756">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "980">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "784">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "1008">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "848">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - 52ec4c65574eedba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "1072">
+               </Location>
+               <Location
+                  uuid = "640F42C0-F35C-4F97-BAEA-35ADD9C3E6AF - c545031dadb0be10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.mainArtistsView.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Documents/Setlist/160/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F4D9A4E-FBD4-443D-9440-54E822AB57CB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Projects/Feature/Scenes/MainScene/View/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "artistNameScrollView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "6F4D9A4E-FBD4-443D-9440-54E822AB57CB - 9e05c3c7b90f8736"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Array&lt;Core.LikeArtist&gt;, Swift.Array&lt;Core.LikeArtist&gt;) -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "436">
+               </Location>
+               <Location
+                  uuid = "6F4D9A4E-FBD4-443D-9440-54E822AB57CB - 9e05c3c7b90f8736"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Array&lt;Core.LikeArtist&gt;, Swift.Array&lt;Core.LikeArtist&gt;) -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "412">
+               </Location>
+               <Location
+                  uuid = "6F4D9A4E-FBD4-443D-9440-54E822AB57CB - 6cb15bcf9dc97e91"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int, Core.LikeArtist) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: Core.LikeArtist)&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.ScrollViewProxy) -&gt; &lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ScrollViewReader&lt;&lt;&lt;opaque return type of SwiftUI.View.scrollTargetLayout(isEnabled: Swift.Bool) -&gt; some&gt;&gt;.0&gt; in Feature.MainView.artistNameScrollView.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Documents/Setlist/160/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "560">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D26E017-3204-4D2A-B739-A5A0D2097972"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Projects/Feature/Scenes/MainScene/View/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "mainArtistsView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5D26E017-3204-4D2A-B739-A5A0D2097972 - 52ec4c65574eed9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "456">
+               </Location>
+               <Location
+                  uuid = "5D26E017-3204-4D2A-B739-A5A0D2097972 - 52ec4c65574eed9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "516">
+               </Location>
+               <Location
+                  uuid = "5D26E017-3204-4D2A-B739-A5A0D2097972 - 52ec4c65574eed9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.body.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Desktop/Setlist/Develop/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "524">
+               </Location>
+               <Location
+                  uuid = "5D26E017-3204-4D2A-B739-A5A0D2097972 - c545031dadb0be71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Feature.MainView.mainArtistsView.getter : some"
+                  moduleName = "Feature"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a_mcflurry/Documents/Setlist/160/MacC-Team12-Creative8/Projects/Feature/Scenes/MainScene/View/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "168">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

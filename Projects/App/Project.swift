@@ -13,14 +13,12 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   packages: [
-    .CoreXLSX,
     .Firebase,
     .SpotifyAPI,
     .KeychainAccess
   ],
   dependencies: [
     .Projcet.Feature,
-    .SPM.CoreXLSX,
     .SPM.Firebase,
     .SPM.SpotifyAPI,
     .SPM.KeychainAccess

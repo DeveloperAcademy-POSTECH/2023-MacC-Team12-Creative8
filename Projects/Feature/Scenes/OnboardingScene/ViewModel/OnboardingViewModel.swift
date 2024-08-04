@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Foundation
-import CoreXLSX
 import Core
 
 public final class OnboardingViewModel: ObservableObject {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,7 @@
 		2011FDAC897731D9379DD8C1 /* ArtistFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569CF2C676DD875C163323FA /* ArtistFetchService.swift */; };
 		323BDCF0BE9904DD1057E69D /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B667B36D9B1DD2BBFB353DB /* APIKeys.swift */; };
 		48468737968AC50E4DA8C753 /* LikeArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E25910681A644F3142B68 /* LikeArtistModel.swift */; };
-		51B1D4ED7ECB508C4A97445F /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B03BA87A737D60691A479935 /* KeychainAccess */; };
+		51B1D4ED7ECB508C4A97445F /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F46EB0C818DE9ABAA254D9B3 /* SpotifyAPI */; };
 		566F42D3871D02FD3BA0E7B6 /* SetlistListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75600AD4887E89C2223BF659 /* SetlistListModel.swift */; };
 		63C0CF30DB7025BD8C9B3868 /* AccessTokenRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EE6CFCD14DAAAAC61D7A62 /* AccessTokenRequestModel.swift */; };
 		7B796152A7DAA0C5242ECF6E /* AccessTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CCC95E0E473F5AFC48D13 /* AccessTokenModel.swift */; };
@@ -24,7 +24,7 @@
 		B645CCCA0479111367499779 /* AppleMusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004E9629A66EFA763B287E6 /* AppleMusicService.swift */; };
 		B6B2E5BD39B2856B9DE9966C /* SaveSetlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BA5525B0777162DED185D /* SaveSetlist.swift */; };
 		B74D6789CA8E0544FDC086DE /* UserDefaultsManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAC2CCF76672A11CAF5297F /* UserDefaultsManger.swift */; };
-		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; platformFilter = ios; };
+		BC8595A1E286E2F5B6EF15C9 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0FA7F85F3573FB522F9478 /* Core.framework */; };
 		BE88C80EC8D00DCDF2A8E2C8 /* ArtistInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3987D3B9B389368A5B5AF548 /* ArtistInfoModel.swift */; };
 		C195034257141339557D9163 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92A58192634FABF25FF3BF /* NetworkManager.swift */; };
 		CFCE7846B7A050A6A39745F3 /* ArchivedConcertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F16996E458A8A1147E2AE /* ArchivedConcertInfo.swift */; };
@@ -32,7 +32,7 @@
 		E1570A49F96FA15699EEE485 /* KoreanConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4F12A755C30296E33F86F /* KoreanConverter.swift */; };
 		E443D461EB2E1D55C196E6F1 /* SaveArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DD837E5346A7627964873 /* SaveArtistInfo.swift */; };
 		E6804E36D6F5019B528E9890 /* GeniusArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C777C1122A5B5702FCADF8 /* GeniusArtistsModel.swift */; };
-		E7494D59CF3A2D7FFFEE3DA2 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = F46EB0C818DE9ABAA254D9B3 /* SpotifyAPI */; };
+		E7494D59CF3A2D7FFFEE3DA2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B03BA87A737D60691A479935 /* KeychainAccess */; };
 		F6FB06B6DA0BE1FE264F7B7E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109A8C5BADA31C5966791E4F /* SearchModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,8 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7494D59CF3A2D7FFFEE3DA2 /* SpotifyAPI in Frameworks */,
-				51B1D4ED7ECB508C4A97445F /* KeychainAccess in Frameworks */,
+				E7494D59CF3A2D7FFFEE3DA2 /* KeychainAccess in Frameworks */,
+				51B1D4ED7ECB508C4A97445F /* SpotifyAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +313,8 @@
 			);
 			name = Core;
 			packageProductDependencies = (
-				F46EB0C818DE9ABAA254D9B3 /* SpotifyAPI */,
 				B03BA87A737D60691A479935 /* KeychainAccess */,
+				F46EB0C818DE9ABAA254D9B3 /* SpotifyAPI */,
 			);
 			productName = Core;
 			productReference = 2B0FA7F85F3573FB522F9478 /* Core.framework */;
@@ -326,12 +326,13 @@
 		83ADD9484DDC11E75E9F182F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
 			buildConfigurationList = 4EBE82DE9849E8F47BAECD7B /* Build configuration list for PBXProject "Core" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -384,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/choihyowon/Desktop/2023/ADA/Mac/Setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -508,6 +509,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -531,6 +533,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -621,6 +624,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -654,6 +658,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
