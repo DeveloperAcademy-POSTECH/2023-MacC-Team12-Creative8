@@ -23,12 +23,12 @@ public struct OnboardingView: View {
   @AppStorage("isOnboarding") var isOnboarding: Bool?
   @Environment(NetworkMonitor.self) private var networkMonitor
   
-  public init() {
-  }
+  public init() { }
   
   public var body: some View {
     if networkMonitor.isConnected {
       ZStack(alignment: .bottom) {
+        Color.gray6.ignoresSafeArea()
         VStack(spacing: 0) {
           ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
@@ -41,9 +41,10 @@ public struct OnboardingView: View {
         }
         
         if onboardingViewModel.isShowToastBar {
-          toastBar
+          ToastMessageView(message: onboardingViewModel.selectedArtist.count >= 5 ? "아티스트 5명이 모두 선택되었어요" : "아티스트를 선택해주세요", subMessage: nil, icon: "exclamationmark.circle.fill", color: Color.toast2)
             .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
-            .padding(.bottom, 120)
+            .padding(.bottom, 95)
+            .padding(.horizontal, 24)
             .onAppear {
               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 withAnimation {
@@ -70,7 +71,8 @@ public struct OnboardingView: View {
     VStack(alignment: .leading) {
       Spacer().frame(height: 70)
       Text("아티스트 찜하기")
-        .font(.system(.headline))
+        .font(.system(.title))
+        .fontWeight(.bold)
         .foregroundStyle(Color.mainBlack)
       Spacer().frame(height: 16)
       Group {
@@ -78,7 +80,7 @@ public struct OnboardingView: View {
         Text("메인 화면에서 바로 확인할 수 있어요")
       }
       .font(.system(.footnote))
-      .foregroundStyle(Color.fontGrey2)
+      .foregroundStyle(Color(UIColor.systemGray))
       Spacer().frame(height: 48)
     }
     .padding(.leading, 24)
@@ -93,10 +95,10 @@ public struct OnboardingView: View {
           } label: {
             Text(buttonType.rawValue)
               .font(.system(.subheadline))
-              .padding(10)
-              .background(onboardingViewModel.selectedGenere == buttonType ? Color.mainBlack: Color.mainGrey1)
+              .padding(EdgeInsets(top: 9, leading: 10, bottom: 9, trailing: 10))
+              .background(onboardingViewModel.selectedGenere == buttonType ? Color.mainBlack: Color.mainWhite)
               .cornerRadius(12)
-              .foregroundStyle(onboardingViewModel.selectedGenere == buttonType ? Color.settingTextBoxWhite: Color.fontGrey2)
+              .foregroundStyle(onboardingViewModel.selectedGenere == buttonType ? Color.mainWhite: Color.mainBlack)
           }
         }
       }
@@ -141,7 +143,7 @@ public struct OnboardingView: View {
               Text(item.name)
                 .multilineTextAlignment(.center)
                 .frame(width: 110, height: 48)          .font(.system(.largeTitle, weight: .semibold))
-                .foregroundColor(onboardingViewModel.selectedArtist.contains(item) ? .mainBlack : .fontGrey3)
+                .foregroundColor(onboardingViewModel.selectedArtist.contains(item) ? .mainBlack : Color(UIColor.systemGray3))
                 .minimumScaleFactor(0.1)
                 .padding(10)
             }
@@ -165,35 +167,21 @@ public struct OnboardingView: View {
             isOnboarding = false
         }
       }, label: {
-        RoundedRectangle(cornerRadius: 14)
-          .frame(width: 328, height: 54)
-          .foregroundColor(onboardingViewModel.selectedArtist.count < 1 ? .mainGrey1 : .mainBlack)
+        RoundedRectangle(cornerRadius: 12)
+          .frame(width: 342, height: 54)
+          .foregroundColor(onboardingViewModel.selectedArtist.count < 1 ? .mainWhite : .mainBlack)
           .overlay {
             Group {
-              onboardingViewModel.selectedArtist.count == 0 ? Text("5명까지 선택할 수 있습니다") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
+              onboardingViewModel.selectedArtist.count == 0 ? Text("아티스트 5명을 선택해주세요") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
 
             }
-              .foregroundStyle(onboardingViewModel.selectedArtist.count < 1 ? Color.mainBlack : Color.settingTextBoxWhite)
+            .foregroundStyle(onboardingViewModel.selectedArtist.count < 1 ? Color(UIColor.systemGray2) : Color.mainWhite)
               .font(.callout)
               .fontWeight(.bold)
           }
       })
-      .padding(EdgeInsets(top: 0, leading: 31, bottom: 32, trailing: 31))
+      .padding(EdgeInsets(top: 0, leading: 24, bottom: 33, trailing: 24))
     }
-  }
-  
-  private var toastBar: some View {
-    RoundedRectangle(cornerRadius: 27)
-      .frame(width: 328, height: 44)
-      .foregroundColor(.toastBurn)
-      .overlay {
-        Group {
-          onboardingViewModel.selectedArtist.count > 0 ? Text("아티스트 5명이 이미 선택되었어요") : Text("아티스트를 최대 5명까지 선택해주세요")
-        }
-        .foregroundStyle(Color.settingTextBoxWhite)
-          .font(.subheadline)
-          .fontWeight(.bold)
-      }
   }
 }
 

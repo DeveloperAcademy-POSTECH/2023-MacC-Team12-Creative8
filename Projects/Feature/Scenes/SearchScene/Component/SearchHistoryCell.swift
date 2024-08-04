@@ -32,14 +32,14 @@ struct SearchHistoryCell: View {
           dataManager.deleteSearchHistory(history)
         } label: {
           Image(systemName: "xmark")
-            .foregroundStyle(Color.fontGrey25)
+            .foregroundStyle(Color(UIColor.systemGray3))
             .padding(.trailing, 12)
         }
       }
       .padding(.top)
       
       Divider()
-        .foregroundStyle(Color.lineGrey1)
+        .foregroundStyle(Color(UIColor.systemGray3))
         .padding(.top, 15)
     }
   }

@@ -78,7 +78,6 @@ final class MainViewModel: ObservableObject {
     } else {
       return "-"
     }
-  }
   
   func fetchInitialSetlists(likeArtists: [LikeArtist], modelContext: ModelContext) {
     if setlists[0] == nil {

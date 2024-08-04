@@ -20,11 +20,11 @@ struct ArtistSetCell: View {
         artistImg
         Text(name)
           .font(.subheadline)
-          .foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
+          .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
     }
     .padding(6)
     .background {
-      let color = isSelected ? Color.mainBlack : Color.mainGrey1
+      let color = isSelected ? Color.mainBlack : Color.mainWhite
       color.clipShape(RoundedRectangle(cornerRadius: 12))
     }
   }
@@ -36,11 +36,11 @@ struct ArtistSetCell: View {
         AsyncImage(url: url) { image in
           image
             .centerCropped()
-            .overlay(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.mainGrey1, lineWidth: 1)
-                .foregroundStyle(Color.clear)
-            )
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 8)
+////                .stroke(Color.mainGrey1, lineWidth: 1)
+//                .foregroundStyle(Color.clear)
+//            )
         } placeholder: {
           ProgressView()
         }
@@ -50,14 +50,14 @@ struct ArtistSetCell: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         } else {
           Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         }
       }
@@ -72,10 +72,10 @@ struct AllArtistsSetCell: View {
   let isSelected: Bool
   var body: some View {
     Text(name)
-      .foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
+      .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
       .padding(10)
       .background {
-        let color = isSelected ? Color.mainBlack : Color.mainGrey1
+        let color = isSelected ? Color.mainBlack : Color.mainWhite
         color.clipShape(RoundedRectangle(cornerRadius: 12))
       }
   }

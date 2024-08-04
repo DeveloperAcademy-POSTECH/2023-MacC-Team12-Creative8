@@ -46,7 +46,7 @@ struct ArchiveConcertInfoCell: View {
       } label: {
         Image(systemName: "ellipsis")
           .font(.title3)
-          .foregroundStyle(Color.mainWhite)
+          .foregroundStyle(Color.mainBlack)
           .padding()
       }
     }
@@ -60,10 +60,17 @@ struct ArchiveConcertInfoCell: View {
             Text(DateFormatter.dateFormatter().string(from: info.setlist.date))
               .padding(EdgeInsets(top: 3, leading: 7, bottom: 3, trailing: 7))
               .font(.caption)
-              .background(Capsule().foregroundStyle(Color.mainOrange))
-            Text(info.artistInfo.name).font(.subheadline).bold().foregroundStyle(Color.mainBlack)
+              .fontWeight(.semibold)
+              .foregroundStyle(Color.mainOrange)
+              .background(Capsule().foregroundStyle(Color.orange100))
+            Text(info.artistInfo.name)
+              .font(.subheadline)
+              .bold()
+              .foregroundStyle(Color.mainBlack)
               .padding(.vertical, 8)
-            Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
+            Text(info.setlist.venue)
+              .font(.footnote)
+              .foregroundStyle(Color(UIColor.systemGray2))
           }
           .lineLimit(1)
           .padding(.vertical)
@@ -88,8 +95,8 @@ struct ArchiveConcertInfoCell: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1)
-                .foregroundStyle(Color.clear)
+                .stroke(Color(UIColor.systemGray3), lineWidth: 1)
+//                .foregroundStyle(Color.clear)
             )
         } placeholder: {
           ProgressView()
@@ -101,14 +108,14 @@ struct ArchiveConcertInfoCell: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray3), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         } else {
           Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray3), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         }
       }

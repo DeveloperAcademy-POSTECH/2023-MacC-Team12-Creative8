@@ -14,10 +14,14 @@ let project = Project.makeModule(
   product: .app,
   packages: [
     .Firebase,
+    .SpotifyAPI,
+    .KeychainAccess
   ],
   dependencies: [
-    .project(target: "Feature", path: .relativeToRoot("Projects/Feature")),
+    .Projcet.Feature,
     .SPM.Firebase,
+    .SPM.SpotifyAPI,
+    .SPM.KeychainAccess
   ],
   sources: ["Sources/**"],
   resources: ["Resources/**"],

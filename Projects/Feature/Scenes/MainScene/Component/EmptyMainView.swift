@@ -17,7 +17,7 @@ struct EmptyMainView: View {
   
   var body: some View {
     ZStack {
-      Color.backgroundWhite
+      Color.mainWhite
       VStack {
         Spacer()
         Text("찜한 아티스트가 없습니다")
@@ -32,7 +32,7 @@ struct EmptyMainView: View {
         }
         .font(.footnote)
         .multilineTextAlignment(.center)
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color.black850)
         .padding(.bottom)
         Button {
           selectedTab = .search
@@ -46,7 +46,7 @@ struct EmptyMainView: View {
           .font(.system(size: 14))
           .padding(EdgeInsets(top: 17, leading: 22, bottom: 17, trailing: 22))
           .background(RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.buttonBlack))
+            .foregroundStyle(Color.black850))
         }
         .padding(.vertical)
         Spacer()

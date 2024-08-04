@@ -151,7 +151,7 @@ struct SummarizedSetlistInfoView: View {
             
             Image(systemName: "chevron.right")
         }
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color(UIColor.systemGray))
         .onTapGesture {
             chevronButtonAction?()
         }

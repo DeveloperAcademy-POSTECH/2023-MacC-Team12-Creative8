@@ -41,12 +41,12 @@ struct ArtistImage: View {
   
   public var artistEmptyImage: some View {
     RoundedRectangle(cornerRadius: 15)
-      .foregroundStyle(Color.mainGrey1)
+      .foregroundStyle(Color(UIColor.systemGray))
       .overlay(
         Image("ticket", bundle: setaBundle)
           .resizable()
           .renderingMode(.template)
-          .foregroundStyle(Color.lineGrey1)
+          .foregroundStyle(Color(UIColor.systemGray))
           .aspectRatio(contentMode: .fit)
           .frame(width: UIWidth * 0.43)
       )

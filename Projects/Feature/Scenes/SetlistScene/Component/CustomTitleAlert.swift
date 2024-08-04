@@ -38,7 +38,7 @@ struct CustomTitleAlert: View {
     .padding(.horizontal, 24)
     .padding(.top, 32)
     .padding(.bottom, 13)
-    .background(Color.settingTextBoxWhite)
+    .background(Color.mainWhite)
     .cornerRadius(12)
   }
   
@@ -55,11 +55,11 @@ struct CustomTitleAlert: View {
   private var textFieldView: some View {
     TextField("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")",
                text: $text,
-              prompt: Text("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")").foregroundColor(Color.fontGrey3)
+              prompt: Text("\(artistInfo?.name ?? "" ) @ \(setlist?.eventDate ?? "")").foregroundColor(Color(UIColor.systemGray3))
     )
     .padding(.horizontal)
     .padding(.vertical, 7)
-    .background(RoundedRectangle(cornerRadius: 10).fill(Color.mainGrey1).stroke(Color.mainOrange))
+    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray6).stroke(Color(UIColor.systemGray)))
   }
   
   private var buttonsView: some View {
@@ -98,9 +98,10 @@ struct CustomTitleAlert: View {
         }
       }
       .foregroundColor(Color.mainBlack)
-      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.settingTextBoxWhite))
+      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.mainWhite))
     }
   }
+  
   private func animate(isShown: Bool, completion: (() -> Void)? = nil) {
     switch isShown {
     case true:
@@ -145,6 +146,7 @@ struct CustomAlertButton: View {
     }
   }
 }
+
 struct CustomAlertModifier {
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   @Binding private var isPresented: Bool
@@ -154,6 +156,7 @@ struct CustomAlertModifier {
   let artistInfo: ArtistInfo?
   @State private var keyboardHeight: CGFloat = 0
 }
+
 extension CustomAlertModifier: ViewModifier {
   
   func body(content: Content) -> some View {
@@ -196,6 +199,7 @@ extension CustomAlertModifier: ViewModifier {
       }
     }
   }
+  
     func hideKeyboard() {
       UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

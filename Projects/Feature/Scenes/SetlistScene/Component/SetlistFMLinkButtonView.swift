@@ -20,7 +20,7 @@ struct SetlistFMLinkButtonView: View {
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color.fontGrey3)
+            .background(Color(UIColor.systemGray))
             .cornerRadius(14)
         }
       }

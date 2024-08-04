@@ -20,6 +20,7 @@
 		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
 		390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */; };
 		3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */; };
+		401713AA84C30985B8586007 /* MusicButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BDFF98F69690AA72BF5530 /* MusicButtonView.swift */; };
 		45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */; };
 		460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52FD2A86596385940F794 /* ListView.swift */; };
 		50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B73D1E3286777029DFCAF2E /* ArchivingViewModel.swift */; };
@@ -105,6 +106,7 @@
 		2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
+		35BDFF98F69690AA72BF5530 /* MusicButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicButtonView.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C2FB80EDC5776CA9B041A3 /* ShareOptionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOptionButtonView.swift; sourceTree = "<group>"; };
 		46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSetlistView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				72A03F6D9078EC56B70BF0B9 /* CaptureSetlist */,
 				7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */,
 				B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */,
+				35BDFF98F69690AA72BF5530 /* MusicButtonView.swift */,
 				493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */,
 				44C2FB80EDC5776CA9B041A3 /* ShareOptionButtonView.swift */,
 				114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */,
@@ -638,6 +641,7 @@
 				DBE7FCEC2694DEA5E13ABBE4 /* CaptureSetlistView.swift in Sources */,
 				F84986A12ECC7DCACB4C7309 /* CustomTitleAlert.swift in Sources */,
 				390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */,
+				401713AA84C30985B8586007 /* MusicButtonView.swift in Sources */,
 				802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */,
 				0BA6A1BD5097108BC5A2A693 /* ShareOptionButtonView.swift in Sources */,
 				3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */,

@@ -54,7 +54,7 @@ struct SearchView: View {
           }
       }
       .padding(.horizontal)
-      .background(Color.backgroundWhite)
+      .background(Color.gray6)
       .navigationDestination(for: NavigationDelivery.self) { value in
         if value.setlistId != nil {
           SetlistView(setlistId: value.setlistId, artistInfo: ArtistInfo(
@@ -78,7 +78,7 @@ struct SearchView: View {
       foreignArtistView
         .padding(.bottom, 48)
     }
-    .background(Color.backgroundWhite)
+//    .background(Color.backgroundWhite)
     .disabled(viewModel.searchIsPresented)
     .opacity(viewModel.searchIsPresented ? 0 : 1)
   }
