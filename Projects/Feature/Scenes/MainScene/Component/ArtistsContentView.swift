@@ -5,13 +5,9 @@
 //  Created by 장수민 on 11/17/23.
 //  Copyright © 2023 com.creative8.seta. All rights reserved.
 //
-
-import Foundation
 import SwiftUI
-import SwiftData
 import Core
-import UI
-import Combine
+import SwiftData
 
 struct ArtistsContentView: View {
   @Binding var selectedTab: Tab
@@ -19,111 +15,89 @@ struct ArtistsContentView: View {
   @State var artistInfo: SaveArtistInfo
   @StateObject var dataManager = SwiftDataManager()
   @Environment(\.modelContext) var modelContext
-  var index: Int
-  var body: some View {
-    VStack(spacing: 0) {
-      artistImage
-      Group {
-        if !viewModel.isLoading {
-          Group {
-            commentText
-            artistSetlistCells  // 세트리스트 불러오는화면과 세트리스트가 없는 화면
-          }
-          .padding(.horizontal, 3)
-          .scrollTransition(.animated.threshold(.visible(0.5))) { content, phase in
-            content
-              .opacity(phase.isIdentity ? 1 : 0)
-              .blur(radius: phase.isIdentity ? 0 : 0.5)
-          }
-        } else {
-          ProgressView()
-            .frame(width: UIWidth, height: UIWidth * 0.6) // TODO: 수정 필요!
-        }
-      }
-    }
-    .frame(width: UIWidth * 0.81)
-    .onAppear {
-      dataManager.modelContext = modelContext
-    }
-  }
-  private var artistImage: some View {
-    NavigationLink(value: NavigationDelivery(artistInfo: artistInfo)) {
-      ArtistImage(selectedTab: $selectedTab, imageUrl: artistInfo.imageUrl)
-        .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
-    }
-    .buttonStyle(BasicButtonStyle())
-  }
-  private var commentText: some View {
-    HStack(spacing: 0) {
-      Text("\(artistInfo.name)의 최근 공연")
-        .font(.caption)
-        .foregroundStyle(Color.black850)
-      Spacer()
-    }
-    .padding(.top, UIWidth * 0.062)
-  }
-  private var artistSetlistCells: some View {
-    VStack(spacing: 0 ) {
-      let setlists: [Setlist?] = viewModel.setlists[index] ?? []
-      if setlists.isEmpty {
-        EmptyMainSetlistView(viewModel: viewModel)
-      } else {
-        ForEach(Array(setlists.prefix(3).enumerated()), id: \.element?.id) { index, item in
-          VStack(alignment: .leading, spacing: 0) {
-            NavigationLink(value: NavigationDelivery(setlistId: item?.id ?? "", artistInfo: artistInfo)) {
-              HStack(spacing: 0) {
-                VStack(alignment: .center) {
-                  Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
-                    .foregroundStyle(Color(UIColor.systemGray2))
-                    .tracking(0.5)
-                  Text(viewModel.getFormattedDate(date: item?.eventDate ?? "", format: "MM.dd") ?? "")
-                    .foregroundStyle(Color.mainBlack)
-                }
-                .font(.headline)
-                .fontWeight(.semibold)
-                Spacer()
-                  .frame(width: UIWidth * 0.08)
-                VStack(alignment: .leading) {
-                  Group {
-                    Text(item?.venue?.city?.name ?? "city")
-                    +
-                    Text(", ")
-                    +
-                    Text(item?.venue?.city?.country?.name ?? "country")
-                  }
-                  .font(.footnote)
-                  .lineLimit(1)
-                  .foregroundStyle(Color.mainBlack)
-                  Group {
-                    if let firstSong = item?.sets?.setsSet?.first?.song?.first?.name {
-                      Text("01 \(firstSong)")
-                    } else {
-                      Text("세트리스트 정보가 아직 없습니다")
-                    }
-                  }
-                  .font(.footnote)
-                  .lineLimit(1)
-                  .foregroundStyle(Color(UIColor.systemGray2))
-                }
-                Spacer()
-              }
-              .padding(.vertical)
-            }
-          }
-          
-          if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {
-            Divider()
-              .foregroundStyle(Color(UIColor.systemGray))
-          }
-        }
-      }
-    }
-    .frame(minHeight: UIWidth * 0.6, alignment: .topLeading)
-  }
-}
+  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+  @StateObject var tabViewManager: TabViewManager
 
-#Preview {
-  ArtistsContentView(selectedTab: .constant(.home),
-                     viewModel: MainViewModel(),
-                     artistInfo: SaveArtistInfo(name: "Silica Gel", country: "South Korea", alias: "실리카겔", mbid: "2c8b5bb2-6110-488d-bc15-abb08379d3c6", gid: 2382659, imageUrl: "https://i.namu.wiki/i/SCZmC5XQgajMHRv6wvMc406r6aoQyf0JjXNCIQkIxJ-oe035C8h6VTkKllE6gkp3p-A7RFwiIcd0d726O77rbQ.webp", songList: []), index: 1)
+  var index: Int
+  
+  var body: some View {
+    NavigationStack(path: $tabViewManager.pageStack) {
+      VStack(spacing: 24) {
+        
+        if viewModel.isLoading {
+          loadingView
+        } else {
+          contentView
+        }
+        
+        navigationLink
+      }
+      .onAppear {
+        dataManager.modelContext = modelContext
+      }
+    }
+  }
+  
+  private var loadingView: some View {
+    ProgressView()
+  }
+  
+  private var navigationLink: some View {
+    NavigationLink(destination: ArtistView(
+      selectedTab: $selectedTab,
+      artistName: artistInfo.name,
+      artistAlias: artistInfo.alias,
+      artistMbid: artistInfo.mbid
+    ), isActive: $viewModel.navigateToArtistView) {
+      EmptyView()
+    }
+  }
+  
+  private var contentView: some View {
+    let setlists: [Setlist?] = viewModel.setlists[index] ?? []
+    
+    if let firstSetlist = setlists.compactMap({ $0 }).first {
+      return AnyView(
+        VStack(spacing: 12) {
+          summarizedSetlistView(for: firstSetlist)
+          ArtistMainSetlistView(viewModel: viewModel, index: index)
+        }
+      )
+    } else {
+      return AnyView(emptySetlistView)
+    }
+  }
+  
+  private var emptySetlistView: some View {
+    SummarizedSetlistInfoView(
+      type: .recentConcert,
+      info: nil,
+      infoButtonAction: nil,
+      cancelBookmarkAction: nil,
+      chevronButtonAction: nil
+    )
+  }
+  
+  private func summarizedSetlistView(for setlist: Setlist) -> some View {
+    let venueName = setlist.venue?.name ?? ""
+    let city = setlist.venue?.city?.name ?? ""
+    let countryName = setlist.venue?.city?.country?.name ?? ""
+    let artistName = setlist.artist?.name ?? ""
+    
+    return SummarizedSetlistInfoView(
+      type: .recentConcert,
+      info: SetlistInfo(
+        artistInfo: artistInfo.toArtistInfo(),
+        id: setlist.id ?? "",
+        date: viewModel.getDateFormatted(dateString: setlist.eventDate ?? ""),
+        title: setlist.tour?.name ?? "\(artistName) Setlist",
+        venue: "\(venueName)\n\(city), \(countryName)"
+      ),
+      infoButtonAction: nil,
+      cancelBookmarkAction: nil,
+      chevronButtonAction: {
+        viewModel.navigateToArtistView = true
+      }
+    )
+  }
 }

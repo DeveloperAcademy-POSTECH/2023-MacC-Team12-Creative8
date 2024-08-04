@@ -71,7 +71,6 @@ struct CustomTitleAlert: View {
     }
   }
   
-  
   @ViewBuilder
   private var primaryButtonView: some View {
     if let button = primaryButton {

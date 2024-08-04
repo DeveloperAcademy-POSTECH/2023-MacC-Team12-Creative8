@@ -11,6 +11,7 @@
 		069FC56BB3B65A8510E24FE4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083107765017313EF49CE3A /* OnboardingViewModel.swift */; };
 		08A19712E89A1D55144198CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262BAC1BBABEA8ACE800B1F /* SearchView.swift */; };
 		0BA6A1BD5097108BC5A2A693 /* ShareOptionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C2FB80EDC5776CA9B041A3 /* ShareOptionButtonView.swift */; };
+		0F7ED39E8D27D6E0F8C7BF92 /* ArchivingArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350BEE650F00A82955286523 /* ArchivingArtistView.swift */; };
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2A8C2150733996FB4B25ECA8 /* NetworkUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFABF026418D0F883A9B4D3 /* NetworkUnavailableView.swift */; };
@@ -33,6 +34,7 @@
 		7611BAD555C16F6A7E0CEA5C /* ArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */; };
 		7895A841E262B3C4586F6BDC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EED38EE073FA6E9252D7F /* MainView.swift */; };
 		802686A7E7B66DD12F44A9A9 /* SetlistFMLinkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */; };
+		8E8999D50E442F5F50E55FAF /* MainToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44913E1B3F1E54028CC6EC6A /* MainToolTipView.swift */; };
 		900EC881930541C98C607D30 /* SearchArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB796CBAC6A2C6DB4ACE654E /* SearchArtistList.swift */; };
 		94BB809B61709B35B36F7BA3 /* ExportPlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D00D9D84D120E91EDCF4E /* ExportPlaylistViewModel.swift */; };
 		9BDAC9C92EE177410F1DBF27 /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5806DEE9B0B7C5659EF7F65 /* ArtistInfoView.swift */; };
@@ -44,9 +46,11 @@
 		B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */; };
 		BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6065131130D585C891E3C0 /* SetlistInfoView.swift */; };
 		BD6BAC88EEBC6C9BE9794F8A /* SetlistImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */; };
+		BF015464C3C1BC99D09C647B /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = C507ACC9995A73EA3B6D0A17 /* Marquee */; };
 		BF3DF8B460FBB0671C7334C0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
 		C56D12C45B540DEA352BA4CF /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */; };
+		CDCA119578022BF4734596BE /* ArtistMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068B78532EA3510E64C1517 /* ArtistMainSetlistView.swift */; };
 		CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766B8B4DF5C405ABA13CEBB /* SearchbarCustom.swift */; };
 		CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */; };
 		D022D62B0566852C9B0ADB70 /* AllSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81387F73BA3D6FEC0C217EE1 /* AllSetlistsView.swift */; };
@@ -104,8 +108,10 @@
 		2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		2FCF902DF7D9CA7A6F12E920 /* FeatureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureTests-Info.plist"; sourceTree = "<group>"; };
+		350BEE650F00A82955286523 /* ArchivingArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingArtistView.swift; sourceTree = "<group>"; };
 		35BDFF98F69690AA72BF5530 /* MusicButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicButtonView.swift; sourceTree = "<group>"; };
 		35F364327687E6A20628F831 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44913E1B3F1E54028CC6EC6A /* MainToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolTipView.swift; sourceTree = "<group>"; };
 		44C2FB80EDC5776CA9B041A3 /* ShareOptionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOptionButtonView.swift; sourceTree = "<group>"; };
 		46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSetlistView.swift; sourceTree = "<group>"; };
 		493DEF5A3CB257D50F23D1F6 /* SetlistFMLinkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistFMLinkButtonView.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 		B91DB9D35DA30A20216AC9A4 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		BDBEDC7B5CC11C55A64F2DC0 /* ArtistNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistNameView.swift; sourceTree = "<group>"; };
 		BFFABF026418D0F883A9B4D3 /* NetworkUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUnavailableView.swift; sourceTree = "<group>"; };
+		C068B78532EA3510E64C1517 /* ArtistMainSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMainSetlistView.swift; sourceTree = "<group>"; };
 		C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySetlistView.swift; sourceTree = "<group>"; };
 		C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingView.swift; sourceTree = "<group>"; };
 		C766B8B4DF5C405ABA13CEBB /* SearchbarCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchbarCustom.swift; sourceTree = "<group>"; };
@@ -167,6 +174,7 @@
 			files = (
 				3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */,
 				AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */,
+				BF015464C3C1BC99D09C647B /* Marquee in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,10 +374,12 @@
 			isa = PBXGroup;
 			children = (
 				DAD79847FF98BCA9A4C8CCAF /* ArtistImage.swift */,
+				C068B78532EA3510E64C1517 /* ArtistMainSetlistView.swift */,
 				BDBEDC7B5CC11C55A64F2DC0 /* ArtistNameView.swift */,
 				A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */,
 				6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */,
 				80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */,
+				44913E1B3F1E54028CC6EC6A /* MainToolTipView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -377,6 +387,7 @@
 		8ECED7BE23A224945FDB9DCC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				350BEE650F00A82955286523 /* ArchivingArtistView.swift */,
 				C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */,
 			);
 			path = View;
@@ -500,6 +511,9 @@
 			dependencies = (
 			);
 			name = Feature;
+			packageProductDependencies = (
+				C507ACC9995A73EA3B6D0A17 /* Marquee */,
+			);
 			productName = Feature;
 			productReference = 8A611D1693834F821CBD6EAD /* Feature.framework */;
 			productType = "com.apple.product-type.framework";
@@ -543,6 +557,9 @@
 				en,
 			);
 			mainGroup = 6DC82FD44AFA8E6846CC19FE;
+			packageReferences = (
+				FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */,
+			);
 			productRefGroup = F37C3A4FE623C846745B9CE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -602,6 +619,7 @@
 				5FE54878808838FA5FDA55AE /* ArtistSetCell.swift in Sources */,
 				9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */,
 				351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */,
+				0F7ED39E8D27D6E0F8C7BF92 /* ArchivingArtistView.swift in Sources */,
 				2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */,
 				50075F8687CFE39236D263F4 /* ArchivingViewModel.swift in Sources */,
 				D022D62B0566852C9B0ADB70 /* AllSetlistsView.swift in Sources */,
@@ -610,10 +628,12 @@
 				F3E6A26AAF23964C5D5B2116 /* BookmarkedSetlistsView.swift in Sources */,
 				A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */,
 				7611BAD555C16F6A7E0CEA5C /* ArtistImage.swift in Sources */,
+				CDCA119578022BF4734596BE /* ArtistMainSetlistView.swift in Sources */,
 				673BC362A18EE90248B0AEF2 /* ArtistNameView.swift in Sources */,
 				B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */,
 				2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */,
 				6272736B46A19746BC5ECD16 /* EmptyMainView.swift in Sources */,
+				8E8999D50E442F5F50E55FAF /* MainToolTipView.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
 				720A765913530AA37CFF00B4 /* TabBarView.swift in Sources */,
 				6EA0587A8956D298CD666573 /* MainViewModel.swift in Sources */,
@@ -927,6 +947,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIKit/Marquee.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C507ACC9995A73EA3B6D0A17 /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Marquee;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 44191F7B9590ED06371F46BF /* Project object */;
 }

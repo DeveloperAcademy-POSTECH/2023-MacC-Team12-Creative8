@@ -57,7 +57,6 @@ struct ArchiveConcertInfoCell: View {
       NavigationLink(value: NavigationDelivery(setlistId: info.setlist.setlistId, artistInfo: SaveArtistInfo(name: info.artistInfo.name, country: "", alias: "", mbid: info.artistInfo.mbid, gid: 0, imageUrl: "", songList: []))) {
         HStack {
           VStack(alignment: .leading) {
-            // TODO: 색 변경
             Text(DateFormatter.dateFormatter().string(from: info.setlist.date))
               .padding(EdgeInsets(top: 3, leading: 7, bottom: 3, trailing: 7))
               .font(.caption)

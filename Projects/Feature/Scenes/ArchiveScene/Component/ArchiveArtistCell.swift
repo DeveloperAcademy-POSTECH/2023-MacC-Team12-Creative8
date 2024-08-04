@@ -9,9 +9,8 @@
 import SwiftUI
 import UI
 
-struct ArchiveArtistCell: View {
+struct ArchiveArtistCellImage: View {
   let artistUrl: URL?
-  let isNewUpdate: Bool
   @Environment(\.colorScheme) var colorScheme
   var body: some View {
     Group {
@@ -23,31 +22,25 @@ struct ArchiveArtistCell: View {
           ProgressView()
         }
       } else {
-        // TODO: 이미지 변경?
         if colorScheme == .light {
           Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
-              RoundedRectangle(cornerRadius: 20)
-                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+              RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         } else {
           Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
-              RoundedRectangle(cornerRadius: 20)
-                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+              RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         }
       }
     }
     .aspectRatio(1.0, contentMode: .fit)
-    .clipShape(RoundedRectangle(cornerRadius: 20))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
     .frameForCell()
   }
-}
-
-#Preview {
-  ArchiveArtistCell(artistUrl: URL(string: "https://newsimg.sedaily.com/2019/10/11/1VPHATB1H9_1.jpg")!,
-                    isNewUpdate: true)
 }
