@@ -20,7 +20,7 @@ struct ArtistInfoView: View {
   @State private var scale: CGFloat = 1.0
   
   var body: some View {
-    VStack {
+    VStack(spacing: 24) {
       imageLayer
       HStack {
         nameLayer
@@ -61,14 +61,21 @@ struct ArtistInfoView: View {
           .centerCropped()
           .aspectRatio(1, contentMode: .fit)
           .frame(width: UIWidth * 0.57)
-          .cornerRadius(14)
-          .overlay(Color.black.opacity(0.2).cornerRadius(14))
+          .cornerRadius(12)
+          .overlay(Color.black.opacity(0.2).cornerRadius(12))
       } placeholder: {
         ProgressView()
       })
     } else {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
         .resizable()
+        .renderingMode(.template)
+        .foregroundStyle(Color(UIColor.systemGray3))
+        .background {
+          Color(UIColor.systemGray)
+            .cornerRadius(12)
+        }
+        .aspectRatio(1, contentMode: .fit)
         .frame(width: UIWidth * 0.57)
       )
     }
@@ -100,7 +107,7 @@ struct ArtistInfoView: View {
         .aspectRatio(contentMode: .fit)
         .frame(width: UIWidth * 0.07)
         .fontWeight(.thin)
-        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
         .scaleEffect(vm.isLikedArtist ? scale : 1.0)
     }
     .onDisappear {

@@ -26,7 +26,9 @@ struct ArtistView: View {
       } else {
         ScrollView {
           ArtistInfoView(vm: vm)
-          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+          if vm.setlists?.count != 0 {
+            BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+          }
           AllSetlistsView(vm: vm)
         }
       }
@@ -38,7 +40,7 @@ struct ArtistView: View {
         vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
       }
     }
-    .background(Color.mainGrey1)
+    .background(Color.gray6)
   }
 }
 

@@ -96,7 +96,7 @@ struct BookmarkedSetlistsView: View {
       info: SetlistInfo(
         artistInfo: vm.artistInfo,
         id: scrollPosition!.setlist.setlistId,
-        date: vm.getFormattedDateFromDate(
+        date: vm.getFormattedDate(
           date: scrollPosition!.setlist.date,
           format: "yyyy년 MM월 dd일"
         ),

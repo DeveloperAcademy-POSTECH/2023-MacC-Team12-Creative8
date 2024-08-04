@@ -31,16 +31,16 @@ struct SummarizedSetlistInfoView: View {
         }
         .opacity(type == .recentConcert && info == nil ? 1 : 0)
       }
-      .foregroundStyle(Color.fontGrey2)
+      .foregroundStyle(Color(UIColor.systemGray))
       .padding(10)
       .background(
         RoundedRectangle(cornerRadius: 4)
-          .foregroundStyle(Color.mainGrey1)
+          .foregroundStyle(Color(UIColor.systemGray5))
       )
       
       if type == .bookmarkedConcert && info == nil {
         Text("좋아하는 공연을 북마크 해보세요.")
-          .foregroundStyle(Color.fontGrey2)
+          .foregroundStyle(Color(UIColor.systemGray4))
           .font(.body)
           .padding(.horizontal, 5)
           .padding(.bottom, 20)
@@ -56,7 +56,7 @@ struct SummarizedSetlistInfoView: View {
           .padding(.horizontal, 2)
           .background(
             RoundedRectangle(cornerRadius: 20)
-              .foregroundStyle(Color.mainOrange.opacity(0.1))
+              .foregroundStyle(Color.orange100)
           )
           
           Spacer()
@@ -91,7 +91,7 @@ struct SummarizedSetlistInfoView: View {
             .padding(.horizontal, 5)
           Text(info.venue)
             .fontWeight(.regular)
-            .foregroundStyle(Color.fontGrey2)
+            .foregroundStyle(Color(UIColor.systemGray2))
             .padding(.top, -10)
             .padding(.horizontal, 5)
         }
@@ -109,7 +109,7 @@ struct SummarizedSetlistInfoView: View {
           
           Image(systemName: "chevron.right")
         }
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color(UIColor.systemGray))
         .onTapGesture {
           chevronButtonAction!()
         }
@@ -122,7 +122,7 @@ struct SummarizedSetlistInfoView: View {
     .background(
       Rectangle()
         .cornerRadius(12, corners: [.topLeft, .topRight])
-        .foregroundStyle(Color.backgroundWhite)
+        .foregroundStyle(Color.mainWhite)
     )
   }
 }

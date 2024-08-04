@@ -25,7 +25,7 @@ struct ArtistNameView: View {
         .font(.title)
         .fontWeight(.semibold)
     }
-    .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+    .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color(UIColor.systemGray))
   }
 }
 
