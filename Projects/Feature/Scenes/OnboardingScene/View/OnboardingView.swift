@@ -41,7 +41,7 @@ public struct OnboardingView: View {
         }
         
         if onboardingViewModel.isShowToastBar {
-          ToastMessageView(message: onboardingViewModel.selectedArtist.count >= 5 ? "아티스트 5명이 모두 선택되었어요" : "아티스트를 선택해주세요", icon: "exclamationmark.circle.fill", color: Color.toast2)
+          ToastMessageView(message: onboardingViewModel.selectedArtist.count >= 5 ? "아티스트 5명이 모두 선택되었어요" : "아티스트를 선택해주세요", subMessage: nil, icon: "exclamationmark.circle.fill", color: Color.toast2)
             .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
             .padding(.bottom, 95)
             .padding(.horizontal, 24)

@@ -80,7 +80,7 @@ struct SetlistView: View {
       if showToastMessage {
         VStack {
           ToastMessageView(
-            message: vm.isBookmarked ? "보관함‑북마크한 공연에 담겼어요." : "보관이 취소되었어요!",
+            message: vm.isBookmarked ? "보관함‑북마크한 공연에 담겼어요." : "보관이 취소되었어요!", subMessage: nil,
             icon: vm.isBookmarked ? "checkmark.circle.fill" : "checkmark.circle.badge.xmark.fill",
             color: vm.isBookmarked ? Color.toast1 : Color.toast2
           )
