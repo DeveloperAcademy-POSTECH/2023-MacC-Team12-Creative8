@@ -17,6 +17,7 @@ struct ArtistInfoView: View {
   @Query var likeArtist: [LikeArtist]
   @Environment(\.modelContext) var modelContext
   @Environment(\.scenePhase) var scenePhase
+  @State private var scale: CGFloat = 1.0
   
   var body: some View {
     VStack(spacing: 24) {
@@ -91,10 +92,23 @@ struct ArtistInfoView: View {
   private var buttonLayer: some View {
     Button {
       vm.isLikedArtist.toggle()
+      withAnimation(.easeInOut(duration: 0.3)) {
+        self.scale = 0.7
+      }
+      withAnimation(.easeInOut(duration: 0.3).delay(0.3)) {
+        self.scale = 1.15
+      }
+      withAnimation(.easeInOut(duration: 0.3).delay(0.6)) {
+        self.scale = 1.0
+      }
     } label: {
       Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color(UIColor.systemGray))
-        .font(.title)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: UIWidth * 0.07)
+        .fontWeight(.thin)
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
+        .scaleEffect(vm.isLikedArtist ? scale : 1.0)
     }
     .onDisappear {
       if vm.isLikedArtist && !vm.swiftDataManager.isAddedLikeArtist(likeArtist, vm.artistInfo.mbid) { // 뷰를 나갈 때 swiftData에 추가되어있지 않은 상태에서 하트를 눌렀으면

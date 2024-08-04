@@ -70,45 +70,45 @@ struct ArtistsContentView: View {
       } else {
         ForEach(Array(setlists.prefix(3).enumerated()), id: \.element?.id) { index, item in
           VStack(alignment: .leading, spacing: 0) {
-            NavigationLink(value: NavigationDelivery(setlistId: item?.id ?? "", artistInfo: artistInfo)) {
-              HStack(spacing: 0) {
-                VStack(alignment: .center) {
-                  Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
-                    .foregroundStyle(Color(UIColor.systemGray2))
-                    .tracking(0.5)
-                  Text(viewModel.getFormattedDate(date: item?.eventDate ?? "", format: "MM.dd") ?? "")
-                    .foregroundStyle(Color.mainBlack)
-                }
-                .font(.headline)
-                .fontWeight(.semibold)
-                Spacer()
-                  .frame(width: UIWidth * 0.08)
-                VStack(alignment: .leading) {
-                  Group {
-                    Text(item?.venue?.city?.name ?? "city")
-                    +
-                    Text(", ")
-                    +
-                    Text(item?.venue?.city?.country?.name ?? "country")
-                  }
-                  .font(.footnote)
-                  .lineLimit(1)
-                  .foregroundStyle(Color.mainBlack)
-                  Group {
-                    if let firstSong = item?.sets?.setsSet?.first?.song?.first?.name {
-                      Text("01 \(firstSong)")
-                    } else {
-                      Text("세트리스트 정보가 아직 없습니다")
-                    }
-                  }
-                  .font(.footnote)
-                  .lineLimit(1)
-                  .foregroundStyle(Color(UIColor.systemGray2))
-                }
-                Spacer()
-              }
-              .padding(.vertical)
-            }
+//            NavigationLink(value: NavigationDelivery(setlistId: item?.id ?? "", artistInfo: artistInfo)) {
+//              HStack(spacing: 0) {
+//                VStack(alignment: .center) {
+//                  Text(viewModel.getFormattedYear(date: item?.eventDate ?? "yyyy") ?? "yyyy")
+//                    .foregroundStyle(Color(UIColor.systemGray2))
+//                    .tracking(0.5)
+//                  Text(viewModel.getFormattedDate(date: item?.eventDate ?? "", format: "MM.dd") ?? "")
+//                    .foregroundStyle(Color.mainBlack)
+//                }
+//                .font(.headline)
+//                .fontWeight(.semibold)
+//                Spacer()
+//                  .frame(width: UIWidth * 0.08)
+//                VStack(alignment: .leading) {
+//                  Group {
+//                    Text(item?.venue?.city?.name ?? "city")
+//                    +
+//                    Text(", ")
+//                    +
+//                    Text(item?.venue?.city?.country?.name ?? "country")
+//                  }
+//                  .font(.footnote)
+//                  .lineLimit(1)
+//                  .foregroundStyle(Color.mainBlack)
+//                  Group {
+//                    if let firstSong = item?.sets?.setsSet?.first?.song?.first?.name {
+//                      Text("01 \(firstSong)")
+//                    } else {
+//                      Text("세트리스트 정보가 아직 없습니다")
+//                    }
+//                  }
+//                  .font(.footnote)
+//                  .lineLimit(1)
+//                  .foregroundStyle(Color(UIColor.systemGray2))
+//                }
+//                Spacer()
+//              }
+//              .padding(.vertical)
+//            }
           }
           
           if let lastIndex = setlists.prefix(3).lastIndex(where: { $0 != nil }), index != lastIndex {

@@ -16,13 +16,36 @@ struct AllSetlistsView: View {
     VStack {
       titleLayer
       if vm.setlists?.count == 0 {
-        EmptyView(vm: vm)
+        emptyLayer
       } else {
         setlistsLayer
         if vm.page != vm.totalPage {
           buttonLayer
         }
       }
+    }
+  }
+  
+  private var emptyLayer: some View {
+    VStack {
+      Text("등록된 공연이 없어요")
+        .font(.headline)
+        .fontWeight(.semibold)
+        .padding(.top, UIHeight * 0.1)
+        .padding(.bottom, 5)
+      Text("공연과 세트리스트를 직접 등록하고 싶으신가요?")
+        .multilineTextAlignment(.center)
+        .font(.footnote)
+        .foregroundStyle(Color.gray)
+      HStack(spacing: 0) {
+        Link(destination: URL(string: "https://www.setlist.fm")!) {
+          Text("Setlist.fm")
+            .underline()
+        }
+        Text("에서 추가하세요.")
+      }
+      .foregroundStyle(Color.gray)
+      .font(.footnote)
     }
   }
   
@@ -117,73 +140,73 @@ struct AllSetlistsView: View {
   
 }
 
-private struct EmptyView: View {
-  @ObservedObject var vm: ArtistViewModel
-  
-  var body: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      Group {
-        Text("세트리스트 정보가 없습니다.")
-          .font(.system(size: 16))
-          .fontWeight(.semibold)
-          .foregroundStyle(Color.black)
-          .multilineTextAlignment(.leading)
-        
-        Text("찜한 가수의 세트리스트가 없다면,")
-          .foregroundStyle(Color.gray)
-          .font(.footnote)
-          .padding(.top)
-          .multilineTextAlignment(.leading)
-        
-        if vm.isKorean() {
-          HStack(spacing: 0) {
-            Link(destination: URL(string: "https://www.setlist.fm")!) {
-              Text("Setlist.fm")
-                .underline()
-                .foregroundStyle(Color.gray)
-                .font(.footnote)
-            }
-            Text("에서 직접 추가할 수 있어요.")
-              .foregroundStyle(Color.gray)
-              .font(.footnote)
-              .multilineTextAlignment(.leading)
-          }
-          .padding(.bottom)
-        } else {
-          HStack(spacing: 0) {
-            Text("에서 직접 추가할 수 있어요.")
-              .foregroundStyle(Color.gray)
-              .font(.footnote)
-              .multilineTextAlignment(.leading)
-            Link(destination: URL(string: "https://www.setlist.fm")!) {
-              Text("Setlist.fm")
-                .underline()
-                .foregroundStyle(Color.gray)
-                .font(.footnote)
-            }
-          }
-          .padding(.bottom)
-        }
-      }
-      .padding(.horizontal, 3)
-      
-      Link(destination: URL(string: "https://www.setlist.fm")!) {
-        RoundedRectangle(cornerRadius: 14)
-          .foregroundStyle(Color.gray)
-          .frame(height: UIHeight * 0.06)
-          .overlay {
-            Text("세트리스트 추가하기")
-              .foregroundStyle(Color.mainBlack)
-              .bold()
-          }
-          .padding(.top)
-      }
-    }
-    .frame(width: UIWidth * 0.81)
-    .padding(.vertical, 50)
-  }
-  
-}
+//private struct EmptyView: View {
+//  @ObservedObject var vm: ArtistViewModel
+//  
+//  var body: some View {
+//    VStack(alignment: .leading, spacing: 0) {
+//      Group {
+//        Text("세트리스트 정보가 없습니다.")
+//          .font(.system(size: 16))
+//          .fontWeight(.semibold)
+//          .foregroundStyle(Color.black)
+//          .multilineTextAlignment(.leading)
+//        
+//        Text("찜한 가수의 세트리스트가 없다면,")
+//          .foregroundStyle(Color.gray)
+//          .font(.footnote)
+//          .padding(.top)
+//          .multilineTextAlignment(.leading)
+//        
+//        if vm.isKorean() {
+//          HStack(spacing: 0) {
+//            Link(destination: URL(string: "https://www.setlist.fm")!) {
+//              Text("Setlist.fm")
+//                .underline()
+//                .foregroundStyle(Color.gray)
+//                .font(.footnote)
+//            }
+//            Text("에서 직접 추가할 수 있어요.")
+//              .foregroundStyle(Color.gray)
+//              .font(.footnote)
+//              .multilineTextAlignment(.leading)
+//          }
+//          .padding(.bottom)
+//        } else {
+//          HStack(spacing: 0) {
+//            Text("에서 직접 추가할 수 있어요.")
+//              .foregroundStyle(Color.gray)
+//              .font(.footnote)
+//              .multilineTextAlignment(.leading)
+//            Link(destination: URL(string: "https://www.setlist.fm")!) {
+//              Text("Setlist.fm")
+//                .underline()
+//                .foregroundStyle(Color.gray)
+//                .font(.footnote)
+//            }
+//          }
+//          .padding(.bottom)
+//        }
+//      }
+//      .padding(.horizontal, 3)
+//      
+//      Link(destination: URL(string: "https://www.setlist.fm")!) {
+//        RoundedRectangle(cornerRadius: 14)
+//          .foregroundStyle(Color.gray)
+//          .frame(height: UIHeight * 0.06)
+//          .overlay {
+//            Text("세트리스트 추가하기")
+//              .foregroundStyle(Color.mainBlack)
+//              .bold()
+//          }
+//          .padding(.top)
+//      }
+//    }
+//    .frame(width: UIWidth * 0.81)
+//    .padding(.vertical, 50)
+//  }
+//  
+//}
 
 #Preview {
   AllSetlistsView(vm: ArtistViewModel())
