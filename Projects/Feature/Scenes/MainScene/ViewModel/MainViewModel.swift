@@ -54,6 +54,26 @@ final class MainViewModel: ObservableObject {
       }
     }
   }
+
+    func getFormattedYear(date: String) -> String? {
+      let inputDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+      }()
+      
+      let outputDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY"
+        return formatter
+      }()
+      
+      if let inputDate = inputDateFormatter.date(from: date) {
+        return outputDateFormatter.string(from: inputDate)
+      } else {
+        return nil
+      }
+    }
   
   func getFormattedDate(date: String, format: String) -> String? {
     let inputDateFormatter: DateFormatter = {
