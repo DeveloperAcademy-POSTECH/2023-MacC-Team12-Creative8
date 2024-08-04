@@ -23,18 +23,15 @@ struct BookmarkedSetlistsView: View {
     VStack {
       if bookmarkedSetlists.isEmpty {
         emptyLayer
-          .frame(width: UIWidth * 0.87)
       } else if bookmarkedSetlists.count > 1 {
         VStack {
           ScrollView(.horizontal) {
             HStack {
-              ForEach(Array(bookmarkedSetlists.prefix(min(bookmarkedSetlists.count, 3))), id: \.self) { element in
+              ForEach(Array(bookmarkedSetlists.prefix(min(bookmarkedSetlists.count, 3))), id: \.self) { _ in
                 setlistsLayer
-                  .padding(.horizontal, UIWidth * 0.007)
-                  .frame(width: UIWidth * 0.87)
+                  .frame(width: UIWidth)
               }
             }
-            .padding(.horizontal, UIWidth * 0.13 / 2)
             .scrollTargetLayout()
           }
           .scrollTargetBehavior(.viewAligned)
@@ -61,7 +58,6 @@ struct BookmarkedSetlistsView: View {
         }
       } else {
         setlistsLayer
-          .frame(width: UIWidth * 0.87)
       }
     }
     .padding(.bottom)
