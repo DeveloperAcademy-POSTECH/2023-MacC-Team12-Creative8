@@ -62,36 +62,38 @@ struct SetlistImageShareView: View {
   func backgroundImage(backgroundImage: UIImage) {
     if let urlScheme = URL(string: "instagram-stories://share") {
       if UIApplication.shared.canOpenURL(urlScheme) {
-        let pasteboardItems = [["com.instagram.sharedSticker.stickerImage": backgroundImage.pngData(),
-                                "com.instagram.sharedSticker.backgroundImage": backgroundImage.pngData()]]
+        let pasteboardItems = [["com.instagram.sharedSticker.backgroundImage": backgroundImage.pngData()]]
         
         let pasteboardOptions = [UIPasteboard.OptionsKey.expirationDate: Date().addingTimeInterval(60 * 5)]
         
         UIPasteboard.general.setItems(pasteboardItems, options: pasteboardOptions)
         
-        UIApplication.shared.open(urlScheme as URL, options: [:], completionHandler: nil)
+        if let shareURL = URL(string: "instagram-stories://share?source_application=" +
+                              "807909384825071") {
+          UIApplication.shared.open(shareURL, options: [:], completionHandler: nil)
+        }
       } else {
         print("인스타 앱이 깔려있지 않습니다.")
       }
     }
   }
-}
-
-struct ActivityViewController: UIViewControllerRepresentable {
-  var activityItems: [Any]
-  var applicationActivities: [UIActivity]? = nil
-  @Environment(\.presentationMode) var presentationMode
   
-  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
-    let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
-    print("activityItems \(activityItems)")
-    controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
-      self.presentationMode.wrappedValue.dismiss()
+  struct ActivityViewController: UIViewControllerRepresentable {
+    var activityItems: [Any]
+    var applicationActivities: [UIActivity]? = nil
+    @Environment(\.presentationMode) var presentationMode
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+      let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+      print("activityItems \(activityItems)")
+      controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+        self.presentationMode.wrappedValue.dismiss()
+      }
+      
+      controller.excludedActivityTypes = []
+      return controller
     }
     
-    controller.excludedActivityTypes = []
-    return controller
+    func updateUIViewController (_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
   }
-  
-  func updateUIViewController (_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }
