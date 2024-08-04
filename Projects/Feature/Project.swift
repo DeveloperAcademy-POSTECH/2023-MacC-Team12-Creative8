@@ -14,7 +14,6 @@ let project = Project.makeModule(
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),
         .project(target: "UI", path: .relativeToRoot("Projects/UI")),
-        .SPM.CoreXLSX
     ],
     sources: ["Scenes/**"]
 )
