@@ -37,7 +37,7 @@ struct ArtistMainSetlistView: View {
         .background(
             Rectangle()
                 .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
-                .foregroundStyle(Color.backgroundWhite)
+                .foregroundStyle(Color.white)
         )
         .padding(.horizontal)
         .overlay(
@@ -108,7 +108,7 @@ struct ArtistMainSetlistView: View {
         .onTapGesture {
             isExpanded.toggle()
         }
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color.gray)
     }
 
     private struct ListRowView: View {

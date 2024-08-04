@@ -36,16 +36,16 @@ struct ArchivingArtistView: View {
           VStack(alignment: .leading, spacing: 0) {
             Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
               .font(.footnote)
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color.gray)
               .padding(.bottom)
             
           }.id(topID)
             .listRowSeparator(.hidden)
-            .listRowBackground(Color.backgroundWhite)
+            .listRowBackground(Color.mainWhite)
           
           archiveArtistListCell
             .listRowSeparator(.hidden)
-            .listRowBackground(Color.backgroundWhite)
+            .listRowBackground(Color.mainWhite)
         }
         .scrollIndicators(.hidden)
         .listStyle(.plain)
@@ -66,14 +66,13 @@ struct ArchivingArtistView: View {
           .bold(index < 5)
         Spacer()
         Image(systemName: "chevron.up.chevron.down")
-          .foregroundColor(.buttonBlack)
+          .foregroundColor(Color.black)
       }
       if index == 4 {
         Divider()
           .background(Color.gray)
       }
     }
-    ///순서 변ㄱ
     .onMove { source, destination in
       var updatedItems = likeArtists
       updatedItems.move(fromOffsets: source, toOffset: destination)

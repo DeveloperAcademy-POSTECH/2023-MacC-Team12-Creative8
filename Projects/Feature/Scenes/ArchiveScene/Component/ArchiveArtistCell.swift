@@ -27,14 +27,14 @@ struct ArchiveArtistCellImage: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         } else {
           Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         }
       }
@@ -44,4 +44,3 @@ struct ArchiveArtistCellImage: View {
     .frameForCell()
   }
 }
-

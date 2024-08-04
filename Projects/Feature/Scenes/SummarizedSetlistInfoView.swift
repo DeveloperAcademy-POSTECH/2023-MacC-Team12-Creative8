@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import UI
 
 struct SummarizedSetlistInfoView: View {
     let type: ComponentType
@@ -32,7 +33,7 @@ struct SummarizedSetlistInfoView: View {
         .background(
             Rectangle()
                 .cornerRadius(12, corners: [.topLeft, .topRight])
-                .foregroundStyle(Color.backgroundWhite)
+                .foregroundStyle(Color.mainWhite)
         )
         .padding(.horizontal)
     }
@@ -43,11 +44,11 @@ struct SummarizedSetlistInfoView: View {
             Text(type == .recentConcert ? "최근 공연" : "북마크한 공연")
             Spacer()
         }
-        .foregroundStyle(Color.fontGrey2)
+        .foregroundStyle(Color.gray)
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .foregroundStyle(Color.mainGrey1)
+              .foregroundStyle(Color.gray6)
         )
     }
     
@@ -82,7 +83,7 @@ struct SummarizedSetlistInfoView: View {
                     .padding(5)
                 Text(info.venue)
                     .fontWeight(.regular)
-                    .foregroundStyle(Color.fontGrey2)
+                    .foregroundStyle(Color.gray)
                     .padding(.horizontal, 5)
             }
             

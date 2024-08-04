@@ -31,7 +31,7 @@ struct MainView: View {
                         .id(likeArtists)
                 }
             }
-            .background(Color.backgroundGrey)
+            .background(Color.gray6)
             .onAppear {
                 viewModel.fetchInitialSetlists(likeArtists: likeArtists, modelContext: modelContext)
             }

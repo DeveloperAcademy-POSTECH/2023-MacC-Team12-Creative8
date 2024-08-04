@@ -36,7 +36,7 @@ struct ArtistNameView: View {
           .frame(width: UIWidth * 0.8, alignment: .center)
       }
     }
-    .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.fontGrey3)
+    .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.gray)
     .background(
       GeometryReader { geo in
         Color.clear

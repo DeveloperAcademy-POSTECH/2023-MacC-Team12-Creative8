@@ -25,7 +25,7 @@ struct ArtistImage: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.mainGrey1, lineWidth: 1))
+              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.gray, lineWidth: 1))
           } placeholder: {
             ProgressView()
           }
