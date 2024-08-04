@@ -23,7 +23,7 @@ struct EmptySetlistView: View {
         Text("세트리스트를 직접 작성하고 싶으신가요?")
         Text("Setlist.fm에서 추가해보세요.")
       }
-      .foregroundStyle(Color.fontGrey2)
+      .foregroundStyle(Color(UIColor.systemGray))
       .font(.footnote)
       .multilineTextAlignment(.center)
       SetlistFMLinkButtonView()

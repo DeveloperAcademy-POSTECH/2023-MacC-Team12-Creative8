@@ -23,19 +23,20 @@ struct ArchiveArtistCell: View {
           ProgressView()
         }
       } else {
+        // TODO: 이미지 변경?
         if colorScheme == .light {
           Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         } else {
           Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.mainGrey1, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
             )
         }
       }

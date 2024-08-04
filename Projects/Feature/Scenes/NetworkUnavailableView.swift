@@ -30,10 +30,10 @@ struct NetworkUnavailableView: View {
             .font(.system(size: 14))
             .padding(EdgeInsets(top: 17, leading: 22, bottom: 17, trailing: 22))
             .background(RoundedRectangle(cornerRadius: 14)
-              .foregroundStyle(Color.buttonBlack))
+              .foregroundStyle(Color.mainBlack))
         }
       }
-      .background(Color.backgroundWhite)
+      .background(Color.mainWhite)
     }
 }
 

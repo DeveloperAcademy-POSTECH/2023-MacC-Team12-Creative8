@@ -29,11 +29,11 @@ struct SearchArtistCell: View {
                 Image("ticket", bundle: setaBundle)
                   .resizable()
                   .renderingMode(.template)
-                  .foregroundStyle(Color.lineGrey1)
+                  .foregroundStyle(Color(UIColor.systemGray))
                   .scaledToFill()
                   .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
               )
-              .foregroundStyle(Color.mainGrey1)
+              .foregroundStyle(Color(UIColor.systemGray5))
           case .success(let image):
             image
               .resizable()
@@ -44,11 +44,11 @@ struct SearchArtistCell: View {
                 Image("ticket", bundle: setaBundle)
                   .resizable()
                   .renderingMode(.template)
-                  .foregroundStyle(Color.lineGrey1)
+                  .foregroundStyle(Color(UIColor.systemGray))
                   .scaledToFill()
                   .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
               )
-              .foregroundStyle(Color.mainGrey1)
+              .foregroundStyle(Color(UIColor.systemGray5))
           @unknown default:
             EmptyView()
           }
@@ -57,7 +57,7 @@ struct SearchArtistCell: View {
       .aspectRatio(contentMode: .fit)
       .clipShape(RoundedRectangle(cornerRadius: 12))
       .overlay(RoundedRectangle(cornerRadius: 12)
-      .stroke(Color.mainGrey1, lineWidth: 1))
+      .stroke(Color(UIColor.systemGray4), lineWidth: 1))
       
       Text("\(artistName)")
         .foregroundStyle(Color.mainBlack)

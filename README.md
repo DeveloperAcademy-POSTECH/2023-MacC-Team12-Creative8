@@ -71,11 +71,11 @@
 
 <div align="center"> 
   
-| [고혜지(Hazzy)](https://github.com/Ko-HyeJi) | [김나윤(Nayla)](https://github.com/nylakim) | [김예슬(Suri)](https://github.com/suri0000) | [유인호(Musk)](https://github.com/Oreo-Mcflurry) | 이예은(Yelson) | [장수민(Lorenzo)](https://github.com/sumintnals) | [정제명(Green)](https://github.com/JJemyeong) | [최효원(Wonni)](https://github.com/wonniiii) |
+| [고혜지(Hazzy)](https://github.com/Ko-HyeJi) | [김나윤(Nayla)](https://github.com/nylakim) | [김예슬(Suri)](https://github.com/suri0000) | [유인호(Musk)](https://github.com/Oreo-Mcflurry) | [이예은(Yelson)](https://github.com/Yeeunlee34) | [장수민(Lorenzo)](https://github.com/sumintnals) | [정제명(Green)](https://github.com/JJemyeong) | [최효원(Wonni)](https://github.com/wonniiii) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |<img width="100" alt="Hazzy" src="https://avatars.githubusercontent.com/u/88470545?v=4">|<img width="100" alt="Nayla" src="https://avatars.githubusercontent.com/u/128906664?v=4">|<img width="100" alt="Suri" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Musk" src="https://avatars.githubusercontent.com/u/96654328?v=4">|<img width="100" alt="Yelson" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Lorenzo" src="https://avatars.githubusercontent.com/u/127755029?v=4">|<img width="100" alt="Green" src="https://avatars.githubusercontent.com/u/130547132?v=4)">|<img width="100" alt="Wonni" src="https://avatars.githubusercontent.com/u/81157265?v=4">|
 
-  
+
 </div>
 <br/>
 

@@ -10,34 +10,77 @@ import SwiftUI
 import UI
 
 struct ArtistSetCell: View {
-   let name: String
-   let isSelected: Bool
-   var body: some View {
-     Text(name)
-       .foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
-       .padding(10)
-       .background {
-         let color = isSelected ? Color.mainBlack : Color.mainGrey1
-         color.clipShape(RoundedRectangle(cornerRadius: 12))
-       }
-       .font(.subheadline)
-   }
- }
+  let name: String
+  let artistImgUrl: URL?
+  let isSelected: Bool
+  @Environment(\.colorScheme) var colorScheme
+  
+  var body: some View {
+    HStack {
+        artistImg
+        Text(name)
+          .font(.subheadline)
+          .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
+    }
+    .padding(6)
+    .background {
+      let color = isSelected ? Color.mainBlack : Color.mainWhite
+      color.clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+  }
+  
+  @ViewBuilder
+  private var artistImg: some View {
+    Group {
+      if let url = artistImgUrl {
+        AsyncImage(url: url) { image in
+          image
+            .centerCropped()
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 8)
+////                .stroke(Color.mainGrey1, lineWidth: 1)
+//                .foregroundStyle(Color.clear)
+//            )
+        } placeholder: {
+          ProgressView()
+        }
+      } else {
+        if colorScheme == .light {
+          Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+            .centerCropped()
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+            )
+        } else {
+          Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+            .centerCropped()
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+            )
+        }
+      }
+    }
+    .aspectRatio(1.0, contentMode: .fit)
+    .clipShape(RoundedRectangle(cornerRadius: 8))
+  }
+}
 
 struct AllArtistsSetCell: View {
-   let name: LocalizedStringResource
-   let isSelected: Bool
-   var body: some View {
-     Text(name)
-       .foregroundStyle(isSelected ? Color.settingTextBoxWhite : Color.fontGrey2)
-       .padding(10)
-       .background {
-         let color = isSelected ? Color.mainBlack : Color.mainGrey1
-         color.clipShape(RoundedRectangle(cornerRadius: 12))
-       }
-   }
- }
-
- #Preview {
-   ArtistSetCell(name: "방탄소년단", isSelected: false)
- }
+  let name: LocalizedStringResource
+  let isSelected: Bool
+  var body: some View {
+    Text(name)
+      .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
+      .padding(10)
+      .background {
+        let color = isSelected ? Color.mainBlack : Color.mainWhite
+        color.clipShape(RoundedRectangle(cornerRadius: 12))
+      }
+  }
+}
+//
+// #Preview {
+//		ArtistSetCell(name: "방탄소년단", isSelected: false)
+// }

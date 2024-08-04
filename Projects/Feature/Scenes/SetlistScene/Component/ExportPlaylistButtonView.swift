@@ -16,42 +16,122 @@ struct ExportPlaylistButtonView: View {
   @ObservedObject var vm: SetlistViewModel
   @Binding var showToastMessageAppleMusic: Bool
   @Binding var showToastMessageCapture: Bool
+  @Binding var showToastMessageSubscription: Bool
+  @Binding var showSpotifyAlert: Bool
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
-
+  
+  private func toastMessageToShow() -> LocalizedStringResource? {
+    if showToastMessageAppleMusic {
+      return "1~2분 후 Apple Music에서 확인하세요"
+    } else if showToastMessageCapture {
+      return "캡쳐된 사진을 앨범에서 확인하세요"
+    } else if showToastMessageSubscription {
+        return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
+    } else if showSpotifyAlert {
+        return "10초 뒤 Spotify에서 확인하세요"
+    } else {
+      return nil
+    }
+  }
+  
   var body: some View {
-    VStack {
-      Spacer()
-      
-      Group {
-        if showToastMessageAppleMusic {
-          ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
-        } else if showToastMessageCapture {
-          ToastMessageView(message: "캡쳐된 사진을 앨범에서 확인하세요")
-        }
-      }
-      .padding(.horizontal, 30)
-      
-      Button(action: {
-        vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
-        vm.showModal.toggle()
-      }, label: {
-        Text("플레이리스트 내보내기")
-          .foregroundStyle(Color.settingTextBoxWhite)
+    ZStack {
+      VStack(spacing: 0) {
+        Spacer()
+        
+        Text("플레이리스트 만들기")
+          .foregroundStyle(Color.mainWhite)
           .font(.callout)
-          .fontWeight(.bold)
+          .fontWeight(.semibold)
           .frame(maxWidth: .infinity)
-          .padding(.vertical, 20)
+          .padding(.vertical, 16)
           .background(Color.mainBlack)
           .cornerRadius(14)
           .padding(.horizontal, 30)
           .padding(.bottom, 50)
-          .background(Rectangle().foregroundStyle(Gradient(colors: [.backgroundWhite.opacity(0), .backgroundWhite, .backgroundWhite])))
-      })
+          .background(Rectangle().foregroundStyle(Color.gray6))
+          .onTapGesture {
+            vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
+            vm.showModal.toggle()
+          }
+        
+      }
+      
+      if showSpotifyAlert {
+        VStack {
+          ToastMessageView(
+            message: "Spotify로 세트리스트가 옮겨지고 있어요!",
+            subMessage: "15초 후 완료 예정",
+            icon: "dot.radiowaves.left.and.right",
+            color: Color.toast1
+          )
+          .padding(.horizontal, UIWidth * 0.075)
+          .padding(.top, 5)
+          Spacer()
+        }
+      }
+      
+      if showToastMessageCapture {
+        captureSetlistAlertView
+      }
+
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture)
-        .presentationDetents([.fraction(0.5)])
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture, showSpotifyAlert: $showSpotifyAlert)
+        .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
+    }
+  }
+  
+  private var captureSetlistAlertView: some View {
+    ZStack {
+      Color.black.opacity(0.6).ignoresSafeArea()
+      RoundedRectangle(cornerRadius: 12.0)
+        .frame(width: UIWidth * 0.95, height: UIHeight * 0.25)
+        .foregroundStyle(Color.white)
+      VStack {
+        Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
+          .font(.headline.bold())
+          .padding()
+        Text("위의 뮤직앱에서는 이미지로 된 세트리스트를\n인식해 플레이리스트로 변환합니다.\n원하는 세트리스트를 이미지로 받아보세요.")
+          .multilineTextAlignment(.center)
+          .font(.callout)
+          .foregroundStyle(Color.gray)
+        Divider()
+          .padding(.vertical)
+        HStack {
+          Button {
+            showToastMessageCapture = false
+          } label: {
+            Text("취소")
+              .frame(width: UIWidth * 0.95 * 0.5)
+              .foregroundStyle(Color.black)
+              .padding(.bottom)
+          }
+          Button {
+            exportViewModel.handlePhotoExportButtonAction()
+            if !exportViewModel.checkPhotoPermission() {
+              takeSetlistToImage(vm.setlistSongKoreanName)
+            }
+            showToastMessageCapture = false
+          } label: {
+            Text("이미지 저장")
+              .frame(width: UIWidth * 0.95 * 0.5)
+              .fontWeight(.bold)
+              .padding(.bottom)
+          }
+          // 사진 권한 허용 거부 상태인 경우
+          .alert(isPresented: $exportViewModel.showLibrarySettingsAlert) {
+            Alert(
+              title: Text(""),
+              message: Text("사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다."),
+              primaryButton: .default(Text("취소")),
+              secondaryButton: .default(Text("설정").bold(), action: {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+              }))
+          }
+        }
+      }
     }
   }
 }

@@ -22,7 +22,7 @@ struct ConcertInfoView: View {
           .foregroundStyle(Color.mainBlack)
         +
         Text("Setlist")
-          .foregroundStyle(Color.fontGrey2)
+          .foregroundStyle(Color.black850)
       }
       .font(.largeTitle)
       .fontWeight(.semibold)
@@ -45,7 +45,7 @@ struct InfoComponent: View {
       Text(text1)
         .foregroundStyle(Color.mainBlack)
         .padding(12)
-        .background(Color.mainGrey1.cornerRadius(12))
+        .background(Color(UIColor.systemGray).cornerRadius(12))
       Spacer()
       Text(text2)
         .font(.body)

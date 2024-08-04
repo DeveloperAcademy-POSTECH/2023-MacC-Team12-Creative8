@@ -13,14 +13,15 @@ import MusicKit
 
 final class ExportPlaylistViewModel: ObservableObject {
   @Published var playlistTitle: String = ""
-  @Published var showYouTubeAlert: Bool = false
   @Published var showAppleMusicAlert: Bool = false
   @Published var showToastMessageAppleMusic: Bool = false
+  @Published var showToastMessageSubscription: Bool = false
   @Published var showToastMessageCapture = false
   @Published var showLibrarySettingsAlert = false
   @Published var showMusicSettingsAlert = false
+  @Published var showSpotifyAlert = false
   
-  //MARK: Photo
+  // MARK: Photo
   func checkPhotoPermission() -> Bool {
     var status: PHAuthorizationStatus = .notDetermined
     
@@ -34,23 +35,23 @@ final class ExportPlaylistViewModel: ObservableObject {
   }
   
   func requestPhotoLibraryPermission() {
-      PHPhotoLibrary.requestAuthorization { status in
-          switch status {
-          case .authorized:
-              // 권한이 허용된 경우
-              print("Photo library access granted")
-          case .denied, .restricted:
-              // 권한이 거부되거나 제한된 경우
-              print("Photo library access denied")
-          case .notDetermined:
-              // 권한이 아직 결정되지 않은 경우
-              print("Photo library access not determined")
-          case .limited:
-            print("Photo library access limited")
-          @unknown default:
-              print("omg")
-          }
+    PHPhotoLibrary.requestAuthorization { status in
+      switch status {
+      case .authorized:
+        // 권한이 허용된 경우
+        print("Photo library access granted")
+      case .denied, .restricted:
+        // 권한이 거부되거나 제한된 경우
+        print("Photo library access denied")
+      case .notDetermined:
+        // 권한이 아직 결정되지 않은 경우
+        print("Photo library access not determined")
+      case .limited:
+        print("Photo library access limited")
+      @unknown default:
+        print("omg")
       }
+    }
   }
   
   func getPhotoLibraryPermissionStatus() -> PHAuthorizationStatus {
@@ -71,16 +72,10 @@ final class ExportPlaylistViewModel: ObservableObject {
     }
   }
   
-  //MARK: AppleMusic
-  func getMusicKitPermissionStatus() -> MusicAuthorization.Status {
-    let status: MusicAuthorization.Status = MusicAuthorization.currentStatus
-    return status
-  }
+  // MARK: AppleMusic
   
-  func checkMusicKitPermission() -> Bool {
-    var status: MusicAuthorization.Status = .notDetermined
-    status = MusicAuthorization.currentStatus
-    return status == .denied || status == .notDetermined
+  var musicKitPermissionStatus: MusicAuthorization.Status {
+    return MusicAuthorization.currentStatus
   }
   
   func addToAppleMusic(musicList: [(String, String?)], setlist: Setlist?) {
@@ -97,23 +92,28 @@ final class ExportPlaylistViewModel: ObservableObject {
   }
   
   func handleAppleMusicButtonAction() {
-    if self.getMusicKitPermissionStatus() == .notDetermined {
-      AppleMusicService().requestMusicAuthorization()
-    } else if self.getMusicKitPermissionStatus() == .denied {
-      self.showMusicSettingsAlert = true
-    } else {
-      CheckAppleMusicSubscription.shared.appleMusicSubscription()
-      if CheckAppleMusicSubscription.shared.getCheckValue() {
-        self.showAppleMusicAlert.toggle()
-        self.playlistTitle = ""
-      } else {
-        
+    Task {
+      switch musicKitPermissionStatus {
+      case .notDetermined:
+        AppleMusicService().requestMusicAuthorization()
+      case .denied, .restricted:
+        self.showMusicSettingsAlert = true
+      case .authorized:
+        let subscriptionChecker = CheckAppleMusicSubscription.shared
+        subscriptionChecker.appleMusicSubscription { [self] isSubscribed in
+          
+          if isSubscribed {
+            self.showAppleMusicAlert.toggle()
+            playlistTitle = ""
+          } else {
+            self.showToastMessageSubscription = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+              self.showToastMessageSubscription = false
+            }
+          }
+        }
+      default: break
       }
     }
-  }
-  
-  //MARK: YouTubeMusic
-  func addToYouTubeMusic() {
-    //TODO: 유튜브뮤직
   }
 }

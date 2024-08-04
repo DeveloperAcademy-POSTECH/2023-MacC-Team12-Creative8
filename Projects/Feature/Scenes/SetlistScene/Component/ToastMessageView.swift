@@ -11,20 +11,32 @@ import UI
 
 struct ToastMessageView: View {
   let message: LocalizedStringResource
+  let subMessage: LocalizedStringResource?
+  let icon: String
+  let color: Color
   
   var body: some View {
-     Text(message)
-      .foregroundStyle(Color.settingTextBoxWhite)
-      .font(.subheadline)
-      .padding(.vertical, 15)
-      .frame(maxWidth: .infinity)
-      .background(
-        Color.toastBurn
-          .cornerRadius(27)
-      )
+     HStack {
+       VStack(alignment: .leading) {
+         Text(message)
+          .foregroundStyle(Color.mainWhite)
+          .font(.subheadline)
+         if let subMessage = subMessage {
+           Text(subMessage)
+            .foregroundStyle(Color.toast1)
+            .font(.subheadline)
+         }
+       }
+       Spacer()
+       Image(systemName: icon)
+         .renderingMode(.template)
+         .foregroundStyle(color)
+     }
+     .padding(15)
+     .frame(maxWidth: .infinity)
+     .background(
+       Color.black850
+        .cornerRadius(6.0)
+     )
   }
-}
-
-#Preview {
-  ToastMessageView(message: "1~2분 후 Apple Music에서 확인하세요")
 }
