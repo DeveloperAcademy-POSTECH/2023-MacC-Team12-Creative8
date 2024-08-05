@@ -22,7 +22,7 @@ struct ListView: View {
           Text(session.name != nil ? session.name! : session.encore != nil ? "Encore" : "Main")
               .font(.headline)
               .fontWeight(.bold)
-              .foregroundStyle(Color.fontGrey25)
+              .foregroundStyle(Color(UIColor.systemGray2))
               .padding(.top, 30)
           let songs = session.song ?? []
           ForEach(Array(songs.enumerated()), id: \.offset) { index, song in
@@ -47,7 +47,7 @@ struct ListView: View {
               .padding(.vertical, 7)
               
               if index + 1 < songs.count {
-                Divider()
+                Divider().foregroundStyle(Color(UIColor.systemGray3))
               }
             }
           }
@@ -80,7 +80,7 @@ private struct ListRowView: View {
         if let info = info {
           Text(info)
             .fontWeight(.regular)
-            .foregroundStyle(Color.fontGrey25)
+            .foregroundStyle(Color(UIColor.systemGray2))
         }
       }
     }

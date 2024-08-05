@@ -25,8 +25,7 @@ struct ArchivingView: View {
       VStack {
         bookmarkView
       }
-      // TODO: 색 변경
-      .background(Color.gray)
+      .background(Color.gray6)
       .navigationTitle("보관함")
       .navigationDestination(for: NavigationDelivery.self) { value in
         if value.setlistId != nil {
@@ -137,15 +136,14 @@ extension ArchivingView {
       viewModel.insertArtistSet(newValue)
     }
   }
-  
   private func getColor(url: URL?, toggle: inout Bool) -> (Color, Color) {
     guard url == nil else {
       return (.clear, .clear)
     }
     //TODO: 색상 변경
-    let backgroundColor: Color = toggle ? .orange.opacity(0.1) : .white
-    let foregroundColor: Color = toggle ? .orange : .black
-    toggle.toggle()
+      let backgroundColor: Color = toggle ? .orange100: .mainWhite
+      let foregroundColor: Color = toggle ? .mainOrange : Color(UIColor.systemGray4)
+      toggle.toggle()
     
     return (backgroundColor, foregroundColor)
   }

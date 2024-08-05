@@ -17,11 +17,45 @@ struct BookmarkedSetlistsView: View {
   @State var bookmarkedSetlists: [ArchivedConcertInfo] = []
   @Environment(\.dismiss) var dismiss
   @Binding var selectedTab: Tab
+  @State private var scrollPosition: ArchivedConcertInfo?
   
   var body: some View {
     VStack {
       if bookmarkedSetlists.isEmpty {
         emptyLayer
+      } else if bookmarkedSetlists.count > 1 {
+        VStack {
+          ScrollView(.horizontal) {
+            HStack {
+              ForEach(Array(bookmarkedSetlists.prefix(min(bookmarkedSetlists.count, 3))), id: \.self) { _ in
+                setlistsLayer
+                  .frame(width: UIWidth)
+              }
+            }
+            .scrollTargetLayout()
+          }
+          .scrollTargetBehavior(.viewAligned)
+          .scrollPosition(id: $scrollPosition)
+          .scrollIndicators(.hidden)
+          
+          HStack {
+            ForEach(Array(bookmarkedSetlists.prefix(min(bookmarkedSetlists.count, 3))), id: \.self) { element in
+              if element == scrollPosition {
+                RoundedRectangle(cornerRadius: 25.0)
+                  .frame(width: 15, height: 8)
+                  .foregroundStyle(Color.mainBlack)
+                  .padding(.vertical)
+                  .padding(.horizontal, 5)
+              } else {
+                Circle()
+                  .frame(width: 10)
+                  .foregroundStyle(Color.gray)
+                  .padding(.vertical)
+                  .padding(.horizontal, 5)
+              }
+            }
+          }
+        }
       } else {
         setlistsLayer
       }
@@ -36,6 +70,9 @@ struct BookmarkedSetlistsView: View {
       if concert.artistInfo.mbid == vm.artistInfo.mbid {
         bookmarkedSetlists.append(concert)
       }
+    }
+    if !bookmarkedSetlists.isEmpty {
+      scrollPosition = bookmarkedSetlists[0]
     }
   }
   
@@ -55,19 +92,19 @@ struct BookmarkedSetlistsView: View {
       type: .bookmarkedConcert,
       info: SetlistInfo(
         artistInfo: vm.artistInfo,
-        id: bookmarkedSetlists[0].setlist.setlistId,
-        date: vm.getFormattedDateFromDate(
-          date: bookmarkedSetlists[0].setlist.date,
+        id: scrollPosition!.setlist.setlistId,
+        date: vm.getFormattedDate(
+          date: scrollPosition!.setlist.date,
           format: "yyyy년 MM월 dd일"
         ),
-        title: bookmarkedSetlists[0].setlist.title,
-        venue: "\(bookmarkedSetlists[0].setlist.venue)\n\(bookmarkedSetlists[0].setlist.city), \(bookmarkedSetlists[0].setlist.country)"
+        title: scrollPosition!.setlist.title,
+        venue: "\(scrollPosition!.setlist.venue)\n\(scrollPosition!.setlist.city), \(scrollPosition!.setlist.country)"
       ),
       infoButtonAction: nil,
       cancelBookmarkAction: {
-        vm.swiftDataManager.deleteArchivedConcertInfo(bookmarkedSetlists[0])
+        vm.swiftDataManager.deleteArchivedConcertInfo(scrollPosition!)
         for (index, item) in bookmarkedSetlists.enumerated() {
-          if item.id == bookmarkedSetlists[0].id {
+          if item.id == scrollPosition!.id {
             bookmarkedSetlists.remove(at: index)
           }
         }
@@ -86,5 +123,8 @@ struct BookmarkedSetlistsView: View {
 }
 
 #Preview {
-  BookmarkedSetlistsView(vm: ArtistViewModel(), selectedTab: .constant(.archiving))
+  ZStack {
+    Color.gray.ignoresSafeArea()
+    BookmarkedSetlistsView(vm: ArtistViewModel(), selectedTab: .constant(.archiving))
+  }
 }

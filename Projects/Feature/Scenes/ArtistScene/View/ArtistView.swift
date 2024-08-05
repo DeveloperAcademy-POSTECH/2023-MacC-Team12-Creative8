@@ -26,34 +26,29 @@ struct ArtistView: View {
       } else {
         ScrollView {
           ArtistInfoView(vm: vm)
-          BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+          if vm.setlists?.count != 0 {
+            BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+          }
           AllSetlistsView(vm: vm)
         }
       }
     }
     .padding(.horizontal, 5)
-    .toolbar { ToolbarItem(placement: .principal) { toolbarArtistName } }
     .onAppear {
       if vm.artistInfo.gid == nil {
         vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
         vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
       }
     }
-    .background(Color.mainGrey1)
-  }
-  
-  private var toolbarArtistName: some View {
-    Text(vm.artistInfo.name)
-      .font(.title3)
-      .fontWeight(.semibold)
+    .background(Color.gray6)
   }
 }
 
 #Preview {
-  NavigationStack {
-    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
-  }
 //  NavigationStack {
-//    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
 //  }
+  NavigationStack {
+    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+  }
 }

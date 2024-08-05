@@ -17,9 +17,10 @@ struct ArtistInfoView: View {
   @Query var likeArtist: [LikeArtist]
   @Environment(\.modelContext) var modelContext
   @Environment(\.scenePhase) var scenePhase
+  @State private var scale: CGFloat = 1.0
   
   var body: some View {
-    VStack {
+    VStack(spacing: 24) {
       imageLayer
       HStack {
         nameLayer
@@ -60,8 +61,8 @@ struct ArtistInfoView: View {
           .centerCropped()
           .aspectRatio(1, contentMode: .fit)
           .frame(width: UIWidth * 0.57)
-          .cornerRadius(14)
-          .overlay(Color.black.opacity(0.2).cornerRadius(14))
+          .cornerRadius(12)
+          .overlay(Color.black.opacity(0.2).cornerRadius(12))
       } placeholder: {
         ProgressView()
       })
@@ -69,10 +70,10 @@ struct ArtistInfoView: View {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
         .resizable()
         .renderingMode(.template)
-        .foregroundStyle(Color.lineGrey1)
+        .foregroundStyle(Color(UIColor.systemGray3))
         .background {
-          Color.mainGrey1
-            .cornerRadius(14)
+          Color(UIColor.systemGray)
+            .cornerRadius(12)
         }
         .aspectRatio(1, contentMode: .fit)
         .frame(width: UIWidth * 0.57)
@@ -82,7 +83,7 @@ struct ArtistInfoView: View {
   
   private var nameLayer: some View {
     Text(vm.artistInfo.name)
-      .font(.largeTitle)
+      .font(.title3)
       .fontWeight(.semibold)
       .foregroundStyle(Color.mainBlack)
       .minimumScaleFactor(0.1)
@@ -91,10 +92,23 @@ struct ArtistInfoView: View {
   private var buttonLayer: some View {
     Button {
       vm.isLikedArtist.toggle()
+      withAnimation(.easeInOut(duration: 0.3)) {
+        self.scale = 0.7
+      }
+      withAnimation(.easeInOut(duration: 0.3).delay(0.3)) {
+        self.scale = 1.15
+      }
+      withAnimation(.easeInOut(duration: 0.3).delay(0.6)) {
+        self.scale = 1.0
+      }
     } label: {
       Image(systemName: vm.isLikedArtist ? "heart.fill" : "heart")
-        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite1)
-        .font(.title)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: UIWidth * 0.07)
+        .fontWeight(.thin)
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
+        .scaleEffect(vm.isLikedArtist ? scale : 1.0)
     }
     .onDisappear {
       if vm.isLikedArtist && !vm.swiftDataManager.isAddedLikeArtist(likeArtist, vm.artistInfo.mbid) { // 뷰를 나갈 때 swiftData에 추가되어있지 않은 상태에서 하트를 눌렀으면

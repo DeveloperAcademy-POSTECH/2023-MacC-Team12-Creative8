@@ -5,17 +5,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/abseil-cpp-binary.git",
       "state" : {
-        "revision" : "bfc0b6f81adc06ce5121eb23f628473638d67c5c",
-        "version" : "1.2022062300.0"
+        "revision" : "748c7837511d0e6a507737353af268484e1745e2",
+        "version" : "1.2024011601.1"
       }
     },
     {
-      "identity" : "corexlsx",
+      "identity" : "app-check",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CoreOffice/CoreXLSX.git",
+      "location" : "https://github.com/google/app-check.git",
       "state" : {
-        "revision" : "1391f3832ea2eeee5186ea8abb81ea49ed0609cc",
-        "version" : "0.14.2"
+        "revision" : "3b62f154d00019ae29a71e9738800bb6f18b236d",
+        "version" : "10.19.2"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "8872dbd7d947acf757abab933da10e83c1842280",
-        "version" : "10.17.0"
+        "revision" : "eca84fd638116dd6adb633b5a3f31cc7befcbb7d",
+        "version" : "10.29.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "6b332152355c372ace9966d8ee76ed191f97025e",
-        "version" : "10.17.0"
+        "revision" : "fe727587518729046fc1465625b9afd80b5ab361",
+        "version" : "10.28.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "aae45a320fd0d11811820335b1eabc8753902a40",
-        "version" : "9.2.5"
+        "revision" : "a637d318ae7ae246b02d7305121275bc75ed5565",
+        "version" : "9.4.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "1cd556b33550982ec17f80e358253d905e756f0f",
-        "version" : "7.11.6"
+        "revision" : "57a1d307f42df690fdef2637f3e5b776da02aad6",
+        "version" : "7.13.3"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/grpc-binary.git",
       "state" : {
-        "revision" : "a673bc2937fbe886dd1f99c401b01b6d977a9c98",
-        "version" : "1.49.1"
+        "revision" : "e9fad491d0673bdda7063a0341fb6b47a30c5359",
+        "version" : "1.62.2"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "d415594121c9e8a4f9d79cecee0965cf35e74dbd",
-        "version" : "3.1.1"
+        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
+        "version" : "3.5.0"
       }
     },
     {
@@ -82,12 +82,30 @@
       }
     },
     {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess.git",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
       "state" : {
-        "revision" : "9d108e9112aa1d65ce508facf804674546116d9c",
-        "version" : "1.22.3"
+        "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
+        "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "marquee",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftUIKit/Marquee.git",
+      "state" : {
+        "revision" : "69d7b7c6c34ed41d9299cfa8406f91f529c4fef3",
+        "version" : "0.3.0"
       }
     },
     {
@@ -95,8 +113,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
+        "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
+        "version" : "2.30910.0"
+      }
+    },
+    {
+      "identity" : "opencombine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpenCombine/OpenCombine.git",
+      "state" : {
+        "revision" : "8576f0d579b27020beccbccc3ea6844f3ddfc2c2",
+        "version" : "0.14.0"
       }
     },
     {
@@ -104,8 +131,44 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
-        "version" : "2.3.1"
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "regularexpressions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Peter-Schorn/RegularExpressions.git",
+      "state" : {
+        "revision" : "b27140d0bd3a9a1e61f2324f644219be98eb3311",
+        "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "spotifyapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Peter-Schorn/SpotifyAPI.git",
+      "state" : {
+        "revision" : "daccfb042862bcfd369c7bd1906eddcb801180ee",
+        "version" : "3.0.3"
+      }
+    },
+    {
+      "identity" : "swift-crypto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-crypto.git",
+      "state" : {
+        "revision" : "ddb07e896a2a8af79512543b1c7eb9797f8898a5",
+        "version" : "1.1.7"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "9cb486020ebf03bfa5b5df985387a14a98744537",
+        "version" : "1.6.1"
       }
     },
     {
@@ -115,24 +178,6 @@
       "state" : {
         "revision" : "07f7f26ded8df9645c072f220378879c4642e063",
         "version" : "1.25.1"
-      }
-    },
-    {
-      "identity" : "xmlcoder",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maxdesiatov/XMLCoder.git",
-      "state" : {
-        "revision" : "ca932442d7481700f5434a7b138c47dd42d9902b",
-        "version" : "0.14.0"
-      }
-    },
-    {
-      "identity" : "zipfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/weichsel/ZIPFoundation.git",
-      "state" : {
-        "revision" : "a3f5c2bae0f04b0bce9ef3c4ba6bd1031a0564c4",
-        "version" : "0.9.17"
       }
     }
   ],

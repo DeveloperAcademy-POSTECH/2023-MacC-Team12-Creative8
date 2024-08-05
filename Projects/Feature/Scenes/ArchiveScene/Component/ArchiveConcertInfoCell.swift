@@ -23,7 +23,7 @@ struct ArchiveConcertInfoCell: View {
   
   var body: some View {
     ZStack {
-      Color.white
+      Color.mainWhite
       imageBG
       VStack {
         menuBar
@@ -32,6 +32,7 @@ struct ArchiveConcertInfoCell: View {
       }
     }
     .clipShape(RoundedRectangle(cornerRadius: 12))
+    .frame(width: UIWidth*0.44)
     .onAppear { dataManager.modelContext = modelContext }
   }
   
@@ -49,7 +50,7 @@ struct ArchiveConcertInfoCell: View {
       } label: {
         Image(systemName: "ellipsis")
           .font(.title3)
-          .foregroundStyle(Color.black)
+          .foregroundStyle(Color.mainBlack)
           .padding()
       }
     }
@@ -68,14 +69,31 @@ struct ArchiveConcertInfoCell: View {
             }
             .padding(EdgeInsets(top: 4, leading: 7, bottom: 4, trailing: 7))
             .font(.caption2)
-            .background(Capsule().foregroundStyle(Color.mainOrange))
+            .foregroundStyle(Color.mainOrange)
+            .background(Capsule().foregroundStyle(Color.orange100))
             Group {
               Text(info.artistInfo.name).font(.subheadline).bold().foregroundStyle(Color.mainBlack)
                 .padding(.vertical, 8)
-              Text(info.setlist.venue).font(.footnote).foregroundStyle(Color.mainBlack)
+                
+                Text(info.setlist.venue).font(.footnote).foregroundStyle(Color(UIColor.systemGray2))
             }
             .padding(.horizontal, 3)
-
+            
+//          VStack(alignment: .leading) {
+//            Text(DateFormatter.dateFormatter().string(from: info.setlist.date))
+//              .padding(EdgeInsets(top: 3, leading: 7, bottom: 3, trailing: 7))
+//              .font(.caption)
+//              .fontWeight(.semibold)
+//              .foregroundStyle(Color.mainOrange)
+//              .background(Capsule().foregroundStyle(Color.orange100))
+//            Text(info.artistInfo.name)
+//              .font(.subheadline)
+//              .bold()
+//              .foregroundStyle(Color.mainBlack)
+//              .padding(.vertical, 8)
+//            Text(info.setlist.venue)
+//              .font(.footnote)
+//              .foregroundStyle(Color(UIColor.systemGray2))
           }
           .lineLimit(1)
           .padding(EdgeInsets(top: 12, leading: 0, bottom: 20, trailing: 0))
@@ -86,7 +104,6 @@ struct ArchiveConcertInfoCell: View {
       .padding(.horizontal, 10)
       .background(
         Rectangle()
-          .frame(width: UIWidth*0.43)
           .foregroundStyle(Color.mainWhite)
       )
     }
@@ -101,8 +118,8 @@ struct ArchiveConcertInfoCell: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.mainGrey1, lineWidth: 1)
-                .foregroundStyle(Color.clear)
+                .stroke(Color(UIColor.systemGray3), lineWidth: 1)
+//                .foregroundStyle(Color.clear)
             )
         } placeholder: {
           ProgressView()
@@ -129,7 +146,5 @@ struct ArchiveConcertInfoCell: View {
       }
     }
     .aspectRatio(1.0, contentMode: .fit)
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    
   }
 }

@@ -12,145 +12,189 @@ import Core
 import UI
 import Combine
 
-public struct MainView: View {
-  @Binding var selectedTab: Tab
-  @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
-  @StateObject var viewModel = MainViewModel()
-  @State var dataManager = SwiftDataManager()
-  @Environment(\.modelContext) var modelContext
-  @StateObject var tabViewManager: TabViewManager
-  
-  public var body: some View {
-    NavigationStack(path: $tabViewManager.pageStack) {
-      Group {
-        if likeArtists.isEmpty {
-          EmptyMainView(selectedTab: $selectedTab)
-        } else {
-          ScrollView {
-            mainArtistsView
-              .padding(.top, 11)
-              .id(likeArtists)
-          }
-          .scrollIndicators(.hidden)
-          .onReceive(tabViewManager.$scrollToTop) { _ in
-            withAnimation {
-              viewModel.scrollToIndex = 0
-              viewModel.selectedIndex = 0
+struct MainView: View {
+    @Binding var selectedTab: Tab
+    @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
+    @AppStorage("hasClickedSeeArchiveArtistButton") private var hasClickedButton: Bool = false
+    @StateObject var viewModel = MainViewModel()
+    @Environment(\.modelContext) var modelContext
+    @StateObject var tabViewManager: TabViewManager
+    @State private var rect: CGRect = .zero
+    
+    public var body: some View {
+        NavigationStack(path: $tabViewManager.pageStack) {
+            Group {
+                if likeArtists.isEmpty {
+                    EmptyMainView(selectedTab: $selectedTab)
+                } else {
+                    contentView
+                        .id(likeArtists)
+                }
             }
-          }
-        }
-      }
-      .padding(.top, 15)
-      .background(Color.backgroundWhite)
-      .onAppear {
-        dataManager.modelContext = modelContext
-        if viewModel.setlists[0] == nil {
-          var idx = likeArtists.count-1
-          for artist in likeArtists.reversed() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-              viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-              idx -= 1
+            .background(Color.gray6)
+            .onAppear {
+                viewModel.fetchInitialSetlists(likeArtists: likeArtists, modelContext: modelContext)
             }
-          }
-        }
-        
-      }
-      .onChange(of: likeArtists) { _, newValue in
-        var idx = likeArtists.count-1
-        for artist in likeArtists.reversed() {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            viewModel.getSetlistsFromSetlistFM(artistMbid: artist.artistInfo.mbid, idx: idx)
-            idx -= 1
-          }
-        }
-      }
-      .navigationDestination(for: NavigationDelivery.self) { value in
-        if value.setlistId != nil {
-          SetlistView(setlistId: value.setlistId, artistInfo: ArtistInfo(
-            name: value.artistInfo.name,
-            alias: value.artistInfo.alias,
-            mbid: value.artistInfo.mbid,
-            gid: value.artistInfo.gid,
-            imageUrl: value.artistInfo.imageUrl,
-            songList: value.artistInfo.songList))
-        } else {
-          ArtistView(selectedTab: $selectedTab, artistName: value.artistInfo.name, artistAlias: value.artistInfo.alias, artistMbid: value.artistInfo.mbid)
-        }
-      }
-    }
-  }
-  
-  public var mainArtistsView: some View {
-    VStack(spacing: 0) {
-      artistNameScrollView
-      artistContentView
-    }
-    .onChange(of: viewModel.scrollToIndex) {
-      viewModel.selectedIndex = viewModel.scrollToIndex
-    }
-  }
-  public var artistNameScrollView: some View {
-    ScrollView(.horizontal) {
-      ScrollViewReader { scrollViewProxy in
-        HStack(spacing: UIWidth * 0.13) {
-          ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
-            let artistName = viewModel.replaceFirstSpaceWithNewline(data.artistInfo.name)
-            ArtistNameView(selectedTab: $selectedTab,
-                           viewModel: viewModel,
-                           index: index, name: artistName)
-            .id(index)
-            .onTapGesture {
-              withAnimation {
-                viewModel.selectedIndex = index
-                viewModel.scrollToIndex = index
-              }
+            .onChange(of: likeArtists) { _, newValue in
+                viewModel.updateSetlists(likeArtists: newValue)
             }
-          }
-          Color.clear
-            .frame(width: UIWidth * 0.7)
+            .navigationDestination(for: NavigationDelivery.self, destination: viewModel.navigationDestination(for:))
         }
-        .frame(height: UIWidth * 0.22)
+    }
+    
+    private var contentView: some View {
+        ScrollView(.vertical) {
+            seeArchiveArtistButton
+                .padding(.top)
+                .padding(.trailing, 36)
+            artistContent
+                .scrollIndicators(.hidden)
+                .onReceive(tabViewManager.$scrollToTop) { _ in
+                    viewModel.resetScroll()
+                }
+        }
+    }
+    
+    private var seeArchiveArtistButton: some View {
+        HStack {
+            Spacer()
+            NavigationLink(destination: ArchivingArtistView()) {
+                Text("찜한 아티스트")
+                    .foregroundColor(.gray)
+                    .font(.footnote).bold()
+            }
+        }
         .onAppear {
-          if viewModel.selectedIndex == nil || viewModel.scrollToIndex == nil {
-            if !likeArtists.isEmpty {
-              viewModel.selectedIndex = 0
-              viewModel.scrollToIndex = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                hasClickedButton = true
             }
-          }
         }
-        .onChange(of: viewModel.scrollToIndex) {
-          viewModel.selectedIndex = viewModel.scrollToIndex
-          withAnimation(.easeInOut(duration: 0.3)) {
-            scrollViewProxy.scrollTo(viewModel.scrollToIndex, anchor: .leading)
-          }
+    }
+    
+    private var artistIndicators: some View {
+        HStack {
+            let count = likeArtists.count
+            if count == 1 {
+                Circle()
+                    .frame(width: 8)
+                    .foregroundColor(.black)
+            } else {
+                ForEach(0..<min(count, 5), id: \.self) { index in
+                    indicator(for: index)
+                }
+            }
         }
-        .onChange(of: likeArtists, { _, _ in
+    }
+    
+    @ViewBuilder
+    private func indicator(for idx: Int) -> some View {
+        if viewModel.selectedIndex == idx {
+            Capsule()
+                .frame(width: 16, height: 8)
+                .foregroundColor(.black)
+        } else {
+            Circle()
+                .frame(width: 8)
+                .foregroundColor(.secondary.opacity(0.5))
+        }
+    }
+    
+    private var artistContent: some View {
+        ZStack(alignment: .topTrailing) {
+            VStack {
+                Spacer().frame(height: 10)
+                artistIndicators
+                artistNameScrollView
+                artistImage
+                artistItemsTabView()
+            }
+            .onChange(of: viewModel.scrollToIndex) {
+                viewModel.selectedIndex = $0
+            }
+            if !hasClickedButton {
+                MainTooltipView()
+                    .padding(.trailing, 16)
+            }
+        }
+    }
+    
+    public var artistNameScrollView: some View {
+        TabView(selection: $viewModel.selectedIndex) {
+            ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
+                ArtistNameView(selectedTab: $selectedTab,
+                               viewModel: viewModel,
+                               index: index, name: data.artistInfo.name)
+                    .id(index)
+                    .lineLimit(nil)
+            }
+        }
+        .frame(width: UIWidth, height: UIHeight * 0.1)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .onAppear {
           viewModel.selectedIndex = 0
           viewModel.scrollToIndex = 0
-        })
-        .scrollTargetLayout()
-      }
-    }
-    .scrollIndicators(.hidden)
-    .safeAreaPadding(.leading, UIWidth * 0.1)
-  }
-  public var artistContentView: some View {
-    ScrollView(.horizontal) {
-      HStack(spacing: 12) {
-        ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
-          ArtistsContentView(selectedTab: $selectedTab, viewModel: viewModel, artistInfo: data.artistInfo, index: index)
         }
-      }
-      .scrollTargetLayout()
+        .onChange(of: viewModel.selectedIndex) { _, newIndex in
+            viewModel.selectArtist(index: newIndex)
+        }
     }
-    .scrollTargetBehavior(.viewAligned)
-    .scrollIndicators(.hidden)
-    .scrollPosition(id: $viewModel.scrollToIndex)
-    .safeAreaPadding(.horizontal, UIWidth * 0.09)
-    .safeAreaPadding(.trailing, UIWidth * 0.005)
-  }
-}
-
-#Preview {
-  MainView(selectedTab: .constant(.home), viewModel: MainViewModel(), tabViewManager: .init(consecutiveTaps: Empty().eraseToAnyPublisher()))
+    
+    private var artistImage: some View {
+        ScrollView(.horizontal) {
+            ScrollViewReader { scrollViewProxy in
+                HStack(spacing: 12) {
+                    ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
+                        ArtistImage(selectedTab: $selectedTab, imageUrl: data.artistInfo.imageUrl)
+                            .id(index)
+                            .buttonStyle(BasicButtonStyle())
+                    }
+                }
+                .scrollTargetLayout()
+                .onAppear { viewModel.scrollToSelectedIndex(proxy: scrollViewProxy) }
+                .onChange(of: viewModel.scrollToIndex) { _, _ in
+                    viewModel.scrollToSelectedIndex(proxy: scrollViewProxy)
+                }
+                .onChange(of: likeArtists) { _, _ in
+                    viewModel.resetScrollToIndex(proxy: scrollViewProxy, likeArtists: likeArtists)
+                }
+            }
+        }
+        .disabled(true)
+        .scrollTargetBehavior(.viewAligned)
+        .scrollIndicators(.hidden)
+        .safeAreaPadding(.horizontal, UIWidth * 0.09)
+        .safeAreaPadding(.trailing, UIWidth * 0.005)
+    }
+    
+    @ViewBuilder
+    func artistItemsTabView() -> some View {
+        TabView(selection: $viewModel.selectedIndex) {
+            ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
+                ArtistsContentView(selectedTab: $selectedTab, viewModel: viewModel, artistInfo: data.artistInfo, tabViewManager: tabViewManager, index: index)
+                    .tag(index)
+                    .background(GeometryReader {
+                        Color.clear.preference(key: ViewRectKey.self, value: [$0.frame(in: .local)])
+                    })
+                    .offset(y: 0)
+            }
+        }
+        .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .onChange(of: viewModel.selectedIndex) { _, newIndex in
+            viewModel.scrollToIndex = newIndex
+        }
+        .onPreferenceChange(ViewRectKey.self) { value in
+            if let firstRect = value.first {
+                self.rect = firstRect
+            }
+        }
+    }
+    
+    private struct ViewRectKey: PreferenceKey {
+        typealias Value = Array<CGRect>
+        static var defaultValue = [CGRect]()
+        static func reduce(value: inout Value, nextValue: () -> Value) {
+            value += nextValue()
+        }
+    }
 }

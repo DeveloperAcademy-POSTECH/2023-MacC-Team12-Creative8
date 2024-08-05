@@ -13,8 +13,6 @@ import Core
 import UI
 import Combine
 
-// TODO: 추후 수정하기
-
 struct EmptyMainSetlistView: View {
   @ObservedObject var viewModel: MainViewModel
   
@@ -29,7 +27,7 @@ struct EmptyMainSetlistView: View {
         .multilineTextAlignment(.leading)
         
         Text("찜한 가수의 세트리스트가 없다면,")
-          .foregroundStyle(Color.fontGrey2)
+          .foregroundStyle(Color.black850)
           .font(.footnote)
           .padding(.top)
           .multilineTextAlignment(.leading)
@@ -39,11 +37,11 @@ struct EmptyMainSetlistView: View {
             Link(destination: URL(string: "https://www.setlist.fm")!) {
               Text("Setlist.fm")
                 .underline()
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color.black850)
                 .font(.footnote)
             }
             Text("에서 직접 추가할 수 있어요.")
-              .foregroundStyle(Color.fontGrey2)
+              .foregroundStyle(Color.black850)
               .font(.footnote)
               .multilineTextAlignment(.leading)
           }
@@ -51,13 +49,13 @@ struct EmptyMainSetlistView: View {
         } else {
           HStack(spacing: 0) {
             Text("에서 직접 추가할 수 있어요.")
-                        .foregroundStyle(Color.fontGrey2)
+                        .foregroundStyle(Color.black850)
                         .font(.footnote)
                         .multilineTextAlignment(.leading)
             Link(destination: URL(string: "https://www.setlist.fm")!) {
               Text("Setlist.fm")
                 .underline()
-                .foregroundStyle(Color.fontGrey2)
+                .foregroundStyle(Color.black850)
                 .font(.footnote)
             }
           }
@@ -68,7 +66,7 @@ struct EmptyMainSetlistView: View {
 
       Link(destination: URL(string: "https://www.setlist.fm")!) {
         RoundedRectangle(cornerRadius: 14)
-          .foregroundStyle(Color.mainGrey1)
+          .foregroundStyle(Color(UIColor.systemGray))
           .frame(height: UIHeight * 0.06)
           .overlay {
             Text("세트리스트 추가하기")
