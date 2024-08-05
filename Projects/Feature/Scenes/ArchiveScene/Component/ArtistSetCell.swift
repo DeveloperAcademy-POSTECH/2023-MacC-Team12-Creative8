@@ -21,12 +21,14 @@ struct ArtistSetCell: View {
         Text(name)
           .font(.subheadline)
           .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
+          .frame(maxWidth: UIWidth * 0.17)
     }
     .padding(6)
     .background {
       let color = isSelected ? Color.mainBlack : Color.mainWhite
       color.clipShape(RoundedRectangle(cornerRadius: 12))
     }
+    .lineLimit(1)
   }
   
   @ViewBuilder

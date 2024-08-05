@@ -87,6 +87,7 @@ struct BookmarkedSetlistsView: View {
   }
   
   private var setlistsLayer: some View {
+    // TODO: vm.getFormattedDateFromDate() 오류 납니다...
     SummarizedSetlistInfoView(
       type: .bookmarkedConcert,
       info: SetlistInfo(
