@@ -56,7 +56,7 @@ struct SummarizedSetlistInfoView: View {
     private var noInfoView: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(info == nil && type == .recentConcert ? "등록된 공연이 없어요" : "좋아하는 공연을 북마크 해보세요.")
-                .foregroundStyle(Color.black)
+                .foregroundStyle(Color.mainBlack)
                 .font(.headline).bold()
             
             if type == .recentConcert {

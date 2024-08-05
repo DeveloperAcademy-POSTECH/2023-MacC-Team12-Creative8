@@ -37,7 +37,7 @@ struct ArtistMainSetlistView: View {
         .background(
             Rectangle()
                 .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
-                .foregroundStyle(Color.white)
+                .foregroundStyle(Color.mainWhite)
         )
         .padding(.horizontal)
         .overlay(

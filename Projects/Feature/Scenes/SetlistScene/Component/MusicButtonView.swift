@@ -23,7 +23,7 @@ struct MusicButtonView: View {
       
       Text(music.name)
         .font(.system(size: 15))
-        .foregroundStyle(Color.black)
+        .foregroundStyle(Color.mainBlack)
         .opacity(0.6)
     }
       
