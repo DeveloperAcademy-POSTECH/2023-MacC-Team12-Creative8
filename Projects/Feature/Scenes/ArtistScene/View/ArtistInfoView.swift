@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftData
 import Core
 import UI
+import Marquee
 
 struct ArtistInfoView: View {
   @ObservedObject var vm: ArtistViewModel
@@ -27,7 +28,7 @@ struct ArtistInfoView: View {
         Spacer()
         buttonLayer
       }
-      .padding(.horizontal, UIWidth * 0.07)
+      .padding(.horizontal, UIWidth * 0.05)
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
@@ -69,24 +70,52 @@ struct ArtistInfoView: View {
     } else {
       return AnyView(Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
         .resizable()
-        .renderingMode(.template)
-        .foregroundStyle(Color(UIColor.systemGray3))
-        .background {
-          Color(UIColor.systemGray)
-            .cornerRadius(12)
-        }
         .aspectRatio(1, contentMode: .fit)
         .frame(width: UIWidth * 0.57)
       )
     }
   }
   
+  @State private var textWidth: CGFloat = 0
+  @State private var parentWidth: CGFloat = 0
+  
   private var nameLayer: some View {
-    Text(vm.artistInfo.name)
-      .font(.title3)
+    HStack(spacing: 0) {
+      if textWidth > parentWidth {
+        Marquee {
+          Text(vm.artistInfo.name)
+            .fixedSize(horizontal: true, vertical: false)
+        }
+        .marqueeDuration(5.0)
+        .frame(width: parentWidth)
+      } else {
+        Text(vm.artistInfo.name)
+          .frame(width: UIWidth * 0.8, alignment: .leading)
+      }
+    }
+    .font(.title3)
+    .fontWeight(.semibold)
+    .foregroundColor(Color.mainBlack)
+    .background(
+      GeometryReader { geo in
+        Color.clear
+          .onAppear {
+            parentWidth = geo.size.width
+            measureTextWidth()
+          }
+      }
+    )
+  }
+  
+  private func measureTextWidth() {
+    let text = Text(vm.artistInfo.name)
+      .font(.title)
       .fontWeight(.semibold)
-      .foregroundStyle(Color.mainBlack)
-      .minimumScaleFactor(0.1)
+    
+    let controller = UIHostingController(rootView: text)
+    controller.view.frame.size = .zero
+    controller.view.sizeToFit()
+    textWidth = controller.view.intrinsicContentSize.width
   }
   
   private var buttonLayer: some View {
@@ -107,7 +136,7 @@ struct ArtistInfoView: View {
         .aspectRatio(contentMode: .fit)
         .frame(width: UIWidth * 0.07)
         .fontWeight(.thin)
-        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainWhite)
+        .foregroundStyle(vm.isLikedArtist ? Color.mainOrange : Color.mainBlack)
         .scaleEffect(vm.isLikedArtist ? scale : 1.0)
     }
     .onDisappear {

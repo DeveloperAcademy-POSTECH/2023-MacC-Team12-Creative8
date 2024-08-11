@@ -48,7 +48,7 @@ struct BookmarkedSetlistsView: View {
                   .padding(.horizontal, 5)
               } else {
                 Circle()
-                  .frame(width: 10)
+                  .frame(width: 8)
                   .foregroundStyle(Color.gray)
                   .padding(.vertical)
                   .padding(.horizontal, 5)
@@ -77,11 +77,10 @@ struct BookmarkedSetlistsView: View {
   }
   
   private var emptyLayer: some View {
-    SummarizedSetlistInfoView(
+  SummarizedSetlistInfoView(
       type: .bookmarkedConcert,
       info: nil,
       infoButtonAction: nil,
-      cancelBookmarkAction: nil,
       chevronButtonAction: nil
     )
   }
@@ -101,14 +100,6 @@ struct BookmarkedSetlistsView: View {
         venue: "\(scrollPosition!.setlist.venue)\n\(scrollPosition!.setlist.city), \(scrollPosition!.setlist.country)"
       ),
       infoButtonAction: nil,
-      cancelBookmarkAction: {
-        vm.swiftDataManager.deleteArchivedConcertInfo(scrollPosition!)
-        for (index, item) in bookmarkedSetlists.enumerated() {
-          if item.id == scrollPosition!.id {
-            bookmarkedSetlists.remove(at: index)
-          }
-        }
-      },
       chevronButtonAction: {
         vm.archivingViewModel.selectSegment = .bookmark
         vm.archivingViewModel.selectArtist = vm.artistInfo.name

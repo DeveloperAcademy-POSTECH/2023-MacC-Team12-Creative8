@@ -73,7 +73,6 @@ struct ArtistsContentView: View {
       type: .recentConcert,
       info: nil,
       infoButtonAction: nil,
-      cancelBookmarkAction: nil,
       chevronButtonAction: nil
     )
   }
@@ -94,7 +93,6 @@ struct ArtistsContentView: View {
         venue: "\(venueName)\n\(city), \(countryName)"
       ),
       infoButtonAction: nil,
-      cancelBookmarkAction: nil,
       chevronButtonAction: {
         viewModel.navigateToArtistView = true
       }

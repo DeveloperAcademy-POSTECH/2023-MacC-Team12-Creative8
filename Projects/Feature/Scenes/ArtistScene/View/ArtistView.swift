@@ -28,6 +28,8 @@ struct ArtistView: View {
           ArtistInfoView(vm: vm)
           if vm.setlists?.count != 0 {
             BookmarkedSetlistsView(vm: vm, selectedTab: $selectedTab)
+            Divider()
+              .padding(.horizontal, UIWidth * 0.05)
           }
           AllSetlistsView(vm: vm)
         }
@@ -45,10 +47,10 @@ struct ArtistView: View {
 }
 
 #Preview {
-//  NavigationStack {
-//    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
-//  }
   NavigationStack {
-    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+    ArtistView(selectedTab: .constant(.archiving), artistName: "IU", artistAlias: "아이유", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
   }
+//  NavigationStack {
+//    ArtistView(selectedTab: .constant(.archiving), artistName: "검정치마", artistAlias: "검정치마", artistMbid: "b9545342-1e6d-4dae-84ac-013374ad8d7c")
+//  }
 }
