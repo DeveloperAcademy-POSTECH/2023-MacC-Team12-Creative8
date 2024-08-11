@@ -57,6 +57,7 @@ struct SetlistView: View {
             if vm.isEmptySetlist(setlist) {
               EmptySetlistView()
                 .padding(UIWidth * 0.1)
+                .padding(.top, 100)
             } else {
               ListView(setlist: setlist, artistInfo: artistInfo, vm: vm)
                 .padding(UIWidth * 0.1)
@@ -74,6 +75,7 @@ struct SetlistView: View {
                                    showToastMessageCapture: $exportViewModel.showToastMessageCapture,
                                    showToastMessageSubscription: $exportViewModel.showToastMessageSubscription,
                                    showSpotifyAlert: $exportViewModel.showSpotifyAlert,
+                                   showCaptureAlert: $exportViewModel.showCaptureAlert,
                                    exportViewModel: exportViewModel)
         }
       }

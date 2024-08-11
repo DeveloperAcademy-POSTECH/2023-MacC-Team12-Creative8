@@ -59,7 +59,7 @@ struct SetlistInfoView: View {
               .font(.footnote)
               .foregroundStyle(Color(UIColor.systemGray))
               .padding(.bottom, 7)
-            HStack {
+            HStack(spacing: 3) {
               Image(systemName: "calendar")
               Text(date)
             }

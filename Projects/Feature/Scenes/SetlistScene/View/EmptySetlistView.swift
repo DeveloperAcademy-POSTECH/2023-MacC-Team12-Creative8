@@ -12,22 +12,24 @@ import UI
 struct EmptySetlistView: View {
   var body: some View {
     VStack {
-      Text("세트리스트가 없습니다")
-        .font(.callout)
+      Text("등록된 세트리스트가 없어요")
+        .font(.headline)
         .fontWeight(.semibold)
-        .foregroundStyle(Color.mainBlack)
-        .padding(.bottom)
-        .padding(.top, 100)
-      
-      Group {
-        Text("세트리스트를 직접 작성하고 싶으신가요?")
-        Text("Setlist.fm에서 추가해보세요.")
+        .padding(.top, UIHeight * 0.1)
+        .padding(.bottom, 5)
+      Text("세트리스트를 직접 작성하고 싶으신가요?")
+        .multilineTextAlignment(.center)
+        .font(.footnote)
+        .foregroundStyle(Color.gray)
+      HStack(spacing: 0) {
+        Link(destination: URL(string: "https://www.setlist.fm")!) {
+          Text("Setlist.fm")
+            .underline()
+        }
+        Text("에서 추가하세요.")
       }
-      .foregroundStyle(Color(UIColor.systemGray))
+      .foregroundStyle(Color.gray)
       .font(.footnote)
-      .multilineTextAlignment(.center)
-      SetlistFMLinkButtonView()
-        .padding(.top, 100)
     }
   }
 }

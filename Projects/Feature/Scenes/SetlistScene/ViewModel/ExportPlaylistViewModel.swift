@@ -20,6 +20,7 @@ final class ExportPlaylistViewModel: ObservableObject {
   @Published var showLibrarySettingsAlert = false
   @Published var showMusicSettingsAlert = false
   @Published var showSpotifyAlert = false
+  @Published var showCaptureAlert = false
   
   // MARK: Photo
   func checkPhotoPermission() -> Bool {

@@ -18,7 +18,7 @@ struct BottomModalView: View {
   @ObservedObject var vm: SetlistViewModel
   @StateObject var spotifyManager = SpotifyManager.shared
   @Binding var showToastMessageAppleMusic: Bool
-  @Binding var showToastMessageCapture: Bool
+  @Binding var showCaptureALert: Bool
   @Binding var showSpotifyAlert: Bool
   @State var isSharePresented = false
   
@@ -70,12 +70,12 @@ struct BottomModalView: View {
             ProgressView()
           }
           .frame(width: UIWidth * 0.18, height: UIWidth * 0.18)
-          .padding(.trailing)
+          .padding(.trailing, 10)
         } else {
           Image("artistViewTicket", bundle: Bundle(identifier: "com.creative8.seta.UI"))
             .resizable()
             .frame(width: UIWidth * 0.18, height: UIWidth * 0.18)
-            .padding(.trailing)
+            .padding(.trailing, 10)
         }
         
         VStack(alignment: .leading) {
@@ -134,7 +134,7 @@ struct BottomModalView: View {
   private var captureSetListButtonView: some View {
     Button(action: {
       vm.showModal = false
-      showToastMessageCapture = true
+      showCaptureALert = true
     }, label: {
       Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
         .font(.callout)

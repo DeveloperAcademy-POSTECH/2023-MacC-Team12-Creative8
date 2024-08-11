@@ -18,17 +18,18 @@ struct ExportPlaylistButtonView: View {
   @Binding var showToastMessageCapture: Bool
   @Binding var showToastMessageSubscription: Bool
   @Binding var showSpotifyAlert: Bool
+  @Binding var showCaptureAlert: Bool
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   
   private func toastMessageToShow() -> LocalizedStringResource? {
     if showToastMessageAppleMusic {
       return "1~2분 후 Apple Music에서 확인하세요"
     } else if showToastMessageCapture {
-      return "캡쳐된 사진을 앨범에서 확인하세요"
+      return "캡쳐된 이미지를 앨범에서 확인하세요"
     } else if showToastMessageSubscription {
-        return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
+      return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
     } else if showSpotifyAlert {
-        return "10초 뒤 Spotify에서 확인하세요"
+      return "10초 뒤 Spotify에서 확인하세요"
     } else {
       return nil
     }
@@ -71,13 +72,31 @@ struct ExportPlaylistButtonView: View {
         }
       }
       
-      if showToastMessageCapture {
-        captureSetlistAlertView
+      if showCaptureAlert {
+        ZStack {
+          Color.black.opacity(0.6).ignoresSafeArea()
+          captureSetlistAlertView
+            .padding(.bottom, 120)
+        }
       }
-
+      
+      if showToastMessageCapture {
+        VStack {
+          ToastMessageView(
+            message: "캡쳐된 이미지를 앨범에서 확인하세요",
+            subMessage: nil,
+            icon: "checkmark.circle.fill",
+            color: Color.toast1
+          )
+          .padding(.horizontal, UIWidth * 0.075)
+          .padding(.top, 5)
+          Spacer()
+        }
+      }
+      
     }
     .sheet(isPresented: $vm.showModal) {
-      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showToastMessageCapture: $showToastMessageCapture, showSpotifyAlert: $showSpotifyAlert)
+      BottomModalView(setlist: setlist, artistInfo: artistInfo, exportViewModel: exportViewModel, vm: vm, showToastMessageAppleMusic: $showToastMessageAppleMusic, showCaptureALert: $showCaptureAlert, showSpotifyAlert: $showSpotifyAlert)
         .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
     }
@@ -85,26 +104,26 @@ struct ExportPlaylistButtonView: View {
   
   private var captureSetlistAlertView: some View {
     ZStack {
-      Color.black.opacity(0.6).ignoresSafeArea()
       RoundedRectangle(cornerRadius: 12.0)
-        .frame(width: UIWidth * 0.95, height: UIHeight * 0.25)
+        .frame(width: UIWidth * 0.95, height: UIHeight * 0.23)
         .foregroundStyle(Color.white)
       VStack {
         Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
-          .font(.headline.bold())
+          .font(.callout.bold())
           .padding()
         Text("위의 뮤직앱에서는 이미지로 된 세트리스트를\n인식해 플레이리스트로 변환합니다.\n원하는 세트리스트를 이미지로 받아보세요.")
           .multilineTextAlignment(.center)
-          .font(.callout)
+          .font(.footnote)
           .foregroundStyle(Color.gray)
         Divider()
-          .padding(.vertical)
+          .padding(.vertical, 15)
         HStack {
           Button {
-            showToastMessageCapture = false
+            showCaptureAlert = false
           } label: {
             Text("취소")
               .frame(width: UIWidth * 0.95 * 0.5)
+              .font(.callout)
               .foregroundStyle(Color.black)
               .padding(.bottom)
           }
@@ -113,10 +132,12 @@ struct ExportPlaylistButtonView: View {
             if !exportViewModel.checkPhotoPermission() {
               takeSetlistToImage(vm.setlistSongKoreanName)
             }
-            showToastMessageCapture = false
+            showCaptureAlert = false
+            showToastMessageCapture = true
           } label: {
             Text("이미지 저장")
               .frame(width: UIWidth * 0.95 * 0.5)
+              .font(.callout)
               .fontWeight(.bold)
               .padding(.bottom)
           }
