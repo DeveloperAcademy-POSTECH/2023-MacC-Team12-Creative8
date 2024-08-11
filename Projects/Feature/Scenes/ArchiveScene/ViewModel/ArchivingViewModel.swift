@@ -37,7 +37,7 @@ class ArchivingViewModel: ObservableObject {
   static let shared = ArchivingViewModel()
   @Published var selectSegment: SelectEnum = .bookmark
 	@Published var selectArtist: String = ""
-	@Published var artistSet: Set<String> = []
+	@Published var artistSet: Set<ArchivedConcertInfo> = []
 
 	func insertArtistSet(_ info: [ArchivedConcertInfo]) {
     if !artistSet.isEmpty { 
@@ -46,10 +46,26 @@ class ArchivingViewModel: ObservableObject {
         selectArtist = ""
       }
     }
+      
+      // 임시 딕셔너리를 사용하여 아티스트 이름별로 가장 최근 정보를 저장
+      var uniqueArtists: [String: ArchivedConcertInfo] = [:]
 
-		for index in 0..<info.count {
-			artistSet.insert(info[index].artistInfo.name)
-		}
+      for concert in info {
+          let artistName = concert.artistInfo.name
+          // 이미 존재하는 아티스트라면, 더 최신 정보로 업데이트 (또는 다른 기준 적용)
+          if let existingConcert = uniqueArtists[artistName] {
+              uniqueArtists[artistName] = concert
+          } else {
+              uniqueArtists[artistName] = concert
+          }
+      }
+
+      // 중복이 제거된 아티스트 정보를 Set에 삽입
+      artistSet = Set(uniqueArtists.values)
+
+//		for index in 0..<info.count {
+//			artistSet.insert(info[index])
+//		}
 	}
 
   enum SelectEnum {

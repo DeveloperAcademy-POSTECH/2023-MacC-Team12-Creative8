@@ -73,13 +73,15 @@ extension ArchivingView {
     }
   }
   
-  private func findArtistImageURL(byName name: String) -> String {
-    if let url = likeArtists.first(where: { $0.artistInfo.name.localizedStandardContains(name) })?.artistInfo.imageUrl {
-      return url
-    } else {
-      return ""
-    }
-  }
+//  private func findArtistImageURL(byItem item: ArchivedConcertInfo) -> String {
+//      if let url = likeArtists.first(where: { $0.artistInfo.mbid == item.artistInfo.mbid })?.artistInfo.imageUrl {
+//          print("find " + item.artistInfo.name)
+//          return url
+//      } else {
+//          print("cant find " + item.artistInfo.name)
+//          return ""
+//      }
+//  }
   
   private var bookmarkListView: some View {
     VStack {
@@ -93,15 +95,15 @@ extension ArchivingView {
           } label: {
             AllArtistsSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
           }
-          ForEach(viewModel.artistSet.sorted(), id: \.self) { artist in
+          ForEach(Array(viewModel.artistSet).sorted(by: { $0.artistInfo.name < $1.artistInfo.name }), id: \.artistInfo.name) { artist in
             Button {
-              if viewModel.selectArtist == artist {
+                if viewModel.selectArtist == artist.artistInfo.name {
                 viewModel.selectArtist = ""
               } else {
-                viewModel.selectArtist = artist
+                viewModel.selectArtist = artist.artistInfo.name
               }
             } label: {
-              ArtistSetCell(name: artist, artistImgUrl: URL(string: findArtistImageURL(byName: artist)), isSelected: viewModel.selectArtist.contains(artist))
+                ArtistSetCell(name: artist.artistInfo.name, artistImgUrl: URL(string: artist.artistInfo.imageUrl), isSelected: viewModel.selectArtist.contains(artist.artistInfo.name))
             }
           }
         }
