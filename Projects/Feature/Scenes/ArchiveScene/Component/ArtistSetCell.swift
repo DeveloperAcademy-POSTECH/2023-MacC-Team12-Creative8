@@ -48,19 +48,19 @@ struct ArtistSetCell: View {
         }
       } else {
         if colorScheme == .light {
-          Image(uiImage: UIImage(named: "whiteTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+          Image(uiImage: UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
-            .overlay(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
-            )
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 8)
+//                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정   
+//            )
         } else {
-          Image(uiImage: UIImage(named: "darkTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+          Image(uiImage: UIImage(named: "darkArtistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
             .centerCropped()
-            .overlay(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
-            )
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 8)
+//                .stroke(Color(UIColor.systemGray), lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+//            )
         }
       }
     }

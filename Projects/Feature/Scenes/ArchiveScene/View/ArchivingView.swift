@@ -125,7 +125,7 @@ extension ArchivingView {
                     backgroundColor: backgroundColor,
                     foregroundColor: foregroundColor
                 )
-                .frame(width: UIWidth * 0.43)
+//                .frame(width: UIWidth * 0.42)
             }
         }
       }
