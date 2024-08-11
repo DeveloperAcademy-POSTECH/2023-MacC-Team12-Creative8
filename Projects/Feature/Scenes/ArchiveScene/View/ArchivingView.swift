@@ -27,6 +27,7 @@ struct ArchivingView: View {
       }
       .background(Color.gray6)
       .navigationTitle("보관함")
+      .navigationBarTitleDisplayMode(.large)
       .navigationDestination(for: NavigationDelivery.self) { value in
         if value.setlistId != nil {
           SetlistView(setlistId: value.setlistId, artistInfo: ArtistInfo(
