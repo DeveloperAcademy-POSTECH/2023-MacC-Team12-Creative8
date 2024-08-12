@@ -96,7 +96,7 @@ struct ArtistMainSetlistView: View {
                 }
             }
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 8)
     }
 
     private var footerView: some View {
@@ -105,6 +105,7 @@ struct ArtistMainSetlistView: View {
             Text(isExpanded ? "세트리스트 접기" : "세트리스트 전체 보기")
             Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
         }
+        .padding(.trailing, 5)
         .onTapGesture {
             isExpanded.toggle()
         }
@@ -129,7 +130,6 @@ struct ArtistMainSetlistView: View {
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 10)
         }
     }
 

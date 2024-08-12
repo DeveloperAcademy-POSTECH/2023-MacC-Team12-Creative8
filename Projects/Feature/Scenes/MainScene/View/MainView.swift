@@ -105,7 +105,6 @@ struct MainView: View {
                 Spacer().frame(height: 10)
                 artistIndicators
                 artistNameScrollView
-                artistImage
                 artistItemsTabView()
             }
             .onChange(of: viewModel.scrollToIndex) {
@@ -121,11 +120,16 @@ struct MainView: View {
     public var artistNameScrollView: some View {
         TabView(selection: $viewModel.selectedIndex) {
             ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
-                ArtistNameView(selectedTab: $selectedTab,
-                               viewModel: viewModel,
-                               index: index, name: data.artistInfo.name)
-                    .id(index)
+                VStack {
+                    ArtistNameView(selectedTab: $selectedTab,
+                                   viewModel: viewModel,
+                                   index: index, name: data.artistInfo.name)
                     .lineLimit(nil)
+                    ArtistImage(selectedTab: $selectedTab, imageUrl: data.artistInfo.imageUrl)
+
+                }
+                .id(index)
+
             }
         }
         .frame(width: UIWidth, height: UIHeight * 0.1)
@@ -137,33 +141,6 @@ struct MainView: View {
         .onChange(of: viewModel.selectedIndex) { _, newIndex in
             viewModel.selectArtist(index: newIndex)
         }
-    }
-    
-    private var artistImage: some View {
-        ScrollView(.horizontal) {
-            ScrollViewReader { scrollViewProxy in
-                HStack(spacing: 12) {
-                    ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
-                        ArtistImage(selectedTab: $selectedTab, imageUrl: data.artistInfo.imageUrl)
-                            .id(index)
-                            .buttonStyle(BasicButtonStyle())
-                    }
-                }
-                .scrollTargetLayout()
-                .onAppear { viewModel.scrollToSelectedIndex(proxy: scrollViewProxy) }
-                .onChange(of: viewModel.scrollToIndex) { _, _ in
-                    viewModel.scrollToSelectedIndex(proxy: scrollViewProxy)
-                }
-                .onChange(of: likeArtists) { _, _ in
-                    viewModel.resetScrollToIndex(proxy: scrollViewProxy, likeArtists: likeArtists)
-                }
-            }
-        }
-        .disabled(true)
-        .scrollTargetBehavior(.viewAligned)
-        .scrollIndicators(.hidden)
-        .safeAreaPadding(.horizontal, UIWidth * 0.09)
-        .safeAreaPadding(.trailing, UIWidth * 0.005)
     }
     
     @ViewBuilder
