@@ -20,6 +20,7 @@ struct ArtistSetCell: View {
         artistImg
         Text(name)
           .font(.subheadline)
+          .fontWeight(isSelected ? .semibold : .regular)
           .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
           .frame(maxWidth: UIWidth * 0.17)
     }
@@ -75,6 +76,7 @@ struct AllArtistsSetCell: View {
   var body: some View {
     Text(name)
       .foregroundStyle(isSelected ? Color.mainWhite : Color.mainBlack)
+      .fontWeight(isSelected ? .bold : .regular)
       .padding(10)
       .background {
         let color = isSelected ? Color.mainBlack : Color.mainWhite

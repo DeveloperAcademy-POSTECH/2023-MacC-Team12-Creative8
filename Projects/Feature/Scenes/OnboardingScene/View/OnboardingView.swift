@@ -81,7 +81,7 @@ public struct OnboardingView: View {
       }
       .font(.system(.footnote))
       .foregroundStyle(Color(UIColor.systemGray))
-      Spacer().frame(height: 48)
+      Spacer().frame(height: 24)
     }
     .padding(.leading, 24)
   }
@@ -94,6 +94,7 @@ public struct OnboardingView: View {
             onboardingViewModel.selectedGenere = buttonType
           } label: {
             Text(buttonType.rawValue)
+                  .fontWeight(onboardingViewModel.selectedGenere == buttonType ? .semibold : .regular)
               .font(.system(.subheadline))
               .padding(EdgeInsets(top: 9, leading: 10, bottom: 9, trailing: 10))
               .background(onboardingViewModel.selectedGenere == buttonType ? Color.mainBlack: Color.mainWhite)
@@ -103,7 +104,7 @@ public struct OnboardingView: View {
         }
       }
       .padding(.horizontal, 24)
-      .padding(.bottom, 30)
+      .padding(.bottom, 20)
     }
   }
 
