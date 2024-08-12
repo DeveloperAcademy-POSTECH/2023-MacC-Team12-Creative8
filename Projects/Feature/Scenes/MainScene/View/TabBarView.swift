@@ -68,8 +68,8 @@ public struct TabBarView: View {
     appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "mainBlack", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)
     appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor(named: "mainBlack", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)]
     
-    appearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray3
-    appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray3]
+    appearance.stackedLayoutAppearance.normal.iconColor = UIColor.systemGray
+    appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray]
 
     tabBar.standardAppearance = appearance
   }
@@ -79,24 +79,34 @@ public struct TabBarView: View {
       Group {
         MainView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
           .navigationBarTitleDisplayMode(.inline)
-          .tabItem { Label("세트리스트", systemImage: "music.note.house.fill") }
+          .tabItem {
+            Image("setlistIcon", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+              .renderingMode(.template)
+            Text("세트리스트")
+          }
           .tag(Tab.home)
         
         SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
           .navigationBarTitleDisplayMode(.inline)
-          .tabItem { Label("검색", systemImage: "magnifyingglass") }
+          .tabItem {
+            Image("searchIcon", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+              .renderingMode(.template)
+            Text("검색")
+          }
           .tag(Tab.search)
         
         ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
           .navigationBarTitleDisplayMode(.large)
-//          .background(Color.backgroundWhite)
-          .tabItem { Label("보관함", systemImage: "heart.fill") }
+          .tabItem {
+            Image("archiveIcon", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+              .renderingMode(.template)
+            Text("보관함")
+          }
           .tag(Tab.archiving)
         
         NavigationStack {
           SettingView()
             .navigationBarTitleDisplayMode(.large)
-//            .background(Color.backgroundWhite)
         }
         .tabItem { Label("더보기", systemImage: "ellipsis") }
         .tag(Tab.setting)
