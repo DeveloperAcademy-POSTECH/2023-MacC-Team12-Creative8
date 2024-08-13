@@ -65,7 +65,7 @@ public final class AppleMusicService: MusicPlaylistAddable, Sendable {
             let songsToAdd = sortedResults.compactMap { $0.1?.songs.first }
 
             // 플레이리스트 생성 및 곡 추가를 더 빠르게 처리
-            let newPlayList = try await MusicLibrary.shared.createPlaylist(
+            let _ = try await MusicLibrary.shared.createPlaylist(
                 name: name,
                 description: "Seta에서 생성된 플레이리스트 입니다.",
                 authorDisplayName: venue,
