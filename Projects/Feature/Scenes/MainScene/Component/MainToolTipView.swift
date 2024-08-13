@@ -14,10 +14,11 @@ struct MainTooltipView: View {
       CustomTriangleShape()
         .fill(Color.mainOrange)
         .offset(x: -50, y: 3)
-        .frame(width: 20, height: 20)
+        .frame(width: 20, height: 50)
       
       CustomRectangleShape(text: "메인화면 아티스트를 수정할 수 있어요")
         .frame(width: 250, height: 40)
+
     }
   }
 }
@@ -74,8 +75,8 @@ private struct CustomRectangleShape: View {
             Text(text)
                 .font(.footnote)
                 .foregroundColor(.white)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 18)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.mainOrange)

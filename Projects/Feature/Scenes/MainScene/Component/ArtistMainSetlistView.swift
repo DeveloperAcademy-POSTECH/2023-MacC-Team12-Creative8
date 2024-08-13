@@ -90,9 +90,11 @@ struct ArtistMainSetlistView: View {
                 ListRowView(index: song.tape == true ? nil : index + 1, title: song.name ?? "")
                     .opacity(song.tape == true ? 0.6 : 1.0)
                     .padding(.vertical, 7)
-
-                if index + 1 < (isExpanded ? displaySongs.count : 3) {
-                    Divider()
+                
+                if displaySongs.count > 1 {
+                    if index + 1 < (isExpanded ? displaySongs.count : 3) {
+                        Divider()
+                    }
                 }
             }
         }

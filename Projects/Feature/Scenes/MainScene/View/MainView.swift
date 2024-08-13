@@ -15,11 +15,12 @@ import Combine
 struct MainView: View {
     @Binding var selectedTab: Tab
     @Query(sort: \LikeArtist.orderIndex, order: .reverse) var likeArtists: [LikeArtist]
-    @AppStorage("hasClickedSeeArchiveArtistButton") private var hasClickedButton: Bool = false
+    @State private var isShowToolTip: Bool = true
     @StateObject var viewModel = MainViewModel()
     @Environment(\.modelContext) var modelContext
     @StateObject var tabViewManager: TabViewManager
     @State private var rect: CGRect = .zero
+    @State private var buttonFrame: CGRect = .zero
     
     public var body: some View {
         NavigationStack(path: $tabViewManager.pageStack) {
@@ -34,132 +35,136 @@ struct MainView: View {
             .background(Color.gray6)
             .onAppear {
                 viewModel.fetchInitialSetlists(likeArtists: likeArtists, modelContext: modelContext)
+                viewModel.selectedIndex = 0
             }
             .onChange(of: likeArtists) { _, newValue in
                 viewModel.updateSetlists(likeArtists: newValue)
             }
-            .navigationDestination(for: NavigationDelivery.self, destination: viewModel.navigationDestination(for:))
         }
     }
     
     private var contentView: some View {
-        ScrollView(.vertical) {
-            seeArchiveArtistButton
-                .padding(.top)
-                .padding(.trailing, 36)
-            artistContent
-                .scrollIndicators(.hidden)
-                .onReceive(tabViewManager.$scrollToTop) { _ in
-                    viewModel.resetScroll()
+        ZStack(alignment: .bottom) {
+            ScrollView(.vertical) {
+                VStack {
+                    likeArtistsButton
+                    ZStack(alignment: .topTrailing) {
+                        artistContentView()
+                        if isShowToolTip {
+                            MainTooltipView()
+                                .safeAreaPadding(.trailing, UIWidth * 0.05)
+                        }
+                    }
+                    Spacer(minLength: UIHeight * 0.1)
                 }
+            }
+            VStack {
+                Spacer()
+                artistIndicators
+                    .padding(.bottom, 8)
+            }
         }
     }
     
-    private var seeArchiveArtistButton: some View {
+    private var likeArtistsButton: some View {
         HStack {
             Spacer()
             NavigationLink(destination: ArchivingArtistView()) {
                 Text("찜한 아티스트")
-                    .foregroundColor(.gray)
                     .font(.footnote).bold()
             }
         }
+        .foregroundColor(.gray)
+        .padding(.top)
+        .safeAreaPadding(.trailing, UIWidth * 0.1)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                hasClickedButton = true
+                
+                isShowToolTip = false
             }
         }
     }
     
     private var artistIndicators: some View {
-        HStack {
-            let count = likeArtists.count
-            if count == 1 {
+        HStack(spacing: 8) {
+            if likeArtists.count == 1 {
                 Circle()
-                    .frame(width: 8)
+                    .frame(width: 6)
                     .foregroundColor(.black)
             } else {
-                ForEach(0..<min(count, 5), id: \.self) { index in
+                ForEach(0..<min(likeArtists.count, 5), id: \.self) { index in
                     indicator(for: index)
                 }
             }
         }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 76)
+                .foregroundStyle(Color.gray6))
+        
     }
     
     @ViewBuilder
     private func indicator(for idx: Int) -> some View {
         if viewModel.selectedIndex == idx {
             Capsule()
-                .frame(width: 16, height: 8)
+                .frame(width: 12, height: 6)
                 .foregroundColor(.black)
         } else {
             Circle()
-                .frame(width: 8)
+                .frame(width: 6)
                 .foregroundColor(.secondary.opacity(0.5))
         }
     }
     
-    private var artistContent: some View {
-        ZStack(alignment: .topTrailing) {
-            VStack {
-                Spacer().frame(height: 10)
-                artistIndicators
-                artistNameScrollView
-                artistItemsTabView()
-            }
-            .onChange(of: viewModel.scrollToIndex) {
-                viewModel.selectedIndex = $0
-            }
-            if !hasClickedButton {
-                MainTooltipView()
-                    .padding(.trailing, 16)
-            }
-        }
-    }
-    
-    public var artistNameScrollView: some View {
+    @ViewBuilder
+    func artistContentView() -> some View {
         TabView(selection: $viewModel.selectedIndex) {
             ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
                 VStack {
-                    ArtistNameView(selectedTab: $selectedTab,
-                                   viewModel: viewModel,
-                                   index: index, name: data.artistInfo.name)
-                    .lineLimit(nil)
-                    ArtistImage(selectedTab: $selectedTab, imageUrl: data.artistInfo.imageUrl)
-
-                }
-                .id(index)
-
-            }
-        }
-        .frame(width: UIWidth, height: UIHeight * 0.1)
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        .onAppear {
-          viewModel.selectedIndex = 0
-          viewModel.scrollToIndex = 0
-        }
-        .onChange(of: viewModel.selectedIndex) { _, newIndex in
-            viewModel.selectArtist(index: newIndex)
-        }
-    }
-    
-    @ViewBuilder
-    func artistItemsTabView() -> some View {
-        TabView(selection: $viewModel.selectedIndex) {
-            ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
-                ArtistsContentView(selectedTab: $selectedTab, viewModel: viewModel, artistInfo: data.artistInfo, tabViewManager: tabViewManager, index: index)
+                    VStack {
+                        // 아티스트 이름
+                        ArtistNameView(selectedTab: $selectedTab,
+                                       viewModel: viewModel,
+                                       index: index,
+                                       name: data.artistInfo.name)
+                        .lineLimit(nil)
+                        
+                        // 아티스트 이미지
+                        NavigationLink(destination: ArtistView(selectedTab: $selectedTab,
+                                                               artistName: data.artistInfo.name,
+                                                               artistAlias: data.artistInfo.alias,
+                                                               artistMbid: data.artistInfo.mbid)) {
+                            ArtistImage(selectedTab: $selectedTab,
+                                        imageUrl: data.artistInfo.imageUrl)
+                            .buttonStyle(BasicButtonStyle())
+                        }
+                    }
+                    .frame(height: UIHeight * 0.45)
+                    
+                    // 아티스트 세트리스트
+                    ArtistsContentView(selectedTab: $selectedTab,
+                                       viewModel: viewModel,
+                                       artistInfo: data.artistInfo,
+                                       tabViewManager: tabViewManager,
+                                       index: index)
                     .tag(index)
                     .background(GeometryReader {
                         Color.clear.preference(key: ViewRectKey.self, value: [$0.frame(in: .local)])
                     })
                     .offset(y: 0)
+                    .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
+                    
+                }
+                .tag(index)
+                
             }
         }
-        .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
+        .frame(width: UIWidth, height: rect.size.height + UIHeight * 0.45 + 30)
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .onChange(of: viewModel.selectedIndex) { _, newIndex in
-            viewModel.scrollToIndex = newIndex
-        }
+        .padding(.top, 10)
+        
         .onPreferenceChange(ViewRectKey.self) { value in
             if let firstRect = value.first {
                 self.rect = firstRect

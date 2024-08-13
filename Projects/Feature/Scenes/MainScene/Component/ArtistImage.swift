@@ -33,9 +33,11 @@ struct ArtistImage: View {
           artistEmptyImage
         }
       }
-      .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
+      .frame(height: UIHeight * 0.38)
       .clipShape(RoundedRectangle(cornerRadius: 15))
       .clipped()
+      .safeAreaPadding(.horizontal, UIWidth * 0.07)
+      
     }
   }
   

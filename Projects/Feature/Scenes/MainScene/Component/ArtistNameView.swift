@@ -36,6 +36,7 @@ struct ArtistNameView: View {
           .frame(width: UIWidth * 0.8, alignment: .center)
       }
     }
+    .frame(width: UIWidth * 0.8, height: UIHeight * 0.07)
     .foregroundColor(viewModel.selectedIndex == index ? Color.mainBlack : Color.gray)
     .background(
       GeometryReader { geo in
@@ -59,4 +60,3 @@ struct ArtistNameView: View {
     textWidth = controller.view.intrinsicContentSize.width
   }
 }
-

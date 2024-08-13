@@ -25,7 +25,7 @@ struct ArchivingArtistView: View {
         Text("찜한 아티스트")
           .font(.title).bold()
           .foregroundStyle(Color.mainBlack)
-          .padding(.vertical)
+          .padding(.vertical, 12)
           .frame(alignment: .leading)
         Spacer()
       }
@@ -37,7 +37,7 @@ struct ArchivingArtistView: View {
             Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
               .font(.footnote)
               .foregroundStyle(Color.gray)
-              .padding(.bottom)
+              .padding(.bottom, 16)
             
           }.id(topID)
             .listRowSeparator(.hidden)
