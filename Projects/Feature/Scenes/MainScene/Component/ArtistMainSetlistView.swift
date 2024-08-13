@@ -27,8 +27,10 @@ struct ArtistMainSetlistView: View {
             headerView
             Spacer().frame(height: 25)
             setlistContent
+                .padding(.bottom, 25)
             if displaySongs.count > 3 {
                 footerView
+                    .padding(.bottom, 5)
             }
         }
         .font(.footnote)
@@ -89,7 +91,7 @@ struct ArtistMainSetlistView: View {
             ForEach(Array(displaySongs.prefix(isExpanded ? displaySongs.count : 3).enumerated()), id: \.offset) { index, song in
                 ListRowView(index: song.tape == true ? nil : index + 1, title: song.name ?? "")
                     .opacity(song.tape == true ? 0.6 : 1.0)
-                    .padding(.vertical, 7)
+                    .padding(3)
                 
                 if displaySongs.count > 1 {
                     if index + 1 < (isExpanded ? displaySongs.count : 3) {

@@ -101,7 +101,7 @@ struct MainView: View {
         .padding(.vertical, 16)
         .background(
             RoundedRectangle(cornerRadius: 76)
-                .foregroundStyle(Color.gray6))
+                .foregroundStyle(Color.gray6.opacity(0.6)))
         
     }
     
@@ -142,7 +142,6 @@ struct MainView: View {
                         }
                     }
                     .frame(height: UIHeight * 0.45)
-                    
                     // 아티스트 세트리스트
                     ArtistsContentView(selectedTab: $selectedTab,
                                        viewModel: viewModel,

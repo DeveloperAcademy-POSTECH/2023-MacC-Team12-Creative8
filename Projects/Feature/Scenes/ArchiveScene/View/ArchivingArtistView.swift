@@ -20,24 +20,23 @@ struct ArchivingArtistView: View {
   @Namespace var topID
   
   var body: some View {
-    Group {
       HStack {
         Text("찜한 아티스트")
           .font(.title).bold()
           .foregroundStyle(Color.mainBlack)
-          .padding(.vertical, 12)
-          .frame(alignment: .leading)
+          .padding([.leading, .top], 23)
         Spacer()
       }
+      .padding(.bottom, -5)
       if likeArtists.isEmpty {
         IsEmptyCell(type: .likeArtist)
       } else {
         List {
-          VStack(alignment: .leading, spacing: 0) {
+          VStack(alignment: .leading) {
             Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
               .font(.footnote)
               .foregroundStyle(Color.gray)
-              .padding(.bottom, 16)
+              .padding(.bottom, 6)
             
           }.id(topID)
             .listRowSeparator(.hidden)
@@ -46,14 +45,14 @@ struct ArchivingArtistView: View {
           archiveArtistListCell
             .listRowSeparator(.hidden)
             .listRowBackground(Color.mainWhite)
+            Spacer().frame(height: 30)
         }
+        .padding(.horizontal, 5)
         .scrollIndicators(.hidden)
         .listStyle(.plain)
-        .padding(EdgeInsets(top: -10, leading: -18, bottom: 10, trailing: -18))
         
       }
-    }
-    .padding(.horizontal, 24)
+    
   }
   
   private var archiveArtistListCell: some View {
@@ -77,12 +76,11 @@ struct ArchivingArtistView: View {
       var updatedItems = likeArtists
       updatedItems.move(fromOffsets: source, toOffset: destination)
       
-      // Update CoreData context and save changes
       for (index, item) in updatedItems.enumerated() {
         item.orderIndex = likeArtists.count - 1 - index
       }
-      // Assuming `modelContext` is available
-      do {
+
+        do {
         try modelContext.save()
       } catch {
         print("Failed to save context: \(error)")

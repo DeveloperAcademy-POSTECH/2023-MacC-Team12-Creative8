@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftData
 import Core
 import UI
-import Marquee
+import MarqueeText
 
 struct ArtistInfoView: View {
   @ObservedObject var vm: ArtistViewModel
@@ -82,12 +82,11 @@ struct ArtistInfoView: View {
   private var nameLayer: some View {
     HStack(spacing: 0) {
       if textWidth > parentWidth {
-        Marquee {
-          Text(vm.artistInfo.name)
-            .fixedSize(horizontal: true, vertical: false)
-        }
-        .marqueeDuration(5.0)
-        .frame(width: parentWidth)
+          MarqueeText(text: vm.artistInfo.name,
+                      font: .systemFont(ofSize: 20, weight: .semibold),
+                      leftFade: 16,
+                      rightFade: 16,
+                      startDelay: 0.3)
       } else {
         Text(vm.artistInfo.name)
           .frame(width: UIWidth * 0.8, alignment: .leading)

@@ -23,7 +23,7 @@ struct CustomTitleAlert: View {
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   
   var body: some View {
-    ZStack {
+      ZStack(alignment: .center) {
       alertView
     }
     .ignoresSafeArea()
@@ -157,7 +157,7 @@ struct CustomAlertModifier {
 extension CustomAlertModifier: ViewModifier {
   
   func body(content: Content) -> some View {
-    ZStack {
+      ZStack(alignment: .top) {
       content
       if isPresented {
         // 얼럿이 띄워질 때 반투명한 뒷 배경을 추가
@@ -171,6 +171,7 @@ extension CustomAlertModifier: ViewModifier {
           dismissButton: dismissButton,
           primaryButton: primaryButton, exportViewModel: exportViewModel)
         .padding(.horizontal, 20)
+        .padding(.top, UIScreen.main.bounds.height * 0.25)
         .zIndex(1) // 얼럿 창이 뒷 배경보다 위에 나타나도록 설정
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden)

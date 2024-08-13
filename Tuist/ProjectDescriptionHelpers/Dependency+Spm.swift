@@ -12,7 +12,7 @@ public extension TargetDependency {
 }
 
 public extension Package {
-  static let Marquee = Package.remote(url: "https://github.com/SwiftUIKit/Marquee.git", requirement: .upToNextMajor(from: "0.3.0"))
+    static let MarqueeText = Package.remote(url: "https://github.com/joekndy/MarqueeText.git", requirement: .branch("master"))
   static let SpotifyAPI = Package.remote(url: "https://github.com/Peter-Schorn/SpotifyAPI.git", requirement: .upToNextMajor(from: "3.0.0"))
   static let KeychainAccess = Package.remote(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", requirement: .upToNextMajor(from: "4.2.2"))
   static let Firebase = Package.remote(url: "https://github.com/firebase/firebase-ios-sdk.git", requirement: .upToNextMajor(from: "10.17.0"))
@@ -20,7 +20,7 @@ public extension Package {
 
 public extension TargetDependency.SPM {
   static let Firebase = TargetDependency.package(product: "FirebaseAnalytics")
-  static let Marquee = TargetDependency.package(product: "Marquee")
+  static let MarqueeText = TargetDependency.package(product: "MarqueeText")
   static let SpotifyAPI = TargetDependency.package(product: "SpotifyAPI")
   static let KeychainAccess = TargetDependency.package(product: "KeychainAccess")
 }
