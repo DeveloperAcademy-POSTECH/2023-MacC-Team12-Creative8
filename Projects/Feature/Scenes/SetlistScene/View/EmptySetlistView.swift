@@ -20,7 +20,7 @@ struct EmptySetlistView: View {
       Text("세트리스트를 직접 작성하고 싶으신가요?")
         .multilineTextAlignment(.center)
         .font(.footnote)
-        .foregroundStyle(Color.gray)
+        .foregroundStyle(Color(UIColor.systemGray))
       HStack(spacing: 0) {
         Link(destination: URL(string: "https://www.setlist.fm")!) {
           Text("Setlist.fm")
@@ -28,7 +28,7 @@ struct EmptySetlistView: View {
         }
         Text("에서 추가하세요.")
       }
-      .foregroundStyle(Color.gray)
+      .foregroundStyle(Color(UIColor.systemGray))
       .font(.footnote)
     }
   }

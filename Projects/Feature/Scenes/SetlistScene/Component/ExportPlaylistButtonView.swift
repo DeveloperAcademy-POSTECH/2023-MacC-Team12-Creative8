@@ -127,7 +127,7 @@ struct ExportPlaylistButtonView: View {
                 Text("위의 뮤직앱에서는 이미지로 된 세트리스트를\n인식해 플레이리스트로 변환합니다.\n원하는 세트리스트를 이미지로 받아보세요.")
                     .multilineTextAlignment(.center)
                     .font(.footnote)
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color(UIColor.systemGray))
                 Divider()
                     .padding(.vertical, 15)
                 HStack {

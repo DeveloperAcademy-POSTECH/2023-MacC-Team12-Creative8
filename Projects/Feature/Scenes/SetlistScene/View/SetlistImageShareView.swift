@@ -18,7 +18,7 @@ struct SetlistImageShareView: View {
   
   var body: some View {
     ZStack(alignment: .top) {
-      Color.black.ignoresSafeArea()
+      Color.gray6.ignoresSafeArea()
       ScrollView {
         ZStack {
           VStack {

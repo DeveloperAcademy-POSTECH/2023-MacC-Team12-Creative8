@@ -17,7 +17,7 @@ struct EmptyMainView: View {
     
     var body: some View {
         ZStack {
-            Color.mainWhite.ignoresSafeArea()
+            Color.gray6.ignoresSafeArea()
             VStack {
                 Spacer()
                 Text("찜한 아티스트가 없어요")
@@ -29,7 +29,7 @@ struct EmptyMainView: View {
                         Text("검색에서 원하는 아티스트를 찾고")
                         Text("하트버튼을 눌러주세요")
                     }
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color(UIColor.systemGray))
                 }
                 .font(.system(size: 13, weight: .regular))
                 .multilineTextAlignment(.center)

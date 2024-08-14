@@ -20,39 +20,43 @@ struct ArchivingArtistView: View {
   @Namespace var topID
   
   var body: some View {
-      HStack {
-        Text("찜한 아티스트")
-          .font(.title).bold()
-          .foregroundStyle(Color.mainBlack)
-          .padding([.leading, .top], 23)
-        Spacer()
-      }
-      .padding(.bottom, -5)
-      if likeArtists.isEmpty {
-        IsEmptyCell(type: .likeArtist)
-      } else {
-        List {
-          VStack(alignment: .leading) {
-            Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
-              .font(.footnote)
-              .foregroundStyle(Color.gray)
-              .padding(.bottom, 6)
-            
-          }.id(topID)
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.mainWhite)
-          
-          archiveArtistListCell
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.mainWhite)
-            Spacer().frame(height: 30)
+    ZStack {
+      Color.gray6.ignoresSafeArea()
+      VStack {
+        HStack {
+          Text("찜한 아티스트")
+            .font(.title).bold()
+            .foregroundStyle(Color.mainBlack)
+            .padding([.leading, .top], 23)
+          Spacer()
         }
-        .padding(.horizontal, 5)
-        .scrollIndicators(.hidden)
-        .listStyle(.plain)
+        .padding(.bottom, -5)
         
+        if likeArtists.isEmpty {
+          IsEmptyCell(type: .likeArtist)
+        } else {
+          List {
+            VStack(alignment: .leading) {
+              Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
+                .font(.footnote)
+                .foregroundStyle(Color(UIColor.systemGray))
+                .padding(.bottom, 6)
+              
+            }.id(topID)
+              .listRowSeparator(.hidden)
+              .listRowBackground(Color.gray6)
+            
+            archiveArtistListCell
+              .listRowSeparator(.hidden)
+              .listRowBackground(Color.gray6)
+          }
+          .padding(.horizontal, 5)
+          .scrollIndicators(.hidden)
+          .listStyle(.plain)
+          
+        }
       }
-    
+    }
   }
   
   private var archiveArtistListCell: some View {
@@ -65,11 +69,11 @@ struct ArchivingArtistView: View {
           .bold(index < 5)
         Spacer()
         Image(systemName: "chevron.up.chevron.down")
-          .foregroundColor(Color.black)
+          .foregroundColor(.mainBlack)
       }
       if index == 4 {
         Divider()
-          .background(Color.gray)
+          .background(Color(UIColor.systemGray3))
       }
     }
     .onMove { source, destination in
