@@ -23,7 +23,7 @@ struct CustomTitleAlert: View {
   @ObservedObject var exportViewModel: ExportPlaylistViewModel
   
   var body: some View {
-    ZStack {
+      ZStack(alignment: .center) {
       alertView
     }
     .ignoresSafeArea()
@@ -32,17 +32,15 @@ struct CustomTitleAlert: View {
     VStack(spacing: 0) {
       titleView
       textFieldView
-        .padding(.vertical, 24)
+        .padding(24)
+        Divider()
       buttonsView
     }
-    .padding(.horizontal, 24)
     .padding(.top, 32)
-    .padding(.bottom, 13)
     .background(Color.mainWhite)
     .cornerRadius(12)
   }
   
-  @ViewBuilder
   private var titleView: some View {
       Text("플레이리스트 제목")
       .foregroundColor(Color.mainBlack)
@@ -59,15 +57,15 @@ struct CustomTitleAlert: View {
     )
     .padding(.horizontal)
     .padding(.vertical, 7)
-    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray6).stroke(Color(UIColor.systemGray)))
+    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)).stroke(Color(UIColor.systemGray)))
   }
   
   private var buttonsView: some View {
-    VStack(spacing: 0) {
-        primaryButtonView
+    HStack(spacing: 0) {
       if let dismissButton = dismissButton {
         dismissButtonView
       }
+        primaryButtonView
     }
   }
   
@@ -84,8 +82,7 @@ struct CustomTitleAlert: View {
           button.action?()
         }
       }
-      .foregroundColor(Color.mainWhite)
-      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.mainOrange))
+      .foregroundColor(Color.mainOrange)
     }
   }
   
@@ -98,7 +95,7 @@ struct CustomTitleAlert: View {
         }
       }
       .foregroundColor(Color.mainBlack)
-      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.mainWhite))
+      .background(RoundedRectangle(cornerRadius: 14).foregroundStyle(Color.clear))
     }
   }
   
@@ -160,7 +157,7 @@ struct CustomAlertModifier {
 extension CustomAlertModifier: ViewModifier {
   
   func body(content: Content) -> some View {
-    ZStack {
+      ZStack(alignment: .top) {
       content
       if isPresented {
         // 얼럿이 띄워질 때 반투명한 뒷 배경을 추가
@@ -174,6 +171,7 @@ extension CustomAlertModifier: ViewModifier {
           dismissButton: dismissButton,
           primaryButton: primaryButton, exportViewModel: exportViewModel)
         .padding(.horizontal, 20)
+        .padding(.top, UIScreen.main.bounds.height * 0.25)
         .zIndex(1) // 얼럿 창이 뒷 배경보다 위에 나타나도록 설정
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden)

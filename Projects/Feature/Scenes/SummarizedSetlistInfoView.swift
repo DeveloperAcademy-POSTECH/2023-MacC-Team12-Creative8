@@ -80,7 +80,7 @@ struct SummarizedSetlistInfoView: View {
                 Text(info.title.isEmpty ? "\(info.artistInfo.name)의 Setlist" : info.title)
                     .foregroundStyle(Color.mainBlack)
                     .font(.callout)
-                    .padding(5)
+                    .padding(.horizontal, 5)
                 Text(info.venue)
                     .fontWeight(.regular)
                     .foregroundStyle(Color.gray)

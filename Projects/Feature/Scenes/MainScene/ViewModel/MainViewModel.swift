@@ -16,7 +16,6 @@ final class MainViewModel: ObservableObject {
   let koreanConverter = KoreanConverter()
   
   @Published var selectedIndex: Int = 0
-  @Published var scrollToIndex: Int = 0
   @Published var isTapped: Bool = false
   @Published var isLoading: Bool = false
   @Published var pageStack: [NavigationDelivery] = []
@@ -98,28 +97,6 @@ final class MainViewModel: ObservableObject {
         idx -= 1
       }
     }
-  }
-  func resetScroll() {
-    scrollToIndex = 0
-    selectedIndex = 0
-
-  }
-  
-  func selectArtist(index: Int) {
-    selectedIndex = index
-    scrollToIndex = index
-  }
-  
-  func scrollToSelectedIndex(proxy: ScrollViewProxy) {
-    withAnimation {
-      proxy.scrollTo(scrollToIndex, anchor: .center)
-    }
-  }
-  
-  func resetScrollToIndex(proxy: ScrollViewProxy, likeArtists: [LikeArtist]) {
-    selectedIndex = 0
-    scrollToIndex = 0
-    scrollToSelectedIndex(proxy: proxy)
   }
   
   func navigationDestination(for value: NavigationDelivery) -> some View {
