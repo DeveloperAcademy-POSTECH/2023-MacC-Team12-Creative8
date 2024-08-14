@@ -98,7 +98,11 @@ public extension Color {
     Color("toast2", bundle: setaBundle)
   }
 
-    static var ellipsis: Color {
-        Color("ellipsis", bundle: setaBundle)
-    }
+  static var ellipsis: Color {
+    Color("ellipsis", bundle: setaBundle)
+  }
+  
+  static var gray600: Color {
+    Color("gray600", bundle: setaBundle)
+  }
 }
