@@ -31,7 +31,7 @@ public struct SettingView: View {
             }
 
             // 서비스 이용 관련
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
               Divider()
                 .foregroundStyle(Color(UIColor.systemGray3))
               SectionTitleView(
@@ -82,15 +82,15 @@ struct SectionTitleView: View {
       Text(sectionTitle)
         .font(.headline)
         .foregroundStyle(Color.mainBlack)
-        .padding(.top, 30)
-        .padding(.bottom, 24)
+        .padding(.top, 27)
+        .padding(.bottom, 10)
       VStack(alignment: .leading) {
         Text(sectionTopDescription)
         Text(sectionBottomDescription)
       }
         .font(.footnote)
         .foregroundStyle(Color(UIColor.systemGray))
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
     }
   }
 }
@@ -115,7 +115,8 @@ struct SetlistfmLinkButton: View {
       .background(Color.mainWhite)
       .foregroundStyle(Color.mainBlack)
       .clipShape(RoundedRectangle(cornerRadius: 12))
-      .padding(.bottom, 15)
+      .padding(.bottom, 12)
+      .padding(.top, 5)
     })
   }
 }
@@ -133,7 +134,7 @@ struct LinkLabelView: View {
       Image(systemName: "chevron.right")
         .resizable()
         .frame(width: 10, height: 15)
-        .padding(EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 15))
+        .padding(EdgeInsets(top: 22, leading: 0, bottom: 22, trailing: 15))
     }
     .foregroundStyle(Color.mainBlack)
   }
