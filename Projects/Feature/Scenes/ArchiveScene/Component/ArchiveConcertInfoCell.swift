@@ -32,7 +32,7 @@ struct ArchiveConcertInfoCell: View {
       }
     }
     .clipShape(RoundedRectangle(cornerRadius: 12))
-    .frame(width: UIWidth*0.44)
+//    .frame(width: UIWidth*0.44)
     .onAppear { dataManager.modelContext = modelContext }
   }
   
