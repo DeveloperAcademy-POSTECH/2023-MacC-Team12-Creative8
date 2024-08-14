@@ -12,7 +12,7 @@ import Core
 struct SetlistImageShareView: View {
   let artistInfo: ArtistInfo?
   let setlist: Setlist?
-  @StateObject var viewModel: SetlistViewModel
+  @ObservedObject var viewModel: SetlistViewModel
   @State private var isPresented = false
   @State private var showToastMessage = false
   
