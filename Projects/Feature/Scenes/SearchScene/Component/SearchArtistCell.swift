@@ -11,6 +11,7 @@ import UI
 import Core
 
 struct SearchArtistCell: View {
+	@Environment(\.colorScheme) var colorScheme
   @Binding var selectedTab: Tab
   let imageURL: String
   let artistName: String
@@ -26,12 +27,25 @@ struct SearchArtistCell: View {
           case .empty:
             RoundedRectangle(cornerRadius: 12)
               .overlay(
-                Image("ticket", bundle: setaBundle)
-                  .resizable()
-                  .renderingMode(.template)
-                  .foregroundStyle(Color(UIColor.systemGray))
-                  .scaledToFill()
-                  .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
+				Group {
+					if colorScheme == .light {
+					  Image(uiImage: UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+						.centerCropped()
+						.scaledToFill()
+						.overlay(
+						  RoundedRectangle(cornerRadius: 12)
+							.stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+						)
+					} else {
+					  Image(uiImage: UIImage(named: "darkArtistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+						.centerCropped()
+						.scaledToFill()
+						.overlay(
+						  RoundedRectangle(cornerRadius: 12)
+							.stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+						)
+					}
+				}
               )
               .foregroundStyle(Color(UIColor.systemGray5))
           case .success(let image):
@@ -41,12 +55,25 @@ struct SearchArtistCell: View {
           case .failure:
             RoundedRectangle(cornerRadius: 12)
               .overlay(
-                Image("ticket", bundle: setaBundle)
-                  .resizable()
-                  .renderingMode(.template)
-                  .foregroundStyle(Color(UIColor.systemGray))
-                  .scaledToFill()
-                  .frame(width: UIWidth * 0.2, height: UIWidth * 0.2)
+				Group {
+					if colorScheme == .light {
+					  Image(uiImage: UIImage(named: "artistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+						.centerCropped()
+						.scaledToFill()
+						.overlay(
+						  RoundedRectangle(cornerRadius: 12)
+							.stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+						)
+					} else {
+					  Image(uiImage: UIImage(named: "darkArtistViewTicket", in: Bundle(identifier: "com.creative8.seta.UI"), compatibleWith: nil)!)
+						.centerCropped()
+						.scaledToFill()
+						.overlay(
+						  RoundedRectangle(cornerRadius: 12)
+							.stroke(Color.gray, lineWidth: 1) // 색상과 선 두께를 원하는 대로 설정
+						)
+					}
+				}
               )
               .foregroundStyle(Color(UIColor.systemGray5))
           @unknown default:

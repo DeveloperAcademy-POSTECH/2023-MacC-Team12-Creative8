@@ -15,7 +15,7 @@ struct SearchView: View {
   @Binding var selectedTab: Tab
   @Query(sort: \SearchHistory.createdDate, order: .reverse) private var history: [SearchHistory] = []
   @StateObject var viewModel = SearchViewModel()
-  @Environment (\.modelContext) var modelContext
+  @Environment(\.modelContext) var modelContext
   @StateObject var dataManager = SwiftDataManager()
   @StateObject var tabViewManager: TabViewManager
   @Namespace var topID
@@ -110,23 +110,25 @@ struct SearchView: View {
   private var searchingHistoryView: some View {
         VStack {
           if viewModel.searchText.isEmpty {
-            HStack {
-              Text("최근 검색")
-                .bold()
-                .foregroundStyle(Color.mainBlack)
-              Spacer()
-              Button {
-                dataManager.deleteSearchHistoryAll()
-              } label: {
-                Text("모두 지우기")
-                  .foregroundStyle(Color.mainOrange)
-                  .bold()
-              }
-            }
-            ForEach(history, id: \.self) { item in
-              SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
-            }
-            .toolbar(viewModel.searchIsPresented ? .hidden : .visible, for: .tabBar)
+			  if !history.isEmpty {
+				  HStack {
+					Text("최근 검색")
+					  .bold()
+					  .foregroundStyle(Color.mainBlack)
+					Spacer()
+					Button {
+					  dataManager.deleteSearchHistoryAll()
+					} label: {
+					  Text("모두 지우기")
+						.foregroundStyle(Color.mainOrange)
+						.bold()
+					}
+				  }
+				  ForEach(history, id: \.self) { item in
+					SearchHistoryCell(searchText: $viewModel.searchText, selectedTab: $selectedTab, history: item, dataManager: dataManager)
+				  }
+				  .toolbar(viewModel.searchIsPresented ? .hidden : .visible, for: .tabBar)
+			  }
           } else {
             SearchArtistList(selectedTab: $selectedTab, viewModel: viewModel)
           }

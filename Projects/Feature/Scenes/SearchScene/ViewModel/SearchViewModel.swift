@@ -35,34 +35,35 @@ final class SearchViewModel: ObservableObject {
       .store(in: &cancellables)
 
     if artistFetchService.allArtist.isEmpty {
-      artistFetchService.fetchData { success in
+      artistFetchService.fetchData { [weak self] success in
+		  guard let self else { return }
           if success {
-            self.domesticArtists = self.getRandomArtists(.kpop)
-            self.foreignArtists = self.getRandomArtists(.pop)
-          }
+			  getRandomArtistInfos()
+		  }
       }
     }
   }
-
-  enum ArtistKind {
-    case kpop
-    case pop
-  }
-
-  func getRandomArtists(_ kind: ArtistKind) -> [OnboardingModel] {
-    if searchIsPresented == false {
-      let kpopArtists = artistFetchService.allArtist.filter { artist in
-        if let tags = artist.tags, artist.country == (kind == .kpop ? "South Korea" : "") {
-          if artist.url != nil && artist.url != "" {
-            return tags.contains(kind == .kpop ? "K-Pop" : "Pop")
-          }
-        }
-        return false
-      }
-      return Array(kpopArtists.shuffled().prefix(9))
-    }
-    return []
-  }
+	
+	func getRandomArtistInfos() {
+		if searchIsPresented { return }
+		
+		var domestic: [OnboardingModel] = []
+		var foreign: [OnboardingModel] = []
+		
+		for data in artistFetchService.allArtist {
+			guard data.url != nil && data.url != "" && data.url != "https://assets.genius.com/images/default_avatar_300.png?1722887932" else { continue }
+			guard let tags = data.tags else { continue }
+			
+			if tags.contains("K-Pop") && data.country == "South Korea" {
+				domestic.append(data)
+			} else if data.country != "South Korea" && !data.country.isEmpty {
+				foreign.append(data)
+			}
+		}
+		print(domestic, foreign)
+		domesticArtists = Array(domestic.shuffled().prefix(9))
+		foreignArtists = Array(foreign.shuffled().prefix(9))
+	}
 
   func getSearchArtistList() {
     self.isLoading = true

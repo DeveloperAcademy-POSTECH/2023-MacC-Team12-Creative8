@@ -15,6 +15,7 @@ import Combine
 
 struct ArtistImage: View {
   @Binding var selectedTab: Tab
+	@Environment(\.colorScheme) var colorScheme
   var imageUrl: String
   
   var body: some View {
