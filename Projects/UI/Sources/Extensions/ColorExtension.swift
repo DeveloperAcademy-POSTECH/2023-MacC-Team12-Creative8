@@ -37,10 +37,6 @@ public extension Color {
     Color("gray6", bundle: setaBundle)
   }
   
-  static var black850: Color {
-    Color("black850", bundle: setaBundle)
-  }
-  
   static var orange100: Color {
     Color("orange100", bundle: setaBundle)
   }
