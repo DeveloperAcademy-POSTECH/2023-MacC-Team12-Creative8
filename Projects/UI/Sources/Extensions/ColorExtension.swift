@@ -64,4 +64,8 @@ public extension Color {
   static var toastBG: Color {
     Color("toastBG", bundle: setaBundle)
   }
+  
+  static var shareBG: Color {
+    Color("shareBG", bundle: setaBundle)
+  }
 }
