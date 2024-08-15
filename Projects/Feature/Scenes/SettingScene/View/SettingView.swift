@@ -89,7 +89,7 @@ struct SectionTitleView: View {
         Text(sectionBottomDescription)
       }
         .font(.footnote)
-        .foregroundStyle(Color(UIColor.systemGray))
+        .foregroundStyle(Color.gray)
         .padding(.bottom, 10)
     }
   }

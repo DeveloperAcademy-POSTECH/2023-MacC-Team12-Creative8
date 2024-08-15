@@ -49,7 +49,7 @@ struct BookmarkedSetlistsView: View {
               } else {
                 Circle()
                   .frame(width: 8)
-                  .foregroundStyle(Color(UIColor.systemGray))
+                  .foregroundStyle(Color.gray)
                   .padding(.vertical)
                   .padding(.horizontal, 5)
               }

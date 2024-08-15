@@ -45,7 +45,7 @@ struct InfoComponent: View {
       Text(text1)
         .foregroundStyle(Color.mainBlack)
         .padding(12)
-        .background(Color(UIColor.systemGray).cornerRadius(12))
+        .background(Color.gray.cornerRadius(12))
       Spacer()
       Text(text2)
         .font(.body)

@@ -29,7 +29,7 @@ struct EmptyMainView: View {
                         Text("검색에서 원하는 아티스트를 찾고")
                         Text("하트버튼을 눌러주세요")
                     }
-                    .foregroundStyle(Color(UIColor.systemGray))
+                    .foregroundStyle(Color.gray)
                 }
                 .font(.system(size: 13, weight: .regular))
                 .multilineTextAlignment(.center)

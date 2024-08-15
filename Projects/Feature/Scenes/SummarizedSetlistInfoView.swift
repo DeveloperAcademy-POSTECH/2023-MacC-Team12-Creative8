@@ -43,7 +43,7 @@ struct SummarizedSetlistInfoView: View {
             Text(type == .recentConcert ? "최근 공연" : "북마크한 공연")
             Spacer()
         }
-        .foregroundStyle(Color(UIColor.systemGray))
+        .foregroundStyle(Color.gray)
         .fontWeight(.semibold)
         .padding(10)
         .background(
@@ -65,7 +65,7 @@ struct SummarizedSetlistInfoView: View {
                 + Text("에서 추가하세요.")
             }
         }
-        .foregroundStyle(Color(UIColor.systemGray))
+        .foregroundStyle(Color.gray)
         .padding(5)
         .padding(.bottom, 30)
     }
@@ -123,7 +123,7 @@ struct SummarizedSetlistInfoView: View {
             }
             
         }
-        .foregroundStyle(Color(UIColor.systemGray))
+        .foregroundStyle(Color.gray)
         .onTapGesture {
             chevronButtonAction?()
         }

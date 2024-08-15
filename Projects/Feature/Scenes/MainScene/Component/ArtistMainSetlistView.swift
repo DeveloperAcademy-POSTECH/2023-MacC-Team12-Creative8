@@ -72,7 +72,7 @@ struct ArtistMainSetlistView: View {
             }
         } label: {
             Image(systemName: "info.circle")
-                .foregroundStyle(Color(UIColor.systemGray))
+                .foregroundStyle(Color.gray)
         }
     }
 
@@ -107,7 +107,7 @@ struct ArtistMainSetlistView: View {
         HStack {
             Spacer()
             Text(isExpanded ? "세트리스트 접기" : "세트리스트 전체 보기")
-              .foregroundStyle(Color(UIColor.systemGray))
+              .foregroundStyle(Color.gray)
             Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
               .foregroundStyle(Color(UIColor.systemGray3))
         }

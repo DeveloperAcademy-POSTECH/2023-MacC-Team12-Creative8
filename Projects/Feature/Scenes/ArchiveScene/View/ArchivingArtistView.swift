@@ -39,7 +39,7 @@ struct ArchivingArtistView: View {
             VStack(alignment: .leading) {
               Text("상단 5명의 아티스트만 홈 화면에 표시됩니다\n변경을 원하신다면 순서를 옮겨보세요")
                 .font(.footnote)
-                .foregroundStyle(Color(UIColor.systemGray))
+                .foregroundStyle(Color.gray)
                 .padding(.bottom, 6)
               
             }.id(topID)

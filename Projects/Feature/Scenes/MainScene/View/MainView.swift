@@ -74,7 +74,7 @@ struct MainView: View {
                     .font(.footnote).bold()
             }
         }
-        .foregroundColor(Color(UIColor.systemGray))
+        .foregroundColor(Color.gray)
         .padding(.top)
         .safeAreaPadding(.trailing, UIWidth * 0.1)
         .onAppear {
