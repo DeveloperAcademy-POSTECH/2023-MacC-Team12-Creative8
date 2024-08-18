@@ -31,7 +31,6 @@ public final class ArtistFetchService: ObservableObject {
                 let artists = try decoder.decode([OnboardingModel].self, from: data)
 
                 DispatchQueue.main.async {
-					print(artists)
                     self.allArtist = artists
                     completion(true)
                 }

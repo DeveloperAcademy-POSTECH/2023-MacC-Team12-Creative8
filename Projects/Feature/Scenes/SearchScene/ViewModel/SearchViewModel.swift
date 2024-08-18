@@ -60,7 +60,6 @@ final class SearchViewModel: ObservableObject {
 				foreign.append(data)
 			}
 		}
-		print(domestic, foreign)
 		domesticArtists = Array(domestic.shuffled().prefix(9))
 		foreignArtists = Array(foreign.shuffled().prefix(9))
 	}
