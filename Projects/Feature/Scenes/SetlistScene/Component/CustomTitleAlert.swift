@@ -57,7 +57,7 @@ struct CustomTitleAlert: View {
     )
     .padding(.horizontal)
     .padding(.vertical, 7)
-    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)).stroke(Color(UIColor.systemGray)))
+    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)).stroke(Color.gray))
   }
   
   private var buttonsView: some View {

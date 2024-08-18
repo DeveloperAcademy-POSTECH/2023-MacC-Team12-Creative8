@@ -107,13 +107,14 @@ struct ArtistMainSetlistView: View {
         HStack {
             Spacer()
             Text(isExpanded ? "세트리스트 접기" : "세트리스트 전체 보기")
+              .foregroundStyle(Color.gray)
             Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+              .foregroundStyle(Color(UIColor.systemGray3))
         }
         .padding(.trailing, 5)
         .onTapGesture {
             isExpanded.toggle()
         }
-        .foregroundStyle(Color.gray)
     }
 
     private struct ListRowView: View {
@@ -124,7 +125,7 @@ struct ArtistMainSetlistView: View {
             HStack(alignment: .top, spacing: 16) {
                 if let index = index {
                     Text(String(format: "%02d", index))
-                        .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color(UIColor.systemGray2))
                 } else {
                     Image(systemName: "recordingtape")
                         .foregroundStyle(Color.mainBlack)
@@ -139,10 +140,10 @@ struct ArtistMainSetlistView: View {
 
     private var toastView: some View {
         Text("세트리스트에 추가된 곡이 없어요.\n더보기 - setlist.fm 바로가기에서 곡을 추가하세요")
-            .foregroundColor(.white)
+            .foregroundColor(.mainWhite)
             .padding(12)
             .font(.footnote)
-            .background(Color.gray)
+            .background(Color.toastBG)
             .cornerRadius(4)
     }
 }

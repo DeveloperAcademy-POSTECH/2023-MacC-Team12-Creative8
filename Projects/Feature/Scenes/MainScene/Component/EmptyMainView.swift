@@ -17,7 +17,7 @@ struct EmptyMainView: View {
     
     var body: some View {
         ZStack {
-            Color.mainWhite.ignoresSafeArea()
+            Color.gray6.ignoresSafeArea()
             VStack {
                 Spacer()
                 Text("찜한 아티스트가 없어요")

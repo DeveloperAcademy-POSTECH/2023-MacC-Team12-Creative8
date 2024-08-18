@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct SetlistInfoView: View {
   let imageUrl: String?
@@ -15,7 +16,9 @@ struct SetlistInfoView: View {
   let venue: String
   let location: String
   let date: String
-  let shareButtonAction: (() -> Void)
+  let artistInfo: ArtistInfo?
+  let setlist: Setlist?
+  @ObservedObject var viewModel: SetlistViewModel
   let bookmarkButtonAction: (() -> Void)
   var isBookmarkedSetlist: Bool
   
@@ -54,10 +57,10 @@ struct SetlistInfoView: View {
               .padding(.bottom, 2)
             Text(venue)
               .font(.footnote)
-              .foregroundStyle(Color(UIColor.systemGray))
+              .foregroundStyle(Color.gray)
             Text(location)
               .font(.footnote)
-              .foregroundStyle(Color(UIColor.systemGray))
+              .foregroundStyle(Color.gray)
               .padding(.bottom, 7)
             HStack(spacing: 3) {
               Image(systemName: "calendar")
@@ -89,15 +92,19 @@ struct SetlistInfoView: View {
           .cornerRadius(12.0, corners: [.bottomLeft, .bottomRight])
         HStack {
           Spacer()
-          Button {
-            shareButtonAction()
+          NavigationLink {
+            SetlistImageShareView(artistInfo: artistInfo, setlist: setlist, viewModel: viewModel)
           } label: {
             HStack {
               Image(systemName: "square.and.arrow.up")
               Text("공유")
             }
-            .foregroundStyle(Color(UIColor.systemGray))
-          }
+            .foregroundStyle(Color.gray)
+          }.simultaneousGesture(
+            TapGesture().onEnded {
+              viewModel.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistName)
+            }
+          )
           Spacer()
           Rectangle()
             .frame(width: 2)
@@ -123,33 +130,32 @@ struct SetlistInfoView: View {
   }
 }
 
-#Preview {
-  ZStack {
-    Color.gray.ignoresSafeArea()
-    VStack {
-      SetlistInfoView(
-        imageUrl: "https://images.genius.com/52e84f5a1e618f9f72c763a920ba788a.1000x1000x1.jpg",
-        title: "POWER ANDRE 99",
-        artistName: "Silica Gel",
-        venue: "Blue Square Mastercard Hall",
-        location: "Seoul, South Korea",
-        date: "2023년 11월 12일",
-        shareButtonAction: {},
-        bookmarkButtonAction: {},
-        isBookmarkedSetlist: true
-      )
-      SetlistInfoView(
-        imageUrl: nil,
-        title: "POWER ANDRE 99",
-        artistName: "Silica Gel",
-        venue: "Blue Square Mastercard Hall",
-        location: "Seoul, South Korea",
-        date: "2023년 11월 12일",
-        shareButtonAction: {},
-        bookmarkButtonAction: {},
-        isBookmarkedSetlist: false
-      )
-      Spacer()
-    }
-  }
-}
+//#Preview {
+//  ZStack {
+//    Color.gray.ignoresSafeArea()
+//    VStack {
+//      SetlistInfoView(
+//        imageUrl: "https://images.genius.com/52e84f5a1e618f9f72c763a920ba788a.1000x1000x1.jpg",
+//        title: "POWER ANDRE 99",
+//        artistName: "Silica Gel",
+//        venue: "Blue Square Mastercard Hall",
+//        location: "Seoul, South Korea",
+//        date: "2023년 11월 12일",
+//        bookmarkButtonAction: {},
+//        isBookmarkedSetlist: true
+//      )
+//      SetlistInfoView(
+//        imageUrl: nil,
+//        title: "POWER ANDRE 99",
+//        artistName: "Silica Gel",
+//        venue: "Blue Square Mastercard Hall",
+//        location: "Seoul, South Korea",
+//        date: "2023년 11월 12일",
+//        shareButtonAction: {},
+//        bookmarkButtonAction: {},
+//        isBookmarkedSetlist: false
+//      )
+//      Spacer()
+//    }
+//  }
+//}

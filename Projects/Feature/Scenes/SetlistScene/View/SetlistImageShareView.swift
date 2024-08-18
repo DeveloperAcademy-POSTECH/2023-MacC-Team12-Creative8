@@ -12,13 +12,14 @@ import Core
 struct SetlistImageShareView: View {
   let artistInfo: ArtistInfo?
   let setlist: Setlist?
-  @StateObject var viewModel: SetlistViewModel
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+  @ObservedObject var viewModel: SetlistViewModel
   @State private var isPresented = false
   @State private var showToastMessage = false
   
   var body: some View {
     ZStack(alignment: .top) {
-      Color.black.ignoresSafeArea()
+      Color.shareBG.ignoresSafeArea()
       ScrollView {
         ZStack {
           VStack {
@@ -49,14 +50,37 @@ struct SetlistImageShareView: View {
             .cornerRadius(12)
             .padding(.horizontal, 24)
           }
-          // TODO: - 이미지 저장 토스트메시지 띄우기
+          
           if showToastMessage {
-            
+            VStack {
+              ToastMessageView(message: "이미지가 저장되었어요", subMessage: nil, icon: "checkmark.circle.fill", color: Color.toast1)
+                .padding(.horizontal, UIWidth * 0.075)
+                .padding(.top, 5)
+              Spacer()
+            }
           }
         }
       }
     }
-    .navigationTitle("공유하기")
+    .navigationBarBackButtonHidden()
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        Text("공유하기")
+          .font(.headline)
+          .foregroundColor(.white)
+      }
+      
+      ToolbarItem(placement: .navigationBarLeading) {
+        Button {
+          presentationMode.wrappedValue.dismiss()
+        } label: {
+          Image(systemName: "chevron.left")
+            .foregroundColor(.white)
+            .fontWeight(.semibold)
+        }
+      }
+    }
+    .toolbarBackground(.placeholder, for: .navigationBar)
   }
   
   func backgroundImage(backgroundImage: UIImage) {

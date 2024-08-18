@@ -40,7 +40,7 @@ struct SummarizedSetlistInfoView: View {
     // MARK: - Title View
     private var titleView: some View {
         HStack {
-            Text(type == .recentConcert ? "최근 공연" : "보관한 공연")
+            Text(type == .recentConcert ? "최근 공연" : "북마크한 공연")
             Spacer()
         }
         .foregroundStyle(Color.gray)
@@ -48,7 +48,7 @@ struct SummarizedSetlistInfoView: View {
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .foregroundStyle(Color.gray6)
+              .foregroundStyle(Color(UIColor.systemGray5))
         )
     }
     
@@ -56,7 +56,7 @@ struct SummarizedSetlistInfoView: View {
     private var noInfoView: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(info == nil && type == .recentConcert ? "등록된 공연이 없어요" : "좋아하는 공연을 북마크 해보세요.")
-                .foregroundStyle(Color.mainBlack)
+            .foregroundStyle(info == nil && type == .recentConcert ? Color.mainBlack : Color(UIColor.systemGray3))
                 .font(.headline).bold()
             
             if type == .recentConcert {
@@ -83,7 +83,7 @@ struct SummarizedSetlistInfoView: View {
                     .padding(.horizontal, 5)
                 Text(info.venue)
                     .fontWeight(.regular)
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color(UIColor.systemGray2))
                     .padding(.horizontal, 5)
             }
             
@@ -119,10 +119,11 @@ struct SummarizedSetlistInfoView: View {
             if type == .bookmarkedConcert {
                 Text("보관함에서 보기")
                 Image(systemName: "chevron.right")
+                  .foregroundStyle(Color(UIColor.systemGray3))
             }
             
         }
-        .foregroundStyle(Color(UIColor.systemGray))
+        .foregroundStyle(Color.gray)
         .onTapGesture {
             chevronButtonAction?()
         }

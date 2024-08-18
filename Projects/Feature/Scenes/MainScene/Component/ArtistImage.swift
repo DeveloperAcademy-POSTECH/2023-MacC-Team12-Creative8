@@ -26,7 +26,7 @@ struct ArtistImage: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.gray, lineWidth: 1))
+              .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color(UIColor.systemGray5), lineWidth: 1))
           } placeholder: {
             ProgressView()
           }
@@ -43,17 +43,9 @@ struct ArtistImage: View {
   }
   
   public var artistEmptyImage: some View {
-    RoundedRectangle(cornerRadius: 15)
-      .foregroundStyle(Color(UIColor.systemGray))
-      .overlay(
-        Image("ticket", bundle: setaBundle)
-          .resizable()
-          .renderingMode(.template)
-          .foregroundStyle(Color(UIColor.systemGray))
-          .aspectRatio(contentMode: .fit)
-          .frame(width: UIWidth * 0.43)
-      )
-      .frame(width: UIWidth * 0.81, height: UIWidth * 0.81)
+    Image("artistViewTicket", bundle: setaBundle)
+      .resizable()
+      .aspectRatio(contentMode: .fit)
   }
 }
 

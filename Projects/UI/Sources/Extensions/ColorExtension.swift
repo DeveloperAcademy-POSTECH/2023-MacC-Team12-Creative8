@@ -21,42 +21,9 @@ public extension Color {
 
 public let setaBundle = Bundle(identifier: "com.creative8.seta.UI")
 public extension Color {
-  
-//  static var backgroundGrey: Color {
-//      Color("backgroundGrey", bundle: setaBundle)
-//  }
-//  
-//  static var backgroundWhite: Color {
-//      Color("backgroundWhite", bundle: setaBundle)
-//  }
-//  
-//  static var buttonBlack: Color {
-//      Color("buttonBlack", bundle: setaBundle)
-//  }
-//  
-//  static var fontGrey25: Color {
-//      Color("fontGrey25", bundle: setaBundle)
-//  }
-//  
-//  static var fontGrey3: Color {
-//      Color("fontGrey3", bundle: setaBundle)
-//  }
-//  
-//  static var fontGrey2: Color {
-//      Color("fontGrey2", bundle: setaBundle)
-//  }
-//  
-//  static var lineGrey1: Color {
-//      Color("lineGrey1", bundle: setaBundle)
-//  }
-  
   static var mainBlack: Color {
       Color("mainBlack", bundle: setaBundle)
   }
-  
-//  static var mainGrey1: Color {
-//      Color("mainGrey1", bundle: setaBundle)
-//  }
   
   static var mainOrange: Color {
       Color("mainOrange", bundle: setaBundle)
@@ -66,24 +33,8 @@ public extension Color {
       Color("mainWhite", bundle: setaBundle)
   }
   
-//  static var mainWhite1: Color {
-//      Color("mainWhite1", bundle: setaBundle)
-//  }
-//  
-//  static var settingTextBoxWhite: Color {
-//      Color("settingTextBoxWhite", bundle: setaBundle)
-//  }
-//  
-//  static var toastBurn: Color {
-//      Color("toastBurn", bundle: setaBundle)
-//  }
-  
   static var gray6: Color {
     Color("gray6", bundle: setaBundle)
-  }
-  
-  static var black850: Color {
-    Color("black850", bundle: setaBundle)
   }
   
   static var orange100: Color {
@@ -98,7 +49,19 @@ public extension Color {
     Color("toast2", bundle: setaBundle)
   }
 
-    static var ellipsis: Color {
-        Color("ellipsis", bundle: setaBundle)
-    }
+  static var ellipsis: Color {
+    Color("ellipsis", bundle: setaBundle)
+  }
+  
+  static var gray600: Color {
+    Color("gray600", bundle: setaBundle)
+  }
+  
+  static var toastBG: Color {
+    Color("toastBG", bundle: setaBundle)
+  }
+  
+  static var shareBG: Color {
+    Color("shareBG", bundle: setaBundle)
+  }
 }
