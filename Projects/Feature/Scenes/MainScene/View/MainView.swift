@@ -74,7 +74,7 @@ struct MainView: View {
                     .font(.footnote).bold()
             }
         }
-        .foregroundColor(.gray)
+        .foregroundColor(Color.gray)
         .padding(.top)
         .safeAreaPadding(.trailing, UIWidth * 0.1)
         .onAppear {
@@ -90,7 +90,7 @@ struct MainView: View {
             if likeArtists.count == 1 {
                 Circle()
                     .frame(width: 6)
-                    .foregroundColor(.black)
+                    .foregroundColor(.mainBlack)
             } else {
                 ForEach(0..<min(likeArtists.count, 5), id: \.self) { index in
                     indicator(for: index)
@@ -101,8 +101,7 @@ struct MainView: View {
         .padding(.vertical, 16)
         .background(
             RoundedRectangle(cornerRadius: 76)
-                .foregroundStyle(Color.gray6.opacity(0.6)))
-        
+              .foregroundStyle(Color.gray600))
     }
     
     @ViewBuilder
@@ -110,11 +109,11 @@ struct MainView: View {
         if viewModel.selectedIndex == idx {
             Capsule()
                 .frame(width: 12, height: 6)
-                .foregroundColor(.black)
+                .foregroundColor(.mainBlack)
         } else {
             Circle()
                 .frame(width: 6)
-                .foregroundColor(.secondary.opacity(0.5))
+                .foregroundColor(.mainBlack.opacity(0.3))
         }
     }
     

@@ -35,7 +35,9 @@ struct SetlistView: View {
             venue: setlist?.venue?.name ?? "-",
             location: "\(setlist?.venue?.city?.name ?? "-"), \(setlist?.venue?.city?.country?.name ?? "-")",
             date: vm.allDateFormatter(inputDate: setlist?.eventDate ?? "") ?? "-",
-            shareButtonAction: {},
+            artistInfo: artistInfo,
+            setlist: setlist,
+            viewModel: vm,
             bookmarkButtonAction: {
               if vm.isBookmarked {
                 vm.dataManager.findConcertAndDelete(concertInfo, setlist?.id ?? "")

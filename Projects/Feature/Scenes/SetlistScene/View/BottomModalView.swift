@@ -149,7 +149,7 @@ struct BottomModalView: View {
       VStack(spacing: 0) {
         ZStack {
           RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color(UIColor.systemGray))
+            .foregroundStyle(Color.gray)
             .frame(maxWidth: .infinity)
             .frame(height: UIWidth * 0.2)
           

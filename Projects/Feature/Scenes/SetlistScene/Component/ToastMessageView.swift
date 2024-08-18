@@ -35,7 +35,7 @@ struct ToastMessageView: View {
      .padding(15)
      .frame(maxWidth: .infinity)
      .background(
-       Color.black850
+       Color.toastBG
         .cornerRadius(6.0)
      )
   }
