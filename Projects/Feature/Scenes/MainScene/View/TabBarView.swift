@@ -80,9 +80,9 @@ public struct TabBarView: View {
         MainView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .home)))
           .navigationBarTitleDisplayMode(.inline)
           .tabItem {
-            Image("setlistIcon", bundle: Bundle(identifier: "com.creative8.seta.UI"))
+            Image("homeIcon", bundle: Bundle(identifier: "com.creative8.seta.UI"))
               .renderingMode(.template)
-            Text("세트리스트")
+            Text("홈")
           }
           .tag(Tab.home)
         

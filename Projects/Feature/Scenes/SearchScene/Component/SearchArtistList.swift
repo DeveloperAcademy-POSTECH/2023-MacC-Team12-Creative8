@@ -41,7 +41,7 @@ struct SearchArtistList: View {
           })
           
           Divider()
-            .foregroundStyle(Color(UIColor.systemGray))
+            .foregroundStyle(Color.gray)
         }
       }
       .onAppear { dataManager.modelContext = modelContext }

@@ -46,6 +46,7 @@ struct SearchArtistCell: View {
 						)
 					}
 				}
+
               )
               .foregroundStyle(Color(UIColor.systemGray5))
           case .success(let image):
@@ -74,6 +75,7 @@ struct SearchArtistCell: View {
 						)
 					}
 				}
+
               )
               .foregroundStyle(Color(UIColor.systemGray5))
           @unknown default:

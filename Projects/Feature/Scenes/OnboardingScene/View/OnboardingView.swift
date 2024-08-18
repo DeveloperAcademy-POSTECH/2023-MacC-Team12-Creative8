@@ -80,7 +80,7 @@ public struct OnboardingView: View {
         Text("메인 화면에서 바로 확인할 수 있어요")
       }
       .font(.system(.footnote))
-      .foregroundStyle(Color(UIColor.systemGray))
+      .foregroundStyle(Color.gray)
       Spacer().frame(height: 24)
     }
     .padding(.leading, 24)
