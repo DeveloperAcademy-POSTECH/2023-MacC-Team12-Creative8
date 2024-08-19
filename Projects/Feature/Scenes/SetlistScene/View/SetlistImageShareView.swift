@@ -60,27 +60,13 @@ struct SetlistImageShareView: View {
             }
           }
         }
-      }
-    }
-    .navigationBarBackButtonHidden()
-    .toolbar {
-      ToolbarItem(placement: .principal) {
-        Text("공유하기")
-          .font(.headline)
-          .foregroundColor(.white)
-      }
-      
-      ToolbarItem(placement: .navigationBarLeading) {
-        Button {
-          presentationMode.wrappedValue.dismiss()
-        } label: {
-          Image(systemName: "chevron.left")
-            .foregroundColor(.white)
-            .fontWeight(.semibold)
-        }
-      }
-    }
-    .toolbarBackground(.placeholder, for: .navigationBar)
+	  }
+	}
+	.navigationTitle("공유하기")
+	.navigationBarTitleDisplayMode(.inline)
+	.toolbarColorScheme(.dark, for: .navigationBar)
+	.toolbarBackground(Color.shareBG, for: .navigationBar)
+	.toolbarBackground(.visible, for: .navigationBar)
   }
   
   func backgroundImage(backgroundImage: UIImage) {
