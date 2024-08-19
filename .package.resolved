@@ -1,4 +1,5 @@
 {
+  "originHash" : "cf506a95934e6ad92a20de7aa95d51c2f4afd564fbcfcb7168843c6eddeed73e",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -100,12 +101,12 @@
       }
     },
     {
-      "identity" : "marquee",
+      "identity" : "marqueetext",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftUIKit/Marquee.git",
+      "location" : "https://github.com/joekndy/MarqueeText.git",
       "state" : {
-        "revision" : "69d7b7c6c34ed41d9299cfa8406f91f529c4fef3",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "e18d514455563ad00581e0d825146c6f15b1c6c4"
       }
     },
     {
@@ -181,5 +182,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

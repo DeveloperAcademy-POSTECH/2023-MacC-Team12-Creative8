@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>2.0.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -29,10 +29,10 @@
 			</array>
 		</dict>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.create8.seta.Seta</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.create8.seta.Seta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>seta-login</string>
@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram-stories</string>

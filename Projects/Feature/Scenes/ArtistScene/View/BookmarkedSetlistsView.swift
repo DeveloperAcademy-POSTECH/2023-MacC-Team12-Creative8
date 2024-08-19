@@ -26,10 +26,10 @@ struct BookmarkedSetlistsView: View {
       } else if bookmarkedSetlists.count > 1 {
         VStack {
           ScrollView(.horizontal) {
-            HStack {
+            HStack(spacing: 0) {
               ForEach(Array(bookmarkedSetlists.prefix(min(bookmarkedSetlists.count, 3))), id: \.self) { _ in
                 setlistsLayer
-                  .frame(width: UIWidth)
+                  .padding(.horizontal, UIWidth * 0.05)
               }
             }
             .scrollTargetLayout()
@@ -86,7 +86,6 @@ struct BookmarkedSetlistsView: View {
   }
   
   private var setlistsLayer: some View {
-    // TODO: vm.getFormattedDateFromDate() 오류 납니다...
     SummarizedSetlistInfoView(
       type: .bookmarkedConcert,
       info: SetlistInfo(

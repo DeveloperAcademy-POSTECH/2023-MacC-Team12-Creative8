@@ -28,7 +28,7 @@ struct ArtistInfoView: View {
         Spacer()
         buttonLayer
       }
-      .padding(.horizontal, UIWidth * 0.05)
+      .frame(width: UIWidth * 0.8)
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
@@ -89,7 +89,7 @@ struct ArtistInfoView: View {
                       startDelay: 0.3)
       } else {
         Text(vm.artistInfo.name)
-          .frame(width: UIWidth * 0.8, alignment: .leading)
+          .frame(width: UIWidth * 0.7, alignment: .leading)
       }
     }
     .font(.title3)

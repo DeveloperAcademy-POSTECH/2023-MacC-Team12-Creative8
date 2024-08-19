@@ -97,6 +97,8 @@ struct BottomModalView: View {
       }
       .padding(.top)
 
+      Spacer()
+      
       Button {
         vm.showModal = false
       } label: {
@@ -107,8 +109,6 @@ struct BottomModalView: View {
       .sheet(isPresented: $isSharePresented, content: {
         SetlistImageShareView(artistInfo: artistInfo, setlist: setlist, viewModel: vm)
       })
-      
-      Spacer()
     }
   }
   

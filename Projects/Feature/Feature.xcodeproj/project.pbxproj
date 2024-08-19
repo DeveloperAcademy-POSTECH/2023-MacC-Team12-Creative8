@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,10 +15,9 @@
 		2426977C88C49F8E00251361 /* ArchivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F40CB8FD2904D8042D3C70 /* ArchivingView.swift */; };
 		26207C1F0FDC8804D56D3F9F /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DB9D35DA30A20216AC9A4 /* AskView.swift */; };
 		2A8C2150733996FB4B25ECA8 /* NetworkUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFABF026418D0F883A9B4D3 /* NetworkUnavailableView.swift */; };
-		2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */; };
 		33B67F64711DE0EEBC7CFDEA /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B4F74512203B8DC967D75 /* SearchHistoryCell.swift */; };
 		351EAAF6DF49AD4AAEB6CBF4 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF56B0153354883134B7D3 /* MenuButton.swift */; };
-		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; };
+		3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F364327687E6A20628F831 /* Core.framework */; platformFilter = ios; };
 		390C2CA1FA51DFD3ADDB15F7 /* ExportPlaylistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A38AC09140A2108728005D /* ExportPlaylistButtonView.swift */; };
 		3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114CA248E10EFB663E0B78CA /* ShareSetlistView.swift */; };
 		401713AA84C30985B8586007 /* MusicButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BDFF98F69690AA72BF5530 /* MusicButtonView.swift */; };
@@ -41,12 +40,12 @@
 		9FB2B9116D6834D9BEA85406 /* IsEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E319B5E5F3B22C401257A /* IsEmptyCell.swift */; };
 		A72C54D48F7B92F3B2961449 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94572AD3E21A053371D6AB /* ArtistViewModel.swift */; };
 		A7461E5E48F8438B43700C05 /* SummarizedSetlistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB2AC5AE52D97E2BD98EF72 /* SummarizedSetlistInfoView.swift */; };
-		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; };
+		AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB8E69261DF7B00B491EB6 /* UI.framework */; platformFilter = ios; };
 		B233A3D5F1B85098924335AE /* SetlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */; };
 		B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */; };
 		BBC1CC8EAFF2A4881C8A916C /* SetlistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6065131130D585C891E3C0 /* SetlistInfoView.swift */; };
 		BD6BAC88EEBC6C9BE9794F8A /* SetlistImageShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */; };
-		BF015464C3C1BC99D09C647B /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = C507ACC9995A73EA3B6D0A17 /* Marquee */; };
+		BF015464C3C1BC99D09C647B /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 715A6823BDA6CD79A2253FE3 /* MarqueeText */; };
 		BF3DF8B460FBB0671C7334C0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AD7A6FE7090BB3AD1BC04 /* OnboardingView.swift */; };
 		C32BFA6CF1F8F98040A83268 /* SetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13B904D1DF7D17856476773 /* SetlistView.swift */; };
 		C56D12C45B540DEA352BA4CF /* ArchiveArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC951D0055ED15096793FD /* ArchiveArtistCell.swift */; };
@@ -54,13 +53,12 @@
 		CEC964C178177063152C0B76 /* SearchbarCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766B8B4DF5C405ABA13CEBB /* SearchbarCustom.swift */; };
 		CFFD2503F60E041CCD286AE5 /* SearchArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FBA19903928FA68FC87A0D /* SearchArtistCell.swift */; };
 		D022D62B0566852C9B0ADB70 /* AllSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81387F73BA3D6FEC0C217EE1 /* AllSetlistsView.swift */; };
-		D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391501B4523A254694E36D3 /* ConcertInfoView.swift */; };
 		D14597997C2CC4943DEAD58F /* EmptyArtistImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A08B10A62786CFAEAC0BB /* EmptyArtistImage.swift */; };
 		D99C3C15D47DFE69D26233A6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5A189A4C15C7D4EFEDD9C /* SettingView.swift */; };
 		DBE7FCEC2694DEA5E13ABBE4 /* CaptureSetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B1D61B80E2B19B176DC9EC /* CaptureSetlistView.swift */; };
 		EC3070A8E0E0C591E7EB8D83 /* ArchiveConcertInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9981CC6F7982EBE581173 /* ArchiveConcertInfoCell.swift */; };
 		F3E6A26AAF23964C5D5B2116 /* BookmarkedSetlistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */; };
-		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; };
+		F4123BA0D3124D4C0497F69D /* Feature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A611D1693834F821CBD6EAD /* Feature.framework */; platformFilter = ios; };
 		F5956A9DF7A46AA11B481F4D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC7F29C04CF52F861CA24A5 /* SearchViewModel.swift */; };
 		F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */; };
 		F84986A12ECC7DCACB4C7309 /* CustomTitleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */; };
@@ -122,8 +120,6 @@
 		5AAF56B0153354883134B7D3 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistImageShareView.swift; sourceTree = "<group>"; };
 		6078AB30A6F9C94C40229479 /* SetlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistViewModel.swift; sourceTree = "<group>"; };
-		6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMainSetlistView.swift; sourceTree = "<group>"; };
-		7391501B4523A254694E36D3 /* ConcertInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertInfoView.swift; sourceTree = "<group>"; };
 		75E35BB3B227839591945A42 /* BookmarkedSetlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedSetlistsView.swift; sourceTree = "<group>"; };
 		777E319B5E5F3B22C401257A /* IsEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEmptyCell.swift; sourceTree = "<group>"; };
 		7A919947E4A82878ABA33FDF /* CustomTitleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleAlert.swift; sourceTree = "<group>"; };
@@ -176,7 +172,7 @@
 			files = (
 				3819C7BC063EFDCA572FD7BF /* Core.framework in Frameworks */,
 				AA49F394D38D8CFF960D0423 /* UI.framework in Frameworks */,
-				BF015464C3C1BC99D09C647B /* Marquee in Frameworks */,
+				BF015464C3C1BC99D09C647B /* MarqueeText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				57FE13EFCC7261456CCD9E03 /* BottomModalView.swift */,
-				7391501B4523A254694E36D3 /* ConcertInfoView.swift */,
 				C4D35E29F7386A0896424BDD /* EmptySetlistView.swift */,
 				4CB52FD2A86596385940F794 /* ListView.swift */,
 				5DA1623DD066B04381608F3A /* SetlistImageShareView.swift */,
@@ -379,7 +374,6 @@
 				C068B78532EA3510E64C1517 /* ArtistMainSetlistView.swift */,
 				BDBEDC7B5CC11C55A64F2DC0 /* ArtistNameView.swift */,
 				A328B30B03679C80E901F8C4 /* ArtistsContentView.swift */,
-				6C634BCB7AED0EC2483D8164 /* EmptyMainSetlistView.swift */,
 				80859AB1C625F8E5EC6CCD1C /* EmptyMainView.swift */,
 				44913E1B3F1E54028CC6EC6A /* MainToolTipView.swift */,
 			);
@@ -515,7 +509,7 @@
 			);
 			name = Feature;
 			packageProductDependencies = (
-				C507ACC9995A73EA3B6D0A17 /* Marquee */,
+				715A6823BDA6CD79A2253FE3 /* MarqueeText */,
 			);
 			productName = Feature;
 			productReference = 8A611D1693834F821CBD6EAD /* Feature.framework */;
@@ -546,13 +540,12 @@
 		44191F7B9590ED06371F46BF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = com.creative8.seta;
 				TargetAttributes = {
 				};
 			};
 			buildConfigurationList = 31B40DEAC22225C89EF80B24 /* Build configuration list for PBXProject "Feature" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -561,7 +554,7 @@
 			);
 			mainGroup = 6DC82FD44AFA8E6846CC19FE;
 			packageReferences = (
-				FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */,
+				E611572CE21C4D23F0585AAB /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = F37C3A4FE623C846745B9CE2 /* Products */;
 			projectDirPath = "";
@@ -608,7 +601,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ROOT_DIR=/Users/yeseul/setlist\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
+			shellScript = "ROOT_DIR=/Users/kohyeji/Desktop/MacC-Team12-Creative8\n        \n${ROOT_DIR}/swiftlint --config ${ROOT_DIR}/.swiftlint.yml";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -635,7 +628,6 @@
 				CDCA119578022BF4734596BE /* ArtistMainSetlistView.swift in Sources */,
 				673BC362A18EE90248B0AEF2 /* ArtistNameView.swift in Sources */,
 				B9F55380B36BFBC919BA7E27 /* ArtistsContentView.swift in Sources */,
-				2B00133D0C22198A1958FCDA /* EmptyMainSetlistView.swift in Sources */,
 				6272736B46A19746BC5ECD16 /* EmptyMainView.swift in Sources */,
 				8E8999D50E442F5F50E55FAF /* MainToolTipView.swift in Sources */,
 				7895A841E262B3C4586F6BDC /* MainView.swift in Sources */,
@@ -659,7 +651,6 @@
 				3F6117227CA4360A92895AA2 /* ShareSetlistView.swift in Sources */,
 				5F88406A5A4A13DE97BEE8A3 /* ToastMessageView.swift in Sources */,
 				45E137825C53EDE9F91D957D /* BottomModalView.swift in Sources */,
-				D033CBAE2F65B7E916A44BA9 /* ConcertInfoView.swift in Sources */,
 				F7235093C7DB84C0A618E0E6 /* EmptySetlistView.swift in Sources */,
 				460E36BE01BF8CD2CCB18941 /* ListView.swift in Sources */,
 				BD6BAC88EEBC6C9BE9794F8A /* SetlistImageShareView.swift in Sources */,
@@ -715,7 +706,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -741,7 +731,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -773,7 +762,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -912,7 +900,6 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -953,20 +940,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FE68D9D0D9E43B85DA566EA8 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+		E611572CE21C4D23F0585AAB /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIKit/Marquee.git";
+			repositoryURL = "https://github.com/joekndy/MarqueeText.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C507ACC9995A73EA3B6D0A17 /* Marquee */ = {
+		715A6823BDA6CD79A2253FE3 /* MarqueeText */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Marquee;
+			productName = MarqueeText;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -34,7 +34,7 @@ struct SummarizedSetlistInfoView: View {
                 .cornerRadius(12, corners: [.topLeft, .topRight])
                 .foregroundStyle(Color.mainWhite)
         )
-        .padding(.horizontal)
+        .frame(width: UIWidth * 0.87)
     }
     
     // MARK: - Title View
