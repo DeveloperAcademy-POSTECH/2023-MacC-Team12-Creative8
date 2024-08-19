@@ -10,6 +10,7 @@ import SwiftUI
 import MarqueeText
 
 struct ArtistNameView: View {
+	@Binding var isShowToolTip: Bool
     @Binding var selectedTab: Tab
     @ObservedObject var viewModel: MainViewModel
     var index: Int
@@ -25,7 +26,7 @@ struct ArtistNameView: View {
                     font: .systemFont(ofSize: 32, weight: .semibold),
                     leftFade: 16,
                     rightFade: 16,
-                    startDelay: 3
+					startDelay: isShowToolTip ? 3 : 0
                 )
                 .frame(width: parentWidth)
             } else {

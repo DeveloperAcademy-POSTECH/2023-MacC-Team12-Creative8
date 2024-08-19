@@ -122,12 +122,13 @@ struct MainView: View {
         TabView(selection: $viewModel.selectedIndex) {
             ForEach(Array(likeArtists.enumerated().prefix(5)), id: \.offset) { index, data in
                 VStack {
-                    VStack {
-                        // 아티스트 이름
-                        ArtistNameView(selectedTab: $selectedTab,
-                                       viewModel: viewModel,
-                                       index: index,
-                                       name: data.artistInfo.name)
+					VStack {
+						// 아티스트 이름
+						ArtistNameView(isShowToolTip: $isShowToolTip,
+									   selectedTab: $selectedTab,
+									   viewModel: viewModel,
+									   index: index,
+									   name: data.artistInfo.name)
                         .lineLimit(nil)
                         
                         // 아티스트 이미지
