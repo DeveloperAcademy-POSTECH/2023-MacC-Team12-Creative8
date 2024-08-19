@@ -142,11 +142,21 @@ struct MainView: View {
                     }
                     .frame(height: UIHeight * 0.45)
                     // 아티스트 세트리스트
-                    ArtistsContentView(selectedTab: $selectedTab,
-                                       viewModel: viewModel,
-                                       artistInfo: data.artistInfo,
-                                       tabViewManager: tabViewManager,
-                                       index: index)
+					NavigationLink {
+						SetlistView(setlistId: viewModel.setlists[index]?.first??.id, artistInfo: ArtistInfo(
+						  name: data.artistInfo.name,
+						  alias: data.artistInfo.alias,
+						  mbid: data.artistInfo.mbid,
+						  gid: data.artistInfo.gid,
+						  imageUrl: data.artistInfo.imageUrl,
+						  songList: data.artistInfo.songList))
+					} label: {
+						ArtistsContentView(selectedTab: $selectedTab,
+										   viewModel: viewModel,
+										   artistInfo: data.artistInfo,
+										   tabViewManager: tabViewManager,
+										   index: index)
+					}
                     .tag(index)
                     .background(GeometryReader {
                         Color.clear.preference(key: ViewRectKey.self, value: [$0.frame(in: .local)])
