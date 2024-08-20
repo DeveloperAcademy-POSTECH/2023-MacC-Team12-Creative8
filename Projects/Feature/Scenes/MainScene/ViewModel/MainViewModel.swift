@@ -66,17 +66,17 @@ final class MainViewModel: ObservableObject {
   }
   
   func getDateFormatted(dateString: String) -> String {
-    let inputFormatter = DateFormatter()
-    inputFormatter.dateFormat = "dd-MM-yyyy"
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return "" }
     
-    let outputFormatter = DateFormatter()
-    outputFormatter.dateFormat = "yyyy년 MM월 dd일"
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
     
-    if let date = inputFormatter.date(from: dateString) {
-      return outputFormatter.string(from: date)
-    } else {
-      return "-"
+    guard let convertedDate = dateFormatter.date(from: dateString) else {
+        return "-"
     }
+    
+    dateFormatter.dateFormat = (languageCode == "ko") ? "yyyy년 MM월 dd일" : "MMMM dd, yyyy"
+    return dateFormatter.string(from: convertedDate)
   }
   
   func fetchInitialSetlists(likeArtists: [LikeArtist], modelContext: ModelContext) {

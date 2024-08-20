@@ -35,6 +35,11 @@ public final class OnboardingViewModel: ObservableObject {
     case .jpop: return "J-Pop"
     }
   }
+    
+  func isKorean() -> Bool {
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return false }
+      return languageCode == "ko"
+  }
 }
 
 // array nil 분기 처리

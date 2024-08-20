@@ -10,6 +10,7 @@ import SwiftUI
 import UI
 
 struct EmptySetlistView: View {
+  @StateObject var vm = MainViewModel()
   var body: some View {
     VStack {
       Text("등록된 세트리스트가 없어요")
@@ -21,13 +22,21 @@ struct EmptySetlistView: View {
         .multilineTextAlignment(.center)
         .font(.footnote)
         .foregroundStyle(Color.gray)
-      HStack(spacing: 0) {
-        Link(destination: URL(string: "https://www.setlist.fm")!) {
-          Text("Setlist.fm")
-            .underline()
+        HStack(spacing: 0) {
+          if vm.isKorean() {
+            Link(destination: URL(string: "https://www.setlist.fm")!) {
+              Text("Setlist.fm")
+                .underline()
+            }
+            Text("에서 추가하세요.")
+          } else {
+            Text("setlist? Add it on ")
+            Link(destination: URL(string: "https://www.setlist.fm")!) {
+              Text("Setlist.fm.")
+                .underline()
+            }
+          }
         }
-        Text("에서 추가하세요.")
-      }
       .foregroundStyle(Color.gray)
       .font(.footnote)
     }

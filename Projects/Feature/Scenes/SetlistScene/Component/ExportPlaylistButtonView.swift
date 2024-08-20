@@ -128,6 +128,7 @@ struct ExportPlaylistButtonView: View {
                     .multilineTextAlignment(.center)
                     .font(.footnote)
                     .foregroundStyle(Color.gray)
+                    .frame(maxWidth: 321)
                 Divider()
                     .padding(.vertical, 20)
                 HStack {

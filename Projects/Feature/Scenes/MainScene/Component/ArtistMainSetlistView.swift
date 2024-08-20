@@ -79,7 +79,7 @@ struct ArtistMainSetlistView: View {
     private var setlistContent: some View {
         VStack(alignment: .leading, spacing: 10) {
             if displaySongs.isEmpty {
-                ListRowView(index: 00, title: "비어있어요")
+                ListRowView(index: 00, title: "포함된 곡이 없어요")
                     .padding(.horizontal, 8)
             } else {
                 songList
@@ -140,11 +140,14 @@ struct ArtistMainSetlistView: View {
     }
 
     private var toastView: some View {
-        Text("세트리스트에 추가된 곡이 없어요.\n더보기 - setlist.fm 바로가기에서 곡을 추가하세요")
-            .foregroundColor(.mainWhite)
-            .padding(12)
-            .font(.footnote)
-            .background(Color.toastBG)
-            .cornerRadius(4)
+        VStack(alignment: .leading) {
+            Text("아티스트의 최근 공연 세트리스트가 없어요\n")
+            Text("더보기 - setlist.fm 바로가기에서 곡을 추가하세요")
+        }
+        .foregroundColor(.mainWhite)
+        .padding(12)
+        .font(.footnote)
+        .background(Color.toastBG)
+        .cornerRadius(4)
     }
 }

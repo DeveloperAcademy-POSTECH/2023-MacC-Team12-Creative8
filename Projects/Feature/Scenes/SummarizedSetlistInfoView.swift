@@ -15,6 +15,8 @@ struct SummarizedSetlistInfoView: View {
   let info: SetlistInfo?
   let infoButtonAction: (() -> Void)?
   let chevronButtonAction: (() -> Void)?
+    
+  @StateObject var viewModel = MainViewModel()
   
   var body: some View {
     VStack(alignment: .leading, spacing: 20) {
@@ -54,23 +56,40 @@ struct SummarizedSetlistInfoView: View {
   }
   
   // MARK: - No Info View
-  private var noInfoView: some View {
-    VStack(alignment: .leading, spacing: 10) {
-      Text(info == nil && type == .recentConcert ? "등록된 공연이 없어요" : "좋아하는 공연을 북마크 해보세요.")
-        .foregroundStyle(info == nil && type == .recentConcert ? Color.mainBlack : Color(UIColor.systemGray3))
-        .font(.headline).bold()
-      
-      if type == .recentConcert {
-        Text("공연과 세트리스트를 직접 등록하고 싶으신가요?\n")
-        + Text("[Setlist.fm](https://www.setlist.fm/)").underline()
-        + Text("에서 추가하세요.")
+//  private var noInfoView: some View {
+//    VStack(alignment: .leading, spacing: 10) {
+//      Text(info == nil && type == .recentConcert ? "등록된 공연이 없어요" : "좋아하는 공연을 북마크 해보세요.")
+//        .foregroundStyle(info == nil && type == .recentConcert ? Color.mainBlack : Color(UIColor.systemGray3))
+//        .font(.headline).bold()
+//      
+//      if type == .recentConcert {
+//        Text("공연과 세트리스트를 직접 등록하고 싶으신가요?\n")
+//        + Text("[Setlist.fm](https://www.setlist.fm/)").underline()
+//        + Text("에서 추가하세요.")
+//      }
+//    }
+//    .foregroundStyle(Color.gray)
+//    .padding(5)
+//    .padding(.bottom, 30)
+//  }
+    private var noInfoView: some View {
+      VStack(alignment: .leading, spacing: 10) {
+        Text(info == nil && type == .recentConcert ? "등록된 공연이 없어요" : "좋아하는 공연을 북마크 해보세요.")
+          .foregroundStyle(info == nil && type == .recentConcert ? Color.mainBlack : Color(UIColor.systemGray3))
+          .font(.headline).bold()
+        
+        if type == .recentConcert {
+          Text("공연과 세트리스트를 직접 등록하고 싶으신가요?\n")
+          + (viewModel.isKorean() ?
+             Text("[Setlist.fm](https://www.setlist.fm/)").underline() + Text("에서 추가하세요.") :
+             Text("yourself on ") + Text("[Setlist.fm](https://www.setlist.fm/)").underline() + Text("."))
+        }
       }
+      .foregroundStyle(Color.gray)
+      .padding(5)
+      .padding(.bottom, 30)
     }
-    .foregroundStyle(Color.gray)
-    .padding(5)
-    .padding(.bottom, 30)
-  }
-  
+    
   // MARK: - Info View
   private var infoView: some View {
     VStack(alignment: .leading, spacing: 10) {

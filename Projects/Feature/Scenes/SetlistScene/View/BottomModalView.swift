@@ -41,6 +41,11 @@ struct BottomModalView: View {
     }
   }
   
+  func isKorean() -> Bool {
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return false }
+    return languageCode == "ko"
+  }
+  
   private var spotifyButtonView: some View {
     Button {
       spotifyManager.addPlayList(name: setlist?.artist?.name ?? "",
@@ -83,10 +88,16 @@ struct BottomModalView: View {
             .lineLimit(1)
             .font(.headline)
             .fontWeight(.regular)
-          Text(setlist?.tour?.name ?? "\(artistInfo?.name ?? "")의 세트리스트")
-            .lineLimit(1)
-            .font(.footnote)
-          Text("\(setlist?.venue?.city?.country?.name ?? "-"), \(setlist?.venue?.city?.name ?? "-") • \(vm.getFormattedDateFromString(date: setlist?.eventDate?.description ?? "", format: "yyyy년 MM월 dd일") ?? "-")")
+          if vm.isKorean() {
+            Text(setlist?.tour?.name ?? "\(artistInfo?.name ?? "")의 세트리스트")
+              .lineLimit(1)
+              .font(.footnote)
+          } else {
+            Text(setlist?.tour?.name ?? "\(artistInfo?.name ?? "")'s playlist")
+              .lineLimit(1)
+              .font(.footnote)
+          }
+          Text("\(setlist?.venue?.city?.country?.name ?? "-"), \(setlist?.venue?.city?.name ?? "-") • \(vm.allDateFormatter(inputDate: setlist?.eventDate?.description ?? "") ?? "-")")
             .lineLimit(1)
             .font(.footnote)
             .foregroundStyle(Color.gray)

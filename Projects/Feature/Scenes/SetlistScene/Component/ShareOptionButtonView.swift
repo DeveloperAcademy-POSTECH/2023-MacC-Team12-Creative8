@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ShareOptionButtonView: View {
   let action: () -> Void
-  let label: String
+  let label: LocalizedStringKey
   let systemImageName: String
   
   var body: some View {

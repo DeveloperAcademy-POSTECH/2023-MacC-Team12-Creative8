@@ -30,7 +30,7 @@ struct SetlistView: View {
         VStack {
           SetlistInfoView(
             imageUrl: artistInfo.imageUrl,
-            title: setlist?.tour?.name ?? "\(artistInfo.name)의 세트리스트",
+            title: setlist?.tour?.name ?? (vm.isKorean() ? "\(artistInfo.name)의 세트리스트" : "\(artistInfo.name)'s playlist"),
             artistName: artistInfo.name,
             venue: setlist?.venue?.name ?? "-",
             location: "\(setlist?.venue?.city?.name ?? "-"), \(setlist?.venue?.city?.country?.name ?? "-")",
