@@ -118,18 +118,18 @@ struct ExportPlaylistButtonView: View {
     private var captureSetlistAlertView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12.0)
-                .frame(width: UIWidth * 0.95, height: UIHeight * 0.23)
+                .frame(width: UIWidth * 0.95, height: UIHeight * 0.27)
                 .foregroundStyle(Color.white)
             VStack {
                 Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
                     .font(.callout.bold())
-                    .padding()
+                    .padding(20)
                 Text("위의 뮤직앱에서는 이미지로 된 세트리스트를\n인식해 플레이리스트로 변환합니다.\n원하는 세트리스트를 이미지로 받아보세요.")
                     .multilineTextAlignment(.center)
                     .font(.footnote)
                     .foregroundStyle(Color.gray)
                 Divider()
-                    .padding(.vertical, 15)
+                    .padding(.vertical, 20)
                 HStack {
                     Button {
                         showCaptureAlert = false
@@ -152,7 +152,7 @@ struct ExportPlaylistButtonView: View {
                             .frame(width: UIWidth * 0.95 * 0.5)
                             .font(.callout)
                             .fontWeight(.bold)
-                            .padding(.bottom)
+                            .padding(.bottom, 20)
                     }
                     // 사진 권한 허용 거부 상태인 경우
                     .alert(isPresented: $exportViewModel.showLibrarySettingsAlert) {
