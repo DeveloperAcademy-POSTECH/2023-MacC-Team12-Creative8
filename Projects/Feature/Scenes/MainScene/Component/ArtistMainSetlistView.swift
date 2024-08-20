@@ -80,6 +80,7 @@ struct ArtistMainSetlistView: View {
         VStack(alignment: .leading, spacing: 10) {
             if displaySongs.isEmpty {
                 ListRowView(index: 00, title: "비어있어요")
+                    .padding(.horizontal, 8)
             } else {
                 songList
             }

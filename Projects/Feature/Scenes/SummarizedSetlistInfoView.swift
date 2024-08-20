@@ -45,7 +45,8 @@ struct SummarizedSetlistInfoView: View {
     }
     .foregroundStyle(Color.gray)
     .fontWeight(.semibold)
-    .padding(10)
+    .padding(.vertical, 10)
+    .padding(.horizontal, 9)
     .background(
       RoundedRectangle(cornerRadius: 4)
         .foregroundStyle(Color(UIColor.systemGray5))
@@ -77,15 +78,16 @@ struct SummarizedSetlistInfoView: View {
       
       // MARK: Concert Info
       if let info = info {
-        Text(info.title.isEmpty ? "\(info.artistInfo.name)의 Setlist" : info.title)
-          .foregroundStyle(Color.mainBlack)
-          .font(.callout)
-          .padding(.horizontal, 5)
-        Text(info.venue)
-          .multilineTextAlignment(.leading)
-          .fontWeight(.regular)
-          .foregroundStyle(Color(UIColor.systemGray2))
-          .padding(.horizontal, 5)
+          Group {
+              Text(info.title.isEmpty ? "\(info.artistInfo.name)의 Setlist" : info.title)
+                  .foregroundStyle(Color.mainBlack)
+                  .font(.callout)
+              Text(info.venue)
+                  .multilineTextAlignment(.leading)
+                  .fontWeight(.regular)
+                  .foregroundStyle(Color(UIColor.systemGray2))
+          }
+          .padding(.leading, 9)
       }
       
       // MARK: Navigation

@@ -61,7 +61,7 @@ struct MainView: View {
             VStack {
                 Spacer()
                 artistIndicators
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 20)
             }
         }
     }
@@ -76,10 +76,9 @@ struct MainView: View {
         }
         .foregroundColor(Color.gray)
         .padding(.top)
-        .safeAreaPadding(.trailing, UIWidth * 0.1)
+        .safeAreaPadding(.trailing, UIWidth * 0.07)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                
                 isShowToolTip = false
             }
         }
