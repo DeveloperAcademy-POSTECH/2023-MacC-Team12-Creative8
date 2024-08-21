@@ -13,7 +13,6 @@
       }
     },
     " " : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -22,6 +21,9 @@
           }
         }
       }
+    },
+    "-" : {
+
     },
     ", " : {
       "extractionState" : "stale",
@@ -34,8 +36,13 @@
         }
       }
     },
+    "." : {
+
+    },
+    "[Setlist.fm](https://www.setlist.fm/)" : {
+
+    },
     "%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -57,7 +64,6 @@
       }
     },
     "%@ @ %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -69,23 +75,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ @ %2$@"
-          }
-        }
-      }
-    },
-    "%@ 보관함에서 보기" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find %@ on Archive"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ 보관함에서 보기"
           }
         }
       }
@@ -107,13 +96,35 @@
         }
       }
     },
+    "%@, %@ • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@ • %3$@"
+          }
+        }
+      }
+    },
+    "%@'s playlist" : {
+
+    },
     "%@명 선택" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "%@의 세트리스트" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'s playlist"
           }
         }
       }
@@ -144,34 +155,27 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Artist"
+                  "value" : "Select %lld More"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Artists"
+                  "value" : "Select %lld More"
                 }
               }
             }
           }
         },
         "ko" : {
-          "variations" : {
-            "plural" : {
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld명 선택"
-                }
-              }
-            }
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld명 선택"
           }
         }
       }
     },
     "01 %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -215,8 +219,18 @@
         }
       }
     },
+    "15초 후 완료 예정" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will be ready in 15Sec"
+          }
+        }
+      }
+    },
     "App Store로 이동하기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -228,6 +242,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "App Store로 이동하기"
+          }
+        }
+      }
+    },
+    "Apple Music로 세트리스트가 옮겨지고 있어요!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your setlist is moving to Apple Music!"
           }
         }
       }
@@ -245,6 +270,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apple Music으로 내보내기"
+          }
+        }
+      }
+    },
+    "Bugs, FLO, genie, VIBE를 이용하시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you’re using Bugs, FLO, genie, VIBE?"
           }
         }
       }
@@ -299,8 +334,11 @@
         }
       }
     },
-    "Key" : {
+    "Key 1" : {
       "extractionState" : "manual"
+    },
+    "Next" : {
+
     },
     "OCR 서비스를 사용해 캡쳐만으로 플레이리스트를 만들어보세요." : {
       "extractionState" : "manual",
@@ -319,8 +357,13 @@
         }
       }
     },
+    "Select %@ artists" : {
+
+    },
+    "Select %@ more" : {
+
+    },
     "Seta" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -330,7 +373,7 @@
         }
       }
     },
-    "Seta의 서비스 약관을 확인해보세요" : {
+    "Seta의 서비스 약관을 확인하세요" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -358,8 +401,10 @@
         }
       }
     },
+    "setlist? Add it on " : {
+
+    },
     "Setlist.fm" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -385,6 +430,9 @@
           }
         }
       }
+    },
+    "Setlist.fm." : {
+
     },
     "Setlist.fm에서 다녀온 공연의 세트리스트를" : {
       "extractionState" : "manual",
@@ -420,6 +468,20 @@
         }
       }
     },
+    "Spotify로 세트리스트가 옮겨지고 있어요!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your selist is moving to Spotify!"
+          }
+        }
+      }
+    },
+    "yourself on " : {
+
+    },
     "개인정보 처리방침" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -450,6 +512,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "검색"
+          }
+        }
+      }
+    },
+    "검색에서 원하는 아티스트를 찾고" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find and like your favorited artist "
           }
         }
       }
@@ -505,6 +577,36 @@
         }
       }
     },
+    "공연과 세트리스트를 직접 등록하고 싶으신가요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to directly register a concert and "
+          }
+        }
+      }
+    },
+    "공연과 세트리스트를 직접 등록하고 싶으신가요?\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to directly register a concert and "
+          }
+        }
+      }
+    },
+    "공유" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
+    },
     "공유하기" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -523,17 +625,16 @@
       }
     },
     "관심 있는 아티스트의 세트리스트 정보를" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It will help you to check out their setlist easier."
+            "value" : "Select artists and check their setlist information "
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "관심 있는 아티스트의 세트리스트 정보를"
           }
         }
@@ -562,12 +663,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmark the performances you are interested in"
+            "value" : "Bookmark the shows you’re interested and "
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "관심있는 공연을 북마크하고"
           }
         }
@@ -608,18 +709,39 @@
       }
     },
     "국내 아티스트" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "K-pop Artist"
+            "value" : "K-pop"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "국내 아티스트"
+          }
+        }
+      }
+    },
+    "기능을 사용하려면 Apple Music 앱이 필요해요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Apple Music to use this feature."
+          }
+        }
+      }
+    },
+    "기능을 사용하려면 Spotify 앱이 필요해요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Spotify to use this feature."
           }
         }
       }
@@ -659,7 +781,6 @@
       }
     },
     "더보기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -671,6 +792,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "더보기"
+          }
+        }
+      }
+    },
+    "더보기 - setlist.fm 바로가기에서 곡을 추가하세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to More and click Setlist.fm to add songs."
+          }
+        }
+      }
+    },
+    "등록된 공연이 없어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No shows"
+          }
+        }
+      }
+    },
+    "등록된 세트리스트가 없어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Setlist"
           }
         }
       }
@@ -692,25 +843,34 @@
         }
       }
     },
-    "메인 화면에서 바로 확인할 수 있어요" : {
-      "extractionState" : "stale",
+    "메인 화면 아티스트를 수정할 수 있어요" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click the ones you like!"
+            "value" : "Change the artist on the main page"
+          }
+        }
+      }
+    },
+    "메인 화면에서 바로 확인할 수 있어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "directly from the main screen."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "메인 화면에서 바로 확인할 수 있어요"
           }
         }
       }
     },
     "메일 전송 실패" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -727,7 +887,6 @@
       }
     },
     "메일을 보내려면 'Mail' 앱이 필요합니다. App Store에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -766,12 +925,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear all"
+            "value" : "Delete All"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "모두 지우기"
           }
         }
@@ -795,7 +954,6 @@
       }
     },
     "변경을 원하신다면 " : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -807,6 +965,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "변경을 원하신다면 "
+          }
+        }
+      }
+    },
+    "변경을 원하신다면 순서를 옮겨보세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press the list and move to rearrange the order."
+          }
+        }
+      }
+    },
+    "보관이 취소되었어요!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive has been cancelled. "
           }
         }
       }
@@ -824,6 +1003,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "보관함"
+          }
+        }
+      }
+    },
+    "보관함‑북마크한 공연에 담겼어요." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added to your Archive-Bookmarked shows."
+          }
+        }
+      }
+    },
+    "보관함에서 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View in Archive"
           }
         }
       }
@@ -868,12 +1068,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmarked Shows"
+            "value" : "Saved shows"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "북마크한 공연"
           }
         }
@@ -931,7 +1131,6 @@
       }
     },
     "사진 기능을 사용하려면 ‘사진/비디오' 접근 권한을 허용해야 합니다." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -947,8 +1146,17 @@
         }
       }
     },
+    "상단 5명의 아티스트만 홈 화면에 표시됩니다\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top five artists will shown on the main page."
+          }
+        }
+      }
+    },
     "새로고침" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -982,7 +1190,6 @@
       }
     },
     "설정" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1016,7 +1223,6 @@
       }
     },
     "세트리스트 보기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1032,8 +1238,29 @@
         }
       }
     },
+    "세트리스트 전체 보기" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View All"
+          }
+        }
+      }
+    },
+    "세트리스트 접기" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide"
+          }
+        }
+      }
+    },
     "세트리스트 정보가 아직 없습니다" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1050,7 +1277,6 @@
       }
     },
     "세트리스트 정보가 없습니다." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1084,7 +1310,6 @@
       }
     },
     "세트리스트 추가하기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1117,8 +1342,18 @@
         }
       }
     },
+    "세트리스트를 바로 확인해보세요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "check the setlists right away."
+          }
+        }
+      }
+    },
     "세트리스트를 직접 작성하고 싶으신가요?" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1130,6 +1365,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "세트리스트를 직접 작성하고 싶으신가요?"
+          }
+        }
+      }
+    },
+    "아티스트 5명을 선택해주세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 5 artists"
+          }
+        }
+      }
+    },
+    "아티스트 5명이 모두 선택되었어요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have selected all 5 artists."
           }
         }
       }
@@ -1169,7 +1425,6 @@
       }
     },
     "아티스트 찜하기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1220,7 +1475,6 @@
       }
     },
     "아티스트를 꾹 눌러 순서를 옮겨보세요" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1232,6 +1486,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "아티스트를 꾹 눌러 순서를 옮겨보세요"
+          }
+        }
+      }
+    },
+    "아티스트를 선택해주세요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select 5 artists you like."
           }
         }
       }
@@ -1249,6 +1514,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "아티스트를 최대 5명까지 선택해주세요"
+          }
+        }
+      }
+    },
+    "아티스트의 최근 공연 세트리스트가 없어요\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no recent setlist."
           }
         }
       }
@@ -1288,7 +1563,6 @@
       }
     },
     "에서 직접 추가할 수 있어요." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1304,7 +1578,31 @@
         }
       }
     },
-    "음악으로 연결되는 순간," : {
+    "에서 추가하세요." : {
+
+    },
+    "옵션 더보기" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More options"
+          }
+        }
+      }
+    },
+    "위의 뮤직앱에서는 이미지로 된 세트리스트를\n인식해 플레이리스트로 변환합니다.\n원하는 세트리스트를 이미지로 받아보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In the music app above, setlists in image form are recognized and converted into playlists. Get any setlist as an image."
+          }
+        }
+      }
+    },
+    "음악이 연결되는 순간," : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1317,6 +1615,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "음악이 연결되는 순간,"
+          }
+        }
+      }
+    },
+    "이미지 저장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         }
       }
@@ -1338,8 +1646,18 @@
         }
       }
     },
+    "인스타그램 스토리" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post on Instagram stories"
+          }
+        }
+      }
+    },
     "인터넷 연결을 확인한 뒤 다시 시도해 주세요" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1389,6 +1707,16 @@
         }
       }
     },
+    "저장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        }
+      }
+    },
     "전체" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1402,6 +1730,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "전체"
+          }
+        }
+      }
+    },
+    "전체 공연" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Shows"
           }
         }
       }
@@ -1440,6 +1778,17 @@
         }
       }
     },
+    "좋아하는 공연을 북마크 해보세요." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved your favorite show."
+          }
+        }
+      }
+    },
     "찜하기 취소" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1458,7 +1807,6 @@
       }
     },
     "찜한 가수의 세트리스트가 없다면," : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1492,7 +1840,6 @@
       }
     },
     "찜한 아티스트 중 상단의 5명이 메인화면에 등장합니다" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1531,30 +1878,40 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Liked"
+            "value" : "No Liked Artist"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "찜한 아티스트가 없어요"
           }
         }
       }
     },
     "최근 검색" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recent searches"
+            "value" : "Recent"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "최근 검색"
+          }
+        }
+      }
+    },
+    "최근 공연" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Show"
           }
         }
       }
@@ -1577,7 +1934,6 @@
       }
     },
     "취소" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1606,6 +1962,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "캡쳐된 사진을 앨범에서 확인하세요"
+          }
+        }
+      }
+    },
+    "캡쳐된 이미지를 앨범에서 확인하세요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check saved image on your album app."
           }
         }
       }
@@ -1661,6 +2028,17 @@
         }
       }
     },
+    "포함된 곡이 없어요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No songs included"
+          }
+        }
+      }
+    },
     "플레이리스트 내보내기" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1679,7 +2057,6 @@
       }
     },
     "플레이리스트 내보내기 기능을 사용하려면 ‘Apple Music' 접근 권한을 허용해야 합니다." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1695,18 +2072,27 @@
         }
       }
     },
-    "플레이리스트 제목" : {
-      "extractionState" : "stale",
+    "플레이리스트 만들기" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter Playlist Title"
+            "value" : "Make Setlist"
+          }
+        }
+      }
+    },
+    "플레이리스트 제목" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Playlist Title"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "플레이리스트 제목"
           }
         }
@@ -1746,19 +2132,38 @@
         }
       }
     },
-    "해외 아티스트" : {
-      "extractionState" : "stale",
+    "하트버튼을 눌러주세요" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pop Artist"
+            "value" : "from the search tab."
+          }
+        }
+      }
+    },
+    "해외 아티스트" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pop"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "해외 아티스트"
+          }
+        }
+      }
+    },
+    "홈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
           }
         }
       }

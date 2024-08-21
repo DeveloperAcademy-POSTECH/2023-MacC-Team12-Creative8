@@ -23,7 +23,7 @@ struct IsEmptyCell: View {
         .padding(.bottom, 12)
       Group {
         Text(type == .bookmark ? "관심있는 공연을 북마크하고" : "관심있는 아티스트를 찜하고")
-        Text(type == .bookmark ? "빠르게 세트리스트를 확인해보세요" : "공연 및 세트리스트 정보를 빠르게 확인해보세요")
+        Text(type == .bookmark ? "세트리스트를 바로 확인해보세요" : "공연 및 세트리스트 정보를 빠르게 확인해보세요")
       }
       .font(.footnote)
       .foregroundStyle(Color.gray)

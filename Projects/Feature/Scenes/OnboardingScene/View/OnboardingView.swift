@@ -172,10 +172,25 @@ public struct OnboardingView: View {
           .frame(width: 342, height: 54)
           .foregroundColor(onboardingViewModel.selectedArtist.count < 1 ? .mainWhite : .mainBlack)
           .overlay {
-            Group {
-              onboardingViewModel.selectedArtist.count == 0 ? Text("아티스트 5명을 선택해주세요") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
-
-            }
+//            Group {
+//              onboardingViewModel.selectedArtist.count == 0 ? Text("아티스트 5명을 선택해주세요") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
+//
+//            }
+              Group {
+                if onboardingViewModel.isKorean() {
+                  onboardingViewModel.selectedArtist.count == 0 ? Text("아티스트 5명을 선택해주세요") : Text("\(Int(onboardingViewModel.selectedArtist.count))명 선택")
+                } else {
+                  let remainingArtists = 5 - Int(onboardingViewModel.selectedArtist.count)
+                  if remainingArtists == 0 {
+                    Text("Next")
+                  } else if remainingArtists == 5{
+                      Text("Select \(remainingArtists) artists")
+                  }
+                    else {
+                    Text("Select \(remainingArtists) more")
+                  }
+                }
+              }
             .foregroundStyle(onboardingViewModel.selectedArtist.count < 1 ? Color(UIColor.systemGray2) : Color.mainWhite)
               .font(.callout)
               .fontWeight(.bold)

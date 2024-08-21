@@ -33,6 +33,15 @@ class ArchivingViewModel: ObservableObject {
 //        
 //      }
 //  }
+    
+  func getDateFormatted(date: Date) -> String {
+    guard let languageCode = Locale.current.language.languageCode?.identifier else { return "" }
+    
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = (languageCode == "ko") ? "yyyy년 MM월 dd일" : "MMMM dd, yyyy"
+    return dateFormatter.string(from: date)
+  }
   
   static let shared = ArchivingViewModel()
   @Published var selectSegment: SelectEnum = .bookmark

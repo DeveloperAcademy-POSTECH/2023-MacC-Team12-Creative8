@@ -125,7 +125,7 @@ extension ArchivingView {
                     selectedTab: $selectedTab,
                     info: item,
                     url: url,
-                    backgroundColor: backgroundColor,
+                    viewModel: viewModel, backgroundColor: backgroundColor,
                     foregroundColor: foregroundColor
                 )
 //                .frame(width: UIWidth * 0.42)

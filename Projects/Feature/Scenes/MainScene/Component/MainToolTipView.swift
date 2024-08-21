@@ -16,7 +16,7 @@ struct MainTooltipView: View {
         .offset(x: -50, y: 3)
         .frame(width: 20, height: 50)
       
-      CustomRectangleShape(text: "메인화면 아티스트를 수정할 수 있어요")
+      CustomRectangleShape(text: "메인 화면 아티스트를 수정할 수 있어요")
         .frame(width: 250, height: 40)
 
     }
@@ -63,9 +63,9 @@ private struct CustomTriangleShape: Shape {
 }
 
 private struct CustomRectangleShape: View {
-    private var text: String
+    private var text: LocalizedStringKey
     
-    fileprivate init(text: String) {
+    fileprivate init(text: LocalizedStringKey) {
         self.text = text
     }
     

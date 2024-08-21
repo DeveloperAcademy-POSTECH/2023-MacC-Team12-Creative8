@@ -26,6 +26,28 @@ struct AllSetlistsView: View {
     }
   }
   
+//  private var emptyLayer: some View {
+//    VStack {
+//      Text("등록된 공연이 없어요")
+//        .font(.headline)
+//        .fontWeight(.semibold)
+//        .padding(.top, UIHeight * 0.1)
+//        .padding(.bottom, 5)
+//      Text("공연과 세트리스트를 직접 등록하고 싶으신가요?")
+//        .multilineTextAlignment(.center)
+//        .font(.footnote)
+//        .foregroundStyle(Color.gray)
+//      HStack(spacing: 0) {
+//        Link(destination: URL(string: "https://www.setlist.fm")!) {
+//          Text("Setlist.fm")
+//            .underline()
+//        }
+//        Text("에서 추가하세요.")
+//      }
+//      .foregroundStyle(Color.gray)
+//      .font(.footnote)
+//    }
+//  }
   private var emptyLayer: some View {
     VStack {
       Text("등록된 공연이 없어요")
@@ -38,11 +60,19 @@ struct AllSetlistsView: View {
         .font(.footnote)
         .foregroundStyle(Color.gray)
       HStack(spacing: 0) {
-        Link(destination: URL(string: "https://www.setlist.fm")!) {
-          Text("Setlist.fm")
-            .underline()
+        if vm.isKorean() {
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm")
+              .underline()
+          }
+          Text("에서 추가하세요.")
+        } else {
+          Text("setlist? Add it on ")
+          Link(destination: URL(string: "https://www.setlist.fm")!) {
+            Text("Setlist.fm.")
+              .underline()
+          }
         }
-        Text("에서 추가하세요.")
       }
       .foregroundStyle(Color.gray)
       .font(.footnote)

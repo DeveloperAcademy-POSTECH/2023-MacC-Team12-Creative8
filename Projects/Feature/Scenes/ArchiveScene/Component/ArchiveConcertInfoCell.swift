@@ -16,6 +16,7 @@ struct ArchiveConcertInfoCell: View {
   let url: URL?
   let dataServiece = SetlistDataService()
   @StateObject var dataManager = SwiftDataManager()
+  @ObservedObject var viewModel: ArchivingViewModel
   @Environment(\.modelContext) var modelContext
   @Environment(\.colorScheme) var colorScheme
   let backgroundColor: Color
@@ -50,7 +51,7 @@ struct ArchiveConcertInfoCell: View {
       } label: {
         Image(systemName: "ellipsis")
           .font(.title3)
-          .foregroundStyle(Color.mainBlack)
+          .foregroundStyle(Color.ellipsis)
           .padding()
       }
     }
@@ -65,10 +66,11 @@ struct ArchiveConcertInfoCell: View {
             HStack(spacing: 0) {
               Image(systemName: "calendar")
                 .padding(.trailing, 2)
-              Text(DateFormatter.dateFormatter().string(from: info.setlist.date))
+              Text(viewModel.getDateFormatted(date: info.setlist.date))
             }
             .padding(EdgeInsets(top: 4, leading: 7, bottom: 4, trailing: 7))
             .font(.caption2)
+            .fontWeight (.semibold)
             .foregroundStyle(Color.mainOrange)
             .background(Capsule().foregroundStyle(Color.orange100))
             Group {
@@ -118,7 +120,7 @@ struct ArchiveConcertInfoCell: View {
             .centerCropped()
             .overlay(
               RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(UIColor.systemGray3), lineWidth: 1)
+                .foregroundStyle(Color.black.opacity(0.2))
 //                .foregroundStyle(Color.clear)
             )
         } placeholder: {
