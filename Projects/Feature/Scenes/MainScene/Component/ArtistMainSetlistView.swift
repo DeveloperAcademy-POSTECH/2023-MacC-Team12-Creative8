@@ -70,6 +70,7 @@ struct ArtistMainSetlistView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 showToast = false
             }
+          AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainNoSetlistInformation)
         } label: {
             Image(systemName: "info.circle")
                 .foregroundStyle(Color.gray)
@@ -115,6 +116,7 @@ struct ArtistMainSetlistView: View {
         .padding(.trailing, 5)
         .onTapGesture {
             isExpanded.toggle()
+          AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainSetlistToggle.description)
         }
     }
 

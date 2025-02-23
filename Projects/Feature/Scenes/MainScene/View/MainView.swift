@@ -5,12 +5,12 @@
 //  Created by 최효원 on 2023/10/06.
 //
 
-import Foundation
 import SwiftUI
-import SwiftData
-import Core
-import UI
 import Combine
+import Core
+import SwiftData
+import UI
+
 
 struct MainView: View {
     @Binding var selectedTab: Tab
@@ -53,6 +53,9 @@ struct MainView: View {
                         if isShowToolTip {
                             MainTooltipView()
                                 .safeAreaPadding(.trailing, UIWidth * 0.05)
+                                .onAppear {
+                                  AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.mainToolTip.description, screenClass: "MainTooltipView")
+                                }
                         }
                     }
                     Spacer(minLength: UIHeight * 0.1)
@@ -73,6 +76,9 @@ struct MainView: View {
                 Text("찜한 아티스트")
                     .font(.footnote).bold()
             }
+            .simultaneousGesture(TapGesture().onEnded({
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainLikedArtist.description)
+            }))
         }
         .foregroundColor(Color.gray)
         .padding(.top)
@@ -131,14 +137,20 @@ struct MainView: View {
                         .lineLimit(nil)
                         
                         // 아티스트 이미지
-                        NavigationLink(destination: ArtistView(selectedTab: $selectedTab,
-                                                               artistName: data.artistInfo.name,
-                                                               artistAlias: data.artistInfo.alias,
-                                                               artistMbid: data.artistInfo.mbid)) {
+                        NavigationLink(destination: ArtistView(
+                            selectedTab: $selectedTab,
+                            artistName: data.artistInfo.name,
+                            artistAlias: data.artistInfo.alias,
+                            artistMbid: data.artistInfo.mbid
+                          )
+                        ) {
                             ArtistImage(selectedTab: $selectedTab,
                                         imageUrl: data.artistInfo.imageUrl)
                             .buttonStyle(BasicButtonStyle())
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                          AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.artist.description, screenClass: "ArtistView")
+                        })
                     }
                     .frame(height: UIHeight * 0.45)
                     // 아티스트 세트리스트
@@ -163,6 +175,9 @@ struct MainView: View {
                     })
                     .offset(y: 0)
                     .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
+                    .simultaneousGesture(TapGesture().onEnded({
+                      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.setlist.description, screenClass: "SetlistView")
+                    }))
                     
                 }
                 .tag(index)
