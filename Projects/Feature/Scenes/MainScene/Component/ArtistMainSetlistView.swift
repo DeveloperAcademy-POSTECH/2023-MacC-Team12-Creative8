@@ -116,7 +116,7 @@ struct ArtistMainSetlistView: View {
         .padding(.trailing, 5)
         .onTapGesture {
             isExpanded.toggle()
-          AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainSetlistToggle.description)
+          AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainSetlistToggle)
         }
     }
 

@@ -40,7 +40,7 @@ struct SetlistApp: App {
       if isOnboarding {
         OnboardingView()
           .onAppear() {
-            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.onboarding.description, screenClass: "OnboardingView")
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.onboarding, screenClass: "OnboardingView")
           }
       } else {
         TabBarView()

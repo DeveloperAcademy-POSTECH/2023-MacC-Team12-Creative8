@@ -86,7 +86,7 @@ public struct TabBarView: View {
           }
           .tag(Tab.home)
           .onAppear {
-            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.main.description, screenClass: "MainView")
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.main, screenClass: "MainView")
           }
         
         SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
@@ -98,7 +98,7 @@ public struct TabBarView: View {
           }
           .tag(Tab.search)
           .onAppear {
-            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.search.description, screenClass: "SearchView")
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.search, screenClass: "SearchView")
           }
         
         ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
@@ -110,7 +110,7 @@ public struct TabBarView: View {
           }
           .tag(Tab.archiving)
           .onAppear {
-            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.archive.description, screenClass: "ArchivingView")
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.archive, screenClass: "ArchivingView")
           }
         
         NavigationStack {
@@ -120,7 +120,7 @@ public struct TabBarView: View {
         .tabItem { Label("더보기", systemImage: "ellipsis") }
         .tag(Tab.setting)
         .onAppear {
-          AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.more.description, screenClass: "SettingView")
+          AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.more, screenClass: "SettingView")
         }
       }
       .overlay {

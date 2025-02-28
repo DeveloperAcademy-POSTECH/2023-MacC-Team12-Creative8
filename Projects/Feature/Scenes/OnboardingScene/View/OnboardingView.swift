@@ -52,8 +52,8 @@ public struct OnboardingView: View {
                 }
               }
               onboardingViewModel.selectedArtist.count == 0 ?
-                AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastUnselected.description)
-              : AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastDone.description)
+                AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastUnselected)
+              : AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastDone)
             }
         }
       }
@@ -96,7 +96,7 @@ public struct OnboardingView: View {
           Button {
             onboardingViewModel.selectedGenere = buttonType
             if onboardingViewModel.selectedGenere != .all {
-              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingGenre.description)
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingGenre)
             }
           } label: {
             Text(buttonType.rawValue)
@@ -174,15 +174,15 @@ public struct OnboardingView: View {
             isOnboarding = false
           
           if onboardingViewModel.selectedArtist.count == 1 {
-            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelected.description)
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelected)
           } else if onboardingViewModel.selectedArtist.count == 2 {
-            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedTwo.description)
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedTwo)
           } else if onboardingViewModel.selectedArtist.count == 3 {
             AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedThree.description)
           } else if onboardingViewModel.selectedArtist.count == 4 {
-            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedFour.description)
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedFour)
           } else if onboardingViewModel.selectedArtist.count == 5 {
-            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedAll.description)
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedAll)
           }
         }
       }, label: {

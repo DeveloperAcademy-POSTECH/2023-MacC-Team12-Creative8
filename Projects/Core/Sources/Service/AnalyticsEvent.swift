@@ -47,7 +47,7 @@ public struct AnalyticsEvent {
     
     // 아티스트
     public static let artistArchivedListScroll = "S3_artist_archived_list_scroll"
-    public static let artistViewArchivedList = "B3_artist_view_archived_list"
+    public static let artistSeeArchivedList = "B3_artist_see_archived_list"
     
     // 보관함
     public static let archiveListAll = "B4_1_archive_list_all"

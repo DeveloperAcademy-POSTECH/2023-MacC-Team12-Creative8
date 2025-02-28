@@ -54,7 +54,7 @@ struct MainView: View {
                             MainTooltipView()
                                 .safeAreaPadding(.trailing, UIWidth * 0.05)
                                 .onAppear {
-                                  AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.mainToolTip.description, screenClass: "MainTooltipView")
+                                  AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.mainToolTip, screenClass: "MainTooltipView")
                                 }
                         }
                     }
@@ -77,7 +77,7 @@ struct MainView: View {
                     .font(.footnote).bold()
             }
             .simultaneousGesture(TapGesture().onEnded({
-              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainLikedArtist.description)
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.mainLikedArtist)
             }))
         }
         .foregroundColor(Color.gray)
@@ -148,9 +148,6 @@ struct MainView: View {
                                         imageUrl: data.artistInfo.imageUrl)
                             .buttonStyle(BasicButtonStyle())
                         }
-                        .simultaneousGesture(TapGesture().onEnded {
-                          AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.artist.description, screenClass: "ArtistView")
-                        })
                     }
                     .frame(height: UIHeight * 0.45)
                     // 아티스트 세트리스트
@@ -176,7 +173,7 @@ struct MainView: View {
                     .offset(y: 0)
                     .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
                     .simultaneousGesture(TapGesture().onEnded({
-                      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.setlist.description, screenClass: "SetlistView")
+                      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.setlist, screenClass: "SetlistView")
                     }))
                     
                 }
