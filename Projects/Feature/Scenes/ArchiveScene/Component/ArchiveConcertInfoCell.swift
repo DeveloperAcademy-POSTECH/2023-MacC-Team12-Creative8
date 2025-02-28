@@ -54,6 +54,9 @@ struct ArchiveConcertInfoCell: View {
           .foregroundStyle(Color.ellipsis)
           .padding()
       }
+      .simultaneousGesture(TapGesture().onEnded({
+        AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.archiveListMenu)
+      }))
     }
   }
   

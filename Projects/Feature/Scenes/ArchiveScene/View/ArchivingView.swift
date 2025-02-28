@@ -92,6 +92,7 @@ extension ArchivingView {
             .foregroundStyle(.clear)
           Button {
             viewModel.selectArtist = ""
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.archiveListAll)
           } label: {
             AllArtistsSetCell(name: "전체", isSelected: viewModel.selectArtist.isEmpty)
           }
@@ -102,6 +103,7 @@ extension ArchivingView {
               } else {
                 viewModel.selectArtist = artist.artistInfo.name
               }
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.archiveListArtist)
             } label: {
                 ArtistSetCell(name: artist.artistInfo.name, artistImgUrl: URL(string: artist.artistInfo.imageUrl), isSelected: viewModel.selectArtist.contains(artist.artistInfo.name))
             }
@@ -133,6 +135,9 @@ extension ArchivingView {
         }
       }
       .padding(.horizontal, 24)
+      .simultaneousGesture(TapGesture().onEnded({
+        AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.archivedSetlist)
+      }))
     }
     .onAppear { viewModel.insertArtistSet(concertInfo) }
     .onChange(of: concertInfo) { _, newValue in
