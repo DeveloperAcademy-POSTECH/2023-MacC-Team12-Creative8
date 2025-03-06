@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import UI
 
 struct SearchBar: View {
@@ -50,6 +51,7 @@ struct SearchBar: View {
           withAnimation {
             self.isEditing = true
           }
+          AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.searchBar)
         }
       
       if isEditing {
