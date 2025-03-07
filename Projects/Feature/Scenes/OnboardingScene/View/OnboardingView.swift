@@ -20,7 +20,7 @@ public struct OnboardingView: View {
   private let artistDataManager = ArtistDataManager()
   private let dataService = SetlistDataService()
   var artistInfo: ArtistInfo?
-  @AppStorage("isOnboarding") var isOnboarding: Bool?
+  @EnvironmentObject var appState: AppState
   @Environment(NetworkMonitor.self) private var networkMonitor
   
   public init() { }
@@ -171,7 +171,7 @@ public struct OnboardingView: View {
           for item in onboardingViewModel.selectedArtist {
             dataManager.addLikeArtist(name: item.name, country: item.country, alias: item.alias, mbid: item.mbid, gid: item.gid, imageUrl: item.url, songList: [])
           }
-            isOnboarding = false
+          appState.isOnboarding = false
           
           if onboardingViewModel.selectedArtist.count == 1 {
             AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelected)
