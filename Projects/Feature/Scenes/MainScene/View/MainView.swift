@@ -172,10 +172,6 @@ struct MainView: View {
                     })
                     .offset(y: 0)
                     .frame(width: UIWidth * 0.95, height: rect.size.height + 30)
-                    .simultaneousGesture(TapGesture().onEnded({
-                      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.setlist, screenClass: "SetlistView")
-                    }))
-                    
                 }
                 .tag(index)
                 
