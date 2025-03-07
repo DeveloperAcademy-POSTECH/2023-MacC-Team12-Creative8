@@ -57,6 +57,7 @@ struct BottomModalView: View {
           self.showSpotifyAlert = false
         }
       }
+      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistSpotify)
     } label: {
       MusicButtonView(music: .spotify)
     }.onOpenURL(perform: spotifyManager.handleURL(_:))
@@ -127,6 +128,7 @@ struct BottomModalView: View {
     Button {
       exportViewModel.handleAppleMusicButtonAction()
       vm.showModal.toggle()
+      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistAppleMusic)
     } label: {
       MusicButtonView(music: .appleMusic)
     }
@@ -146,6 +148,7 @@ struct BottomModalView: View {
     Button(action: {
       vm.showModal = false
       showCaptureALert = true
+      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistBugs)
     }, label: {
       Text("Bugs, FLO, genie, VIBE를 이용하시나요?")
         .font(.callout)
@@ -153,29 +156,29 @@ struct BottomModalView: View {
     })
   }
   
-  private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
-    Button {
-      action()
-    } label: {
-      VStack(spacing: 0) {
-        ZStack {
-          RoundedRectangle(cornerRadius: 14)
-            .foregroundStyle(Color.gray)
-            .frame(maxWidth: .infinity)
-            .frame(height: UIWidth * 0.2)
-          
-          Image(image, bundle: setaBundle)
-            .resizable()
-            .scaledToFit()
-            .frame(width: UIWidth * 0.1)
-          
-        }
-        .padding(.bottom, 11)
-        
-        Text(title)
-          .font(.caption2)
-          .foregroundStyle(Color.mainBlack)
-      }
-    }
-  }
+//  private func platformButtonView(title: String, image: String, action: @escaping () -> Void) -> some View {
+//    Button {
+//      action()
+//    } label: {
+//      VStack(spacing: 0) {
+//        ZStack {
+//          RoundedRectangle(cornerRadius: 14)
+//            .foregroundStyle(Color.gray)
+//            .frame(maxWidth: .infinity)
+//            .frame(height: UIWidth * 0.2)
+//          
+//          Image(image, bundle: setaBundle)
+//            .resizable()
+//            .scaledToFit()
+//            .frame(width: UIWidth * 0.1)
+//          
+//        }
+//        .padding(.bottom, 11)
+//        
+//        Text(title)
+//          .font(.caption2)
+//          .foregroundStyle(Color.mainBlack)
+//      }
+//    }
+//  }
 }

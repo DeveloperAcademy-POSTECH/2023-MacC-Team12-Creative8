@@ -21,19 +21,19 @@ struct ExportPlaylistButtonView: View {
     @Binding var showCaptureAlert: Bool
     @ObservedObject var exportViewModel: ExportPlaylistViewModel
     
-    private func toastMessageToShow() -> LocalizedStringResource? {
-        if showToastMessageAppleMusic {
-            return "10초 뒤 Apple Music에서 확인하세요"
-        } else if showToastMessageCapture {
-            return "캡쳐된 이미지를 앨범에서 확인하세요"
-        } else if showToastMessageSubscription {
-            return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
-        } else if showSpotifyAlert {
-            return "10초 뒤 Spotify에서 확인하세요"
-        } else {
-            return nil
-        }
-    }
+//    private func toastMessageToShow() -> LocalizedStringResource? {
+//        if showToastMessageAppleMusic {
+//            return "10초 뒤 Apple Music에서 확인하세요"
+//        } else if showToastMessageCapture {
+//            return "캡쳐된 이미지를 앨범에서 확인하세요"
+//        } else if showToastMessageSubscription {
+//            return "플레이리스트를 내보내려면 Apple Music을 구독해야 합니다"
+//        } else if showSpotifyAlert {
+//            return "10초 뒤 Spotify에서 확인하세요"
+//        } else {
+//            return nil
+//        }
+//    }
     
     var body: some View {
         ZStack {
@@ -52,8 +52,9 @@ struct ExportPlaylistButtonView: View {
                     .padding(.bottom, 50)
                     .background(Rectangle().foregroundStyle(Color.gray6))
                     .onTapGesture {
-                        vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
-                        vm.showModal.toggle()
+                      vm.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistInfo?.name)
+                      vm.showModal.toggle()
+                      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistMakePlaylist)
                     }
                 
             }
@@ -67,6 +68,9 @@ struct ExportPlaylistButtonView: View {
                     )
                     .padding(.horizontal, UIWidth * 0.075)
                     .padding(.top, 5)
+                    .onAppear {
+                      AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.setlistToastPlaylistAppleMusic)
+                    }
                     Spacer()
                 }
             }
@@ -81,6 +85,9 @@ struct ExportPlaylistButtonView: View {
                     )
                     .padding(.horizontal, UIWidth * 0.075)
                     .padding(.top, 5)
+                    .onAppear {
+                      AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.setlistToastPlaylistSpotify)
+                    }
                     Spacer()
                 }
             }
@@ -103,6 +110,9 @@ struct ExportPlaylistButtonView: View {
                     )
                     .padding(.horizontal, UIWidth * 0.075)
                     .padding(.top, 5)
+                    .onAppear {
+                      AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.setlistToastPlaylistBugs)
+                    }
                     Spacer()
                 }
             }

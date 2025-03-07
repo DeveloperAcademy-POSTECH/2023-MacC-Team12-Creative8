@@ -47,6 +47,7 @@ struct SetlistView: View {
                 }
               } else {
                 saveData()
+                AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistArchive)
               }
               vm.isBookmarked.toggle()
             },
@@ -90,6 +91,13 @@ struct SetlistView: View {
           )
           .padding(.horizontal, UIWidth * 0.075)
           .padding(.top, 5)
+          .onAppear {
+            if vm.isBookmarked {
+              AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.setlistToastSaved)
+            } else {
+              AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.setlistToastCanceled)
+            }
+          }
           Spacer()
         }
       }
@@ -141,6 +149,8 @@ struct SetlistView: View {
           }
         }
       }
+      
+      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.setlist, screenClass: "SetlistView")
     }
   }
   
