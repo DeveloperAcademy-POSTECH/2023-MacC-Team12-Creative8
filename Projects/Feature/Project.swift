@@ -10,14 +10,16 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
     name: "Feature",
-    product: .framework,
+    product: .staticFramework,
     packages: [
-        .MarqueeText,
+      .Firebase,
+      .MarqueeText
     ],
     dependencies: [
         .project(target: "Core", path: .relativeToRoot("Projects/Core")),
         .project(target: "UI", path: .relativeToRoot("Projects/UI")),
         .SPM.MarqueeText,
+        .SPM.Firebase
     ],
     sources: ["Scenes/**"]
 )

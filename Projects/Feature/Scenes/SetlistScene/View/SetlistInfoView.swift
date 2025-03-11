@@ -103,6 +103,7 @@ struct SetlistInfoView: View {
           }.simultaneousGesture(
             TapGesture().onEnded {
               viewModel.createArrayForExportPlaylist(setlist: setlist, songList: artistInfo?.songList ?? [], artistName: artistName)
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.setlistShare)
             }
           )
           Spacer()

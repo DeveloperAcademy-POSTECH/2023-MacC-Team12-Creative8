@@ -26,6 +26,9 @@ struct SearchView: View {
         SearchBar(text: $viewModel.searchText, isEditing: $viewModel.searchIsPresented)
           .padding(.top)
           .padding(.top)
+          .onTapGesture {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.searchBar)
+          }
           ScrollViewReader { proxy in
             ScrollView {
 //              searchingHistoryView
@@ -90,6 +93,9 @@ struct SearchView: View {
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
         ForEach(viewModel.domesticArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistAlias: item.alias, artistMbid: item.mbid, artistGid: item.gid)
+            .simultaneousGesture(TapGesture().onEnded({
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.searchDomesticArtist)
+            }))
         }
       }
     }
@@ -102,6 +108,9 @@ struct SearchView: View {
       LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 15) {
         ForEach(viewModel.foreignArtists, id: \.self) { item in
           SearchArtistCell(selectedTab: $selectedTab, imageURL: item.url ?? "", artistName: item.name, artistAlias: item.alias, artistMbid: item.mbid, artistGid: item.gid)
+            .simultaneousGesture(TapGesture().onEnded({
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.searchOverseasArtist)
+            }))
         }
       }
     }

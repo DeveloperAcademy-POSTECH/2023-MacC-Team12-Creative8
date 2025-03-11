@@ -85,6 +85,9 @@ public struct TabBarView: View {
             Text("홈")
           }
           .tag(Tab.home)
+          .onAppear {
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.main, screenClass: "MainView")
+          }
         
         SearchView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .search)))
           .navigationBarTitleDisplayMode(.inline)
@@ -94,6 +97,9 @@ public struct TabBarView: View {
             Text("검색")
           }
           .tag(Tab.search)
+          .onAppear {
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.search, screenClass: "SearchView")
+          }
         
         ArchivingView(selectedTab: $viewModel.selectedTab, tabViewManager: TabViewManager(consecutiveTaps: viewModel.consecutiveTaps(on: .archiving)))
           .navigationBarTitleDisplayMode(.large)
@@ -103,6 +109,9 @@ public struct TabBarView: View {
             Text("보관함")
           }
           .tag(Tab.archiving)
+          .onAppear {
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.archive, screenClass: "ArchivingView")
+          }
         
         NavigationStack {
           SettingView()
@@ -110,6 +119,9 @@ public struct TabBarView: View {
         }
         .tabItem { Label("더보기", systemImage: "ellipsis") }
         .tag(Tab.setting)
+        .onAppear {
+          AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.more, screenClass: "SettingView")
+        }
       }
       .overlay {
         if !networkMonitor.isConnected {

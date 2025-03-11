@@ -13,9 +13,8 @@ import Firebase
 
 @main
 struct SetlistApp: App {
-  @AppStorage("isOnboarding")
-  var isOnboarding: Bool = true
   @State var networkMonitor = NetworkMonitor()
+  @StateObject private var appState = AppState()
   
   var sharedModelContainer: ModelContainer = {
     let schema = Schema([
@@ -37,8 +36,12 @@ struct SetlistApp: App {
   
   var body: some Scene {
     WindowGroup {
-      if isOnboarding {
+      if appState.isOnboarding {
         OnboardingView()
+          .environmentObject(appState)
+          .onAppear() {
+            AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.onboarding, screenClass: "OnboardingView")
+          }
       } else {
         TabBarView()
       }

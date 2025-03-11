@@ -31,17 +31,36 @@ struct SetlistImageShareView: View {
               .padding(.vertical, 28)
             
             VStack(spacing: 0) {
-              ShareOptionButtonView(action: { backgroundImage(backgroundImage: image) }, label: "인스타그램 스토리", systemImageName: "star")
+              ShareOptionButtonView(
+                action: {
+                  backgroundImage(backgroundImage: image)
+                  AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.shareInstagramStory)
+                },
+                label: "인스타그램 스토리",
+                systemImageName: "star"
+              )
               CustomDivider()
-              ShareOptionButtonView(action: {
+              ShareOptionButtonView(
+                action: {
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 showToastMessage = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                   showToastMessage = false
                 }
-              }, label: "이미지 저장", systemImageName: "square.and.arrow.down")
+                  AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.shareSaveImage)
+              },
+                label: "이미지 저장",
+                systemImageName: "square.and.arrow.down"
+              )
               CustomDivider()
-              ShareOptionButtonView(action: { self.isPresented = true }, label: "옵션 더보기", systemImageName: "ellipsis")
+              ShareOptionButtonView(
+                action: {
+                  self.isPresented = true
+                  AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.shareMoreOption)
+                },
+                label: "옵션 더보기",
+                systemImageName: "ellipsis"
+              )
                 .sheet(isPresented: $isPresented) {
                   ActivityViewController(activityItems: [image])
                 }
@@ -56,6 +75,9 @@ struct SetlistImageShareView: View {
               ToastMessageView(message: "이미지가 저장되었어요", subMessage: nil, icon: "checkmark.circle.fill", color: Color.toast1)
                 .padding(.horizontal, UIWidth * 0.075)
                 .padding(.top, 5)
+                .onAppear {
+                  AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.shareToastSaveImage)
+                }
               Spacer()
             }
           }
@@ -67,6 +89,9 @@ struct SetlistImageShareView: View {
 	.toolbarColorScheme(.dark, for: .navigationBar)
 	.toolbarBackground(Color.shareBG, for: .navigationBar)
 	.toolbarBackground(.visible, for: .navigationBar)
+  .onAppear {
+    AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.share, screenClass: "SetlistImageShareView")
+  }
   }
   
   func backgroundImage(backgroundImage: UIImage) {

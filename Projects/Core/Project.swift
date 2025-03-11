@@ -10,7 +10,7 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
   name: "Core",
-  product: .framework,
+  product: .staticFramework,
   dependencies: [
     .SPM.KeychainAccess,
     .SPM.SpotifyAPI

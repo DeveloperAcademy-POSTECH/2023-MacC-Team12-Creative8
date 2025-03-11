@@ -20,7 +20,7 @@ public struct OnboardingView: View {
   private let artistDataManager = ArtistDataManager()
   private let dataService = SetlistDataService()
   var artistInfo: ArtistInfo?
-  @AppStorage("isOnboarding") var isOnboarding: Bool?
+  @EnvironmentObject var appState: AppState
   @Environment(NetworkMonitor.self) private var networkMonitor
   
   public init() { }
@@ -51,6 +51,9 @@ public struct OnboardingView: View {
                   onboardingViewModel.isShowToastBar.toggle()
                 }
               }
+              onboardingViewModel.selectedArtist.count == 0 ?
+                AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastUnselected)
+              : AnalyticsEvent.trackToastMessage(message: AnalyticsEvent.Event.onboardingToastDone)
             }
         }
       }
@@ -92,6 +95,9 @@ public struct OnboardingView: View {
         ForEach(OnboardingFilterType.allCases, id: \.self) { buttonType in
           Button {
             onboardingViewModel.selectedGenere = buttonType
+            if onboardingViewModel.selectedGenere != .all {
+              AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingGenre)
+            }
           } label: {
             Text(buttonType.rawValue)
                   .fontWeight(onboardingViewModel.selectedGenere == buttonType ? .semibold : .regular)
@@ -165,7 +171,19 @@ public struct OnboardingView: View {
           for item in onboardingViewModel.selectedArtist {
             dataManager.addLikeArtist(name: item.name, country: item.country, alias: item.alias, mbid: item.mbid, gid: item.gid, imageUrl: item.url, songList: [])
           }
-            isOnboarding = false
+          appState.isOnboarding = false
+          
+          if onboardingViewModel.selectedArtist.count == 1 {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelected)
+          } else if onboardingViewModel.selectedArtist.count == 2 {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedTwo)
+          } else if onboardingViewModel.selectedArtist.count == 3 {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedThree.description)
+          } else if onboardingViewModel.selectedArtist.count == 4 {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedFour)
+          } else if onboardingViewModel.selectedArtist.count == 5 {
+            AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.onboardingSelectedAll)
+          }
         }
       }, label: {
         RoundedRectangle(cornerRadius: 12)
@@ -183,7 +201,7 @@ public struct OnboardingView: View {
                   let remainingArtists = 5 - Int(onboardingViewModel.selectedArtist.count)
                   if remainingArtists == 0 {
                     Text("Next")
-                  } else if remainingArtists == 5{
+                  } else if remainingArtists == 5 {
                       Text("Select \(remainingArtists) artists")
                   }
                     else {

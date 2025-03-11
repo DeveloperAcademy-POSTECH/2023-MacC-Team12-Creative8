@@ -41,6 +41,7 @@ struct ArtistView: View {
         vm.getArtistInfoFromGenius(artistName: artistName, artistAlias: artistAlias, artistMbid: artistMbid)
         vm.getSetlistsFromSetlistFM(artistMbid: artistMbid)
       }
+      AnalyticsEvent.trackScreen(screenName: AnalyticsEvent.Screen.artist, screenClass: "ArtistView")
     }
     .background(Color.gray6)
   }

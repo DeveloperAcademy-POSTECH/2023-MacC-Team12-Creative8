@@ -143,11 +143,11 @@ struct SummarizedSetlistInfoView: View {
         Image(systemName: "chevron.right")
           .foregroundStyle(Color(UIColor.systemGray3))
       }
-      
     }
     .foregroundStyle(Color.gray)
     .onTapGesture {
       chevronButtonAction?()
+      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.artistSeeArchivedList)
     }
   }
 }

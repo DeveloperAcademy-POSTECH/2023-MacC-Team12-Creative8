@@ -27,7 +27,6 @@ public struct SettingView: View {
               SetlistfmLinkButton(
                 setlistfmURL: "https://www.setlist.fm",
                 linkLabel: "Setlist.fm 바로가기")
-              
             }
 
             // 서비스 이용 관련
@@ -118,6 +117,9 @@ struct SetlistfmLinkButton: View {
       .padding(.bottom, 12)
       .padding(.top, 5)
     })
+    .simultaneousGesture(TapGesture().onEnded({
+      AnalyticsEvent.trackButtonTap(buttonName: AnalyticsEvent.Event.moreSetlistFM)
+    }))
   }
 }
 
