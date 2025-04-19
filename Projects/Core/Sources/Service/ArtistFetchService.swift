@@ -29,9 +29,9 @@ public final class ArtistFetchService: ObservableObject {
             return
         }
         
-        var reqest: URLRequest = URLRequest(url: urls[index], timeoutInterval: 5)
+        var request: URLRequest = URLRequest(url: urls[index], timeoutInterval: 5)
         
-        URLSession.shared.dataTask(with: reqest) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard let self else { return }
 
             guard let data,
