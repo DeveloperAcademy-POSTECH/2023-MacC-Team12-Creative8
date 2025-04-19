@@ -28,23 +28,18 @@ public final class ArtistFetchService: ObservableObject {
             completion(false)
             return
         }
-        let url = urls[index]
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                print("Request to \(url) failed: \(error?.localizedDescription ?? "Unknown error")")
-                self.fetch(at: index + 1, completion: completion)
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let artists = try decoder.decode([OnboardingModel].self, from: data)
-                DispatchQueue.main.async {
-                    self.allArtist = artists
-                    completion(true)
-                }
-            } catch {
-                print("Decoding error on \(url): \(error.localizedDescription)")
-                self.fetch(at: index + 1, completion: completion)
+        
+        var reqest: URLRequest = URLRequest(url: urls[index], timeoutInterval: 5)
+        
+        URLSession.shared.dataTask(with: reqest) { [weak self] data, _, error in
+            guard let self else { return }
+
+            guard let data,
+            let artists = try? JSONDecoder().decode([OnboardingModel].self, from: data) else { fetch(at: index + 1, completion: completion); return }
+            
+            Task { @MainActor in
+                self.allArtist = artists
+                completion(true)
             }
         }.resume()
     }
