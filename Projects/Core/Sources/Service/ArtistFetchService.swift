@@ -13,31 +13,38 @@ public final class ArtistFetchService: ObservableObject {
 
     @Published public var allArtist: [OnboardingModel] = []
 
+    // 주 요청 URL을 새로 받은 URL로 변경
+    private let urls: [URL] = [
+        URL(string: "https://port-0-seta-server-bkcl2bloxy1ug8.sel5.cloudtype.app/api/getArtists")!,
+        URL(string: "https://seta-server.fly.dev/api/getArtists")!
+    ]
+
     public func fetchData(completion: @escaping (Bool) -> Void) {
-        let serverUrl = "https://port-0-seta-server-bkcl2bloxy1ug8.sel5.cloudtype.app/api/getArtists"
-        guard let url = URL(string: serverUrl) else {
+        fetch(at: 0, completion: completion)
+    }
+
+    private func fetch(at index: Int, completion: @escaping (Bool) -> Void) {
+        guard index < urls.count else {
             completion(false)
             return
         }
-
+        let url = urls[index]
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
-                print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-                completion(false)
+                print("Request to \(url) failed: \(error?.localizedDescription ?? "Unknown error")")
+                self.fetch(at: index + 1, completion: completion)
                 return
             }
             do {
                 let decoder = JSONDecoder()
                 let artists = try decoder.decode([OnboardingModel].self, from: data)
-
                 DispatchQueue.main.async {
                     self.allArtist = artists
                     completion(true)
                 }
             } catch {
-                print("Error decoding data: \(error.localizedDescription)")
-                print("Decoding error details: \(error)")
-                completion(false)
+                print("Decoding error on \(url): \(error.localizedDescription)")
+                self.fetch(at: index + 1, completion: completion)
             }
         }.resume()
     }
